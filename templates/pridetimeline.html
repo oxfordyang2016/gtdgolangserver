@@ -165,7 +165,7 @@ $.ajaxSetup({
 
 
 
-$.get("https://www.blackboxo.top/v1/pride", function(data, status){
+$.get("/v1/pride", function(data, status){
   //     alert(data);
         for(i=0;i<data.memories.length;i++){
 var dayname = data.memories[i].Name;
