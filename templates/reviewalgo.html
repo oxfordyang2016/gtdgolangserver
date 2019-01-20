@@ -17,6 +17,26 @@
 <script type="text/javascript">
 
 
+function calculateMA(dayCount, data) {
+    console.log("i had no ho")
+    var result = [];
+    for (var i = 0, len = data.length; i < len; i++) {
+        if (i < dayCount) {
+            result.push('-');
+            continue;
+        }
+        var sum = 0;
+        for (var j = 0; j < dayCount; j++) {
+            sum += data[i - j];
+        }
+        result.push(+(sum / dayCount).toFixed(3));
+    }
+    console.log(result)
+    return result;
+}
+
+
+
 
 
 var myChart = echarts.init(document.getElementById('main'));
@@ -39,6 +59,11 @@ var resize = function() {
     window.onresize = function() {
       resize();
     };
+
+
+
+
+
 
 
 
@@ -160,7 +185,7 @@ option = {
         }
     },
     legend: {
-        data:['Make use of things u have learned','The total score of  number of tasks finished','Start an important thing early']
+        data:['Totalscore','MA5','MA10','Make use of things u have learned','The total score of  number of tasks finished','Start an important thing early']
     },
     toolbox: {
         feature: {
@@ -338,6 +363,28 @@ option = {
             areaStyle: {},
             data:learnnewthings
         },
+
+        {
+                name: 'MA5',
+                type: 'line',
+                color:'red',
+                data: calculateMA(5, totalscore),
+                smooth: true,
+                lineStyle: {
+                    normal: { opacity: 0.5 }
+                }
+            },
+
+            {
+                name: 'MA10',
+                type: 'line',
+                color:'black',
+                data: calculateMA(10, totalscore),
+                smooth: true,
+                lineStyle: {
+                    normal: { opacity: 0.5 }
+                }
+            },
 
 
 
