@@ -416,8 +416,10 @@ func CreatetaskbyJSON(c *gin.Context) {
   email:=emailcookie.Value
   inbox := gjson.Get(reqBody, "inbox").String()
   tasktags := gjson.Get(reqBody, "tasktags").String()
+  reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
   fmt.Println("=====task  tags=========")
   fmt.Println(tasktags)
+  fmt.Println(reviewalgodata)
   fmt.Println("======*************========")
   fmt.Println(inbox)
 
@@ -488,7 +490,7 @@ if status!="unfinished"{
     clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 
     }
-  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
 fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
@@ -499,7 +501,7 @@ taskid = task.ID
    fmt.Println(return_info)
   }else{
 
-  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
   taskid = task.ID
   Check_reviewdaylog(finishtime.Format("060102"),email)
@@ -512,7 +514,7 @@ fmt.Println(task.ID)
 
 
   }else{
-  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags}
+  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
   fmt.Println("i am testing the id return")
   fmt.Println(task.ID) 

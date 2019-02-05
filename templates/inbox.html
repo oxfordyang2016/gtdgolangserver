@@ -18,6 +18,20 @@
    min-width: 150px;
    font-size: 34px;
 }
+
+
+
+div#intro {
+    width: 520px;
+    min-width: 520px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 120px;
+}
+
+
+
 </style>
 <script src="/v1/jquery.js"></script>
   <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png"> 
@@ -69,7 +83,7 @@ $(document).ready(function(){
   <body>
 <div id="intro">
 <h2 class="title">Make use of the things {{.countforunfinishedtasks}} you have learned {{.finishedrate}}</h2>
-<a href="/v1/review?reviewtype=statistics" style="color:blue;">=data=</a><a href="/v1/pride" style="color:blue;">=pride=</a><a href="/v1/place" style="color:blue;">=place=</a><a href="/v1/inbox" style="color:blue;">=inbox=</a><a style="color:blue;" href="/v1/everyday">=everyday=</a><a style="color:blue;" href="/v1/project">=project=</a><a style="color:blue;" href="/v1/reviewsjson">=review=</a>
+<a href="/v1/review?reviewtype=statistics" style="color:blue;">=data=</a><a href="/v1/pride" style="color:blue;">=pride=</a><a href="/v1/place" style="color:blue;">=place=</a><a href="/v1/inbox" style="color:blue;">=inbox=</a><a style="color:blue;" href="/v1/everyday">=everyday=</a><a style="color:blue;" href="/v1/project">=project=</a><a style="color:blue;" href="/v1/reviewsjson">=review=</a><a style="color:blue;" href="/v1/errorlog">=error=</a>
 <ul>
 <!--u can reference testgolangtemplaterender.html to do anythings-->
 {{ range .task}}
