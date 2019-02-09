@@ -34017,3 +34017,1525 @@ Time                 Id Command    Argument
 2019-02-05T10:16:07.798829Z	   58 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?)
 2019-02-05T10:16:07.798926Z	   58 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com')
 2019-02-05T10:16:07.801935Z	   58 Close stmt	
+/usr/local/opt/mysql/bin/mysqld, Version: 5.7.20-log (Homebrew). started with:
+Tcp port: 0  Unix socket: (null)
+Time                 Id Command    Argument
+2019-02-06T04:17:58.487973Z	    2 Query	SELECT TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE CREATE_OPTIONS LIKE '%partitioned%';
+2019-02-07T02:48:00.662247Z	    3 Connect	dt_admin@localhost on dreamteam_db using TCP/IP
+2019-02-07T02:48:00.677100Z	    3 Query	SET NAMES utf8
+2019-02-07T02:48:00.683670Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.692786Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-07T02:48:00.693427Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts'
+2019-02-07T02:48:00.696593Z	    3 Close stmt	
+2019-02-07T02:48:00.696675Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.714914Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.717074Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'id'
+2019-02-07T02:48:00.723803Z	    3 Close stmt	
+2019-02-07T02:48:00.723890Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.724463Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.724522Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'created_at'
+2019-02-07T02:48:00.725201Z	    3 Close stmt	
+2019-02-07T02:48:00.725253Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.725744Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.725792Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'updated_at'
+2019-02-07T02:48:00.726308Z	    3 Close stmt	
+2019-02-07T02:48:00.726357Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.726775Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.726822Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'deleted_at'
+2019-02-07T02:48:00.727294Z	    3 Close stmt	
+2019-02-07T02:48:00.727342Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.727838Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.727897Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'email'
+2019-02-07T02:48:00.728444Z	    3 Close stmt	
+2019-02-07T02:48:00.728495Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.728926Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.728972Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'username'
+2019-02-07T02:48:00.729432Z	    3 Close stmt	
+2019-02-07T02:48:00.729477Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.729994Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.730066Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'password'
+2019-02-07T02:48:00.730504Z	    3 Close stmt	
+2019-02-07T02:48:00.730582Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.730907Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-07T02:48:00.730981Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND index_name = 'idx_accounts_deleted_at'
+2019-02-07T02:48:00.731299Z	    3 Close stmt	
+2019-02-07T02:48:00.731649Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.731960Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-07T02:48:00.732029Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models'
+2019-02-07T02:48:00.732405Z	    3 Close stmt	
+2019-02-07T02:48:00.732453Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.732884Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.732930Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'id'
+2019-02-07T02:48:00.733961Z	    3 Close stmt	
+2019-02-07T02:48:00.734050Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.734453Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.734523Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'created_at'
+2019-02-07T02:48:00.734974Z	    3 Close stmt	
+2019-02-07T02:48:00.735019Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.735418Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.735461Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'updated_at'
+2019-02-07T02:48:00.735883Z	    3 Close stmt	
+2019-02-07T02:48:00.735925Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.736305Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.736348Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'deleted_at'
+2019-02-07T02:48:00.736799Z	    3 Close stmt	
+2019-02-07T02:48:00.736847Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.737233Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.737275Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title2'
+2019-02-07T02:48:00.737715Z	    3 Close stmt	
+2019-02-07T02:48:00.737758Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.738134Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.738200Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title1'
+2019-02-07T02:48:00.738616Z	    3 Close stmt	
+2019-02-07T02:48:00.738658Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.739031Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.739073Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title'
+2019-02-07T02:48:00.739481Z	    3 Close stmt	
+2019-02-07T02:48:00.739524Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.739838Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.739899Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'completed'
+2019-02-07T02:48:00.740289Z	    3 Close stmt	
+2019-02-07T02:48:00.740348Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.740618Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-07T02:48:00.740681Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND index_name = 'idx_todo_models_deleted_at'
+2019-02-07T02:48:00.740979Z	    3 Close stmt	
+2019-02-07T02:48:00.741183Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.741443Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-07T02:48:00.741507Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks'
+2019-02-07T02:48:00.741828Z	    3 Close stmt	
+2019-02-07T02:48:00.741875Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.742245Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.742286Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'id'
+2019-02-07T02:48:00.742814Z	    3 Close stmt	
+2019-02-07T02:48:00.742854Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.743210Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.743252Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'task'
+2019-02-07T02:48:00.744787Z	    3 Close stmt	
+2019-02-07T02:48:00.744857Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.745322Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.745364Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'user'
+2019-02-07T02:48:00.745860Z	    3 Close stmt	
+2019-02-07T02:48:00.745904Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.746257Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.746305Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'email'
+2019-02-07T02:48:00.746816Z	    3 Close stmt	
+2019-02-07T02:48:00.746856Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.747207Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.747250Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'place'
+2019-02-07T02:48:00.747707Z	    3 Close stmt	
+2019-02-07T02:48:00.747751Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.748103Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.748146Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'status'
+2019-02-07T02:48:00.748608Z	    3 Close stmt	
+2019-02-07T02:48:00.748649Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.749018Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.749096Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'project'
+2019-02-07T02:48:00.749719Z	    3 Close stmt	
+2019-02-07T02:48:00.749789Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.750179Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.750219Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'plantime'
+2019-02-07T02:48:00.750711Z	    3 Close stmt	
+2019-02-07T02:48:00.750756Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.751136Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.751177Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'finishtime'
+2019-02-07T02:48:00.751632Z	    3 Close stmt	
+2019-02-07T02:48:00.751674Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.752029Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.752070Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'note'
+2019-02-07T02:48:00.752515Z	    3 Close stmt	
+2019-02-07T02:48:00.752558Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.752961Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.753005Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'parentproject'
+2019-02-07T02:48:00.753503Z	    3 Close stmt	
+2019-02-07T02:48:00.753547Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.753931Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.753974Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'ifdissect'
+2019-02-07T02:48:00.754555Z	    3 Close stmt	
+2019-02-07T02:48:00.754598Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.754958Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.755001Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'accurate_finishtime'
+2019-02-07T02:48:00.755469Z	    3 Close stmt	
+2019-02-07T02:48:00.755511Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.755910Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.755951Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'longitude'
+2019-02-07T02:48:00.756428Z	    3 Close stmt	
+2019-02-07T02:48:00.756472Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.756822Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.756863Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'latitude'
+2019-02-07T02:48:00.757303Z	    3 Close stmt	
+2019-02-07T02:48:00.757346Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.757726Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.757769Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewsign'
+2019-02-07T02:48:00.758275Z	    3 Close stmt	
+2019-02-07T02:48:00.758341Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.758726Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.758768Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'score'
+2019-02-07T02:48:00.759238Z	    3 Close stmt	
+2019-02-07T02:48:00.759278Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.759632Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.759671Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewdatas'
+2019-02-07T02:48:00.760131Z	    3 Close stmt	
+2019-02-07T02:48:00.760172Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.760539Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.760580Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'tasktags'
+2019-02-07T02:48:00.761067Z	    3 Close stmt	
+2019-02-07T02:48:00.761282Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.761559Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-07T02:48:00.761608Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays'
+2019-02-07T02:48:00.761919Z	    3 Close stmt	
+2019-02-07T02:48:00.761978Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.762345Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.762386Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'id'
+2019-02-07T02:48:00.762795Z	    3 Close stmt	
+2019-02-07T02:48:00.762835Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.763156Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.763221Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'created_at'
+2019-02-07T02:48:00.763617Z	    3 Close stmt	
+2019-02-07T02:48:00.763660Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.764021Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.764061Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'updated_at'
+2019-02-07T02:48:00.764458Z	    3 Close stmt	
+2019-02-07T02:48:00.764501Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.764865Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.764909Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'deleted_at'
+2019-02-07T02:48:00.765304Z	    3 Close stmt	
+2019-02-07T02:48:00.765345Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.765723Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.765765Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'date'
+2019-02-07T02:48:00.766175Z	    3 Close stmt	
+2019-02-07T02:48:00.766217Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.766542Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.766604Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'email'
+2019-02-07T02:48:00.767000Z	    3 Close stmt	
+2019-02-07T02:48:00.767039Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.767420Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-07T02:48:00.767461Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'details'
+2019-02-07T02:48:00.767904Z	    3 Close stmt	
+2019-02-07T02:48:00.767973Z	    3 Query	SELECT DATABASE()
+2019-02-07T02:48:00.768237Z	    3 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-07T02:48:00.768297Z	    3 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND index_name = 'idx_reviewofdays_deleted_at'
+2019-02-07T02:48:00.768555Z	    3 Close stmt	
+2019-02-07T02:48:38.538825Z	    3 Prepare	SELECT * FROM `accounts`  WHERE `accounts`.`deleted_at` IS NULL AND ((email = ?)) ORDER BY `accounts`.`id` ASC LIMIT 1
+2019-02-07T02:48:38.539002Z	    3 Execute	SELECT * FROM `accounts`  WHERE `accounts`.`deleted_at` IS NULL AND ((email = 'yang756260386@gmail.com')) ORDER BY `accounts`.`id` ASC LIMIT 1
+2019-02-07T02:48:38.540939Z	    3 Close stmt	
+2019-02-07T02:48:38.572374Z	    3 Prepare	SELECT * FROM `tasks`  WHERE (Email= ?) AND (status in (?,?)) ORDER BY id desc
+2019-02-07T02:48:38.572572Z	    3 Execute	SELECT * FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (status in ('unfinish','unfinished')) ORDER BY id desc
+2019-02-07T02:48:38.613888Z	    3 Close stmt	
+2019-02-07T02:48:38.614147Z	    3 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?) AND (status = ?) OR (status = ?)
+2019-02-07T02:48:38.614275Z	    3 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (status = 'unfinished') OR (status = 'unfinish')
+2019-02-07T02:48:38.617966Z	    3 Close stmt	
+2019-02-07T02:48:38.618165Z	    3 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?) AND (`tasks`.`status` NOT IN (?,?))
+2019-02-07T02:48:38.618293Z	    3 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (`tasks`.`status` NOT IN ('unfinished','unfinish'))
+2019-02-07T02:48:38.622273Z	    3 Close stmt	
+2019-02-07T02:48:38.622449Z	    3 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?)
+2019-02-07T02:48:38.622573Z	    3 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com')
+2019-02-07T02:48:38.625431Z	    3 Close stmt	
+2019-02-07T02:51:29.262281Z	    4 Connect	root@localhost on finance using Socket
+2019-02-07T02:51:29.282484Z	    4 Query	set autocommit=0
+2019-02-07T02:51:29.288786Z	    4 Query	SHOW VARIABLES LIKE 'sql_mode'
+2019-02-07T02:51:29.296761Z	    4 Query	SELECT DATABASE()
+2019-02-07T02:51:29.297384Z	    4 Query	SELECT @@tx_isolation
+2019-02-07T02:51:29.297601Z	    4 Query	SHOW WARNINGS
+2019-02-07T02:51:29.299892Z	    4 Query	show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2019-02-07T02:51:29.311799Z	    4 Query	SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2019-02-07T02:51:29.312399Z	    4 Query	SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2019-02-07T02:51:29.313035Z	    4 Query	SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2019-02-07T02:51:29.313488Z	    4 Query	SELECT 'x' AS some_label
+2019-02-07T02:51:29.313704Z	    4 Query	rollback
+2019-02-07T02:51:29.314987Z	    4 Query	DESCRIBE `rateofyield`
+2019-02-07T02:51:29.330015Z	    4 Query	rollback
+2019-02-07T02:51:30.374561Z	    5 Connect	root@localhost on finance using Socket
+2019-02-07T02:51:30.374847Z	    5 Query	set autocommit=0
+2019-02-07T02:51:30.375299Z	    5 Query	SHOW VARIABLES LIKE 'sql_mode'
+2019-02-07T02:51:30.378352Z	    5 Query	SELECT DATABASE()
+2019-02-07T02:51:30.378680Z	    5 Query	SELECT @@tx_isolation
+2019-02-07T02:51:30.378823Z	    5 Query	SHOW WARNINGS
+2019-02-07T02:51:30.379967Z	    5 Query	show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2019-02-07T02:51:30.381268Z	    5 Query	SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2019-02-07T02:51:30.381740Z	    5 Query	SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2019-02-07T02:51:30.382281Z	    5 Query	SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2019-02-07T02:51:30.382611Z	    5 Query	SELECT 'x' AS some_label
+2019-02-07T02:51:30.382738Z	    5 Query	rollback
+2019-02-07T02:51:30.383526Z	    5 Query	DESCRIBE `rateofyield`
+2019-02-07T02:51:30.384410Z	    5 Query	rollback
+2019-02-08T01:20:27.296642Z	    6 Connect	root@localhost on finance using Socket
+2019-02-08T01:20:27.321975Z	    6 Query	set autocommit=0
+2019-02-08T01:20:27.326493Z	    6 Query	SHOW VARIABLES LIKE 'sql_mode'
+2019-02-08T01:20:27.340253Z	    6 Query	SELECT DATABASE()
+2019-02-08T01:20:27.341230Z	    6 Query	SELECT @@tx_isolation
+2019-02-08T01:20:27.341369Z	    6 Query	SHOW WARNINGS
+2019-02-08T01:20:27.361664Z	    6 Query	show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2019-02-08T01:20:27.364025Z	    6 Query	SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2019-02-08T01:20:27.364661Z	    6 Query	SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2019-02-08T01:20:27.365310Z	    6 Query	SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2019-02-08T01:20:27.365753Z	    6 Query	SELECT 'x' AS some_label
+2019-02-08T01:20:27.365942Z	    6 Query	rollback
+2019-02-08T01:20:27.366986Z	    6 Query	DESCRIBE `rateofyield`
+2019-02-08T01:20:27.381166Z	    6 Query	rollback
+2019-02-08T01:20:28.454996Z	    7 Connect	root@localhost on finance using Socket
+2019-02-08T01:20:28.456372Z	    7 Query	set autocommit=0
+2019-02-08T01:20:28.456886Z	    7 Query	SHOW VARIABLES LIKE 'sql_mode'
+2019-02-08T01:20:28.460250Z	    7 Query	SELECT DATABASE()
+2019-02-08T01:20:28.460604Z	    7 Query	SELECT @@tx_isolation
+2019-02-08T01:20:28.460753Z	    7 Query	SHOW WARNINGS
+2019-02-08T01:20:28.461972Z	    7 Query	show collation where `Charset` = 'utf8' and `Collation` = 'utf8_bin'
+2019-02-08T01:20:28.463307Z	    7 Query	SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2019-02-08T01:20:28.463870Z	    7 Query	SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2019-02-08T01:20:28.464443Z	    7 Query	SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8) COLLATE utf8_bin AS anon_1
+2019-02-08T01:20:28.464779Z	    7 Query	SELECT 'x' AS some_label
+2019-02-08T01:20:28.464955Z	    7 Query	rollback
+2019-02-08T01:20:28.465722Z	    7 Query	DESCRIBE `rateofyield`
+2019-02-08T01:20:28.466723Z	    7 Query	rollback
+2019-02-09T02:50:18.807086Z	    8 Connect	dt_admin@localhost on dreamteam_db using TCP/IP
+2019-02-09T02:50:18.810179Z	    8 Query	SET NAMES utf8
+2019-02-09T02:50:18.812621Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.818795Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:50:18.819222Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts'
+2019-02-09T02:50:18.823335Z	    8 Close stmt	
+2019-02-09T02:50:18.823416Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.825932Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.826006Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'id'
+2019-02-09T02:50:18.827018Z	    8 Close stmt	
+2019-02-09T02:50:18.827081Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.827520Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.827564Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'created_at'
+2019-02-09T02:50:18.828078Z	    8 Close stmt	
+2019-02-09T02:50:18.828125Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.828547Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.828590Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'updated_at'
+2019-02-09T02:50:18.829020Z	    8 Close stmt	
+2019-02-09T02:50:18.829069Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.829453Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.829498Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'deleted_at'
+2019-02-09T02:50:18.829908Z	    8 Close stmt	
+2019-02-09T02:50:18.829957Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.830328Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.830370Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'email'
+2019-02-09T02:50:18.830754Z	    8 Close stmt	
+2019-02-09T02:50:18.830798Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.831436Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.831483Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'username'
+2019-02-09T02:50:18.831928Z	    8 Close stmt	
+2019-02-09T02:50:18.831984Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.832375Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.832416Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'password'
+2019-02-09T02:50:18.832814Z	    8 Close stmt	
+2019-02-09T02:50:18.832882Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.833168Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T02:50:18.833233Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND index_name = 'idx_accounts_deleted_at'
+2019-02-09T02:50:18.833506Z	    8 Close stmt	
+2019-02-09T02:50:18.833952Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.834232Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:50:18.834295Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models'
+2019-02-09T02:50:18.834634Z	    8 Close stmt	
+2019-02-09T02:50:18.834677Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.835028Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.835094Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'id'
+2019-02-09T02:50:18.835513Z	    8 Close stmt	
+2019-02-09T02:50:18.835558Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.835969Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.836011Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'created_at'
+2019-02-09T02:50:18.836441Z	    8 Close stmt	
+2019-02-09T02:50:18.836491Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.836860Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.836904Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'updated_at'
+2019-02-09T02:50:18.837331Z	    8 Close stmt	
+2019-02-09T02:50:18.837372Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.837776Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.837819Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'deleted_at'
+2019-02-09T02:50:18.838211Z	    8 Close stmt	
+2019-02-09T02:50:18.838257Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.838639Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.838681Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title2'
+2019-02-09T02:50:18.839080Z	    8 Close stmt	
+2019-02-09T02:50:18.839125Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.839508Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.839550Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title1'
+2019-02-09T02:50:18.840050Z	    8 Close stmt	
+2019-02-09T02:50:18.840110Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.840688Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.840762Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title'
+2019-02-09T02:50:18.841349Z	    8 Close stmt	
+2019-02-09T02:50:18.841402Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.841789Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.841833Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'completed'
+2019-02-09T02:50:18.842253Z	    8 Close stmt	
+2019-02-09T02:50:18.842323Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.842599Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T02:50:18.842665Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND index_name = 'idx_todo_models_deleted_at'
+2019-02-09T02:50:18.842945Z	    8 Close stmt	
+2019-02-09T02:50:18.843226Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.843496Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:50:18.843558Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks'
+2019-02-09T02:50:18.843873Z	    8 Close stmt	
+2019-02-09T02:50:18.843915Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.844306Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.844346Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'id'
+2019-02-09T02:50:18.845249Z	    8 Close stmt	
+2019-02-09T02:50:18.845307Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.845713Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.845756Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'task'
+2019-02-09T02:50:18.846255Z	    8 Close stmt	
+2019-02-09T02:50:18.846303Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.846688Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.846728Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'user'
+2019-02-09T02:50:18.847331Z	    8 Close stmt	
+2019-02-09T02:50:18.847381Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.847772Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.847815Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'email'
+2019-02-09T02:50:18.848294Z	    8 Close stmt	
+2019-02-09T02:50:18.848340Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.848753Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.848794Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'place'
+2019-02-09T02:50:18.849260Z	    8 Close stmt	
+2019-02-09T02:50:18.849308Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.849740Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.849785Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'status'
+2019-02-09T02:50:18.850344Z	    8 Close stmt	
+2019-02-09T02:50:18.850408Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.850790Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.850830Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'project'
+2019-02-09T02:50:18.851300Z	    8 Close stmt	
+2019-02-09T02:50:18.851348Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.851852Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.851910Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'plantime'
+2019-02-09T02:50:18.852392Z	    8 Close stmt	
+2019-02-09T02:50:18.852436Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.852819Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.852870Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'finishtime'
+2019-02-09T02:50:18.853351Z	    8 Close stmt	
+2019-02-09T02:50:18.853396Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.853852Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.853898Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'note'
+2019-02-09T02:50:18.854394Z	    8 Close stmt	
+2019-02-09T02:50:18.854442Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.854858Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.854902Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'parentproject'
+2019-02-09T02:50:18.855443Z	    8 Close stmt	
+2019-02-09T02:50:18.855491Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.855862Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.855903Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'ifdissect'
+2019-02-09T02:50:18.856368Z	    8 Close stmt	
+2019-02-09T02:50:18.856412Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.856796Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.856837Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'accurate_finishtime'
+2019-02-09T02:50:18.857334Z	    8 Close stmt	
+2019-02-09T02:50:18.857376Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.857708Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.857772Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'longitude'
+2019-02-09T02:50:18.858236Z	    8 Close stmt	
+2019-02-09T02:50:18.858279Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.858638Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.858683Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'latitude'
+2019-02-09T02:50:18.859161Z	    8 Close stmt	
+2019-02-09T02:50:18.859204Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.859538Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.859605Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewsign'
+2019-02-09T02:50:18.860082Z	    8 Close stmt	
+2019-02-09T02:50:18.860123Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.860484Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.860523Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'score'
+2019-02-09T02:50:18.860990Z	    8 Close stmt	
+2019-02-09T02:50:18.861035Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.861389Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.861428Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewdatas'
+2019-02-09T02:50:18.861918Z	    8 Close stmt	
+2019-02-09T02:50:18.861963Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.862338Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.862379Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'tasktags'
+2019-02-09T02:50:18.862855Z	    8 Close stmt	
+2019-02-09T02:50:18.863041Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.863308Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:50:18.863373Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays'
+2019-02-09T02:50:18.863671Z	    8 Close stmt	
+2019-02-09T02:50:18.863713Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.864103Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.864144Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'id'
+2019-02-09T02:50:18.864566Z	    8 Close stmt	
+2019-02-09T02:50:18.864607Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.865012Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.865054Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'created_at'
+2019-02-09T02:50:18.865486Z	    8 Close stmt	
+2019-02-09T02:50:18.865531Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.865901Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.865943Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'updated_at'
+2019-02-09T02:50:18.866405Z	    8 Close stmt	
+2019-02-09T02:50:18.866451Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.866828Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.866870Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'deleted_at'
+2019-02-09T02:50:18.867285Z	    8 Close stmt	
+2019-02-09T02:50:18.867328Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.867687Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.867728Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'date'
+2019-02-09T02:50:18.868129Z	    8 Close stmt	
+2019-02-09T02:50:18.868176Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.868552Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.868592Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'email'
+2019-02-09T02:50:18.869019Z	    8 Close stmt	
+2019-02-09T02:50:18.869063Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.869419Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:50:18.869460Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'details'
+2019-02-09T02:50:18.869886Z	    8 Close stmt	
+2019-02-09T02:50:18.869930Z	    8 Query	SELECT DATABASE()
+2019-02-09T02:50:18.870182Z	    8 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T02:50:18.870250Z	    8 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND index_name = 'idx_reviewofdays_deleted_at'
+2019-02-09T02:50:18.870534Z	    8 Close stmt	
+2019-02-09T02:50:38.424315Z	    8 Prepare	SELECT * FROM `accounts`  WHERE `accounts`.`deleted_at` IS NULL AND ((email = ?)) ORDER BY `accounts`.`id` ASC LIMIT 1
+2019-02-09T02:50:38.424428Z	    8 Execute	SELECT * FROM `accounts`  WHERE `accounts`.`deleted_at` IS NULL AND ((email = 'yang756260386@gmail.com')) ORDER BY `accounts`.`id` ASC LIMIT 1
+2019-02-09T02:50:38.431339Z	    8 Close stmt	
+2019-02-09T02:50:38.450155Z	    8 Prepare	SELECT * FROM `tasks`  WHERE (Email= ?) AND (status in (?,?)) ORDER BY id desc
+2019-02-09T02:50:38.450367Z	    8 Execute	SELECT * FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (status in ('unfinish','unfinished')) ORDER BY id desc
+2019-02-09T02:50:38.493434Z	    8 Close stmt	
+2019-02-09T02:50:38.493662Z	    8 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?) AND (status = ?) OR (status = ?)
+2019-02-09T02:50:38.493744Z	    8 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (status = 'unfinished') OR (status = 'unfinish')
+2019-02-09T02:50:38.498029Z	    8 Close stmt	
+2019-02-09T02:50:38.498291Z	    8 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?) AND (`tasks`.`status` NOT IN (?,?))
+2019-02-09T02:50:38.498370Z	    8 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (`tasks`.`status` NOT IN ('unfinished','unfinish'))
+2019-02-09T02:50:38.502110Z	    8 Close stmt	
+2019-02-09T02:50:38.502295Z	    8 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?)
+2019-02-09T02:50:38.502392Z	    8 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com')
+2019-02-09T02:50:38.505253Z	    8 Close stmt	
+2019-02-09T02:53:19.817626Z	    8 Query	START TRANSACTION
+2019-02-09T02:53:19.847465Z	    8 Prepare	INSERT INTO `tasks` (`task`,`user`,`email`,`place`,`status`,`project`,`plantime`,`finishtime`,`note`,`parentproject`,`ifdissect`,`accurate_finishtime`,`longitude`,`latitude`,`reviewsign`,`score`,`reviewdatas`,`tasktags`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+2019-02-09T02:53:19.847620Z	    8 Execute	INSERT INTO `tasks` (`task`,`user`,`email`,`place`,`status`,`project`,`plantime`,`finishtime`,`note`,`parentproject`,`ifdissect`,`accurate_finishtime`,`longitude`,`latitude`,`reviewsign`,`score`,`reviewdatas`,`tasktags`) VALUES ('i have no any error','yang756260386@gmail.com','yang756260386@gmail.com','unspecified','unfinished','error','unspecified','unfinished','','','','','','','',0,'{}','{}')
+2019-02-09T02:53:19.852889Z	    8 Close stmt	
+2019-02-09T02:53:19.852978Z	    8 Query	COMMIT
+2019-02-09T02:53:19.857874Z	    8 Prepare	SELECT * FROM `tasks`  WHERE `tasks`.`id` = ?
+2019-02-09T02:53:19.857966Z	    8 Execute	SELECT * FROM `tasks`  WHERE `tasks`.`id` = 4401
+2019-02-09T02:53:19.859485Z	    8 Close stmt	
+2019-02-09T02:53:28.218982Z	    8 Prepare	SELECT * FROM `tasks`  WHERE (Email= ?) AND (status in (?,?)) ORDER BY id desc
+2019-02-09T02:53:28.219118Z	    8 Execute	SELECT * FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (status in ('unfinish','unfinished')) ORDER BY id desc
+2019-02-09T02:53:28.249308Z	    8 Close stmt	
+2019-02-09T02:53:28.249535Z	    8 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?) AND (status = ?) OR (status = ?)
+2019-02-09T02:53:28.249647Z	    8 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (status = 'unfinished') OR (status = 'unfinish')
+2019-02-09T02:53:28.253225Z	    8 Close stmt	
+2019-02-09T02:53:28.253511Z	    8 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?) AND (`tasks`.`status` NOT IN (?,?))
+2019-02-09T02:53:28.253624Z	    8 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (`tasks`.`status` NOT IN ('unfinished','unfinish'))
+2019-02-09T02:53:28.258384Z	    8 Close stmt	
+2019-02-09T02:53:28.258596Z	    8 Prepare	SELECT count(*) FROM `tasks`  WHERE (Email= ?)
+2019-02-09T02:53:28.258694Z	    8 Execute	SELECT count(*) FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com')
+2019-02-09T02:53:28.261796Z	    8 Close stmt	
+2019-02-09T02:54:12.948629Z	    9 Connect	dt_admin@localhost on dreamteam_db using TCP/IP
+2019-02-09T02:54:12.948917Z	    9 Query	SET NAMES utf8
+2019-02-09T02:54:12.951210Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.951634Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:54:12.951703Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts'
+2019-02-09T02:54:12.952112Z	    9 Close stmt	
+2019-02-09T02:54:12.952158Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.952631Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.952682Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'id'
+2019-02-09T02:54:12.953243Z	    9 Close stmt	
+2019-02-09T02:54:12.953294Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.953666Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.953709Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'created_at'
+2019-02-09T02:54:12.954297Z	    9 Close stmt	
+2019-02-09T02:54:12.954382Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.954855Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.954946Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'updated_at'
+2019-02-09T02:54:12.955418Z	    9 Close stmt	
+2019-02-09T02:54:12.955468Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.955831Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.955874Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'deleted_at'
+2019-02-09T02:54:12.956364Z	    9 Close stmt	
+2019-02-09T02:54:12.956410Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.956786Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.956827Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'email'
+2019-02-09T02:54:12.957224Z	    9 Close stmt	
+2019-02-09T02:54:12.957268Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.957640Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.957681Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'username'
+2019-02-09T02:54:12.958112Z	    9 Close stmt	
+2019-02-09T02:54:12.958155Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.958498Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.958539Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'password'
+2019-02-09T02:54:12.958936Z	    9 Close stmt	
+2019-02-09T02:54:12.958983Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.959234Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T02:54:12.959308Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND index_name = 'idx_accounts_deleted_at'
+2019-02-09T02:54:12.959565Z	    9 Close stmt	
+2019-02-09T02:54:12.959886Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.960196Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:54:12.960243Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models'
+2019-02-09T02:54:12.960509Z	    9 Close stmt	
+2019-02-09T02:54:12.960549Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.960937Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.960981Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'id'
+2019-02-09T02:54:12.961392Z	    9 Close stmt	
+2019-02-09T02:54:12.961434Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.961806Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.961878Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'created_at'
+2019-02-09T02:54:12.962414Z	    9 Close stmt	
+2019-02-09T02:54:12.962509Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.962981Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.963032Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'updated_at'
+2019-02-09T02:54:12.963464Z	    9 Close stmt	
+2019-02-09T02:54:12.963511Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.963909Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.963950Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'deleted_at'
+2019-02-09T02:54:12.964366Z	    9 Close stmt	
+2019-02-09T02:54:12.964410Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.964778Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.964820Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title2'
+2019-02-09T02:54:12.965245Z	    9 Close stmt	
+2019-02-09T02:54:12.965291Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.965653Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.965697Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title1'
+2019-02-09T02:54:12.966112Z	    9 Close stmt	
+2019-02-09T02:54:12.966154Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.966514Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.966557Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title'
+2019-02-09T02:54:12.966965Z	    9 Close stmt	
+2019-02-09T02:54:12.967007Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.967370Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.967411Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'completed'
+2019-02-09T02:54:12.967843Z	    9 Close stmt	
+2019-02-09T02:54:12.967888Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.968160Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T02:54:12.968227Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND index_name = 'idx_todo_models_deleted_at'
+2019-02-09T02:54:12.968512Z	    9 Close stmt	
+2019-02-09T02:54:12.968789Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.969105Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:54:12.969154Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks'
+2019-02-09T02:54:12.969444Z	    9 Close stmt	
+2019-02-09T02:54:12.969485Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.969919Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.969965Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'id'
+2019-02-09T02:54:12.970752Z	    9 Close stmt	
+2019-02-09T02:54:12.970825Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.971285Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.971334Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'task'
+2019-02-09T02:54:12.971835Z	    9 Close stmt	
+2019-02-09T02:54:12.971884Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.972259Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.972301Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'user'
+2019-02-09T02:54:12.972821Z	    9 Close stmt	
+2019-02-09T02:54:12.972866Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.973234Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.973275Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'email'
+2019-02-09T02:54:12.973800Z	    9 Close stmt	
+2019-02-09T02:54:12.973848Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.974218Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.974259Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'place'
+2019-02-09T02:54:12.974741Z	    9 Close stmt	
+2019-02-09T02:54:12.974786Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.975139Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.975182Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'status'
+2019-02-09T02:54:12.975649Z	    9 Close stmt	
+2019-02-09T02:54:12.975693Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.976006Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.976067Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'project'
+2019-02-09T02:54:12.976572Z	    9 Close stmt	
+2019-02-09T02:54:12.976617Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.976976Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.977023Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'plantime'
+2019-02-09T02:54:12.977487Z	    9 Close stmt	
+2019-02-09T02:54:12.977530Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.977844Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.977930Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'finishtime'
+2019-02-09T02:54:12.978657Z	    9 Close stmt	
+2019-02-09T02:54:12.978727Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.979157Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.979206Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'note'
+2019-02-09T02:54:12.979724Z	    9 Close stmt	
+2019-02-09T02:54:12.979774Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.980157Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.980198Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'parentproject'
+2019-02-09T02:54:12.980687Z	    9 Close stmt	
+2019-02-09T02:54:12.980732Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.981093Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.981136Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'ifdissect'
+2019-02-09T02:54:12.981600Z	    9 Close stmt	
+2019-02-09T02:54:12.981645Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.981994Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.982064Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'accurate_finishtime'
+2019-02-09T02:54:12.982629Z	    9 Close stmt	
+2019-02-09T02:54:12.982737Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.983277Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.983327Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'longitude'
+2019-02-09T02:54:12.983861Z	    9 Close stmt	
+2019-02-09T02:54:12.983925Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.984472Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.984563Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'latitude'
+2019-02-09T02:54:12.985164Z	    9 Close stmt	
+2019-02-09T02:54:12.985225Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.985640Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.985684Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewsign'
+2019-02-09T02:54:12.986184Z	    9 Close stmt	
+2019-02-09T02:54:12.986230Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.986623Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.986665Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'score'
+2019-02-09T02:54:12.987160Z	    9 Close stmt	
+2019-02-09T02:54:12.987207Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.987584Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.987625Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewdatas'
+2019-02-09T02:54:12.988088Z	    9 Close stmt	
+2019-02-09T02:54:12.988131Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.988496Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.988535Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'tasktags'
+2019-02-09T02:54:12.988982Z	    9 Close stmt	
+2019-02-09T02:54:12.989188Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.989476Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T02:54:12.989538Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays'
+2019-02-09T02:54:12.989801Z	    9 Close stmt	
+2019-02-09T02:54:12.989845Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.990227Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.990272Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'id'
+2019-02-09T02:54:12.990687Z	    9 Close stmt	
+2019-02-09T02:54:12.990732Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.991093Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.991134Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'created_at'
+2019-02-09T02:54:12.991541Z	    9 Close stmt	
+2019-02-09T02:54:12.991582Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.991954Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.991994Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'updated_at'
+2019-02-09T02:54:12.992398Z	    9 Close stmt	
+2019-02-09T02:54:12.992444Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.992816Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.992881Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'deleted_at'
+2019-02-09T02:54:12.993294Z	    9 Close stmt	
+2019-02-09T02:54:12.993337Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.993703Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.993745Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'date'
+2019-02-09T02:54:12.994349Z	    9 Close stmt	
+2019-02-09T02:54:12.994414Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.994862Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.994949Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'email'
+2019-02-09T02:54:12.995414Z	    9 Close stmt	
+2019-02-09T02:54:12.995463Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.995835Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T02:54:12.995878Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'details'
+2019-02-09T02:54:12.996337Z	    9 Close stmt	
+2019-02-09T02:54:12.996390Z	    9 Query	SELECT DATABASE()
+2019-02-09T02:54:12.996662Z	    9 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T02:54:12.996723Z	    9 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND index_name = 'idx_reviewofdays_deleted_at'
+2019-02-09T02:54:12.997000Z	    9 Close stmt	
+2019-02-09T02:54:17.391645Z	    9 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T02:54:17.391801Z	    9 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T02:54:17.404147Z	    9 Close stmt	
+2019-02-09T03:02:08.925518Z	    9 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T03:02:08.925649Z	    9 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T03:02:08.939503Z	    9 Close stmt	
+2019-02-09T03:24:21.005979Z	    9 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T03:24:21.006147Z	    9 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T03:24:21.018038Z	    9 Close stmt	
+2019-02-09T03:25:30.223067Z	    9 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T03:25:30.223235Z	    9 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T03:25:30.235060Z	    9 Close stmt	
+2019-02-09T03:25:57.551233Z	   10 Connect	dt_admin@localhost on dreamteam_db using TCP/IP
+2019-02-09T03:25:57.551474Z	   10 Query	SET NAMES utf8
+2019-02-09T03:25:57.553399Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.553778Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:25:57.553848Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts'
+2019-02-09T03:25:57.554209Z	   10 Close stmt	
+2019-02-09T03:25:57.554256Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.554660Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.554703Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'id'
+2019-02-09T03:25:57.556402Z	   10 Close stmt	
+2019-02-09T03:25:57.556489Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.556974Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.557046Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'created_at'
+2019-02-09T03:25:57.557537Z	   10 Close stmt	
+2019-02-09T03:25:57.557588Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.558004Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.558047Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'updated_at'
+2019-02-09T03:25:57.558496Z	   10 Close stmt	
+2019-02-09T03:25:57.558544Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.558943Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.558990Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'deleted_at'
+2019-02-09T03:25:57.559397Z	   10 Close stmt	
+2019-02-09T03:25:57.559451Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.559861Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.559903Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'email'
+2019-02-09T03:25:57.560310Z	   10 Close stmt	
+2019-02-09T03:25:57.560354Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.560712Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.560754Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'username'
+2019-02-09T03:25:57.561138Z	   10 Close stmt	
+2019-02-09T03:25:57.561180Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.561584Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.561626Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'password'
+2019-02-09T03:25:57.562043Z	   10 Close stmt	
+2019-02-09T03:25:57.562108Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.562372Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T03:25:57.562438Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND index_name = 'idx_accounts_deleted_at'
+2019-02-09T03:25:57.562696Z	   10 Close stmt	
+2019-02-09T03:25:57.563045Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.563319Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:25:57.563379Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models'
+2019-02-09T03:25:57.563658Z	   10 Close stmt	
+2019-02-09T03:25:57.563698Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.564116Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.564160Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'id'
+2019-02-09T03:25:57.564574Z	   10 Close stmt	
+2019-02-09T03:25:57.564619Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.565032Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.565076Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'created_at'
+2019-02-09T03:25:57.565479Z	   10 Close stmt	
+2019-02-09T03:25:57.565528Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.565911Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.565954Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'updated_at'
+2019-02-09T03:25:57.566351Z	   10 Close stmt	
+2019-02-09T03:25:57.566396Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.566798Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.566841Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'deleted_at'
+2019-02-09T03:25:57.567349Z	   10 Close stmt	
+2019-02-09T03:25:57.567400Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.567804Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.567889Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title2'
+2019-02-09T03:25:57.568451Z	   10 Close stmt	
+2019-02-09T03:25:57.568508Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.568855Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.568918Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title1'
+2019-02-09T03:25:57.569327Z	   10 Close stmt	
+2019-02-09T03:25:57.569373Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.569754Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.569796Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title'
+2019-02-09T03:25:57.570183Z	   10 Close stmt	
+2019-02-09T03:25:57.570228Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.570592Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.570635Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'completed'
+2019-02-09T03:25:57.571056Z	   10 Close stmt	
+2019-02-09T03:25:57.571117Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.571379Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T03:25:57.571442Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND index_name = 'idx_todo_models_deleted_at'
+2019-02-09T03:25:57.571712Z	   10 Close stmt	
+2019-02-09T03:25:57.571976Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.572249Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:25:57.572297Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks'
+2019-02-09T03:25:57.572612Z	   10 Close stmt	
+2019-02-09T03:25:57.572652Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.572997Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.573062Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'id'
+2019-02-09T03:25:57.573553Z	   10 Close stmt	
+2019-02-09T03:25:57.573597Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.573988Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.574028Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'task'
+2019-02-09T03:25:57.574510Z	   10 Close stmt	
+2019-02-09T03:25:57.574552Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.574921Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.574963Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'user'
+2019-02-09T03:25:57.575434Z	   10 Close stmt	
+2019-02-09T03:25:57.575479Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.575854Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.575894Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'email'
+2019-02-09T03:25:57.576352Z	   10 Close stmt	
+2019-02-09T03:25:57.576396Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.576772Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.576812Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'place'
+2019-02-09T03:25:57.577296Z	   10 Close stmt	
+2019-02-09T03:25:57.577340Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.577703Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.577744Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'status'
+2019-02-09T03:25:57.578349Z	   10 Close stmt	
+2019-02-09T03:25:57.578403Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.578792Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.578833Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'project'
+2019-02-09T03:25:57.579317Z	   10 Close stmt	
+2019-02-09T03:25:57.579360Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.579691Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.579754Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'plantime'
+2019-02-09T03:25:57.580219Z	   10 Close stmt	
+2019-02-09T03:25:57.580263Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.580633Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.580674Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'finishtime'
+2019-02-09T03:25:57.581141Z	   10 Close stmt	
+2019-02-09T03:25:57.581183Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.581562Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.581602Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'note'
+2019-02-09T03:25:57.582071Z	   10 Close stmt	
+2019-02-09T03:25:57.582116Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.582587Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.582643Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'parentproject'
+2019-02-09T03:25:57.583231Z	   10 Close stmt	
+2019-02-09T03:25:57.583323Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.583857Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.583909Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'ifdissect'
+2019-02-09T03:25:57.584422Z	   10 Close stmt	
+2019-02-09T03:25:57.584470Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.584804Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.584864Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'accurate_finishtime'
+2019-02-09T03:25:57.585377Z	   10 Close stmt	
+2019-02-09T03:25:57.585422Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.585739Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.585794Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'longitude'
+2019-02-09T03:25:57.586273Z	   10 Close stmt	
+2019-02-09T03:25:57.586322Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.586698Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.586740Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'latitude'
+2019-02-09T03:25:57.587211Z	   10 Close stmt	
+2019-02-09T03:25:57.587252Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.587607Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.587650Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewsign'
+2019-02-09T03:25:57.588123Z	   10 Close stmt	
+2019-02-09T03:25:57.588163Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.588521Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.588561Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'score'
+2019-02-09T03:25:57.589026Z	   10 Close stmt	
+2019-02-09T03:25:57.589072Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.589461Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.589502Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewdatas'
+2019-02-09T03:25:57.589956Z	   10 Close stmt	
+2019-02-09T03:25:57.590001Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.590361Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.590402Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'tasktags'
+2019-02-09T03:25:57.590865Z	   10 Close stmt	
+2019-02-09T03:25:57.591032Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.591320Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:25:57.591384Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays'
+2019-02-09T03:25:57.591637Z	   10 Close stmt	
+2019-02-09T03:25:57.591677Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.592049Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.592091Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'id'
+2019-02-09T03:25:57.592503Z	   10 Close stmt	
+2019-02-09T03:25:57.592546Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.592932Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.592973Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'created_at'
+2019-02-09T03:25:57.593422Z	   10 Close stmt	
+2019-02-09T03:25:57.593474Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.593874Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.593916Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'updated_at'
+2019-02-09T03:25:57.594311Z	   10 Close stmt	
+2019-02-09T03:25:57.594356Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.594724Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.594766Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'deleted_at'
+2019-02-09T03:25:57.595174Z	   10 Close stmt	
+2019-02-09T03:25:57.595219Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.595601Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.595641Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'date'
+2019-02-09T03:25:57.596046Z	   10 Close stmt	
+2019-02-09T03:25:57.596090Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.596441Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.596483Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'email'
+2019-02-09T03:25:57.596889Z	   10 Close stmt	
+2019-02-09T03:25:57.596949Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.597379Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:25:57.597465Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'details'
+2019-02-09T03:25:57.598054Z	   10 Close stmt	
+2019-02-09T03:25:57.598134Z	   10 Query	SELECT DATABASE()
+2019-02-09T03:25:57.598424Z	   10 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T03:25:57.598485Z	   10 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND index_name = 'idx_reviewofdays_deleted_at'
+2019-02-09T03:25:57.598768Z	   10 Close stmt	
+2019-02-09T03:28:20.133639Z	   11 Connect	dt_admin@localhost on dreamteam_db using TCP/IP
+2019-02-09T03:28:20.134191Z	   11 Query	SET NAMES utf8
+2019-02-09T03:28:20.140316Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.141263Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:28:20.141450Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts'
+2019-02-09T03:28:20.142336Z	   11 Close stmt	
+2019-02-09T03:28:20.142460Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.143405Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.143591Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'id'
+2019-02-09T03:28:20.145096Z	   11 Close stmt	
+2019-02-09T03:28:20.145293Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.146192Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.146295Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'created_at'
+2019-02-09T03:28:20.147445Z	   11 Close stmt	
+2019-02-09T03:28:20.147570Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.148754Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.148864Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'updated_at'
+2019-02-09T03:28:20.149909Z	   11 Close stmt	
+2019-02-09T03:28:20.150026Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.150929Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.151216Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'deleted_at'
+2019-02-09T03:28:20.153986Z	   11 Close stmt	
+2019-02-09T03:28:20.154137Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.155557Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.155743Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'email'
+2019-02-09T03:28:20.157021Z	   11 Close stmt	
+2019-02-09T03:28:20.157143Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.158153Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.158393Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'username'
+2019-02-09T03:28:20.160116Z	   11 Close stmt	
+2019-02-09T03:28:20.160484Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.162101Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.162238Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'password'
+2019-02-09T03:28:20.163437Z	   11 Close stmt	
+2019-02-09T03:28:20.163602Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.164272Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T03:28:20.164433Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND index_name = 'idx_accounts_deleted_at'
+2019-02-09T03:28:20.165085Z	   11 Close stmt	
+2019-02-09T03:28:20.165779Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.166427Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:28:20.166588Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models'
+2019-02-09T03:28:20.167220Z	   11 Close stmt	
+2019-02-09T03:28:20.167320Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.168244Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.168344Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'id'
+2019-02-09T03:28:20.169426Z	   11 Close stmt	
+2019-02-09T03:28:20.169525Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.170446Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.170600Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'created_at'
+2019-02-09T03:28:20.172217Z	   11 Close stmt	
+2019-02-09T03:28:20.172388Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.173436Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.173554Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'updated_at'
+2019-02-09T03:28:20.174779Z	   11 Close stmt	
+2019-02-09T03:28:20.174918Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.175963Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.176215Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'deleted_at'
+2019-02-09T03:28:20.177916Z	   11 Close stmt	
+2019-02-09T03:28:20.178084Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.179262Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.179382Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title2'
+2019-02-09T03:28:20.180673Z	   11 Close stmt	
+2019-02-09T03:28:20.180797Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.181840Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.181959Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title1'
+2019-02-09T03:28:20.183220Z	   11 Close stmt	
+2019-02-09T03:28:20.183341Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.184289Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.184471Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title'
+2019-02-09T03:28:20.185931Z	   11 Close stmt	
+2019-02-09T03:28:20.186078Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.187482Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.187598Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'completed'
+2019-02-09T03:28:20.188773Z	   11 Close stmt	
+2019-02-09T03:28:20.188941Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.189606Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T03:28:20.189836Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND index_name = 'idx_todo_models_deleted_at'
+2019-02-09T03:28:20.190564Z	   11 Close stmt	
+2019-02-09T03:28:20.191253Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.192003Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:28:20.192183Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks'
+2019-02-09T03:28:20.193022Z	   11 Close stmt	
+2019-02-09T03:28:20.193138Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.194224Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.194337Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'id'
+2019-02-09T03:28:20.195950Z	   11 Close stmt	
+2019-02-09T03:28:20.196089Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.197143Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.197271Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'task'
+2019-02-09T03:28:20.198661Z	   11 Close stmt	
+2019-02-09T03:28:20.198848Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.200277Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.200470Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'user'
+2019-02-09T03:28:20.201777Z	   11 Close stmt	
+2019-02-09T03:28:20.201902Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.203032Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.203142Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'email'
+2019-02-09T03:28:20.204388Z	   11 Close stmt	
+2019-02-09T03:28:20.204514Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.205511Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.205674Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'place'
+2019-02-09T03:28:20.206891Z	   11 Close stmt	
+2019-02-09T03:28:20.207013Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.207844Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.208037Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'status'
+2019-02-09T03:28:20.209254Z	   11 Close stmt	
+2019-02-09T03:28:20.209381Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.210360Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.210533Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'project'
+2019-02-09T03:28:20.213572Z	   11 Close stmt	
+2019-02-09T03:28:20.213840Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.215175Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.215300Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'plantime'
+2019-02-09T03:28:20.216643Z	   11 Close stmt	
+2019-02-09T03:28:20.216768Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.217815Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.217936Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'finishtime'
+2019-02-09T03:28:20.219337Z	   11 Close stmt	
+2019-02-09T03:28:20.219465Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.220314Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.220466Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'note'
+2019-02-09T03:28:20.221740Z	   11 Close stmt	
+2019-02-09T03:28:20.221923Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.222880Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.223093Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'parentproject'
+2019-02-09T03:28:20.224513Z	   11 Close stmt	
+2019-02-09T03:28:20.224619Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.225590Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.225735Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'ifdissect'
+2019-02-09T03:28:20.227273Z	   11 Close stmt	
+2019-02-09T03:28:20.227421Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.228819Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.228949Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'accurate_finishtime'
+2019-02-09T03:28:20.230230Z	   11 Close stmt	
+2019-02-09T03:28:20.230354Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.231317Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.231512Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'longitude'
+2019-02-09T03:28:20.232735Z	   11 Close stmt	
+2019-02-09T03:28:20.232841Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.233745Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.233940Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'latitude'
+2019-02-09T03:28:20.235256Z	   11 Close stmt	
+2019-02-09T03:28:20.235381Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.236353Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.236456Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewsign'
+2019-02-09T03:28:20.237721Z	   11 Close stmt	
+2019-02-09T03:28:20.237836Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.238840Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.238978Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'score'
+2019-02-09T03:28:20.240249Z	   11 Close stmt	
+2019-02-09T03:28:20.240360Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.241409Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.241510Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewdatas'
+2019-02-09T03:28:20.242924Z	   11 Close stmt	
+2019-02-09T03:28:20.243058Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.244163Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.244320Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'tasktags'
+2019-02-09T03:28:20.245711Z	   11 Close stmt	
+2019-02-09T03:28:20.246186Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.246873Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T03:28:20.247029Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays'
+2019-02-09T03:28:20.247691Z	   11 Close stmt	
+2019-02-09T03:28:20.247797Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.248665Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.248770Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'id'
+2019-02-09T03:28:20.249903Z	   11 Close stmt	
+2019-02-09T03:28:20.250020Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.251007Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.251180Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'created_at'
+2019-02-09T03:28:20.252317Z	   11 Close stmt	
+2019-02-09T03:28:20.252436Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.253487Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.253619Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'updated_at'
+2019-02-09T03:28:20.254711Z	   11 Close stmt	
+2019-02-09T03:28:20.254815Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.255702Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.255855Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'deleted_at'
+2019-02-09T03:28:20.256965Z	   11 Close stmt	
+2019-02-09T03:28:20.257073Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.257962Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.258174Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'date'
+2019-02-09T03:28:20.259551Z	   11 Close stmt	
+2019-02-09T03:28:20.259697Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.261045Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.261207Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'email'
+2019-02-09T03:28:20.262345Z	   11 Close stmt	
+2019-02-09T03:28:20.262465Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.263383Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T03:28:20.263540Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'details'
+2019-02-09T03:28:20.264668Z	   11 Close stmt	
+2019-02-09T03:28:20.264840Z	   11 Query	SELECT DATABASE()
+2019-02-09T03:28:20.265531Z	   11 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T03:28:20.265708Z	   11 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND index_name = 'idx_reviewofdays_deleted_at'
+2019-02-09T03:28:20.266371Z	   11 Close stmt	
+2019-02-09T03:30:43.690217Z	   11 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T03:30:43.690982Z	   11 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T03:30:43.712264Z	   11 Close stmt	
+2019-02-09T03:31:02.545075Z	   11 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T03:31:02.545349Z	   11 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T03:31:02.566318Z	   11 Close stmt	
+2019-02-09T04:21:00.102511Z	   11 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:21:00.102613Z	   11 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:21:00.111345Z	   11 Close stmt	
+2019-02-09T04:21:58.276616Z	   12 Connect	dt_admin@localhost on dreamteam_db using TCP/IP
+2019-02-09T04:21:58.276863Z	   12 Query	SET NAMES utf8
+2019-02-09T04:21:58.278767Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.279153Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:21:58.279212Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts'
+2019-02-09T04:21:58.279532Z	   12 Close stmt	
+2019-02-09T04:21:58.279576Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.279993Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.280035Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'id'
+2019-02-09T04:21:58.280550Z	   12 Close stmt	
+2019-02-09T04:21:58.280606Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.280996Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.281042Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'created_at'
+2019-02-09T04:21:58.281442Z	   12 Close stmt	
+2019-02-09T04:21:58.281507Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.281900Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.281972Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'updated_at'
+2019-02-09T04:21:58.282488Z	   12 Close stmt	
+2019-02-09T04:21:58.282554Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.283189Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.283249Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'deleted_at'
+2019-02-09T04:21:58.283729Z	   12 Close stmt	
+2019-02-09T04:21:58.283779Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.284162Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.284229Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'email'
+2019-02-09T04:21:58.284663Z	   12 Close stmt	
+2019-02-09T04:21:58.284706Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.285084Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.285124Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'username'
+2019-02-09T04:21:58.285501Z	   12 Close stmt	
+2019-02-09T04:21:58.285548Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.285908Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.285948Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'password'
+2019-02-09T04:21:58.286343Z	   12 Close stmt	
+2019-02-09T04:21:58.286405Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.286675Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T04:21:58.286734Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND index_name = 'idx_accounts_deleted_at'
+2019-02-09T04:21:58.287008Z	   12 Close stmt	
+2019-02-09T04:21:58.287330Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.287599Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:21:58.287657Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models'
+2019-02-09T04:21:58.287929Z	   12 Close stmt	
+2019-02-09T04:21:58.287970Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.288339Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.288379Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'id'
+2019-02-09T04:21:58.288786Z	   12 Close stmt	
+2019-02-09T04:21:58.288827Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.289191Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.289234Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'created_at'
+2019-02-09T04:21:58.289639Z	   12 Close stmt	
+2019-02-09T04:21:58.289681Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.290038Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.290078Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'updated_at'
+2019-02-09T04:21:58.290486Z	   12 Close stmt	
+2019-02-09T04:21:58.290528Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.290884Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.290923Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'deleted_at'
+2019-02-09T04:21:58.291321Z	   12 Close stmt	
+2019-02-09T04:21:58.291362Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.291720Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.291762Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title2'
+2019-02-09T04:21:58.292143Z	   12 Close stmt	
+2019-02-09T04:21:58.292183Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.292526Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.292565Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title1'
+2019-02-09T04:21:58.292974Z	   12 Close stmt	
+2019-02-09T04:21:58.293017Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.293378Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.293418Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title'
+2019-02-09T04:21:58.293795Z	   12 Close stmt	
+2019-02-09T04:21:58.293838Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.294150Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.294199Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'completed'
+2019-02-09T04:21:58.294585Z	   12 Close stmt	
+2019-02-09T04:21:58.294631Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.294878Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T04:21:58.294952Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND index_name = 'idx_todo_models_deleted_at'
+2019-02-09T04:21:58.295202Z	   12 Close stmt	
+2019-02-09T04:21:58.295418Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.295742Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:21:58.295799Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks'
+2019-02-09T04:21:58.296078Z	   12 Close stmt	
+2019-02-09T04:21:58.296120Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.296487Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.296528Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'id'
+2019-02-09T04:21:58.296996Z	   12 Close stmt	
+2019-02-09T04:21:58.297038Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.297442Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.297484Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'task'
+2019-02-09T04:21:58.297996Z	   12 Close stmt	
+2019-02-09T04:21:58.298039Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.298426Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.298469Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'user'
+2019-02-09T04:21:58.298982Z	   12 Close stmt	
+2019-02-09T04:21:58.299037Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.299477Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.299527Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'email'
+2019-02-09T04:21:58.300048Z	   12 Close stmt	
+2019-02-09T04:21:58.300097Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.300450Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.300491Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'place'
+2019-02-09T04:21:58.300979Z	   12 Close stmt	
+2019-02-09T04:21:58.301022Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.301380Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.301423Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'status'
+2019-02-09T04:21:58.301901Z	   12 Close stmt	
+2019-02-09T04:21:58.301945Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.302329Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.302373Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'project'
+2019-02-09T04:21:58.302871Z	   12 Close stmt	
+2019-02-09T04:21:58.302917Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.303268Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.303309Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'plantime'
+2019-02-09T04:21:58.303784Z	   12 Close stmt	
+2019-02-09T04:21:58.303828Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.304212Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.304252Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'finishtime'
+2019-02-09T04:21:58.304707Z	   12 Close stmt	
+2019-02-09T04:21:58.304749Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.305091Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.305133Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'note'
+2019-02-09T04:21:58.305592Z	   12 Close stmt	
+2019-02-09T04:21:58.305635Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.305982Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.306024Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'parentproject'
+2019-02-09T04:21:58.306512Z	   12 Close stmt	
+2019-02-09T04:21:58.306554Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.306911Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.306952Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'ifdissect'
+2019-02-09T04:21:58.307420Z	   12 Close stmt	
+2019-02-09T04:21:58.307462Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.307818Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.307857Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'accurate_finishtime'
+2019-02-09T04:21:58.308316Z	   12 Close stmt	
+2019-02-09T04:21:58.308357Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.308714Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.308755Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'longitude'
+2019-02-09T04:21:58.309205Z	   12 Close stmt	
+2019-02-09T04:21:58.309246Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.309586Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.309626Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'latitude'
+2019-02-09T04:21:58.310080Z	   12 Close stmt	
+2019-02-09T04:21:58.310121Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.310458Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.310500Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewsign'
+2019-02-09T04:21:58.310957Z	   12 Close stmt	
+2019-02-09T04:21:58.310999Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.311343Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.311385Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'score'
+2019-02-09T04:21:58.311854Z	   12 Close stmt	
+2019-02-09T04:21:58.311895Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.312253Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.312292Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewdatas'
+2019-02-09T04:21:58.312757Z	   12 Close stmt	
+2019-02-09T04:21:58.312799Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.313150Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.313191Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'tasktags'
+2019-02-09T04:21:58.313662Z	   12 Close stmt	
+2019-02-09T04:21:58.313875Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.314130Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:21:58.314188Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays'
+2019-02-09T04:21:58.314454Z	   12 Close stmt	
+2019-02-09T04:21:58.314497Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.314845Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.314906Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'id'
+2019-02-09T04:21:58.315357Z	   12 Close stmt	
+2019-02-09T04:21:58.315410Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.315926Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.316007Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'created_at'
+2019-02-09T04:21:58.316750Z	   12 Close stmt	
+2019-02-09T04:21:58.316834Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.317433Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.317494Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'updated_at'
+2019-02-09T04:21:58.318067Z	   12 Close stmt	
+2019-02-09T04:21:58.318123Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.318522Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.318565Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'deleted_at'
+2019-02-09T04:21:58.319009Z	   12 Close stmt	
+2019-02-09T04:21:58.319058Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.319416Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.319459Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'date'
+2019-02-09T04:21:58.319915Z	   12 Close stmt	
+2019-02-09T04:21:58.319956Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.320283Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.320331Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'email'
+2019-02-09T04:21:58.320719Z	   12 Close stmt	
+2019-02-09T04:21:58.320763Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.321144Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:21:58.321185Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'details'
+2019-02-09T04:21:58.321585Z	   12 Close stmt	
+2019-02-09T04:21:58.321659Z	   12 Query	SELECT DATABASE()
+2019-02-09T04:21:58.321932Z	   12 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T04:21:58.321979Z	   12 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND index_name = 'idx_reviewofdays_deleted_at'
+2019-02-09T04:21:58.322244Z	   12 Close stmt	
+2019-02-09T04:22:05.595067Z	   12 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:22:05.595207Z	   12 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:22:05.605607Z	   12 Close stmt	
+2019-02-09T04:22:13.686185Z	   12 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:22:13.686338Z	   12 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:22:13.697600Z	   12 Close stmt	
+2019-02-09T04:25:26.204059Z	   12 Prepare	SELECT * FROM `tasks`  WHERE (Email= ?) AND (project in (?)) ORDER BY id desc
+2019-02-09T04:25:26.204238Z	   12 Execute	SELECT * FROM `tasks`  WHERE (Email= 'yang756260386@gmail.com') AND (project in ('review')) ORDER BY id desc
+2019-02-09T04:25:26.215331Z	   12 Close stmt	
+2019-02-09T04:26:02.136419Z	   12 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:26:02.136514Z	   12 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:26:02.145603Z	   12 Close stmt	
+2019-02-09T04:31:47.693083Z	   13 Connect	dt_admin@localhost on dreamteam_db using TCP/IP
+2019-02-09T04:31:47.693323Z	   13 Query	SET NAMES utf8
+2019-02-09T04:31:47.695251Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.695639Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:31:47.695703Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts'
+2019-02-09T04:31:47.696062Z	   13 Close stmt	
+2019-02-09T04:31:47.696113Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.696528Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.696579Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'id'
+2019-02-09T04:31:47.697030Z	   13 Close stmt	
+2019-02-09T04:31:47.697076Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.697443Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.697487Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'created_at'
+2019-02-09T04:31:47.697882Z	   13 Close stmt	
+2019-02-09T04:31:47.697925Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.698289Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.698329Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'updated_at'
+2019-02-09T04:31:47.698717Z	   13 Close stmt	
+2019-02-09T04:31:47.698759Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.699102Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.699143Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'deleted_at'
+2019-02-09T04:31:47.699538Z	   13 Close stmt	
+2019-02-09T04:31:47.699583Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.699924Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.699970Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'email'
+2019-02-09T04:31:47.700368Z	   13 Close stmt	
+2019-02-09T04:31:47.700411Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.700784Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.700824Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'username'
+2019-02-09T04:31:47.701249Z	   13 Close stmt	
+2019-02-09T04:31:47.701295Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.701644Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.701683Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND column_name = 'password'
+2019-02-09T04:31:47.702076Z	   13 Close stmt	
+2019-02-09T04:31:47.702138Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.702390Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T04:31:47.702450Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'accounts' AND index_name = 'idx_accounts_deleted_at'
+2019-02-09T04:31:47.702706Z	   13 Close stmt	
+2019-02-09T04:31:47.703038Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.703292Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:31:47.703358Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models'
+2019-02-09T04:31:47.703637Z	   13 Close stmt	
+2019-02-09T04:31:47.703689Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.704180Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.704234Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'id'
+2019-02-09T04:31:47.704714Z	   13 Close stmt	
+2019-02-09T04:31:47.704762Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.705144Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.705185Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'created_at'
+2019-02-09T04:31:47.705582Z	   13 Close stmt	
+2019-02-09T04:31:47.705625Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.706048Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.706108Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'updated_at'
+2019-02-09T04:31:47.706557Z	   13 Close stmt	
+2019-02-09T04:31:47.706605Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.706995Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.707042Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'deleted_at'
+2019-02-09T04:31:47.707474Z	   13 Close stmt	
+2019-02-09T04:31:47.707521Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.707919Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.707992Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title2'
+2019-02-09T04:31:47.708641Z	   13 Close stmt	
+2019-02-09T04:31:47.708706Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.709180Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.709228Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title1'
+2019-02-09T04:31:47.709678Z	   13 Close stmt	
+2019-02-09T04:31:47.709722Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.710089Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.710130Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'title'
+2019-02-09T04:31:47.710550Z	   13 Close stmt	
+2019-02-09T04:31:47.710591Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.710952Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.710995Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND column_name = 'completed'
+2019-02-09T04:31:47.711401Z	   13 Close stmt	
+2019-02-09T04:31:47.711459Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.711733Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T04:31:47.711777Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'todo_models' AND index_name = 'idx_todo_models_deleted_at'
+2019-02-09T04:31:47.712036Z	   13 Close stmt	
+2019-02-09T04:31:47.712271Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.712563Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:31:47.712614Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks'
+2019-02-09T04:31:47.712906Z	   13 Close stmt	
+2019-02-09T04:31:47.712950Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.713342Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.713384Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'id'
+2019-02-09T04:31:47.713847Z	   13 Close stmt	
+2019-02-09T04:31:47.713889Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.714260Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.714302Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'task'
+2019-02-09T04:31:47.714797Z	   13 Close stmt	
+2019-02-09T04:31:47.714840Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.715203Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.715243Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'user'
+2019-02-09T04:31:47.715694Z	   13 Close stmt	
+2019-02-09T04:31:47.715738Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.716106Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.716145Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'email'
+2019-02-09T04:31:47.716630Z	   13 Close stmt	
+2019-02-09T04:31:47.716675Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.717076Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.717116Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'place'
+2019-02-09T04:31:47.717568Z	   13 Close stmt	
+2019-02-09T04:31:47.717611Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.717984Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.718036Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'status'
+2019-02-09T04:31:47.718512Z	   13 Close stmt	
+2019-02-09T04:31:47.718557Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.718886Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.718936Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'project'
+2019-02-09T04:31:47.719395Z	   13 Close stmt	
+2019-02-09T04:31:47.719437Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.719776Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.719816Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'plantime'
+2019-02-09T04:31:47.720282Z	   13 Close stmt	
+2019-02-09T04:31:47.720324Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.720693Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.720734Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'finishtime'
+2019-02-09T04:31:47.721192Z	   13 Close stmt	
+2019-02-09T04:31:47.721232Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.721577Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.721617Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'note'
+2019-02-09T04:31:47.722093Z	   13 Close stmt	
+2019-02-09T04:31:47.722136Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.722493Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.722535Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'parentproject'
+2019-02-09T04:31:47.722997Z	   13 Close stmt	
+2019-02-09T04:31:47.723041Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.723365Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.723413Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'ifdissect'
+2019-02-09T04:31:47.723892Z	   13 Close stmt	
+2019-02-09T04:31:47.723938Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.724313Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.724355Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'accurate_finishtime'
+2019-02-09T04:31:47.724829Z	   13 Close stmt	
+2019-02-09T04:31:47.724871Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.725243Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.725284Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'longitude'
+2019-02-09T04:31:47.725757Z	   13 Close stmt	
+2019-02-09T04:31:47.725798Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.726139Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.726179Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'latitude'
+2019-02-09T04:31:47.726634Z	   13 Close stmt	
+2019-02-09T04:31:47.726675Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.727017Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.727059Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewsign'
+2019-02-09T04:31:47.727536Z	   13 Close stmt	
+2019-02-09T04:31:47.727581Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.727936Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.727976Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'score'
+2019-02-09T04:31:47.728447Z	   13 Close stmt	
+2019-02-09T04:31:47.728490Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.728806Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.728868Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'reviewdatas'
+2019-02-09T04:31:47.729363Z	   13 Close stmt	
+2019-02-09T04:31:47.729409Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.729785Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.729825Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'tasks' AND column_name = 'tasktags'
+2019-02-09T04:31:47.730287Z	   13 Close stmt	
+2019-02-09T04:31:47.730474Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.730716Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = ? AND table_name = ?
+2019-02-09T04:31:47.730773Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays'
+2019-02-09T04:31:47.731043Z	   13 Close stmt	
+2019-02-09T04:31:47.731084Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.731441Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.731484Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'id'
+2019-02-09T04:31:47.731908Z	   13 Close stmt	
+2019-02-09T04:31:47.731951Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.732302Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.732346Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'created_at'
+2019-02-09T04:31:47.732761Z	   13 Close stmt	
+2019-02-09T04:31:47.732804Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.733128Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.733196Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'updated_at'
+2019-02-09T04:31:47.733764Z	   13 Close stmt	
+2019-02-09T04:31:47.733814Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.734314Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.734367Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'deleted_at'
+2019-02-09T04:31:47.734822Z	   13 Close stmt	
+2019-02-09T04:31:47.734870Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.735242Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.735286Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'date'
+2019-02-09T04:31:47.735706Z	   13 Close stmt	
+2019-02-09T04:31:47.735750Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.736119Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.736160Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'email'
+2019-02-09T04:31:47.736605Z	   13 Close stmt	
+2019-02-09T04:31:47.736648Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.737007Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ? AND column_name = ?
+2019-02-09T04:31:47.737047Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND column_name = 'details'
+2019-02-09T04:31:47.737450Z	   13 Close stmt	
+2019-02-09T04:31:47.737514Z	   13 Query	SELECT DATABASE()
+2019-02-09T04:31:47.737760Z	   13 Prepare	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = ? AND table_name = ? AND index_name = ?
+2019-02-09T04:31:47.737822Z	   13 Execute	SELECT count(*) FROM INFORMATION_SCHEMA.STATISTICS WHERE table_schema = 'dreamteam_db' AND table_name = 'reviewofdays' AND index_name = 'idx_reviewofdays_deleted_at'
+2019-02-09T04:31:47.738075Z	   13 Close stmt	
+2019-02-09T04:31:50.850786Z	   13 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:31:50.850930Z	   13 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:31:50.860075Z	   13 Close stmt	
+2019-02-09T04:33:11.398384Z	   13 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:33:11.398490Z	   13 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:33:11.406410Z	   13 Close stmt	
+2019-02-09T04:38:32.008965Z	   13 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:38:32.009072Z	   13 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:38:32.017364Z	   13 Close stmt	
+2019-02-09T04:38:43.660755Z	   13 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:38:43.660838Z	   13 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:38:43.669246Z	   13 Close stmt	
+2019-02-09T04:56:22.835931Z	   13 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:56:22.836048Z	   13 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:56:22.844046Z	   13 Close stmt	
+2019-02-09T04:56:49.771961Z	   13 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:56:49.772050Z	   13 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:56:49.780763Z	   13 Close stmt	
+2019-02-09T04:59:10.771853Z	   13 Prepare	SELECT * FROM `tasks`  WHERE (email =  ?) AND (project =  ?) ORDER BY `id`
+2019-02-09T04:59:10.771959Z	   13 Execute	SELECT * FROM `tasks`  WHERE (email =  'yang756260386@gmail.com') AND (project =  'error') ORDER BY `id`
+2019-02-09T04:59:10.780374Z	   13 Close stmt	

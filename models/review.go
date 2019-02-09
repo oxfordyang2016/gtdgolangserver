@@ -84,6 +84,34 @@ func Reviewalgorithmjson(c *gin.Context) {
 }
 
 
+func Errorlog(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+
+  var errors []Tasks
+  db.Where("email =  ?", email).Where("project =  ?", "error").Order("id").Find(&errors)
+  
+  c.JSON(200, gin.H{
+      "errorlog":errors,
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 func Reviewalgorithmjsonforios(c *gin.Context) {
