@@ -584,10 +584,15 @@ c.JSON(200, gin.H{
     fmt.Println(reviewdata)
     taglight := gjson.Get(reqBody, "taglight").String()
     tasktags := gjson.Get(reqBody, "tasktags").String()
+    //gtd-cli to update the review algo data
+    reviewalgolight := gjson.Get(reqBody, "reviewalgolight").String()
+    reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
      
     fmt.Println("---------------------tasktags info -------------------")
     fmt.Println(taglight)
     fmt.Println(tasktags)
+    fmt.Println(reviewalgolight)
+    fmt.Println(reviewalgodata)
     
     fmt.Println("-------------------------------------------------------")
 
@@ -690,6 +695,8 @@ c.JSON(200, gin.H{
     if ifdissect!="no"{db.Model(&task).Update("Ifdissect", ifdissect)}
     if note!="unspecified"{db.Model(&task).Update("Note", note)}
     if taglight == "yes"{db.Model(&task).Update("Tasktags", tasktags)}
+    if reviewalgolight == "yes" {db.Model(&task).Update("Reviewdatas", reviewalgodata)}
+    
     if isreview=="yes"{db.Model(&task).Update("reviewdatas", reviewdata)}
     
     //always to update tasktags,i think ther is a room to optimatical
