@@ -59,6 +59,7 @@ v1.StaticFile("/user.css", "./static/css/user.css")
 v1.StaticFile("/moment.js", "./static/js/moment.js")
 
 v1.StaticFile("/echart.js", "./static/js/echart.js")
+v1.StaticFile("/finance.js", "./static/js/finance.js")
 v1.StaticFile("/jquery.js", "./static/js/jquery.js")
 v1.StaticFile("/style.css", "./static/css/style.css")
  v1.StaticFile("/index.js", "./static/js/index.js")
@@ -118,6 +119,8 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   v1.GET("/review",Review)
   v1.GET("/errorlogjson",Errorlog)
   v1.GET("/reviewgraphforios",Reviewforios)
+   //finance
+   v1.GET("/mybalancejson",Getmywealth)
 router.Run(":8081")
 
 }

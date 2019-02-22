@@ -5,13 +5,31 @@
 
  <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="/v1/finance.js"></script>
+
 <style>
-p {
+#demo{
   text-align: center;
   font-size: 60px;
   color: red;
   position: absolute;
     top: 50%;
+    left: 45%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+   
+
+}
+
+#demo1{
+  text-align: center;
+  font-size: 60px;
+  color: red;
+  position: absolute;
+    top: 65%;
     left: 50%;
     margin-top: -50px;
     margin-left: -50px;
@@ -21,6 +39,9 @@ p {
 
 }
 
+
+
+
 body{
     background-color: green;
 }
@@ -29,9 +50,10 @@ body{
 </head>
 <body>
 
-<p id="demo"></p>
-
+<ul id="demo"></ul>
+<ul id="demo1">balance</ul>
 <script>
+jQuery.ajaxSetup({async:false});
 // Set the date we're counting down to
 var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
 
@@ -86,6 +108,38 @@ var x = setInterval(function() {
     //     document.getElementById("demo").innerHTML = "EXPIRED";
     // }
 }, 1000);
+
+
+var mybalance1 = setInterval(function() {
+
+var now = new Date();
+
+var seconds = now.getSeconds();
+
+var stringseconds =  seconds.toString();
+if (stringseconds.length<2){
+ stringseconds = "0" + stringseconds;
+}
+
+// var mybalancefromserver = 0
+// $.get("/v1/mybalancejson", function(data, status){
+// console.log(data);
+// //alert(data)
+//  mybalancefromserver = data.blance  
+// })
+
+//console.log(mybalancefromserver)
+
+document.getElementById("demo1").innerHTML = mybalance() ;
+}, 3*60*60*1000);
+
+
+
+
+
+
+
+
 </script>
 
 </body>
