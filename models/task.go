@@ -1420,9 +1420,9 @@ return alleverydays[i].Name > alleverydays[j].Name
               email:=emailcookie.Value
                  
              client:= c.Request.Header.Get("client")
-            fmt.Println("+++++++client is++++++++")
-           fmt.Println(client)
-           fmt.Println("+++++++client is++++++++")
+             fmt.Println("+++++++client is++++++++")
+             fmt.Println(client)
+             fmt.Println("+++++++client is++++++++")
 
 
 
@@ -1433,11 +1433,11 @@ return alleverydays[i].Name > alleverydays[j].Name
               db.Where("Email= ?", email).Find(&tasks)
               alldays:=make(map[string] []Tasks)
               
-          getdbdatatime := time.Now()
-          fmt.Println("from request arrive to finished get data from db  time ")
-        //https://stackoverflow.com/questions/45791241/correctly-measure-time-duration-in-go 
-         fmt.Println(getdbdatatime.Sub(start))
-         fmt.Println("++++++++")
+              getdbdatatime := time.Now()
+              fmt.Println("from request arrive to finished get data from db  time ")
+             //https://stackoverflow.com/questions/45791241/correctly-measure-time-duration-in-go 
+             fmt.Println(getdbdatatime.Sub(start))
+             fmt.Println("++++++++")
 
 
 
@@ -1553,7 +1553,7 @@ if err != nil {
 fmt.Println(datafromredis)
 **/
 
-            if(client   == "ios" || client == "clientforjson"){
+if(client   == "ios" || client == "clientforjson"||client == "weekpridejson"||client == "todaypridejson"){
 
 
         // c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": datafromredis})
@@ -1561,17 +1561,18 @@ fmt.Println(datafromredis)
 //u need to note,the fellowing code ,u can test theperformance of  dealing with json ,when i set different size.
 if (client == "clientforjson"){
 c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
+}else if(client == "weekpridejson"){
+  c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:6]})
+}else if(client == "todaypridejson"){
+  c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:1]})
 }else{
-
 c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:30]})
-
-
 }
 
 
 
-                returntoclienttime := time.Now()
-          fmt.Println("from request arrive to the end time of return json to client ")
+    returntoclienttime := time.Now()
+    fmt.Println("from request arrive to the end time of return json to client ")
         //https://stackoverflow.com/questions/45791241/correctly-measure-time-duration-in-go
          fmt.Println(returntoclienttime.Sub(start))
          fmt.Println("++++++++")   
