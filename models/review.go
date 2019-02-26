@@ -4,6 +4,7 @@ import (
 "fmt"
 "encoding/json"
 "net/http"
+"github.com/jinzhu/gorm"
 //"github.com/jinzhu/gorm"
 "github.com/gin-gonic/gin"
 //"github.com/gin-contrib/sessions"
@@ -40,11 +41,22 @@ Atomadifficulttask  int    `json:"atomadifficulttask"`
 Alwaysprofit       int     `json:"alwaysprofit"` 
 Markataskimmediately int   `json:"markataskimmediately"`
 Doanimportantthingearly int  `json:"doanimportantthingearly"`
+Buildframeandprinciple    int `json:"buildframeandprinciple"`
 }
 
 
 
 
+type Reviewofday  struct {
+  gorm.Model
+  Date string   `json:"date"`
+  Email    string   `json:"email"`     
+  Details string `json:"details" sql:"type:text;"`
+
+   }
+
+
+ 
 
 
 
@@ -55,10 +67,32 @@ Doanimportantthingearly int  `json:"doanimportantthingearly"`
 
 
 
-
-
-
-
+type Reviewfortimescount struct {
+    gorm.Model
+     Patience int   `json:"patiencenumber"`
+     Email    string   `json:"email"`     
+     //Details string `json:"details" sql:"type:text;"`
+     Date string   `json:"date"`
+     //Patience      int  `json:"patience"`
+     Usebrain      int   `json:"usebrain"`
+     Battlewithlowerbrain int   `json:"battlewithlowerbrain"`
+    Learnnewthings int     `json:"learnnewthings"`
+Makeuseofthingsuhavelearned int    `json:"makeuseofthingsuhavelearned"`
+Difficultthings int  `json:"difficultthings"`
+Challengethings int  `json:"challengethings"`
+Threeminutes    int   `json:"threeminutes"`
+Getlesson       int    `json:"getlesson"`
+Learntechuse    int    `json:"learntechuse"` 
+Thenumberoftasks_score  int    `json:"thenumberoftasks_score"`
+Serviceforgoal_score  int    `json:"serviceforgoal_score"`
+Onlystartatask int       `json:"onlystartatask_score" sql:"size:999999"`
+Atomadifficulttask  int    `json:"atomadifficulttask"`
+Alwaysprofit       int     `json:"alwaysprofit"` 
+Markataskimmediately int   `json:"markataskimmediately"`
+Doanimportantthingearly int  `json:"doanimportantthingearly"`  
+Buildframeandprinciple    int `json:"buildframeandprinciple"`
+    
+    }
 
 
 
@@ -76,8 +110,11 @@ func Reviewalgorithmjson(c *gin.Context) {
 
   var reviewdays []Reviewofday
   db.Where("email =  ?", email).Order("date").Find(&reviewdays)
-  
+  //if u set the len,u will get the size of slice
+  //reviewdays = reviewdays[len(reviewdays)-7:]
+
   c.JSON(200, gin.H{
+      //"reviewdata":review30days,
       "reviewdata":reviewdays,
     })
 
@@ -100,16 +137,6 @@ func Errorlog(c *gin.Context) {
     })
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -147,6 +174,34 @@ c.HTML(http.StatusOK, "reviewalgoforios.html",nil)
 }
 
 
+//this api was used to prepare the data of review
+func Reviewforstastics(c *gin.Context){
+  //get 7 days review datas 
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+
+  var reviewsfortimescount []Reviewfortimescount
+  db.Where("email =  ?", email).Order("date").Find(&reviewsfortimescount)
+  lengthofreviewsfortimescount := len(reviewsfortimescount)
+  weekstart := lengthofreviewsfortimescount - 1
+  var reviewdata = reviewsfortimescount[weekstart:]
+  fmt.Println(reviewdata)
+  //   for _,item :=range reviewdata{
+  //   var detailofday = item.Details 
+  //   challengetag := gjson.Get(detailofday, "challengetag").String()
+  //   fmt.Println(challengetag)  
+  // }
+  c.JSON(200, gin.H{
+      "reviewdata":reviewdata,
+    })
+}
+
+
+
+
+
 
 
 
@@ -169,12 +224,23 @@ check if date row was created in reviewday table,if it is no,the function will c
 */
 
 var reviewday Reviewofday 
+var reviewfortimecount  Reviewfortimescount
 db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewday)
+db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewfortimecount)
 if reviewday.Date!=date{
 db.Create(&Reviewofday{Date: date,Email:email,Details:"no"})
 }else{
 fmt.Println("===========the record has been created in the past==========")
 }
+
+if reviewfortimecount.Date!=date{
+  db.Create(&Reviewfortimescount{Date: date,Email:email})
+  }else{
+  fmt.Println("===========the record has been created in the past==========")
+  }
+
+
+
 }
 
 
@@ -195,7 +261,6 @@ var brainuse_score,makeuseofthethingsuhavelearned_score,difficultthings_score,th
 var serviceforgoal_score,onlystartatask_score = 0,0
 var atomadifficulttask_score,alwaysprofit_score = 0,0
 var doanimportantthingearly_score,markataskimmediately_score = 0,0
-
 var challengetag_score = 0
 db.Where("Email= ?", email).Where("finishtime =  ?", date).Order("id desc").Find(&tasks)
 
@@ -204,6 +269,14 @@ var taskcount_score int
 var countoffinishedtasks int
 
 var countofgivenuptasks int
+
+
+//for times stastics
+var patiencenumber = 0 
+var battlewithlowerbrainnumber = 0
+var usebrainnumber = 0
+var buildframeandprinciple_score =0 
+var buildframeandprinciplenumber =0 
 
 
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"unfinished","unfinish"}).Count(&countoffinishedtasks)
@@ -238,7 +311,19 @@ fmt.Println("------------i had been into loop----------------")
 if  brainuse := gjson.Get(json, "brainuse").String();brainuse=="yes"{
 fmt.Println(brainuse)
 brainuse_score = brainuse_score +5
+battlewithlowerbrainnumber = battlewithlowerbrainnumber +1
  } 
+
+if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprinciple").String();buildframeandprinciple_from_client=="yes"{
+  //fmt.Println(brainuse)
+  buildframeandprinciple_score = buildframeandprinciple_score +5
+  buildframeandprinciplenumber = buildframeandprinciplenumber +1
+   } 
+
+
+
+
+
 if  makeuseofthings := gjson.Get(json, "makeuseofthings").String();makeuseofthings=="yes"{
 makeuseofthethingsuhavelearned_score = makeuseofthethingsuhavelearned_score + 5
  }
@@ -262,9 +347,9 @@ alwaysprofit_score = alwaysprofit_score + 5
  }
 
 
-if  alwaysprofit := gjson.Get(json, "alwaysprofit").String();alwaysprofit=="yes"{
-alwaysprofit_score = alwaysprofit_score + 5
- }
+// if  alwaysprofit := gjson.Get(json, "alwaysprofit").String();alwaysprofit=="yes"{
+// alwaysprofit_score = alwaysprofit_score + 5
+//  }
 
 
 
@@ -289,7 +374,7 @@ onlystartatask_score  = onlystartatask_score  + 10
 
 if  battlewithlowerbrain := gjson.Get(json, "battlewithlowerbrain").String();battlewithlowerbrain=="yes"{
 battlewithlowerbrain_score = battlewithlowerbrain_score +5
-
+battlewithlowerbrainnumber = battlewithlowerbrainnumber + 0
  }
 
 
@@ -305,7 +390,7 @@ atomadifficulttask_score = atomadifficulttask_score +5
 
 if  patience := gjson.Get(json, "patience").String();patience=="yes"{
 patience_score = patience_score + 10
-
+patiencenumber = patiencenumber + 1
  }
 
 
@@ -340,9 +425,9 @@ learntechuse_score = learntechuse_score +5
 
 }
 
-total_score:=taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
-review := &Reviewdatadetail{Totalscore: total_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
-
+total_score:=buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
+review := &Reviewdatadetail{Totalscore: total_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
+reviewfortimecount_from_client := Reviewfortimescount{Email:email,Date:date,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 
@@ -360,9 +445,14 @@ fmt.Println(reviewstring)
 fmt.Println("-------------i am pritning reviewstring---------------")
 
 var reviewday Reviewofday
+var reviewfortimecount Reviewfortimescount
 db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewday)
 db.Model(&reviewday).Update("Details", reviewstring)
-
+db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewfortimecount)
+db.Model(&reviewfortimecount).Updates(reviewfortimecount_from_client)
+// db.Model(&reviewfortimecount).Update("Patiencenumber", patiencenumber)
+// db.Model(&reviewfortimecount).Update("Battlewithlowerbrain", battlewithlowerbrainnumber)
+// db.Model(&reviewfortimecount).Update("Usebrain", usebrainnumber)
 return reviewstring
 }
 

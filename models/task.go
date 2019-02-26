@@ -70,13 +70,6 @@ type (
 
 
 
-     Reviewofday  struct {
-     gorm.Model
-     Date string   `json:"date"`
-     Email    string   `json:"email"`     
-     Details string `json:"details" sql:"type:text;"`
-
-      }
 
 
 
