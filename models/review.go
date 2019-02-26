@@ -311,7 +311,7 @@ fmt.Println("------------i had been into loop----------------")
 if  brainuse := gjson.Get(json, "brainuse").String();brainuse=="yes"{
 fmt.Println(brainuse)
 brainuse_score = brainuse_score +5
-battlewithlowerbrainnumber = battlewithlowerbrainnumber +1
+usebrainnumber = usebrainnumber +1
  } 
 
 if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprinciple").String();buildframeandprinciple_from_client=="yes"{
