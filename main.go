@@ -117,7 +117,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.GET("/place",Placebased)
         v1.GET("/freewriting",Freewriting)
         v1.GET("/review",Review)
-        v1.GET("/datareview",Reviewforstastics)
+        v1.GET("/reviewfortimes",Reviewforstastics)
         v1.GET("/errorlogjson",Errorlog)
         v1.GET("/reviewgraphforios",Reviewforios)
         //finance

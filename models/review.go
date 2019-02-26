@@ -277,8 +277,15 @@ var battlewithlowerbrainnumber = 0
 var usebrainnumber = 0
 var buildframeandprinciple_score =0 
 var buildframeandprinciplenumber =0 
-
-
+var markataskimmediately_number = 0
+var alwaysprofit_number = 0
+var threeminutes_number = 0
+var difficultthings_number = 0
+var learnnewthings_number = 0
+var atomadifficulttask_number = 0 
+var makeuseofthethingsuhavelearned_number = 0
+var doanimportantthingearly_number =0
+var serviceforgoal_number = 0
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"unfinished","unfinish"}).Count(&countoffinishedtasks)
 
 
@@ -326,16 +333,19 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
 
 if  makeuseofthings := gjson.Get(json, "makeuseofthings").String();makeuseofthings=="yes"{
 makeuseofthethingsuhavelearned_score = makeuseofthethingsuhavelearned_score + 5
+makeuseofthethingsuhavelearned_number = makeuseofthethingsuhavelearned_number +1
  }
 
 
 if  doanimportantthingearly := gjson.Get(json, "doanimportantthingearly").String();doanimportantthingearly =="yes"{
 doanimportantthingearly_score = doanimportantthingearly_score + 10
+doanimportantthingearly_number = doanimportantthingearly_number + 1
  }
  
 
 if  markataskimmediately := gjson.Get(json, "markataskimmediately").String();markataskimmediately =="yes"{
 markataskimmediately_score = markataskimmediately_score + 1
+markataskimmediately_number = markataskimmediately_number + 1
  }
 
 
@@ -344,6 +354,7 @@ markataskimmediately_score = markataskimmediately_score + 1
 
 if  alwaysprofit := gjson.Get(json, "alwaysprofit").String();alwaysprofit=="yes"{
 alwaysprofit_score = alwaysprofit_score + 5
+alwaysprofit_number = alwaysprofit_number +1
  }
 
 
@@ -356,6 +367,7 @@ alwaysprofit_score = alwaysprofit_score + 5
 
 if  learnnewthings := gjson.Get(json, "learnnewthings").String();learnnewthings=="yes"{
 learnnewthings_score = learnnewthings_score +5
+learnnewthings_number = learnnewthings_number + 1
  }
 
 
@@ -380,7 +392,7 @@ battlewithlowerbrainnumber = battlewithlowerbrainnumber + 0
 
 if  atomadifficulttask := gjson.Get(json, "atomadifficulttask").String();atomadifficulttask=="yes"{
 atomadifficulttask_score = atomadifficulttask_score +5
-
+atomadifficulttask_number = atomadifficulttask_number+1
  }
 
 
@@ -398,14 +410,14 @@ patiencenumber = patiencenumber + 1
 
 if  difficultthings := gjson.Get(json, "difficultthings").String();difficultthings=="yes"{
 difficultthings_score = difficultthings_score +10
-
+difficultthings_number = difficultthings_number + 1
  }
 
 
 
 if  threeminutes := gjson.Get(json, "threeminutes").String();threeminutes=="yes"{
 threeminutes_score = threeminutes_score +5
-
+threeminutes_number = threeminutes_number + 1
  }
 
 
@@ -427,7 +439,7 @@ learntechuse_score = learntechuse_score +5
 
 total_score:=buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
 review := &Reviewdatadetail{Totalscore: total_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
-reviewfortimecount_from_client := Reviewfortimescount{Email:email,Date:date,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
+reviewfortimecount_from_client := Reviewfortimescount{Email:email,Date:date,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 
