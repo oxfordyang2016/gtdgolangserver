@@ -114,6 +114,7 @@ var onlystartatask_score = [];
 var atomadifficulttask_score = []; 
 var doanimportantthingearly = [];
 var markataskimmediately = [];
+var buildframeandprinciple = [];
 
 
 $.get("/v1/reviewdaydatajson", function(data, status){
@@ -140,8 +141,8 @@ $.get("/v1/reviewdaydatajson", function(data, status){
             atomadifficulttask_score.push(obj_detailofreview.atomadifficulttask);
          doanimportantthingearly.push(obj_detailofreview.doanimportantthingearly);
          markataskimmediately.push(obj_detailofreview.markataskimmediately);
-
-
+         buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
+         
 };    
 
 
@@ -214,7 +215,7 @@ option = {
 
 
     {
-            name:'Make use of things u have learned',
+            name:'Make use of things you have learned',
             type:'line',
             stack: 'make',
             areaStyle: {},
@@ -363,6 +364,15 @@ option = {
             areaStyle: {},
             data:learnnewthings
         },
+
+        {
+            name:'Build frame and principle',
+            type:'line',
+            stack: 'learn',
+            areaStyle: {},
+            data:buildframeandprinciple
+        },
+
 
         {
                 name: 'MA5',
