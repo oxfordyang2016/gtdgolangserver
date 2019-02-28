@@ -386,7 +386,7 @@ onlystartatask_score  = onlystartatask_score  + 10
 
 if  battlewithlowerbrain := gjson.Get(json, "battlewithlowerbrain").String();battlewithlowerbrain=="yes"{
 battlewithlowerbrain_score = battlewithlowerbrain_score +5
-battlewithlowerbrainnumber = battlewithlowerbrainnumber + 0
+battlewithlowerbrainnumber = battlewithlowerbrainnumber + 1
  }
 
 
