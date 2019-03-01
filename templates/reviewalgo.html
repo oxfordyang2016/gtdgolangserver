@@ -115,7 +115,7 @@ var atomadifficulttask_score = [];
 var doanimportantthingearly = [];
 var markataskimmediately = [];
 var buildframeandprinciple = [];
-
+var acceptfact = [];
 
 $.get("/v1/reviewdaydatajson", function(data, status){
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
@@ -142,6 +142,7 @@ $.get("/v1/reviewdaydatajson", function(data, status){
          doanimportantthingearly.push(obj_detailofreview.doanimportantthingearly);
          markataskimmediately.push(obj_detailofreview.markataskimmediately);
          buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
+         acceptfact.push(obj_detailofreview.acceptfact)
          
 };    
 
@@ -371,6 +372,13 @@ option = {
             stack: 'learn',
             areaStyle: {},
             data:buildframeandprinciple
+        },
+        {
+            name:'Accept fact ',
+            type:'line',
+            stack: 'learn',
+            areaStyle: {},
+            data:acceptfact
         },
 
 
