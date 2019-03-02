@@ -5,6 +5,7 @@ import (
 "encoding/json"
 "net/http"
 "github.com/jinzhu/gorm"
+"strconv"
 //"github.com/jinzhu/gorm"
 "github.com/gin-gonic/gin"
 //"github.com/gin-contrib/sessions"
@@ -181,12 +182,25 @@ func Reviewforstastics(c *gin.Context){
   emailcookie,_:=c.Request.Cookie("email")
   fmt.Println(emailcookie.Value)
   email:=emailcookie.Value
+
   //fmt.Println(cookie1.Value)
+  count_need_bystastics_from_client := c.Query("days")
+  counts, _:= strconv.Atoi(count_need_bystastics_from_client)
+
+
+
 
   var reviewsfortimescount []Reviewfortimescount
   db.Where("email =  ?", email).Order("date").Find(&reviewsfortimescount)
+  if (len(reviewsfortimescount)-counts < 0){
+    c.JSON(200, gin.H{
+      "errorcode":1101,
+      "msg":"u need more days to use the functions",
+    })
+   return
+  }
   lengthofreviewsfortimescount := len(reviewsfortimescount)
-  weekstart := lengthofreviewsfortimescount - 1
+  weekstart := lengthofreviewsfortimescount - counts
   var reviewdata = reviewsfortimescount[weekstart:]
   fmt.Println(reviewdata)
   //   for _,item :=range reviewdata{
@@ -195,6 +209,7 @@ func Reviewforstastics(c *gin.Context){
   //   fmt.Println(challengetag)  
   // }
   c.JSON(200, gin.H{
+      "errorcode":1102,
       "reviewdata":reviewdata,
     })
 }
