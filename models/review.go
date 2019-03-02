@@ -347,7 +347,7 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
    } 
 
 
-   if  acceptfact_from_client := gjson.Get(json, "acceptfact").String();acceptfact_from_client=="yes"{
+   if  acceptfact_from_client := gjson.Get(json, "acceptfactandseektruth").String();acceptfact_from_client=="yes"{
     //fmt.Println(brainuse)
     acceptfactandseektruth_score =  acceptfactandseektruth_score  +  10
     acceptfactandseektruth_number = acceptfactandseektruth_number +1
