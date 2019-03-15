@@ -8,12 +8,12 @@
     <!-- 引入 echarts.js -->
 
     <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
-
-    <script src="/echart.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/v1/echart.js"></script>
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 2000px;height:2000px;"></div>
+    <div id="main" style="width: 2000px;height:10000px;"></div>
     <script type="text/javascript">
      // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
         var myChart = echarts.init(document.getElementById('main'));
@@ -44,7 +44,34 @@ myChart.setOption(option);
 //myChart.showLoading();
 //$.get('data/asset/data/flare.json', function (data) {
 //myChart.hideLoading();
-    var data={
+
+jQuery.ajaxSetup({async:false});
+  function  getprojectrees(){
+    projectsfortree = []
+    $.get("/v1/projectsjson", function(data, status){
+    var datafromserver = data
+    //console.log(indicators.hist)
+    projects = datafromserver.projects
+    // histv = indicators.hist
+    // signalv = indicators.signal
+    // kdjkv =  indicators.kdjk
+    // kdjdv =  indicators.kdjd
+    // kdjjv =  indicatof       rs.kdjj
+
+    for(j=0;j<projects.length;j++){
+        console.log("--------")
+    //macdvalue.push(projects[i])
+    singleproject_tasks = []
+    for(i=0;i<projects[j].Alltasksinproject.length;i++){
+     var alltasks = projects[j].Alltasksinproject
+      singleproject_tasks.push({"name":alltasks[i].task,"value":223})
+    }
+    projectsfortree.push({"name":projects[j].Name,"children":singleproject_tasks})
+    }
+   })
+return projectsfortree
+}
+    var data1={
  "name": "DM",
  "children": [
   {
@@ -442,7 +469,7 @@ a={}
 */
 
 
-
+var data = {"name":"dm","children":getprojectrees()}
 
 myChart.showLoading();
     myChart.hideLoading();
@@ -511,11 +538,13 @@ myChart.setOption(option = {
 
             layout: 'radial',
 
-            symbol: 'emptyCircle',
+            symbol: 'pin',
 
-            symbolSize: 7,
+            symbolSize: 10,
 
-            initialTreeDepth: 3,
+            initialTreeDepth: 1,
+            rom:true,
+            label:{show:false,position:"right",rotate:12,fontStyle:'italic',fontSize:15},
 
             animationDurationUpdate: 750
 
