@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 2500px;height:3000px;"></div>
+    <div id="main" style="width: 3500px;height:3000px;"></div>
     <script type="text/javascript">
      // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
         var myChart = echarts.init(document.getElementById('main'));
@@ -64,7 +64,7 @@ jQuery.ajaxSetup({async:false});
     singleproject_tasks = []
     for(i=0;i<projects[j].Alltasksinproject.length;i++){
      var alltasks = projects[j].Alltasksinproject
-      singleproject_tasks.push({"name":alltasks[i].ID.toString()+"-" + alltasks[i].task,"value":223})
+      singleproject_tasks.push({"name":alltasks[i].task +"-"+alltasks[i].ID.toString(),"value":223})
     }
     projectsfortree.push({"name":projects[j].Name,"children":singleproject_tasks})
     }
