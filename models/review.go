@@ -45,6 +45,7 @@ Doanimportantthingearly int  `json:"doanimportantthingearly"`
 Buildframeandprinciple    int `json:"buildframeandprinciple"`
 Acceptfactandseektruth    int `json:"acceptfactandseektruth"`
 Acceptpain                int `json:"acceptpain"`
+Solveakeyproblem                int `json:"solveakeyproblem"`
 }
 
 
@@ -96,7 +97,8 @@ Doanimportantthingearly int  `json:"doanimportantthingearly"`
 Buildframeandprinciple    int `json:"buildframeandprinciple"`
 Acceptfactandseektruth    int `json:"acceptfactandseektruth"`
 Acceptpain                int `json:"acceptpain"`  
-    }
+Solveakeyproblem                int `json:"solveakeyproblem"`   
+}
 
 
 
@@ -308,6 +310,12 @@ var acceptfactandseektruth_score = 0
 var acceptfactandseektruth_number = 0
 var acceptpain_score = 0
 var acceptpain_number = 0
+var solveakeyproblem_score = 0
+var solveakeyproblem_number = 0
+
+
+
+
 
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"unfinished","unfinish"}).Count(&countoffinishedtasks)
 
@@ -441,6 +449,13 @@ patiencenumber = patiencenumber + 1
  }
 
 
+ if  solveakeyproblem := gjson.Get(json, "solveakeyproblem").String();solveakeyproblem=="yes"{
+  patience_score = solveakeyproblem_score + 50
+  solveakeyproblem_number = solveakeyproblem_number + 1
+   }
+
+
+
 
 
 if  difficultthings := gjson.Get(json, "difficultthings").String();difficultthings=="yes"{
@@ -472,9 +487,9 @@ learntechuse_score = learntechuse_score +5
 
 }
 
-total_score:=acceptfactandseektruth_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
-review := &Reviewdatadetail{Totalscore: total_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
-reviewfortimecount_from_client := Reviewfortimescount{Email:email,Date:date,Acceptpain:acceptpain_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
+total_score:=acceptfactandseektruth_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
+review := &Reviewdatadetail{Totalscore: total_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
+reviewfortimecount_from_client := Reviewfortimescount{Email:email,Date:date,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 
