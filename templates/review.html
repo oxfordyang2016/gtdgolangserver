@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 4000px;height:10000px;"></div>
+    <div id="main" style="width: 2500px;height:3000px;"></div>
     <script type="text/javascript">
      // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
         var myChart = echarts.init(document.getElementById('main'));
@@ -146,8 +146,11 @@ myChart.setOption(option = {
 
             initialTreeDepth: 1,
             rom:true,
+            emphasis:{
+                lineStyle:{width:20}
+            },
             label:{show:false,position:"right",rotate:12,fontStyle:'italic',fontSize:15},
-
+            lineStyle:{width:1,color:"red",curveness:0.1},
             animationDurationUpdate: 750
 
         }
