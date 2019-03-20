@@ -146,6 +146,44 @@ func Errorlog(c *gin.Context) {
 
 
 
+func Goalsystem(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+
+  var goals []Tasks
+  db.Where("email =  ?", email).Where("project =  ?", "goal").Order("id").Find(&goals)
+  
+  c.JSON(200, gin.H{
+      "goals":goals,
+    })
+
+}
+
+func Problemssystem(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+
+  var problems []Tasks
+  db.Where("email =  ?", email).Where("project =  ?", "problem").Order("id").Find(&problems)
+  
+  c.JSON(200, gin.H{
+      "problems":problems,
+    })
+
+}
+
+
+
+
+
 
 func Reviewalgorithmjsonforios(c *gin.Context) {
   //i use email as identifier
