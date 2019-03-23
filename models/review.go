@@ -136,7 +136,7 @@ func Errorlog(c *gin.Context) {
   //fmt.Println(cookie1.Value)
 
   var errors []Tasks
-  db.Where("email =  ?", email).Where("project =  ?", "error").Not("status", []string{"finished","f","finish"}).Order("id").Find(&errors)
+  db.Where("email =  ?", email).Where("project =  ?", "error").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&errors)
   
   c.JSON(200, gin.H{
       "errorlog":errors,
@@ -156,7 +156,7 @@ func Search(c *gin.Context) {
   //fmt.Println(cookie1.Value)
   var keywords = c.Query("keywords")
   var search []Tasks
-  db.Where("email =  ?", email).Where("task LIKE ?", "%"+keywords+"%").Not("status", []string{"finished","f","finish"}).Order("id").Find(&search)
+  db.Where("email =  ?", email).Where("task LIKE ?", "%"+keywords+"%").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&search)
   
   c.JSON(200, gin.H{
       "search":search,
@@ -179,7 +179,7 @@ func Goalsystem(c *gin.Context) {
   //fmt.Println(cookie1.Value)
 
   var goals []Tasks
-  db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish"}).Order("id").Find(&goals)
+  db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
   
   c.JSON(200, gin.H{
       "goals":goals,
@@ -196,7 +196,7 @@ func Problemssystem(c *gin.Context) {
   //fmt.Println(cookie1.Value)
 
   var problems []Tasks
-  db.Where("email =  ?", email).Where("project =  ?", "problem").Not("status", []string{"finished","f","finish"}).Order("id").Find(&problems)
+  db.Where("email =  ?", email).Where("project =  ?", "problem").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&problems)
   
   c.JSON(200, gin.H{
       "problems":problems,
