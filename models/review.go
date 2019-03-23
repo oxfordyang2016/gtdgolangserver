@@ -146,6 +146,30 @@ func Errorlog(c *gin.Context) {
 
 
 
+
+func Search(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+  var keywords = c.Query("keywords")
+  var search []Tasks
+  db.Where("email =  ?", email).Where("task LIKE ?", "%"+keywords+"%").Not("status", []string{"finished","f","finish"}).Order("id").Find(&search)
+  
+  c.JSON(200, gin.H{
+      "search":search,
+    })
+
+}
+
+
+
+
+
+
+
 func Goalsystem(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
