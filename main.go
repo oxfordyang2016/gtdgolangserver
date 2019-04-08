@@ -27,7 +27,7 @@ import (
 	// _ "github.com/jinzhu/gorm/dialects/postgres"
 	// the  . https://www.golang-book.com/books/intro/11
 	//_ "github.com/jinzhu/gorm/dialects/sqlite"
-	. "github.com/yangming/models"
+	. "github.com/gtdgolangserver/models"
 )
 
 var db *gorm.DB
