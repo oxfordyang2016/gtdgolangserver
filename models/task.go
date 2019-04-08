@@ -1559,7 +1559,12 @@ c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
 }else if(client == "todaypridejson"){
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:1]})
 }else{
-c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:30]})
+  if (len(alldays)<30){
+    c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
+  }else{
+    c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:30]})
+  }
+
 }
 
 
