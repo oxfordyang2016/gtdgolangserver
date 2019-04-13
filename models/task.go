@@ -1049,7 +1049,7 @@ func Reviewsjson(c *gin.Context) {
 
   //Query Chains http://doc.gorm.io/crud.html#query
   db.Where("Email= ?", email).Where("project in (?)", []string{"review"}).Order("id desc").Find(&tasks)
-   if client == "commandline"{
+   if (client == "commandline"||client =="ios"){
    c.JSON(200, gin.H{
       "task":tasks,
     })
