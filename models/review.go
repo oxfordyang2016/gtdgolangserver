@@ -204,6 +204,29 @@ func Problemssystem(c *gin.Context) {
 
 }
 
+func Questionssystem(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+
+  var questions []Tasks
+  db.Where("email =  ?", email).Where("project =  ?", "question").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&questions)
+  
+  c.JSON(200, gin.H{
+      "questions":questions,
+    })
+
+}
+
+
+
+
+
+
+
 
 
 
