@@ -117,12 +117,20 @@ func Reviewalgorithmjson(c *gin.Context) {
   var reviewdays []Reviewofday
   db.Where("email =  ?", email).Order("date").Find(&reviewdays)
   //if u set the len,u will get the size of slice
-  reviewdays = reviewdays[len(reviewdays)-31:]
-
-  c.JSON(200, gin.H{
+  if len(reviewdays)<33{
+    c.JSON(200, gin.H{
       //"reviewdata":review30days,
       "reviewdata":reviewdays,
     })
+  }else{
+    reviewdays = reviewdays[len(reviewdays)-31:]
+  
+    c.JSON(200, gin.H{
+      //"reviewdata":review30days,
+      "reviewdata":reviewdays,
+    })
+  }
+ 
 
 }
 
