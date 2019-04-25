@@ -47,6 +47,7 @@ type (
     Email    string   `json:"email"`
     Place    string   `json:"place"`
     Status  string   `json:"status"`
+    Goal  string   `json:"goal"`
     Project  string  `json:"project"`
     Plantime  string  `json:"plantime"`
     Finishtime  string `json:"finishtime"`
@@ -279,6 +280,7 @@ func Createtask(c *gin.Context) {
   plantime := c.PostForm("plantime")
   long :=  c.PostForm("long")
   lat :=  c.PostForm("lat") 
+  goal :=  c.PostForm("goal") 
   fmt.Println("+++++++++++++++place info +++++++++++++")   
   longtitude = long
   latitude = lat  
@@ -342,7 +344,7 @@ if status!="unfinished"{
     clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 
     }
-  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
   db.Create(&task)
 
 
@@ -353,7 +355,7 @@ return_info:= Compute_singleday(clientfinishtime,email)
 fmt.Println(return_info)
   }else{
 
-  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
   db.Create(&task)
   
 Check_reviewdaylog(finishtime.Format("060102"),email)
@@ -365,7 +367,7 @@ fmt.Println(return_info)
 
 
 }else{
-  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
+  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
   db.Create(&task)
 }
 
@@ -422,6 +424,7 @@ func CreatetaskbyJSON(c *gin.Context) {
   plantime := gjson.Get(reqBody, "plantime").String()
   long :=  gjson.Get(reqBody, "long").String()
   lat :=  gjson.Get(reqBody, "lat").String()
+  goal :=  gjson.Get(reqBody, "goal").String()
   fmt.Println("+++++++++++++++place info +++++++++++++")
   longtitude = long
   latitude = lat
@@ -483,7 +486,7 @@ if status!="unfinished"{
     clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 
     }
-  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
 fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
@@ -494,7 +497,7 @@ taskid = task.ID
    fmt.Println(return_info)
   }else{
 
-  task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
   taskid = task.ID
   Check_reviewdaylog(finishtime.Format("060102"),email)
@@ -507,7 +510,7 @@ fmt.Println(task.ID)
 
 
   }else{
-  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
   fmt.Println("i am testing the id return")
   fmt.Println(task.ID) 
