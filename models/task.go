@@ -554,20 +554,14 @@ c.JSON(200, gin.H{
     //---------------get body string-------------
     //https://github.com/gin-gonic/gin/issues/1295
      buf := make([]byte, 1024)
-	num, _ := c.Request.Body.Read(buf)
-	reqBody := string(buf[0:num])
+	   num, _ := c.Request.Body.Read(buf)
+	   reqBody := string(buf[0:num])
    
      
    //--------------using gjson to parse------------
    //https://github.com/tidwall/gjson
-   value := gjson.Get(reqBody, "reviewdata")
-	fmt.Println(value.String())
-
-
-
-
-
-
+    value := gjson.Get(reqBody, "reviewdata")
+	  fmt.Println(value.String())
     emailcookie,_:=c.Request.Cookie("email")
     fmt.Println(emailcookie.Value)
     email:=emailcookie.Value
@@ -576,6 +570,7 @@ c.JSON(200, gin.H{
     fmt.Println("--------------------single task  total scores----------------")
     fmt.Println(totalscores)
     isreview := gjson.Get(reqBody, "isreview").String() 
+    goal := gjson.Get(reqBody, "goal").String() 
     reviewdata := gjson.Get(reqBody, "reviewdata").String()
     fmt.Println(reviewdata)
     taglight := gjson.Get(reqBody, "taglight").String()
@@ -683,6 +678,7 @@ c.JSON(200, gin.H{
     }
 
      //update a task
+    if goal!="unspecified"{db.Model(&task).Update("Goal", goal)}
     if place!="unspecified"{db.Model(&task).Update("Place", place)}
     if project!="inbox"{db.Model(&task).Update("Project", project)}
     if inbox!="nocontent"{db.Model(&task).Update("Task", inbox)}
