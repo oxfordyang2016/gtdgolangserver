@@ -94,6 +94,12 @@ type (
     Alltasksinproject       []Tasks
     }
 
+
+   
+
+
+
+
     Everyday  struct{
       Name                    string
       Alldays       []Tasks
@@ -400,8 +406,6 @@ func CreatetaskbyJSON(c *gin.Context) {
      buf := make([]byte, 1024)
         num, _ := c.Request.Body.Read(buf)
         reqBody := string(buf[0:num])
-
-
    //--------------using gjson to parse------------
    //https://github.com/tidwall/gjson
   value := gjson.Get(reqBody, "reviewdata")
@@ -1814,6 +1818,17 @@ c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "projects": allprojects})
              //  "projects":allprojects,
              //})
       }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
