@@ -65,12 +65,18 @@ func Goalsjson(c *gin.Context) {
 	
     
 	   for _,item :=range tasks{
-		alltasks_ingoal[item.Goal]=append(alltasks_ingoal[item.Goal],item)
+		   if item.Goal == ""{
+			alltasks_ingoal["no goal"]=append(alltasks_ingoal["no goal"],item)
+		   }else{
+			alltasks_ingoal[item.Goal]=append(alltasks_ingoal[item.Goal],item)
+		   }
+		
 	 }
 	   var goals []string 
 	   for k :=range(alltasks_ingoal){
         goals = append(goals,k)
 	   }
+	   fmt.Println(len(goals))
 	   allclassgoals := make(map[string] []Projects) 
 	    for _,key := range(goals){
 		    allclassproject:=make(map[string] []Tasks)
@@ -86,9 +92,16 @@ func Goalsjson(c *gin.Context) {
 		  allclassgoals[key] = allprojects
 
 	  }
-    
+	
+	  var allgoals []Goals
+	  for k,v := range allclassgoals{
+		allgoals =append(allgoals,Goals{k,v})
+
+	 }
+
+
 	   //fmt.Println(allclassproject["gtd1"])
-      c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "goals": allclassgoals})
+      c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "goals": allgoals})
   
 		}
   

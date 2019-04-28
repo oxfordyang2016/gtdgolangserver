@@ -1291,6 +1291,10 @@ func Todaytaskjson(c *gin.Context) {
    fmt.Println("------------------------------------------------------")
 
     c.HTML(http.StatusOK, "reviewalgo.html", nil)
+     }else if reviewtype == "goals"{
+
+      c.HTML(http.StatusOK, "goals.html", nil)
+
      }else{
 
       c.HTML(http.StatusOK, "review.html", nil)
