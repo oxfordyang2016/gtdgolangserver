@@ -351,9 +351,6 @@ if reviewfortimecount.Date!=date{
   }else{
   fmt.Println("===========the record has been created in the past==========")
   }
-
-
-
 }
 
 

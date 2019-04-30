@@ -59,7 +59,7 @@ type (
     Latitude  string `json:"Latitude"`
     Reviewsign string `json:"reviewsign"`
     Score      uint    `json:"score"`
-    Reviewdatas string  `json:"reviewdatas"`    
+    Reviewdatas string  `json:"reviewdatas"sql:"type:text;"`    
     Tasktags string `json:"tasktags" sql:"type:text;"`
 
 	}
@@ -414,6 +414,7 @@ func CreatetaskbyJSON(c *gin.Context) {
   fmt.Println(emailcookie.Value)
   email:=emailcookie.Value
   inbox := gjson.Get(reqBody, "inbox").String()
+  inboxlist := gjson.Get(reqBody, "inboxlist")
   tasktags := gjson.Get(reqBody, "tasktags").String()
   reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
   fmt.Println("=====task  tags=========")
@@ -490,41 +491,85 @@ if status!="unfinished"{
     clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 
     }
-  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
-  db.Create(&task).Scan(&task)
-fmt.Println("i am testing the id return")
+    fmt.Println("-----------i am try to print inbox list-------------")
+    fmt.Println(len(inboxlist.Array()))
+   if len(inboxlist.Array())>1{
+     for _,inbox := range inboxlist.Array(){
+      task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      db.Create(&task).Scan(&task)
+      fmt.Println("i am testing the id return")
+      fmt.Println(task.ID)
+      taskid = task.ID
+     }   
+
+   }else{
+    task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+    db.Create(&task).Scan(&task)
+    fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
 taskid = task.ID
+   }
+ 
+
    //for adding review data for db when create a task
    Check_reviewdaylog(clientfinishtime,email)
    return_info:= Compute_singleday(clientfinishtime,email)
    fmt.Println(return_info)
   }else{
 
-  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
-  db.Create(&task).Scan(&task)
-  taskid = task.ID
+    if len(inboxlist.Array())>1{
+      for _,inbox := range inboxlist.Array(){
+       //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       db.Create(&task).Scan(&task)
+       fmt.Println("i am testing the id return")
+       fmt.Println(task.ID)
+       taskid = task.ID
+      }   
+ 
+    }else{
+      task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+     //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+     db.Create(&task).Scan(&task)
+     fmt.Println("i am testing the id return")
+    fmt.Println(task.ID)
+   taskid = task.ID
+    }
+
   Check_reviewdaylog(finishtime.Format("060102"),email)
   return_info:= Compute_singleday(finishtime.Format("060102"),email)
   fmt.Println(return_info)
-  fmt.Println("i am testing the id return")
-fmt.Println(task.ID)
+
 
   }
 
 
   }else{
+
+    if len(inboxlist.Array())>1{
+      for _,inbox := range inboxlist.Array(){
+       //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       //db.Create(&task).Scan(&task)
+       task := Tasks{Task:inbox.String(),User:email,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      db.Create(&task).Scan(&task)
+       
+       
+       fmt.Println("i am testing the id return")
+       fmt.Println(task.ID)
+       taskid = task.ID
+      }   
+ 
+    }else{
   task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
-  fmt.Println("i am testing the id return")
-  fmt.Println(task.ID) 
+     fmt.Println("i am testing the id return")
+    fmt.Println(task.ID)
    taskid = task.ID
+    }
   }
 
-
-
-
-c.JSON(200, gin.H{
+  c.JSON(200, gin.H{
     "taskid": taskid,
     "status":  "posted",
     "message": "u have uploaded info,please come on!",
