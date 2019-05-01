@@ -6,7 +6,7 @@ import(
 //"github.com/bradfitz/slice"
 //"encoding/json"
 "net/http"
-//"github.com/jinzhu/gorm"
+"github.com/jinzhu/gorm"
 //"strconv"
 //"github.com/jinzhu/gorm"
 "github.com/gin-gonic/gin"
@@ -23,6 +23,13 @@ Goals  struct{
 	Name                    string
 	Allprojectsingoal       []Projects
 	}
+
+Goalfordbs  struct{
+	gorm.Model
+	Name                    string
+	}
+
+
 
 Goalsincludetasks struct{
 	Name  string

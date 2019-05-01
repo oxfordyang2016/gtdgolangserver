@@ -1598,7 +1598,7 @@ if err != nil {
 fmt.Println(datafromredis)
 **/
 
-if(client   == "ios" || client == "clientforjson"||client == "weekpridejson"||client == "todaypridejson"){
+if(client   == "ios" || client == "clientforjson"||client == "weekpridejson"||client == "todaypridejson"||client =="yesterdaypridejson"){
 
 
         // c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": datafromredis})
@@ -1610,6 +1610,8 @@ c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:6]})
 }else if(client == "todaypridejson"){
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:1]})
+}else if(client == "yesterdaypridejson"){
+  c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[1:2]})
 }else{
   if (len(alldays)<30){
     c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
