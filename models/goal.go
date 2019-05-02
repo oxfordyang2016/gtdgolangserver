@@ -27,6 +27,8 @@ Goals  struct{
 Goalfordbs  struct{
 	gorm.Model
 	Name                    string
+	//i will use email+ab(2 alphebet table),such as yang756260386@gmail.comab
+	Goalcode              string 
 	}
 
 
@@ -60,7 +62,10 @@ func Goalsjson(c *gin.Context) {
        //db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime in (?)", []string{today, tomorrow}).Order("id desc").Find(&tasks)
 	   db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks) 
 	   client:= c.Request.Header.Get("client")
+	   querytype:=c.Query("type")
+
 	   fmt.Println("+++++++client is++++++++")
+	   fmt.Println(querytype)
 	   fmt.Println(client)
 	  fmt.Println("+++++++client is++++++++")
 	  //use maps to aviod to design complex algorithm
@@ -79,6 +84,20 @@ func Goalsjson(c *gin.Context) {
 		   }
 		
 	 }
+	 var allgoalsonlyincludetasks []Goalsincludetasks
+	 for k,v:= range alltasks_ingoal{
+		 allgoalsonlyincludetasks = append(allgoalsonlyincludetasks,Goalsincludetasks{k,v})
+
+	 }
+	 fmt.Println("========i am here 1========")
+   if querytype == "noproject"{
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "goals": allgoalsonlyincludetasks})
+	fmt.Println("========i am here========")
+	return
+   }
+	 
+   fmt.Println("========i am here 3========")
+
 	   var goals []string 
 	   for k :=range(alltasks_ingoal){
         goals = append(goals,k)

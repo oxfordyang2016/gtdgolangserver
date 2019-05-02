@@ -108,7 +108,7 @@ myChart.setOption(option);
 //myChart.hideLoading();
 
 jQuery.ajaxSetup({async:false});
-  function  getprojectrees(){
+  function  getgoaltrees(){
     projectsfortree = []
     $.get("/v1/goalsgraph", function(data, status){
     var datafromserver = data
@@ -147,7 +147,39 @@ jQuery.ajaxSetup({async:false});
    })
 return single_goal_projects
 }
-var data = {"name":"goals","children":getprojectrees()}
+
+function  getgoaltrees_without_project(){
+    goalsfortree = []
+    $.get("/v1/goalsgraph?type=noproject", function(data, status){
+    var datafromserver = data
+    //console.log(indicators.hist)
+    goals = datafromserver.goals
+    //projects = datafromserver.projects
+    // histv = indicators.hist
+    // signalv = indicators.signal
+    // kdjkv =  indicators.kdjk
+    // kdjdv =  indicators.kdjd
+    // kdjjv =  indicatof       rs.kdjj
+
+    for(j=0;j<goals.length;j++){
+        console.log("--------")
+    //macdvalue.push(projects[i])
+    singlegoal_tasks = []
+    for(i=0;i<goals[j].Alltasksingoal.length;i++){
+     var alltasks = goals[j].Alltasksingoal
+      singlegoal_tasks.push({"name":alltasks[i].task +"-"+alltasks[i].ID.toString(),"value":223})
+    }
+    goalsfortree.push({"name":goals[j].Name,"children":singlegoal_tasks})
+    }
+   })
+return goalsfortree
+}
+
+
+
+var data = {"name":"goals","children":getgoaltrees_without_project()}
+
+//var data = {"name":"goals","children":getgoaltrees()}
 
 myChart.showLoading();
     myChart.hideLoading();
