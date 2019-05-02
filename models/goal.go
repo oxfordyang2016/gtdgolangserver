@@ -26,9 +26,11 @@ Goals  struct{
 
 Goalfordbs  struct{
 	gorm.Model
-	Name                    string
+	Name                   string  `json:"name"`
+	//ID uint64 `gorm:"type:bigint(20) unsigned auto_increment;not null;primary_key"`
 	//i will use email+ab(2 alphebet table),such as yang756260386@gmail.comab
-	Goalcode              string 
+	Goalcode             string    `json:"goalcode"`
+	Email                 string   `json:"email"`
 	}
 
 
@@ -36,6 +38,7 @@ Goalfordbs  struct{
 Goalsincludetasks struct{
 	Name  string
 	Alltasksingoal    []Tasks
+
 }	
 
 )

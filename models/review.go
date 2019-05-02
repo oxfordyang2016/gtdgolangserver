@@ -186,9 +186,10 @@ func Goalsystem(c *gin.Context) {
   email:=emailcookie.Value
   //fmt.Println(cookie1.Value)
 
-  var goals []Tasks
-  db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
-  
+  //var goals []Tasks
+  var goals []Goalfordbs
+  //db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+  db.Where("email =  ?", email).Order("id").Find(&goals)
   c.JSON(200, gin.H{
       "goals":goals,
     })

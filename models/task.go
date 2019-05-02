@@ -59,7 +59,7 @@ type (
     Latitude  string `json:"Latitude"`
     Reviewsign string `json:"reviewsign"`
     Score      uint    `json:"score"`
-    Reviewdatas string  `json:"reviewdatas"sql:"type:text;"`    
+    Reviewdatas string  `json:"reviewdatas" sql:"type:text;"`    
     Tasktags string `json:"tasktags" sql:"type:text;"`
 
 	}
@@ -389,7 +389,17 @@ c.JSON(200, gin.H{
 	}
 
 
-
+func getindex(s string) int{
+  alphabet :=[26]string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+ index:=28
+  for k:=0;k<26;k++ {
+   if s == alphabet[k]{
+    index =  k
+   }
+  
+ }
+ return index
+}
 
 
 
@@ -416,6 +426,8 @@ func CreatetaskbyJSON(c *gin.Context) {
   inbox := gjson.Get(reqBody, "inbox").String()
   inboxlist := gjson.Get(reqBody, "inboxlist")
   tasktags := gjson.Get(reqBody, "tasktags").String()
+  goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
+
   reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
   fmt.Println("=====task  tags=========")
   fmt.Println(tasktags)
@@ -424,12 +436,71 @@ func CreatetaskbyJSON(c *gin.Context) {
   fmt.Println(inbox)
 
   project := gjson.Get(reqBody, "project").String()
+  
+
+  
+
+  //create a goal and save it to table
+   alphabet :=[26]string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+  
+   //numbertable := [26]int{0,1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}
+  var goalcount = 0
+  var goalcountforsamegoal = 0
+  var goalsforemail []Goalfordbs 
+  if project == "goal"{
+    db.Where("Email= ?", email).Where("Name=?",inbox).Find(&goalsforemail).Count(&goalcountforsamegoal)
+    if goalcountforsamegoal >0{
+      c.JSON(200, gin.H{
+        "status":  "posted",
+        "message": "the goal had ben created,not repeated youself",
+      })
+      return
+    }else{
+
+   
+   db.Where("Email= ?", email).Find(&goalsforemail).Count(&goalcount)
+   if goalcount ==0{
+    goalfromclient := Goalfordbs{Name:inbox,Email:email,Goalcode:"aaa"}
+    db.Create(&goalfromclient).Scan(&goalfromclient)
+   }else{
+    goalcode := goalsforemail[len(goalsforemail)-1].Goalcode
+    a,b,c := string(goalcode[0]),string(goalcode[1]),string(goalcode[2])
+    if c!= "z"{
+      c = alphabet[getindex(c)+1]
+    }else{
+      if b!="z"{
+        c = "a"
+        b = alphabet[getindex(b)+1]
+      }else{
+        c= "a"
+        b= "a"
+        a = alphabet[getindex(a)+1]
+      }
+    }
+    goalfromclient := Goalfordbs{Name:inbox,Email:email,Goalcode:fmt.Sprintf("%s%s%s ",a,b,c)}
+    db.Create(&goalfromclient).Scan(&goalfromclient)
+   } 
+
+  }
+  
+  }
   //taglight := gjson.Get(reqBody, "taglight").String()
   place := gjson.Get(reqBody, "place").String()
   plantime := gjson.Get(reqBody, "plantime").String()
   long :=  gjson.Get(reqBody, "long").String()
   lat :=  gjson.Get(reqBody, "lat").String()
   goal :=  gjson.Get(reqBody, "goal").String()
+  
+  if goalcode_fromgtdcli !="xxx"{
+    var goalsforemail []Goalfordbs 
+    db.Where("Email= ?", email).Where("Goalcode=?",goalcode_fromgtdcli).Find(&goalsforemail).Count(&goalcountforsamegoal)
+    goal = goalsforemail[0].Name
+  }
+
+
+ // if goal !=="no goal"{}
+
+
   fmt.Println("+++++++++++++++place info +++++++++++++")
   longtitude = long
   latitude = lat
@@ -967,7 +1038,8 @@ func Inbox(c *gin.Context) {
   //try to STATISTICS for gtd
   //http://doc.gorm.io/crud.html#query
   /*
-  db.Where("name = ?", "jinzhu").Or("name = ?", "jinzhu 2").Find(&users).Count(&count)
+  
+  
 //// SELECT * from USERS WHERE name = 'jinzhu' OR name = 'jinzhu 2'; (users)
 //// SELECT count(*) FROM users WHERE name = 'jinzhu' OR name = 'jinzhu 2'; (count)
 
