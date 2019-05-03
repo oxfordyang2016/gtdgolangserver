@@ -10,6 +10,9 @@
     <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="/v1/echart.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/echarts/4.2.1/echarts-en.common.js"></script> -->
+    <!-- <script src="https://cdn.bootcss.com/echarts/4.0.2/echarts-en.common.js"></script> -->
+   
 </head>
 <script>
     jQuery.ajaxSetup({async:false});
@@ -72,14 +75,19 @@
     </script>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div>
+        <button id = "noproject">no project level</button><button id="withproject" >project level</button>
+            
+   <div id="chart" style="position: absolute;left:0;right:0;top:40px;bottom:0;">
     <div id="time" style="width: 3000px;height:200px;">
         <ul id="demo"></ul>
     </div>
     <div id="main" style="width: 3000px;height:3000px;"></div>
     <script type="text/javascript">
      // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
-        var myChart = echarts.init(document.getElementById('main'));
-
+       
+//myChart.showLoading();
+// myChart.hideLoading();
         // 指定图表的配置项和数据
 /*        var option = {
             title: {
@@ -107,7 +115,8 @@ myChart.setOption(option);
 //$.get('data/asset/data/flare.json', function (data) {
 //myChart.hideLoading();
 
-jQuery.ajaxSetup({async:false});
+   jQuery.ajaxSetup({async:false});
+   var myChart = echarts.init(document.getElementById('main'));
   function  getgoaltrees(){
     projectsfortree = []
     $.get("/v1/goalsgraph", function(data, status){
@@ -175,14 +184,28 @@ function  getgoaltrees_without_project(){
 return goalsfortree
 }
 
-
-
 var data = {"name":"goals","children":getgoaltrees_without_project()}
+doooo(data)
+$( "#noproject" ).click(function() {
+//   alert( "Handler for .click() called." );
+//   //var myNode = document.getElementById("foo");
+// while (myChart.firstChild) {
+//     myChart.removeChild(myNode.firstChild);
+// }
+//   //var data1 = {"name":"goals","children":getgoaltrees_without_project()}
+//   doooo(data)
+window.location.reload();
+});
+
+
+$( "#withproject" ).click(function() {
+  var data2 = {"name":"goals","children": getgoaltrees()}
+  doooo(data2)
+});
+
 
 //var data = {"name":"goals","children":getgoaltrees()}
 
-myChart.showLoading();
-    myChart.hideLoading();
 /*
     echarts.util.each(data.children, function (datum, index) {
         index % 2 === 0 && (datum.collapsed = true);
@@ -232,7 +255,11 @@ myChart.showLoading();
         ]
     });
 */
-myChart.setOption(option = {
+
+function doooo(datafromserver){
+    
+
+    myChart.setOption(option = {
     tooltip: {
         trigger: 'item',
         triggerOn: 'mousemove'
@@ -240,8 +267,7 @@ myChart.setOption(option = {
     series: [
         {
             type: 'tree',
-
-            data: [data],
+            data: [datafromserver],
 
             top: '18%',
             bottom: '14%',
@@ -264,6 +290,9 @@ myChart.setOption(option = {
         }
     ]
 });
+}
+
+
 
 </script>
 </body>
