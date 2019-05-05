@@ -490,12 +490,20 @@ func CreatetaskbyJSON(c *gin.Context) {
   long :=  gjson.Get(reqBody, "long").String()
   lat :=  gjson.Get(reqBody, "lat").String()
   goal :=  gjson.Get(reqBody, "goal").String()
+  client :=  gjson.Get(reqBody, "client").String()
   
+  //deal with gtd commandline client info uploaded!
+ if client == "gtdcli" {
+     //gtd cli to pass goal code
   if goalcode_fromgtdcli !="xxx"{
     var goalsforemail []Goalfordbs 
     db.Where("Email= ?", email).Where("Goalcode=?",goalcode_fromgtdcli).Find(&goalsforemail).Count(&goalcountforsamegoal)
     goal = goalsforemail[0].Name
-  }
+  }else{
+    goal = "no goal"
+  } 
+ }
+
 
 
  // if goal !=="no goal"{}
@@ -698,7 +706,7 @@ taskid = task.ID
     //gtd-cli to update the review algo data
     reviewalgolight := gjson.Get(reqBody, "reviewalgolight").String()
     reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
-     
+    goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
     fmt.Println("---------------------tasktags info -------------------")
     fmt.Println(taglight)
     fmt.Println(tasktags)
@@ -798,7 +806,36 @@ taskid = task.ID
     }
 
      //update a task
-    if goal!="unspecified"{db.Model(&task).Update("Goal", goal)}
+
+
+    //deal with goal client update
+    if goalcode_fromgtdcli!=""&& goalcode_fromgtdcli=="xxx"{
+      goal="unspecified"
+
+    }
+
+
+    
+    client :=  gjson.Get(reqBody, "client").String()
+    
+    //deal with gtd commandline client info uploaded!
+   if client == "gtdcli" {
+     fmt.Println("---------------------+++++----------------------------")
+       //gtd cli to pass goal code
+       fmt.Println(goalcode_fromgtdcli)
+       fmt.Println("---------------------+++++----------------------------")
+    if goalcode_fromgtdcli !="xxx"{
+      var goalsforemail []Goalfordbs 
+      db.Where("Email= ?", email).Where("Goalcode=?",goalcode_fromgtdcli).Find(&goalsforemail)
+      goal = goalsforemail[0].Name
+    }else{
+      goal = "unspecified"
+    } 
+   }
+    
+
+   if goal!="unspecified"{db.Model(&task).Update("Goal", goal)}
+
     if place!="unspecified"{db.Model(&task).Update("Place", place)}
     if project!="inbox"{db.Model(&task).Update("Project", project)}
     if inbox!="nocontent"{db.Model(&task).Update("Task", inbox)}
