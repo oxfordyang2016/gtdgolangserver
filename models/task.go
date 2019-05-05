@@ -490,8 +490,10 @@ func CreatetaskbyJSON(c *gin.Context) {
   long :=  gjson.Get(reqBody, "long").String()
   lat :=  gjson.Get(reqBody, "lat").String()
   goal :=  gjson.Get(reqBody, "goal").String()
-  
-  if goalcode_fromgtdcli !="xxx"{
+ 
+
+   //if it is from gtdcli 
+  if goalcode_fromgtdcli !="xxx"&&goalcode_fromgtdcli !=""{
     var goalsforemail []Goalfordbs 
     db.Where("Email= ?", email).Where("Goalcode=?",goalcode_fromgtdcli).Find(&goalsforemail).Count(&goalcountforsamegoal)
     goal = goalsforemail[0].Name
