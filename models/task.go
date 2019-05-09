@@ -490,6 +490,8 @@ func CreatetaskbyJSON(c *gin.Context) {
   long :=  gjson.Get(reqBody, "long").String()
   lat :=  gjson.Get(reqBody, "lat").String()
   goal :=  gjson.Get(reqBody, "goal").String()
+ 
+
   client :=  gjson.Get(reqBody, "client").String()
   
   //deal with gtd commandline client info uploaded!
