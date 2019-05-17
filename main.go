@@ -126,6 +126,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.GET("/goalsgraph",Goalsjson)
         v1.GET("/reviewgraphforios",Reviewforios)
         v1.GET("/search",Search)
+        v1.GET("/searchwithtag",Searchwithtags)
         //finance
         v1.GET("/mybalancejson",Getmywealth)
         router.Run(":8081")
