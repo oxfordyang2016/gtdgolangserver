@@ -148,7 +148,8 @@ func Errorlog(c *gin.Context) {
   //fmt.Println(cookie1.Value)
 
   var errors []Tasks
-  db.Where("email =  ?", email).Where("project =  ?", "error").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&errors)
+  //.Not("status", []string{"finished","f","finish","giveup","g"})
+  db.Where("email =  ?", email).Where("project =  ?", "error").Order("id").Find(&errors)
   
   c.JSON(200, gin.H{
       "errorlog":errors,

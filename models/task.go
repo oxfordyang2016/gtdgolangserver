@@ -686,8 +686,6 @@ taskid = task.ID
      buf := make([]byte, 1024)
 	   num, _ := c.Request.Body.Read(buf)
 	   reqBody := string(buf[0:num])
-   
-     
    //--------------using gjson to parse------------
    //https://github.com/tidwall/gjson
     value := gjson.Get(reqBody, "reviewdata")
