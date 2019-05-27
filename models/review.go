@@ -189,7 +189,7 @@ func Searchwithtags(c *gin.Context) {
   var keywords = c.Query("keywords")
   var search []Tasks
   //var s string = "12312sf"
-  querystring:= "select * from tasks where status not in ('finished','finish','giveup','g') and  email =" +`"`+ email +`" `+ " and tasktags REGEXP "+"'"+`"`+keywords+`"`+": "+`"yes"`+"'"
+  querystring:= "select * from tasks where status not in ('finished','finish','giveup','g') and  email =" +`"`+ email +`" `+ " and tasktags REGEXP "+"'"+`"`+keywords+`"`+":[ ]{0,1}"+`"yes"`+"'"
   //qurystring = fmt.Sprintf("select * from tasks where tasktags REGEXP '%s %s %s",s,"123123")
  // select * from tasks where tasktags REGEXP  '"hardtag":"yes"'\G;
   //db.Where("email =  ?", email).Where("task LIKE ?", "%"+keywords+"%").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&search)
@@ -227,6 +227,30 @@ func Goalsystem(c *gin.Context) {
     })
 
 }
+
+
+
+func Goalreviewfortoday(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+
+  //var goals []Tasks
+  var goals []Goalfordbs
+  //db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+  db.Where("email =  ?", email).Order("id").Find(&goals)
+  c.JSON(200, gin.H{
+      "goals":goals,
+    })
+
+}
+
+
+
+
 
 func Problemssystem(c *gin.Context) {
   //i use email as identifier

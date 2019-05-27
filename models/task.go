@@ -425,6 +425,8 @@ func CreatetaskbyJSON(c *gin.Context) {
   email:=emailcookie.Value
   inbox := gjson.Get(reqBody, "inbox").String()
   inboxlist := gjson.Get(reqBody, "inboxlist")
+  // tasktags1 := gjson.Get(reqBody, "tasktags")
+  // fmt.Println(tasktags1)
   tasktags := gjson.Get(reqBody, "tasktags").String()
   goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
 
