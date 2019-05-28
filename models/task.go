@@ -1109,7 +1109,7 @@ var finishedrate   float64
 
 //reference http://doc.gorm.io/crud.html#query  query with condition
 //db.Table("tasks").Where("status = ?", "finish").Count(&countofalltasks)
-//db.Not("name", []string{"jinzhu", "jinzhu 2"}).Find(&users)
+//Find(&users)
 //// SELECT * FROM users WHERE name NOT IN ("jinzhu", "jinzhu 2");
 //i use SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country; to verify which status  items are there?
 db.Table("tasks").Where("Email= ?", email).Where("status = ?","unfinished").Or("status = ?","unfinish").Count(&countforunfinishedtasks)
