@@ -63,9 +63,17 @@ func Goalsjson(c *gin.Context) {
 	   //today :=  time.Now().In(loc).Format("060102")
 	   //tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
        //db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime in (?)", []string{today, tomorrow}).Order("id desc").Find(&tasks)
-	   db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks) 
+	   statusbool:=c.Query("statusbool")  
+	   if statusbool =="yes"{
+		db.Where("Email= ?", email).Where("status in (?)", []string{"finished", "finish"}).Order("id desc").Find(&tasks)
+	   }else{
+		db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks)
+	   }
+	    
 	   client:= c.Request.Header.Get("client")
 	   querytype:=c.Query("type")
+	   
+	   
 
 	   fmt.Println("+++++++client is++++++++")
 	   fmt.Println(querytype)
