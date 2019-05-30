@@ -1586,7 +1586,7 @@ return alleverydays[i].Name > alleverydays[j].Name
               //fmt.Println(cookie1.Value)
               var tasks []Tasks
               //email:="yangming1"
-              db.Where("Email= ?", email).Find(&tasks)
+              db.Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","giveup","g"}).Find(&tasks)
               alldays:=make(map[string] []Tasks)
               
               getdbdatatime := time.Now()
@@ -1645,7 +1645,7 @@ return alleverydays[i].Name > alleverydays[j].Name
               //  looptest := "string"
               //fmt.Println(looptest)
         var countforfinishedtasks  int
-db.Table("tasks").Where("Email= ?", email).Not("status", []string{"unfinished","unfinish"}).Count(&countforfinishedtasks)//reference not keyword
+db.Table("tasks").Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","giveup","g"}).Count(&countforfinishedtasks)//reference not keyword
 
 /**
 conn, err := redis.Dial("tcp", ":6379")
@@ -1718,8 +1718,10 @@ if(client   == "ios" || client == "clientforjson"||client == "weekpridejson"||cl
 if (client == "clientforjson"){
 c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
 }else if(client == "weekpridejson"){
+  fmt.Println("=========i am week pride=================")
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:6]})
 }else if(client == "todaypridejson"){
+  fmt.Println("=========i am day pride=================")
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:1]})
 }else if(client == "yesterdaypridejson"){
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[1:2]})
