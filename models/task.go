@@ -1627,8 +1627,13 @@ return alleverydays[i].Name > alleverydays[j].Name
               slice.Sort(alleverydays, func(i, j int) bool {
        return alleverydays[i].Name > alleverydays[j].Name
    })
-             alleverydays =append(alleverydays,daybefore180119)
-             alleverydays =append(alleverydays,forgotten)
+            if daybefore180119.Name!=""{
+              alleverydays =append(alleverydays,daybefore180119)
+            }
+             if forgotten.Name!=""{
+              alleverydays =append(alleverydays,forgotten)
+             }
+            
 
           operatestructtime := time.Now()
           fmt.Println("from request arrive to finished operate struct time ")
