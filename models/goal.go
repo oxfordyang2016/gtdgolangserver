@@ -67,7 +67,7 @@ func Goalsjson(c *gin.Context) {
 	   if statusbool =="yes"{
 		db.Where("Email= ?", email).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal"}).Order("id desc").Find(&tasks)
 	   }else{
-		db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks)
+		db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("goal", []string{"no goal"}).Order("id desc").Find(&tasks)
 	   }
 	    
 	   client:= c.Request.Header.Get("client")
