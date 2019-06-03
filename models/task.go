@@ -1181,7 +1181,10 @@ func Unfinishedtaskjson(c *gin.Context) {
      tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
    
   //Query Chains http://doc.gorm.io/crud.html#query
-  db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Where("goal in (?)", []string{"no goal",""}).Not("plantime", []string{today,tomorrow}).Order("id desc").Find(&tasks)
+  //db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Where("goal = ?", nil).Not("plantime", []string{today,tomorrow}).Order("id desc").Find(&tasks)
+  
+  var sql = fmt.Sprintf(`select * from tasks where status in("unfinish", "unfinished") and (goal in ("no goal","") or goal is null) and plantime not in (%s,%s) and email ='%s' order by id desc`,today,tomorrow,email)
+  db.Raw(sql).Scan(&tasks)
   c.JSON(200, gin.H{
       "task":tasks,
     })
