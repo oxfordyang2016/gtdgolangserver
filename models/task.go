@@ -1181,7 +1181,7 @@ func Unfinishedtaskjson(c *gin.Context) {
      tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
    
   //Query Chains http://doc.gorm.io/crud.html#query
-  db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime", []string{today,tomorrow}).Order("id desc").Find(&tasks)
+  db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Where("goal in (?)", []string{"no goal",""}).Not("plantime", []string{today,tomorrow}).Order("id desc").Find(&tasks)
   c.JSON(200, gin.H{
       "task":tasks,
     })
@@ -1627,10 +1627,10 @@ return alleverydays[i].Name > alleverydays[j].Name
               slice.Sort(alleverydays, func(i, j int) bool {
        return alleverydays[i].Name > alleverydays[j].Name
    })
-            if daybefore180119.Name!=""{
+            if daybefore180119.Name !=""{
               alleverydays =append(alleverydays,daybefore180119)
             }
-             if forgotten.Name!=""{
+             if forgotten.Name !=""{
               alleverydays =append(alleverydays,forgotten)
              }
             
