@@ -1183,7 +1183,7 @@ func Unfinishedtaskjson(c *gin.Context) {
   //Query Chains http://doc.gorm.io/crud.html#query
   //db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Where("goal = ?", nil).Not("plantime", []string{today,tomorrow}).Order("id desc").Find(&tasks)
   
-  var sql = fmt.Sprintf(`select * from tasks where status in("unfinish", "unfinished") and (goal in ("no goal","") or goal is null) and plantime not in (%s,%s) and email ='%s' order by id desc`,today,tomorrow,email)
+  var sql = fmt.Sprintf(`select * from tasks where status in("unfinish", "unfinished") and project not in ("goal") and (goal in ("no goal","") or goal is null) and plantime not in (%s,%s) and email ='%s' order by id desc`,today,tomorrow,email)
   db.Raw(sql).Scan(&tasks)
   c.JSON(200, gin.H{
       "task":tasks,
