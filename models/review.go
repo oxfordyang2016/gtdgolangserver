@@ -342,6 +342,17 @@ func Reviewforstastics(c *gin.Context){
   counts, _:= strconv.Atoi(count_need_bystastics_from_client)
 
 
+ // db.Where("email =  ?", email).Order("date").Find(&reviewsfortimescount)
+
+//how many things do u had finished in theses days?
+var countfortasks = 0
+db.Table("tasks").Where("Email= ?", email).Where("status =?","giveup").Count(&countfortasks)
+//how many things was correlated to goals?
+//how many the times u had devoted to goals?
+//which goals do u care specially?
+//how urgent your goal is?
+//
+
 
 
   var reviewsfortimescount []Reviewfortimescount

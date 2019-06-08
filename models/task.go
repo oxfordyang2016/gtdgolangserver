@@ -58,7 +58,8 @@ type (
     Longitude string `json:"Longitude"`
     Latitude  string `json:"Latitude"`
     Reviewsign string `json:"reviewsign"`
-    Score      uint    `json:"score"`
+    Score      uint    `json:"score"` 
+    Devotedtime int    `json:"devotedtime"` 
     Reviewdatas string  `json:"reviewdatas" sql:"type:text;"`    
     Tasktags string `json:"tasktags" sql:"type:text;"`
 
@@ -287,6 +288,9 @@ func Createtask(c *gin.Context) {
   long :=  c.PostForm("long")
   lat :=  c.PostForm("lat") 
   goal :=  c.PostForm("goal") 
+  devotedtime,_:= strconv.Atoi(c.PostForm("timedevotedto_a_task"))
+  fmt.Println("+++++++++++++++devoted time info +++++++++++++") 
+  fmt.Println(devotedtime)
   fmt.Println("+++++++++++++++place info +++++++++++++")   
   longtitude = long
   latitude = lat  
@@ -350,7 +354,7 @@ if status!="unfinished"{
     clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 
     }
-  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:devotedtime,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
   db.Create(&task)
 
 
@@ -361,7 +365,7 @@ return_info:= Compute_singleday(clientfinishtime,email)
 fmt.Println(return_info)
   }else{
 
-  task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+  task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:devotedtime,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
   db.Create(&task)
   
 Check_reviewdaylog(finishtime.Format("060102"),email)
@@ -373,7 +377,7 @@ fmt.Println(return_info)
 
 
 }else{
-  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
+  task := Tasks{Task:inbox,User:email,Devotedtime:devotedtime,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
   db.Create(&task)
 }
 
@@ -425,6 +429,8 @@ func CreatetaskbyJSON(c *gin.Context) {
   email:=emailcookie.Value
   inbox := gjson.Get(reqBody, "inbox").String()
   inboxlist := gjson.Get(reqBody, "inboxlist")
+  devotedtime:= gjson.Get(reqBody, "timedevotedto_a_task").Int()
+   fmt.Println(devotedtime)
   // tasktags1 := gjson.Get(reqBody, "tasktags")
   // fmt.Println(tasktags1)
   tasktags := gjson.Get(reqBody, "tasktags").String()
@@ -578,7 +584,7 @@ if status!="unfinished"{
     fmt.Println(len(inboxlist.Array()))
    if len(inboxlist.Array())>1{
      for _,inbox := range inboxlist.Array(){
-      task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
       fmt.Println("i am testing the id return")
       fmt.Println(task.ID)
@@ -586,7 +592,7 @@ if status!="unfinished"{
      }   
 
    }else{
-    task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+    task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
     db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
@@ -603,7 +609,7 @@ taskid = task.ID
     if len(inboxlist.Array())>1{
       for _,inbox := range inboxlist.Array(){
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
-       task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Devotedtime:int(devotedtime),Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        db.Create(&task).Scan(&task)
        fmt.Println("i am testing the id return")
        fmt.Println(task.ID)
@@ -611,7 +617,7 @@ taskid = task.ID
       }   
  
     }else{
-      task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
@@ -634,7 +640,7 @@ taskid = task.ID
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //db.Create(&task).Scan(&task)
-       task := Tasks{Task:inbox.String(),User:email,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Task:inbox.String(),User:email,Finishtime:"unfinished",Devotedtime:int(devotedtime),Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
        
        
@@ -644,7 +650,7 @@ taskid = task.ID
       }   
  
     }else{
-  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Devotedtime:int(devotedtime),Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
     fmt.Println(task.ID)
@@ -709,6 +715,7 @@ taskid = task.ID
     reviewalgolight := gjson.Get(reqBody, "reviewalgolight").String()
     reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
     goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
+    devotedtime:= gjson.Get(reqBody, "timedevotedto_a_task").Int()
     fmt.Println("---------------------tasktags info -------------------")
     fmt.Println(taglight)
     fmt.Println(tasktags)
@@ -847,6 +854,7 @@ taskid = task.ID
     if note!="unspecified"{db.Model(&task).Update("Note", note)}
     if taglight == "yes"{db.Model(&task).Update("Tasktags", tasktags)}
     if reviewalgolight == "yes" {db.Model(&task).Update("Reviewdatas", reviewalgodata)}
+    if devotedtime != 0  {db.Model(&task).Update("Devotedtime", devotedtime)}
     
     if isreview=="yes"{db.Model(&task).Update("reviewdatas", reviewdata)}
     
