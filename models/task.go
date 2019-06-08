@@ -1567,7 +1567,48 @@ return alleverydays[i].Name > alleverydays[j].Name
 
 
 
+    func  Sort_tasksbyday(tasks []Tasks) []Everyday {
+      alldays:=make(map[string] []Tasks)
+      for _,item :=range tasks{
+        // alldays[item.Plantime]=append(alldays[item.Plantime],item)
+  if item.Status!="unfinished"{
+    if item.Status!="unfinish"{
+    alldays[item.Finishtime]=append(alldays[item.Finishtime],item)}}
+      }
+      var alleverydays []Everyday
+      var daybefore180119 Everyday
+      var forgotten  Everyday
+      for k,v := range alldays{
+       if k!="180119before"&&k!="forgotten"{
+         alleverydays =append(alleverydays,Everyday{k,v})
+      }
+         if k=="180119before"{
+           daybefore180119 = Everyday{k,v}
+         }
+         if k=="forgotten"{
+         forgotten  = Everyday{k,v}
+         
+}
 
+
+
+}
+
+//https://stackoverflow.com/questions/28999735/what-is-the-shortest-way-to-simply-sort-an-array-of-structs-by-arbitrary-field
+
+      slice.Sort(alleverydays, func(i, j int) bool {
+return alleverydays[i].Name > alleverydays[j].Name
+})
+    if daybefore180119.Name !=""{
+      alleverydays =append(alleverydays,daybefore180119)
+    }
+     if forgotten.Name !=""{
+      alleverydays =append(alleverydays,forgotten)
+     }
+
+
+     return alleverydays
+    }
 
 
 
@@ -1598,7 +1639,7 @@ return alleverydays[i].Name > alleverydays[j].Name
               var tasks []Tasks
               //email:="yangming1"
               db.Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","giveup","g"}).Find(&tasks)
-              alldays:=make(map[string] []Tasks)
+              //alldays:=make(map[string] []Tasks)
               
               getdbdatatime := time.Now()
               fmt.Println("from request arrive to finished get data from db  time ")
@@ -1608,42 +1649,7 @@ return alleverydays[i].Name > alleverydays[j].Name
 
 
 
-         for _,item :=range tasks{
-                // alldays[item.Plantime]=append(alldays[item.Plantime],item)
-          if item.Status!="unfinished"{
-            if item.Status!="unfinish"{
-            alldays[item.Finishtime]=append(alldays[item.Finishtime],item)}}
-              }
-              var alleverydays []Everyday
-              var daybefore180119 Everyday
-              var forgotten  Everyday
-              for k,v := range alldays{
-               if k!="180119before"&&k!="forgotten"{
-                 alleverydays =append(alleverydays,Everyday{k,v})
-              }
-                 if k=="180119before"{
-                   daybefore180119 = Everyday{k,v}
-                 }
-                 if k=="forgotten"{
-                 forgotten  = Everyday{k,v}
-                 
-}
-
-
-
-}
-
-//https://stackoverflow.com/questions/28999735/what-is-the-shortest-way-to-simply-sort-an-array-of-structs-by-arbitrary-field
-
-              slice.Sort(alleverydays, func(i, j int) bool {
-       return alleverydays[i].Name > alleverydays[j].Name
-   })
-            if daybefore180119.Name !=""{
-              alleverydays =append(alleverydays,daybefore180119)
-            }
-             if forgotten.Name !=""{
-              alleverydays =append(alleverydays,forgotten)
-             }
+              var alleverydays = Sort_tasksbyday(tasks)
             
 
           operatestructtime := time.Now()
@@ -1742,7 +1748,8 @@ c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
 }else if(client == "yesterdaypridejson"){
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[1:2]})
 }else{
-  if (len(alldays)<30){
+  //if (len(alldays)<30){
+    if (len(alleverydays)<30){
     c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays})
   }else{
     c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "memories": alleverydays[0:30]})

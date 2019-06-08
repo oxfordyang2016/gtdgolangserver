@@ -353,8 +353,30 @@ db.Table("tasks").Where("Email= ?", email).Where("status =?","giveup").Count(&co
 //how urgent your goal is?
 //
 
+var tasks []Tasks
+//email:="yangming1"
+db.Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","giveup","g"}).Find(&tasks)
+var alleverydays = Sort_tasksbyday(tasks)
+var tasksbydays = alleverydays[0:counts]
+//fmt.Println(tasksbydays)
 
 
+var alltasks_count = 0
+var all_time_u_had_devoted_inthe_time_range = 0
+var  alltime_goal_oriented = 0 
+for  _,item :=range tasksbydays{
+  alltasks_count =  alltasks_count+len(item.Alldays)
+  for _,item1 := range item.Alldays{
+    all_time_u_had_devoted_inthe_time_range = all_time_u_had_devoted_inthe_time_range + item1.Devotedtime
+    if item1.Goal!="no goal"{
+      alltime_goal_oriented = alltime_goal_oriented + item1.Devotedtime
+    } 
+  } 
+}
+fmt.Printf("the task length is %d",len(tasksbydays))
+fmt.Printf("theses task counts is %d",alltasks_count)
+fmt.Printf("u had devoted %d  minutes in the time range",all_time_u_had_devoted_inthe_time_range)
+fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_oriented)
   var reviewsfortimescount []Reviewfortimescount
   db.Where("email =  ?", email).Order("date").Find(&reviewsfortimescount)
   if (len(reviewsfortimescount)-counts < 0){
@@ -375,6 +397,10 @@ db.Table("tasks").Where("Email= ?", email).Where("status =?","giveup").Count(&co
   // }
   c.JSON(200, gin.H{
       "errorcode":1102,
+      "dayscount":len(tasksbydays),
+      "alltasks_count":alltasks_count,
+      "devotedtime":all_time_u_had_devoted_inthe_time_range,
+      "devotedtime_oriented":alltime_goal_oriented,
       "reviewdata":reviewdata,
     })
 }
