@@ -357,7 +357,13 @@ var tasks []Tasks
 //email:="yangming1"
 db.Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","giveup","g"}).Find(&tasks)
 var alleverydays = Sort_tasksbyday(tasks)
-var tasksbydays = alleverydays[0:counts]
+var tasksbydays []Everyday
+
+if counts == -1{
+  tasksbydays = alleverydays[1:2]
+}else{
+  tasksbydays = alleverydays[0:counts]
+}
 //fmt.Println(tasksbydays)
 
 
@@ -387,8 +393,17 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
    return
   }
   lengthofreviewsfortimescount := len(reviewsfortimescount)
-  weekstart := lengthofreviewsfortimescount - counts
-  var reviewdata = reviewsfortimescount[weekstart:]
+  var reviewdata []Reviewfortimescount
+ 
+  //for yesterday
+  if counts == -1{
+    reviewdata = reviewsfortimescount[lengthofreviewsfortimescount-2:lengthofreviewsfortimescount-1]
+  }else{
+    weekstart := lengthofreviewsfortimescount - counts
+    reviewdata = reviewsfortimescount[weekstart:]
+  }
+ 
+
   fmt.Println(reviewdata)
   //   for _,item :=range reviewdata{
   //   var detailofday = item.Details 
