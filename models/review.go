@@ -366,7 +366,7 @@ if counts == -1{
 }
 //fmt.Println(tasksbydays)
 
-
+var goal_devotedtime = make(map[string]int)
 var alltasks_count = 0
 var all_time_u_had_devoted_inthe_time_range = 0
 var  alltime_goal_oriented = 0 
@@ -375,6 +375,11 @@ for  _,item :=range tasksbydays{
   for _,item1 := range item.Alldays{
     all_time_u_had_devoted_inthe_time_range = all_time_u_had_devoted_inthe_time_range + item1.Devotedtime
     if item1.Goal!="no goal"{
+      if val, ok := goal_devotedtime[item1.Goal]; ok {
+        goal_devotedtime[item1.Goal] =val +item1.Devotedtime
+      }else{
+        goal_devotedtime[item1.Goal] = item1.Devotedtime
+      }
       alltime_goal_oriented = alltime_goal_oriented + item1.Devotedtime
     } 
   } 
@@ -403,6 +408,7 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
     reviewdata = reviewsfortimescount[weekstart:]
   }
  
+  
 
   fmt.Println(reviewdata)
   //   for _,item :=range reviewdata{
@@ -416,6 +422,7 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
       "alltasks_count":alltasks_count,
       "devotedtime":all_time_u_had_devoted_inthe_time_range,
       "devotedtime_oriented":alltime_goal_oriented,
+      "goaltime":goal_devotedtime,
       "reviewdata":reviewdata,
     })
 }
