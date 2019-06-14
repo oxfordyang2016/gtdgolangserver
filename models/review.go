@@ -6,6 +6,7 @@ import (
 "net/http"
 "github.com/jinzhu/gorm"
 "strconv"
+"time"
 //"github.com/jinzhu/gorm"
 "github.com/gin-gonic/gin"
 //"github.com/gin-contrib/sessions"
@@ -365,6 +366,19 @@ if counts == -1{
   tasksbydays = alleverydays[0:counts]
 }
 //fmt.Println(tasksbydays)
+var plannedtask_today_count = 0
+var plannedtask_yesterday_count = 0
+var plannedtask_same_with_finished_today_count = 0
+var plannedtask_same_with_finished_yesterday_count = 0
+loc, _ := time.LoadLocation("Asia/Shanghai")
+//https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+yesterdaytime :=  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
+todaytime :=  time.Now().In(loc).AddDate(0,0,0).Format("060102")
+db.Table("tasks").Where("Email= ?", email).Where("plantime =?",todaytime).Count(&plannedtask_today_count)
+db.Table("tasks").Where("Email= ?", email).Where("plantime =?",yesterdaytime).Count(&plannedtask_yesterday_count)
+db.Table("tasks").Where("Email= ?", email).Where("plantime =?",todaytime).Where("finishtime =?",todaytime).Count(&plannedtask_same_with_finished_today_count)
+db.Table("tasks").Where("Email= ?", email).Where("plantime =?",yesterdaytime).Where("finishtime =?",yesterdaytime).Count(&plannedtask_same_with_finished_yesterday_count)
+
 
 var goal_devotedtime = make(map[string]int)
 var alltasks_count = 0
@@ -422,6 +436,11 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
       "alltasks_count":alltasks_count,
       "devotedtime":all_time_u_had_devoted_inthe_time_range,
       "devotedtime_oriented":alltime_goal_oriented,
+      "yesterday_planed_task_count":plannedtask_yesterday_count,
+      "today_planed_task_count":plannedtask_today_count,
+
+      "plannedtask_same_with_finished_today_count":plannedtask_same_with_finished_today_count,   
+      "plannedtask_same_with_finished_yesterday_count":plannedtask_same_with_finished_yesterday_count, 
       "goaltime":goal_devotedtime,
       "reviewdata":reviewdata,
     })
