@@ -14,7 +14,7 @@ import(
 //_ "github.com/jinzhu/gorm/dialects/mysql"
 _ "github.com/jinzhu/gorm/dialects/postgres"
 _ "github.com/lib/pq"
-
+"github.com/tidwall/gjson"
 //"github.com/tidwall/gjson"
 )
 
@@ -30,6 +30,7 @@ Goalfordbs  struct{
 	//ID uint64 `gorm:"type:bigint(20) unsigned auto_increment;not null;primary_key"`
 	//i will use email+ab(2 alphebet table),such as yang756260386@gmail.comab
 	Goalcode             string    `json:"goalcode"`
+	Priority             int    `json:"priority"`
 	Email                 string   `json:"email"`
 	}
 
@@ -42,6 +43,70 @@ Goalsincludetasks struct{
 }	
 
 )
+
+func Creategoal(c *gin.Context) {
+	buf := make([]byte, 1024)
+	num, _ := c.Request.Body.Read(buf)
+	reqBody := string(buf[0:num])
+	emailcookie,_:=c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email:=emailcookie.Value
+	goal := gjson.Get(reqBody, "goal").String()
+	priority:= gjson.Get(reqBody, "priority").Int()
+	var goalsforemail []Goalfordbs 
+	var goalcountforsamegoal = 0
+	var goalcount = 0
+	alphabet :=[26]string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+    db.Where("Email= ?", email).Where("Name=?",goal).Find(&goalsforemail).Count(&goalcountforsamegoal)
+    if goalcountforsamegoal >0{
+      c.JSON(200, gin.H{
+        "status":  "posted",
+        "message": "the goal had ben created,not repeated youself",
+      })
+      return
+    }else{
+   db.Where("Email= ?", email).Find(&goalsforemail).Count(&goalcount)
+   if goalcount ==0{
+    goalfromclient := Goalfordbs{Name:goal,Email:email,Goalcode:"aaa",Priority:int(priority)}
+    db.Create(&goalfromclient).Scan(&goalfromclient)
+   }else{
+    goalcode := goalsforemail[len(goalsforemail)-1].Goalcode
+    a,b,c := string(goalcode[0]),string(goalcode[1]),string(goalcode[2])
+    if c!= "z"{
+      c = alphabet[getindex(c)+1]
+    }else{
+      if b!="z"{
+        c = "a"
+        b = alphabet[getindex(b)+1]
+      }else{
+        c= "a"
+        b= "a"
+        a = alphabet[getindex(a)+1]
+      }
+    }
+    goalfromclient := Goalfordbs{Name:goal,Email:email,Goalcode:fmt.Sprintf("%s%s%s ",a,b,c)}
+    db.Create(&goalfromclient).Scan(&goalfromclient)
+   } 
+  }
+}
+
+
+func Updategoal(c *gin.Context) {
+	buf := make([]byte, 1024)
+	num, _ := c.Request.Body.Read(buf)
+	reqBody := string(buf[0:num])
+	emailcookie,_:=c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email:=emailcookie.Value
+	goal := gjson.Get(reqBody, "goal").String()
+	goalcode := gjson.Get(reqBody, "goalcode").String()
+	priority:= gjson.Get(reqBody, "priority").Int()
+	var goalindb  Goalfordbs
+	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
+	if priority != 0  {db.Model(&goalindb).Update("Priority", int(priority)) }
+	if goal != "unspecified"{db.Model(&goalindb).Update("Name", goal)}
+}
+
 
 
 

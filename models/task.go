@@ -793,8 +793,8 @@ taskid = task.ID
     parentproject := gjson.Get(reqBody, "parentproject").String()
    // note := c.PostForm("note")
     
-      note := gjson.Get(reqBody, "note").String()
-      fmt.Println(note)
+    note := gjson.Get(reqBody, "note").String()
+    fmt.Println(note)
 
 
 
@@ -854,7 +854,7 @@ taskid = task.ID
     if note!="unspecified"{db.Model(&task).Update("Note", note)}
     if taglight == "yes"{db.Model(&task).Update("Tasktags", tasktags)}
     if reviewalgolight == "yes" {db.Model(&task).Update("Reviewdatas", reviewalgodata)}
-    if devotedtime != 0  {db.Model(&task).Update("Devotedtime", devotedtime)}
+    if devotedtime != 0  {db.Model(&task).Update("Devotedtime", int(devotedtime))}
     
     if isreview=="yes"{db.Model(&task).Update("reviewdatas", reviewdata)}
     
@@ -894,8 +894,26 @@ fmt.Println(return_info)
 
 
 
+  }else{
+    loc, _ := time.LoadLocation("Asia/Shanghai")
+    now :=  time.Now().In(loc)
+   db.Model(&task).Update("Finishtime",now.Format("060102"))
+    //now1 :=  time.Now().In(loc)
+
+//db.Model(&task).Update("Finishtime", finishtime)
+    //db.Model(&task).Update("AccurateFinishtime",now1.String()
+
+    fmt.Println("---------------i am confed in unfeid  even if user only update the one part the algo will update the score------------------------------")
+    db.Model(&task).Update("Status", status)
+
+Check_reviewdaylog(now.Format("060102"),email)
+return_info:= Compute_singleday(now.Format("060102"),email)
+fmt.Println(return_info)
+
   } 
   if finishtime!="unspecified"{db.Model(&task).Update("Finishtime", finishtime)
+
+
 Check_reviewdaylog(finishtime,email)
 return_info:= Compute_singleday(finishtime,email)
 fmt.Println(return_info)

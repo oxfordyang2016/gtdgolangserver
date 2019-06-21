@@ -108,6 +108,8 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.POST("/updateforios",Updateforios)	
         v1.GET("/map",Googlemapservice)
         v1.GET("/location",Canvas)
+        v1.POST("/creategoal",Creategoal)
+        v1.POST("/updategoal",Updategoal)
         //web page
 	      //v1.GET("/mainboard",Mainboard)
         v1.GET("/inbox",Inbox)

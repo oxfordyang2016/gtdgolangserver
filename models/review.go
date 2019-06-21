@@ -7,6 +7,7 @@ import (
 "github.com/jinzhu/gorm"
 "strconv"
 "time"
+// "math"
 //"github.com/jinzhu/gorm"
 "github.com/gin-gonic/gin"
 //"github.com/gin-contrib/sessions"
@@ -514,7 +515,7 @@ var taskcount_score int
 var countoffinishedtasks int
 
 var countofgivenuptasks int
-
+var count_makeplanfortomorrow  = 0 
 
 //for times stastics
 var patiencenumber = 0 
@@ -549,6 +550,11 @@ db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Not("s
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Where("status =?","giveup").Count(&countofgivenuptasks)
 
 
+db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Where("status =?","giveup").Count(&countofgivenuptasks)
+ 
+
+// db.Where(&Tasks{Finishtime : date, Task:"make plan for tomorrow on "+date,Status:"finish"}).Count(&count_makeplanfortomorrow)
+//count_makeplanfortomorrow
 
 
 fmt.Println("-----=======-------++++++++++++++=-----======----------------")
@@ -590,7 +596,7 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
     useprinciple_number = useprinciple_number +1
      } 
 
-
+   
 
 
 
@@ -734,7 +740,21 @@ learntechuse_score = learntechuse_score +5
 
 }
 
+
+
+
 total_score:=acceptfactandseektruth_score+useprinciple_score+attackactively_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
+
+db.Table("tasks").Where("Email= ?", email).Where("task = ?","make plan for tomorrow on "+date).Where("status =?","finish").Count(&count_makeplanfortomorrow)
+//if u donnot pplanned in the today,u will lost the the score
+fmt.Println("---------------the date is ------------------")
+fmt.Println("make plan for tomorrow on "+date)
+//if u dnoot plan fro tomorrow the score will * 0.75
+if count_makeplanfortomorrow == 0{
+  total_score = int(total_score/4*3)
+}else{
+  total_score = total_score *1
+}
 review := &Reviewdatadetail{Totalscore:total_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
 reviewfortimecount_from_client := Reviewfortimescount{Email:email,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
