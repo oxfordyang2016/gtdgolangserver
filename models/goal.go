@@ -105,9 +105,57 @@ func Updategoal(c *gin.Context) {
 	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
 	if priority != 0  {db.Model(&goalindb).Update("Priority", int(priority)) }
 	if goal != "unspecified"{db.Model(&goalindb).Update("Name", goal)}
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK })
 }
 
 
+
+
+
+
+
+
+
+
+
+func Goalsystem(c *gin.Context) {
+	//i use email as identifier
+  //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+	emailcookie,_:=c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email:=emailcookie.Value
+	//fmt.Println(cookie1.Value)
+  
+	//var goals []Tasks
+	var goals []Goalfordbs
+	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+	db.Where("email =  ?", email).Order("id").Find(&goals)
+	c.JSON(200, gin.H{
+		"goals":goals,
+	  })
+  
+  }
+  
+  
+  
+  func Goalreviewfortoday(c *gin.Context) {
+	//i use email as identifier
+  //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+	emailcookie,_:=c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email:=emailcookie.Value
+	//fmt.Println(cookie1.Value)
+  
+	//var goals []Tasks
+	var goals []Goalfordbs
+	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+	db.Where("email =  ?", email).Order("id").Find(&goals)
+	c.JSON(200, gin.H{
+		"goals":goals,
+	  })
+  
+  }
+  
 
 
 

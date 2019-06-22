@@ -209,51 +209,6 @@ func Searchwithtags(c *gin.Context) {
 
 
 
-
-
-
-func Goalsystem(c *gin.Context) {
-  //i use email as identifier
-//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-  emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
-  //fmt.Println(cookie1.Value)
-
-  //var goals []Tasks
-  var goals []Goalfordbs
-  //db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
-  db.Where("email =  ?", email).Order("id").Find(&goals)
-  c.JSON(200, gin.H{
-      "goals":goals,
-    })
-
-}
-
-
-
-func Goalreviewfortoday(c *gin.Context) {
-  //i use email as identifier
-//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-  emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
-  //fmt.Println(cookie1.Value)
-
-  //var goals []Tasks
-  var goals []Goalfordbs
-  //db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
-  db.Where("email =  ?", email).Order("id").Find(&goals)
-  c.JSON(200, gin.H{
-      "goals":goals,
-    })
-
-}
-
-
-
-
-
 func Problemssystem(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
