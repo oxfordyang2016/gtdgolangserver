@@ -62,7 +62,7 @@ type (
     Devotedtime int    `json:"devotedtime"` 
     Reviewdatas string  `json:"reviewdatas" sql:"type:text;"`    
     Tasktags string `json:"tasktags" sql:"type:text;"`
-
+    Goalcoefficient float64   `json:"goalcoefficient"` 
 	}
 
  
@@ -126,102 +126,96 @@ var latitude = "47.47"
 
 
 
- // createTodo add a new todo
- func Createtaskfromios(c *gin.Context) {
-   emailcookie,_:=c.Request.Cookie("email")
-   //fmt.Println(emailcookie.Value)
-   email:=emailcookie.Value
-   print("22222222222222222222")
-   print(email)
-   //email := c.PostForm("email")
-   inbox := c.PostForm("inbox")
-   fmt.Println(inbox)
-    project := c.PostForm("project")
-   fmt.Println("+++++++++++++++++")
-   fmt.Println(project)  
-   place := c.PostForm("place")
-   fmt.Println("=============")
-   fmt.Println(place) 
-   plantime := c.PostForm("plantime")
+//  // createTodo add a new todo
+//  func Createtaskfromios(c *gin.Context) {
+//    emailcookie,_:=c.Request.Cookie("email")
+//    //fmt.Println(emailcookie.Value)
+//    email:=emailcookie.Value
+//    print("22222222222222222222")
+//    print(email)
+//    //email := c.PostForm("email")
+//    inbox := c.PostForm("inbox")
+//    fmt.Println(inbox)
+//     project := c.PostForm("project")
+//    fmt.Println("+++++++++++++++++")
+//    fmt.Println(project)  
+//    place := c.PostForm("place")
+//    fmt.Println("=============")
+//    fmt.Println(place) 
+//    plantime := c.PostForm("plantime")
     
-        if plantime =="today"{
-      loc, _ := time.LoadLocation("Asia/Shanghai")
-      //plantimeofanotherforamt :=  time.Now().In(loc)
-      //
-      plantime =  time.Now().In(loc).Format("060102")
-    }
-    if plantime  =="tomorrow"{
-      loc, _ := time.LoadLocation("Asia/Shanghai")
-    //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
-    plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
-    }
+//         if plantime =="today"{
+//       loc, _ := time.LoadLocation("Asia/Shanghai")
+//       //plantimeofanotherforamt :=  time.Now().In(loc)
+//       //
+//       plantime =  time.Now().In(loc).Format("060102")
+//     }
+//     if plantime  =="tomorrow"{
+//       loc, _ := time.LoadLocation("Asia/Shanghai")
+//     //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+//     plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+//     }
 
 
-   if plantime==""{
-   plantime ="unspecified" 
-}
+//    if plantime==""{
+//    plantime ="unspecified" 
+// }
 
  
- if   plantime !="unspecified" {
-    //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
-     loc, _ := time.LoadLocation("Asia/Shanghai") 
-   plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
-    }
+//  if   plantime !="unspecified" {
+//     //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+//      loc, _ := time.LoadLocation("Asia/Shanghai") 
+//    plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+//     }
 
 
-   if plantime==""{
-   plantime ="unspecified" 
-} 
+//    if plantime==""{
+//    plantime ="unspecified" 
+// } 
 
-  status := c.PostForm("taskstatus")
-   parentproject := c.PostForm("parentproject")
-   note := c.PostForm("note")
-   ifdissect := c.PostForm("ifdissect")
+//   status := c.PostForm("taskstatus")
+//    parentproject := c.PostForm("parentproject")
+//    note := c.PostForm("note")
+//    ifdissect := c.PostForm("ifdissect")
 
- if status!="unfinished"{
+//  if status!="unfinished"{
   
 
-    clientfinishtime:=  c.PostForm("finishtime")
+//     clientfinishtime:=  c.PostForm("finishtime")
    
-  only_finishtime:= clientfinishtime
+//   only_finishtime:= clientfinishtime
 
-   fmt.Println("=================")
-   fmt.Println(clientfinishtime)
-   loc, _ := time.LoadLocation("Asia/Shanghai")
-   finishtime :=  time.Now().In(loc)
-   if clientfinishtime!="unspecified"{
-   task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
-   db.Create(&task)
-   }else{
-   only_finishtime = finishtime.Format("060102")
-   task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
-   db.Create(&task)
-    }
+//    fmt.Println("=================")
+//    fmt.Println(clientfinishtime)
+//    loc, _ := time.LoadLocation("Asia/Shanghai")
+//    finishtime :=  time.Now().In(loc)
+//    if clientfinishtime!="unspecified"{
+//    task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+//    db.Create(&task)
+//    }else{
+//    only_finishtime = finishtime.Format("060102")
+//    task := Tasks{Note:note,Ifdissect:ifdissect,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+//    db.Create(&task)
+//     }
 
     
-/*
-compute single day review data
+// /*
+// compute single day review data
 
-*/
- Check_reviewdaylog(only_finishtime,email)
- computeinfo := Compute_singleday(only_finishtime,email)
- fmt.Println(computeinfo)
+// */
+//  Check_reviewdaylog(only_finishtime,email)
+//  computeinfo := Compute_singleday(only_finishtime,email)
+//  fmt.Println(computeinfo)
 
- }else{
-   task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
-   db.Create(&task)
- }
- c.JSON(200, gin.H{
-     "status":  "posted",
-     "message": "u have uploaded info,please come on!",
-   })
- 	}
-
-
-
-
-
-
+//  }else{
+//    task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
+//    db.Create(&task)
+//  }
+//  c.JSON(200, gin.H{
+//      "status":  "posted",
+//      "message": "u have uploaded info,please come on!",
+//    })
+//  	}
 
 
 
@@ -266,66 +260,66 @@ c.JSON(200, gin.H{
 
 
 // createTodo add a new todo
-func Createtask(c *gin.Context) {
+// func Createtask(c *gin.Context) {
  
-   fmt.Println("+++++++++++++++++++ i am invoked in create task++++++++++++++++++++++")
+//    fmt.Println("+++++++++++++++++++ i am invoked in create task++++++++++++++++++++++")
 
 
 
-   emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
-  inbox := c.PostForm("inbox")
-  tasktags := c.PostForm("tasktags")
-  fmt.Println("=====task  tags=========")
-  fmt.Println(tasktags) 
-  fmt.Println("======*************========")
-  fmt.Println(inbox)
+//    emailcookie,_:=c.Request.Cookie("email")
+//   fmt.Println(emailcookie.Value)
+//   email:=emailcookie.Value
+//   inbox := c.PostForm("inbox")
+//   tasktags := c.PostForm("tasktags")
+//   fmt.Println("=====task  tags=========")
+//   fmt.Println(tasktags) 
+//   fmt.Println("======*************========")
+//   fmt.Println(inbox)
   
-  project := c.PostForm("project")
-  place := c.PostForm("place")
-  plantime := c.PostForm("plantime")
-  long :=  c.PostForm("long")
-  lat :=  c.PostForm("lat") 
-  goal :=  c.PostForm("goal") 
-  devotedtime,_:= strconv.Atoi(c.PostForm("timedevotedto_a_task"))
-  fmt.Println("+++++++++++++++devoted time info +++++++++++++") 
-  fmt.Println(devotedtime)
-  fmt.Println("+++++++++++++++place info +++++++++++++")   
-  longtitude = long
-  latitude = lat  
-  fmt.Println(long)
-  fmt.Println(lat)
+//   project := c.PostForm("project")
+//   place := c.PostForm("place")
+//   plantime := c.PostForm("plantime")
+//   long :=  c.PostForm("long")
+//   lat :=  c.PostForm("lat") 
+//   goal :=  c.PostForm("goal") 
+//   devotedtime,_:= strconv.Atoi(c.PostForm("timedevotedto_a_task"))
+//   fmt.Println("+++++++++++++++devoted time info +++++++++++++") 
+//   fmt.Println(devotedtime)
+//   fmt.Println("+++++++++++++++place info +++++++++++++")   
+//   longtitude = long
+//   latitude = lat  
+//   fmt.Println(long)
+//   fmt.Println(lat)
   
-  fmt.Println("+++++++++++++++place info +++++++++++++")
-  if strings.Contains(plantime, "today"){
-       // if plantime =="today"{
-      loc, _ := time.LoadLocation("Asia/Shanghai")
-      //plantimeofanotherforamt :=  time.Now().In(loc)
-      //
-      plantime =  time.Now().In(loc).Format("060102")
-    }
-    if strings.Contains(plantime, "tomorrow"){
-     // if plantime  =="tomorrow"{
-      loc, _ := time.LoadLocation("Asia/Shanghai")
-    //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
-    plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
-    }
+//   fmt.Println("+++++++++++++++place info +++++++++++++")
+//   if strings.Contains(plantime, "today"){
+//        // if plantime =="today"{
+//       loc, _ := time.LoadLocation("Asia/Shanghai")
+//       //plantimeofanotherforamt :=  time.Now().In(loc)
+//       //
+//       plantime =  time.Now().In(loc).Format("060102")
+//     }
+//     if strings.Contains(plantime, "tomorrow"){
+//      // if plantime  =="tomorrow"{
+//       loc, _ := time.LoadLocation("Asia/Shanghai")
+//     //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+//     plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+//     }
 
 
 
 
 
 
-  status := c.PostForm("taskstatus")
-   //status := c.PostForm("taskstatus")
-    if status == "f"{status = "finish"}
-    if status  == "g"{status = "giveup"}
-    if status   == "r"{status =  "replace"}
-    if status  == "a"{status = "anotherday"}
-  parentproject := c.PostForm("parentproject")
-  note := c.PostForm("note")
-  ifdissect := c.PostForm("ifdissect")
+//   status := c.PostForm("taskstatus")
+//    //status := c.PostForm("taskstatus")
+//     if status == "f"{status = "finish"}
+//     if status  == "g"{status = "giveup"}
+//     if status   == "r"{status =  "replace"}
+//     if status  == "a"{status = "anotherday"}
+//   parentproject := c.PostForm("parentproject")
+//   note := c.PostForm("note")
+//   ifdissect := c.PostForm("ifdissect")
 
 
 
@@ -333,64 +327,64 @@ func Createtask(c *gin.Context) {
 
 
 
-if status!="unfinished"{
-  clientfinishtime:=  c.PostForm("finishtime")
-  if clientfinishtime == "y"{
-   clientfinishtime = "yesterday"
+// if status!="unfinished"{
+//   clientfinishtime:=  c.PostForm("finishtime")
+//   if clientfinishtime == "y"{
+//    clientfinishtime = "yesterday"
 
-}
+// }
 
-  fmt.Println("=================")
-  fmt.Println(clientfinishtime)
-  loc, _ := time.LoadLocation("Asia/Shanghai")
-  finishtime :=  time.Now().In(loc)
-
-
-  if clientfinishtime!="unspecified"{
-     if strings.Contains(clientfinishtime, "yesterday"){   
-     // if clientfinishtime == "yesterday"{
-   loc, _ := time.LoadLocation("Asia/Shanghai")
-    //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
-    clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
-
-    }
-  task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:devotedtime,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
-  db.Create(&task)
+//   fmt.Println("=================")
+//   fmt.Println(clientfinishtime)
+//   loc, _ := time.LoadLocation("Asia/Shanghai")
+//   finishtime :=  time.Now().In(loc)
 
 
+//   if clientfinishtime!="unspecified"{
+//      if strings.Contains(clientfinishtime, "yesterday"){   
+//      // if clientfinishtime == "yesterday"{
+//    loc, _ := time.LoadLocation("Asia/Shanghai")
+//     //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+//     clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 
-//for adding review data for db when create a task
-Check_reviewdaylog(clientfinishtime,email)
-return_info:= Compute_singleday(clientfinishtime,email)
-fmt.Println(return_info)
-  }else{
+//     }
+//   task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:devotedtime,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+//   db.Create(&task)
 
-  task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:devotedtime,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
-  db.Create(&task)
+
+
+// //for adding review data for db when create a task
+// Check_reviewdaylog(clientfinishtime,email)
+// return_info:= Compute_singleday(clientfinishtime,email)
+// fmt.Println(return_info)
+//   }else{
+
+//   task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:devotedtime,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime}
+//   db.Create(&task)
   
-Check_reviewdaylog(finishtime.Format("060102"),email)
-return_info:= Compute_singleday(finishtime.Format("060102"),email)
-fmt.Println(return_info)
+// Check_reviewdaylog(finishtime.Format("060102"),email)
+// return_info:= Compute_singleday(finishtime.Format("060102"),email)
+// fmt.Println(return_info)
 
 
- }
+//  }
 
 
-}else{
-  task := Tasks{Task:inbox,User:email,Devotedtime:devotedtime,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
-  db.Create(&task)
-}
-
-
-
+// }else{
+//   task := Tasks{Task:inbox,User:email,Devotedtime:devotedtime,Finishtime:"unfinished",Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime}
+//   db.Create(&task)
+// }
 
 
 
-c.JSON(200, gin.H{
-    "status":  "posted",
-    "message": "u have uploaded info,please come on!",
-  })
-	}
+
+
+
+// c.JSON(200, gin.H{
+//     "status":  "posted",
+//     "message": "u have uploaded info,please come on!",
+//   })
+// 	}
 
 
 func getindex(s string) int{
@@ -514,6 +508,7 @@ func CreatetaskbyJSON(c *gin.Context) {
   } 
  }
 
+  goalcoefficient :=  Get_goal_coffient(goal,email)
 
 
  // if goal !=="no goal"{}
@@ -584,7 +579,7 @@ if status!="unfinished"{
     fmt.Println(len(inboxlist.Array()))
    if len(inboxlist.Array())>1{
      for _,inbox := range inboxlist.Array(){
-      task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
       fmt.Println("i am testing the id return")
       fmt.Println(task.ID)
@@ -592,7 +587,7 @@ if status!="unfinished"{
      }   
 
    }else{
-    task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+    task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
     db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
@@ -609,7 +604,7 @@ taskid = task.ID
     if len(inboxlist.Array())>1{
       for _,inbox := range inboxlist.Array(){
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
-       task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Devotedtime:int(devotedtime),Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Note:note,Ifdissect:ifdissect,Goalcoefficient:goalcoefficient,Goal:goal,Devotedtime:int(devotedtime),Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        db.Create(&task).Scan(&task)
        fmt.Println("i am testing the id return")
        fmt.Println(task.ID)
@@ -617,7 +612,7 @@ taskid = task.ID
       }   
  
     }else{
-      task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      task := Tasks{Note:note,Ifdissect:ifdissect,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
@@ -640,7 +635,7 @@ taskid = task.ID
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //db.Create(&task).Scan(&task)
-       task := Tasks{Task:inbox.String(),User:email,Finishtime:"unfinished",Devotedtime:int(devotedtime),Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Task:inbox.String(),User:email,Finishtime:"unfinished",Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
        
        
@@ -650,7 +645,7 @@ taskid = task.ID
       }   
  
     }else{
-  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Devotedtime:int(devotedtime),Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
     fmt.Println(task.ID)
@@ -842,6 +837,7 @@ taskid = task.ID
     } 
    }
     
+   goalcoefficient :=  Get_goal_coffient(goal,email)
 
    if goal!="unspecified"{db.Model(&task).Update("Goal", goal)}
 
@@ -855,7 +851,8 @@ taskid = task.ID
     if taglight == "yes"{db.Model(&task).Update("Tasktags", tasktags)}
     if reviewalgolight == "yes" {db.Model(&task).Update("Reviewdatas", reviewalgodata)}
     if devotedtime != 0  {db.Model(&task).Update("Devotedtime", int(devotedtime))}
-    
+    //EVERYTIME TO COMPUTE
+    db.Model(&task).Update("Goalcoefficient", goalcoefficient)
     if isreview=="yes"{db.Model(&task).Update("reviewdatas", reviewdata)}
     
     //always to update tasktags,i think ther is a room to optimatical

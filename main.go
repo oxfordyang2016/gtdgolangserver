@@ -102,8 +102,8 @@ v1.StaticFile("/background.png", "./static/images/background.png")
 
         //tasks system
         v1.POST("/createtask",CreatetaskbyJSON)
-        v1.POST("/gtdcli",Createtask)
-        v1.POST("/gtdclifromios",Createtaskfromios)
+        //v1.POST("/gtdcli",Createtask)
+        //v1.POST("/gtdclifromios",Createtaskfromios)
 	      v1.POST("/update",Update)
         v1.POST("/updateforios",Updateforios)	
         v1.GET("/map",Googlemapservice)

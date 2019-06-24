@@ -517,38 +517,39 @@ fmt.Println(countofgivenuptasks)
 
 
 
-taskcount_score =  2  * (countoffinishedtasks - countofgivenuptasks) +countofgivenuptasks*1
+ taskcount_score =  2  * (countoffinishedtasks - countofgivenuptasks) +countofgivenuptasks*1
 
  for _,item :=range tasks{
 fmt.Println("------------i had been into loop----------------")
 
 var jsonoftasktags = item.Tasktags
 if  challengetag := gjson.Get(jsonoftasktags, "challengetag").String();challengetag=="yes"{
-challengetag_score  = challengetag_score + 5
+challengetag_score  = int(float64((challengetag_score + 5))*item.Goalcoefficient)
 }
 
 
 
 
 var json = item.Reviewdatas
+//var goalcoffient = 1item.goalcoffient
 fmt.Println(json)
 fmt.Println("------------i had been into loop----------------")
 if  brainuse := gjson.Get(json, "brainuse").String();brainuse=="yes"{
 fmt.Println(brainuse)
-brainuse_score = brainuse_score +5
+brainuse_score = int(float64(brainuse_score +5)*(item.Goalcoefficient))
 usebrainnumber = usebrainnumber +1
  } 
 
 if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprinciple").String();buildframeandprinciple_from_client=="yes"{
   //fmt.Println(brainuse)
-  buildframeandprinciple_score = buildframeandprinciple_score +5
+  buildframeandprinciple_score = int(float64(buildframeandprinciple_score +5)*item.Goalcoefficient)
   buildframeandprinciplenumber = buildframeandprinciplenumber +1
    } 
 
    if  useprinciple_from_client := gjson.Get(json, "useprinciple").String();useprinciple_from_client=="yes"{
     //fmt.Println(brainuse)
-    useprinciple_score = useprinciple_score +10
-    useprinciple_number = useprinciple_number +1
+    useprinciple_score = int(float64(useprinciple_score +10)*(item.Goalcoefficient))
+        useprinciple_number = useprinciple_number +1
      } 
 
    
@@ -557,14 +558,14 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
 
    if  acceptfact_from_client := gjson.Get(json, "acceptfactandseektruth").String();acceptfact_from_client=="yes"{
     //fmt.Println(brainuse)
-    acceptfactandseektruth_score =  acceptfactandseektruth_score  +  10
+    acceptfactandseektruth_score =  int(float64(acceptfactandseektruth_score  +  10)*(item.Goalcoefficient))
     acceptfactandseektruth_number = acceptfactandseektruth_number +1
      } 
 
 
      if  attackactively_from_client := gjson.Get(json, "attackactively").String();attackactively_from_client=="yes"{
       //fmt.Println(brainuse)
-      attackactively_score=  attackactively_score  +  10
+      attackactively_score=  int(float64(attackactively_score  +  10)*item.Goalcoefficient)
       attackactively_number= attackactively_number +1
        } 
 
@@ -575,7 +576,7 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
 
      if  acceptfact_from_client := gjson.Get(json, "acceptpain").String();acceptfact_from_client=="yes"{
       //fmt.Println(brainuse)
-      acceptpain_score =  acceptpain_score  +  10
+      acceptpain_score =  int(float64(acceptpain_score  +  10)*item.Goalcoefficient)
       acceptpain_number = acceptpain_number +1
        } 
 
@@ -583,19 +584,19 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
 
 
 if  makeuseofthings := gjson.Get(json, "makeuseofthings").String();makeuseofthings=="yes"{
-makeuseofthethingsuhavelearned_score = makeuseofthethingsuhavelearned_score + 5
+makeuseofthethingsuhavelearned_score =  int(float64( makeuseofthethingsuhavelearned_score + 5)*item.Goalcoefficient)
 makeuseofthethingsuhavelearned_number = makeuseofthethingsuhavelearned_number +1
  }
 
 
 if  doanimportantthingearly := gjson.Get(json, "doanimportantthingearly").String();doanimportantthingearly =="yes"{
-doanimportantthingearly_score = doanimportantthingearly_score + 10
+doanimportantthingearly_score =  int(float64(doanimportantthingearly_score + 10)*item.Goalcoefficient)
 doanimportantthingearly_number = doanimportantthingearly_number + 1
  }
  
 
 if  markataskimmediately := gjson.Get(json, "markataskimmediately").String();markataskimmediately =="yes"{
-markataskimmediately_score = markataskimmediately_score + 1
+markataskimmediately_score = int(float64(markataskimmediately_score + 1 )*item.Goalcoefficient)
 markataskimmediately_number = markataskimmediately_number + 1
  }
 
@@ -604,7 +605,7 @@ markataskimmediately_number = markataskimmediately_number + 1
 
 
 if  alwaysprofit := gjson.Get(json, "alwaysprofit").String();alwaysprofit=="yes"{
-alwaysprofit_score = alwaysprofit_score + 5
+alwaysprofit_score = int(float64(alwaysprofit_score + 5)*item.Goalcoefficient)
 alwaysprofit_number = alwaysprofit_number +1
  }
 
@@ -617,18 +618,18 @@ alwaysprofit_number = alwaysprofit_number +1
 
 
 if  learnnewthings := gjson.Get(json, "learnnewthings").String();learnnewthings=="yes"{
-learnnewthings_score = learnnewthings_score +5
+learnnewthings_score = int(float64(learnnewthings_score +5 )*item.Goalcoefficient)
 learnnewthings_number = learnnewthings_number + 1
  }
 
 
 if  serviceforgoal := gjson.Get(json, "serviceforgoal").String();serviceforgoal=="yes"{
-serviceforgoal_score  = serviceforgoal_score  + 20
+serviceforgoal_score  = int(float64(serviceforgoal_score  + 20  )*item.Goalcoefficient)
  }
 
 
 if  onlystartatask := gjson.Get(json, "onlystartatask").String();onlystartatask=="yes"{
-onlystartatask_score  = onlystartatask_score  + 10
+onlystartatask_score  =  int(float64(onlystartatask_score  + 10)*item.Goalcoefficient)
  }
 
 
@@ -636,13 +637,13 @@ onlystartatask_score  = onlystartatask_score  + 10
 
 
 if  battlewithlowerbrain := gjson.Get(json, "battlewithlowerbrain").String();battlewithlowerbrain=="yes"{
-battlewithlowerbrain_score = battlewithlowerbrain_score +5
+battlewithlowerbrain_score = int(float64(battlewithlowerbrain_score +5 )*item.Goalcoefficient)
 battlewithlowerbrainnumber = battlewithlowerbrainnumber + 1
  }
 
 
 if  atomadifficulttask := gjson.Get(json, "atomadifficulttask").String();atomadifficulttask=="yes"{
-atomadifficulttask_score = atomadifficulttask_score +5
+atomadifficulttask_score = int(float64(atomadifficulttask_score +5 )*item.Goalcoefficient)
 atomadifficulttask_number = atomadifficulttask_number+1
  }
 
@@ -652,13 +653,13 @@ atomadifficulttask_number = atomadifficulttask_number+1
 
 
 if  patience := gjson.Get(json, "patience").String();patience=="yes"{
-patience_score = patience_score + 10
+patience_score =  int(float64(patience_score + 10)*item.Goalcoefficient)
 patiencenumber = patiencenumber + 1
  }
 
 
  if  solveakeyproblem := gjson.Get(json, "solveakeyproblem").String();solveakeyproblem=="yes"{
-  patience_score = solveakeyproblem_score + 50
+  solveakeyproblem_score =  int(float64(solveakeyproblem_score + 50)*item.Goalcoefficient)
   solveakeyproblem_number = solveakeyproblem_number + 1
    }
 
@@ -667,49 +668,108 @@ patiencenumber = patiencenumber + 1
 
 
 if  difficultthings := gjson.Get(json, "difficultthings").String();difficultthings=="yes"{
-difficultthings_score = difficultthings_score +10
+difficultthings_score =  int(float64(difficultthings_score +20)*item.Goalcoefficient)
 difficultthings_number = difficultthings_number + 1
  }
 
 
 
 if  threeminutes := gjson.Get(json, "threeminutes").String();threeminutes=="yes"{
-threeminutes_score = threeminutes_score +5
+threeminutes_score = int(float64(threeminutes_score +5 )*item.Goalcoefficient)
 threeminutes_number = threeminutes_number + 1
  }
 
 
 
 if  getlesson:= gjson.Get(json, "getlesson").String();getlesson=="yes"{
-getlesson_score = getlesson_score +5
+getlesson_score = int(float64(getlesson_score +5  )*item.Goalcoefficient)
 
  }
 
 
 
 if  learntechuse := gjson.Get(json, "learntechuse").String();learntechuse=="yes"{
-learntechuse_score = learntechuse_score +5
-
+learntechuse_score = int(float64(learntechuse_score +5)*item.Goalcoefficient)
  }
 
 
-}
+ }
 
 
 
 
 total_score:=acceptfactandseektruth_score+useprinciple_score+attackactively_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
 
+
+
+//----------------------------------------------------------plan obey part------------------
+//plan obey coeffient
+//the part to judge how self-reglation you r
+var tasksforstatistics []Tasks
+//email:="yangming1"
+db.Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","giveup","g"}).Find(&tasksforstatistics)
+// var alleverydays = Sort_tasksbyday(tasks)
+// var tasksbydays []Everyday
+
+// if counts == -1{
+//   tasksbydays = alleverydays[1:2]
+// }else{
+//   tasksbydays = alleverydays[0:counts]
+// }
+//fmt.Println(tasksbydays)
+var plannedtask_count = 0
+//var plannedtask_yesterday_count = 0
+var plannedtask_same_with_finished_count = 0
+//var plannedtask_same_with_finished_yesterday_count = 0
+//loc, _ := time.LoadLocation("Asia/Shanghai")
+//https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+//yesterdaytime :=  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
+//todaytime :=  time.Now().In(loc).AddDate(0,0,0).Format("060102")
+db.Table("tasks").Where("Email= ?", email).Where("plantime =?",date).Count(&plannedtask_count)
+//db.Table("tasks").Where("Email= ?", email).Where("plantime =?",yesterdaytime).Count(&plannedtask_yesterday_count)
+db.Table("tasks").Where("Email= ?", email).Where("plantime =?",date).Where("finishtime =?",date).Count(&plannedtask_same_with_finished_count)
+//db.Table("tasks").Where("Email= ?", email).Where("plantime =?",yesterdaytime).Where("finishtime =?",yesterdaytime).Count(&plannedtask_same_with_finished_yesterday_count)
+var planobey_coffient = 0.0
+if plannedtask_count !=0 {
+  planobey_coffient = float64(plannedtask_same_with_finished_count/plannedtask_count)
+  if plannedtask_count ==0{
+    planobey_coffient = 0.2
+  }
+}
+ 
+fmt.Println(planobey_coffient)
+
+
+
+fmt.Println("------------------------------------Do you plan for tomorrow?-------------------------------------")
 db.Table("tasks").Where("Email= ?", email).Where("task = ?","make plan for tomorrow on "+date).Where("status =?","finish").Count(&count_makeplanfortomorrow)
-//if u donnot pplanned in the today,u will lost the the score
+
 fmt.Println("---------------the date is ------------------")
+
 fmt.Println("make plan for tomorrow on "+date)
 //if u dnoot plan fro tomorrow the score will * 0.75
+
+// float compute  https://www.digitalocean.com/community/tutorials/how-to-do-math-in-go-with-operators
+var makeplanfortomorrow_coffient = 0.5
+fmt.Println(makeplanfortomorrow_coffient)
 if count_makeplanfortomorrow == 0{
   total_score = int(total_score/4*3)
+  makeplanfortomorrow_coffient = 0.75
+  //plancoffient = 2
 }else{
   total_score = total_score *1
+  makeplanfortomorrow_coffient = 1.0
+  //plancoffient = 4
 }
+fmt.Println(makeplanfortomorrow_coffient)
+
+
+//-----------------------------------everygoal score---------------------------------
+total_score = int(float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient)
+
+
+
+
 review := &Reviewdatadetail{Totalscore:total_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
 reviewfortimecount_from_client := Reviewfortimescount{Email:email,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 

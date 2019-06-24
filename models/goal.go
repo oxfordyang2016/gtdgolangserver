@@ -160,6 +160,31 @@ func Goalsystem(c *gin.Context) {
 
 
 
+
+   func Get_goal_coffient(goal string,email string) float64{
+	   var total_priotity = 0
+	   var goals_belonged2email  []Goalfordbs
+	   db.Where("Email= ?", email).Find(&goals_belonged2email)
+	   for _,item :=range goals_belonged2email{  
+	   total_priotity = total_priotity + item.Priority}
+	   var querygoal Goalfordbs
+       db.Where("Email= ?", email).Where("Name = ?",goal).Find(&querygoal)
+	   goal_coffient  :=  float64(querygoal.Priority)/float64(total_priotity)
+	   fmt.Println("-------------------------goal coeffient-------------------------")
+	   fmt.Println(float64(total_priotity))
+	   fmt.Println(goal_coffient)
+	   return goal_coffient
+   }
+
+
+
+
+
+
+
+
+
+
 func Goalsjson(c *gin.Context) {
 
 	//the algorithm can be upgrade
