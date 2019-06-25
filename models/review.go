@@ -742,7 +742,9 @@ fmt.Println(planobey_coffient)
 
 
 fmt.Println("------------------------------------Do you plan for tomorrow?-------------------------------------")
-db.Table("tasks").Where("Email= ?", email).Where("task = ?","make plan for tomorrow on "+date).Where("status =?","finish").Count(&count_makeplanfortomorrow)
+loc, _ := time.LoadLocation("Asia/Shanghai")
+yesterday :=  time.Now().In(loc).AddDate(0, 0, -1).Format("060102")
+db.Table("tasks").Where("Email= ?", email).Where("task = ?","make plan for tomorrow on "+yesterday).Where("plantime =?",yesterday).Where("status =?","finish").Count(&count_makeplanfortomorrow)
 
 fmt.Println("---------------the date is ------------------")
 
