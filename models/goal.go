@@ -103,7 +103,7 @@ func Updategoal(c *gin.Context) {
 	priority:= gjson.Get(reqBody, "priority").Int()
 	var goalindb  Goalfordbs
 	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
-	if priority != 0  {db.Model(&goalindb).Update("Priority", int(priority)) }
+	if priority != -1  {db.Model(&goalindb).Update("Priority", int(priority)) }
 	if goal != "nocontent"{db.Model(&goalindb).Update("Name", goal)}
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK })
 }
