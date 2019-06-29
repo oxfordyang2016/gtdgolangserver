@@ -103,8 +103,8 @@ func Updategoal(c *gin.Context) {
 	priority:= gjson.Get(reqBody, "priority").Int()
 	var goalindb  Goalfordbs
 	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
-	if priority != -1  {db.Model(&goalindb).Update("Priority", int(priority)) }
-	if goal != "nocontent"{db.Model(&goalindb).Update("Name", goal)}
+	if priority != 0  {db.Model(&goalindb).Update("Priority", int(priority)) }
+	if goal != "unspecified"{db.Model(&goalindb).Update("Name", goal)}
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK })
 }
 
@@ -171,7 +171,7 @@ func Goalsystem(c *gin.Context) {
        db.Where("Email= ?", email).Where("Name = ?",goal).Find(&querygoal)
 	   goal_coffient  :=  float64(querygoal.Priority)/float64(total_priotity)
 	   fmt.Println("-------------------------goal coeffient-------------------------")
-	   fmt.Println(float64(total_priotity))
+	   fmt.Println("hahhahh")
 	   fmt.Println(goal_coffient)
 	   return goal_coffient
    }

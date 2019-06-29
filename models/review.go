@@ -519,6 +519,11 @@ fmt.Println(countofgivenuptasks)
 //task basic count
  taskcount_score =  float64(1* (countoffinishedtasks - countofgivenuptasks) +countofgivenuptasks*0)
 
+ var pain_coeffient float64 = 0.5
+ var difficult_coeffient float64 = 0.5
+ 
+
+
  for _,item :=range tasks{
 fmt.Println("------------i had been into loop----------------")
 
@@ -573,11 +578,12 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
 
 
 
-
+    
      if  acceptfact_from_client := gjson.Get(json, "acceptpain").String();acceptfact_from_client=="yes"{
       //fmt.Println(brainuse)
       acceptpain_score =  float64(acceptpain_score  +  10)*item.Goalcoefficient
       acceptpain_number = acceptpain_number +1
+      pain_coeffient =  pain_coeffient + 0.5
        } 
 
 
@@ -670,6 +676,7 @@ patiencenumber = patiencenumber + 1
 if  difficultthings := gjson.Get(json, "difficultthings").String();difficultthings=="yes"{
 difficultthings_score =  float64(difficultthings_score +20)*item.Goalcoefficient
 difficultthings_number = difficultthings_number + 1
+difficult_coeffient =  difficult_coeffient + 0.5
  }
 
 
@@ -757,7 +764,6 @@ fmt.Println("make plan for tomorrow on "+date)
 
 // float compute  https://www.digitalocean.com/community/tutorials/how-to-do-math-in-go-with-operators
 var makeplanfortomorrow_coffient = 0.5
-fmt.Println(makeplanfortomorrow_coffient)
 if count_makeplanfortomorrow == 0{
   //total_score = total_score/4*3
   makeplanfortomorrow_coffient = 0.75
@@ -771,9 +777,15 @@ fmt.Println(makeplanfortomorrow_coffient)
 
 
 //-----------------------------------everygoal score---------------------------------
-total_score = float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient
+total_score = float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
 
-
+fmt.Println("-------------alll kinds of coeffient is fellowing------------")
+fmt.Printf("the pain coeffient %f\n",pain_coeffient)
+fmt.Printf("the plan obey coeffient %f\n",planobey_coffient)
+fmt.Printf("the diffcult coeffient %f\n",difficult_coeffient)
+fmt.Printf("make plan for tomorrow  coeffient %f\n",makeplanfortomorrow_coffient)
+fmt.Printf("total score is  %f\n",total_score)
+fmt.Println("-------------alll kinds of coeffient is above------------")
 
 
 review := &Reviewdatadetail{Totalscore:total_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
