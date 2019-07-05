@@ -86,6 +86,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   //json API
   v1.GET("/inboxjson",Inboxjson)
   v1.GET("/todayjson",Todaytaskjson)
+  v1.GET("/tomorrowjson",Tomorrowtaskjson)
   v1.GET("/unfinishedtasksjson",Unfinishedtaskjson)
   v1.GET("/readinglist",Readinglistjson) 
   v1.GET("/habitlist",Habitlistjson)

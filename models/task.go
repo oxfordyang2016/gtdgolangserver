@@ -1422,6 +1422,40 @@ func Todaytaskjson(c *gin.Context) {
 
 
 
+func Tomorrowtaskjson(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  loc, _ := time.LoadLocation("Asia/Shanghai")
+  tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+  //fmt.Println(cookie1.Value)
+  var tasks []Tasks
+  //email:="yangming1"
+  //http://doc.gorm.io/crud.html#query to desc
+  //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
+ 
+
+  //today :=  time.Now().In(loc).Format("060102")
+  //tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+
+
+ //db.Model(&task).Update("Finishtime",now.Format("060102"))
+
+  //Query Chains http://doc.gorm.io/crud.html#query
+  db.Where("Email= ?", email).Where("plantime = ?",tomorrow).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks)
+  c.JSON(200, gin.H{
+      "task":tasks,
+    })
+
+}
+
+
+
+
+
+
 
 
 
