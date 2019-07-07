@@ -59,7 +59,8 @@ type (
     Latitude  string `json:"Latitude"`
     Reviewsign string `json:"reviewsign"`
     Score      uint    `json:"score"` 
-    Devotedtime int    `json:"devotedtime"` 
+    Devotedtime int    `json:"devotedtime"`
+    Priority    int    `json:"priority"`
     Reviewdatas string  `json:"reviewdatas" sql:"type:text;"`    
     Tasktags string `json:"tasktags" sql:"type:text;"`
     Goalcoefficient float64   `json:"goalcoefficient"` 
@@ -492,8 +493,8 @@ func CreatetaskbyJSON(c *gin.Context) {
   long :=  gjson.Get(reqBody, "long").String()
   lat :=  gjson.Get(reqBody, "lat").String()
   goal :=  gjson.Get(reqBody, "goal").String()
- 
-
+  
+  task_priority := 0
   client :=  gjson.Get(reqBody, "client").String()
   
   //deal with gtd commandline client info uploaded!
@@ -503,11 +504,17 @@ func CreatetaskbyJSON(c *gin.Context) {
     var goalsforemail []Goalfordbs 
     db.Where("Email= ?", email).Where("Goalcode=?",goalcode_fromgtdcli).Find(&goalsforemail).Count(&goalcountforsamegoal)
     goal = goalsforemail[0].Name
+    task_priority =  goalsforemail[0].Priority
   }else{
     goal = "no goal"
   } 
  }
 
+  if goal !="no goal"{
+    var goalsforemail []Goalfordbs 
+    db.Where("Email= ?", email).Where("Name=?",goal).Find(&goalsforemail)
+    task_priority = goalsforemail[0].Priority
+  }
   goalcoefficient :=  Get_goal_coffient(goal,email)
 
 
@@ -579,7 +586,7 @@ if status!="unfinished"{
     fmt.Println(len(inboxlist.Array()))
    if len(inboxlist.Array())>1{
      for _,inbox := range inboxlist.Array(){
-      task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
       fmt.Println("i am testing the id return")
       fmt.Println(task.ID)
@@ -587,7 +594,7 @@ if status!="unfinished"{
      }   
 
    }else{
-    task := Tasks{Note:note,Ifdissect:ifdissect,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+    task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
     db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
@@ -604,7 +611,7 @@ taskid = task.ID
     if len(inboxlist.Array())>1{
       for _,inbox := range inboxlist.Array(){
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
-       task := Tasks{Note:note,Ifdissect:ifdissect,Goalcoefficient:goalcoefficient,Goal:goal,Devotedtime:int(devotedtime),Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Goalcoefficient:goalcoefficient,Goal:goal,Devotedtime:int(devotedtime),Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        db.Create(&task).Scan(&task)
        fmt.Println("i am testing the id return")
        fmt.Println(task.ID)
@@ -612,7 +619,7 @@ taskid = task.ID
       }   
  
     }else{
-      task := Tasks{Note:note,Ifdissect:ifdissect,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
@@ -635,7 +642,7 @@ taskid = task.ID
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //db.Create(&task).Scan(&task)
-       task := Tasks{Task:inbox.String(),User:email,Finishtime:"unfinished",Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Task:inbox.String(),User:email,Priority:task_priority,Finishtime:"unfinished",Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
        
        
@@ -645,7 +652,7 @@ taskid = task.ID
       }   
  
     }else{
-  task := Tasks{Task:inbox,User:email,Finishtime:"unfinished",Goal:goal,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+  task := Tasks{Task:inbox,User:email,Priority:task_priority,Finishtime:"unfinished",Goal:goal,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
     fmt.Println(task.ID)
@@ -819,7 +826,7 @@ taskid = task.ID
     }
 
 
-    
+    var task_priority = 0
     client :=  gjson.Get(reqBody, "client").String()
     
     //deal with gtd commandline client info uploaded!
@@ -832,6 +839,7 @@ taskid = task.ID
       var goalsforemail []Goalfordbs 
       db.Where("Email= ?", email).Where("Goalcode=?",goalcode_fromgtdcli).Find(&goalsforemail)
       goal = goalsforemail[0].Name
+      task_priority = goalsforemail[0].Priority
     }else{
       goal = "unspecified"
     } 
@@ -839,9 +847,16 @@ taskid = task.ID
     
    goalcoefficient :=  Get_goal_coffient(goal,email)
 
-   if goal!="unspecified"{db.Model(&task).Update("Goal", goal)}
+   if goal!="unspecified"{
+    var goalsforemail []Goalfordbs 
+    db.Where("Email= ?", email).Where("Name=?",goal).Find(&goalsforemail)
+    task_priority = goalsforemail[0].Priority
+    db.Model(&task).Update("Priority", task_priority) 
+    db.Model(&task).Update("Goal", goal)}
 
-    if place!="unspecified"{db.Model(&task).Update("Place", place)}
+    if place!="unspecified"{
+     
+      db.Model(&task).Update("Place", place)}
     if project!="inbox"{db.Model(&task).Update("Project", project)}
     if inbox!="nocontent"{db.Model(&task).Update("Task", inbox)}
     if plantime!="unspecified"{db.Model(&task).Update("Plantime", plantime)}
@@ -1438,7 +1453,7 @@ func Tomorrowtaskjson(c *gin.Context) {
  
 
   //today :=  time.Now().In(loc).Format("060102")
-  //tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+ //tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
 
 
  //db.Model(&task).Update("Finishtime",now.Format("060102"))
