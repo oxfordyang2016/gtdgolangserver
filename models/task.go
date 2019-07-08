@@ -63,7 +63,9 @@ type (
     Priority    int    `json:"priority"`
     Reviewdatas string  `json:"reviewdatas" sql:"type:text;"`    
     Tasktags string `json:"tasktags" sql:"type:text;"`
-    Goalcoefficient float64   `json:"goalcoefficient"` 
+    Goalcoefficient float64   `json:"goalcoefficient"`
+    Mark_finished_time_switch int  `json:"mark_finished_time_switch"` 
+    First_finish_timestamp string   `json:"First_finish_timestamp"` 
 	}
 
  
@@ -561,6 +563,17 @@ func CreatetaskbyJSON(c *gin.Context) {
 
   var taskid uint;
 
+  mark_finished_time_firstly_switch := 0
+  var mark_finished_time_firstly_timestamp = ""
+// give timestamp for marking time firstly the task finished 
+if status!="unfinished"{
+  // fmt.Println(clientfinishtime)
+  loc, _ := time.LoadLocation("Asia/Shanghai")
+  mark_finished_time_firstly_switch = 1
+  mark_finished_time_firstly_timestamp =  time.Now().In(loc).Format("2006-01-02T15:04:05")
+}
+
+
 
 if status!="unfinished"{
   clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
@@ -586,7 +599,9 @@ if status!="unfinished"{
     fmt.Println(len(inboxlist.Array()))
    if len(inboxlist.Array())>1{
      for _,inbox := range inboxlist.Array(){
-      task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      // Mark_finished_time_switch int  `json:"mark_finished_time_switch"` 
+     
+      task := Tasks{Note:note,Ifdissect:ifdissect,Mark_finished_time_switch:mark_finished_time_firstly_switch,First_finish_timestamp:mark_finished_time_firstly_timestamp,Priority:task_priority,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
       fmt.Println("i am testing the id return")
       fmt.Println(task.ID)
@@ -594,7 +609,7 @@ if status!="unfinished"{
      }   
 
    }else{
-    task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+    task := Tasks{Note:note,Ifdissect:ifdissect,Mark_finished_time_switch:mark_finished_time_firstly_switch,First_finish_timestamp:mark_finished_time_firstly_timestamp,Priority:task_priority,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
     db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
@@ -611,7 +626,7 @@ taskid = task.ID
     if len(inboxlist.Array())>1{
       for _,inbox := range inboxlist.Array(){
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
-       task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Goalcoefficient:goalcoefficient,Goal:goal,Devotedtime:int(devotedtime),Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Note:note,Mark_finished_time_switch:mark_finished_time_firstly_switch,First_finish_timestamp:mark_finished_time_firstly_timestamp,Ifdissect:ifdissect,Priority:task_priority,Goalcoefficient:goalcoefficient,Goal:goal,Devotedtime:int(devotedtime),Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        db.Create(&task).Scan(&task)
        fmt.Println("i am testing the id return")
        fmt.Println(task.ID)
@@ -619,7 +634,7 @@ taskid = task.ID
       }   
  
     }else{
-      task := Tasks{Note:note,Ifdissect:ifdissect,Priority:task_priority,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+      task := Tasks{Note:note,Mark_finished_time_switch:mark_finished_time_firstly_switch,First_finish_timestamp:mark_finished_time_firstly_timestamp,Ifdissect:ifdissect,Priority:task_priority,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
      db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
@@ -642,7 +657,7 @@ taskid = task.ID
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:finishtime.Format("060102"),Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
        //db.Create(&task).Scan(&task)
-       task := Tasks{Task:inbox.String(),User:email,Priority:task_priority,Finishtime:"unfinished",Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+       task := Tasks{Task:inbox.String(),User:email,Mark_finished_time_switch:mark_finished_time_firstly_switch,First_finish_timestamp:mark_finished_time_firstly_timestamp,Priority:task_priority,Finishtime:"unfinished",Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Goal:goal,Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
       db.Create(&task).Scan(&task)
        
        
@@ -652,7 +667,7 @@ taskid = task.ID
       }   
  
     }else{
-  task := Tasks{Task:inbox,User:email,Priority:task_priority,Finishtime:"unfinished",Goal:goal,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
+  task := Tasks{Task:inbox,User:email,Mark_finished_time_switch:mark_finished_time_firstly_switch,First_finish_timestamp:mark_finished_time_firstly_timestamp,Priority:task_priority,Finishtime:"unfinished",Goal:goal,Goalcoefficient:goalcoefficient,Devotedtime:int(devotedtime),Status:status,Email:email,Place:place,Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
   db.Create(&task).Scan(&task)
      fmt.Println("i am testing the id return")
     fmt.Println(task.ID)
@@ -884,6 +899,21 @@ taskid = task.ID
 fmt.Println("-----------i am printing -----status-------------")
 fmt.Println(status)
 fmt.Println("-----------i am printing -----status-------------")
+  
+
+
+//if the task fisrtly finished,update the mark switch and mark  the time stamp
+if status!="unfinished"{
+  if task.Mark_finished_time_switch == 0{
+    // Mark_finished_time_switch int  `json:"mark_finished_time_switch"` 
+    // First_finish_timestamp float64   `json:"First_finish_timestamp"`
+    loc, _ := time.LoadLocation("Asia/Shanghai")
+    // mark_finished_time_firstly_switch = 1
+    mark_finished_time_firstly_timestamp :=  time.Now().In(loc).Format("2006-01-02T15:04:05")
+    db.Model(&task).Update("Mark_finished_time_switch", 1)
+    db.Model(&task).Update("First_finish_timestamp", mark_finished_time_firstly_timestamp)
+  }
+}
 
 
  if status!="unfinished"{
@@ -898,7 +928,7 @@ fmt.Println("-----------i am printing -----status-------------")
       //db.Model(&task).Update("AccurateFinishtime",now1.String()
 
 
-      db.Model(&task).Update("Status", status)
+     db.Model(&task).Update("Status", status)
 
 Check_reviewdaylog(now.Format("060102"),email)
 return_info:= Compute_singleday(now.Format("060102"),email)

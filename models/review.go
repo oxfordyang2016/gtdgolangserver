@@ -409,6 +409,19 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
 
 
 
+// func Task_execute_priority_table_review(date string,email string) float64{
+//   //get the finished task in the day by the accurate finished time
+//   var tasks_finished []Tasks
+//   db.Where("Email= ?", email).Where("finishtime =  ?", date).Order("id desc").Find(&tasks_finished)
+  
+//   //get the optimal excute order
+//   var tasks_planed []Tasks
+//   db.Where("Email= ?", email).Where("plantime =  ?", date).Order("id desc").Find(&tasks_finished)
+
+//   return 0.1
+// }
+
+
 
 
 
@@ -749,6 +762,25 @@ if plannedtask_count !=0 {
 }
  fmt.Println(plannedtask_same_with_finished_count)
 fmt.Println(planobey_coffient)
+
+
+
+
+//--------the plan priority task order finishd----------------
+// var priority_execute_coffient = 0.1
+// if plannedtask_count !=0 {
+//   planobey_coffient = float64(plannedtask_same_with_finished_count)/float64(plannedtask_count)
+//   fmt.Println(planobey_coffient)
+//   if plannedtask_count ==0{
+//     planobey_coffient = 0.2
+//   }
+// }
+//  fmt.Println(plannedtask_same_with_finished_count)
+// fmt.Println(planobey_coffient)
+
+
+
+
 
 
 
