@@ -99,12 +99,13 @@ func Updategoal(c *gin.Context) {
 	fmt.Println(emailcookie.Value)
 	email:=emailcookie.Value
 	goal := gjson.Get(reqBody, "goal").String()
+	fmt.Printf("---goal is------%s-----\n",goal)
 	goalcode := gjson.Get(reqBody, "goalcode").String()
 	priority:= gjson.Get(reqBody, "priority").Int()
 	var goalindb  Goalfordbs
 	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
-	if priority != 0  {db.Model(&goalindb).Update("Priority", int(priority)) }
-	if goal != "unspecified"{db.Model(&goalindb).Update("Name", goal)}
+	if priority != -1  {db.Model(&goalindb).Update("Priority", int(priority)) }
+	if goal != "unspecified"{if goal!= "nocontent"{db.Model(&goalindb).Update("Name", goal)}}
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK })
 }
 

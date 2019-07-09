@@ -948,8 +948,8 @@ fmt.Println(return_info)
     fmt.Println("---------------i am confed in unfeid  even if user only update the one part the algo will update the score------------------------------")
     db.Model(&task).Update("Status", status)
 
-Check_reviewdaylog(now.Format("060102"),email)
-return_info:= Compute_singleday(now.Format("060102"),email)
+   Check_reviewdaylog(now.Format("060102"),email)
+   return_info:= Compute_singleday(now.Format("060102"),email)
 fmt.Println(return_info)
 
   } 

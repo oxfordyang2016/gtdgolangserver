@@ -14,7 +14,8 @@ import (
 //_ "github.com/jinzhu/gorm/dialects/mysql"
 _ "github.com/jinzhu/gorm/dialects/postgres"
 _ "github.com/lib/pq"
-
+"github.com/bradfitz/slice"
+"math"
 "github.com/tidwall/gjson"
 
 )
@@ -404,22 +405,114 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
 
 
 
+func pow(x, n int) int {
+  ret := 1 // 结果初始为0次方的值，整数0次方为1。如果是矩阵，则为单元矩阵。
+  for n != 0 {
+      if n%2 != 0 {
+          ret = ret * x
+      }
+      n /= 2
+      x = x * x
+  }
+  return ret
+}
+// --------------------- 
+// 作者：陈鹏万里 
+// 来源：CSDN 
+// 原文：https://blog.csdn.net/qq245671051/article/details/70342047 
+// 版权声明：本文为博主原创文章，转载请附上博文链接！
 
 
 
 
-
-// func Task_execute_priority_table_review(date string,email string) float64{
-//   //get the finished task in the day by the accurate finished time
-//   var tasks_finished []Tasks
-//   db.Where("Email= ?", email).Where("finishtime =  ?", date).Order("id desc").Find(&tasks_finished)
+func Task_execute_priority_table_review(date string,email string) float64{
+  //get the finished task in the day by the accurate finished time
+  var tasks_finished_pure []Tasks
+  db.Where("Email= ?", email).Where("plantime =  ?", date).Where("finishtime =  ?", date).Order("first_finish_timestamp").Find(&tasks_finished_pure)
   
-//   //get the optimal excute order
-//   var tasks_planed []Tasks
-//   db.Where("Email= ?", email).Where("plantime =  ?", date).Order("id desc").Find(&tasks_finished)
+  var year = "20"+date[0:2]
+  var month = date[2:4]
+  var day = date[4:6]
+  
+  layout := year+"-"+month+"-"+day+"T11:00:01"
+  fmt.Printf("-------lay out is %s------\n",layout)
+  t, err := time.Parse("2006-01-02T15:04:05", layout)
+  if err != nil {
+      fmt.Println(err)
+  }
+  var  time_pivot =  t.Unix()
+  
+  fmt.Println(time_pivot)
+   
+  //I am about to reorder the tasks completed before ten o'clock.
+  var tasks_finished []Tasks
+  var task_finished_before_10am []Tasks
+  var task_finished_after_10am  []Tasks
+   // time.Now().UnixNano()
+   //https://stackoverflow.com/questions/24122821/go-golang-time-now-unixnano-convert-to-milliseconds
+  for _,task  :=range tasks_finished_pure{
+    t, _ := time.Parse("2006-01-02T15:04:05", task.First_finish_timestamp)
+    fmt.Println("-------******---------")
+    fmt.Println(task.First_finish_timestamp)
+    fmt.Println(time_pivot)
+    fmt.Println(t.Unix())
+    if t.Unix() < time_pivot{
+      task_finished_before_10am =  append(task_finished_before_10am,task)
+    }else{
+      task_finished_after_10am =  append(task_finished_after_10am,task)
+    }
+  }
+  //slice sort
+  slice.Sort(task_finished_before_10am[:], func(i, j int) bool {
+    return task_finished_before_10am[i].Priority > task_finished_before_10am[j].Priority
+}) 
 
-//   return 0.1
-// }
+
+
+//https://stackoverflow.com/questions/16248241/concatenate-two-slices-in-go/29688973
+   //tasks_finished = task_finished_before_10am + task_finished_after_10am 
+  tasks_finished =  append(tasks_finished, append(task_finished_before_10am, task_finished_after_10am...)...)
+
+  
+  //get the optimal excute order
+  var tasks_planed []Tasks
+  db.Where("Email= ?", email).Where("plantime =  ?", date).Order("priority").Find(&tasks_planed)
+  fmt.Printf("-----------------the planed tasks-----%d---------\n",len(tasks_planed))
+  var optimal_order_by_paln = 0.0
+  var optiaml_order = ""
+  for i,task :=range tasks_planed{
+     optiaml_order =  optiaml_order + strconv.Itoa(task.Priority)
+     optimal_order_by_paln = optimal_order_by_paln + float64(task.Priority)*math.Pow10(i)
+  }
+  //get the real execute order
+  var real_order_by_execute = 0.0
+  var real_order = ""
+  for i,task :=range tasks_finished{
+    real_order =  real_order + strconv.Itoa(task.Priority)
+    real_order_by_execute = real_order_by_execute + float64(task.Priority)*math.Pow10(i)
+ }
+
+ var gap_between_reality_and_ideal = len(tasks_planed) - len(tasks_finished)
+
+ real_order_by_execute = real_order_by_execute*math.Pow10(gap_between_reality_and_ideal)  
+fmt.Printf("------------------------------------------------\n")
+fmt.Println(gap_between_reality_and_ideal)
+fmt.Printf("real order include justify is %s \n",real_order)
+fmt.Printf("optiaml order is %s \n",optiaml_order)
+fmt.Println(time_pivot)
+fmt.Println(tasks_finished_pure)
+fmt.Println(task_finished_before_10am)
+fmt.Println(task_finished_after_10am)
+fmt.Println(tasks_finished)
+fmt.Printf("optiaml order score is %f",optimal_order_by_paln)
+fmt.Printf("real order is score is %f",real_order_by_execute)
+fmt.Printf("------------------------------------------------\n")
+
+ 
+var  task_execute_priority_table_review float64 = 0.1
+task_execute_priority_table_review = float64(real_order_by_execute)/float64(optimal_order_by_paln)
+return task_execute_priority_table_review
+}
 
 
 
@@ -767,7 +860,7 @@ fmt.Println(planobey_coffient)
 
 
 //--------the plan priority task order finishd----------------
-// var priority_execute_coffient = 0.1
+var priority_execute_coffient = Task_execute_priority_table_review(date,email)
 // if plannedtask_count !=0 {
 //   planobey_coffient = float64(plannedtask_same_with_finished_count)/float64(plannedtask_count)
 //   fmt.Println(planobey_coffient)
@@ -807,9 +900,13 @@ if count_makeplanfortomorrow == 0{
 }
 fmt.Println(makeplanfortomorrow_coffient)
 
+if priority_execute_coffient < 0.1 {
+  priority_execute_coffient = 0.1
+}
+
 
 //-----------------------------------everygoal score---------------------------------
-total_score = float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
+total_score = priority_execute_coffient*float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
 
 fmt.Println("-------------alll kinds of coeffient is fellowing------------")
 fmt.Printf("the pain coeffient %f\n",pain_coeffient)
@@ -817,6 +914,7 @@ fmt.Printf("the plan obey coeffient %f\n",planobey_coffient)
 fmt.Printf("the diffcult coeffient %f\n",difficult_coeffient)
 fmt.Printf("make plan for tomorrow  coeffient %f\n",makeplanfortomorrow_coffient)
 fmt.Printf("total score is  %f\n",total_score)
+fmt.Printf("task execute coeffient  %f\n",priority_execute_coffient)
 fmt.Println("-------------alll kinds of coeffient is above------------")
 
 
