@@ -38,6 +38,7 @@ Goalfordbs  struct{
 
 Goalsincludetasks struct{
 	Name  string
+	Devotedtime int 
 	Alltasksingoal    []Tasks
 
 }	
@@ -247,20 +248,22 @@ func Goalsjson(c *gin.Context) {
 	   
 	   
 	   alltasks_ingoal:=make(map[string] []Tasks)
-
+	   devotedtime_for_goal:=make(map[string] int)
 	
     
 	   for _,item :=range tasks{
 		   if item.Goal == ""{
 			alltasks_ingoal["no goal"]=append(alltasks_ingoal["no goal"],item)
+			devotedtime_for_goal["no goal"] = devotedtime_for_goal["no goal"] + item.Devotedtime
 		   }else{
 			alltasks_ingoal[item.Goal]=append(alltasks_ingoal[item.Goal],item)
+			devotedtime_for_goal[item.Goal] = devotedtime_for_goal[item.Goal] + item.Devotedtime
 		   }
 		
 	 }
 	 var allgoalsonlyincludetasks []Goalsincludetasks
 	 for k,v:= range alltasks_ingoal{
-		 allgoalsonlyincludetasks = append(allgoalsonlyincludetasks,Goalsincludetasks{k,v})
+		 allgoalsonlyincludetasks = append(allgoalsonlyincludetasks,Goalsincludetasks{Name:k,Devotedtime:devotedtime_for_goal[k],Alltasksingoal:v})
 
 	 }
 	 fmt.Println("========i am here 1========")
