@@ -187,8 +187,8 @@ func Goalsystem(c *gin.Context) {
 
 
 func Goalsjson(c *gin.Context) {
-
-	//the algorithm can be upgrade
+   
+ 	//the algorithm can be upgrade
 				//i use email as identifier
 			  //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
 		emailcookie,_:=c.Request.Cookie("email")
@@ -202,13 +202,31 @@ func Goalsjson(c *gin.Context) {
 	   today :=  time.Now().In(loc).Format("060102")
 	   tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
        //db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime in (?)", []string{today, tomorrow}).Order("id desc").Find(&tasks)
-	   statusbool:=c.Query("statusbool")  
+	   statusbool:=c.Query("statusbool")
+	   time_range := c.Request.Header.Get("time_range")
+	//    get   all days in this week or month
+	   week_day := Getweekday()  
+	   month_day := Getmonthday() 
 	   if statusbool =="yes"{
-		db.Where("Email= ?", email).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
+		  if time_range == "week"{
+			db.Where("Email= ?", email).Where("finishtime in (?)", week_day).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
+		  }else if  time_range =="month"{
+			db.Where("Email= ?", email).Where("finishtime in (?)", month_day).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
+		  }else{
+			db.Where("Email= ?", email).Where("finishtime in (?)", week_day).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
+		  }
+		
 	   }else{
-		db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime", []string{today,tomorrow}).Order("id desc").Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
-	   }
-	    
+		if time_range == "week"{
+		db.Where("Email= ?", email).Where("finishtime in (?)",week_day).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime", []string{today,tomorrow}).Order("id desc").Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
+		}else if time_range == "month"{
+			db.Where("Email= ?", email).Where("finishtime in (?)",month_day).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime", []string{today,tomorrow}).Order("id desc").Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
+		}else{
+			db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime", []string{today,tomorrow}).Order("id desc").Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
+		}  
+	}
+		
+	   
 	   client:= c.Request.Header.Get("client")
 	   querytype:=c.Query("type")
 	   

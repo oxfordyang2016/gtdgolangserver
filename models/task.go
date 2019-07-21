@@ -1661,52 +1661,6 @@ return alleverydays[i].Name > alleverydays[j].Name
 
 
 
-    func  Sort_tasksbyday(tasks []Tasks) []Everyday {
-      alldays:=make(map[string] []Tasks)
-      for _,item :=range tasks{
-        // alldays[item.Plantime]=append(alldays[item.Plantime],item)
-  if item.Status!="unfinished"{
-    if item.Status!="unfinish"{
-    alldays[item.Finishtime]=append(alldays[item.Finishtime],item)}}
-      }
-      var alleverydays []Everyday
-      var daybefore180119 Everyday
-      var forgotten  Everyday
-      for k,v := range alldays{
-       if k!="180119before"&&k!="forgotten"{
-         alleverydays =append(alleverydays,Everyday{k,v})
-      }
-         if k=="180119before"{
-           daybefore180119 = Everyday{k,v}
-         }
-         if k=="forgotten"{
-         forgotten  = Everyday{k,v}
-         
-}
-
-
-
-}
-
-//https://stackoverflow.com/questions/28999735/what-is-the-shortest-way-to-simply-sort-an-array-of-structs-by-arbitrary-field
-
-      slice.Sort(alleverydays, func(i, j int) bool {
-return alleverydays[i].Name > alleverydays[j].Name
-})
-    if daybefore180119.Name !=""{
-      alleverydays =append(alleverydays,daybefore180119)
-    }
-     if forgotten.Name !=""{
-      alleverydays =append(alleverydays,forgotten)
-     }
-
-
-     return alleverydays
-    }
-
-
-
-
 
 
 
