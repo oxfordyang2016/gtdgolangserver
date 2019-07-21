@@ -241,6 +241,8 @@ func Goalsjson(c *gin.Context) {
 	   fmt.Println("+++++++client is++++++++")
 	   fmt.Println(querytype)
 	   fmt.Println(client)
+           fmt.Printf("time gap is %s",time_range)
+           fmt.Println(tasks)
 	  fmt.Println("+++++++client is++++++++")
 	  //use maps to aviod to design complex algorithm
 
