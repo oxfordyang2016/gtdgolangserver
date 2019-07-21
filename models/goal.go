@@ -203,10 +203,10 @@ func Goalsjson(c *gin.Context) {
 	   tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
        //db.Where("Email= ?", email).Where("status in (?)", []string{"unfinish", "unfinished"}).Not("plantime in (?)", []string{today, tomorrow}).Order("id desc").Find(&tasks)
 	   statusbool:=c.Query("statusbool")
-	   time_range := c.Request.Header.Get("time_range")
-
-	   fmt.Println(time_range)
-	   fmt.Println("status bool is %s",statusbool)
+	   //https://blog.csdn.net/u013474436/article/details/71516649
+	   time_range := c.Request.Header.Get("time-range")
+	//    fmt.Println(time_range)
+	//    fmt.Println("status bool is ",statusbool)
 	//    get   all days in this week or month
 	   week_day := Getweekday()  
 	   month_day := Getmonthday() 
@@ -215,7 +215,7 @@ func Goalsjson(c *gin.Context) {
 		  if time_range == "week"{
 			 
 			db.Where("Email= ?", email).Where("finishtime in (?)", week_day).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
-		  }else if  time_range =="month"{
+		  }else if  time_range == "month"{
 			db.Where("Email= ?", email).Where("finishtime in (?)", month_day).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
 		  }else{
 			db.Where("Email= ?", email).Where("status in (?)", []string{"finished", "finish"}).Not("goal", []string{"no goal",""}).Order("id desc").Find(&tasks)
@@ -241,6 +241,7 @@ func Goalsjson(c *gin.Context) {
 	   fmt.Println("+++++++client is++++++++")
 	   fmt.Println(querytype)
 	   fmt.Println(client)
+	//    fmt.Println(tasks)
 	  fmt.Println("+++++++client is++++++++")
 	  //use maps to aviod to design complex algorithm
 
