@@ -414,7 +414,7 @@ func CreatetaskbyJSON(c *gin.Context) {
 
     //---------------get body string-------------
     //https://github.com/gin-gonic/gin/issues/1295
-     buf := make([]byte, 1024)
+     buf := make([]byte, 1000000)
         num, _ := c.Request.Body.Read(buf)
         reqBody := string(buf[0:num])
    //--------------using gjson to parse------------
@@ -708,7 +708,7 @@ taskid = task.ID
 
     //---------------get body string-------------
     //https://github.com/gin-gonic/gin/issues/1295
-     buf := make([]byte, 1024)
+     buf := make([]byte, 1024000)
 	   num, _ := c.Request.Body.Read(buf)
 	   reqBody := string(buf[0:num])
    //--------------using gjson to parse------------
