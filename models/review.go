@@ -62,12 +62,16 @@ type Reviewofday  struct {
   Date string   `json:"date"`
   Email    string   `json:"email"`     
   Details string `json:"details" sql:"type:text;"`
-
    }
 
 
- 
-
+ //add coeffient   get table
+  //  type Reviewofday  struct {
+  //   gorm.Model
+  //   Date string   `json:"date"`
+  //   Email    string   `json:"email"`     
+  //   Details string `json:"details" sql:"type:text;"`
+  //    }
 
 
 
@@ -571,6 +575,7 @@ var serviceforgoal_score,onlystartatask_score float64 = 0,0
 var atomadifficulttask_score,alwaysprofit_score float64 = 0,0
 var doanimportantthingearly_score,markataskimmediately_score float64 = 0,0
 var challengetag_score float64= 0
+var atomtag_score float64= 0
 db.Where("Email= ?", email).Where("finishtime =  ?", date).Order("id desc").Find(&tasks)
 
 var taskcount_score float64
@@ -634,7 +639,7 @@ fmt.Println(countofgivenuptasks)
 
  var pain_coeffient float64 = 0.5
  var difficult_coeffient float64 = 0.5
- 
+ var atom_coffient = 0.5 
 
 
  for _,item :=range tasks{
@@ -646,6 +651,17 @@ challengetag_score  = float64((challengetag_score + 5))*item.Goalcoefficient
 }
 
 
+
+//this  tom tag work for  tasks tagged with atom and finished!
+if  atomtag := gjson.Get(jsonoftasktags, "atomtag").String();atomtag=="yes"{
+  atomtag_score  = float64((atomtag_score + 5))*item.Goalcoefficient
+  if atom_coffient < 1{
+    atom_coffient =  atom_coffient + 0.5
+  }else{
+    atom_coffient =  atom_coffient + 0.2
+  }
+  
+  }
 
 
 var json = item.Reviewdatas
@@ -828,7 +844,7 @@ learntechuse_score = float64(learntechuse_score +5)*item.Goalcoefficient
 
 
 
-total_score:=acceptfactandseektruth_score+dfs_score+useprinciple_score+attackactively_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score + brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
+total_score:=acceptfactandseektruth_score+dfs_score+useprinciple_score+attackactively_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score +atomtag_score+ brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
 
 
 
@@ -923,7 +939,7 @@ if priority_execute_coffient < 0.1 {
 
 
 //-----------------------------------everygoal score---------------------------------
-total_score = priority_execute_coffient*float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
+total_score = atom_coffient*priority_execute_coffient*float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
 
 fmt.Println("-------------alll kinds of coeffient is fellowing------------")
 fmt.Printf("the pain coeffient %f\n",pain_coeffient)
@@ -932,6 +948,7 @@ fmt.Printf("the diffcult coeffient %f\n",difficult_coeffient)
 fmt.Printf("make plan for tomorrow  coeffient %f\n",makeplanfortomorrow_coffient)
 fmt.Printf("total score is  %f\n",total_score)
 fmt.Printf("task execute coeffient  %f\n",priority_execute_coffient)
+fmt.Printf("atom coeffient  %f\n",atom_coffient)
 fmt.Println("-------------alll kinds of coeffient is above------------")
 
 
