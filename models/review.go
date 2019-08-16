@@ -52,6 +52,7 @@ type Reviewdatadetail struct{
   Acceptpain                float64 `json:"acceptpain"`
   Solveakeyproblem                float64 `json:"solveakeyproblem"`
   Depthfirstsearch                float64 `json:"depthfirstsearch"`
+  Noflinch                float64 `json:"noflinch"`
 }
 
 
@@ -110,7 +111,8 @@ Buildframeandprinciple    int `json:"buildframeandprinciple"`
 Acceptfactandseektruth    int `json:"acceptfactandseektruth"`
 Acceptpain                int `json:"acceptpain"`  
 Solveakeyproblem                int `json:"solveakeyproblem"` 
-Depthfirstsearch                int `json:"depthfirstsearch"`  
+Depthfirstsearch                int `json:"depthfirstsearch"`
+Noflinch                   int  `json:"noflinch"`  
 }
 
 
@@ -608,12 +610,12 @@ var solveakeyproblem_score float64= 0
 var solveakeyproblem_number = 0
 var attackactively_number = 0
 var attackactively_score float64= 0
-
 var useprinciple_number = 0
 var useprinciple_score float64= 0
 var dfs_number = 0
 var dfs_score float64= 0
-
+var noflinch_number = 0
+var noflinch_score float64= 0
 
 
 
@@ -687,14 +689,28 @@ if  buildframeandprinciple_from_client := gjson.Get(json, "buildframeandprincipl
      } 
 
    
+     if  noflinch := gjson.Get(json, "noflinch").String();noflinch=="yes"{
+      //fmt.Println(brainuse)
+      noflinch_score = float64(noflinch_score  +  50)*(item.Goalcoefficient)
+      noflinch_number = noflinch_number +1
+       } 
+    
+
+
+  
+  
+
+
+     if  acceptfact_from_client := gjson.Get(json, "acceptfactandseektruth").String();acceptfact_from_client=="yes"{
+      //fmt.Println(brainuse)
+      acceptfactandseektruth_score = float64(acceptfactandseektruth_score  +  10)*(item.Goalcoefficient)
+      acceptfactandseektruth_number = acceptfactandseektruth_number +1
+       } 
+   
 
 
 
-   if  acceptfact_from_client := gjson.Get(json, "acceptfactandseektruth").String();acceptfact_from_client=="yes"{
-    //fmt.Println(brainuse)
-    acceptfactandseektruth_score = float64(acceptfactandseektruth_score  +  10)*(item.Goalcoefficient)
-    acceptfactandseektruth_number = acceptfactandseektruth_number +1
-     } 
+
 
 
      if  attackactively_from_client := gjson.Get(json, "attackactively").String();attackactively_from_client=="yes"{
@@ -722,6 +738,9 @@ if  makeuseofthings := gjson.Get(json, "makeuseofthings").String();makeuseofthin
 makeuseofthethingsuhavelearned_score =  float64( makeuseofthethingsuhavelearned_score + 5)*item.Goalcoefficient
 makeuseofthethingsuhavelearned_number = makeuseofthethingsuhavelearned_number +1
  }
+
+
+
 
 
 if  doanimportantthingearly := gjson.Get(json, "doanimportantthingearly").String();doanimportantthingearly =="yes"{
@@ -937,9 +956,13 @@ if priority_execute_coffient < 0.1 {
   priority_execute_coffient = 0.1
 }
 
+var noflinch_coefficient = 0.5 
+if noflinch_number !=0{
+  noflinch_coefficient = noflinch_coefficient*float64(noflinch_number)*2.0+ noflinch_coefficient
+}
 
 //-----------------------------------everygoal score---------------------------------
-total_score = atom_coffient*priority_execute_coffient*float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
+total_score = noflinch_coefficient*atom_coffient*priority_execute_coffient*float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
 
 fmt.Println("-------------alll kinds of coeffient is fellowing------------")
 fmt.Printf("the pain coeffient %f\n",pain_coeffient)
@@ -949,11 +972,12 @@ fmt.Printf("make plan for tomorrow  coeffient %f\n",makeplanfortomorrow_coffient
 fmt.Printf("total score is  %f\n",total_score)
 fmt.Printf("task execute coeffient  %f\n",priority_execute_coffient)
 fmt.Printf("atom coeffient  %f\n",atom_coffient)
+fmt.Printf("no flinch coeffient  %f\n",noflinch_coefficient)
 fmt.Println("-------------alll kinds of coeffient is above------------")
 
 
-review := &Reviewdatadetail{Totalscore:total_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
-reviewfortimecount_from_client := Reviewfortimescount{Email:email,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
+review := &Reviewdatadetail{Totalscore:total_score,Noflinch:noflinch_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
+reviewfortimecount_from_client := Reviewfortimescount{Email:email,Noflinch:noflinch_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 
