@@ -42,6 +42,7 @@ type (
     //gorm.Model this has set id ,cautous!!!http://jinzhu.me/gorm/models.html
 		//ID        uint   `json:"id"`
     ID        uint    `gorm:"primary_key"`
+    Userid    int    `json:"userid"`
     Task      string   `json:"task"`
     User     string `json:"user"`
     Email    string   `json:"email"`
