@@ -17,7 +17,7 @@ _ "github.com/lib/pq"
 "github.com/bradfitz/slice"
 "math"
 "github.com/tidwall/gjson"
-
+"github.com/gomodule/redigo/redis"
 )
 
 
@@ -865,8 +865,17 @@ learntechuse_score = float64(learntechuse_score +5)*item.Goalcoefficient
 
 total_score:=acceptfactandseektruth_score+dfs_score+useprinciple_score+attackactively_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score +atomtag_score+ brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
 
+fmt.Println("--------之前的成绩----")
+fmt.Println(total_score)
 
+r, err := redis.Int(redisDBcon.Do("PUBLISH", "channel_1",total_score))
 
+fmt.Println(r)
+if err != nil{
+  fmt.Println(err)
+}
+
+fmt.Println("-------voted to shanghai -----------")
 //----------------------------------------------------------plan obey part------------------
 //plan obey coeffient
 //the part to judge how self-reglation you r
@@ -877,7 +886,7 @@ db.Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","give
 // var tasksbydays []Everyday
 
 // if counts == -1{
-//   tasksbydays = alleverydays[1:2]
+//   tasksbydays = alleverydays[1:2]      
 // }else{
 //   tasksbydays = alleverydays[0:counts]
 // }
