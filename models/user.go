@@ -9,10 +9,12 @@ import (
 _ "github.com/jinzhu/gorm/dialects/mysql"
 _ "github.com/jinzhu/gorm/dialects/postgres"
 _ "github.com/lib/pq"
+"github.com/gomodule/redigo/redis"
 
 )
 var Yangming int
 var db *gorm.DB
+var redisDBcon  redis.Conn
 type (
 	//when username use lowcase,the db will not include the items
 	Accounts struct {
@@ -56,6 +58,16 @@ func init() {
 	db.AutoMigrate(&Accounts{},&TodoModel{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{})
 //http://jinzhu.me/gorm/database.html#migration delete database table column
  //db.Model(&Tasks{}).DropColumn("Uer")
+
+   redisDBcon, err = redis.Dial("tcp", "localhost:6379")
+   if err != nil {
+	 panic(err)
+   }
+
+
+ // パブリッシュ
+ 
+
 }
 
 
