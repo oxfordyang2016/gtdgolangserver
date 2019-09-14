@@ -870,10 +870,6 @@ fmt.Println(total_score)
 
 
 
-fmt.Println(r)
-if err != nil{
-  fmt.Println(err)
-}
 
 fmt.Println("-------voted to shanghai -----------")
 //----------------------------------------------------------plan obey part------------------
@@ -1006,6 +1002,14 @@ fmt.Println("-------------i am pritning reviewstring---------------")
 
 
 r, err := redis.Int(redisDBcon.Do("PUBLISH", "channel_1",total_score))
+
+
+fmt.Println(r)
+if err != nil{
+  fmt.Println(err)
+}
+
+
 var reviewday Reviewofday
 var reviewfortimecount Reviewfortimescount
 db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewday)
