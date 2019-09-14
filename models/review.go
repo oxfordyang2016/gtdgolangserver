@@ -868,7 +868,7 @@ total_score:=acceptfactandseektruth_score+dfs_score+useprinciple_score+attackact
 fmt.Println("--------之前的成绩----")
 fmt.Println(total_score)
 
-r, err := redis.Int(redisDBcon.Do("PUBLISH", "channel_1",total_score))
+
 
 fmt.Println(r)
 if err != nil{
@@ -1003,6 +1003,9 @@ fmt.Printf("%+v\n", review)
 fmt.Println(reviewstring)
 fmt.Println("-------------i am pritning reviewstring---------------")
 
+
+
+r, err := redis.Int(redisDBcon.Do("PUBLISH", "channel_1",total_score))
 var reviewday Reviewofday
 var reviewfortimecount Reviewfortimescount
 db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewday)
