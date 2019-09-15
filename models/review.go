@@ -1001,7 +1001,18 @@ fmt.Println("-------------i am pritning reviewstring---------------")
 
 
 fmt.Println(total_score)
-r, err := redis.Int(redisDBcon.Do("PUBLISH", "channel_1",total_score))
+
+total_score_float_precision := fmt.Sprintf("%.4f", total_score)
+set_status, err1 := redis.Int(redisDBcon.Do("SET", "initscore",total_score_float_precision))
+
+fmt.Println(set_status)
+if err1 != nil{
+  fmt.Println(err)
+}
+
+
+r, err := redis.Int(redisDBcon.Do("PUBLISH", "channel_1",total_score_float_precision))
+
 fmt.Println(r)
 if err != nil{
   fmt.Println(err)
