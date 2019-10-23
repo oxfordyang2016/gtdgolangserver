@@ -406,6 +406,27 @@ func getindex(s string) int{
 
 
 
+// createTodo add a new todo
+func Createtaskfromsiri(c *gin.Context) {
+ fmt.Println("+++++++++++++++++++ i am invoked in create task++++++++++++++++++++++")
+
+    //---------------get body string-------------
+    //https://github.com/gin-gonic/gin/issues/1295
+     // buf := make([]byte, 1000000)
+     //    num, _ := c.Request.Body.Read(buf)
+     //    reqBody := string(buf[0:num])
+   //--------------using gjson to parse------------
+   //https://github.com/tidwall/gjson
+  email:="yang756260386@gmail.com"
+  inbox := c.Query("task")  
+  task := Tasks{Task:inbox,User:email}
+  db.Create(&task).Scan(&task)
+  c.JSON(200, gin.H{
+    "status":  "posted",
+    "message": "u have uploaded info,please come on!",
+  })
+        }
+
 
 
 
@@ -750,11 +771,9 @@ taskid = task.ID
     fmt.Println(inbox)
     
    // id := c.PostForm("id")
-      
     id := gjson.Get(reqBody, "id").String()
-    
-
-
+    fmt.Println("-------------yangming------------------")
+    fmt.Println(reflect.TypeOf(id))
     project := gjson.Get(reqBody, "project").String()
     finishtime := gjson.Get(reqBody, "finishtime").String()
     if finishtime == "y"{finishtime = "yesterday"}

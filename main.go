@@ -94,7 +94,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   v1.GET("/healthlist",Healthlistjson)
   v1.GET("/financelist",Financelistjson)
   v1.GET("/projectsjson",Projectsjson)
- 
+  v1.GET("/createtaskfromsiri",Createtaskfromsiri) 
   v1.GET("/reviewsjson",Reviewsjson)
   v1.GET("/reviewdaydatajson", Reviewalgorithmjson)  
   v1.GET("/reviewdaydatajsonforios", Reviewalgorithmjsonforios)
