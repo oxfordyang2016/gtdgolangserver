@@ -412,16 +412,43 @@ func Createtaskfromsiri(c *gin.Context) {
 
     //---------------get body string-------------
     //https://github.com/gin-gonic/gin/issues/1295
-     // buf := make([]byte, 1000000)
-     //    num, _ := c.Request.Body.Read(buf)
-     //    reqBody := string(buf[0:num])
+     buf := make([]byte, 1000000)
+        num, _ := c.Request.Body.Read(buf)
+        reqBody := string(buf[0:num])
    //--------------using gjson to parse------------
    //https://github.com/tidwall/gjson
   email:="yang756260386@gmail.com"
-  inbox := c.Query("task")  
-  task := Tasks{Task:inbox,User:email}
-  db.Create(&task).Scan(&task)
-  c.JSON(200, gin.H{
+  inbox := gjson.Get(reqBody, "inbox").String()
+  fmt.Println(inbox)
+  
+
+   plantime := gjson.Get(reqBody, "plantime").String()
+ if strings.Contains(plantime, "today"){
+       // if plantime =="today"{
+      loc, _ := time.LoadLocation("Asia/Shanghai")
+      //plantimeofanotherforamt :=  time.Now().In(loc)
+      //
+      plantime =  time.Now().In(loc).Format("060102")
+    }
+  if strings.Contains(plantime, "tomorrow"){
+     // if plantime  =="tomorrow"{
+      loc, _ := time.LoadLocation("Asia/Shanghai")
+    //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+    plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+    }
+
+
+
+
+task := Tasks{Task:inbox,Status:"unfinished",Email:email,User:email,Plantime:plantime}
+ //db.Create(&task).Scan(&task)
+ db.Create(&task).Scan(&task)
+    fmt.Println("i am testing the id return")
+fmt.Println(task.ID)
+
+
+
+c.JSON(200, gin.H{
     "status":  "posted",
     "message": "u have uploaded info,please come on!",
   })
