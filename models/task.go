@@ -420,7 +420,7 @@ func Createtaskfromsiri(c *gin.Context) {
   email:="yang756260386@gmail.com"
   inbox := gjson.Get(reqBody, "inbox").String()
   fmt.Println(inbox)
-  
+  tasktags := gjson.Get(reqBody, "tasktags").String()
 
    plantime := gjson.Get(reqBody, "plantime").String()
  if strings.Contains(plantime, "today"){
@@ -440,7 +440,7 @@ func Createtaskfromsiri(c *gin.Context) {
 
 
 
-task := Tasks{Task:inbox,Status:"unfinished",Email:email,User:email,Plantime:plantime}
+task := Tasks{Task:inbox,Status:"unfinished",Email:email,User:email,Plantime:plantime,Tasktags:tasktags}
  //db.Create(&task).Scan(&task)
  db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
