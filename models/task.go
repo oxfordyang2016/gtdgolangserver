@@ -440,7 +440,7 @@ clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
 
 
 
-task := Tasks{Task:inbox,Status:"unfinished",Project:"inbox",Finishtime:clientfinishtime,Email:email,User:email,Plantime:plantime,Tasktags:tasktags}
+task := Tasks{Task:inbox,Status:"unfinished",Project:"inbox",Goal:"Fight against fate",Finishtime:clientfinishtime,Email:email,User:email,Plantime:plantime,Tasktags:tasktags}
  //db.Create(&task).Scan(&task)
  db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
