@@ -423,6 +423,9 @@ func Createtaskfromsiri(c *gin.Context) {
   tasktags := gjson.Get(reqBody, "tasktags").String()
 clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
    plantime := gjson.Get(reqBody, "plantime").String()
+
+  client_status := gjson.Get(reqBody, "status").String()
+
  if strings.Contains(plantime, "today"){
        // if plantime =="today"{
       loc, _ := time.LoadLocation("Asia/Shanghai")
@@ -440,7 +443,7 @@ clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
 
 
 
-task := Tasks{Task:inbox,Status:"unfinished",Project:"inbox",Goal:"Fight against fate",Finishtime:clientfinishtime,Email:email,User:email,Plantime:plantime,Tasktags:tasktags}
+task := Tasks{Task:inbox,Status:client_status,Project:"inbox",Goal:"Fight against fate",Finishtime:clientfinishtime,Email:email,User:email,Plantime:plantime,Tasktags:tasktags}
  //db.Create(&task).Scan(&task)
  db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
