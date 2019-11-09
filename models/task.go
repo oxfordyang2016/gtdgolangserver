@@ -417,14 +417,26 @@ func Createtaskfromsiri(c *gin.Context) {
         reqBody := string(buf[0:num])
    //--------------using gjson to parse------------
    //https://github.com/tidwall/gjson
-  email:="yang756260386@gmail.com"
+  
+  //emailcookie,_:=c.Request.Cookie("email")
+  //fmt.Println(emailcookie.Value)
+
+
+email:="yang756260386@gmail.com"
   inbox := gjson.Get(reqBody, "inbox").String()
   fmt.Println(inbox)
   tasktags := gjson.Get(reqBody, "tasktags").String()
 clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
    plantime := gjson.Get(reqBody, "plantime").String()
 
-  client_status := gjson.Get(reqBody, "status").String()
+  client_status := gjson.Get(reqBody, "taskstatus").String()
+
+
+
+   fmt.Println("------------------")
+   fmt.Println(client_status)
+
+
 
  if strings.Contains(plantime, "today"){
        // if plantime =="today"{
@@ -453,7 +465,8 @@ fmt.Println(task.ID)
 
 c.JSON(200, gin.H{
     "status":  "posted",
-    "message": "u have uploaded info,please come on!",
+    "score":3.15, 
+   "message": "u have uploaded info,please come on!",
   })
         }
 
