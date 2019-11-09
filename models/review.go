@@ -567,7 +567,7 @@ if reviewfortimecount.Date!=date{
 
 //compute total_scores of someday
 
-func Compute_singleday(date string,email string) string{
+func Compute_singleday(date string,email string) float64{
 //https://tour.golang.org/basics/10
 fmt.Println("------------ i am here to compute the single day---------------------------")
 var tasks []Tasks
@@ -1028,7 +1028,7 @@ db.Model(&reviewfortimecount).Updates(reviewfortimecount_from_client)
 // db.Model(&reviewfortimecount).Update("Patiencenumber", patiencenumber)
 // db.Model(&reviewfortimecount).Update("Battlewithlowerbrain", battlewithlowerbrainnumber)
 // db.Model(&reviewfortimecount).Update("Usebrain", usebrainnumber)
-return reviewstring
+return total_score
 }
 
 

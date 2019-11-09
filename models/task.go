@@ -461,11 +461,11 @@ task := Tasks{Task:inbox,Status:client_status,Project:"inbox",Goal:"Fight agains
     fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
 
-
+var score =   Compute_singleday(plantime,email)
 
 c.JSON(200, gin.H{
     "status":  "posted",
-    "score":3.15, 
+    "score":score, 
    "message": "u have uploaded info,please come on!",
   })
         }
