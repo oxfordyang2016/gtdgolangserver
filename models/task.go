@@ -468,7 +468,8 @@ if len(plantime)!=6{
           //
           plantime =  time.Now().In(loc).Format("060102")
 }
-
+// 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
+Check_reviewdaylog(plantime,email)
 var score =   Compute_singleday(plantime,email)
 
 c.JSON(200, gin.H{
