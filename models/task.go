@@ -471,6 +471,10 @@ if len(plantime)!=6{
 
 var score =   Compute_singleday(plantime,email)
 
+fmt.Println("真成绩是")
+
+fmt.Println(score)
+
 c.JSON(200, gin.H{
     "status":  "posted",
     "score":score, 
