@@ -1028,6 +1028,9 @@ db.Model(&reviewfortimecount).Updates(reviewfortimecount_from_client)
 // db.Model(&reviewfortimecount).Update("Patiencenumber", patiencenumber)
 // db.Model(&reviewfortimecount).Update("Battlewithlowerbrain", battlewithlowerbrainnumber)
 // db.Model(&reviewfortimecount).Update("Usebrain", usebrainnumber)
+if (total_score <= 0.0) {
+  total_score = 0.01
+}
 return total_score
 }
 

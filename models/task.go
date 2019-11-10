@@ -461,6 +461,14 @@ task := Tasks{Task:inbox,Status:client_status,Project:"inbox",Goal:"Fight agains
     fmt.Println("i am testing the id return")
 fmt.Println(task.ID)
 
+if len(plantime)!=6{
+         // if plantime =="today"{
+          loc, _ := time.LoadLocation("Asia/Shanghai")
+          //plantimeofanotherforamt :=  time.Now().In(loc)
+          //
+          plantime =  time.Now().In(loc).Format("060102")
+}
+
 var score =   Compute_singleday(plantime,email)
 
 c.JSON(200, gin.H{
