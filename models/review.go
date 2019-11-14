@@ -53,6 +53,8 @@ type Reviewdatadetail struct{
   Solveakeyproblem                float64 `json:"solveakeyproblem"`
   Depthfirstsearch                float64 `json:"depthfirstsearch"`
   Noflinch                float64 `json:"noflinch"`
+  Setarecord             float64 `json:"setarecord"`
+  Conquerthefear             float64 `json:"conquerthefear"`
 }
 
 
@@ -112,7 +114,9 @@ Acceptfactandseektruth    int `json:"acceptfactandseektruth"`
 Acceptpain                int `json:"acceptpain"`  
 Solveakeyproblem                int `json:"solveakeyproblem"` 
 Depthfirstsearch                int `json:"depthfirstsearch"`
-Noflinch                   int  `json:"noflinch"`  
+Noflinch                   int  `json:"noflinch"` 
+Setarecord             int `json:"setarecord"`
+Conquerthefear          int `json:"conquerthefear"` 
 }
 
 
@@ -616,9 +620,10 @@ var dfs_number = 0
 var dfs_score float64= 0
 var noflinch_number = 0
 var noflinch_score float64= 0
-
-
-
+var conquerthefear_score float64= 0
+var conquerthefear_number  = 0
+var setarecord_score float64= 0
+var setarecord_number  = 0
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"unfinished","unfinish"}).Count(&countoffinishedtasks)
 
 
@@ -796,6 +801,22 @@ battlewithlowerbrainnumber = battlewithlowerbrainnumber + 1
  }
 
 
+ if  conquerthefear := gjson.Get(json, "conquerthefear").String();conquerthefear=="yes"{
+  conquerthefear_score = float64(conquerthefear_score +50 )*item.Goalcoefficient
+  conquerthefear_number = conquerthefear_number + 1
+   }
+
+
+
+   if  setarecord := gjson.Get(json, "setarecord").String();setarecord=="yes"{
+    setarecord_score = float64(setarecord_score +50 )*item.Goalcoefficient
+    setarecord_number = setarecord_number + 1
+     }
+
+
+
+
+
 if  atomadifficulttask := gjson.Get(json, "atomadifficulttask").String();atomadifficulttask=="yes"{
 atomadifficulttask_score = float64(atomadifficulttask_score +5 )*item.Goalcoefficient
 atomadifficulttask_number = atomadifficulttask_number+1
@@ -863,7 +884,7 @@ learntechuse_score = float64(learntechuse_score +5)*item.Goalcoefficient
 
 
 
-total_score:=acceptfactandseektruth_score+dfs_score+useprinciple_score+attackactively_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score +atomtag_score+ brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
+total_score:=acceptfactandseektruth_score+dfs_score+useprinciple_score+attackactively_score+solveakeyproblem_score+acceptpain_score+buildframeandprinciple_score+conquerthefear_score+setarecord_score+taskcount_score+doanimportantthingearly_score+atomadifficulttask_score+onlystartatask_score+markataskimmediately_score+challengetag_score +atomtag_score+ brainuse_score+alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score+difficultthings_score+threeminutes_score+getlesson_score+learntechuse_score + serviceforgoal_score
 
 fmt.Println("--------之前的成绩----")
 fmt.Println(total_score)
@@ -984,8 +1005,8 @@ if math.IsNaN(total_score){
   total_score = 0.0
 }
 
-review := &Reviewdatadetail{Totalscore:total_score,Noflinch:noflinch_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
-reviewfortimecount_from_client := Reviewfortimescount{Email:email,Noflinch:noflinch_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
+review := &Reviewdatadetail{Totalscore:total_score,Noflinch:noflinch_score,Setarecord:setarecord_score,Conquerthefear:conquerthefear_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
+reviewfortimecount_from_client := Reviewfortimescount{Email:email,Noflinch:noflinch_number,Conquerthefear:conquerthefear_number,Setarecord:setarecord_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 
