@@ -94,10 +94,12 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   v1.GET("/healthlist",Healthlistjson)
   v1.GET("/financelist",Financelistjson)
   v1.GET("/projectsjson",Projectsjson)
+  // 这里是评价组
   v1.GET("/reviewsjson",Reviewsjson)
   v1.GET("/reviewdaydatajson", Reviewalgorithmjson)  
   v1.GET("/reviewdaydatajsonforios", Reviewalgorithmjsonforios)
-
+  // 这里是获取今天的分数
+  v1.GET("/reviewscoreoftoday", Reviewscore_today)
 	
 
 
