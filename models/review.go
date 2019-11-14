@@ -531,6 +531,40 @@ return task_execute_priority_table_review
 
 
 
+// createTodo add a new todo
+func Reviewscore_today(c *gin.Context) {
+  fmt.Println("+++++++++++++++++++ i am invoked in create task++++++++++++++++++++++")
+ 
+     //---------------get body string-------------
+     //https://github.com/gin-gonic/gin/issues/1295
+      buf := make([]byte, 1000000)
+         num, _ := c.Request.Body.Read(buf)
+         reqBody := string(buf[0:num])
+    //--------------using gjson to parse------------
+    //https://github.com/tidwall/gjson
+   
+   //emailcookie,_:=c.Request.Cookie("email")
+   //fmt.Println(emailcookie.Value)
+   inbox := gjson.Get(reqBody, "inbox").String()
+  fmt.Println(inbox)
+ 
+ 
+   email:="yang756260386@gmail.com"
+   loc, _ := time.LoadLocation("Asia/Shanghai")
+    plantime :=  time.Now().In(loc).Format("060102")
+ // 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
+ Check_reviewdaylog(plantime,email)
+ var score =   Compute_singleday(plantime,email)
+ 
+ c.JSON(200, gin.H{
+     "status":  "posted",
+     "score":score, 
+    "message": "u have uploaded info,please come on!",
+   })
+         }
+
+
+
 
 
 
