@@ -545,11 +545,18 @@ func Reviewscore_today(c *gin.Context) {
    
    //emailcookie,_:=c.Request.Cookie("email")
    //fmt.Println(emailcookie.Value)
+   emailcookie,err:=c.Request.Cookie("email")
+   var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
+
+
    inbox := gjson.Get(reqBody, "inbox").String()
   fmt.Println(inbox)
- 
- 
-   email:="yang756260386@gmail.com"
    loc, _ := time.LoadLocation("Asia/Shanghai")
     plantime :=  time.Now().In(loc).Format("060102")
  // 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
