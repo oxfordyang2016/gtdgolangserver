@@ -1678,9 +1678,16 @@ func Yesterdaytaskjson(c *gin.Context) {
 func Everydays(c *gin.Context) {
       //i use email as identifier
     //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-      emailcookie,_:=c.Request.Cookie("email")
-      fmt.Println(emailcookie.Value)
-      email:=emailcookie.Value
+      emailcookie,err:=c.Request.Cookie("email")
+      var email string
+      if err!=nil{
+        email = c.Request.Header.Get("email")
+      }else{
+        fmt.Println(emailcookie.Value)
+        email =emailcookie.Value
+      }
+      
+
       client:= c.Request.Header.Get("client")
 
       //fmt.Println(cookie1.Value)
