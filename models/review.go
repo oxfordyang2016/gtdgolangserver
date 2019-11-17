@@ -303,10 +303,15 @@ c.HTML(http.StatusOK, "reviewalgoforios.html",nil)
 //this api was used to prepare the data of review
 func Reviewforstastics(c *gin.Context){
   //get 7 days review datas 
-  emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
-
+  emailcookie,err:=c.Request.Cookie("email")
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
+ 
   //fmt.Println(cookie1.Value)
   count_need_bystastics_from_client := c.Query("days")
   counts, _:= strconv.Atoi(count_need_bystastics_from_client)
