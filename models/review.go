@@ -627,6 +627,7 @@ var serviceforgoal_score,onlystartatask_score float64 = 0,0
 var atomadifficulttask_score,alwaysprofit_score float64 = 0,0
 var doanimportantthingearly_score,markataskimmediately_score float64 = 0,0
 var challengetag_score float64= 0
+var challengetag_number = 0
 var atomtag_score float64= 0
 db.Where("Email= ?", email).Where("finishtime =  ?", date).Order("id desc").Find(&tasks)
 
@@ -701,6 +702,8 @@ fmt.Println("------------i had been into loop----------------")
 var jsonoftasktags = item.Tasktags
 if  challengetag := gjson.Get(jsonoftasktags, "challengetag").String();challengetag=="yes"{
 challengetag_score  = float64((challengetag_score + 5))*item.Goalcoefficient
+challengetag_number  = challengetag_number + 1
+
 }
 
 
@@ -1052,7 +1055,7 @@ if math.IsNaN(total_score){
 }
 
 review := &Reviewdatadetail{Totalscore:total_score,Noflinch:noflinch_score,Setarecord:setarecord_score,Conquerthefear:conquerthefear_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
-reviewfortimecount_from_client := Reviewfortimescount{Email:email,Noflinch:noflinch_number,Conquerthefear:conquerthefear_number,Setarecord:setarecord_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
+reviewfortimecount_from_client := Reviewfortimescount{Email:email,Noflinch:noflinch_number,Challengethings:challengetag_number,Conquerthefear:conquerthefear_number,Setarecord:setarecord_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 
