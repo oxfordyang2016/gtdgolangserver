@@ -418,11 +418,18 @@ func Createtaskfromsiri(c *gin.Context) {
    //--------------using gjson to parse------------
    //https://github.com/tidwall/gjson
   
-  //emailcookie,_:=c.Request.Cookie("email")
+  emailcookie,err:=c.Request.Cookie("email")
   //fmt.Println(emailcookie.Value)
+  var email string
+  if err!=nil{
+    email = c.Request.Header.Get("email")
+  }else{
+    fmt.Println(emailcookie.Value)
+    email =emailcookie.Value
+  }
 
 
-  email:="yang756260386@gmail.com"
+
   inbox := gjson.Get(reqBody, "inbox").String()
   fmt.Println(inbox)
   tasktags := gjson.Get(reqBody, "tasktags").String()
