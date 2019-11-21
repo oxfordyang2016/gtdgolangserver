@@ -3,6 +3,7 @@ package models
 import(
 "fmt"
 "time"
+"sort"
 //"github.com/bradfitz/slice"
 //"encoding/json"
 "net/http"
@@ -21,6 +22,7 @@ _ "github.com/lib/pq"
 type(
 Goals  struct{
 	Name                    string
+	Priority                int
 	Allprojectsingoal       []Projects
 	}
 
@@ -298,10 +300,29 @@ func Goalsjson(c *gin.Context) {
 	
 	  var allgoals []Goals
 	  for k,v := range allclassgoals{
-		allgoals =append(allgoals,Goals{k,v})
+		var goal Goalfordbs
+		var	goalcountforsamegoal int
+		var goal_level = 0
+		// find product with id 1
+		// db.First(&goal, "Name = ?", "L1212") 
+		db.Where("Email= ?", email).Where("Name=?",k).Find(&goal).Count(&goalcountforsamegoal)
+		if goalcountforsamegoal == 0{
+		  print(goal_level)
+		  goal_level = 0
+		}else{
+			goal_level = goal.Priority
+			if k=="no goal"{
+				goal_level = 0
+			}
+
+		}
+		allgoals =append(allgoals,Goals{k,goal_level,v})
 
 	 }
-
+	  
+	 sort.Slice(allgoals, func(i, j int) bool {
+		return allgoals[i].Priority > allgoals[j].Priority
+	  })
 
 	   //fmt.Println(allclassproject["gtd1"])
       c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "goals": allgoals})
