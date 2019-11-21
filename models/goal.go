@@ -305,7 +305,13 @@ func Goalsjson(c *gin.Context) {
 		var goal_level = 0
 		// find product with id 1
 		// db.First(&goal, "Name = ?", "L1212") 
+
 		db.Where("Email= ?", email).Where("Name=?",k).Find(&goal).Count(&goalcountforsamegoal)
+                
+
+                fmt.Println(goal.Name)
+                fmt.Println(goal.Priority)
+
 		if goalcountforsamegoal == 0{
 		  print(goal_level)
 		  goal_level = 0
