@@ -40,6 +40,7 @@ Goalfordbs  struct{
 
 Goalsincludetasks struct{
 	Name  string
+	Priority                int
 	Devotedtime int 
 	Alltasksingoal    []Tasks
 
@@ -265,7 +266,23 @@ func Goalsjson(c *gin.Context) {
 	 }
 	 var allgoalsonlyincludetasks []Goalsincludetasks
 	 for k,v:= range alltasks_ingoal{
-		 allgoalsonlyincludetasks = append(allgoalsonlyincludetasks,Goalsincludetasks{Name:k,Devotedtime:devotedtime_for_goal[k],Alltasksingoal:v})
+		var goal Goalfordbs
+		var	goalcountforsamegoal int
+		var goal_level = 0
+		// find product with id 1
+		// db.First(&goal, "Name = ?", "L1212") 
+		db.Where("Email= ?", email).Where("Name=?",k).Find(&goal).Count(&goalcountforsamegoal)
+		if goalcountforsamegoal == 0{
+		  print(goal_level)
+		  goal_level = 0
+		}else{
+			goal_level = goal.Priority
+			if k=="no goal"{
+				goal_level = 0
+			}
+
+		}
+		 allgoalsonlyincludetasks = append(allgoalsonlyincludetasks,Goalsincludetasks{Name:k,Priority:goal_level,Devotedtime:devotedtime_for_goal[k],Alltasksingoal:v})
 
 	 }
 	 fmt.Println("========i am here 1========")
