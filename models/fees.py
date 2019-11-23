@@ -13,7 +13,7 @@ from sqlalchemy import Column, String, Integer, Date,Numeric
 # from models import techniqueanalysis
 #from sqlalchemy.ext.declarative import declarative_base
 #from flaskjsontools import JsonSerializableBase
-engine = create_engine('mysql://root:123456@localhost:3306/finance')
+engine = create_engine('mysql://root:123456@localhost:3306/finance?host=localhost')
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
