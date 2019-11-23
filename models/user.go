@@ -55,7 +55,7 @@ func init() {
 	}
 
 	//Migrate the schema
-	db.AutoMigrate(&Accounts{},&TodoModel{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{})
+	db.AutoMigrate(&Accounts{},&TodoModel{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{},&Fees{})
 //http://jinzhu.me/gorm/database.html#migration delete database table column
  //db.Model(&Tasks{}).DropColumn("Uer")
 
