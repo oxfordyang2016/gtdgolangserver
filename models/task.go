@@ -507,7 +507,7 @@ func CreatetaskbyJSON(c *gin.Context) {
   email:=emailcookie.Value
   admin := c.Query("admin")
   if admin =="xxx"{
-    email ="yang756260386"
+    email ="yang756260386@gmail.com"
   }  
   inbox := gjson.Get(reqBody, "inbox").String()
   inboxlist := gjson.Get(reqBody, "inboxlist")

@@ -134,7 +134,9 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.GET("/search",Search)
         v1.GET("/searchwithtag",Searchwithtags)
         //finance
+
         v1.GET("/mybalancejson",Getmywealth)
+        v1.POST("/createfee",CreatefeebyJSON)
         router.Run(":8081")
 
 }
