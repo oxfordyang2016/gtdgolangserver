@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import jieba.posseg as pseg
 
 # coding=utf-8
