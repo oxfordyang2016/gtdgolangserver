@@ -76,7 +76,7 @@ def hello_world():
    return 'Hello World'
 
 
-@app.route('/createfee')
+@app.route('/finance/createfee')
 def getfees():
     email = request.headers['email']
     content = request.json
