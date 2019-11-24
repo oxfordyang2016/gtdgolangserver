@@ -13,7 +13,7 @@ from sqlalchemy import Column, String, Integer, Date,Numeric
 # from models import techniqueanalysis
 #from sqlalchemy.ext.declarative import declarative_base
 #from flaskjsontools import JsonSerializableBase
-engine = create_engine('mysql://root:123456@localhost:3306/finance?host=127.0.0.1')
+engine = create_engine('mysql://root:123456@localhost:3306/finance?host=127.0.0.1&charset=utf8mb4')
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
@@ -78,7 +78,7 @@ def hello_world():
    return 'Hello World'
 
 
-@app.route('/finance/createfee')
+@app.route('/finance/uploadfees',methods=["POST","GET","PUT"])
 def getfees():
     email = request.headers['email']
     content = request.json
