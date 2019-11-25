@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import jieba.posseg as pseg
-
+from datetime import datetime, timedelta  
 # coding=utf-8
 from flask import Flask,render_template,request,url_for 
 #import simplejson as json
@@ -9,7 +9,7 @@ import  json
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, String, Integer, Date,Numeric
+from sqlalchemy import Column, String, Integer, Date,Numeric,and_
 # from models import techniqueanalysis
 #from sqlalchemy.ext.declarative import declarative_base
 #from flaskjsontools import JsonSerializableBase
@@ -18,14 +18,16 @@ Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
 
-# class DecimalEncoder(json.JSONEncoder):
-#     def _iterencode(self, o, markers=None):
-#         if isinstance(o, decimal.Decimal):
-#             # wanted a simple yield str(o) in the next line,
-#             # but that would mean a yield on the line with super(...),
-#             # which wouldn't work (see my comment below), so...
-#             return (str(o) for o in [o])
-#         return super(DecimalEncoder, self)._iterencode(o, markers)
+import decimal
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, decimal.Decimal):
+            return float(o)
+        return super(DecimalEncoder, self).default(o)
+
+
+
 
 
 def getmoney(sentence):
@@ -78,8 +80,37 @@ def hello_world():
    return 'Hello World'
 
 
+
+
+
+
+@app.route('/finance/statistics',methods=["POST","GET","PUT"])
+def staticticsformoney():
+    days = request.args.get('days')
+    if days == "-1":
+        date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
+    if days == "0":
+        date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d') 
+    email = request.headers['email']
+    #date = content['date']
+    session = Session()
+    all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+    #写消费统计部分
+    allcost = sum([float(row.fee) for row in all])
+    for k in all:
+        print(k)
+    # return "ok"
+    result = {"cost":allcost,"income":0}
+    return json.dumps(result)
+    
+
+
+
+
+
+
 @app.route('/finance/uploadfees',methods=["POST","GET","PUT"])
-def getfees():
+def createfees():
     email = request.headers['email']
     content = request.json
     record = content['inbox']
@@ -110,15 +141,9 @@ def getfees():
 
 def rowtodict(row):
     dictforsinglerow ={}
-    dictforsinglerow["id"] = row.id
-    dictforsinglerow["note"] = row.note
-    dictforsinglerow["classname"]= row.classname
-    dictforsinglerow["time"] = str(row.time)
-    dictforsinglerow["highest"] =row.highest
-    dictforsinglerow["lowest"] = row.lowest
-    dictforsinglerow["opening"] = row.opening
-    dictforsinglerow["closing"]  = row.closing
-    dictforsinglerow["volume"] = row.volume
+    dictforsinglerow["email"] = row.email
+    dictforsinglerow["fee"] = row.fee
+    dictforsinglerow["direction"]= row.direction
     print(dictforsinglerow)
     return dictforsinglerow
 
