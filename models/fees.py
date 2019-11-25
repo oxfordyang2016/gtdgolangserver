@@ -92,11 +92,12 @@ def staticticsformoney():
         print("i am here")
         date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
     if days == "0":
-        print("------huodonjianshiq")
+        print("------")
         date = datetime.strftime(datetime.now(), '%y%m%d') 
     email = request.headers['email']
     #date = content['date']
     session = Session()
+    print(date)
     all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
     #写消费统计部分
     allcost = sum([float(row.fee) for row in all])
