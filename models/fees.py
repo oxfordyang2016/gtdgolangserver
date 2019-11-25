@@ -87,6 +87,7 @@ def hello_world():
 @app.route('/finance/statistics',methods=["POST","GET","PUT"])
 def staticticsformoney():
     days = request.args.get('days')
+    date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
     if days == "-1":
         print("i am here")
         date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
