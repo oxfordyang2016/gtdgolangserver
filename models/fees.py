@@ -88,9 +88,11 @@ def hello_world():
 def staticticsformoney():
     days = request.args.get('days')
     if days == "-1":
+        print("i am here")
         date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
     if days == "0":
-        date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d') 
+        print("------huodonjianshiq")
+        date = datetime.strftime(datetime.now(), '%y%m%d') 
     email = request.headers['email']
     #date = content['date']
     session = Session()
