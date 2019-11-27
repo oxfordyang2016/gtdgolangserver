@@ -137,9 +137,24 @@ if err!=nil{
   email =emailcookie.Value
 }
 
-  var reviewdays []Reviewofday
-  db.Where("email =  ?", email).Order("date").Find(&reviewdays)
+// 获取url中的参数
+   daycount := c.Query("days")
+   counts, _:= strconv.Atoi(daycount)
+
+
+   var reviewdays []Reviewofday
+   db.Where("email =  ?", email).Order("date").Find(&reviewdays)
+  if counts >1{
+    c.JSON(200, gin.H{
+      //"reviewdata":review30days,
+      "reviewdata":reviewdays[len(reviewdays)-counts:],
+    })
+  }
+
+
+
   //if u set the len,u will get the size of slice
+
   if len(reviewdays)<33{
     c.JSON(200, gin.H{
       //"reviewdata":review30days,
@@ -201,9 +216,15 @@ func Search(c *gin.Context) {
 func Searchwithtags(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-  emailcookie,_:=c.Request.Cookie("email")
+  emailcookie,err:=c.Request.Cookie("email")
   fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
   //fmt.Println(cookie1.Value)
   var keywords = c.Query("keywords")
   var search []Tasks
