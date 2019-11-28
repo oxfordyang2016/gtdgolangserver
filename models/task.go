@@ -764,8 +764,27 @@ taskid = task.ID
     }
   }
 
+
+  if len(plantime)!=6{
+    // if plantime =="today"{
+     loc, _ := time.LoadLocation("Asia/Shanghai")
+     //plantimeofanotherforamt :=  time.Now().In(loc)
+     //
+     plantime =  time.Now().In(loc).Format("060102")
+}
+// 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
+Check_reviewdaylog(plantime,email)
+var score =   Compute_singleday(plantime,email)
+
+fmt.Println("真成绩是")
+
+fmt.Println(score)
+
+
+
   c.JSON(200, gin.H{
     "taskid": taskid,
+    "score":score,
     "status":  "posted",
     "message": "u have uploaded info,please come on!",
   })
