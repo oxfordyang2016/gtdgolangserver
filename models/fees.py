@@ -124,6 +124,7 @@ def createfees():
     #record = "我们吃了10块钱的晚饭"
     fees = getmoney(record)
     print(fees)
+    #这里因该给出明确的告警信息！否则下面这句话会出问题
     if len(fees) >1 or len(fees) == 0:
         return  "请不要在消费中包含两个数字，我不能帮你识别"
     #接下来准备写入到Q数据库
