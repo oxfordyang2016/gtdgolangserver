@@ -165,6 +165,44 @@ def staticticsformoney():
     
 
 
+#这里是为了获取详详细的消费情况便于展示，这里要使用细节的cookie
+@app.route('/finance/getfeesdetail',methods=["POST","GET","PUT"])
+def getfeesdetail():
+    # email = request.headers['email']
+    email = request.cookies["email"]
+    #date = content['date']
+    session = Session()
+    date = weektime_current()
+    print(date)
+    #这里使用级别链接的方式重新设计
+    #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+    #使用级别链接的方式
+    all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
+    #写消费统计部分
+    #建立一个大的数组，返回的数据格式应该是
+    #allrecords = {"data":[{"name":"191102","records":[row]},{},{},{},{}]}
+    from collections import defaultdict
+    alldays_records = defaultdict(list)
+    for k in all:
+        alldays_records[k.date].append(rowtodict(k))
+    
+    result = []
+    for k in date:
+        result.append({"date":k,"allrecordsinaday":alldays_records[k]})
+     
+    # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+    
+    # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+    # allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
+    resultfromserver = {"allfees":result}
+    return json.dumps(resultfromserver)
+
+
+
+
+
+
+
 
 
 
@@ -206,6 +244,7 @@ def rowtodict(row):
     dictforsinglerow["fee"] = row.fee
     dictforsinglerow["direction"]= row.direction
     print(dictforsinglerow)
+    dictforsinglerow["date"] = row.date
     return dictforsinglerow
 
 
