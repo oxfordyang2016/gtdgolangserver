@@ -245,6 +245,7 @@ def rowtodict(row):
     dictforsinglerow["direction"]= row.direction
     print(dictforsinglerow)
     dictforsinglerow["date"] = row.date
+    dictforsinglerow["record"] = row.record
     return dictforsinglerow
 
 
