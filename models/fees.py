@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import jieba.posseg as pseg
 from datetime import datetime, timedelta  
+from datetime import date 
 # coding=utf-8
 from flask import Flask,render_template,request,url_for 
 #import simplejson as json
@@ -9,7 +10,8 @@ import  json
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, String, Integer, Date,Numeric,and_
+from sqlalchemy import *
+# Column, String, Integer, Date,Numeric,and_,in_
 # from models import techniqueanalysis
 #from sqlalchemy.ext.declarative import declarative_base
 #from flaskjsontools import JsonSerializableBase
@@ -25,6 +27,53 @@ class DecimalEncoder(json.JSONEncoder):
         if isinstance(o, decimal.Decimal):
             return float(o)
         return super(DecimalEncoder, self).default(o)
+
+
+
+
+
+def gen_dates(b_date, days):
+    day = timedelta(days=1)
+    for i in range(days):
+        yield b_date + day*i
+
+
+def get_date_list(start=None, end=None):
+    """
+    这里传入时间都可以进行改写
+    获取日期列表
+    :param start: 开始日期
+    :param end: 结束日期
+    :return:
+    """
+    #这里写代码我自已进行解析时间
+    '%y%m%d'
+    start = datetime.strptime(start, '%y%m%d')
+    end = datetime.strptime(end, '%y%m%d')
+    
+    # if start is None:
+    #     start = datetime.strptime("2000-01-01", "%Y-%m-%d")
+    # if end is None:
+    #     end = datetime.now()
+    data = []
+    #这里传入的时间参数可以进行改变
+    for d in gen_dates(start, (end+timedelta(days=1)-start).days):
+        data.append(datetime.strftime(d,'%y%m%d'))
+    return data
+
+
+
+def  weektime_current():
+    #date_obj = datetime.strptime(date_str, '%Y-%m-%d') 
+    from datetime import date  
+    date_obj  = date.today() 
+    #接下来的两部分是用来获取date类型的时间格式
+    start_of_week = date_obj - timedelta(days=date_obj.weekday())  # Monday 
+    end_of_week = start_of_week + timedelta(days=6)  # Sunday 
+    start_of_week =  date = datetime.strftime(start_of_week, '%y%m%d') 
+    end_of_week =  date = datetime.strftime(end_of_week , '%y%m%d') 
+    return get_date_list(start_of_week,end_of_week)
+
 
 
 
@@ -87,24 +136,31 @@ def hello_world():
 @app.route('/finance/statistics',methods=["POST","GET","PUT"])
 def staticticsformoney():
     days = request.args.get('days')
+    print(days)
     date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
     if days == "-1":
         print("i am here")
-        date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
+        date = [datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')]
     if days == "0":
         print("------")
-        date = datetime.strftime(datetime.now(), '%y%m%d') 
+        date = [datetime.strftime(datetime.now(), '%y%m%d')] 
+    if days =="7":
+        date = weektime_current()
     email = request.headers['email']
     #date = content['date']
     session = Session()
     print(date)
-    all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+    #这里使用级别链接的方式重新设计
+    #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+    #使用级别链接的方式
+    all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
     #写消费统计部分
-    allcost = sum([float(row.fee) for row in all])
+    allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+    allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
     for k in all:
         print(k)
     # return "ok"
-    result = {"cost":allcost,"income":0}
+    result = {"cost":allcost,"income":allincome}
     return json.dumps(result)
     
 
@@ -125,7 +181,7 @@ def createfees():
     fees = getmoney(record)
     print(fees)
     if len(fees) >1 or len(fees) == 0:
-        return  "请不要在消费中包含两个数字，我不能帮你识别"
+        return json.dumps({"info":"请不要在消费中包含两个数字，我不能帮你识别","status":"fail"})
     #接下来准备写入到Q数据库
     feefromclient = float(fees[0])
     print(feefromclient) 
@@ -134,7 +190,7 @@ def createfees():
     session.add(oneday)
     session.commit()
     session.close()
-    return json.dumps({"date":"time","info":"ok"})
+    return json.dumps({"info":"记账成功","status":"ok"})
     
 
 

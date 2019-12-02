@@ -505,10 +505,23 @@ func CreatetaskbyJSON(c *gin.Context) {
    //--------------using gjson to parse------------
    //https://github.com/tidwall/gjson
   value := gjson.Get(reqBody, "reviewdata")
-  fmt.Println(value.String())
-  emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
+fmt.Println(value.String())
+
+  emailcookie,err:=c.Request.Cookie("email")
+  //fmt.Println(emailcookie.Value)
+  var email string
+  if err!=nil{
+    email = c.Request.Header.Get("email")
+  }else{
+    fmt.Println(emailcookie.Value)
+    email =emailcookie.Value
+  }
+
+  //检测客户端是从哪里过来的这里主要是为了解决从Siri过来的东西
+  // client := c.Request.Header.Get("client")  
+
+
+
   admin := c.Query("admin")
   if admin =="xxx"{
     email ="yang756260386@gmail.com"
@@ -520,6 +533,13 @@ func CreatetaskbyJSON(c *gin.Context) {
   // tasktags1 := gjson.Get(reqBody, "tasktags")
   // fmt.Println(tasktags1)
   tasktags := gjson.Get(reqBody, "tasktags").String()
+
+  fmt.Println("------------------yangming /is here----------")
+  fmt.Println(tasktags)
+
+
+
+
   goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
 
   reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
@@ -584,9 +604,12 @@ func CreatetaskbyJSON(c *gin.Context) {
   long :=  gjson.Get(reqBody, "long").String()
   lat :=  gjson.Get(reqBody, "lat").String()
   goal :=  gjson.Get(reqBody, "goal").String()
-  
+ fmt.Println("------------测试目标是否运行正常------------")
+  fmt.Println(goal)
+    
   task_priority := 0
-  client :=  gjson.Get(reqBody, "client").String()
+//检查客户端是哪里注意Siri  
+client :=  gjson.Get(reqBody, "client").String()
   
   //deal with gtd commandline client info uploaded!
  if client == "gtdcli" {
@@ -969,10 +992,16 @@ fmt.Println(score)
    goalcoefficient :=  Get_goal_coffient(goal,email)
 
    if goal!="unspecified"{
+fmt.Println("目标的权限等级错误")  
+ fmt.Println(goal) 
+  if goal!= "no goal"&&goal!=""{
     var goalsforemail []Goalfordbs 
     db.Where("Email= ?", email).Where("Name=?",goal).Find(&goalsforemail)
     task_priority = goalsforemail[0].Priority
-    db.Model(&task).Update("Priority", task_priority) 
+}else{
+   fmt.Println("目标的权限等级错误")
+}    
+db.Model(&task).Update("Priority", task_priority) 
     db.Model(&task).Update("Goal", goal)}
 
     if place!="unspecified"{

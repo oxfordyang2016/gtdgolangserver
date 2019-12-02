@@ -217,7 +217,7 @@ func Searchwithtags(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
   emailcookie,err:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
+  //fmt.Println(emailcookie.Value)
   var email string
    if err!=nil{
      email = c.Request.Header.Get("email")

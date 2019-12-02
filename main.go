@@ -136,7 +136,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         //finance
 
         v1.GET("/mybalancejson",Getmywealth)
-        v1.POST("/createfee",CreatefeebyJSON)
+        //v1.POST("/createfee",CreatefeebyJSON)
         router.Run(":8081")
 
 }
