@@ -169,7 +169,9 @@ def staticticsformoney():
 @app.route('/finance/getfeesdetail',methods=["POST","GET","PUT"])
 def getfeesdetail():
     # email = request.headers['email']
-    email = request.cookies["email"]
+    #email = request.cookies["email"]
+    print(request.cookies)
+    email = "yang756260386@gmail.com"
     #date = content['date']
     session = Session()
     date = weektime_current()
@@ -184,11 +186,13 @@ def getfeesdetail():
     from collections import defaultdict
     alldays_records = defaultdict(list)
     for k in all:
+        print(k.id)
         alldays_records[k.date].append(rowtodict(k))
     
     result = []
     for k in date:
-        result.append({"date":k,"allrecordsinaday":alldays_records[k]})
+        if len(alldays_records[k])>0:
+            result.append({"date":k,"allrecordsinaday":alldays_records[k]})
      
     # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
     
@@ -233,6 +237,32 @@ def createfees():
     
 
 
+@app.route('/finance/updatefees',methods=["POST","GET","PUT"])
+def createfees():
+    email = "yang756260386@gmail.com"
+    content = request.json
+    record = content['inbox']
+    direction = content['direction']
+    date = content['date']
+    fee = content['fee']
+    id = content['id']
+    print(record)
+    #record = "我们吃了10块钱的晚饭"
+    session = Session()
+    recordfromdb = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.id==id).first()
+    recordfromdb.record = record
+    recordfromdb.direction = direction
+    recordfromdb.date = date
+    recordfromdb.fee = fee
+    session.commit()
+    session.close()
+    return json.dumps({"info":"记账成功","status":"ok"})
+
+
+
+
+
+
 
 
 
@@ -241,11 +271,11 @@ def createfees():
 def rowtodict(row):
     dictforsinglerow ={}
     dictforsinglerow["email"] = row.email
-    dictforsinglerow["fee"] = row.fee
+    dictforsinglerow["fee"] = float(row.fee)
     dictforsinglerow["direction"]= row.direction
-    print(dictforsinglerow)
     dictforsinglerow["date"] = row.date
     dictforsinglerow["record"] = row.record
+    dictforsinglerow["id"] = row.id
     return dictforsinglerow
 
 
