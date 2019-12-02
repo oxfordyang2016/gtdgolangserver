@@ -169,7 +169,9 @@ def staticticsformoney():
 @app.route('/finance/getfeesdetail',methods=["POST","GET","PUT"])
 def getfeesdetail():
     # email = request.headers['email']
-    email = request.cookies["email"]
+    #email = request.cookies["email"]
+    print(request.cookies)
+    email = "yang756260386@gmail.com"
     #date = content['date']
     session = Session()
     date = weektime_current()
@@ -184,11 +186,13 @@ def getfeesdetail():
     from collections import defaultdict
     alldays_records = defaultdict(list)
     for k in all:
+        print(k.id)
         alldays_records[k.date].append(rowtodict(k))
     
     result = []
     for k in date:
-        result.append({"date":k,"allrecordsinaday":alldays_records[k]})
+        if len(alldays_records[k])>0:
+            result.append({"date":k,"allrecordsinaday":alldays_records[k]})
      
     # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
     
@@ -241,10 +245,11 @@ def createfees():
 def rowtodict(row):
     dictforsinglerow ={}
     dictforsinglerow["email"] = row.email
-    dictforsinglerow["fee"] = row.fee
+    dictforsinglerow["fee"] = float(row.fee)
     dictforsinglerow["direction"]= row.direction
-    print(dictforsinglerow)
     dictforsinglerow["date"] = row.date
+    dictforsinglerow["record"] = row.record
+    print(dictforsinglerow)
     return dictforsinglerow
 
 
