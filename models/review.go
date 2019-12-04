@@ -664,7 +664,7 @@ var doanimportantthingearly_score,markataskimmediately_score float64 = 0,0
 var challengetag_score float64= 0
 var challengetag_number = 0
 var atomtag_score float64= 0
-db.Where("Email= ?", email).Where("finishtime =  ?", date).Order("id desc").Find(&tasks)
+db.Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"giveup","unfinished","unfinish"}).Order("id desc").Find(&tasks)
 
 var taskcount_score float64
 
@@ -706,7 +706,7 @@ var conquerthefear_score float64= 0
 var conquerthefear_number  = 0
 var setarecord_score float64= 0
 var setarecord_number  = 0
-db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"unfinished","unfinish"}).Count(&countoffinishedtasks)
+db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Count(&countoffinishedtasks)
 
 
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Where("status =?","giveup").Count(&countofgivenuptasks)
@@ -739,6 +739,8 @@ if  challengetag := gjson.Get(jsonoftasktags, "challengetag").String();challenge
 challengetag_score  = float64((challengetag_score + 5))*item.Goalcoefficient
 challengetag_number  = challengetag_number + 1
 
+fmt.Println("-----=======-------++++++++++杨明在这里++++=-----======----------------")
+fmt.Println(item)
 }
 
 
