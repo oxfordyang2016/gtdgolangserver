@@ -32,6 +32,10 @@ class DecimalEncoder(json.JSONEncoder):
 
 
 
+
+
+
+#获取间隔时间
 def gen_dates(b_date, days):
     day = timedelta(days=1)
     for i in range(days):
@@ -63,6 +67,7 @@ def get_date_list(start=None, end=None):
 
 
 
+#获取当前这一周时间
 def  weektime_current():
     #date_obj = datetime.strptime(date_str, '%Y-%m-%d') 
     from datetime import date  
@@ -75,6 +80,7 @@ def  weektime_current():
     return get_date_list(start_of_week,end_of_week)
 
 
+#获取这个月所有时间
 def  monthtime_current():
     #date_obj = datetime.strptime(date_str, '%Y-%m-%d') 
     # from datetime import date,datetime 
@@ -87,7 +93,7 @@ def  monthtime_current():
     days = [datetime.datetime.strftime(datetime.date(year, month, day), '%y%m%d')  for day in range(1, num_days+1)]
     return days
 
-
+#获取上个月所有的时间
 def  lastmonthtime_current():
     #date_obj = datetime.strptime(date_str, '%Y-%m-%d') 
     # from datetime import date,datetime 
@@ -102,6 +108,22 @@ def  lastmonthtime_current():
     num_days = calendar.monthrange(year, month)[1]
     days = [datetime.datetime.strftime(datetime.date(year, month, day), '%y%m%d')  for day in range(1, num_days+1)]
     return days
+
+
+#获取上个月所有的时间
+def  thisyear_current():
+    #date_obj = datetime.strptime(date_str, '%Y-%m-%d') 
+    # from datetime import date,datetime 
+    import datetime, calendar
+    date_obj  = date.today() 
+    #接下来的两部分是用来获取date类型的时间格式
+    year = date_obj.year
+    start = str(year)+"0101"
+    end = str(year)+"1231"
+    days = get_date_list(start,end)
+    return days
+
+
 
 
 
@@ -183,6 +205,8 @@ def staticticsformoney():
         date = monthtime_current()
     if days =="-31":
         date = lastmonthtime_current()
+    if days =="365":
+        date = thisyear_current()
     email = request.headers['email']
     #date = content['date']
     session = Session()
