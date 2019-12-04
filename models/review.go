@@ -176,10 +176,20 @@ if err!=nil{
 func Errorlog(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-  emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
-  //fmt.Println(cookie1.Value)
+  //emailcookie,_:=c.Request.Cookie("email")
+  emailcookie,err:=c.Request.Cookie("email")
+  //fmt.Println(emailcookie.Value)
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }  
+
+
+
+
 
   var errors []Tasks
   //.Not("status", []string{"finished","f","finish","giveup","g"})
