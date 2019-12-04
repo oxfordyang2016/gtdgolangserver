@@ -238,11 +238,13 @@ def createfees():
 
 
 @app.route('/finance/updatefees',methods=["POST","GET","PUT"])
-def createfees():
+def updatefees():
     email = "yang756260386@gmail.com"
     
     content = request.json
-    record = content['inbox']
+    print(request)
+    print(content)
+    record = content['record']
     direction = content['direction']
     date = content['date']
     fee = content['fee']
