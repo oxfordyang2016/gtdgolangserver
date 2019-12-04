@@ -71,8 +71,41 @@ def  weektime_current():
     start_of_week = date_obj - timedelta(days=date_obj.weekday())  # Monday 
     end_of_week = start_of_week + timedelta(days=6)  # Sunday 
     start_of_week =  date = datetime.strftime(start_of_week, '%y%m%d') 
-    end_of_week =  date = datetime.strftime(end_of_week , '%y%m%d') 
+    end_of_week =  date =datetime.strftime(end_of_week , '%y%m%d') 
     return get_date_list(start_of_week,end_of_week)
+
+
+def  monthtime_current():
+    #date_obj = datetime.strptime(date_str, '%Y-%m-%d') 
+    # from datetime import date,datetime 
+    import datetime, calendar
+    date_obj  = date.today() 
+    #接下来的两部分是用来获取date类型的时间格式
+    year = date_obj.year
+    month = date_obj.month
+    num_days = calendar.monthrange(year, month)[1]
+    days = [datetime.datetime.strftime(datetime.date(year, month, day), '%y%m%d')  for day in range(1, num_days+1)]
+    return days
+
+
+def  lastmonthtime_current():
+    #date_obj = datetime.strptime(date_str, '%Y-%m-%d') 
+    # from datetime import date,datetime 
+    import datetime, calendar
+    date_obj  = date.today() 
+    #接下来的两部分是用来获取date类型的时间格式
+    year = date_obj.year
+    month = date_obj.month -1
+    if date_obj.month == 1:
+        year = year -1
+        month = 12
+    num_days = calendar.monthrange(year, month)[1]
+    days = [datetime.datetime.strftime(datetime.date(year, month, day), '%y%m%d')  for day in range(1, num_days+1)]
+    return days
+
+
+
+
 
 
 
@@ -146,6 +179,10 @@ def staticticsformoney():
         date = [datetime.strftime(datetime.now(), '%y%m%d')] 
     if days =="7":
         date = weektime_current()
+    if days =="31":
+        date = monthtime_current()
+    if days =="-31":
+        date = lastmonthtime_current()
     email = request.headers['email']
     #date = content['date']
     session = Session()

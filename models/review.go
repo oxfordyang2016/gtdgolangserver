@@ -664,7 +664,7 @@ var doanimportantthingearly_score,markataskimmediately_score float64 = 0,0
 var challengetag_score float64= 0
 var challengetag_number = 0
 var atomtag_score float64= 0
-db.Where("Email= ?", email).Where("finishtime =  ?", date).Order("id desc").Find(&tasks)
+db.Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"unfinished","unfinish","giveup"}).Order("id desc").Find(&tasks)
 
 var taskcount_score float64
 
