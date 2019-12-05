@@ -402,10 +402,13 @@ var  alltime_goal_oriented = 0
 var  devotedtime_for_goal_in_everyday []int
 for  _,item :=range tasksbydays{
   alltasks_count =  alltasks_count+len(item.Alldays)
+  //接下来在循环每一天的任务
+  var day_devotedtime = 0//每天投入的时间
   for _,item1 := range item.Alldays{
+    day_devotedtime = day_devotedtime +item1.Devotedtime
     all_time_u_had_devoted_inthe_time_range = all_time_u_had_devoted_inthe_time_range + item1.Devotedtime
     if item1.Goal!="no goal"{
-      devotedtime_for_goal_in_everyday = append(devotedtime_for_goal_in_everyday,item1.Devotedtime)
+     
       if val, ok := goal_devotedtime[item1.Goal]; ok {
         goal_devotedtime[item1.Goal] =val +item1.Devotedtime
       }else{
@@ -414,6 +417,8 @@ for  _,item :=range tasksbydays{
       alltime_goal_oriented = alltime_goal_oriented + item1.Devotedtime
     } 
   } 
+  //把每天投入的时间加入到合理的区间里面
+  devotedtime_for_goal_in_everyday = append(devotedtime_for_goal_in_everyday,day_devotedtime)
 }
 fmt.Printf("the task length is %d",len(tasksbydays))
 fmt.Printf("theses task counts is %d",alltasks_count)
