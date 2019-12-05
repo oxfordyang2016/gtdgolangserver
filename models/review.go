@@ -369,6 +369,7 @@ db.Where("Email= ?", email).Not("status", []string{"unfinished","unfinish","give
 var alleverydays = Sort_tasksbyday(tasks)
 var tasksbydays []Everyday
 
+// -1 表示昨天 1表示今天
 if counts == -1{
   tasksbydays = alleverydays[1:2]
 }else{
@@ -393,11 +394,15 @@ var goal_devotedtime = make(map[string]int)
 var alltasks_count = 0
 var all_time_u_had_devoted_inthe_time_range = 0
 var  alltime_goal_oriented = 0 
+//这段时间范围内，每一个工作日你投入的时间是由接下来这个数组决定的 
+
+var  devotedtime_for_goal_in_everyday []int
 for  _,item :=range tasksbydays{
   alltasks_count =  alltasks_count+len(item.Alldays)
   for _,item1 := range item.Alldays{
     all_time_u_had_devoted_inthe_time_range = all_time_u_had_devoted_inthe_time_range + item1.Devotedtime
     if item1.Goal!="no goal"{
+      devotedtime_for_goal_in_everyday = append(devotedtime_for_goal_in_everyday,item1.Devotedtime)
       if val, ok := goal_devotedtime[item1.Goal]; ok {
         goal_devotedtime[item1.Goal] =val +item1.Devotedtime
       }else{
@@ -452,6 +457,7 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
       "plannedtask_same_with_finished_yesterday_count":plannedtask_same_with_finished_yesterday_count, 
       "goaltime":goal_devotedtime,
       "reviewdata":reviewdata,
+      "devotedtime_for_goal_in_everyday":devotedtime_for_goal_in_everyday,
     })
 }
 
