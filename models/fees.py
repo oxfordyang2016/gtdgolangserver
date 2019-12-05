@@ -52,6 +52,7 @@ def get_date_list(start=None, end=None):
     """
     #这里写代码我自已进行解析时间
     '%y%m%d'
+    
     start = datetime.strptime(start, '%y%m%d')
     end = datetime.strptime(end, '%y%m%d')
     
@@ -118,8 +119,11 @@ def  thisyear_current():
     date_obj  = date.today() 
     #接下来的两部分是用来获取date类型的时间格式
     year = date_obj.year
-    start = str(year)+"0101"
-    end = str(year)+"1231"
+    start = str(year)[2:]+"0101"
+    end = str(year)[2:]+"1231"
+    print(year)
+    print(start)
+    print(end)
     days = get_date_list(start,end)
     return days
 
