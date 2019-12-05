@@ -370,6 +370,9 @@ var alleverydays = Sort_tasksbyday(tasks)
 var tasksbydays []Everyday
 
 // -1 表示昨天 1表示今天
+fmt.Println("// -1 表示昨天 1表示今天")
+fmt.Println(counts)
+
 if counts == -1{
   tasksbydays = alleverydays[1:2]
 }else{
