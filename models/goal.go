@@ -126,11 +126,19 @@ func Updategoal(c *gin.Context) {
 func Goalsystem(c *gin.Context) {
 	//i use email as identifier
   //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-	emailcookie,_:=c.Request.Cookie("email")
-	fmt.Println(emailcookie.Value)
-	email:=emailcookie.Value
-	//fmt.Println(cookie1.Value)
-  
+ 
+ emailcookie,err:=c.Request.Cookie("email")
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
+
+
+
+ 
 	//var goals []Tasks
 	var goals []Goalfordbs
 	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
