@@ -1759,14 +1759,14 @@ func Everydays(c *gin.Context) {
       loc, _ := time.LoadLocation("Asia/Shanghai")
      today :=  time.Now().In(loc).Format("060102")
      tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+     yesterday :=  time.Now().In(loc).AddDate(0, 0, -1).Format("060102")
 
 
 
 
 
 
-
-      db.Where("Email= ?", email).Where("plantime in (?)", []string{today,tomorrow}).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks) 
+      db.Where("Email= ?", email).Where("plantime in (?)", []string{yesterday,today,tomorrow}).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks) 
       }else{
      db.Where("Email= ?", email).Find(&tasks)
       }
