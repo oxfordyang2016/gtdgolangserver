@@ -34,6 +34,10 @@ Goalfordbs  struct{
 	Goalcode             string    `json:"goalcode"`
 	Priority             int    `json:"priority"`
 	Email                 string   `json:"email"`
+	Goalstatus            string   `json:"goalstatus"`
+	Plantime            string   `json:"plantime"`
+	Finishtime            string   `json:"finishtime"`
+    Chinesename            string   `json:"chinesename"` 
 	}
 
 
