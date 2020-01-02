@@ -37,7 +37,8 @@ Goalfordbs  struct{
 	Goalstatus            string   `json:"goalstatus"`
 	Plantime            string   `json:"plantime"`
 	Finishtime            string   `json:"finishtime"`
-    Chinesename            string   `json:"chinesename"` 
+	Chinesename            string   `json:"chinesename"`
+	Timerange               string   `json:"timerange"`   //制定目标的时间范围
 	}
 
 
@@ -109,11 +110,19 @@ func Updategoal(c *gin.Context) {
 	goal := gjson.Get(reqBody, "goal").String()
 	fmt.Printf("---goal is------%s-----\n",goal)
 	goalcode := gjson.Get(reqBody, "goalcode").String()
+	goalstatus := gjson.Get(reqBody, "goalstatus").String()
+	finishtime := gjson.Get(reqBody, "finishtime").String()
+	plantime := gjson.Get(reqBody, "plantime").String()
 	priority:= gjson.Get(reqBody, "priority").Int()
+	timerange:= gjson.Get(reqBody, "planmonth").Int()
 	var goalindb  Goalfordbs
 	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
 	if priority != -1  {db.Model(&goalindb).Update("Priority", int(priority)) }
 	if goal != "unspecified"{if goal!= "nocontent"{db.Model(&goalindb).Update("Name", goal)}}
+	if timerange !=0{db.Model(&goalindb).Update("Timerange", int(timerange)) }
+	if goalstatus !="unfinished"{db.Model(&goalindb).Update("Goalstatus", goalstatus)}
+	if finishtime !="unspecified"{db.Model(&goalindb).Update("Finishtime", finishtime)}
+	if plantime !="unspecified"{db.Model(&goalindb).Update("Plantime", plantime)}
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK })
 }
 
