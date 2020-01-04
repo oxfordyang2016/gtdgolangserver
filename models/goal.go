@@ -38,7 +38,7 @@ Goalfordbs  struct{
 	Plantime            string   `json:"plantime"`
 	Finishtime            string   `json:"finishtime"`
 	Chinesename            string   `json:"chinesename"`
-	Timerange               string   `json:"timerange"`   //制定目标的时间范围
+	Timerange               int   `json:"timerange"`   //制定目标的时间范围
 	}
 
 
