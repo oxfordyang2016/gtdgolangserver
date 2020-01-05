@@ -111,12 +111,14 @@ func Updategoal(c *gin.Context) {
 	goal := gjson.Get(reqBody, "goal").String()
 	fmt.Printf("---goal is------%s-----\n",goal)
 	goalcode := gjson.Get(reqBody, "goalcode").String()
-	goalstatus := gjson.Get(reqBody, "goalstatus").String()
+       fmt.Println(goalcode)	
+       goalstatus := gjson.Get(reqBody, "goalstatus").String()
 	finishtime := gjson.Get(reqBody, "finishtime").String()
 	plantime := gjson.Get(reqBody, "plantime").String()
 	priority:= gjson.Get(reqBody, "priority").Int()
-	timerange:= gjson.Get(reqBody, "planmonth").Int()
-	var goalindb  Goalfordbs
+	timerange:= gjson.Get(reqBody, "timerange").Int()
+fmt.Println(timerange)	
+var goalindb  Goalfordbs
 	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
 	if priority != -1  {db.Model(&goalindb).Update("Priority", int(priority)) }
 	if goal != "unspecified"{if goal!= "nocontent"{db.Model(&goalindb).Update("Name", goal)}}
