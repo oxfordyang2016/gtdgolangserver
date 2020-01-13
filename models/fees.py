@@ -239,7 +239,7 @@ def getfeesdetail():
     email = "yang756260386@gmail.com"
     #date = content['date']
     session = Session()
-    date = weektime_current()
+    date = monthtime_current()
     print(date)
     #这里使用级别链接的方式重新设计
     #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()

@@ -379,6 +379,33 @@ func Reviewforstastics(c *gin.Context){
   counts, _:= strconv.Atoi(count_need_bystastics_from_client)
 
 
+
+
+
+type Result struct {
+    Name string
+}
+
+loc, _ := time.LoadLocation("Asia/Shanghai")
+var resultofgoal_tofinishintoday  []Result
+today :=  time.Now().In(loc).Format("060102")
+   db.Raw(`SELECT name  FROM goalfordbs  WHERE email ="`+email+`"`+" and goalstatus not in ("+`"giveup","g","finished","finish"`+`) and `+ ` name   NOT IN (SELECT goal  FROM tasks  WHERE finishtime=` +`"`+today+`"`+` and email =`+`"`+email+`"`+`);`).Scan(&resultofgoal_tofinishintoday)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  // db.Where("email =  ?", email).Order("date").Find(&reviewsfortimescount)
 
 //how many things do u had finished in theses days?
@@ -410,7 +437,6 @@ var plannedtask_today_count = 0
 var plannedtask_yesterday_count = 0
 var plannedtask_same_with_finished_today_count = 0
 var plannedtask_same_with_finished_yesterday_count = 0
-loc, _ := time.LoadLocation("Asia/Shanghai")
 //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
 yesterdaytime :=  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 todaytime :=  time.Now().In(loc).AddDate(0,0,0).Format("060102")
@@ -506,6 +532,7 @@ fmt.Println("---------------")
       "plannedtask_same_with_finished_yesterday_count":plannedtask_same_with_finished_yesterday_count, 
       "goaltime":goal_devotedtime,
       "reviewdata":reviewdata,
+      "resultofgoal_tofinishintoday":resultofgoal_tofinishintoday,
       "devotedtime_for_goal_in_everyday":devotedtime_for_goal_in_everyday,
     })
 }
