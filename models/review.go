@@ -2,6 +2,7 @@ package models
 
 import (
 "fmt"
+"github.com/fatih/color"
 "encoding/json"
 "net/http"
 "github.com/jinzhu/gorm"
@@ -328,7 +329,6 @@ func Questionssystem(c *gin.Context) {
 
 
 
-
 func Reviewalgorithmjsonforios(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
@@ -379,6 +379,33 @@ func Reviewforstastics(c *gin.Context){
   counts, _:= strconv.Atoi(count_need_bystastics_from_client)
 
 
+
+
+
+type Result struct {
+    Name string
+}
+
+loc, _ := time.LoadLocation("Asia/Shanghai")
+var resultofgoal_tofinishintoday  []Result
+today :=  time.Now().In(loc).Format("060102")
+   db.Raw(`SELECT name  FROM goalfordbs  WHERE email ="`+email+`"`+" and goalstatus not in ("+`"giveup","g","finished","finish"`+`) and `+ ` name   NOT IN (SELECT goal  FROM tasks  WHERE finishtime=` +`"`+today+`"`+` and email =`+`"`+email+`"`+`);`).Scan(&resultofgoal_tofinishintoday)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  // db.Where("email =  ?", email).Order("date").Find(&reviewsfortimescount)
 
 //how many things do u had finished in theses days?
@@ -397,6 +424,9 @@ var alleverydays = Sort_tasksbyday(tasks)
 var tasksbydays []Everyday
 
 // -1 表示昨天 1表示今天
+fmt.Println("// -1 表示昨天 1表示今天")
+fmt.Println(counts)
+
 if counts == -1{
   tasksbydays = alleverydays[1:2]
 }else{
@@ -407,7 +437,6 @@ var plannedtask_today_count = 0
 var plannedtask_yesterday_count = 0
 var plannedtask_same_with_finished_today_count = 0
 var plannedtask_same_with_finished_yesterday_count = 0
-loc, _ := time.LoadLocation("Asia/Shanghai")
 //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
 yesterdaytime :=  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 todaytime :=  time.Now().In(loc).AddDate(0,0,0).Format("060102")
@@ -429,7 +458,7 @@ for  _,item :=range tasksbydays{
   //接下来在循环每一天的任务
   var day_devotedtime = 0//每天投入的时间
   for _,item1 := range item.Alldays{
-    day_devotedtime = day_devotedtime +item1.Devotedtime
+         day_devotedtime = day_devotedtime +item1.Devotedtime
     all_time_u_had_devoted_inthe_time_range = all_time_u_had_devoted_inthe_time_range + item1.Devotedtime
     if item1.Goal!="no goal"{
      
@@ -449,7 +478,18 @@ fmt.Printf("theses task counts is %d",alltasks_count)
 fmt.Printf("u had devoted %d  minutes in the time range",all_time_u_had_devoted_inthe_time_range)
 fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_oriented)
   var reviewsfortimescount []Reviewfortimescount
-  db.Where("email =  ?", email).Order("date").Find(&reviewsfortimescount)
+
+
+tomorrowtime :=  time.Now().In(loc).AddDate(0, 0,1).Format("060102")
+
+  
+//这里其实会出现功能性的bug，当用户不小心更新了以后的日子
+db.Where("email =  ?", email).Where("date < ?", tomorrowtime).Order("date").Find(&reviewsfortimescount)
+
+
+fmt.Println("--------")
+fmt.Println(reviewsfortimescount)
+
   if (len(reviewsfortimescount)-counts < 0){
     c.JSON(200, gin.H{
       "errorcode":1101,
@@ -471,7 +511,10 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
   
 
   fmt.Println(reviewdata)
-  //   for _,item :=range reviewdata{
+  
+fmt.Println("---------------")
+
+//   for _,item :=range reviewdata{
   //   var detailofday = item.Details 
   //   challengetag := gjson.Get(detailofday, "challengetag").String()
   //   fmt.Println(challengetag)  
@@ -489,6 +532,7 @@ fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_o
       "plannedtask_same_with_finished_yesterday_count":plannedtask_same_with_finished_yesterday_count, 
       "goaltime":goal_devotedtime,
       "reviewdata":reviewdata,
+      "resultofgoal_tofinishintoday":resultofgoal_tofinishintoday,
       "devotedtime_for_goal_in_everyday":devotedtime_for_goal_in_everyday,
     })
 }
@@ -744,7 +788,7 @@ var conquerthefear_score float64= 0
 var conquerthefear_number  = 0
 var setarecord_score float64= 0
 var setarecord_number  = 0
-db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Not("status", []string{"unfinished","unfinish"}).Count(&countoffinishedtasks)
+db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Count(&countoffinishedtasks)
 
 
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Where("status =?","giveup").Count(&countofgivenuptasks)
@@ -777,6 +821,8 @@ if  challengetag := gjson.Get(jsonoftasktags, "challengetag").String();challenge
 challengetag_score  = float64((challengetag_score + 5))*item.Goalcoefficient
 challengetag_number  = challengetag_number + 1
 
+fmt.Println("-----=======-------++++++++++杨明在这里++++=-----======----------------")
+fmt.Println(item)
 }
 
 
@@ -1128,6 +1174,10 @@ if math.IsNaN(total_score){
 }
 
 review := &Reviewdatadetail{Totalscore:total_score,Noflinch:noflinch_score,Setarecord:setarecord_score,Conquerthefear:conquerthefear_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
+
+color.Red("We have red")
+
+fmt.Println(markataskimmediately_number)
 reviewfortimecount_from_client := Reviewfortimescount{Email:email,Noflinch:noflinch_number,Challengethings:challengetag_number,Conquerthefear:conquerthefear_number,Setarecord:setarecord_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json

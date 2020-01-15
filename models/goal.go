@@ -7,6 +7,7 @@ import(
 //"github.com/bradfitz/slice"
 //"encoding/json"
 "net/http"
+"github.com/fatih/color"
 "github.com/jinzhu/gorm"
 //"strconv"
 //"github.com/jinzhu/gorm"
@@ -110,21 +111,67 @@ func Updategoal(c *gin.Context) {
 	goal := gjson.Get(reqBody, "goal").String()
 	fmt.Printf("---goal is------%s-----\n",goal)
 	goalcode := gjson.Get(reqBody, "goalcode").String()
-	goalstatus := gjson.Get(reqBody, "goalstatus").String()
+       fmt.Println(goalcode)	
+       goalstatus := gjson.Get(reqBody, "goalstatus").String()
 	finishtime := gjson.Get(reqBody, "finishtime").String()
 	plantime := gjson.Get(reqBody, "plantime").String()
 	priority:= gjson.Get(reqBody, "priority").Int()
-	timerange:= gjson.Get(reqBody, "planmonth").Int()
-	var goalindb  Goalfordbs
+	timerange:= gjson.Get(reqBody, "timerange").Int()
+fmt.Println(timerange)	
+var goalindb  Goalfordbs
 	db.Where("Email= ?", email).Where("Goalcode= ?",goalcode).Find(&goalindb)
 	if priority != -1  {db.Model(&goalindb).Update("Priority", int(priority)) }
 	if goal != "unspecified"{if goal!= "nocontent"{db.Model(&goalindb).Update("Name", goal)}}
 	if timerange !=0{db.Model(&goalindb).Update("Timerange", int(timerange)) }
-	if goalstatus !="unfinished"{db.Model(&goalindb).Update("Goalstatus", goalstatus)}
+	if goalstatus !="unspecified"{db.Model(&goalindb).Update("Goalstatus", goalstatus)}
 	if finishtime !="unspecified"{db.Model(&goalindb).Update("Finishtime", finishtime)}
 	if plantime !="unspecified"{db.Model(&goalindb).Update("Plantime", plantime)}
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK })
 }
+
+
+
+
+
+func Goalcompare(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,err:=c.Request.Cookie("email")
+  //fmt.Println(emailcookie.Value)
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
+  
+fmt.Println(email)
+  
+
+type Result struct {
+    Name string
+}
+
+loc, _ := time.LoadLocation("Asia/Shanghai")
+var result []Result
+today :=  time.Now().In(loc).Format("060102")
+   db.Raw(`SELECT name  FROM goalfordbs  WHERE email ="`+email+`"`+" and goalstatus not in ("+`"giveup","g","finished","finish"`+`) and `+ ` name   NOT IN (SELECT goal  FROM tasks  WHERE finishtime=` +`"`+today+`"`+` and email =`+`"`+email+`"`+`);`).Scan(&result)
+   color.Red("red")
+   fmt.Println(result)
+   c.JSON(200, gin.H{
+      "undevotedgoals":result,
+    })
+
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -139,15 +186,25 @@ func Updategoal(c *gin.Context) {
 func Goalsystem(c *gin.Context) {
 	//i use email as identifier
   //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-	emailcookie,_:=c.Request.Cookie("email")
-	fmt.Println(emailcookie.Value)
-	email:=emailcookie.Value
-	//fmt.Println(cookie1.Value)
-  
+ 
+ emailcookie,err:=c.Request.Cookie("email")
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
+
+
+
+ 
 	//var goals []Tasks
 	var goals []Goalfordbs
 	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
-	db.Where("email =  ?", email).Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+//db.Where("email =  ?", email).Not("goalstatus", []string{"finished"}).Order("id").Find(&goals)
+db.Where("email =  ?", email).Order("id").Find(&goals)
+fmt.Println(goals)
 	c.JSON(200, gin.H{
 		"goals":goals,
 	  })

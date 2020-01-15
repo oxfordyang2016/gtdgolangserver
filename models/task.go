@@ -2,6 +2,9 @@ package models
 import(
   "fmt"
   "reflect"
+
+"regexp"
+
   //"encoding/json"
   //"log"
   "time"
@@ -530,7 +533,32 @@ fmt.Println(value.String())
   inboxlist := gjson.Get(reqBody, "inboxlist")
   devotedtime:= gjson.Get(reqBody, "timedevotedto_a_task").Int()
    fmt.Println(devotedtime)
-  // tasktags1 := gjson.Get(reqBody, "tasktags")
+   
+  //这里如果是从Siri上传过来，我先获取tag，然后匹配可能存在的时间
+
+
+   tasktagtextfromsiri := gjson.Get(reqBody, "tasktagtextfromsiri").String()
+   re := regexp.MustCompile(`投入[\p{Han}]*[0-9]+分钟`)
+  if  re.MatchString(tasktagtextfromsiri) == true{
+  d :=   fmt.Sprintf("%q\n",re.Find([]byte(tasktagtextfromsiri)))
+  re1 := regexp.MustCompile(`[0-9]+`)
+  d1 := fmt.Sprintf("%s",re1.Find([]byte(d)))
+  fmt.Println(d1)
+   i, err := strconv.Atoi(d1)
+     if err!= nil{
+fmt.Println(err)
+}else{
+devotedtime = int64(i)
+}
+
+}
+  
+   
+
+
+
+
+ // tasktags1 := gjson.Get(reqBody, "tasktags")
   // fmt.Println(tasktags1)
   tasktags := gjson.Get(reqBody, "tasktags").String()
 
@@ -694,6 +722,14 @@ if status!="unfinished"{
 
 }
 
+
+  if clientfinishtime == "today"{
+   clientfinishtime = "today"
+
+}
+
+
+
   fmt.Println("=================")
   fmt.Println(clientfinishtime)
   loc, _ := time.LoadLocation("Asia/Shanghai")
@@ -707,6 +743,20 @@ if status!="unfinished"{
     clientfinishtime =  time.Now().In(loc).AddDate(0, 0,-1).Format("060102")
 
     }
+
+
+          if strings.Contains(clientfinishtime, "today"){
+     // if clientfinishtime == "yesterday"{
+   loc, _ := time.LoadLocation("Asia/Shanghai")
+    //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+    clientfinishtime =  time.Now().In(loc).Format("060102")
+    
+    }
+
+
+
+
+
     fmt.Println("-----------i am try to print inbox list-------------")
     fmt.Println(len(inboxlist.Array()))
    if len(inboxlist.Array())>1{

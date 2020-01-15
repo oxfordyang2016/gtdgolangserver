@@ -52,6 +52,7 @@ def get_date_list(start=None, end=None):
     """
     #这里写代码我自已进行解析时间
     '%y%m%d'
+    
     start = datetime.strptime(start, '%y%m%d')
     end = datetime.strptime(end, '%y%m%d')
     
@@ -118,8 +119,11 @@ def  thisyear_current():
     date_obj  = date.today() 
     #接下来的两部分是用来获取date类型的时间格式
     year = date_obj.year
-    start = str(year)+"0101"
-    end = str(year)+"1231"
+    start = str(year)[2:]+"0101"
+    end = str(year)[2:]+"1231"
+    print(year)
+    print(start)
+    print(end)
     days = get_date_list(start,end)
     return days
 
@@ -235,7 +239,7 @@ def getfeesdetail():
     email = "yang756260386@gmail.com"
     #date = content['date']
     session = Session()
-    date = weektime_current()
+    date = monthtime_current()
     print(date)
     #这里使用级别链接的方式重新设计
     #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
@@ -279,16 +283,21 @@ def createfees():
     record = content['inbox']
     direction = content['direction']
     date = content['date']
-    print(record)
-    #record = "我们吃了10块钱的晚饭"
-    fees = getmoney(record)
-    print(fees)
-    #这里因该给出明确的告警信息！否则下面这句话会出问题
-    if len(fees) >1 or len(fees) == 0:
-        return json.dumps({"info":"请不要在消费中包含两个数字，我不能帮你识别","status":"fail"})
-    #接下来准备写入到Q数据库
-    feefromclient = float(fees[0])
-    print(feefromclient) 
+    feefromclient = 0.0
+    print(request.headers)
+    if request.headers['client'] == "iosnotsiri":
+        feefromclient = float(content['fee'])
+        print(record)
+    else:
+        #record = "我们吃了10块钱的晚饭"
+        fees = getmoney(record)
+        print(fees)
+        #这里因该给出明确的告警信息！否则下面这句话会出问题
+        if len(fees) >1 or len(fees) == 0:
+            return json.dumps({"info":"请不要在消费中包含两个数字，我不能帮你识别","status":"fail"})
+        #接下来准备写入到Q数据库
+        feefromclient = float(fees[0])
+        print(feefromclient) 
     session = Session()
     oneday = Accounting(direction,record,feefromclient,date,email)
     session.add(oneday)
