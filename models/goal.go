@@ -150,13 +150,15 @@ fmt.Println(email)
   
 
 type Result struct {
-    Name string
+	Name string
+	Goalcode string
+    Priority int
 }
 
 loc, _ := time.LoadLocation("Asia/Shanghai")
 var result []Result
 today :=  time.Now().In(loc).Format("060102")
-   db.Raw(`SELECT name  FROM goalfordbs  WHERE email ="`+email+`"`+" and goalstatus not in ("+`"giveup","g","finished","finish"`+`) and `+ ` name   NOT IN (SELECT goal  FROM tasks  WHERE finishtime=` +`"`+today+`"`+` and email =`+`"`+email+`"`+`);`).Scan(&result)
+   db.Raw(`SELECT name,goalcode,priority  FROM goalfordbs  WHERE email ="`+email+`"`+" and goalstatus not in ("+`"giveup","g","finished","finish"`+`) and `+ ` name   NOT IN (SELECT goal  FROM tasks  WHERE finishtime=` +`"`+today+`"`+` and email =`+`"`+email+`"`+`);`).Scan(&result)
    color.Red("red")
    fmt.Println(result)
    c.JSON(200, gin.H{
