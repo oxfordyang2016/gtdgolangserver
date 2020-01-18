@@ -4,7 +4,8 @@ import(
   "reflect"
 
 "regexp"
-
+ "net/url"
+ "io/ioutil"
   //"encoding/json"
   //"log"
   "time"
@@ -866,7 +867,11 @@ fmt.Println(score)
 
 
 
+fmt.Println(score)
+       s := fmt.Sprintf("%f", score)
 
+     ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
+  ttsclient(ttsclienttext)
 
   c.JSON(200, gin.H{
     "taskid": taskid,
@@ -878,9 +883,24 @@ fmt.Println(score)
 
 
 
+//向腾讯语音合成推流
 
+ func ttsclient(text string){
+  ttsurl := "http://localhost:5050/pcm?%s"
+  var rq = url.Values{}
+  rq.Add("text",text)
+  resp, err := http.Get(fmt.Sprintf(ttsurl, rq.Encode()))
+  body, _ := ioutil.ReadAll(resp.Body)
+  fmt.Println(string(body))
+  defer resp.Body.Close()
+if err != nil {
+   panic(err)
+}
+defer resp.Body.Close()
+//Print the HTTP response status.
 
-
+fmt.Println("Response status:", resp.Status)
+ }
 
 
 
