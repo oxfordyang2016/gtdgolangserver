@@ -853,22 +853,14 @@ var score =   Compute_singleday(plantime,email)
 fmt.Println("真成绩是")
 
 fmt.Println(score)
-       s := fmt.Sprintf("%f", score) 
-   resp, err := http.Get("http://localhost:5050/pcm?text=AI女娲在陆家嘴为你播报，评价算法的分数为"+s)
-    if err != nil {
-        panic(err)
-    }
-    defer resp.Body.Close()
 //Print the HTTP response status.
 
-    fmt.Println("Response status:", resp.Status)
 
 
 
+ s := fmt.Sprintf("%f", score)
 
 
-fmt.Println(score)
-       s := fmt.Sprintf("%f", score)
 
      ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
   ttsclient(ttsclienttext)
