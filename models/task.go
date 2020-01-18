@@ -849,7 +849,6 @@ taskid = task.ID
 // 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
 Check_reviewdaylog(plantime,email)
 var score =   Compute_singleday(plantime,email)
-
 fmt.Println("真成绩是")
 
 fmt.Println(score)
@@ -1177,12 +1176,23 @@ fmt.Println(return_info)
 //Check_reviewdaylog(finishtime,email)
 //return_info:= Compute_singleday(finishtime,email)
 //fmt.Println(return_info)
+loc, _ := time.LoadLocation("Asia/Shanghai")
+today :=  time.Now().In(loc).Format("060102")
+// 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
+Check_reviewdaylog(today,email)
+var scorefotoday =   Compute_singleday(plantime,email)
+
+//推送语音到客户端
+s := fmt.Sprintf("%f", scorefotoday)
+ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
+ttsclient(ttsclienttext)
 
 
 
 
  c.JSON(200, gin.H{
-  			"status":  "posted",
+        "status":  "posted",
+        "score":scorefotoday,
   			"message": "123",
   			"nick": "234",
   		})
