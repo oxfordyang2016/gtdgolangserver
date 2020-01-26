@@ -355,9 +355,7 @@ func Reviewalgorithmjsonforios(c *gin.Context) {
 
 func Reviewforios(c *gin.Context) {
 
-
-c.HTML(http.StatusOK, "reviewalgoforios.html",nil)
-
+  c.HTML(http.StatusOK, "reviewalgoforios.html",nil)
 
 }
 
@@ -527,7 +525,6 @@ fmt.Println("---------------")
       "devotedtime_oriented":alltime_goal_oriented,
       "yesterday_planed_task_count":plannedtask_yesterday_count,
       "today_planed_task_count":plannedtask_today_count,
-
       "plannedtask_same_with_finished_today_count":plannedtask_same_with_finished_today_count,   
       "plannedtask_same_with_finished_yesterday_count":plannedtask_same_with_finished_yesterday_count, 
       "goaltime":goal_devotedtime,

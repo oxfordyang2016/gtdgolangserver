@@ -955,6 +955,11 @@ fmt.Println("Response status:", resp.Status)
     
    // id := c.PostForm("id")
     id := gjson.Get(reqBody, "id").String()
+   //检查更新id是否存在
+   
+
+
+
     fmt.Println("-------------yangming------------------")
     fmt.Println(reflect.TypeOf(id))
     project := gjson.Get(reqBody, "project").String()
@@ -1188,7 +1193,7 @@ ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ 
 ttsclient(ttsclienttext)
 
 
-
+  ttsclient(ttsclienttext)
 
  c.JSON(200, gin.H{
         "status":  "posted",
