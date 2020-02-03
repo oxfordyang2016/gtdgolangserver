@@ -32,6 +32,8 @@ func init() {
 	var err error
 	//mysql://dt_admin:dt2016@localhost/dreamteam_db
 	db, err = gorm.Open("mysql", "dt_admin:dt2016@/dreamteam_db?charset=utf8&parseTime=True&loc=Local")
+
+        db.BlockGlobalUpdate(true)
         
           //connect database to postgrel
 
