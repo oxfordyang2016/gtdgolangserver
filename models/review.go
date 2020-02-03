@@ -471,10 +471,10 @@ for  _,item :=range tasksbydays{
   //把每天投入的时间加入到合理的区间里面
   devotedtime_for_goal_in_everyday = append(devotedtime_for_goal_in_everyday,day_devotedtime)
 }
-fmt.Printf("the task length is %d",len(tasksbydays))
-fmt.Printf("theses task counts is %d",alltasks_count)
-fmt.Printf("u had devoted %d  minutes in the time range",all_time_u_had_devoted_inthe_time_range)
-fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_oriented)
+// fmt.Printf("the task length is %d",len(tasksbydays))
+// fmt.Printf("theses task counts is %d",alltasks_count)
+// fmt.Printf("u had devoted %d  minutes in the time range",all_time_u_had_devoted_inthe_time_range)
+// fmt.Printf("u had devoted %d  minutes in the time range for goal",alltime_goal_oriented)
   var reviewsfortimescount []Reviewfortimescount
 
 
@@ -1214,6 +1214,7 @@ if err != nil{
 
 var reviewday Reviewofday
 var reviewfortimecount Reviewfortimescount
+//这里可能存在bug，我需要非常注意
 db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewday)
 db.Model(&reviewday).Update("Details", reviewstring)
 db.Where("date =  ?", date).Where("email =  ?", email).Find(&reviewfortimecount)

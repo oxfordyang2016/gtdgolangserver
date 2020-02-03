@@ -19,7 +19,9 @@ package main
 import (
 	//"net/http"
 	//"github.com/yangming/stringutil"
-	//"fmt"
+  //"fmt"
+  "os"
+  "io"
 	//"./math"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -43,10 +45,11 @@ func main() {
 	//golang import var
 	//fmt.Println(Modeltest)
 
+  // f, err := os.Create("/tmp/dat2")
 
-
-
-	router := gin.Default()
+f, _ := os.Create("engine.log")
+gin.DefaultWriter = io.MultiWriter(f)
+router := gin.Default()
 
 v1 := router.Group("/v1")
 
@@ -120,7 +123,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.POST("/creategoal",Creategoal)
         v1.POST("/updategoal",Updategoal)
         v1.GET("/comparegoal",Goalcompare)    
-
+        v1.GET("/searchwithgoalcode",Searchwithgoalcode)  
 
  //web page
 	      //v1.GET("/mainboard",Mainboard)

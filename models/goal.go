@@ -170,9 +170,65 @@ today :=  time.Now().In(loc).Format("060102")
 
 
 
+//使用目标的goalcode
+func Searchwithgoalcode(c *gin.Context) {
+	//i use email as identifier
+  //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+	emailcookie,err:=c.Request.Cookie("email")
+	//fmt.Println(emailcookie.Value)
+	var email string
+	 if err!=nil{
+	   email = c.Request.Header.Get("email")
+	 }else{
+	   fmt.Println(emailcookie.Value)
+	   email =emailcookie.Value
+	 }
+	
+	goalcode :=  c.Query("goalcode")
+	tasktag :=  c.Query("tasktag")
+	
+    fmt.Println(email,tasktag)
+	
+  
+  type Simpletask struct {
+	  Id string
+	  Task string
+	  Status string
+  }
+  
+  type Simplegoal struct {
+	Goalcode string
+	Name string
+	// Taskstag string
+}
+
+//   loc, _ := time.LoadLocation("Asia/Shanghai")
+     var result []Simpletask
+//   today :=  time.Now().In(loc).Format("060102")
+     querystring := `SELECT id,task,status  FROM tasks  WHERE  email ="`+email+`"`+"and status not in ("+`"giveup","g","finished","finish"`+`) and `+ ` goal  IN (SELECT name  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`);`
+	 
+	 if tasktag != ""&&tasktag != "notag"{
+		querystring = `SELECT id,task,status  FROM tasks  WHERE  email ="`+email+`"`+" and tasktags REGEXP "+"'"+`"`+tasktag+`"`+":[ ]{0,1}"+`"yes"`+"'"+" and status not in ("+`"giveup","g","finished","finish"`+`) and `+ ` goal  IN (SELECT name  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`);`
+	 }
+	 var goalinfo Simplegoal
+	 goalquery := `SELECT name,goalcode  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`;`
+	 fmt.Println(querystring)
+	 db.Raw(goalquery).Scan(&goalinfo)
+	 db.Raw(querystring).Scan(&result)
+	 color.Red("red")
+	 fmt.Println(result)
+	 fmt.Println(goalinfo)
+	 c.JSON(200, gin.H{
+		 "taskstag":tasktag,
+		 "goalinfo":goalinfo,
+		"goalcode_unfinishedtask":result,
+	  })
+  
+  }
 
 
 
+//   `and tasktags REGEXP "+"'"+`"`+keywords+`"`+":[ ]{0,1}"+`"yes"``
 
 
 
