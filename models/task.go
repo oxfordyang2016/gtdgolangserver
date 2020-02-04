@@ -2,7 +2,7 @@ package models
 import(
   "fmt"
   "reflect"
-
+  "github.com/fatih/color"
 "regexp"
  "net/url"
  "io/ioutil"
@@ -862,7 +862,13 @@ fmt.Println(score)
 
 
      ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
-  ttsclient(ttsclienttext)
+  // ttsclient(ttsclienttext)
+ //这里分别向前段推送语音合成数据
+ ttsclient(ttsclienttext)
+ //这里是向前段推送图像数据
+ visiualdata2websocket(ttsclienttext)
+
+
 
   c.JSON(200, gin.H{
     "taskid": taskid,
@@ -877,6 +883,7 @@ fmt.Println(score)
 //向腾讯语音合成推流
 
  func ttsclient(text string){
+   //访问flask服务器，去合成音频流
   ttsurl := "http://localhost:5050/pcm?%s"
   var rq = url.Values{}
   rq.Add("text",text)
@@ -894,7 +901,25 @@ fmt.Println("Response status:", resp.Status)
  }
 
 
+//向echart推送图像服务
 
+func visiualdata2websocket(text string){
+  echarturl := "http://127.0.0.1:3030/pushtreedatetoweb"
+  // ttsurl := "http://localhost:5050/pcm?%s"
+  // var rq = url.Values{}
+  // rq.Add("text",text)
+  resp, err := http.Get(fmt.Sprintf(echarturl))
+  body, _ := ioutil.ReadAll(resp.Body)
+  fmt.Println(string(body))
+  defer resp.Body.Close()
+  if err != nil {
+    panic(err)
+   }
+defer resp.Body.Close()
+//Print the HTTP response status.
+color.Red("-------测试服务器是否工作正常--------")
+fmt.Println("Response status:", resp.Status)
+ }
 
 
 
@@ -1192,9 +1217,10 @@ s := fmt.Sprintf("%f", scorefotoday)
 ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
 ttsclient(ttsclienttext)
 
-
+//这里分别向前段推送语音合成数据
   ttsclient(ttsclienttext)
-
+  //这里是向前段推送图像数据
+  visiualdata2websocket(ttsclienttext)
  c.JSON(200, gin.H{
         "status":  "posted",
         "score":scorefotoday,

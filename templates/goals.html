@@ -20,7 +20,7 @@
     var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
     
     // Update the count down every 1 second
-    var x = setInterval(function() {
+       var x = setInterval(function() {
     
         // Get todays date and time
         var now = new Date();
@@ -184,6 +184,93 @@ function  getgoaltrees_without_project(){
 return goalsfortree
 }
 
+var heartCheck = {
+    timeout: 6000,//60ms
+    timeoutObj: null,
+    ws:null,
+    serverTimeoutObj: null,
+    reset: function(){
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+　　　　 this.start();
+    },
+    start: function(){
+      //  alert(this.ws)
+        var self = this;
+        this.timeoutObj = setTimeout(function(){
+        console.log("------我在这里测试心跳-----------")
+        // alert(self.ws)
+        console.log("------我在这里测试心跳-----------")
+          self.ws.send("HeartBeat");
+        self.serverTimeoutObj = setTimeout(function(){
+        self.ws.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+            }, self.timeout)
+        }, this.timeout)
+    },
+}
+
+
+
+
+
+function connect(url) {
+  var ws = new WebSocket(url);
+  
+//   ws.binaryType = 'arraybuffer';
+  ws.onopen = function() {
+    //alert(ws)
+    heartCheck.ws = ws;
+    // alert(heartCheck.ws)
+    heartCheck.start()
+    // subscribe to some channels
+    console.log("发送数据到服务器进行测试")
+    ws.send("Message to send");
+    console.log("发送数据到服务器进行测试")
+    // ws.send(JSON.stringify({
+    //   "a":1
+    //     //.... some message the I must send when I connect ....
+    // }));
+  };
+
+  ws.onmessage = function(e) {
+    heartCheck.reset();
+    console.log('Message:', e.data);
+    if (e.data =="服务器发送图像数据到前端"){
+     var data = {"name":"goals","children":getgoaltrees()}
+     doooo(data)
+    }
+   
+    // var data = new Uint8Array(e.data);
+    // player.feed(data);
+    
+  };
+  
+  
+  ws.onclose = function(e) {
+    console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+    setTimeout(function() {
+    // connect('ws://localhost:777',player);
+    connect('ws://47.100.100.141:777',player);
+    }, 1000);
+  };
+
+  ws.onerror = function(err) {
+    console.error('Socket encountered error: ', err.message, 'Closing socket');
+    ws.close();
+  };
+}
+
+
+connect('ws://47.100.100.141:777')
+//    connect('ws://localhost:777')
+
+
+
+
+
+
+
+
 var data = {"name":"goals","children":getgoaltrees()}
 doooo(data)
 $( "#noproject" ).click(function() {
@@ -278,7 +365,7 @@ function doooo(datafromserver){
 
             symbolSize: 10,
 
-            initialTreeDepth: 1,
+            initialTreeDepth: 3,
             rom:true,
             emphasis:{
                 lineStyle:{width:20}
