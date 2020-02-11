@@ -1215,7 +1215,7 @@ var scorefotoday =   Compute_singleday(plantime,email)
 //推送语音到客户端
 s := fmt.Sprintf("%f", scorefotoday)
 ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
-ttsclient(ttsclienttext)
+//ttsclient(ttsclienttext)
 
 //这里分别向前段推送语音合成数据
   ttsclient(ttsclienttext)
