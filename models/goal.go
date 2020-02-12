@@ -152,7 +152,8 @@ fmt.Println(email)
 type Result struct {
 	Name string
 	Goalcode string
-    Priority int
+	Priority int
+	
 }
 
 loc, _ := time.LoadLocation("Asia/Shanghai")
@@ -194,6 +195,7 @@ func Searchwithgoalcode(c *gin.Context) {
 	  Id string
 	  Task string
 	  Status string
+	  Parentid string `json:"parentid"`
   }
   
   type Simplegoal struct {
@@ -205,10 +207,10 @@ func Searchwithgoalcode(c *gin.Context) {
 //   loc, _ := time.LoadLocation("Asia/Shanghai")
      var result []Simpletask
 //   today :=  time.Now().In(loc).Format("060102")
-     querystring := `SELECT id,task,status  FROM tasks  WHERE  email ="`+email+`"`+"and status not in ("+`"giveup","g","finished","finish"`+`) and `+ ` goal  IN (SELECT name  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`);`
+     querystring := `SELECT id,task,status,parentid  FROM tasks  WHERE  email ="`+email+`"`+"and status not in ("+`"giveup","g","finished","finish"`+`) and `+ ` goal  IN (SELECT name  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`);`
 	 
 	 if tasktag != ""&&tasktag != "notag"{
-		querystring = `SELECT id,task,status  FROM tasks  WHERE  email ="`+email+`"`+" and tasktags REGEXP "+"'"+`"`+tasktag+`"`+":[ ]{0,1}"+`"yes"`+"'"+" and status not in ("+`"giveup","g","finished","finish"`+`) and `+ ` goal  IN (SELECT name  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`);`
+		querystring = `SELECT id,task,status,parentid  FROM tasks  WHERE  email ="`+email+`"`+" and tasktags REGEXP "+"'"+`"`+tasktag+`"`+":[ ]{0,1}"+`"yes"`+"'"+" and status not in ("+`"giveup","g","finished","finish"`+`) and `+ ` goal  IN (SELECT name  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`);`
 	 }
 	 var goalinfo Simplegoal
 	 goalquery := `SELECT name,goalcode  FROM goalfordbs  WHERE goalcode =` +`"`+goalcode+`"`+` and email =`+`"`+email+`"`+`;`

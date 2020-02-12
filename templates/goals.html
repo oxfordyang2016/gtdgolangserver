@@ -195,13 +195,13 @@ var heartCheck = {
 　　　　 this.start();
     },
     start: function(){
-      //  alert(this.ws)
+        //alert(this.ws)
         var self = this;
         this.timeoutObj = setTimeout(function(){
         console.log("------我在这里测试心跳-----------")
         // alert(self.ws)
         console.log("------我在这里测试心跳-----------")
-          self.ws.send("HeartBeat");
+        self.ws.send("HeartBeat");
         self.serverTimeoutObj = setTimeout(function(){
         self.ws.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
             }, self.timeout)
@@ -249,11 +249,18 @@ function connect(url) {
   ws.onclose = function(e) {
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
+<<<<<<< HEAD
     // connect('ws://localhost:777',player);
 //    connect('ws://47.100.100.141:777',player);
 connect('wss://www.blackboxo.top/wss')  
 
   }, 1000);
+=======
+    // connect('ws://localhost:777');
+    // connect('ws://47.100.100.141:777');
+    connect('ws://localhost:777');
+    }, 1000);
+>>>>>>> fe264d02961cddbfd9f4e5046ff1619d8e4b45aa
   };
 
   ws.onerror = function(err) {
@@ -263,8 +270,13 @@ connect('wss://www.blackboxo.top/wss')
 }
 
 
+<<<<<<< HEAD
 //connect('ws://47.100.100.141:777')
 //    connect('ws://localhost:777')
+=======
+// connect('ws://47.100.100.141:777')
+   connect('ws://localhost:777')
+>>>>>>> fe264d02961cddbfd9f4e5046ff1619d8e4b45aa
 
 
 connect('wss://www.blackboxo.top/wss') 
@@ -348,7 +360,63 @@ $( "#withproject" ).click(function() {
 function doooo(datafromserver){
     
 
-    myChart.setOption(option = {
+    myChart.setOption(
+       
+
+        
+//从左到右的方式
+//         option = {
+//     tooltip: {
+//         trigger: 'item',
+//         triggerOn: 'mousemove'
+//     },
+//     series:[
+//         {
+//             type: 'tree',
+//             id: 0,
+//             name: 'tree1',
+//             data: [datafromserver],
+
+//             top: '10%',
+//             left: '8%',
+//             bottom: '22%',
+//             right: '20%',
+
+//             symbolSize: 7,
+
+//             edgeShape: 'polyline',
+//             edgeForkPosition: '63%',
+//             initialTreeDepth: 3,
+
+//             lineStyle: {
+//                 width: 2
+//             },
+
+//             label: {
+//                 backgroundColor: '#fff',
+//                 position: 'left',
+//                 verticalAlign: 'middle',
+//                 align: 'right'
+//             },
+
+//             leaves: {
+//                 label: {
+//                     position: 'right',
+//                     verticalAlign: 'middle',
+//                     align: 'left'
+//                 }
+//             },
+
+//             expandAndCollapse: true,
+//             animationDuration: 550,
+//             animationDurationUpdate: 750
+//         }
+//     ]
+// }
+
+
+
+        option = {
     tooltip: {
         trigger: 'item',
         triggerOn: 'mousemove'
@@ -374,10 +442,45 @@ function doooo(datafromserver){
             label:{show:true,position:"right",rotate:12,fontStyle:'italic',fontSize:15},
             lineStyle:{width:1,color:"red",curveness:0.1},
             animationDurationUpdate: 750
+            
+                // top: '1%',
+                // left: '15%',
+                // bottom: '1%',
+                // right: '7%',
+
+                // symbolSize: 7,
+
+                // orient: 'RL',
+
+                // label: {
+                //     position: 'right',
+                //     verticalAlign: 'middle',
+                //     align: 'left'
+                // },
+
+                // leaves: {
+                //     label: {
+                //         position: 'left',
+                //         verticalAlign: 'middle',
+                //         align: 'right'
+                //     }
+                // },
+
+                // expandAndCollapse: true,
+                // animationDuration: 550,
+                // animationDurationUpdate: 750
+
 
         }
     ]
-});
+
+}
+
+
+
+
+
+);
 }
 
 
