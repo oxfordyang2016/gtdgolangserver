@@ -977,6 +977,10 @@ fmt.Println("Response status:", resp.Status)
     reviewalgolight := gjson.Get(reqBody, "reviewalgolight").String()
     reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
     goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
+    parentid_fromgtdcli := gjson.Get(reqBody, "parentid").String()
+    if parentid_fromgtdcli == "unspecified"{
+      parentid_fromgtdcli = goalcode_fromgtdcli
+    }
     devotedtime:= gjson.Get(reqBody, "timedevotedto_a_task").Int()
     fmt.Println("---------------------tasktags info -------------------")
     fmt.Println(taglight)
@@ -1130,6 +1134,17 @@ db.Model(&task).Update("Priority", task_priority)
     if inbox!="nocontent"{db.Model(&task).Update("Task", inbox)}
     if plantime!="unspecified"{db.Model(&task).Update("Plantime", plantime)}
     if parentproject!="unspecified"{db.Model(&task).Update("Parentproject", parentproject)}
+    fmt.Println("--------iamhere--------")
+    fmt.Println("--------iamhere--------")
+    fmt.Println("--------iamhere--------")
+
+    fmt.Println("--------iamhere--------")
+    fmt.Println("--------iamhere--------")
+
+    fmt.Println("--------iamhere--------")
+    fmt.Println("--------iamhere--------")
+    fmt.Println(parentid_fromgtdcli)
+    if parentid_fromgtdcli!="unspecified"{db.Model(&task).Update("Parentid", parentid_fromgtdcli)}
     if ifdissect!="no"{db.Model(&task).Update("Ifdissect", ifdissect)}
     if note!="unspecified"{db.Model(&task).Update("Note", note)}
     if taglight == "yes"{db.Model(&task).Update("Tasktags", tasktags)}
@@ -1233,9 +1248,9 @@ ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ 
 //ttsclient(ttsclienttext)
 
 //这里分别向前段推送语音合成数据
-  ttsclient(ttsclienttext)
+ ttsclient(ttsclienttext)
   //这里是向前段推送图像数据
-  visiualdata2websocket(ttsclienttext)
+ visiualdata2websocket(ttsclienttext)
  c.JSON(200, gin.H{
         "status":  "posted",
         "score":scorefotoday,
