@@ -93,7 +93,8 @@ func Creategoal(c *gin.Context) {
         b= "a"
         a = alphabet[getindex(a)+1]
       }
-    }
+	}
+	//这里原来引号出了问题。。。。多出了一个空格
     goalfromclient := Goalfordbs{Name:goal,Email:email,Goalcode:fmt.Sprintf("%s%s%s ",a,b,c)}
     db.Create(&goalfromclient).Scan(&goalfromclient)
    } 
@@ -219,7 +220,8 @@ func Searchwithgoalcode(c *gin.Context) {
 	 db.Raw(querystring).Scan(&result)
 	 color.Red("red")
 	 fmt.Println(result)
-	 fmt.Println(goalinfo)
+	 fmt.Println("-----------")
+	 fmt.Printf("%#v----\n",goalinfo.Goalcode)
 	 c.JSON(200, gin.H{
 		 "taskstag":tasktag,
 		 "goalinfo":goalinfo,
