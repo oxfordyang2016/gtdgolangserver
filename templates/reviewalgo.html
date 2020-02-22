@@ -179,9 +179,10 @@ jQuery.ajaxSetup({async:false});
 
 
 function loadlink(){
-var standard_group = ['totalscore','doanimportantthingearly','markataskimmediately','alwaysprofit','patience','usebrain','battlewithlowerbrain','learnnewthings','makeofthingsuhavelearned','difficultthings','threeminutes','getlesson','learntechuse','thenumberoftasks_score','serviceforgoal_score'];
+var standard_group = ['totalscore',"todayscore",'doanimportantthingearly','markataskimmediately','alwaysprofit','patience','usebrain','battlewithlowerbrain','learnnewthings','makeofthingsuhavelearned','difficultthings','threeminutes','getlesson','learntechuse','thenumberoftasks_score','serviceforgoal_score'];
 var datecategory = [];
 var totalscore = [];
+var todayscore = [];
 var patience = [];
 var alwaysprofit = [];
 var usebrain = [];
@@ -231,6 +232,11 @@ $.get("/v1/reviewdaydatajson", function(data, status){
 };    
 
 
+
+
+//添加一条今日线
+todayscore = new Array(totalscore.length).fill(totalscore[totalscore.length-1]);
+// alert(todayscore)
 //alert(serviceforgoal_score);
 /*
 
@@ -393,6 +399,29 @@ option = {
             areaStyle: {},
             data:learntechuse
         },
+  //同时在图像中添加别的类型的曲线
+        {
+            name:'todayscore',
+            type:'line',
+            // stack: 'todayscore',
+            color:'red',
+            // areaStyle: {},
+            data:todayscore,
+            smooth: true,
+                lineStyle: {
+                    normal: { opacity: 0.5, 
+                    width:10
+                    }
+
+                }
+
+
+        },
+      
+  
+   
+
+
 
 
     {
