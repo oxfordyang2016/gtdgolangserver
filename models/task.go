@@ -881,10 +881,15 @@ fmt.Println(score)
 
      ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
   // ttsclient(ttsclienttext)
+  /*
+  
+  如果这里不异步执行的化会导致错误的
+  
+  */
  //这里分别向前段推送语音合成数据
- ttsclient(ttsclienttext)
+go ttsclient(ttsclienttext)
  //这里是向前段推送图像数据
- visiualdata2websocket(ttsclienttext)
+go visiualdata2websocket(ttsclienttext)
 
 
 
@@ -906,11 +911,18 @@ fmt.Println(score)
   var rq = url.Values{}
   rq.Add("text",text)
   resp, err := http.Get(fmt.Sprintf(ttsurl, rq.Encode()))
-  body, _ := ioutil.ReadAll(resp.Body)
+  body, err1 := ioutil.ReadAll(resp.Body)
+  if err1 != nil{
+    //下面代码为让服务器停止工作，注释掉
+    //  panic(err)  
+     color.Red("请求语音合成项目失败")
+  }
   fmt.Println(string(body))
   defer resp.Body.Close()
-if err != nil {
-   panic(err)
+if err != nil{
+  //下面代码为让服务器停止工作，注释掉
+  //  panic(err)  
+   color.Red("请求语音合成项目失败")
 }
 defer resp.Body.Close()
 //Print the HTTP response status.
@@ -919,7 +931,9 @@ fmt.Println("Response status:", resp.Status)
 //向echart推送图像服务
 
 func visiualdata2websocket(text string){
-  echarturl := "http://127.0.0.1:3030/pushtreedatetoweb"
+  //直接访问包含webscoket的node服务器
+  //echarturl := "http://127.0.0.1:3030/pushtreedatetoweb"
+  echarturl := "http://localhost:3030/pushtreedatetoweb"
   // ttsurl := "http://localhost:5050/pcm?%s"
   // var rq = url.Values{}
   // rq.Add("text",text)
@@ -1248,9 +1262,9 @@ ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ 
 //ttsclient(ttsclienttext)
 
 //这里分别向前段推送语音合成数据
- ttsclient(ttsclienttext)
+go ttsclient(ttsclienttext)
   //这里是向前段推送图像数据
- visiualdata2websocket(ttsclienttext)
+ go visiualdata2websocket(ttsclienttext)
  c.JSON(200, gin.H{
         "status":  "posted",
         "score":scorefotoday,
