@@ -162,7 +162,8 @@ if err!=nil{
       "reviewdata":reviewdays,
     })
   }else{
-    reviewdays = reviewdays[len(reviewdays)-31:]
+    //你可以在这里能够设置时间
+    reviewdays = reviewdays[len(reviewdays)-61:]
   
     c.JSON(200, gin.H{
       //"reviewdata":review30days,

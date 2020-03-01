@@ -117,6 +117,13 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.GET("/location",Canvas)
 
 
+  //principle system
+  v1.POST("/createprinciplelib",Createprinciplelib)
+  v1.POST("/createprincipledetail",Createprincipledetail) 
+  // v1.POST("/Createprincipledetail",Createprincipledetail)
+  v1.GET("/getprinciple",Principlesystem)
+
+
 
          //goalsystem
 
@@ -124,6 +131,8 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.POST("/updategoal",Updategoal)
         v1.GET("/comparegoal",Goalcompare)    
         v1.GET("/searchwithgoalcode",Searchwithgoalcode)  
+        v1.GET("/goaljson",Goalsystem)
+        v1.GET("/goalsgraph",Goalsjson)
 
  //web page
 	      //v1.GET("/mainboard",Mainboard)
@@ -139,13 +148,11 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.GET("/errorlogjson",Errorlog)
         v1.GET("/problemsjson",Problemssystem)
         v1.GET("/questionsjson",Questionssystem)
-        v1.GET("/goaljson",Goalsystem)
-        v1.GET("/goalsgraph",Goalsjson)
+    
         v1.GET("/reviewgraphforios",Reviewforios)
         v1.GET("/search",Search)
         v1.GET("/searchwithtag",Searchwithtags)
         //finance
-
         v1.GET("/mybalancejson",Getmywealth)
         //v1.POST("/createfee",CreatefeebyJSON)
         router.Run(":8081")
