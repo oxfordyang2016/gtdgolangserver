@@ -249,18 +249,12 @@ function connect(url) {
   ws.onclose = function(e) {
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
-<<<<<<< HEAD
-    // connect('ws://localhost:777',player);
-//    connect('ws://47.100.100.141:777',player);
 connect('wss://www.blackboxo.top/wss')  
 
-  }, 1000);
-=======
     // connect('ws://localhost:777');
     // connect('ws://47.100.100.141:777');
     connect('ws://localhost:777');
     }, 1000);
->>>>>>> fe264d02961cddbfd9f4e5046ff1619d8e4b45aa
   };
 
   ws.onerror = function(err) {
@@ -270,13 +264,7 @@ connect('wss://www.blackboxo.top/wss')
 }
 
 
-<<<<<<< HEAD
-//connect('ws://47.100.100.141:777')
-//    connect('ws://localhost:777')
-=======
-// connect('ws://47.100.100.141:777')
-   connect('ws://localhost:777')
->>>>>>> fe264d02961cddbfd9f4e5046ff1619d8e4b45aa
+   //connect('ws://localhost:777')
 
 
 connect('wss://www.blackboxo.top/wss') 
@@ -286,6 +274,8 @@ connect('wss://www.blackboxo.top/wss')
 
 
 var data = {"name":"goals","children":getgoaltrees()}
+
+
 doooo(data)
 $( "#noproject" ).click(function() {
 //   alert( "Handler for .click() called." );
