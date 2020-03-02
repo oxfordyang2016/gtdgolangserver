@@ -29,14 +29,19 @@ type(
 
 Principledetails  struct{
 	gorm.Model
-	Principlecode                   string  `json:"PrincipleName"`
+	Principlecode                   string  `json:"Principlecode"`
+	Principlename                   string  `json:"Principlename"`
 	Email                     string   `json:"email"`
 	//ID uint64 `gorm:"type:bigint(20) unsigned auto_increment;not null;primary_key"`
 	//i will use email+ab(2 alphebet table),such as yang756260386@gmail.comab
 	Detailitem             string    `json:"Detailitem"`
 	}
 
-
+principlecodewithprincples  struct{
+		Principlecode string  `json:"principlecode"`
+		Principlename string  `json:"principlename"` 
+		Principles    string  `json:"principles"`
+	   }
 
 	// Goalfordbs  struct{
 	// 	gorm.Model
@@ -56,7 +61,7 @@ Principledetails  struct{
 
 
 
-
+//创建的时候使用
 	//该原则系统将会被加载到标签系统上面去
 	Principlefordbs  struct{
 		gorm.Model
@@ -76,6 +81,29 @@ Principledetails  struct{
 
 
 
+    	Principlecodewithtasktag struct{
+			gorm.Model
+			// Principlename                   string  `json:"principlename"`
+			//ID uint64 `gorm:"type:bigint(20) unsigned auto_increment;not null;primary_key"`
+			//i will use email+ab(2 alphebet table),such as yang756260386@gmail.comab
+			Principlecode             string    `json:"Principlecode"`
+			// Priority             int    `json:"priority"`
+			Email                     string   `json:"email"`
+			Tasktag                   string   `json:"tasktag"`
+			// Describe                  string   `json:"describe"`
+			// Goalstatus            string   `json:"goalstatus"`
+			// Plantime            string   `json:"plantime"`
+			// Finishtime            string   `json:"finishtime"`
+			// Chinesename            string   `json:"chinesename"`
+			// Timerange               int   `json:"timerange"`   //制定目标的时间范围
+			}
+
+
+
+
+
+
+
 
 
 // Goalsincludetasks struct{
@@ -85,8 +113,58 @@ Principledetails  struct{
 // 	Alltasksingoal    []Tasks
 
 // }	
+principlemain struct{
+	principlecodewithprincples  map[string] []principlecodewithprincples
+	pcodewithname               []Principlefordbs 
+}
 
 )
+
+
+
+
+
+//获取详细的principle details
+func getprinciples(email string,principlecode string) principlemain{
+var allprinciples []Principledetails
+if principlecode == "xxx"{
+	db.Where("Email= ?", email).Find(&allprinciples)
+}
+if principlecode != "xxx"{
+	db.Where("Email= ?", email).Where("Principlecode=?",principlecode).Find(&allprinciples)
+}
+
+
+fmt.Println("-------yangming is here-----------")
+fmt.Println(principlecode)
+fmt.Println(allprinciples)
+//获取所有列表数据
+
+Principlewithcode :=make(map[string] []principlecodewithprincples)
+
+for i := 0;  i<len(allprinciples); i++ {
+  // """
+  // Principlecode                   string  `json:"Principlecode"`
+	// Email                     string   `json:"email"`
+	// //ID uint64 `gorm:"type:bigint(20) unsigned auto_increment;not null;primary_key"`
+	// //i will use email+ab(2 alphebet table),such as yang756260386@gmail.comab
+  // Detailitem  
+  // """
+  Principlewithcode[allprinciples[i].Principlecode] = append(Principlewithcode[allprinciples[i].Principlecode],principlecodewithprincples{allprinciples[i].Principlecode,allprinciples[i].Principlename,allprinciples[i].Detailitem})
+}
+
+var principlelibs []Principlefordbs
+	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+//db.Where("email =  ?", email).Not("goalstatus", []string{"finished"}).Order("id").Find(&goals)
+db.Where("email =  ?", email).Order("id").Find(&principlelibs)
+return principlemain{Principlewithcode,principlelibs}
+}
+
+
+
+
+
+
 
 func Createprinciplelib(c *gin.Context) {
 	buf := make([]byte, 1024)
@@ -155,14 +233,44 @@ func Createprincipledetail(c *gin.Context) {
 	email:=emailcookie.Value
 	principledetail := gjson.Get(reqBody, "principledetail").String()
 	principlecode := gjson.Get(reqBody, "principlecode").String()
+    principlename := "no have name"
+    // fmt.Println(principlename)
+	var principlelibs []Principlefordbs
+	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+    //db.Where("email =  ?", email).Not("goalstatus", []string{"finished"}).Order("id").Find(&goals)
+    db.Where("email =  ?", email).Where("principlecode =  ?",principlecode).Order("id").Find(&principlelibs)
+	principlename =  principlelibs[0].Principlename
+	fmt.Println(principlename)
+// principlename  = "ok"
 	// priority:= gjson.Get(reqBody, "priority").Int()
 	//这里原来引号出了问题。。。。多出了一个空格
-    principledetailsfromclient := Principledetails{Detailitem:principledetail,Email:email,Principlecode:principlecode}
+    principledetailsfromclient := Principledetails{Detailitem:principledetail,Principlename:principlename,Email:email,Principlecode:principlecode}
 	db.Create(&principledetailsfromclient).Scan(&principledetailsfromclient)
 	c.JSON(200, gin.H{
 		"result":"u have created single principle",
 	  })
 }
+
+
+func Connectpcodewithtasktag(c *gin.Context) {
+	buf := make([]byte, 1024)
+	num, _ := c.Request.Body.Read(buf)
+	reqBody := string(buf[0:num])
+	emailcookie,_:=c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email:=emailcookie.Value
+	// 仅仅支持加挂一个标签
+	tasktag := gjson.Get(reqBody, "tasktag").String()
+	principlecode := gjson.Get(reqBody, "principlecode").String()
+	// priority:= gjson.Get(reqBody, "priority").Int()
+	//这里原来引号出了问题。。。。多出了一个空格
+    tasktagwithprinciplecode := Principlecodewithtasktag{Tasktag:tasktag,Email:email,Principlecode:principlecode}
+	db.Create(&tasktagwithprinciplecode).Scan(&tasktagwithprinciplecode)
+	c.JSON(200, gin.H{
+		"result":"u have created single principle",
+	})
+}
+
 
 
 
@@ -348,6 +456,69 @@ fmt.Println(principlelibs)
   }
   
   
+
+  func Principlesdetailsystem(c *gin.Context) {
+	//i use email as identifier
+  //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+ 
+ emailcookie,err:=c.Request.Cookie("email")
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
+    // principlecodewithprincples  map[string] []principlecodewithprincples
+	// pcodewithname  
+	result := getprinciples(email,"xxx")
+	var principledetails = result.principlecodewithprincples
+	var principlenamewithcode = result.pcodewithname 
+	c.JSON(200, gin.H{
+		"principledetails":principledetails,
+		"pcodewithname":principlenamewithcode,
+	  })
+  
+  }
+
+
+  func Searchwithprinciplecode(c *gin.Context) {
+	//i use email as identifier
+  //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+ 
+ emailcookie,err:=c.Request.Cookie("email")
+  var email string
+   if err!=nil{
+     email = c.Request.Header.Get("email")
+   }else{
+     fmt.Println(emailcookie.Value)
+     email =emailcookie.Value
+   }
+   principlecode :=  c.Query("principlecode")
+   fmt.Println(principlecode)
+    // principlecodewithprincples  map[string] []principlecodewithprincples
+	// pcodewithname  
+	result := getprinciples(email,principlecode)
+	var principledetails = result.principlecodewithprincples
+	var principlenamewithcode = result.pcodewithname 
+	c.JSON(200, gin.H{
+		"principledetails":principledetails,
+		"pcodewithname":principlenamewithcode,
+	  })
+  
+  }
+
+
+
+
+
+
+
+
+
+
+
+
   
 //   func Goalreviewfortoday(c *gin.Context) {
 // 	//i use email as identifier
