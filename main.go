@@ -120,10 +120,11 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   //principle system
   v1.POST("/createprinciplelib",Createprinciplelib)
   v1.POST("/createprincipledetail",Createprincipledetail) 
+  v1.POST("/connectpcodewithtasktag",Connectpcodewithtasktag) 
   // v1.POST("/Createprincipledetail",Createprincipledetail)
   v1.GET("/getprinciple",Principlesystem)
-
-
+  v1.GET("/getprincipledetails",Principlesdetailsystem)
+  v1.GET("/searchwithprinciplecode",Searchwithprinciplecode)
 
          //goalsystem
 
