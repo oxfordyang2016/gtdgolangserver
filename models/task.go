@@ -536,7 +536,18 @@ fmt.Println(value.String())
   }  
   inbox := gjson.Get(reqBody, "inbox").String()
   tasktagsorigin := gjson.Get(reqBody, "tasktagsorigin").String()
-  
+  //不允许用户创建不含tag的任务,这里是检测命令行端啦
+  if tasktagsorigin == "unspecified"{
+   fmt.Println("不允许用户上唇空标签")
+  c.JSON(200, gin.H{
+    "status":  "fail",
+    "message": "不允许定义任务空标签",
+    })
+  return
+  }
+
+
+
   inboxlist := gjson.Get(reqBody, "inboxlist")
   devotedtime:= gjson.Get(reqBody, "timedevotedto_a_task").Int()
    fmt.Println(devotedtime)
@@ -568,6 +579,10 @@ devotedtime = int64(i)
  // tasktags1 := gjson.Get(reqBody, "tasktags")
   // fmt.Println(tasktags1)
   tasktags := gjson.Get(reqBody, "tasktags").String()
+   
+  //如果来自于客户端是gtd cli 不允许创建任务标签为空的task
+  
+
 
   fmt.Println("------------------yangming /is here----------")
   fmt.Println(tasktags)
