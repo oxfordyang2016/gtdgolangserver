@@ -134,7 +134,7 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-
+var  websocket_switch = true
 
 
 
@@ -905,10 +905,13 @@ fmt.Println(score)
   如果这里不异步执行的化会导致错误的
   
   */
- //这里分别向前段推送语音合成数据
-// go ttsclient(ttsclienttext)
+ if websocket_switch{
+  //这里分别向前段推送语音合成数据
+  go ttsclient(ttsclienttext)
  //这里是向前段推送图像数据
-// go visiualdata2websocket(ttsclienttext)
+ go visiualdata2websocket(ttsclienttext)
+ }
+
 
 
 
@@ -1012,9 +1015,7 @@ fmt.Println("Response status:", resp.Status)
     reviewalgodata := gjson.Get(reqBody, "reviewalgo").String()
     goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
     parentid_fromgtdcli := gjson.Get(reqBody, "parentid").String()
-    if parentid_fromgtdcli == "unspecified"{
-      parentid_fromgtdcli = goalcode_fromgtdcli
-    }
+    
     devotedtime:= gjson.Get(reqBody, "timedevotedto_a_task").Int()
     fmt.Println("---------------------tasktags info -------------------")
     fmt.Println(taglight)
@@ -1166,6 +1167,9 @@ db.Model(&task).Update("Priority", task_priority)
       db.Model(&task).Update("Place", place)}
     if project!="inbox"{db.Model(&task).Update("Project", project)}
     if inbox!="nocontent"{db.Model(&task).Update("Task", inbox)}
+    // if parentid_fromgtdcli != "unspecified"{
+    //   db.Model(&task).Update("Parentid",parentid_fromgtdcli)
+    // }
     if plantime!="unspecified"{db.Model(&task).Update("Plantime", plantime)}
     if parentproject!="unspecified"{db.Model(&task).Update("Parentproject", parentproject)}
     fmt.Println("--------iamhere--------")
@@ -1281,12 +1285,15 @@ var scorefotoday =   Compute_singleday(plantime,email)
 //推送语音到客户端
 s := fmt.Sprintf("%f", scorefotoday)
 ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
+fmt.Println(ttsclienttext)
 //ttsclient(ttsclienttext)
-
-//这里分别向前段推送语音合成数据
-go ttsclient(ttsclienttext)
+if websocket_switch{
+ //这里分别向前段推送语音合成数据
+  go ttsclient(ttsclienttext)
   //这里是向前段推送图像数据
  go visiualdata2websocket(ttsclienttext)
+}
+
  c.JSON(200, gin.H{
         "status":  "posted",
         "score":scorefotoday,
