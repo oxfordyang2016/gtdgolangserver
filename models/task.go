@@ -134,7 +134,7 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-var  websocket_switch = true
+var  websocket_switch = false
 
 
 
@@ -586,15 +586,63 @@ devotedtime = int64(i)
 
   fmt.Println("------------------yangming /is here----------")
   fmt.Println(tasktags)
-
-
+  //选择任务状态
+  status := gjson.Get(reqBody, "taskstatus").String()
+  fmt.Println(status) 
+  //status := c.PostForm("taskstatus")
+    if status == "f"{status = "finish"}
+    if status  == "g"{status = "giveup"}
+    if status   == "r"{status =  "replace"}
+    if status  == "a"{status = "anotherday"}
+   
 
 
   goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
   // 这里要对goalcode和pid进行解析
   parentid_fromgtdcli := gjson.Get(reqBody, "parentid").String()
   if parentid_fromgtdcli == "unspecified"{
-    parentid_fromgtdcli = goalcode_fromgtdcli
+    parentid_fromgtdcli = "unspecified"
+  }else{
+   //首先进行查询，如果选择pid的时候状态不能是完成，否则毫无意义
+    
+  if  status != "unspecified"&& status != "unfinished"{
+    c.JSON(200, gin.H{
+      "status":  status,
+      "message": "there is no need to add pid,when you are not adding unfinished task included(giveup)",
+    })
+    //using python design method to return none
+  return
+  }
+
+
+   var task Tasks
+   db.Where("Email= ?", email).First(&task, parentid_fromgtdcli)
+   fmt.Println(task)
+   fmt.Println(task.Email)
+   if task.Email!=email{
+     c.JSON(200, gin.H{
+         "status":  "posted",
+         "message": "updated id not exsit",
+       })
+       //using python design method to return none
+     return
+   }else{
+    childtask := Tasks{Reviewdatas:task.Reviewdatas,Devotedtime:task.Devotedtime,Tasktagsorigin:tasktagsorigin,Goalcoefficient:task.Goalcoefficient,Priority:task.Priority,Parentid:parentid_fromgtdcli,Goal:task.Goal,Task:inbox,User:email,Status:task.Status,Email:email,Place:task.Place, Project:task.Project, Plantime:task.Plantime,Tasktags:task.Tasktags}
+    db.Create(&childtask).Scan(&childtask)
+    Check_reviewdaylog(task.Plantime,email)
+    var score =   Compute_singleday(task.Plantime,email)
+    fmt.Println("真成绩是")
+    fmt.Println(score)
+    //Print the HTTP response status.
+     s := fmt.Sprintf("%f", score)
+    c.JSON(200, gin.H{
+      "status":  "posted",
+      "id":childtask.ID,
+      "score":s,
+      "message": "add parentid success",
+    })
+   }
+   return
   }
   // 这里是为了给一个任务贴上父亲id，如果没有的话直接使用目标code，如果有的话直接给id
   /*
@@ -724,12 +772,7 @@ client :=  gjson.Get(reqBody, "client").String()
 
 
 
-  status := gjson.Get(reqBody, "taskstatus").String()
-   //status := c.PostForm("taskstatus")
-    if status == "f"{status = "finish"}
-    if status  == "g"{status = "giveup"}
-    if status   == "r"{status =  "replace"}
-    if status  == "a"{status = "anotherday"}
+
   parentproject := gjson.Get(reqBody, "parentproject").String()
   note := gjson.Get(reqBody, "note").String()
   ifdissect := gjson.Get(reqBody, "ifdissect").String()
@@ -808,6 +851,7 @@ if status!="unfinished"{
      }   
 
    }else{
+   
     task := Tasks{Note:note,Tasktagsorigin:tasktagsorigin,Ifdissect:ifdissect,Parentid:parentid_fromgtdcli,Mark_finished_time_switch:mark_finished_time_firstly_switch,First_finish_timestamp:mark_finished_time_firstly_timestamp,Priority:task_priority,Devotedtime:int(devotedtime),Goalcoefficient:goalcoefficient,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
     db.Create(&task).Scan(&task)
     fmt.Println("i am testing the id return")
