@@ -627,7 +627,7 @@ devotedtime = int64(i)
        //using python design method to return none
      return
    }else{
-    childtask := Tasks{Reviewdatas:task.Reviewdatas,Devotedtime:task.Devotedtime,Tasktagsorigin:tasktagsorigin,Goalcoefficient:task.Goalcoefficient,Priority:task.Priority,Parentid:parentid_fromgtdcli,Goal:task.Goal,Task:inbox,User:email,Status:task.Status,Email:email,Place:task.Place, Project:task.Project, Plantime:task.Plantime,Tasktags:task.Tasktags}
+    childtask := Tasks{Reviewdatas:task.Reviewdatas,Goalcode:task.Goalcode,Devotedtime:task.Devotedtime,Tasktagsorigin:tasktagsorigin,Goalcoefficient:task.Goalcoefficient,Priority:task.Priority,Parentid:parentid_fromgtdcli,Goal:task.Goal,Task:inbox,User:email,Status:task.Status,Email:email,Place:task.Place, Project:task.Project, Plantime:task.Plantime,Tasktags:task.Tasktags,Finishtime:task.Finishtime}
     db.Create(&childtask).Scan(&childtask)
     Check_reviewdaylog(task.Plantime,email)
     var score =   Compute_singleday(task.Plantime,email)
