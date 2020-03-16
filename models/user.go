@@ -27,7 +27,7 @@ type (
 
 func init() {
 	//open a db connection
-	//var a =m add(2,3)
+	//var a =m add(2,3) 
 	//fmt.Println(a)
 	var err error
 	//mysql://dt_admin:dt2016@localhost/dreamteam_db
@@ -56,7 +56,7 @@ func init() {
 	}
 
 	//Migrate the schema
-	db.AutoMigrate(&Principledetails{},&Principlecodewithtasktag{},&Principlefordbs{},&Accounts{},&TodoModel{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{},&Fees{})
+	db.AutoMigrate(&Principledetails{},&Taskexecutelog{},&Principlecodewithtasktag{},&Principlefordbs{},&Accounts{},&TodoModel{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{},&Fees{})
 //http://jinzhu.me/gorm/database.html#migration delete database table column
  //db.Model(&Tasks{}).DropColumn("Uer")
 

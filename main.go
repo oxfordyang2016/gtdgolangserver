@@ -22,7 +22,8 @@ import (
   //"fmt"
   "os"
   "io"
-	//"./math"
+  //"./math"
+  "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
   //"github.com/gin-contrib/sessions"
@@ -50,7 +51,7 @@ func main() {
 f, _ := os.Create("engine.log")
 gin.DefaultWriter = io.MultiWriter(f)
 router := gin.Default()
-
+router.Use(cors.Default())
 v1 := router.Group("/v1")
 
 
@@ -89,6 +90,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   //json API
   v1.GET("/inboxjson",Inboxjson)
   v1.GET("/todayjson",Todaytaskjson)
+  
   v1.GET("/yesterdayjson",Yesterdaytaskjson)
   v1.GET("/tomorrowjson",Tomorrowtaskjson)
   v1.GET("/unfinishedtasksjson",Unfinishedtaskjson)
@@ -115,8 +117,8 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.POST("/updateforios",Updateforios)	
         v1.GET("/map",Googlemapservice)
         v1.GET("/location",Canvas)
-
-
+        
+        v1.POST("/taskexecute",Taskexecutelogfun)
   //principle system
   v1.POST("/createprinciplelib",Createprinciplelib)
   v1.POST("/createprincipledetail",Createprincipledetail) 
@@ -143,6 +145,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.GET("/pride",Finished)
         v1.GET("/place",Placebased)
         v1.GET("/freewriting",Freewriting)
+        v1.GET("/todaytasks",Todaytaskweb)
         //get the tree map
         v1.GET("/review",Review)
         v1.GET("/reviewfortimes",Reviewforstastics)
