@@ -1,2 +1,7 @@
-[GIN] 2020/03/16 - 15:43:27 | 200 |  112.885545ms |             ::1 | GET      /v1/searchwithtag?keywords=feartag&status=f
-[GIN] 2020/03/16 - 15:44:10 | 200 |   38.521035ms |             ::1 | GET      /v1/searchwithtag?keywords=feartag&status=unfinished
+[GIN] 2020/03/20 - 16:33:01 | 200 |  679.046458ms |             ::1 | POST     /v1/createtask
+[GIN] 2020/03/20 - 16:33:01 | 200 |    1.078682ms |             ::1 | GET      /v1/comparegoal
+[GIN] 2020/03/20 - 16:33:02 | 200 |  521.588782ms |             ::1 | GET      /v1/reviewfortimes?days=1
+[GIN] 2020/03/20 - 16:33:09 | 200 |     4.14046ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/03/20 - 16:33:10 | 200 |   10.046798ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/03/20 - 16:38:47 | 200 |   11.067153ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/03/20 - 16:38:47 | 200 |   14.884387ms |             ::1 | GET      /v1/reviewdaydatajson

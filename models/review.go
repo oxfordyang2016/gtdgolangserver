@@ -56,6 +56,7 @@ type Reviewdatadetail struct{
   Noflinch                float64 `json:"noflinch"`
   Setarecord             float64 `json:"setarecord"`
   Conquerthefear             float64 `json:"conquerthefear"`
+  Executeability_score             float64 `json:"executeability_score"`
 }
 
 
@@ -739,10 +740,57 @@ if reviewfortimecount.Date!=date{
 
 
 
+
+//执行能力评价部分
+func  Check_execute(date string,email string) float64{
+  /*
+  check if date row was created in reviewday table,if it is no,the function will create it
+  
+  */
+  
+   //先获取当天的任务
+    var tasksoftoday []Tasks
+    var countoftasksoftoday int
+    // var tasksoffinished []Tasks
+    db.Where("plantime = ?", date).Where("email =  ?", email).Find(&tasksoftoday).Count(&countoftasksoftoday)
+    //今天计划了几件事，完成了几件事情轻的比例
+   var finishedtaskcount = 0
+    for _,item :=range tasksoftoday{
+      if (item.Status == "finish"){
+      finishedtaskcount+=1
+      }
+    }
+    color.Blue(string("--------检查是否执行函数颜色----------"))
+    fmt.Println(finishedtaskcount)
+    fmt.Println(countoftasksoftoday)
+    var execute1 float64 = float64(finishedtaskcount)/float64(countoftasksoftoday)
+    var toalscoreofexecute = execute1
+    //判断几乎是开始时间和实际执行时间是否一样
+    return  toalscoreofexecute 
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //compute total_scores of someday
 
 func Compute_singleday(date string,email string) float64{
-//https://tour.golang.org/basics/10
+//获取执行能力细节
+executeability_score  := Check_execute(date,email) 
+
+
+
+  //https://tour.golang.org/basics/10
 fmt.Println("------------ i am here to compute the single day---------------------------")
 var tasks []Tasks
 //email := "yang756260386@gmail.com"
@@ -1180,7 +1228,7 @@ if math.IsNaN(total_score){
   total_score = 0.0
 }
 
-review := &Reviewdatadetail{Totalscore:total_score,Noflinch:noflinch_score,Setarecord:setarecord_score,Conquerthefear:conquerthefear_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
+review := &Reviewdatadetail{Totalscore:total_score,Executeability_score:executeability_score,Noflinch:noflinch_score,Setarecord:setarecord_score,Conquerthefear:conquerthefear_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
 
 color.Red("We have red")
 
