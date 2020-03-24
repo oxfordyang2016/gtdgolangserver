@@ -111,7 +111,7 @@ loc, _ := time.LoadLocation("Asia/Shanghai")
 
 
 
-
+//获取截止当前的时间
     // warn  :time format must same
 	func Getmonthday() []string {
 		layout := "2006/01/02"
@@ -133,6 +133,40 @@ loc, _ := time.LoadLocation("Asia/Shanghai")
 		  daterange = append(daterange,firstOfMonth.Format("060102"))
 		   day := firstOfMonth
 				  for day !=today_format {
+								 day =  day.AddDate(0, 0, 1)
+								   daterange = append(daterange,day.Format("060102"))
+				  }
+		  fmt.Println(firstOfMonth)
+		  fmt.Println(lastOfMonth)
+  fmt.Println(daterange)
+  return daterange
+  }
+
+
+
+
+  //获取截止当前的时间
+    // warn  :time format must same
+	func Getmonthallday() []string {
+		layout := "2006/01/02"
+		t, err := time.Parse(layout,time.Now().Format("2006/01/02"))
+		fmt.Println(t)
+		if err != nil {
+				fmt.Println(err)
+		}
+
+		  currentYear, currentMonth, today := t.Date()
+		  //currentLocation := t.Location()
+		  loc, _ := time.LoadLocation("Asia/Shanghai")
+		  firstOfMonth := time.Date(currentYear, currentMonth, 1, 0, 0, 0, 0, loc)
+		  lastOfMonth := firstOfMonth.AddDate(0, 1, -1)
+		  today_format := time.Date(currentYear, currentMonth, today, 0, 0, 0, 0, loc)
+          fmt.Println(today_format)
+
+		  var daterange []string
+		  daterange = append(daterange,firstOfMonth.Format("060102"))
+		   day := firstOfMonth
+				  for day !=lastOfMonth {
 								 day =  day.AddDate(0, 0, 1)
 								   daterange = append(daterange,day.Format("060102"))
 				  }

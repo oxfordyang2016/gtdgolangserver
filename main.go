@@ -117,7 +117,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.POST("/updateforios",Updateforios)	
         v1.GET("/map",Googlemapservice)
         v1.GET("/location",Canvas)
-        
+        v1.GET("/deadlinesystemjson",Deadlinesystem) 
         v1.POST("/taskexecute",Taskexecutelogfun)
   //principle system
   v1.POST("/createprinciplelib",Createprinciplelib)
