@@ -283,6 +283,7 @@ var doanimportantthingearly = [];
 var markataskimmediately = [];
 var buildframeandprinciple = [];
 var acceptfact = [];
+var executeablity = [];
 
 $.get("/v1/reviewdaydatajson", function(data, status){
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
@@ -299,6 +300,7 @@ $.get("/v1/reviewdaydatajson", function(data, status){
            makeuseofthingsuhavelearned.push(obj_detailofreview.makeuseofthingsuhavelearned);
            difficultthings.push(obj_detailofreview.difficultthings);
            threeminutes.push(obj_detailofreview.threeminutes);
+           executeablity.push(obj_detailofreview.executeability_score*obj_detailofreview.totalscore);
             getlesson.push(obj_detailofreview.getlesson);
             learntechuse.push(obj_detailofreview.learntechuse);
            alwaysprofit.push(obj_detailofreview.alwaysprofit);
@@ -474,6 +476,12 @@ option = {
             data:getlesson
         },
 
+    
+
+
+
+
+
     {
             name:'Learntechuse',
             type:'line',
@@ -501,7 +509,26 @@ option = {
         },
       
   
-   
+        {
+            name:'Executeability',
+            type:'line',
+            color:"yellow",
+            stack: 'execute',
+            areaStyle: {},
+            data:executeablity,
+            smooth: true,
+                lineStyle: {
+                    normal: { opacity: 0.5, 
+                    width:10,
+                    
+                    }
+
+                }
+
+
+
+
+        },
 
 
 
