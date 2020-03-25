@@ -1927,11 +1927,98 @@ tasklog := Taskexecutelog{Task:taskfromclient,Email:email,Operationtype:operatio
 
 
 
+//计算返回区块时间
+func   compute_time_range(start string,end string)  [][3]int{
+    //首先将数字且氛围两部分
+    start_hour := start[0:2]
+    start_minute := end[2:4]
+    end_hour := end[0:2]
+    end_minute := end[2:4]
+    this_hour_start_int,_ :=strconv.Atoi(start_hour) 
+    this_hour_end_int,_ :=strconv.Atoi(end_hour) 
+    this_minute_start,_ := strconv.Atoi(start_minute) 
+    this_minute_end,_ := strconv.Atoi(end_minute) 
+    //读取start和end部分的不同时间
+    //判断两部分的开头部分时间是否相同
+    // type locationandcolor [3]int
+    var locationandcolor  [][3]int
+    if (start_hour != end_hour){
+      //计算两个时间跨过多少时间
+      //计算第一个时间组
+      for this_minute_int :=this_minute_start;this_minute_int<60;this_minute_int++{
+        b := [3]int{this_hour_start_int, this_minute_int,1}
+        locationandcolor = append(locationandcolor,b)
+      }
+     
+      //计算中间的时间组
+      for i:= this_hour_start_int+1;i<this_hour_end_int-1;i++{
+      for j:=0;j<59;j++{
+        b := [3]int{i, j,1}
+        locationandcolor = append(locationandcolor,b)
+      }
+    }
+
+
+      //计算最后一个时间组
+      for i :=0;i<this_minute_end;i++{
+        b := [3]int{this_hour_end_int, i,1}
+        locationandcolor = append(locationandcolor,b)
+      }
+
+     //计算中间夹的时间组
+
+
+
+
+    }
+    if (start_hour == end_hour){
+      //将小时转为分钟
+      //直接添加分钟数
+
+      for this_minute_int :=this_minute_start;this_minute_int<this_minute_end;this_minute_int++{
+        b := [3]int{this_hour_start_int, this_minute_int,1}
+        locationandcolor = append(locationandcolor,b)
+      }
+    }
+    return locationandcolor
+    //注意末尾时间是否相同
+}
+
+
+
+func Startend() [][3]int{
+   //查询有开始时间和借宿时间的tasks
+   var tasks []Tasks
+   //email:="yangming1"
+   //http://doc.gorm.io/crud.html#query to desc
+   //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
+ 
+   loc, _ := time.LoadLocation("Asia/Shanghai")
+   now :=  time.Now().In(loc)
+   email:= "yang756260386@gmail.com"
+   db.Where("Email= ?", email).Where("plantime = ?",now.Format("060102")).Not("starttime", []string{"unspecified",""," "}).Not("endtime", []string{"unspecified",""," "}).Order("id desc").Find(&tasks)
+   
+   var alllocationandcolor  [][3]int
+    for i:=0;i<len(tasks);i++{
+      task := tasks[i]
+     
+
+fmt.Println(task.Starttime)
+color.Red("龟儿子")
+fmt.Println(task.Endtime)
+var singletasktimerange =  compute_time_range(task.Starttime,task.Endtime)
+     alllocationandcolor = append(alllocationandcolor, singletasktimerange...)
+    }
+return alllocationandcolor
+}
+
 
 
 
 
 //这里是获取今天没有完成的任务
+//获取今天计划时间色块表
+
 func Todaytaskjson(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
@@ -1945,13 +2032,16 @@ func Todaytaskjson(c *gin.Context) {
   //http://doc.gorm.io/crud.html#query to desc
   //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
 
-     loc, _ := time.LoadLocation("Asia/Shanghai")
+  loc, _ := time.LoadLocation("Asia/Shanghai")
   now :=  time.Now().In(loc)
  
  //db.Model(&task).Update("Finishtime",now.Format("060102"))
 
   //Query Chains http://doc.gorm.io/crud.html#query
-db.Where("Email= ?", email).Where("plantime = ?",now.Format("060102")).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks)
+ db.Where("Email= ?", email).Where("plantime = ?",now.Format("060102")).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks)
+
+
+
 
 var alltasktagorigin []string
 // var al []string
@@ -2000,12 +2090,15 @@ for i := 0;  i<len(allprinciples); i++ {
 // FROM table1, table2
 
 // WHERE table1.column1 = table2.column2;
+//获取所有的任务的计划时间信息
+var alllocationandcolor = Startend()
 fmt.Println(Principlewithcode)
 
   c.JSON(200, gin.H{
       "pcodewithtasktag":principlecodewithtasktagfromdb,
       "task":tasks,
       "pcodewithprinciples":Principlewithcode,
+      "positions":alllocationandcolor,
     })
 
 }

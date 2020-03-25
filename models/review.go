@@ -319,9 +319,10 @@ func Problemssystem(c *gin.Context) {
 func Deadlinesystem(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-  emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
+  // emailcookie,_:=c.Request.Cookie("email")
+  // fmt.Println(emailcookie.Value)
+  // email:=emailcookie.Value
+  email:="yang756260386@gmail.com"
   //fmt.Println(cookie1.Value)
   var daysfordeadline = Getmonthallday()
   var tasksofdeadline []Tasks
