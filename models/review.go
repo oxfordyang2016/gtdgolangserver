@@ -314,6 +314,34 @@ func Problemssystem(c *gin.Context) {
 
 }
 
+
+
+func Deadlinesystem(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  //fmt.Println(cookie1.Value)
+  var daysfordeadline = Getmonthallday()
+  var tasksofdeadline []Tasks
+  db.Where("Email= ?",email).Not("status", []string{"finished","f","finish","giveup","g"}).Where("deadline IN (?)",daysfordeadline).Order("id").Find(&tasksofdeadline)
+ fmt.Println(tasksofdeadline)
+  c.JSON(200, gin.H{
+      "deadlinefortasks":tasksofdeadline,
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
 func Questionssystem(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
