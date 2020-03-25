@@ -1927,13 +1927,20 @@ tasklog := Taskexecutelog{Task:taskfromclient,Email:email,Operationtype:operatio
 func   compute_time_range(start string,end string)  [][3]int{
     //首先将数字且氛围两部分
     start_hour := start[0:2]
-    start_minute := end[2:4]
+    start_minute := start[2:4]
     end_hour := end[0:2]
     end_minute := end[2:4]
     this_hour_start_int,_ :=strconv.Atoi(start_hour) 
     this_hour_end_int,_ :=strconv.Atoi(end_hour) 
     this_minute_start,_ := strconv.Atoi(start_minute) 
     this_minute_end,_ := strconv.Atoi(end_minute) 
+    color.Yellow("------我在这里检测2222--------")
+    color.Yellow(start_hour)
+    fmt.Println(this_hour_start_int)
+    color.Yellow(end_hour)
+    fmt.Println(this_hour_end_int)
+    
+    
     //读取start和end部分的不同时间
     //判断两部分的开头部分时间是否相同
     // type locationandcolor [3]int
@@ -1945,15 +1952,24 @@ func   compute_time_range(start string,end string)  [][3]int{
         b := [3]int{this_hour_start_int, this_minute_int,1}
         locationandcolor = append(locationandcolor,b)
       }
-     
+      color.Yellow("------我在这里检测1111--------")
+      color.Yellow(start_hour)
+      color.Yellow(end_hour)
+      fmt.Println(this_hour_start_int,this_hour_end_int)
+      fmt.Println(this_hour_start_int-this_hour_end_int)
       //计算中间的时间组
-      for i:= this_hour_start_int+1;i<this_hour_end_int-1;i++{
-      for j:=0;j<59;j++{
-        b := [3]int{i, j,1}
-        locationandcolor = append(locationandcolor,b)
+      if (this_hour_end_int-this_hour_start_int>1){
+        color.Yellow("------我在这里检测--------")
+        for i:= this_hour_start_int+1;i<this_hour_end_int;i++{
+          for j:=0;j<60;j++{
+            b := [3]int{i, j,1}
+    
+            locationandcolor = append(locationandcolor,b)
+          }
+        }
+    
       }
-    }
-
+ 
 
       //计算最后一个时间组
       for i :=0;i<this_minute_end;i++{
