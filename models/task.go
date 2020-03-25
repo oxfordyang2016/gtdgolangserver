@@ -2002,17 +2002,18 @@ func   compute_time_range(start string,end string)  [][3]int{
 
 
 
-func Startend() [][3]int{
+func Startend(plantime string) [][3]int{
+  //要求时间格式是
    //查询有开始时间和借宿时间的tasks
    var tasks []Tasks
    //email:="yangming1"
    //http://doc.gorm.io/crud.html#query to desc
    //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
  
-   loc, _ := time.LoadLocation("Asia/Shanghai")
-   now :=  time.Now().In(loc)
+  //  loc, _ := time.LoadLocation("Asia/Shanghai")
+  //  now :=  time.Now().In(loc)
    email:= "yang756260386@gmail.com"
-   db.Where("Email= ?", email).Where("plantime = ?",now.Format("060102")).Not("starttime", []string{"unspecified",""," "}).Not("endtime", []string{"unspecified",""," "}).Order("id desc").Find(&tasks)
+   db.Where("Email= ?", email).Where("plantime = ?",plantime).Not("starttime", []string{"unspecified"," ",""}).Not("endtime", []string{"unspecified",""," "}).Order("id desc").Find(&tasks)
    
    var alllocationandcolor  [][3]int
     for i:=0;i<len(tasks);i++{
@@ -2107,14 +2108,17 @@ for i := 0;  i<len(allprinciples); i++ {
 
 // WHERE table1.column1 = table2.column2;
 //获取所有的任务的计划时间信息
-var alllocationandcolor = Startend()
+today := now.Format("060102")
+tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+var alllocationandcolor = Startend(today)
+var alllocationandcolorfortomorrow = Startend(tomorrow)
 fmt.Println(Principlewithcode)
-
   c.JSON(200, gin.H{
       "pcodewithtasktag":principlecodewithtasktagfromdb,
       "task":tasks,
       "pcodewithprinciples":Principlewithcode,
       "positions":alllocationandcolor,
+      "positionsfortomorrow":alllocationandcolorfortomorrow,
     })
 
 }
