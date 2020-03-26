@@ -249,6 +249,8 @@ function connect(url) {
   ws.onclose = function(e) {
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
+connect('wss://www.blackboxo.top/wss')  
+
     // connect('ws://localhost:777');
     // connect('ws://47.100.100.141:777');
     connect('ws://localhost:777');
@@ -262,11 +264,10 @@ function connect(url) {
 }
 
 
-// connect('ws://47.100.100.141:777')
-   connect('ws://localhost:777')
+   //connect('ws://localhost:777')
 
 
-
+connect('wss://www.blackboxo.top/wss') 
 
 
 
@@ -417,7 +418,6 @@ function doooo(datafromserver){
 
             top: '18%',
             bottom: '14%',
-
             layout: 'radial',
 
             symbol: 'pin',

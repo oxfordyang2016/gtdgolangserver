@@ -3,6 +3,10 @@
 import jieba.posseg as pseg
 from datetime import datetime, timedelta  
 from datetime import date 
+import re
+from flask import Flask, flash, request, redirect, render_template
+#import urllib.request
+import os
 # coding=utf-8
 from flask import Flask,render_template,request,url_for 
 #import simplejson as json
@@ -265,11 +269,6 @@ def getfeesdetail():
     # allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
     resultfromserver = {"allfees":result}
     return json.dumps(resultfromserver)
-
-
-
-
-
 
 
 

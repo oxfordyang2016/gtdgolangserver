@@ -95,6 +95,7 @@
 <script type="text/javascript">
 var  WebSocketurl = 'ws://47.100.100.141:777'
 var localhostWebSocketurl = "ws://localhost:777"
+var httpsWebSocketurl ='wss://www.blackboxo.top/wss'
 var heartCheck = {
     timeout: 6000,//60ms
     timeoutObj: null,
@@ -174,9 +175,9 @@ function connect(url) {
 }
 
 
-connect(localhostWebSocketurl)
-//    connect('ws://localhost:777')
-
+//connect(localhostWebSocketurl)
+ //connect('ws://localhost:777')
+connect(httpsWebSocketurl)
 
 
 
@@ -200,7 +201,6 @@ function calculateMA(dayCount, data) {
     console.log(result)
     return result;
 }
-
 
 
 

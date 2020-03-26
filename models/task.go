@@ -146,9 +146,9 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-var  websocket_switch = false
-var  voice_websocekt = false
-var image_websocket = false
+var  websocket_switch = true
+var  voice_websocekt = true
+var image_websocket = true
 
 
 
@@ -967,6 +967,9 @@ fmt.Println(score)
   如果这里不异步执行的化会导致错误的
   
   */
+ //这里分别向前段推送语音合成数据
+ //这里是向前段推送图像数据
+ if websocket_switch{
  if websocket_switch&&voice_websocekt{
   //这里分别向前段推送语音合成数据
   go ttsclient(ttsclienttext)
@@ -979,7 +982,7 @@ fmt.Println(score)
   go visiualdata2websocket(ttsclienttext)
  }
 
-
+}
 
 
 
@@ -1363,6 +1366,7 @@ var scorefotoday =   Compute_singleday(plantime,email)
 //推送语音到客户端
 s := fmt.Sprintf("%f", scorefotoday)
 ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
+//这里分别向前段推送语音合成数据
 fmt.Println(ttsclienttext)
 //ttsclient(ttsclienttext)
 if websocket_switch{
@@ -2010,12 +2014,17 @@ func Startend(plantime string) [][3]int{
   //  loc, _ := time.LoadLocation("Asia/Shanghai")
   //  now :=  time.Now().In(loc)
    email:= "yang756260386@gmail.com"
-   db.Where("Email= ?", email).Where("plantime = ?",plantime).Not("starttime", []string{"unspecified"}).Not("endtime", []string{"unspecified"}).Order("id desc").Find(&tasks)
+   db.Where("Email= ?", email).Where("plantime = ?",plantime).Not("starttime", []string{"unspecified"," ",""}).Not("endtime", []string{"unspecified",""," "}).Order("id desc").Find(&tasks)
    
    var alllocationandcolor  [][3]int
     for i:=0;i<len(tasks);i++{
       task := tasks[i]
-     var singletasktimerange =  compute_time_range(task.Starttime,task.Endtime)
+     
+
+fmt.Println(task.Starttime)
+color.Red("龟儿子")
+fmt.Println(task.Endtime)
+var singletasktimerange =  compute_time_range(task.Starttime,task.Endtime)
      alllocationandcolor = append(alllocationandcolor, singletasktimerange...)
     }
 return alllocationandcolor

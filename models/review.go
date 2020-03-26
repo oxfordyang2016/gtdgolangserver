@@ -157,13 +157,14 @@ if err!=nil{
 
   //if u set the len,u will get the size of slice
 
-  if len(reviewdays)<33{
+  if len(reviewdays)<63{
     c.JSON(200, gin.H{
       //"reviewdata":review30days,
       "reviewdata":reviewdays,
     })
   }else{
-    //你可以在这里能够设置时间
+
+  //这里设置算反馈的日期
     reviewdays = reviewdays[len(reviewdays)-61:]
   
     c.JSON(200, gin.H{
