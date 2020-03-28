@@ -5,6 +5,7 @@ import(
   "strings"
   "github.com/fatih/color"
 "regexp"
+"sort"
  "net/url"
  "io/ioutil"
   //"encoding/json"
@@ -2113,6 +2114,19 @@ tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
 var alllocationandcolor = Startend(today)
 var alllocationandcolorfortomorrow = Startend(tomorrow)
 fmt.Println(Principlewithcode)
+sort.Slice(tasks, func(p, q int) bool {  
+  if (tasks[p].Starttime == "unspecified"|| tasks[q].Starttime == "unspecified"){
+    return len(tasks[p].Starttime)<len(tasks[q].Starttime)
+    
+  }else{
+    i, _ := strconv.Atoi(tasks[p].Starttime)
+    j, _ := strconv.Atoi(tasks[q].Starttime)
+    return i< j
+  }
+ 
+ })
+
+
   c.JSON(200, gin.H{
       "pcodewithtasktag":principlecodewithtasktagfromdb,
       "task":tasks,
