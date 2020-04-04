@@ -653,6 +653,50 @@ endtime := gjson.Get(reqBody, "endtime").String()
     fmt.Println(score)
     //Print the HTTP response status.
      s := fmt.Sprintf("%f", score)
+     var plantime = task.Plantime
+     if len(plantime)!=6{
+      // if plantime =="today"{
+       loc, _ := time.LoadLocation("Asia/Shanghai")
+       //plantimeofanotherforamt :=  time.Now().In(loc)
+       //
+       plantime =  time.Now().In(loc).Format("060102")
+      }
+  // 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
+  // Check_reviewdaylog(plantime,email)
+  // var score =   Compute_singleday(plantime,email)
+     fmt.Println("真成绩是")
+     fmt.Println(score)
+     //Print the HTTP response status.
+     ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
+     fmt.Println(ttsclienttext)
+    // ttsclient(ttsclienttext)
+    /*
+    
+    如果这里不异步执行的化会导致错误的
+    
+    */
+   //这里分别向前段推送语音合成数据
+   //这里是向前段推送图像数据
+  if websocket_switch{
+   if websocket_switch&&voice_websocekt{
+    //这里分别向前段推送语音合成数据
+    go ttsclient(ttsclienttext)
+   //这里是向前段推送图像数据
+  
+   }
+  
+   if websocket_switch&&image_websocket{
+  
+    go visiualdata2websocket(ttsclienttext)
+   }
+  
+  }
+  
+
+
+
+
+
     c.JSON(200, gin.H{
       "status":  "posted",
       "id":childtask.ID,
@@ -937,7 +981,7 @@ taskid = task.ID
   }
 
 
-  if len(plantime)!=6{
+if len(plantime)!=6{
     // if plantime =="today"{
      loc, _ := time.LoadLocation("Asia/Shanghai")
      //plantimeofanotherforamt :=  time.Now().In(loc)
@@ -948,19 +992,11 @@ taskid = task.ID
 Check_reviewdaylog(plantime,email)
 var score =   Compute_singleday(plantime,email)
 fmt.Println("真成绩是")
-
 fmt.Println(score)
 //Print the HTTP response status.
-
-
-
-
  s := fmt.Sprintf("%f", score)
-
-
-
-     ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
-     fmt.Println(ttsclienttext)
+ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为"+ s 
+fmt.Println(ttsclienttext)
   // ttsclient(ttsclienttext)
   /*
   
@@ -969,7 +1005,7 @@ fmt.Println(score)
   */
  //这里分别向前段推送语音合成数据
  //这里是向前段推送图像数据
- if websocket_switch{
+if websocket_switch{
  if websocket_switch&&voice_websocekt{
   //这里分别向前段推送语音合成数据
   go ttsclient(ttsclienttext)
