@@ -2114,6 +2114,10 @@ tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
 var alllocationandcolor = Startend(today)
 var alllocationandcolorfortomorrow = Startend(tomorrow)
 fmt.Println(Principlewithcode)
+// client := c.Request.Header["client"]
+client := c.Request.Header.Get("client")
+
+if (client != "cmd"){
 sort.Slice(tasks, func(p, q int) bool {  
   if (tasks[p].Starttime == "unspecified"|| tasks[q].Starttime == "unspecified"){
     return len(tasks[p].Starttime)<len(tasks[q].Starttime)
@@ -2125,8 +2129,9 @@ sort.Slice(tasks, func(p, q int) bool {
   }
  
  })
-
-
+}
+color.Blue("yangming is here----------mmmmmm")
+fmt.Println(client)
   c.JSON(200, gin.H{
       "pcodewithtasktag":principlecodewithtasktagfromdb,
       "task":tasks,
