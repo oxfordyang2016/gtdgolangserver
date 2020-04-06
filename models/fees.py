@@ -7,6 +7,7 @@ import re
 from flask import Flask, flash, request, redirect, render_template
 #import urllib.request
 import os
+import ast
 # coding=utf-8
 from flask import Flask,render_template,request,url_for 
 #import simplejson as json
@@ -20,7 +21,9 @@ from sqlalchemy import *
 #from sqlalchemy.ext.declarative import declarative_base
 #from flaskjsontools import JsonSerializableBase
 engine = create_engine('mysql://root:123456@localhost:3306/finance?host=127.0.0.1&charset=utf8mb4')
+engine1 = create_engine('mysql://root:123456@localhost:3306/dreamteam_db?host=127.0.0.1&charset=utf8mb4')
 Session = sessionmaker(bind=engine)
+Session1 = sessionmaker(bind=engine1)
 Base = declarative_base()
 
 
@@ -80,8 +83,8 @@ def  weektime_current():
     #接下来的两部分是用来获取date类型的时间格式
     start_of_week = date_obj - timedelta(days=date_obj.weekday())  # Monday 
     end_of_week = start_of_week + timedelta(days=6)  # Sunday 
-    start_of_week =  date = datetime.strftime(start_of_week, '%y%m%d') 
-    end_of_week =  date =datetime.strftime(end_of_week , '%y%m%d') 
+    start_of_week = datetime.strftime(start_of_week, '%y%m%d') 
+    end_of_week =datetime.strftime(end_of_week , '%y%m%d') 
     return get_date_list(start_of_week,end_of_week)
 
 
@@ -132,6 +135,73 @@ def  thisyear_current():
     return days
 
 
+#获取今天的日期
+from datetime import date   
+from datetime import datetime  
+def gettoday():
+    date_obj  = date.today()
+    today = datetime.strftime(date_obj, '%y%m%d') 
+    return today
+
+   # 这里是将评价孙法与消费结果进行捆绑，建立良好的惩罚与训练机制
+def rewardorpunishment(starttime="191120",times=10,email="yang756260386@gmail.com"):
+    #获取算指定日期以后的日期
+    computesdates = get_date_list("191120",gettoday())
+    print("------yangming is here--------")
+    print(computesdates)
+    #获取指定日期以后的消费总额
+    #获取指定日期以后的评价分数
+    # email = request.headers['email']
+    #date = content['date']
+    session = Session()
+    email = "yang756260386@gmail.com"
+    #date = content['date']
+    # session = Session()
+    lastmonth = lastmonthtime_current()
+    thismonth=  monthtime_current()
+    date = lastmonth + thismonth
+    print(date)
+    #这里使用级别链接的方式重新设计
+    #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+    #使用级别链接的方式
+    all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
+    date = computesdates
+    print(date)
+    #这里使用级别链接的方式重新设计
+    #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+    #使用级别链接的方式
+    print(email)
+    all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
+    #写消费统计部分
+    allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+    allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
+    print("=======yangming=======")
+    print(allcost)
+    #获取评价算法的部分
+    # 这里新开了一个链接不知道是否有影响
+    session1 = Session1()
+    #这里使用级别链接的方式重新设计
+    #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+    #使用级别链接的方式
+    all = session1.query(Reviewofdays).filter(Reviewofdays.email == email).filter(Reviewofdays.date.in_(date)).all()
+    print("长度是%s"%(len(all)))
+    all = [k.details for k in all]
+    print(all[0])
+    print(ast.literal_eval(all[0])["totalscore"])
+    bc = [ast.literal_eval(k)["totalscore"] for k in all if len(k)>0]
+    print(len(bc))
+    print(bc)
+    sum_algo = sum(bc)
+    print("=================aaa===========")
+    print(sum_algo)
+    #乘一个系数
+    sumalgomultiple = sum_algo*10
+    #返回值【负债，可使用资金，奖励剩余，还有】
+    left = sumalgomultiple - allcost
+    return left
+  
+
+
 
 
 
@@ -151,6 +221,25 @@ def getmoney(sentence):
             money.append(float(w.word))
             print(w.word,w.flag,type(w.flag)) 
     return money
+
+
+
+class Reviewofdays(Base):
+    __tablename__ = 'reviewofdays'
+    id = Column(Integer, primary_key=True)
+    # scores=Column(String(32))
+    email = Column(String(32))
+    date = Column(String(32))
+    details = Column(String(32))
+    scores=Column('scores', Numeric)
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def __init__(self,email,detail,date,scores):
+        # self.direction= direction
+        self.scores = scores
+        self.date = date
+        self.details = details
+        self.email = email
 
 
 
@@ -192,8 +281,12 @@ def hello_world():
    return 'Hello World'
 
 
-
-
+# 获取奖励剩余的人民币和时间，时间接库还没实现
+@app.route('/finance/getrewardleft',methods=["POST","GET","PUT"])
+def rewardfun():
+    left = rewardorpunishment()
+    finance={"left":left,"availabel":40,"budget":90,"thisyear":100}
+    return json.dumps(finance)
 
 
 @app.route('/finance/statistics',methods=["POST","GET","PUT"])
