@@ -144,9 +144,9 @@ def gettoday():
     return today
 
    # 这里是将评价孙法与消费结果进行捆绑，建立良好的惩罚与训练机制
-def rewardorpunishment(starttime="191120",times=10,email="yang756260386@gmail.com"):
+def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.com"):
     #获取算指定日期以后的日期
-    computesdates = get_date_list("191120",gettoday())
+    computesdates = get_date_list("200101",gettoday())
     print("------yangming is here--------")
     print(computesdates)
     #获取指定日期以后的消费总额
@@ -198,7 +198,7 @@ def rewardorpunishment(starttime="191120",times=10,email="yang756260386@gmail.co
     sumalgomultiple = sum_algo*10
     #返回值【负债，可使用资金，奖励剩余，还有】
     left = sumalgomultiple - allcost
-    return left
+    return {"left":left,"thisyear":allcost}
   
 
 
@@ -284,8 +284,8 @@ def hello_world():
 # 获取奖励剩余的人民币和时间，时间接库还没实现
 @app.route('/finance/getrewardleft',methods=["POST","GET","PUT"])
 def rewardfun():
-    left = rewardorpunishment()
-    finance={"left":left,"availabel":40,"budget":90,"thisyear":100}
+    finance = rewardorpunishment()
+    finance={"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"]}
     return json.dumps(finance)
 
 
