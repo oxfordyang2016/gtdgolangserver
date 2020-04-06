@@ -198,7 +198,7 @@ def rewardorpunishment(starttime="191120",times=10,email="yang756260386@gmail.co
     sumalgomultiple = sum_algo*10
     #返回值【负债，可使用资金，奖励剩余，还有】
     left = sumalgomultiple - allcost
-    return left
+    return {"left":left,"thisyear":allcost}
   
 
 
@@ -284,8 +284,8 @@ def hello_world():
 # 获取奖励剩余的人民币和时间，时间接库还没实现
 @app.route('/finance/getrewardleft',methods=["POST","GET","PUT"])
 def rewardfun():
-    left = rewardorpunishment()
-    finance={"left":left,"availabel":40,"budget":90,"thisyear":100}
+    finance = rewardorpunishment()
+    finance={"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"]}
     return json.dumps(finance)
 
 
