@@ -144,9 +144,9 @@ def gettoday():
     return today
 
    # 这里是将评价孙法与消费结果进行捆绑，建立良好的惩罚与训练机制
-def rewardorpunishment(starttime="191120",times=10,email="yang756260386@gmail.com"):
+def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.com"):
     #获取算指定日期以后的日期
-    computesdates = get_date_list("191120",gettoday())
+    computesdates = get_date_list("200101",gettoday())
     print("------yangming is here--------")
     print(computesdates)
     #获取指定日期以后的消费总额
