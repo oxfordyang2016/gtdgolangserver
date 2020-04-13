@@ -124,7 +124,12 @@ var goalindb  Goalfordbs
 	if priority != -1  {db.Model(&goalindb).Update("Priority", int(priority)) }
 	if goal != "unspecified"{if goal!= "nocontent"{db.Model(&goalindb).Update("Name", goal)}}
 	if timerange !=0{db.Model(&goalindb).Update("Timerange", int(timerange)) }
-	if goalstatus !="unspecified"{db.Model(&goalindb).Update("Goalstatus", goalstatus)}
+	if goalstatus !="unspecified"{
+	   if goalstatus =="f"{goalstatus="finished"}	
+	   if goalstatus =="g"{goalstatus="giveup"}	
+		db.Model(&goalindb).Update("Goalstatus", goalstatus)
+	
+	}
 	if finishtime !="unspecified"{db.Model(&goalindb).Update("Finishtime", finishtime)}
 	if plantime !="unspecified"{db.Model(&goalindb).Update("Plantime", plantime)}
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK })
