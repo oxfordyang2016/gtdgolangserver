@@ -197,6 +197,17 @@ def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.co
     #乘一个系数
     sumalgomultiple = sum_algo*10
     #返回值【负债，可使用资金，奖励剩余，还有】
+    """
+    计算总的投入时间
+    计算每天睡眠时间
+    计算休息时间
+    总24*60 -8*60
+    计算应该的休息时间=总的分数*30
+    """
+
+
+
+
     left = sumalgomultiple - allcost
     return {"left":left,"thisyear":allcost}
   
@@ -372,6 +383,9 @@ def getfeesdetail():
 
 @app.route('/finance/uploadfees',methods=["POST","GET","PUT"])
 def createfees():
+    print("----i开始---------")
+    print(dict(request.headers))
+    print("----后来---------")
     email = request.headers['email']
     content = request.json
     record = content['inbox']
@@ -381,7 +395,7 @@ def createfees():
     print(request.headers)
     if request.headers['client'] == "iosnotsiri":
         feefromclient = float(content['fee'])
-        print(record)
+        print(record.encode("utf8"))
     else:
         #record = "我们吃了10块钱的晚饭"
         fees = getmoney(record)
@@ -404,16 +418,22 @@ def createfees():
 @app.route('/finance/updatefees',methods=["POST","GET","PUT"])
 def updatefees():
     email = "yang756260386@gmail.com"
-    
+    # print(request.method)
+    print("----i开始---------")
+    print(dict(request.headers))
+    print("----后来---------")
     content = request.json
     print(request)
     print(content)
+    print("----i am here---------")
     record = content['record']
     direction = content['direction']
     date = content['date']
     fee = content['fee']
     id = content['id']
+    
     print(record)
+    print("-----i am here---------")
     #record = "我们吃了10块钱的晚饭"
     session = Session()
     recordfromdb = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.id==id).first()
