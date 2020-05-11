@@ -387,7 +387,7 @@ option = {
         }
     ],
     series : [
-
+/*
 
     {
             name:'Make use of things you have learned',
@@ -481,7 +481,6 @@ option = {
 
 
 
-
     {
             name:'Learntechuse',
             type:'line',
@@ -489,47 +488,11 @@ option = {
             areaStyle: {},
             data:learntechuse
         },
-  //同时在图像中添加别的类型的曲线
-        {
-            name:'todayscore',
-            type:'line',
-            // stack: 'todayscore',
-            color:'red',
-            // areaStyle: {},
-            data:todayscore,
-            smooth: true,
-                lineStyle: {
-                    normal: { opacity: 0.5, 
-                    width:10
-                    }
 
-                }
-
-
-        },
-      
+*/
+ 
+ /*    
   
-        {
-            name:'Executeability',
-            type:'line',
-            color:"yellow",
-            stack: 'execute',
-            areaStyle: {},
-            data:executeablity,
-            smooth: true,
-                lineStyle: {
-                    normal: { opacity: 0.5, 
-                    width:10,
-                    
-                    }
-
-                }
-
-
-
-
-        },
-
 
 
 
@@ -628,22 +591,72 @@ option = {
 
 
 
+*/
+
+  //同时在图像中添加别的类型的曲线
+       
+        {
+            name:'Executeability',
+            type:'line',
+            color:"brown",
+  //          stack: 'e',
+//            areaStyle: {},
+            data:executeablity,
+            smooth: true,
+                lineStyle: {
+                    normal: { opacity: 1.0, 
+                    width:2,
+                    
+                    }
+
+                }
 
 
+
+
+        },
+
+
+ {
+            name:'todayscore',
+            type:'line',
+            // stack: 'e',
+            color:'red',
+            // areaStyle: {},
+            data:todayscore,
+            smooth: true,
+                lineStyle: {
+                    normal: { opacity: 1.0, 
+                    width:10
+                    }
+
+                }
+
+
+        },
         {
             name:'Totalscore',
             type:'line',
             smooth: true,
             color:'blue',
-            stack: 'total',
-            label: {
+//            stack: 'e',
+          
+/*
+  label: {
                 normal: {
                     show: true,
                     position: 'top'
                 }
             },
             areaStyle: {normal: {}},
-            data:totalscore
+*/  
+                lineStyle: {
+                    normal: { opacity: 1,
+                    width:2
+                    }
+
+                },
+          data:totalscore
         }
     ]
 }
