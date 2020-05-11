@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import jieba.posseg as pseg
 from datetime import datetime, timedelta  
@@ -146,9 +145,12 @@ def gettoday():
    # 这里是将评价孙法与消费结果进行捆绑，建立良好的惩罚与训练机制
 def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.com"):
     #获取算指定日期以后的日期
-    computesdates = get_date_list("200101",gettoday())
+    computesdates = get_date_list("200413",gettoday())
     print("------yangming is here--------")
+    computesdatesthisyear = get_date_list("200101","201231")
     print(computesdates)
+    print(computesdatesthisyear)
+    print("--------yangming is here----------")
     #获取指定日期以后的消费总额
     #获取指定日期以后的评价分数
     # email = request.headers['email']
@@ -166,16 +168,21 @@ def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.co
     #使用级别链接的方式
     all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
     date = computesdates
+    datethisyear = computesdatesthisyear
     print(date)
     #这里使用级别链接的方式重新设计
     #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
     #使用级别链接的方式
     print(email)
     all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
+    allthisyear = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(datethisyear)).all()
     #写消费统计部分
     allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+    allcostthisyear = sum([float(row.fee) for row in allthisyear if row.direction == "buy"])
     allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
+    allincomethisyear = sum([float(row.fee) for row in allthisyear if row.direction == "sell"])    
     print("=======yangming=======")
+    print(allcostthisyear)
     print(allcost)
     #获取评价算法的部分
     # 这里新开了一个链接不知道是否有影响
@@ -198,7 +205,7 @@ def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.co
     sumalgomultiple = sum_algo*10
     #返回值【负债，可使用资金，奖励剩余，还有】
     left = sumalgomultiple - allcost
-    return {"left":left,"thisyear":allcost}
+    return {"left":left,"thisyear":allcostthisyear,"thisyearincome":allincomethisyear}
   
 
 
@@ -285,7 +292,7 @@ def hello_world():
 @app.route('/finance/getrewardleft',methods=["POST","GET","PUT"])
 def rewardfun():
     finance = rewardorpunishment()
-    finance={"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"]}
+    finance={"left":finance["left"],"thisyearincome":finance["thisyearincome"],"available":40,"budget":90,"thisyear":finance["thisyear"]}
     return json.dumps(finance)
 
 
@@ -372,6 +379,7 @@ def getfeesdetail():
 
 @app.route('/finance/uploadfees',methods=["POST","GET","PUT"])
 def createfees():
+    #print("========正在上传金融数据=============")
     email = request.headers['email']
     content = request.json
     record = content['inbox']
@@ -381,7 +389,7 @@ def createfees():
     print(request.headers)
     if request.headers['client'] == "iosnotsiri":
         feefromclient = float(content['fee'])
-        print(record)
+        print(str(record.encode('utf8')))
     else:
         #record = "我们吃了10块钱的晚饭"
         fees = getmoney(record)
@@ -397,6 +405,7 @@ def createfees():
     session.add(oneday)
     session.commit()
     session.close()
+    #print("=======金融数据上传完成======")
     return json.dumps({"info":"记账成功","status":"ok"})
     
 
@@ -451,7 +460,7 @@ def rowtodict(row):
 
 
 if __name__ == '__main__':
-   app.run('0.0.0.0',threaded=True,debug = True,port = 6000)
+   app.run('0.0.0.0',threaded=False,debug = True,port = 6000)
 
 
 
