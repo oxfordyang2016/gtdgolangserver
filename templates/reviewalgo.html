@@ -7,7 +7,8 @@
     <title>beautiful dream</title>
  <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
     <!-- 引入 echarts.js -->
-    <script src="/v1/echart.js"></script>
+    <!-- <script src="/v1/echart.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/echarts-en.common.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
@@ -158,7 +159,7 @@ function connect(url) {
     
   };
   
-  
+  //超市重新链接
   ws.onclose = function(e) {
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
@@ -200,6 +201,7 @@ function calculateMA(dayCount, data) {
     }
     console.log(result)
     return result;
+    
 }
 
 
@@ -348,9 +350,14 @@ myChart.setOption(
 
 
 option = {
+    graphic: { // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text1'
+        },
     title: {
         text: 'Evaluation system'
     },
+
     tooltip : {
         trigger: 'axis',
         axisPointer: {
@@ -360,6 +367,7 @@ option = {
             }
         }
     },
+  
     legend: {
         data:['Totalscore','MA5','MA10','Make use of things u have learned','The total score of  number of tasks finished','Start an important thing early']
     },
@@ -661,6 +669,32 @@ option = {
     ]
 }
 );
+// 这里需要检查异步,必须要在图像再入完成后再
+var _zr = myChart.getZr();
+// alert(_zr)
+// alert(_zr.getWidth())
+// alert(_zr.getHeight())
+//  ShowObjProperty(_zr);
+    _zr.add(new echarts.graphic.Text({
+     style: {            
+   x: _zr.getWidth()*4/5,
+   y: _zr.getHeight()/3,
+   textFill:'red',
+   text:totalscore[totalscore.length - 1].toFixed(2),
+//    textAlign: 'center', 
+   textFont : 'bold 50px verdana'
+   }}  
+    ));
+    _zr.add(new echarts.graphic.Text({
+     style: {            
+   x: _zr.getWidth()*1/5,
+   y: _zr.getHeight()/3, 
+   textFill:'green',
+   text: '10000',
+//    textAlign: 'center', 
+   textFont : 'bold 50px verdana'
+   }}  
+    ));
 
 }
 

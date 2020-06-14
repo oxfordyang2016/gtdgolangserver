@@ -137,6 +137,18 @@ var data = {"name":"dm","children":getprojectrees()}
 
 myChart.showLoading();
     myChart.hideLoading();
+    var _zr = myChart.getZr();
+ ShowObjProperty(_zr);
+    _zr.add(new echarts.graphic.Text({
+     style: {            
+   x: _zr.getWidth() / 2,
+   y: _zr.getHeight() / 2,
+   color: '#666', 
+   text: '集团重大风险',
+   textAlign: 'center', 
+   textFont : 'bold 20px verdana'
+   }}  
+    ));
 /*
     echarts.util.each(data.children, function (datum, index) {
         index % 2 === 0 && (datum.collapsed = true);

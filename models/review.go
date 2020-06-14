@@ -42,6 +42,7 @@ type Reviewdatadetail struct{
   Getlesson       float64    `json:"getlesson"`
   Learntechuse    float64    `json:"learntechuse"` 
   Thenumberoftasks_score  float64    `json:"thenumberoftasks_score"`
+  Self_discipline_score   float64    `json:"self_discipline_score"`
   Serviceforgoal_score  float64    `json:"serviceforgoal_score"`
   Onlystartatask float64       `json:"onlystartatask_score" sql:"size:999999"`
   Atomadifficulttask  float64    `json:"atomadifficulttask"`
@@ -119,6 +120,7 @@ Depthfirstsearch                int `json:"depthfirstsearch"`
 Noflinch                   int  `json:"noflinch"` 
 Setarecord             int `json:"setarecord"`
 Conquerthefear          int `json:"conquerthefear"` 
+Self_discipline_number   int    `json:"self_discipline_bumber"`
 }
 
 
@@ -873,33 +875,67 @@ var conquerthefear_score float64= 0
 var conquerthefear_number  = 0
 var setarecord_score float64= 0
 var setarecord_number  = 0
+var self_discipline_score float64= 0
+var self_discipline_number  = 0
+// var self_discipline_coffient = 0.5
+
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Count(&countoffinishedtasks)
-
-
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Where("status =?","giveup").Count(&countofgivenuptasks)
-
-
 db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Where("status =?","giveup").Count(&countofgivenuptasks)
- 
-
 // db.Where(&Tasks{Finishtime : date, Task:"make plan for tomorrow on "+date,Status:"finish"}).Count(&count_makeplanfortomorrow)
 //count_makeplanfortomorrow
-
-
 fmt.Println("-----=======-------++++++++++++++=-----======----------------")
 fmt.Println(countofgivenuptasks)
-
-
 //task basic count
- taskcount_score =  float64(1* (countoffinishedtasks - countofgivenuptasks) +countofgivenuptasks*0)
-
+taskcount_score =  float64(1* (countoffinishedtasks - countofgivenuptasks) +countofgivenuptasks*0)
  var pain_coeffient float64 = 0.5
  var difficult_coeffient float64 = 0.5
  var atom_coffient = 0.5 
-
+ 
 
  for _,item :=range tasks{
 fmt.Println("------------i had been into loop----------------")
+
+/*
+给执行时间 参数
+1.当执行时间比计划时间在5分钟以内就加上
+2.不确定为什么在结束时间
+
+*/
+
+//转换获取计划时间
+var starttime_plan = item.Starttime 
+var endtime_plan = item.Endtime 
+var plantime = item.Plantime
+var starttime_exe = item.Starttime_exe
+var endtime_exe = item.Endtime_exe
+
+fmt.Println(endtime_plan,endtime_exe)
+if starttime_exe !="unspecified"&&starttime_plan!="unspecified"{
+  year, _ := strconv.Atoi("20"+plantime[0:2])
+  month,_ := strconv.Atoi(plantime[2:4])
+  day,_ := strconv.Atoi(plantime[4:6])
+  hour,_ := strconv.Atoi(starttime_exe[0:2])
+  minute,_ := strconv.Atoi(starttime_exe[2:4])
+  date := time.Date(year, time.Month(month), day, hour, minute, 0, 0, time.UTC)
+  //获取的是typeint   64
+  starttime_planunix := date.Unix()*1000
+  starttime_exeunix,_  := strconv.Atoi(starttime_exe)
+  
+  gap := int64(starttime_exeunix) - starttime_planunix
+  
+  if gap < 5000{
+   self_discipline_number = self_discipline_number + 1
+   self_discipline_score = float64((self_discipline_score + 0.5))
+  }
+   
+  fmt.Printf("date is :%s \n", date)
+  date = time.Date(2018, 01, 12, 22, 51, 48, 324359102, time.UTC)
+  fmt.Printf("date is :%s", date)
+}
+
+
+
 
 var jsonoftasktags = item.Tasktags
 if  challengetag := gjson.Get(jsonoftasktags, "challengetag").String();challengetag=="yes"{
@@ -1241,7 +1277,7 @@ if noflinch_number !=0{
 }
 
 //-----------------------------------everygoal score---------------------------------
-total_score = noflinch_coefficient*atom_coffient*priority_execute_coffient*float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
+total_score = self_discipline_score+noflinch_coefficient*atom_coffient*priority_execute_coffient*float64(total_score)*makeplanfortomorrow_coffient*planobey_coffient*pain_coeffient*difficult_coeffient
 
 fmt.Println("-------------alll kinds of coeffient is fellowing------------")
 fmt.Printf("the pain coeffient %f\n",pain_coeffient)
@@ -1258,12 +1294,12 @@ if math.IsNaN(total_score){
   total_score = 0.0
 }
 
-review := &Reviewdatadetail{Totalscore:total_score,Executeability_score:executeability_score,Noflinch:noflinch_score,Setarecord:setarecord_score,Conquerthefear:conquerthefear_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
+review := &Reviewdatadetail{Self_discipline_score:self_discipline_score,Totalscore:total_score,Executeability_score:executeability_score,Noflinch:noflinch_score,Setarecord:setarecord_score,Conquerthefear:conquerthefear_score,Depthfirstsearch:dfs_score,Useprinciple:useprinciple_score,Attackactively:attackactively_score,Solveakeyproblem:solveakeyproblem_score,Acceptpain:acceptpain_score,Acceptfactandseektruth:acceptfactandseektruth_score,Buildframeandprinciple:buildframeandprinciple_score,Challengethings:challengetag_score,Markataskimmediately:markataskimmediately_score,Doanimportantthingearly:doanimportantthingearly_score,Alwaysprofit:alwaysprofit_score,Atomadifficulttask:atomadifficulttask_score,Onlystartatask:onlystartatask_score,Thenumberoftasks_score:taskcount_score,Difficultthings:difficultthings_score,Threeminutes:threeminutes_score,Getlesson:getlesson_score,Learntechuse:learntechuse_score,Patience:patience_score,Serviceforgoal_score:serviceforgoal_score,Usebrain:brainuse_score,Battlewithlowerbrain:battlewithlowerbrain_score,Learnnewthings:learnnewthings_score,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_score}
 
 color.Red("We have red")
 
 fmt.Println(markataskimmediately_number)
-reviewfortimecount_from_client := Reviewfortimescount{Email:email,Noflinch:noflinch_number,Challengethings:challengetag_number,Conquerthefear:conquerthefear_number,Setarecord:setarecord_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
+reviewfortimecount_from_client := Reviewfortimescount{Self_discipline_number:self_discipline_number,Email:email,Noflinch:noflinch_number,Challengethings:challengetag_number,Conquerthefear:conquerthefear_number,Setarecord:setarecord_number,Depthfirstsearch:dfs_number,Date:date,Useprinciple:useprinciple_number,Attackactively:attackactively_number,Acceptpain:acceptpain_number,Solveakeyproblem:solveakeyproblem_number,Acceptfactandseektruth:acceptfactandseektruth_number,Atomadifficulttask:atomadifficulttask_number,Serviceforgoal_score:serviceforgoal_number,Doanimportantthingearly:doanimportantthingearly_number,Makeuseofthingsuhavelearned:makeuseofthethingsuhavelearned_number,Difficultthings:difficultthings_number,Learnnewthings:learnnewthings_number,Threeminutes:threeminutes_number,Alwaysprofit:alwaysprofit_number,Markataskimmediately:markataskimmediately_number,Usebrain:usebrainnumber,Battlewithlowerbrain:battlewithlowerbrainnumber,Buildframeandprinciple:buildframeandprinciplenumber,Patience:patiencenumber}
 
 //https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 
