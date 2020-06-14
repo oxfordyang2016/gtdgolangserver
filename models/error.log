@@ -1,0 +1,717 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [11/May/2020 13:50:31] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model cost 0.353 seconds.
+DEBUG:jieba:Prefix dict has been built succesfully.
+INFO:werkzeug:127.0.0.1 - - [11/May/2020 14:05:34] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 11:32:15] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 11:33:27] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 11:47:23] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 12:09:36] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 16:49:09] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 16:50:09] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 19:02:40] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 19:03:47] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 19:08:00] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 19:35:59] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/May/2020 22:34:44] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/May/2020 11:51:18] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [18/May/2020 05:34:42] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [19/May/2020 08:02:03] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [20/May/2020 20:49:26] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug: * Detected change in '/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/fees.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [20/May/2020 21:56:13] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/May/2020 21:56:55] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/May/2020 21:56:56] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:14:43] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:47:47] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:51:14] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:52:05] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:53:32] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Loading model cost 1.417 seconds.
+DEBUG:jieba:Prefix dict has been built succesfully.
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:54:07] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:54:35] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:57:57] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 07:59:46] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 10:24:41] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 13:38:27] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 13:44:48] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [21/May/2020 15:48:46] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/May/2020 16:16:28] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [22/May/2020 16:29:29] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+INFO:werkzeug:127.0.0.1 - - [22/May/2020 16:38:58] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/May/2020 16:41:19] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/May/2020 17:19:51] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [22/May/2020 17:44:07] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:00:22] "[1m[35mPOST /finance/uploadfees HTTP/1.0[0m" 500 -
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:00:44] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:00:45] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:01:19] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:01:20] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:01:22] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:51:52] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:52:17] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 10:52:18] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 11:40:03] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 11:40:37] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 11:40:38] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 16:58:33] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 16:58:51] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 18:21:52] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 18:22:40] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 18:23:16] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 18:23:29] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:40:35] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:40:38] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:40:40] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:40:45] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:40:50] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:40:51] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:41:05] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:41:14] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:41:17] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:41:20] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:41:48] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:41:51] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:42:10] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:42:11] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:42:15] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:43:29] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:44:03] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:44:44] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:46:16] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:46:47] "[1m[35mPOST /finance/uploadfees HTTP/1.0[0m" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:47:17] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:47:17] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:47:17] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:47:17] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:47:23] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:47:59] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:48:29] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [23/May/2020 23:48:59] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 03:03:33] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:27:38] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:28:25] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:30:58] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:32:52] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:35:57] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:37:40] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:39:37] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:39:57] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:39:58] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:40:42] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:40:43] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:42:25] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:42:25] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:43:23] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:43:46] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:43:48] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:45:45] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:45:46] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 10:53:45] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 11:04:46] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 13:03:32] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 13:04:05] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 13:04:23] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model cost 0.323 seconds.
+DEBUG:jieba:Prefix dict has been built succesfully.
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 13:11:42] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 13:12:26] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 13:12:45] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 16:32:00] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 17:08:14] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 18:06:04] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 18:25:51] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 18:35:18] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 20:18:43] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 20:46:09] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 20:46:25] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 20:49:57] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 20:52:13] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 21:53:41] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 22:05:08] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 22:49:16] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 22:59:42] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 23:00:19] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 23:00:32] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 23:00:42] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 23:00:51] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 23:19:23] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/May/2020 23:19:45] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 03:03:02] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 09:59:24] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:00:53] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:03:31] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:03:44] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:05:36] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:05:58] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:06:07] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:09:52] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:10:49] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:24:52] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:27:12] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:27:42] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:34:26] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 10:39:41] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:03:26] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:03:39] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:09:13] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:19:59] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:20:12] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:21:12] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:48:29] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:49:01] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/May/2020 11:49:18] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:13:46] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:14:08] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:14:09] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:14:50] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:15:32] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:24:07] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:24:10] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:25:56] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [26/May/2020 09:25:57] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Jun/2020 21:50:56] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [04/Jun/2020 21:50:57] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [04/Jun/2020 22:32:57] "[1m[35mGET /finance/getrewardleft HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:01:15] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:01:16] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:01:47] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:03:06] "[1m[35mPOST /finance/uploadfees HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:03:36] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:04:06] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:04:06] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:04:06] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:06:19] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:06:20] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:06:37] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:06:38] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:07:03] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:07:47] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:08:29] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 17:08:29] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 18:50:40] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 19:00:31] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 19:27:50] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2020 21:19:10] "[37mGET /finance/getrewardleft HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [10/Jun/2020 18:56:29] "[1m[35mPOST /finance/uploadfees HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [10/Jun/2020 18:56:42] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [10/Jun/2020 18:57:10] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [10/Jun/2020 18:57:40] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [10/Jun/2020 18:58:12] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 00:14:22] "[1m[35mPOST /finance/uploadfees HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 00:14:44] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:22:00] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:22:37] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:23:03] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:23:05] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:23:40] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:23:41] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:23:42] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:24:18] "[1m[35mPOST /finance/updatefees HTTP/1.0[0m" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:24:48] "[1m[35mGET /finance/getfeesdetail HTTP/1.0[0m" 500 -
+ERROR:werkzeug:Error on request:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 270, in run_wsgi
+    execute(self.server.app)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 261, in execute
+    write(data)
+  File "/usr/lib/python2.7/site-packages/werkzeug/serving.py", line 227, in write
+    self.send_header(key, value)
+  File "/usr/lib64/python2.7/BaseHTTPServer.py", line 401, in send_header
+    self.wfile.write("%s: %s\r\n" % (keyword, value))
+IOError: [Errno 32] Broken pipe
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:24:48] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:24:48] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:24:48] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:24:58] "[37mPOST /finance/updatefees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:24:59] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:25:27] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:25:29] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jun/2020 10:25:59] "[37mGET /finance/statistics?days=365 HTTP/1.0[0m" 200 -
+INFO:werkzeug: * Detected change in '/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/fees.py', reloading
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+ERROR:sqlalchemy.pool.QueuePool:Exception during reset or similar
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 636, in _finalize_fairy
+    fairy._reset(pool)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/pool.py", line 776, in _reset
+    pool._dialect.do_rollback(self)
+  File "/usr/lib/python2.7/site-packages/sqlalchemy/dialects/mysql/base.py", line 2526, in do_rollback
+    dbapi_connection.rollback()
+OperationalError: (2006, 'MySQL server has gone away')
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
