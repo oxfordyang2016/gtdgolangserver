@@ -206,7 +206,7 @@ function calculateMA(dayCount, data) {
 
 
 
-
+echarts.init(document.getElementById('main')).dispose()
 var myChart = echarts.init(document.getElementById('main'));
 
 
@@ -382,6 +382,33 @@ option = {
         bottom: '3%',
         containLabel: true
     },
+        graphic:[{ // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text2',
+            style: {
+            text: totalscore[totalscore.length - 1].toFixed(2),
+               x: myChart.getZr().getWidth()*4/5,
+            y: myChart.getZr().getHeight()/3, 
+   textFill:'red',
+//    textAlign: 'center', 
+   textFont : 'bold 50px verdana'
+    }
+        },
+        { // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text0',
+            style: {
+            text: 10000,
+               x: myChart.getZr().getWidth()*1/5,
+            y: myChart.getZr().getHeight()/3, 
+   textFill:'green',
+//    textAlign: 'center', 
+   textFont : 'bold 50px verdana'
+    }
+        },
+        ],
+
+
     xAxis : [
         {
             type : 'category',
@@ -670,31 +697,31 @@ option = {
 }
 );
 // 这里需要检查异步,必须要在图像再入完成后再
-var _zr = myChart.getZr();
+// var _zr = myChart.getZr();
 // alert(_zr)
 // alert(_zr.getWidth())
 // alert(_zr.getHeight())
 //  ShowObjProperty(_zr);
-    _zr.add(new echarts.graphic.Text({
-     style: {            
-   x: _zr.getWidth()*4/5,
-   y: _zr.getHeight()/3,
-   textFill:'red',
-   text:totalscore[totalscore.length - 1].toFixed(2),
-//    textAlign: 'center', 
-   textFont : 'bold 50px verdana'
-   }}  
-    ));
-    _zr.add(new echarts.graphic.Text({
-     style: {            
-   x: _zr.getWidth()*1/5,
-   y: _zr.getHeight()/3, 
-   textFill:'green',
-   text: '10000',
-//    textAlign: 'center', 
-   textFont : 'bold 50px verdana'
-   }}  
-    ));
+//     _zr.add(new echarts.graphic.Text({
+//      style: {            
+//    x: _zr.getWidth()*4/5,
+//    y: _zr.getHeight()/3,
+//    textFill:'red',
+//    text:totalscore[totalscore.length - 1].toFixed(2),
+// //    textAlign: 'center', 
+//    textFont : 'bold 50px verdana'
+//    }}  
+//     ));
+//     _zr.add(new echarts.graphic.Text({
+//      style: {            
+//    x: _zr.getWidth()*1/5,
+//    y: _zr.getHeight()/3, 
+//    textFill:'green',
+//    text: '10000',
+// //    textAlign: 'center', 
+//    textFont : 'bold 50px verdana'
+//    }}  
+//     ));
 
 }
 
