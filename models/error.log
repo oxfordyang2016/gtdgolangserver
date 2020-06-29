@@ -723,3 +723,15 @@ INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 110-380-736
 >>>>>>> 3d5c9ac99ea75ebc103854e8c614552c35a585bf
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [29/Jun/2020 11:08:21] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jun/2020 11:08:26] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:6000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 845-133-885
+INFO:werkzeug:127.0.0.1 - - [29/Jun/2020 11:09:33] "[37mPOST /finance/uploadfees HTTP/1.0[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Jun/2020 11:09:38] "[37mGET /finance/getfeesdetail HTTP/1.0[0m" 200 -
