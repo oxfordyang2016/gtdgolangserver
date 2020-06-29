@@ -2292,58 +2292,11 @@ func Yesterdaytaskjson(c *gin.Context) {
 
 
 
-    func Review(c *gin.Context) {
-      //i use email as identifier
-    //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-      emailcookie,_:=c.Request.Cookie("email")
-      fmt.Println(emailcookie.Value)
-      email:=emailcookie.Value
-      fmt.Println(email)
-      
-      reviewtype := c.Query("reviewtype")
-      //build search algorithm to get project relationship
-      /*
-      1.set root project be dm
-      2.select datastucture to store
-      3.fetch every line to add --------
-
-
-
-      */
-
-/*
-      var tasks []Tasks
-      //email:="yangming1"
-      db.Where("Email= ?", email).Find(&tasks)
-      alldays:=make(map[string] []Tasks)
-      make(map[string]  []string)//{"na
-      for _,item :=range tasks{
-         alldays[item.Plantime]=append(alldays[item.Plantime],item)
-         //alldays[item.Finishtime]=append(alldays[item.Finishtime],item)
-      }
-      var alleverydays []Everyday
-      for k,v := range alldays{
-         alleverydays =append(alleverydays,Everyday{k,v})
-      }
-*/
 
 
 
 
-      fmt.Println(reviewtype)
-     if reviewtype == "statistics"{
-   fmt.Println("------------------------------------------------------")
 
-    c.HTML(http.StatusOK, "reviewalgo.html", nil)
-     }else if reviewtype == "goals"{
-
-      c.HTML(http.StatusOK, "goals.html", nil)
-
-     }else{
-
-      c.HTML(http.StatusOK, "review.html", nil)
-}      
-	}
 
 
 
