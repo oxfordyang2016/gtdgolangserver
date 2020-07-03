@@ -1,3 +1,4 @@
+
 package models
 
 import (
@@ -177,6 +178,60 @@ if err!=nil{
  
 
 }
+
+
+
+
+func Reviewalgorithmjsonforyangming(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+var email string
+// emailcookie,err:=c.Request.Cookie("email")
+// if err!=nil{
+//   email = c.Request.Header.Get("email")
+// }else{
+//   fmt.Println(emailcookie.Value)
+//   email =emailcookie.Value
+// }
+email = "yang756260386@gmail.com"
+// 获取url中的参数
+   daycount := c.Query("days")
+   counts, _:= strconv.Atoi(daycount)
+
+
+   var reviewdays []Reviewofday
+   db.Where("email =  ?", email).Order("date").Find(&reviewdays)
+  if counts >1{
+    c.JSON(200, gin.H{
+      //"reviewdata":review30days,
+      "reviewdata":reviewdays[len(reviewdays)-counts:],
+    })
+  }
+
+
+
+  //if u set the len,u will get the size of slice
+
+  if len(reviewdays)<63{
+    c.JSON(200, gin.H{
+      //"reviewdata":review30days,
+      "reviewdata":reviewdays,
+    })
+  }else{
+
+  //这里设置算反馈的日期
+    reviewdays = reviewdays[len(reviewdays)-61:]
+  
+    c.JSON(200, gin.H{
+      //"reviewdata":review30days,
+      "reviewdata":reviewdays,
+    })
+  }
+ 
+
+}
+
+
 
 
 func Errorlog(c *gin.Context) {
@@ -388,6 +443,116 @@ func Reviewalgorithmjsonforios(c *gin.Context) {
 }
 
 
+//图像部分
+
+func Review(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  fmt.Println(email)
+  
+  reviewtype := c.Query("reviewtype")
+  //build search algorithm to get project relationship
+  /*
+  1.set root project be dm
+  2.select datastucture to store
+  3.fetch every line to add --------
+
+
+
+  */
+
+/*
+  var tasks []Tasks
+  //email:="yangming1"
+  db.Where("Email= ?", email).Find(&tasks)
+  alldays:=make(map[string] []Tasks)
+  make(map[string]  []string)//{"na
+  for _,item :=range tasks{
+     alldays[item.Plantime]=append(alldays[item.Plantime],item)
+     //alldays[item.Finishtime]=append(alldays[item.Finishtime],item)
+  }
+  var alleverydays []Everyday
+  for k,v := range alldays{
+     alleverydays =append(alleverydays,Everyday{k,v})
+  }
+*/
+
+
+
+
+  fmt.Println(reviewtype)
+ if reviewtype == "statistics"{
+fmt.Println("------------------------------------------------------")
+
+c.HTML(http.StatusOK, "reviewalgo.html", nil)
+ }else if reviewtype == "goals"{
+
+  c.HTML(http.StatusOK, "goals.html", nil)
+
+ }else{
+
+  c.HTML(http.StatusOK, "review.html", nil)
+}      
+}
+
+
+
+
+func Reviewfromyangming(c *gin.Context) {
+//i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+// emailcookie,_:=c.Request.Cookie("email")
+// fmt.Println(emailcookie.Value)
+email:="yang756260386@gmail.com"
+fmt.Println(email)
+
+reviewtype := c.Query("reviewtype")
+//build search algorithm to get project relationship
+/*
+1.set root project be dm
+2.select datastucture to store
+3.fetch every line to add --------
+
+
+
+*/
+
+/*
+var tasks []Tasks
+//email:="yangming1"
+db.Where("Email= ?", email).Find(&tasks)
+alldays:=make(map[string] []Tasks)
+make(map[string]  []string)//{"na
+for _,item :=range tasks{
+   alldays[item.Plantime]=append(alldays[item.Plantime],item)
+   //alldays[item.Finishtime]=append(alldays[item.Finishtime],item)
+}
+var alleverydays []Everyday
+for k,v := range alldays{
+   alleverydays =append(alleverydays,Everyday{k,v})
+}
+*/
+
+
+
+
+fmt.Println(reviewtype)
+if reviewtype == "statistics"{
+fmt.Println("------------------------------------------------------")
+
+c.HTML(http.StatusOK, "reviewalgoforyangming.html", nil)
+}else if reviewtype == "goals"{
+
+c.HTML(http.StatusOK, "goals.html", nil)
+
+}else{
+
+c.HTML(http.StatusOK, "review.html", nil)
+}      
+}
 
 
 

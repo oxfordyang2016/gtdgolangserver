@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 #!/usr/bin/env python
+>>>>>>> 2eeb799a756af7d775637a84d9ba667728101e5a
 # -*- coding: utf-8 -*-
 import jieba.posseg as pseg
 from datetime import datetime, timedelta  
@@ -146,6 +149,12 @@ def gettoday():
    # 这里是将评价孙法与消费结果进行捆绑，建立良好的惩罚与训练机制
 def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.com"):
     #获取算指定日期以后的日期
+    computesdates = get_date_list("200413",gettoday())
+    print("------yangming is here--------")
+    computesdatesthisyear = get_date_list("200101","201231")
+    print(computesdates)
+    print(computesdatesthisyear)
+    print("--------yangming is here----------")
     computesdates = get_date_list("200101",gettoday())
     print("------yangming is here--------")
     print(computesdates)
@@ -166,12 +175,21 @@ def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.co
     #使用级别链接的方式
     all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
     date = computesdates
+    datethisyear = computesdatesthisyear
     print(date)
     #这里使用级别链接的方式重新设计
     #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
     #使用级别链接的方式
     print(email)
     all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
+    allthisyear = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(datethisyear)).all()
+    #写消费统计部分
+    allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+    allcostthisyear = sum([float(row.fee) for row in allthisyear if row.direction == "buy"])
+    allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
+    allincomethisyear = sum([float(row.fee) for row in allthisyear if row.direction == "sell"])    
+    print("=======yangming=======")
+    print(allcostthisyear)
     #写消费统计部分
     allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
     allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
@@ -209,7 +227,7 @@ def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.co
 
 
     left = sumalgomultiple - allcost
-    return {"left":left,"thisyear":allcost}
+    return {"left":left,"thisyear":allcostthisyear,"thisyearincome":allincomethisyear}
   
 
 
@@ -296,7 +314,11 @@ def hello_world():
 @app.route('/finance/getrewardleft',methods=["POST","GET","PUT"])
 def rewardfun():
     finance = rewardorpunishment()
+<<<<<<< HEAD
+    finance={"left":finance["left"],"thisyearincome":finance["thisyearincome"],"available":40,"budget":90,"thisyear":finance["thisyear"]}
+=======
     finance={"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"]}
+>>>>>>> 2eeb799a756af7d775637a84d9ba667728101e5a
     return json.dumps(finance)
 
 
@@ -383,6 +405,7 @@ def getfeesdetail():
 
 @app.route('/finance/uploadfees',methods=["POST","GET","PUT"])
 def createfees():
+    #print("========正在上传金融数据=============")
     print("----i开始---------")
     print(dict(request.headers))
     print("----后来---------")
@@ -395,6 +418,7 @@ def createfees():
     print(request.headers)
     if request.headers['client'] == "iosnotsiri":
         feefromclient = float(content['fee'])
+        print(str(record.encode('utf8')))
         print(record.encode("utf8"))
     else:
         #record = "我们吃了10块钱的晚饭"
@@ -411,6 +435,7 @@ def createfees():
     session.add(oneday)
     session.commit()
     session.close()
+    #print("=======金融数据上传完成======")
     return json.dumps({"info":"记账成功","status":"ok"})
     
 
@@ -471,10 +496,11 @@ def rowtodict(row):
 
 
 if __name__ == '__main__':
-   app.run('0.0.0.0',threaded=True,debug = True,port = 6000)
+   import logging
+   logging.basicConfig(filename='error.log',level=logging.DEBUG)
+   app.run('0.0.0.0',threaded=False,debug = True,port = 6000)
 
 
 
 
         
-

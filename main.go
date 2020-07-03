@@ -102,6 +102,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   // 这里是评价组
   v1.GET("/reviewsjson",Reviewsjson)
   v1.GET("/reviewdaydatajson", Reviewalgorithmjson)  
+  v1.GET("/reviewdaydatajsonforyangming", Reviewalgorithmjsonforyangming)  
   v1.GET("/reviewdaydatajsonforios", Reviewalgorithmjsonforios)
   // 这里是获取今天的分数
   v1.GET("/reviewscoreoftoday", Reviewscore_today)
@@ -148,6 +149,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
         v1.GET("/todaytasks",Todaytaskweb)
         //get the tree map
         v1.GET("/review",Review)
+        v1.GET("/reviewfrommaster",Reviewfromyangming)
         v1.GET("/reviewfortimes",Reviewforstastics)
         v1.GET("/errorlogjson",Errorlog)
         v1.GET("/problemsjson",Problemssystem)
