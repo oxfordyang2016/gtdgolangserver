@@ -468,8 +468,8 @@ func Createtaskfromsiri(c *gin.Context) {
   inbox := gjson.Get(reqBody, "inbox").String()
   fmt.Println(inbox)
   tasktags := gjson.Get(reqBody, "tasktags").String()
-clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
-   plantime := gjson.Get(reqBody, "plantime").String()
+  clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
+  plantime := gjson.Get(reqBody, "plantime").String()
 
 
 
@@ -607,6 +607,13 @@ fmt.Println(value.String())
   endtime := gjson.Get(reqBody, "endtime").String()
   starttime_exe := "unspecified"
   endtime_exe := "unspecified"
+
+ //这里如果任务还没有完成也没有被开始的话，需要推送到任务调度service
+ 
+
+
+
+
 
 
   // tasktags1 := gjson.Get(reqBody, "tasktags")
@@ -1037,6 +1044,21 @@ if websocket_switch{
 
   go visiualdata2websocket(ttsclienttext)
  }
+
+}
+color.Yellow("------------we dealing with push notification---------------")
+color.Red(starttime)
+color.Red(plantime)
+color.Red(status)
+if (starttime!="unspecified"&&plantime!="unspecified"&&status=="unfinished"){
+  month,_ := strconv.Atoi(plantime[2:4])
+  day,_ := strconv.Atoi(plantime[4:6])
+  hour,_ := strconv.Atoi(starttime[0:2])
+  minute,_ :=  strconv.Atoi(starttime[2:4])
+  var pushtime = [6]int{2020,month,day,hour,minute,0}
+  // = strconv.Itoa(taskid)
+  taskid := strconv.Itoa(int(taskid))
+  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",taskid,"jobid",inbox,pushtime)
 
 }
 
@@ -1926,17 +1948,30 @@ func Taskexecutelogfun(c *gin.Context){
 */
 
 buf := make([]byte, 1000000)
-num, _ := c.Request.Body.Read(buf)
+num, err:= c.Request.Body.Read(buf)
+fmt.Println(num)
+if err != nil{
+  fmt.Println(err)
+  fmt.Println("can head")
+}
 reqBody := string(buf[0:num])
+fmt.Println(reqBody)
 email:= "yang756260386@gmail.com"
 timestamp := gjson.Get(reqBody, "timestamp").String()
 timestamp_int := int(gjson.Get(reqBody, "timestamp").Int())
 taskfromclient := gjson.Get(reqBody, "task").String()
 operationtype := gjson.Get(reqBody, "operationtype").String()
 taskidfromclient := gjson.Get(reqBody,"taskid").String()
+fmt.Println(taskidfromclient)
 // taskidint = int(taskid)
-taskid, _ := strconv.Atoi(taskidfromclient)
+
+taskid, err1 := strconv.Atoi(taskidfromclient)
+if err1 !=nil{
+  fmt.Println("-------oh my god----------")
+}
+color.Yellow(taskfromclient)
 color.Yellow("我在这")
+color.Yellow(operationtype)
 color.Yellow(strconv.Itoa(taskid))
 //更新对应task的执行状态字段
 var task Tasks
