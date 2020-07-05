@@ -9,7 +9,7 @@
     <!-- 引入 echarts.js -->
     <!-- <script src="/v1/echart.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/echarts-en.common.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 </head>
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
@@ -181,6 +181,15 @@ function connect(url) {
 connect(httpsWebSocketurl)
 
 
+function gettoday(){
+    var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy.toString().substring(2,4)+mm+dd  ;
+return today
+}
 
 
 
@@ -288,6 +297,9 @@ var acceptfact = [];
 var executeablity = [];
 
 $.get("/v1/reviewdaydatajsonforyangming", function(data, status){
+
+
+
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
         for(i=0;i<data.reviewdata.length;i++){
              datecategory.push(data.reviewdata[i].date);
@@ -314,7 +326,7 @@ $.get("/v1/reviewdaydatajsonforyangming", function(data, status){
          markataskimmediately.push(obj_detailofreview.markataskimmediately);
          buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
          acceptfact.push(obj_detailofreview.acceptfact)
-         
+          if (data.reviewdata[i].date===gettoday()){break;}
 };    
 
 
