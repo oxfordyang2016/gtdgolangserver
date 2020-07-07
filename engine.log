@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [GIN] 2020/07/06 - 00:39:43 | 200 |   16.659834ms |       127.0.0.1 | GET      /v1/reviewdaydatajsonforyangming
 [GIN] 2020/07/06 - 00:39:51 | 200 |    3.103048ms |       127.0.0.1 | GET      /v1/reviewfrommaster?reviewtype=statistics
 [GIN] 2020/07/06 - 00:39:51 | 200 |    16.05312ms |       127.0.0.1 | GET      /v1/reviewdaydatajsonforyangming
@@ -6,3 +7,26 @@
 [GIN] 2020/07/06 - 00:42:30 | 200 |    1.577682ms |       127.0.0.1 | GET      /v1/reviewfrommaster?reviewtype=statistics
 [GIN] 2020/07/06 - 00:42:54 | 200 |    1.560702ms |       127.0.0.1 | GET      /v1/reviewfrommaster?reviewtype=statistics
 [GIN] 2020/07/06 - 00:43:13 | 200 |    1.691859ms |       127.0.0.1 | GET      /v1/reviewfrommaster?reviewtype=statistics
+=======
+[GIN] 2020/07/06 - 00:18:07 | 200 |    5.449477ms |       127.0.0.1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:18:08 | 200 |   49.811964ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:19:59 | 200 |  167.445097ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:20:00 | 200 |   38.429271ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:20:44 | 200 |  191.039386ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:20:44 | 200 |   40.774191ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:20:51 | 200 |    3.314299ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:20:52 | 200 |   37.712968ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:21:57 | 200 |   58.158535ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:21:57 | 200 |   24.843114ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:26:38 | 200 |    187.7179ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:26:38 | 200 |   19.265262ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:27:19 | 200 |   242.67423ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:27:19 | 200 |   130.61631ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:28:08 | 200 |   14.656693ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:28:47 | 200 |   39.455306ms |       127.0.0.1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:28:47 | 200 |   16.049713ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:29:34 | 200 |  400.798008ms |             ::1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/06 - 00:29:34 | 200 |   24.214372ms |             ::1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/06 - 00:35:44 | 200 |  514.138566ms |             ::1 | GET      /v1/reviewfrommaster?reviewtype=statistics
+[GIN] 2020/07/06 - 00:35:46 | 200 |   20.469219ms |             ::1 | GET      /v1/reviewdaydatajsonforyangming
+>>>>>>> ff0ef5b3aa58e0ac57e11fa0788bde9aacd28404
