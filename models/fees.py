@@ -16,6 +16,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
+from loguru import logger
 # Column, String, Integer, Date,Numeric,and_,in_
 # from models import techniqueanalysis
 #from sqlalchemy.ext.declarative import declarative_base
@@ -295,86 +296,96 @@ def hello_world():
 # 获取奖励剩余的人民币和时间，时间接库还没实现
 @app.route('/finance/getrewardleft',methods=["POST","GET","PUT"])
 def rewardfun():
-    finance = rewardorpunishment()
-    finance={"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"]}
-    return json.dumps(finance)
-
+    try:
+        finance = rewardorpunishment()
+        finance={"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
+        return json.dumps(finance)
+    except:
+        logger.exception("获取回馈数据异常")
+        return json.dumps({'code':403,'info':"server eror"})
 
 @app.route('/finance/statistics',methods=["POST","GET","PUT"])
 def staticticsformoney():
-    days = request.args.get('days')
-    print(days)
-    date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
-    if days == "-1":
-        print("i am here")
-        date = [datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')]
-    if days == "0":
-        print("------")
-        date = [datetime.strftime(datetime.now(), '%y%m%d')] 
-    if days =="7":
-        date = weektime_current()
-    if days =="31":
-        date = monthtime_current()
-    if days =="-31":
-        date = lastmonthtime_current()
-    if days =="365":
-        date = thisyear_current()
-    email = request.headers['email']
-    #date = content['date']
-    session = Session()
-    print(date)
-    #这里使用级别链接的方式重新设计
-    #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
-    #使用级别链接的方式
-    all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
-    #写消费统计部分
-    allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
-    allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
-    for k in all:
-        print(k)
-    # return "ok"
-    result = {"cost":allcost,"income":allincome}
-    return json.dumps(result)
-    
+    try:
+        days = request.args.get('days')
+        print(days)
+        date = datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')
+        if days == "-1":
+            print("i am here")
+            date = [datetime.strftime(datetime.now() - timedelta(1), '%y%m%d')]
+        if days == "0":
+            print("------")
+            date = [datetime.strftime(datetime.now(), '%y%m%d')] 
+        if days =="7":
+            date = weektime_current()
+        if days =="31":
+            date = monthtime_current()
+        if days =="-31":
+            date = lastmonthtime_current()
+        if days =="365":
+            date = thisyear_current()
+        email = request.headers['email']
+        #date = content['date']
+        session = Session()
+        print(date)
+        #这里使用级别链接的方式重新设计
+        #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+        #使用级别链接的方式
+        all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
+        #写消费统计部分
+        allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+        allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
+        for k in all:
+            print(k)
+        # return "ok"
+        result = {"cost":allcost,"income":allincome,"code":200}
+        return json.dumps(result)
+    except:
+        logger.exception("获取统计数据异常")
+        return json.dumps({"code":403,"info":"server error"})
 
 
 #这里是为了获取详详细的消费情况便于展示，这里要使用细节的cookie
 @app.route('/finance/getfeesdetail',methods=["POST","GET","PUT"])
 def getfeesdetail():
-    # email = request.headers['email']
-    #email = request.cookies["email"]
-    print(request.cookies)
-    email = "yang756260386@gmail.com"
-    #date = content['date']
-    session = Session()
-    lastmonth = lastmonthtime_current()
-    thismonth=  monthtime_current()
-    date = lastmonth + thismonth
-    print(date)
-    #这里使用级别链接的方式重新设计
-    #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
-    #使用级别链接的方式
-    all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
-    #写消费统计部分
-    #建立一个大的数组，返回的数据格式应该是
-    #allrecords = {"data":[{"name":"191102","records":[row]},{},{},{},{}]}
-    from collections import defaultdict
-    alldays_records = defaultdict(list)
-    for k in all:
-        print(k.id)
-        alldays_records[k.date].append(rowtodict(k))
-    
-    result = []
-    for k in date:
-        if len(alldays_records[k])>0:
-            result.append({"date":k,"allrecordsinaday":alldays_records[k]})
-     
-    # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
-    
-    # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
-    # allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
-    resultfromserver = {"allfees":result}
-    return json.dumps(resultfromserver)
+    try:
+        # email = request.headers['email']
+        #email = request.cookies["email"]
+        print(request.cookies)
+        email = "yang756260386@gmail.com"
+        #date = content['date']
+        session = Session()
+        lastmonth = lastmonthtime_current()
+        thismonth=  monthtime_current()
+        date = lastmonth + thismonth
+        print(date)
+        #这里使用级别链接的方式重新设计
+        #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+        #使用级别链接的方式
+        all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
+        #写消费统计部分
+        #建立一个大的数组，返回的数据格式应该是
+        #allrecords = {"data":[{"name":"191102","records":[row]},{},{},{},{}]}
+        from collections import defaultdict
+        alldays_records = defaultdict(list)
+        for k in all:
+            print(k.id)
+            alldays_records[k.date].append(rowtodict(k))
+        
+        result = []
+        for k in date:
+            if len(alldays_records[k])>0:
+                result.append({"date":k,"allrecordsinaday":alldays_records[k]})
+        
+        # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+        
+        # allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
+        # allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
+        resultfromserver = {"allfees":result,"code":200}
+        return json.dumps(resultfromserver)
+    except:
+        logger.exception("获取详细费用异常")
+        return json.dumps({"info":"server error","code":403})
 
 
 
@@ -383,68 +394,74 @@ def getfeesdetail():
 
 @app.route('/finance/uploadfees',methods=["POST","GET","PUT"])
 def createfees():
-    print("----i开始---------")
-    print(dict(request.headers))
-    print("----后来---------")
-    email = request.headers['email']
-    content = request.json
-    record = content['inbox']
-    direction = content['direction']
-    date = content['date']
-    feefromclient = 0.0
-    print(request.headers)
-    if request.headers['client'] == "iosnotsiri":
-        feefromclient = float(content['fee'])
-        print(record.encode("utf8"))
-    else:
-        #record = "我们吃了10块钱的晚饭"
-        fees = getmoney(record)
-        print(fees)
-        #这里因该给出明确的告警信息！否则下面这句话会出问题
-        if len(fees) >1 or len(fees) == 0:
-            return json.dumps({"info":"请不要在消费中包含两个数字，我不能帮你识别","status":"fail"})
-        #接下来准备写入到Q数据库
-        feefromclient = float(fees[0])
-        print(feefromclient) 
-    session = Session()
-    oneday = Accounting(direction,record,feefromclient,date,email)
-    session.add(oneday)
-    session.commit()
-    session.close()
-    return json.dumps({"info":"记账成功","status":"ok"})
-    
+    try:
+        print("----i开始---------")
+        print(dict(request.headers))
+        print("----后来---------")
+        email = request.headers['email']
+        content = request.json
+        record = content['inbox']
+        direction = content['direction']
+        date = content['date']
+        feefromclient = 0.0
+        print(request.headers)
+        if request.headers['client'] == "iosnotsiri":
+            feefromclient = float(content['fee'])
+            print(record.encode("utf8"))
+        else:
+            #record = "我们吃了10块钱的晚饭"
+            fees = getmoney(record)
+            print(fees)
+            #这里因该给出明确的告警信息！否则下面这句话会出问题
+            if len(fees) >1 or len(fees) == 0:
+                return json.dumps({"info":"请不要在消费中包含两个数字，我不能帮你识别","status":"fail"})
+            #接下来准备写入到Q数据库
+            feefromclient = float(fees[0])
+            print(feefromclient) 
+        session = Session()
+        oneday = Accounting(direction,record,feefromclient,date,email)
+        session.add(oneday)
+        session.commit()
+        session.close()
+        return json.dumps({"info":"记账成功","status":"ok","code":200})
+    except:
+        logger.exception("上传费用异常")
+        return json.dumps({"info":"server error","code":403})
 
 
 @app.route('/finance/updatefees',methods=["POST","GET","PUT"])
 def updatefees():
-    email = "yang756260386@gmail.com"
-    # print(request.method)
-    print("----i开始---------")
-    print(dict(request.headers))
-    print("----后来---------")
-    content = request.json
-    print(request)
-    print(content)
-    print("----i am here---------")
-    record = content['record']
-    direction = content['direction']
-    date = content['date']
-    fee = content['fee']
-    id = content['id']
-    
-    print(record)
-    print("-----i am here---------")
-    #record = "我们吃了10块钱的晚饭"
-    session = Session()
-    recordfromdb = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.id==id).first()
-    recordfromdb.record = record
-    recordfromdb.direction = direction
-    recordfromdb.date = date
-    recordfromdb.fee = fee
-    session.commit()
-    session.close()
-    return json.dumps({"info":"记账成功","status":"ok"})
-
+    try:
+        email = "yang756260386@gmail.com"
+        # print(request.method)
+        print("----i开始---------")
+        print(dict(request.headers))
+        print("----后来---------")
+        content = request.json
+        print(request)
+        print(content)
+        print("----i am here---------")
+        record = content['record']
+        direction = content['direction']
+        date = content['date']
+        fee = content['fee']
+        id = content['id']
+        
+        print(record)
+        print("-----i am here---------")
+        #record = "我们吃了10块钱的晚饭"
+        session = Session()
+        recordfromdb = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.id==id).first()
+        recordfromdb.record = record
+        recordfromdb.direction = direction
+        recordfromdb.date = date
+        recordfromdb.fee = fee
+        session.commit()
+        session.close()
+        return json.dumps({"info":"记账成功","status":"ok","code":200})
+    except:
+        logger.exception("更新费用异常")
+        return json.dumps({"code":405,"info":"server error"})
 
 
 
@@ -471,7 +488,8 @@ def rowtodict(row):
 
 
 if __name__ == '__main__':
-   app.run('0.0.0.0',threaded=True,debug = True,port = 6000)
+    logger.add("./logging/file_1.log", rotation="50 MB",backtrace=True, diagnose=True,colorize=True) 
+    app.run('0.0.0.0',threaded=True,debug = True,port = 6000)
 
 
 
