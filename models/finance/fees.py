@@ -21,12 +21,13 @@ from loguru import logger
 # from models import techniqueanalysis
 #from sqlalchemy.ext.declarative import declarative_base
 #from flaskjsontools import JsonSerializableBase
+import pymysql
+pymysql.install_as_MySQLdb()
 engine = create_engine('mysql://root:123456@localhost:3306/finance?host=127.0.0.1&charset=utf8mb4')
 engine1 = create_engine('mysql://root:123456@localhost:3306/dreamteam_db?host=127.0.0.1&charset=utf8mb4')
 Session = sessionmaker(bind=engine)
 Session1 = sessionmaker(bind=engine1)
 Base = declarative_base()
-
 
 import decimal
 
