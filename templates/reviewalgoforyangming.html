@@ -353,6 +353,23 @@ alert(battlewithlowerbrain);
 
 
 
+//finance api
+var thisyear = 10000
+var left = 100090
+$.get("/finance/getrewardleft", function(data, status){
+    /*
+    
+    {"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
+    */
+    var k = JSON.parse(data)
+        thisyear = k.thisyear
+        left = k.left
+        // alert(data)
+        // alert(left)     
+});  
+
+
+
 myChart.showLoading();
 myChart.hideLoading();
 var datafromserver = ['yangming','is','181923','201942','周五','周六','周日'];
@@ -410,7 +427,7 @@ option = {
             type: 'text',
             id: 'text0',
             style: {
-            text: 10000,
+            text:  left.toFixed(1),
                x: myChart.getZr().getWidth()*1/5,
             y: myChart.getZr().getHeight()/3, 
    textFill:'green',

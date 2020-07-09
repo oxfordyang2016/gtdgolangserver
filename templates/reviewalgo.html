@@ -293,9 +293,7 @@ var markataskimmediately = [];
 var buildframeandprinciple = [];
 var acceptfact = [];
 var executeablity = [];
-//finance api
-var thisyear = 10000
-var left = 100090
+
 
 $.get("/v1/reviewdaydatajson", function(data, status){
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
@@ -358,8 +356,9 @@ alert(battlewithlowerbrain);
 );
 
 
-
-jQuery.ajaxSetup({async:false});
+//finance api
+var thisyear = 10000
+var left = 100090
 $.get("/finance/getrewardleft", function(data, status){
     /*
     

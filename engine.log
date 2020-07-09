@@ -119,3 +119,5 @@
 [GIN] 2020/07/09 - 12:13:44 | 200 |    48.06249ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
 [GIN] 2020/07/09 - 12:13:56 | 200 |    6.986178ms |       127.0.0.1 | GET      /v1/review?reviewtype=statistics
 [GIN] 2020/07/09 - 12:13:56 | 200 |   23.586017ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/09 - 12:17:22 | 200 |    9.785569ms |       127.0.0.1 | GET      /v1/review?reviewtype=statistics
+[GIN] 2020/07/09 - 12:17:22 | 200 |   35.914964ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
