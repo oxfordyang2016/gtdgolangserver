@@ -21,8 +21,8 @@ _ "github.com/lib/pq"
 //"github.com/tidwall/gjson"
 )
 
-func push2scheduler(url string,taskid string,jobid string,task string ,time [6]int){
-values := map[string]interface{}{"taskid":taskid, "task":task,"time":time,"jobid":jobid }
+func push2scheduler(url string,user string,taskid string,jobid string,task string ,time [6]int){
+values := map[string]interface{}{"taskid":taskid,"user":user,"task":task,"time":time,"jobid":jobid }
 jsonValue, _ := json.Marshal(values)
 resp, _ := http.Post(url, "application/json", bytes.NewBuffer(jsonValue))
 if (resp!=nil){

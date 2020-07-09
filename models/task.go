@@ -1058,7 +1058,7 @@ if (starttime!="unspecified"&&plantime!="unspecified"&&status=="unfinished"){
   var pushtime = [6]int{2020,month,day,hour,minute,0}
   // = strconv.Itoa(taskid)
   taskid := strconv.Itoa(int(taskid))
-  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",taskid,"jobid",inbox,pushtime)
+  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",inbox,pushtime)
 
 }
 
@@ -1166,8 +1166,8 @@ fmt.Println("Response status:", resp.Status)
     goalcode_fromgtdcli := gjson.Get(reqBody, "goalcode").String()
     parentid_fromgtdcli := gjson.Get(reqBody, "parentid").String()
     //获取具体的时间
-starttime := gjson.Get(reqBody, "starttime").String()
-endtime := gjson.Get(reqBody, "endtime").String()
+    starttime := gjson.Get(reqBody, "starttime").String()
+    endtime := gjson.Get(reqBody, "endtime").String()
 
 
     devotedtime:= gjson.Get(reqBody, "timedevotedto_a_task").Int()
@@ -1188,6 +1188,7 @@ endtime := gjson.Get(reqBody, "endtime").String()
     
    // id := c.PostForm("id")
     id := gjson.Get(reqBody, "id").String()
+    taskid := id
    //检查更新id是否存在
    
 
@@ -1428,6 +1429,27 @@ Check_reviewdaylog(finishtime,email)
 return_info:= Compute_singleday(finishtime,email)
 fmt.Println(return_info)
 }
+
+color.Yellow("--------------yacccccccccc-------")
+fmt.Println(task.Starttime)
+fmt.Println(task.Plantime)
+fmt.Println(task.Status)
+color.Red(starttime)
+color.Red(plantime)
+color.Red(status)
+color.Yellow("--------------yacccccccccc-------")
+if (task.Starttime!="unspecified"&&task.Plantime!="unspecified"&&task.Status=="unfinished"){
+  month,_ := strconv.Atoi(task.Plantime[2:4])
+  day,_ := strconv.Atoi(task.Plantime[4:6])
+  hour,_ := strconv.Atoi(task.Starttime[0:2])
+  minute,_ :=  strconv.Atoi(task.Starttime[2:4])
+  var pushtime = [6]int{2020,month,day,hour,minute,0}
+  // = strconv.Itoa(taskid)
+  // taskid := strconv.Itoa(taskid)
+  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",task.Task,pushtime)
+
+}
+
 
 
 
