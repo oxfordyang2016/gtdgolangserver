@@ -206,7 +206,7 @@ function calculateMA(dayCount, data) {
 
 
 
-echarts.init(document.getElementById('main')).dispose()
+//echarts.init(document.getElementById('main')).dispose();
 var myChart = echarts.init(document.getElementById('main'));
 
 
@@ -293,6 +293,9 @@ var markataskimmediately = [];
 var buildframeandprinciple = [];
 var acceptfact = [];
 var executeablity = [];
+//finance api
+var thisyear = 10000
+var left = 100090
 
 $.get("/v1/reviewdaydatajson", function(data, status){
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
@@ -332,6 +335,10 @@ $.get("/v1/reviewdaydatajson", function(data, status){
 
 
 
+
+
+
+
 //添加一条今日线
 todayscore = new Array(totalscore.length).fill(totalscore[totalscore.length-1]);
 // alert(todayscore)
@@ -352,8 +359,20 @@ alert(battlewithlowerbrain);
 
 
 
+jQuery.ajaxSetup({async:false});
+$.get("/finance/getrewardleft", function(data, status){
+    /*
+    
+    {"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
+    */
+    var k = JSON.parse(data)
+        thisyear = k.thisyear
+        left = k.left
+        // alert(data)
+        // alert(left)     
+});  
 
-
+// alert(thisyear)
 
 myChart.showLoading();
 myChart.hideLoading();
@@ -371,6 +390,18 @@ option = {
     title: {
         text: 'Evaluation system'
     },
+
+
+    graphic:{ // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text1',
+            style: {
+            text: totalscore[totalscore.length - 1].toFixed(2),
+            x: 100,
+            y: 200
+    }
+        },
+
 
     tooltip : {
         trigger: 'axis',
@@ -412,8 +443,8 @@ option = {
             type: 'text',
             id: 'text0',
             style: {
-            text: 10000,
-               x: myChart.getZr().getWidth()*1/5,
+            text: left.toFixed(1),
+            x: myChart.getZr().getWidth()*1/5,
             y: myChart.getZr().getHeight()/3, 
    textFill:'green',
 //    textAlign: 'center', 
@@ -711,6 +742,7 @@ option = {
 }
 );
 // 这里需要检查异步,必须要在图像再入完成后再
+//myChart.getZr().dispose();
 // var _zr = myChart.getZr();
 // alert(_zr)
 // alert(_zr.getWidth())

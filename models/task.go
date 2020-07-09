@@ -159,9 +159,9 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-var  websocket_switch = false
-var  voice_websocekt = false
-var image_websocket = false
+var  websocket_switch = true
+var  voice_websocekt = true
+var image_websocket = true
 
 
 

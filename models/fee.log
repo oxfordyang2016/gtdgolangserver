@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+ * Serving Flask app "fees" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Serving Flask app "fees" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+=======
 {}
 ['200301', '200302', '200303', '200304', '200305', '200306', '200307', '200308', '200309', '200310', '200311', '200312', '200313', '200314', '200315', '200316', '200317', '200318', '200319', '200320', '200321', '200322', '200323', '200324', '200325', '200326', '200327', '200328', '200329', '200330', '200331', '200401', '200402', '200403', '200404', '200405', '200406', '200407', '200408', '200409', '200410', '200411', '200412', '200413', '200414', '200415', '200416', '200417', '200418', '200419', '200420', '200421', '200422', '200423', '200424', '200425', '200426', '200427', '200428', '200429', '200430']
 5
@@ -407,3 +419,4 @@ Accept-Encoding: gzip;q=1.0, compress;q=0.5
 18
 <Request 'http://127.0.0.1:6000/finance/updatefees' [POST]>
 {u'date': u'200418', u'record': u'\u
+>>>>>>> 75d94ec224c6bd2b0b702e6786cc3f8725149332
