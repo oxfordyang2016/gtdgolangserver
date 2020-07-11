@@ -159,7 +159,7 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-var  websocket_switch = true
+var  websocket_switch = false
 var  voice_websocekt = true
 var image_websocket = true
 
@@ -1058,11 +1058,21 @@ if (starttime!="unspecified"&&plantime!="unspecified"&&status=="unfinished"){
   var pushtime = [6]int{2020,month,day,hour,minute,0}
   // = strconv.Itoa(taskid)
   taskid := strconv.Itoa(int(taskid))
-  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",inbox,pushtime)
+  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",inbox,pushtime,"start")
 
 }
 
+if (endtime!="unspecified"&&plantime!="unspecified"&&status=="unfinished"){
+  month,_ := strconv.Atoi(plantime[2:4])
+  day,_ := strconv.Atoi(plantime[4:6])
+  hour,_ := strconv.Atoi(endtime[0:2])
+  minute,_ :=  strconv.Atoi(endtime[2:4])
+  var pushtime = [6]int{2020,month,day,hour,minute,0}
+  // = strconv.Itoa(taskid)
+  taskid := strconv.Itoa(int(taskid))
+  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",inbox,pushtime,"end")
 
+}
 
   c.JSON(200, gin.H{
     "taskid": taskid,
@@ -1444,12 +1454,25 @@ if (task.Starttime!="unspecified"&&task.Plantime!="unspecified"&&task.Status=="u
   hour,_ := strconv.Atoi(task.Starttime[0:2])
   minute,_ :=  strconv.Atoi(task.Starttime[2:4])
   var pushtime = [6]int{2020,month,day,hour,minute,0}
+  var typeofaction = "start"
   // = strconv.Itoa(taskid)
   // taskid := strconv.Itoa(taskid)
-  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",task.Task,pushtime)
+  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",task.Task,pushtime,typeofaction)
 
 }
 
+if (task.Endtime!="unspecified"&&task.Plantime!="unspecified"&&task.Status=="unfinished"){
+  month,_ := strconv.Atoi(task.Plantime[2:4])
+  day,_ := strconv.Atoi(task.Plantime[4:6])
+  hour,_ := strconv.Atoi(task.Endtime[0:2])
+  minute,_ :=  strconv.Atoi(task.Starttime[2:4])
+  typeofaction := "end"
+  var pushtime = [6]int{2020,month,day,hour,minute,0}
+  // = strconv.Itoa(taskid)
+  // taskid := strconv.Itoa(taskid)
+  go  push2scheduler("http://127.0.0.1:6666/nvwa/schedulejobtopush2notification",email,taskid,"jobid",task.Task,pushtime,typeofaction)
+
+}
 
 
 
