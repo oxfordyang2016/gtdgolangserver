@@ -294,6 +294,7 @@ var buildframeandprinciple = [];
 var acceptfact = [];
 var executeablity = [];
 
+
 $.get("/v1/reviewdaydatajson", function(data, status){
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
         for(i=0;i<data.reviewdata.length;i++){
@@ -332,6 +333,10 @@ $.get("/v1/reviewdaydatajson", function(data, status){
 
 
 
+
+
+
+
 //添加一条今日线
 todayscore = new Array(totalscore.length).fill(totalscore[totalscore.length-1]);
 // alert(todayscore)
@@ -351,7 +356,22 @@ alert(battlewithlowerbrain);
 );
 
 
+//finance api
+var thisyear = 10000
+var left = 100090
+$.get("/finance/getrewardleft", function(data, status){
+    /*
+    
+    {"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
+    */
+    var k = JSON.parse(data)
+        thisyear = k.thisyear
+        left = k.left
+        // alert(data)
+        // alert(left)     
+});  
 
+// alert(thisyear)
 
 myChart.showLoading();
 myChart.hideLoading();
@@ -422,8 +442,8 @@ option = {
             type: 'text',
             id: 'text0',
             style: {
-            text: 10000,
-               x: myChart.getZr().getWidth()*1/5,
+            text: left.toFixed(1),
+            x: myChart.getZr().getWidth()*1/5,
             y: myChart.getZr().getHeight()/3, 
    textFill:'green',
 //    textAlign: 'center', 
