@@ -1077,11 +1077,13 @@ var endtime_exe = item.Endtime_exe
 
 fmt.Println(endtime_plan,endtime_exe)
 if starttime_exe !="unspecified"&&starttime_plan!="unspecified"{
+  //为分钟级别1131的精度进行设计
+  if len(starttime_plan) ==4{
   year, _ := strconv.Atoi("20"+plantime[0:2])
   month,_ := strconv.Atoi(plantime[2:4])
   day,_ := strconv.Atoi(plantime[4:6])
-  hour,_ := strconv.Atoi(starttime_exe[0:2])
-  minute,_ := strconv.Atoi(starttime_exe[2:4])
+  hour,_ := strconv.Atoi(starttime_plan[0:2])
+  minute,_ := strconv.Atoi(starttime_plan[2:4])
   date := time.Date(year, time.Month(month), day, hour, minute, 0, 0, time.UTC)
   //获取的是typeint   64
   starttime_planunix := date.Unix()*1000
@@ -1091,13 +1093,43 @@ if starttime_exe !="unspecified"&&starttime_plan!="unspecified"{
   
   if gap < 5000{
    self_discipline_number = self_discipline_number + 1
-   self_discipline_score = float64((self_discipline_score + 0.5))
+   self_discipline_score = float64((self_discipline_score + 0.25))
   }
    
   fmt.Printf("date is :%s \n", date)
   date = time.Date(2018, 01, 12, 22, 51, 48, 324359102, time.UTC)
   fmt.Printf("date is :%s", date)
 }
+ }
+
+
+if endtime_exe !="unspecified"&&endtime_plan!="unspecified"{
+  //为分钟级别1131的精度进行设计
+  if len(endtime_plan)==4{
+  year, _ := strconv.Atoi("20"+plantime[0:2])
+  month,_ := strconv.Atoi(plantime[2:4])
+  day,_ := strconv.Atoi(plantime[4:6])
+  hour,_ := strconv.Atoi(endtime_plan[0:2])
+  minute,_ := strconv.Atoi(endtime_plan[2:4])
+  date := time.Date(year, time.Month(month), day, hour, minute, 0, 0, time.UTC)
+  //获取的是typeint   64
+  endtime_planunix := date.Unix()*1000
+  endtime_exeunix,_  := strconv.Atoi(starttime_exe)
+  
+  gap := endtime_planunix-int64(endtime_exeunix) 
+  
+  if gap > 3000{
+   self_discipline_number = self_discipline_number + 1
+   self_discipline_score = float64((self_discipline_score + 0.25))
+  }
+   
+  fmt.Printf("date is :%s \n", date)
+  date = time.Date(2018, 01, 12, 22, 51, 48, 324359102, time.UTC)
+  fmt.Printf("date is :%s", date)
+}
+}
+
+
 
 
 

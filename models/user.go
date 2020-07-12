@@ -33,7 +33,7 @@ func init() {
 	//mysql://dt_admin:dt2016@localhost/dreamteam_db
 	db, err = gorm.Open("mysql", "dt_admin:dt2016@/dreamteam_db?charset=utf8&parseTime=True&loc=Local")
 	db.BlockGlobalUpdate(true)
-    db.LogMode(true)
+    // db.LogMode(true)
           //connect database to postgrel
 
         //postgrel database need to be set install set role and password

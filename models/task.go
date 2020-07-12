@@ -2060,7 +2060,8 @@ fmt.Println(email)
 fmt.Println("++++++++++++++++++++++")
 fmt.Println(timestamp)
 fmt.Println(taskid)
-tasklog := Taskexecutelog{Task:taskfromclient,Email:email,Operationtype:operationtype,Taskid:int(taskid),Timestamp:timestamp}
+fmt.Println(task.Task)
+tasklog := Taskexecutelog{Task:task.Task,Email:email,Operationtype:operationtype,Taskid:int(taskid),Timestamp:timestamp}
  //db.Create(&task).Scan(&task)
  db.Create(&tasklog).Scan(&tasklog)
  c.JSON(200, gin.H{
