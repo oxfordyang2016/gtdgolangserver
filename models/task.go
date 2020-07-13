@@ -1465,7 +1465,7 @@ if (task.Endtime!="unspecified"&&task.Plantime!="unspecified"&&task.Status=="unf
   month,_ := strconv.Atoi(task.Plantime[2:4])
   day,_ := strconv.Atoi(task.Plantime[4:6])
   hour,_ := strconv.Atoi(task.Endtime[0:2])
-  minute,_ :=  strconv.Atoi(task.Starttime[2:4])
+  minute,_ :=  strconv.Atoi(task.Endtime[2:4])
   typeofaction := "end"
   var pushtime = [6]int{2020,month,day,hour,minute,0}
   // = strconv.Itoa(taskid)

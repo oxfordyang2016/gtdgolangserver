@@ -22,6 +22,7 @@ type (
 		Email     string `json:"email"`
 		Username     string `json:"username"`
 		Password    string    `json:"password"`
+		DeviceToken    string    `json:"devicetoken"`
 	}
 )
 
@@ -99,15 +100,21 @@ func  Login(c *gin.Context) {
 	   //cookie set
 	  //store := sessions.NewCookieStore([]byte("secret"))
 	  //router.Use(sessions.Sessions("mysession", store))
-	    email := c.PostForm("email")
+	       email := c.PostForm("email")
            password:= c.PostForm("password")
-            client:=c.PostForm("client")
-           
+           client:=c.PostForm("client")
+		   devicetoken:=c.PostForm("devicetoken")
+		   //首先查询然后，更新
+        //   这里仅考虑单个设备的情况
            var userfromdb   Accounts
-           db.Where("email = ?", email).First(&userfromdb)
+		   db.Where("email = ?", email).First(&userfromdb)
+		   if (userfromdb.DeviceToken != devicetoken){
+		   db.Model(&userfromdb).Update("Devicetoken", devicetoken)
+		   }
            fmt.Println("================================")
            fmt.Println(userfromdb.Password)
-	   if  userfromdb.Password != password{
+		
+		   if  userfromdb.Password != password{
              c.JSON(http.StatusOK,  gin.H{
                         "status":  "password or email error!",
                 })      
