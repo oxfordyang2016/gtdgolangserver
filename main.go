@@ -20,8 +20,8 @@ import (
 	//"net/http"
 	//"github.com/yangming/stringutil"
   //"fmt"
-  "os"
-  "io"
+  // "os"
+  // "io"
   //"./math"
   "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -48,8 +48,8 @@ func main() {
 
   // f, err := os.Create("/tmp/dat2")
 
-f, _ := os.Create("engine.log")
-gin.DefaultWriter = io.MultiWriter(f)
+// f, _ := os.Create("engine.log")
+// gin.DefaultWriter = io.MultiWriter(f)
 router := gin.Default()
 router.Use(cors.Default())
 v1 := router.Group("/v1")

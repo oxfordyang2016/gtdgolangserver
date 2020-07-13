@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [GIN] 2020/07/11 - 11:18:34 | 200 |   12.964927ms |       127.0.0.1 | GET      /v1/reviewdaydatajsonforyangming
 [GIN] 2020/07/11 - 11:28:34 | 200 |   14.815707ms |       127.0.0.1 | GET      /v1/reviewdaydatajsonforyangming
 [GIN] 2020/07/11 - 11:38:34 | 200 |   20.022109ms |       127.0.0.1 | GET      /v1/reviewdaydatajsonforyangming
@@ -65,3 +66,47 @@
 [GIN] 2020/07/12 - 00:03:29 | 200 |  1.031041391s |       127.0.0.1 | GET      /v1/reviewfortimes?days=1
 [GIN] 2020/07/12 - 14:33:00 | 200 |   12.913953ms |       127.0.0.1 | GET      /v1/reviewdaydatajsonforyangming
 [GIN] 2020/07/12 - 19:58:15 | 200 |   94.944626ms |       127.0.0.1 | GET      /v1/todayjson
+=======
+[GIN] 2020/07/12 - 18:02:16 | 200 |  840.266212ms |       127.0.0.1 | POST     /v1/createtask
+[GIN] 2020/07/12 - 18:02:16 | 200 |   117.72513ms |       127.0.0.1 | GET      /v1/comparegoal
+[GIN] 2020/07/12 - 18:02:17 | 200 |  806.540817ms |       127.0.0.1 | GET      /v1/reviewfortimes?days=1
+[GIN] 2020/07/12 - 18:02:21 | 200 |   47.587851ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:02:23 | 200 |   43.526681ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:10:34 | 200 |   16.370645ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/12 - 18:10:35 | 404 |       3.368µs |       127.0.0.1 | GET      /finance/getrewardleft
+[GIN] 2020/07/12 - 18:13:28 | 200 |  852.000546ms |       127.0.0.1 | POST     /v1/createtask
+[GIN] 2020/07/12 - 18:13:28 | 200 |  123.000497ms |       127.0.0.1 | GET      /v1/comparegoal
+[GIN] 2020/07/12 - 18:13:29 | 200 |  862.621699ms |       127.0.0.1 | GET      /v1/reviewfortimes?days=1
+[GIN] 2020/07/12 - 18:16:51 | 500 |   45.998687ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:16:51 | 500 |   51.199756ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:17:23 | 500 |    8.713701ms |   192.168.0.110 | GET      /v1/goalsgraph?type=noproject
+[GIN] 2020/07/12 - 18:17:51 | 500 |   42.376906ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:17:55 | 200 |    8.260226ms |   192.168.0.110 | POST     /v1/login
+[GIN] 2020/07/12 - 18:18:00 | 200 |   40.908023ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:18:31 | 200 |   11.754952ms |   192.168.0.110 | POST     /v1/login
+[GIN] 2020/07/12 - 18:20:22 | 200 |   47.421822ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:20:42 | 200 |   140.03274ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/12 - 18:20:43 | 404 |       3.653µs |       127.0.0.1 | GET      /finance/getrewardleft
+[GIN] 2020/07/12 - 18:23:20 | 200 |  2.260322541s |   192.168.0.110 | POST     /v1/taskexecute
+[GIN] 2020/07/12 - 18:24:54 | 200 |     2.03661ms |   192.168.0.110 | POST     /v1/login
+[GIN] 2020/07/12 - 18:26:21 | 200 |  1.529087634s |       127.0.0.1 | POST     /v1/createtask
+[GIN] 2020/07/12 - 18:26:21 | 200 |  112.509683ms |       127.0.0.1 | GET      /v1/comparegoal
+[GIN] 2020/07/12 - 18:26:22 | 200 |  889.458616ms |       127.0.0.1 | GET      /v1/reviewfortimes?days=1
+[GIN] 2020/07/12 - 18:30:43 | 200 |    13.89389ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/12 - 18:30:43 | 404 |       3.478µs |       127.0.0.1 | GET      /finance/getrewardleft
+[GIN] 2020/07/12 - 18:31:49 | 200 |    1.230443ms |   192.168.0.110 | POST     /v1/login
+[GIN] 2020/07/12 - 18:31:49 | 500 |   52.207466ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:32:20 | 200 |    1.391106ms |   192.168.0.110 | POST     /v1/login
+[GIN] 2020/07/12 - 18:32:29 | 200 |   47.056879ms |   192.168.0.110 | GET      /v1/everyday
+[GIN] 2020/07/12 - 18:33:30 | 200 |  2.157379164s |       127.0.0.1 | POST     /v1/createtask
+[GIN] 2020/07/12 - 18:33:30 | 200 |  209.957296ms |       127.0.0.1 | GET      /v1/comparegoal
+[GIN] 2020/07/12 - 18:33:32 | 200 |  1.150636247s |       127.0.0.1 | GET      /v1/reviewfortimes?days=1
+[GIN] 2020/07/12 - 18:39:53 | 200 |  1.011642789s |       127.0.0.1 | POST     /v1/createtask
+[GIN] 2020/07/12 - 18:39:53 | 200 |  123.799006ms |       127.0.0.1 | GET      /v1/comparegoal
+[GIN] 2020/07/12 - 18:39:54 | 200 |  806.183307ms |       127.0.0.1 | GET      /v1/reviewfortimes?days=1
+[GIN] 2020/07/12 - 18:40:43 | 200 |    10.93319ms |       127.0.0.1 | GET      /v1/reviewdaydatajson
+[GIN] 2020/07/12 - 18:40:43 | 404 |       2.587µs |       127.0.0.1 | GET      /finance/getrewardleft
+[GIN] 2020/07/12 - 18:41:27 | 200 |  653.737654ms |   192.168.0.110 | GET      /v1/unfinishedtasksjson
+[GIN] 2020/07/12 - 18:41:30 | 200 |  658.907157ms |   192.168.0.110 | GET      /v1/unfinishedtasksjson
+[GIN] 2020/07/12 - 18:41:32 | 200 |   44.917164ms |   192.168.0.110 | GET      /v1/everyday
+>>>>>>> 8556d07af9557fb4dcbab1f81d866ac4381762f4
