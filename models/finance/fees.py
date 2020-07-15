@@ -187,6 +187,8 @@ def rewardorpunishment(starttime="200101",times=10,email="yang756260386@gmail.co
     #使用级别链接的方式
     all = session1.query(Reviewofdays).filter(Reviewofdays.email == email).filter(Reviewofdays.date.in_(date)).all()
     print("长度是%s"%(len(all)))
+    session.close()
+    session1.close()
     all = [k.details for k in all]
     print(all[0])
     print(ast.literal_eval(all[0])["totalscore"])
@@ -334,6 +336,7 @@ def staticticsformoney():
         #使用级别链接的方式
         all = session.query(Accounting).filter(Accounting.email == email).filter(Accounting.date.in_(date)).all()
         #写消费统计部分
+        session.close()
         allcost = sum([float(row.fee) for row in all if row.direction == "buy"])
         allincome = sum([float(row.fee) for row in all if row.direction == "sell"])
         for k in all:
