@@ -112,16 +112,16 @@ v1.StaticFile("/background.png", "./static/images/background.png")
 
 
         //tasks system
-        v1.POST("/createtask",CreatetaskbyJSON)
-        //v1.POST("/gtdcli",Createtask)
+  v1.POST("/createtask",CreatetaskbyJSON)
+  //v1.POST("/gtdcli",Createtask)
   v1.POST("/createtaskfromsiri",Createtaskfromsiri) 
         //v1.POST("/gtdclifromios",Createtaskfromios)
-	      v1.POST("/update",Update)
-        v1.POST("/updateforios",Updateforios)	
-        v1.GET("/map",Googlemapservice)
-        v1.GET("/location",Canvas)
-        v1.GET("/deadlinesystemjson",Deadlinesystem) 
-        v1.POST("/taskexecute",Taskexecutelogfun)
+  v1.POST("/update",Update)
+  v1.POST("/updateforios",Updateforios)	
+  v1.GET("/map",Googlemapservice)
+  v1.GET("/location",Canvas)
+  v1.GET("/deadlinesystemjson",Deadlinesystem) 
+  v1.POST("/taskexecute",Taskexecutelogfun)
   //principle system
   v1.POST("/createprinciplelib",Createprinciplelib)
   v1.POST("/createprincipledetail",Createprincipledetail) 
@@ -133,15 +133,15 @@ v1.StaticFile("/background.png", "./static/images/background.png")
 
          //goalsystem
 
-        v1.POST("/creategoal",Creategoal)
-        v1.POST("/updategoal",Updategoal)
-        v1.GET("/comparegoal",Goalcompare)    
-        v1.GET("/searchwithgoalcode",Searchwithgoalcode)  
-        v1.GET("/goaljson",Goalsystem)
-        v1.GET("/goalsgraph",Goalsjson)
+  v1.POST("/creategoal",Creategoal)
+  v1.POST("/updategoal",Updategoal)
+  v1.GET("/comparegoal",Goalcompare)    
+  v1.GET("/searchwithgoalcode",Searchwithgoalcode)  
+  v1.GET("/goaljson",Goalsystem)
+  v1.GET("/goalsgraph",Goalsjson)
 
  //web page
-	      //v1.GET("/mainboard",Mainboard)
+ //v1.GET("/mainboard",Mainboard)
         v1.GET("/inbox",Inbox)
         v1.GET("/project",Project)
         v1.GET("/everyday",Everydays)

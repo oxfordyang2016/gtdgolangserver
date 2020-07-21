@@ -356,6 +356,8 @@ def getfeesdetail():
         # email = request.headers['email']
         #email = request.cookies["email"]
         print(request.cookies)
+        # 这里需要读取request部分的client！！！
+        # 获取到实际的email
         email = "yang756260386@gmail.com"
         #date = content['date']
         session = Session()

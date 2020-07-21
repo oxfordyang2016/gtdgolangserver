@@ -49,7 +49,6 @@ type (
     //  添加实际执行时间戳（仅包含开始和结尾）
     Starttime_exe  string  `json:"starttime_exe"`
     Endtime_exe     string `json:"endtime_exe"`
-
     Finishtime  string `json:"finishtime"`
     Note        string `json:"note"`
     Parentproject  string `json:"parentproject"`
@@ -59,7 +58,7 @@ type (
     Latitude  string `json:"Latitude"`
     Reviewsign string `json:"reviewsign"`
     Score      uint    `json:"score"` 
-   Deadline     string    `json:"deadline"` 
+    Deadline     string    `json:"deadline"` 
     Devotedtime int    `json:"devotedtime"`
     Priority    int    `json:"priority"`
     Reviewdatas string  `json:"reviewdatas" sql:"type:text;"`    
@@ -267,8 +266,6 @@ c.JSON(200, gin.H{
       "long": longtitude,
      "message": "u have uploaded info,please come on!",
    })
-
-
 }
 
 }
@@ -454,9 +451,6 @@ func Createtaskfromsiri(c *gin.Context) {
   tasktags := gjson.Get(reqBody, "tasktags").String()
   clientfinishtime:=  gjson.Get(reqBody, "finishtime").String()
   plantime := gjson.Get(reqBody, "plantime").String()
-
-
-
   client_status := gjson.Get(reqBody, "taskstatus").String()
 
 

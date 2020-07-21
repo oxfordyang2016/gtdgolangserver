@@ -24,6 +24,7 @@ _ "github.com/lib/pq"
 func push2scheduler(url string,user string,taskid string,jobid string,task string ,time [6]int,typeofaction string){
 values := map[string]interface{}{"taskid":taskid,"user":user,"task":task,"time":time,"jobid":jobid,"typeofaction":typeofaction}
 jsonValue, _ := json.Marshal(values)
+
 resp, _ := http.Post(url, "application/json", bytes.NewBuffer(jsonValue))
 if (resp!=nil){
 	fmt.Println("ok")
