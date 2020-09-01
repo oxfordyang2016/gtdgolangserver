@@ -1514,6 +1514,13 @@ if websocket_switch{
 
 
 
+       func Taskmanager(c *gin.Context){
+        c.HTML(http.StatusOK, "taskmanager.html",nil)
+       }
+
+
+
+
        func  Todaytaskweb(c *gin.Context) {
         /*  c.HTML(http.StatusOK, "inbox.html",gin.H{
             "task":"ha",

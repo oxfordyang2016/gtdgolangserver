@@ -10,6 +10,8 @@ _ "github.com/jinzhu/gorm/dialects/mysql"
 _ "github.com/jinzhu/gorm/dialects/postgres"
 _ "github.com/lib/pq"
 "github.com/gomodule/redigo/redis"
+"github.com/tidwall/gjson"
+"strings"
 
 )
 var Yangming int
@@ -22,7 +24,10 @@ type (
 		Email     string `json:"email"`
 		Username     string `json:"username"`
 		Password    string    `json:"password"`
-		DeviceToken    string    `json:"devicetoken"`
+		DreamforfutureDeviceTokenforiphone   string    `json:"DreamforfuturedeviceTokenforiphone"`
+		DreamforfutureDeviceTokenforipad  string    `json:"DreamforfuturedeviceTokenforipad"`
+		ThinkingforlifeDeviceTokenforipad    string    `json:"thinkingforlifedeviceTokenforipad "`
+		ThinkingforlifeDeviceTokenforiphone    string    `json:"thinkingforlifedeviceTokenforiphone"`
 	}
 )
 
@@ -32,7 +37,7 @@ func init() {
 	//fmt.Println(a)
 	var err error
 	//mysql://dt_admin:dt2016@localhost/dreamteam_db
-	db, err = gorm.Open("mysql", "dt_admin:dt2016@/dreamteam_db?charset=utf8&parseTime=True&loc=Local")
+	db, err = gorm.Open("mysql", "root:123456@/dreamteam_db?charset=utf8&parseTime=True&loc=Local")
 	db.BlockGlobalUpdate(true)
     // db.LogMode(true)
           //connect database to postgrel
@@ -96,28 +101,67 @@ func  User(c *gin.Context) {
   }
 
 
-func  Login(c *gin.Context) {
+func  Login1(c *gin.Context) {
 	   //cookie set
 	  //store := sessions.NewCookieStore([]byte("secret"))
 	  //router.Use(sessions.Sessions("mysession", store))
-	       email := c.PostForm("email")
+	  buf := make([]byte, 1000000)
+	  num, _ := c.Request.Body.Read(buf)
+	  reqBody := string(buf[0:num])
+
+		   email := c.PostForm("email")
+		   fmt.Println(email)
            password:= c.PostForm("password")
            client:=c.PostForm("client")
 		   devicetoken:=c.PostForm("devicetoken")
+		   devicetype:=c.PostForm("devicetype")
+
+		  
+
+		
+		   datatype := c.Request.Header.Get("Content-Type")
+		  if (strings.Contains(datatype, "application/json")){
+			email= gjson.Get(reqBody, "email").String()
+			fmt.Println(email)
+			password= gjson.Get(reqBody, "password").String()
+			client= gjson.Get(reqBody, "client").String()
+		  }
+		
+
+    //    如果传上来的数据是application/json
+
+
+
 		   //首先查询然后，更新
         //   这里仅考虑单个设备的情况
            var userfromdb   Accounts
 		   db.Where("email = ?", email).First(&userfromdb)
-		   if (userfromdb.DeviceToken != devicetoken){
-		   db.Model(&userfromdb).Update("Devicetoken", devicetoken)
-		   }
+		 
+            fmt.Println(userfromdb )
+            if(client=="dreamforlifeforiphone"){}
+		   if(client=="dreamforlifeforiphone"){}
+		   if(client=="thinkingforlife"){
+			if(devicetype=="ipad") {
+			if (userfromdb.ThinkingforlifeDeviceTokenforipad!= devicetoken){
+				fmt.Println("-----thinkingforlife  with ipad login--------")
+				db.Model(&userfromdb).Update("ThinkingforlifeDeviceTokenforipad", devicetoken)
+				}
+		   }}
+		   if(client=="thinkingforlifeforiphone"){}
+		   if(client=="mapforlifeformac"){}
+		   if(client=="mapforlifeforwindows"){}
+
+
+
+
            fmt.Println("================================")
            fmt.Println(userfromdb.Password)
 		
 		   if  userfromdb.Password != password{
              c.JSON(http.StatusOK,  gin.H{
                         "status":  "password or email error!",
-                })      
+				})      
+				return
                  }            
 
           
@@ -162,4 +206,70 @@ func  Login(c *gin.Context) {
 
 func  checkcookie() bool{
 	return true
+}
+
+
+
+func  Login(c *gin.Context) {
+	//cookie set
+   //store := sessions.NewCookieStore([]byte("secret"))
+   //router.Use(sessions.Sessions("mysession", store))
+		email := c.PostForm("email")
+	password:= c.PostForm("password")
+	client:=c.PostForm("client")
+			// devicetoken:=c.PostForm("devicetoken")
+			//首先查询然后，更新
+ //   这里仅考虑单个设备的情况
+	var userfromdb   Accounts
+			db.Where("email = ?", email).First(&userfromdb)
+			// if (userfromdb.DeviceToken != devicetoken){
+			// db.Model(&userfromdb).Update("Devicetoken", devicetoken)
+			// }
+	fmt.Println("================================")
+	fmt.Println(userfromdb.Password)
+
+			if  userfromdb.Password != password{
+	  c.JSON(http.StatusOK,  gin.H{
+				 "status":  "password or email error!",
+		 })
+		  }
+
+
+
+		 fmt.Println(client)
+				 //session := sessions.Default(c)
+				 //session.Set("count", "yangming")
+				 //session.Save()
+				 fmt.Println(email,password,client)
+				 cookie := &http.Cookie{
+												 Name:  "username",
+												 Value: email,
+								 }
+				 http.SetCookie(c.Writer, cookie)
+				 cookie1 := &http.Cookie{
+												 Name:  "email",
+												 Value: email,
+								 }
+				 http.SetCookie(c.Writer, cookie1)
+				 cookie2 := &http.Cookie{
+												 Name:  "logintime",
+												 Value: "now-nounspecify",
+								 }
+				 http.SetCookie(c.Writer, cookie2)
+				 cookie3 := &http.Cookie{
+					Name:  "client",
+					Value: client,
+	}
+http.SetCookie(c.Writer, cookie3)
+	//c.String(http.StatusOK, "0")
+if client == "web"{
+//https://github.com/gin-gonic/gin to redirect
+c.Redirect(http.StatusMovedPermanently, "/v1/inbox")
+//c.Redirect(http.StatusMovedPermanently, "/mainboard")
+//c.HTML(http.StatusOK, "user.html", nil)
+}else{
+c.JSON(http.StatusOK,  gin.H{
+"status":  "logined",
+})
+}
 }

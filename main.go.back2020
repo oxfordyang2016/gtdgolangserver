@@ -59,7 +59,7 @@ v1 := router.Group("/v1")
 	//i using https://gitlab.com/gin-gonic/gin/issues/358 to server static css
 v1.StaticFile("/show.css", "./static/css/show.css")
 v1.StaticFile("/user.css", "./static/css/user.css")
-v1.StaticFile("/taskmanage.css", "./static/css/taskmanage.css")
+
 v1.StaticFile("/moment.js", "./static/js/moment.js")
 
 v1.StaticFile("/echart.js", "./static/js/echart.js")
@@ -83,10 +83,14 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   //for blog update
   v1.GET("/blogupdate", Blogupdate) 
 
+
+
+
+
   //json API
   v1.GET("/inboxjson",Inboxjson)
   v1.GET("/todayjson",Todaytaskjson)
-  v1.GET("/taskmanager",Taskmanager)
+  
   v1.GET("/yesterdayjson",Yesterdaytaskjson)
   v1.GET("/tomorrowjson",Tomorrowtaskjson)
   v1.GET("/unfinishedtasksjson",Unfinishedtaskjson)
