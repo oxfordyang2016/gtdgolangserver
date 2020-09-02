@@ -32,7 +32,6 @@
   var SimplePicker=function(e){var t={};function i(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,i),r.l=!0,r.exports}return i.m=e,i.c=t,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(e,t){if(1&t&&(e=i(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)i.d(n,r,function(t){return e[t]}.bind(null,r));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=0)}({0:function(e,t,i){i("iyB0"),e.exports=i("TYVf")},"0DyV":function(e,t,i){"use strict";function n(e,t){e=[].concat(e);for(var i=0;i<t;i++)e[i]=void 0;return e}function r(e){var i=new Date(e.getTime()),r=e.getFullYear(),s=e.getMonth(),a={date:i,month:void 0};if(t.monthTracker.current=new Date(e.getTime()),t.monthTracker.current.setDate(1),t.monthTracker.years[r]=t.monthTracker.years[r]||{},void 0!==t.monthTracker.years[r][s])return a.month=t.monthTracker.years[r][s],a;(e=new Date(e.getTime())).setDate(1),t.monthTracker.years[r][s]=[];for(var c=t.monthTracker.years[r][s],o=0;e.getMonth()===s;){var l=e.getDate(),p=e.getDay();1===l&&(c[o]=n([],p)),c[o]=c[o]||[],c[o][p]=l,6===p&&o++,e.setDate(e.getDate()+1)}var d=5;void 0===c[5]&&(d=4,c[5]=n([],7));var m=c[d].length;if(m<7){var h=c[d].concat(n([],7-m));c[d]=h}return a.month=c,a}Object.defineProperty(t,"__esModule",{value:!0}),t.monthTracker={years:{}},t.months=["January","February","March","April","May","June","July","August","September","October","November","December"],t.days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],t.scrapeMonth=r,t.scrapePreviousMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()-1),r(e)},t.scrapeNextMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()+1),r(e)};var s={st:[1,21,31],nd:[2,22],rd:[3,23]};t.getDisplayDate=function(e){var t=e.getDate();return-1!==s.st.indexOf(t)?t+"st":-1!==s.nd.indexOf(t)?t+"nd":-1!==s.rd.indexOf(t)?t+"rd":t+"th"},t.formatTimeFromInputElement=function(e){var t="",i=e.split(":"),n=i[0],r=(n=+n)>=12;return r&&n>12&&(n-=12),r||0!==n||(n=12),t+=n<10?"0"+n:n,t+=":"+i[1]+" ",t+=r?"PM":"AM"}},TYVf:function(e,t,i){"use strict";var n=i("0DyV"),r=i("ht6X"),s=new Date,a=function(){function e(e,t){var i;if("object"==typeof e&&(t=e,i=void 0),"string"==typeof(i=i||"body")&&(i=document.querySelector(i)),!i)throw new Error("SimplePicker: Valid selector or element must be passed!");t||(t={}),this.selectedDate=new Date,this.$simplepicker=i,this.initElMethod(i),this.injectTemplate(),this.init(t),this.initListeners(),this._eventHandlers={},this._validOnListeners=["submit","close"]}return e.prototype.initElMethod=function(e){this.$=function(t){return e.querySelector(t)},this.$$=function(t){return e.querySelectorAll(t)}},e.prototype.init=function(e){var t=this.$,i=this.$$;this.$simplepicker=t(".simpilepicker-date-picker"),this.$simplepickerWrapper=t(".simplepicker-wrapper"),this.$trs=i(".simplepicker-calender tbody tr"),this.$tds=i(".simplepicker-calender tbody td"),this.$headerMonthAndYear=t(".simplepicker-month-and-year"),this.$monthAndYear=t(".simplepicker-selected-date"),this.$date=t(".simplepicker-date"),this.$day=t(".simplepicker-day-header"),this.$time=t(".simplepicker-time"),this.$timeInput=t(".simplepicker-time-section input"),this.$timeSectionIcon=t(".simplepicker-icon-time"),this.$cancel=t(".simplepicker-cancel-btn"),this.$ok=t(".simplepicker-ok-btn"),this.$displayDateElements=[this.$day,this.$headerMonthAndYear,this.$date],this.$time.classList.add("simplepicker-fade"),this.render(n.scrapeMonth(s)),e=e||{},this.opts=e,this.reset(s),void 0!==e.zIndex&&(this.$simplepickerWrapper.style.zIndex=e.zIndex.toString()),e.disableTimeSection&&this.disableTimeSection(),e.compactMode&&this.compactMode()},e.prototype.reset=function(e){var t=e||new Date;this.render(n.scrapeMonth(t));var i=t.getDate().toString(),r=this.findElementWithDate(i);r.classList.contains("active")||(this.selectDateElement(r),this.updateDateComponents(t));var s=t.toTimeString().split(" ")[0].replace(/\:\d\d$/,"");this.$timeInput.value=s,this.$time.innerText=n.formatTimeFromInputElement(s)},e.prototype.compactMode=function(){this.$date.style.display="none"},e.prototype.disableTimeSection=function(){this.$timeSectionIcon.style.visibility="hidden"},e.prototype.enableTimeSection=function(){this.$timeSectionIcon.style.visibility="visible"},e.prototype.injectTemplate=function(){var e=document.createElement("template");e.innerHTML=r.htmlTemplate,this.$simplepicker.appendChild(e.content.cloneNode(!0))},e.prototype.clearRows=function(){this.$tds.forEach(function(e){e.innerHTML="",e.classList.remove("active")})},e.prototype.updateDateComponents=function(e){var t=n.days[e.getDay()],i=n.months[e.getMonth()]+" "+e.getFullYear();this.$headerMonthAndYear.innerHTML=i,this.$monthAndYear.innerHTML=i,this.$day.innerHTML=t,this.$date.innerHTML=n.getDisplayDate(e)},e.prototype.render=function(e){var t=this.$$,i=this.$trs,n=e.month,r=e.date;this.clearRows(),n.forEach(function(e,t){var n=i[t].children;e.forEach(function(e,t){var i=n[t];e?(i.removeAttribute("data-empty"),i.innerHTML=e):i.setAttribute("data-empty","")})});var s=t("table tbody tr:last-child td"),a=!0;s.forEach(function(e){void 0===e.dataset.empty&&(a=!1)});var c=s[0].parentElement;c.style.display=a&&c?"none":"table-row",this.updateDateComponents(r)},e.prototype.updateSelectedDate=function(e){var t,i=this.$monthAndYear,r=this.$time;this.$date;t=e?e.innerHTML.trim():this.$date.innerHTML.replace(/[a-z]+/,"");var s=i.innerHTML.split(" "),a=s[0],c=s[1],o=n.months.indexOf(a),l=r.innerHTML.split(":"),p=+l[0],d=l[1].split(" "),m=d[0],h=d[1];"AM"===h&&12==p&&(p=0),"PM"===h&&p<12&&(p+=12);var u=new Date(+c,+o,+t,+p,+m);this.selectedDate=u;var v=t+" ";v+=i.innerHTML.trim()+" ",v+=r.innerHTML.trim(),this.readableDate=v.replace(/^\d+/,u.getDate().toString())},e.prototype.selectDateElement=function(e){var t=this.$(".simplepicker-calender tbody .active");e.classList.add("active"),t&&t.classList.remove("active"),this.updateSelectedDate(e),this.updateDateComponents(this.selectedDate)},e.prototype.findElementWithDate=function(e,t){var i,n;return void 0===t&&(t=!1),this.$tds.forEach(function(t){var r=t.innerHTML.trim();r===e&&(i=t),""!==r&&(n=t)}),void 0===i&&t&&(i=n),i},e.prototype.handleIconButtonClick=function(e){var t,i=this.$;if(e.classList.contains("simplepicker-icon-calender")){var r=i(".simplepicker-icon-time"),s=i(".simplepicker-time-section");return(c=i(".simplepicker-calender-section")).style.display="block",s.style.display="none",r.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}if(e.classList.contains("simplepicker-icon-time")){var a=i(".simplepicker-icon-calender"),c=i(".simplepicker-calender-section");return(s=i(".simplepicker-time-section")).style.display="block",c.style.display="none",a.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}var o=i(".simplepicker-calender td.active");if(o&&(t=o.innerHTML.trim()),e.classList.contains("simplepicker-icon-next")&&this.render(n.scrapeNextMonth()),e.classList.contains("simplepicker-icon-previous")&&this.render(n.scrapePreviousMonth()),t){var l=this.findElementWithDate(t,!0);this.selectDateElement(l)}},e.prototype.initListeners=function(){var e=this,t=e.$simplepicker,i=e.$timeInput,r=e.$ok,s=e.$cancel,a=e.$simplepickerWrapper,c=this;function o(){c.close(),c.callEvent("close",function(e){e()})}t.addEventListener("click",function(e){var t=e.target,i=t.tagName.toLowerCase();e.stopPropagation(),"td"!==i?"button"===i&&t.classList.contains("simplepicker-icon")&&c.handleIconButtonClick(t):c.selectDateElement(t)}),i.addEventListener("input",function(e){if(""!==e.target.value){var t=n.formatTimeFromInputElement(e.target.value);c.$time.innerHTML=t,c.updateSelectedDate()}}),r.addEventListener("click",function(){c.close(),c.callEvent("submit",function(e){e(c.selectedDate,c.readableDate)})}),s.addEventListener("click",o),a.addEventListener("click",o)},e.prototype.callEvent=function(e,t){(this._eventHandlers[e]||[]).forEach(function(e){t(e)})},e.prototype.open=function(){this.$simplepickerWrapper.classList.add("active")},e.prototype.close=function(){this.$simplepickerWrapper.classList.remove("active")},e.prototype.on=function(e,t){var i=this._validOnListeners,n=this._eventHandlers;if(!i.includes(e))throw new Error("Not a valid event!");n[e]=n[e]||[],n[e].push(t)},e.prototype.toogleDisplayFade=function(){this.$time.classList.toggle("simplepicker-fade"),this.$displayDateElements.forEach(function(e){e.classList.toggle("simplepicker-fade")})},e}();e.exports=a},ht6X:function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.htmlTemplate='\n<div class="simplepicker-wrapper">\n  <div class="simpilepicker-date-picker">\n    <div class="simplepicker-day-header"></div>\n      <div class="simplepicker-date-section">\n        <div class="simplepicker-month-and-year"></div>\n        <div class="simplepicker-date"></div>\n        <div class="simplepicker-select-pane">\n          <button class="simplepicker-icon simplepicker-icon-calender active" title="Select date from calender!"></button>\n          <div class="simplepicker-time">12:00 PM</div>\n          <button class="simplepicker-icon simplepicker-icon-time" title="Select time"></button>\n        </div>\n      </div>\n      <div class="simplepicker-picker-section">\n        <div class="simplepicker-calender-section">\n          <div class="simplepicker-month-switcher simplepicker-select-pane">\n            <button class="simplepicker-icon simplepicker-icon-previous"></button>\n            <div class="simplepicker-selected-date"></div>\n            <button class="simplepicker-icon simplepicker-icon-next"></button>\n          </div>\n          <div class="simplepicker-calender">\n            <table>\n              <thead>\n                <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>\n              </thead>\n              <tbody>\n                '+function(e,t){for(var i="",n=1;n<=t;n++)i+=e;return i}("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>",6)+'\n              </tbody>\n            </table>\n          </div>\n        </div>\n        <div class="simplepicker-time-section">\n          <input type="time" value="12:00" autofocus="false">\n        </div>\n      </div>\n      <div class="simplepicker-bottom-part">\n        <button class="simplepicker-cancel-btn simplepicker-btn" title="Cancel">Cancel</button>\n        <button class="simplepicker-ok-btn simplepicker-btn" title="OK">OK</button>\n      </div>\n  </div>\n</div>\n'},iyB0:function(e,t,i){}});
 // #sourceMappingURL=simplepicker.js.map
 
-
 </script>
 
 <script>
@@ -1002,6 +1001,9 @@ li.disabled{
 
 </head> 
 
+
+
+
 <body>
   <div class="content" id="everydaytree">
   <div>
@@ -1013,10 +1015,6 @@ li.disabled{
 <div id="todaytree">
   <h1>Today tasks</h1>
 </div>
-
-
-
-
 
 </div>
   <div id="everyday">
@@ -1057,119 +1055,123 @@ li.disabled{
         </div>
       </li>
 
+     
+
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+      <!-- 下面是添加任务时使用的html，里面仅包含一个li标签 -->   
+      <li id="add_task_item">
+        <div class="add_task_area" id="add_task" >
+          <div class="input_task_area">
+            <!-- onclick="test(this.getAttribute('id'))" -->
+            <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+            <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+            <!-- 设置输入任务的div -->
+            <div class="container">
+            <!-- <label class="input-task-class"    id="inputlabel">please input your task</label> -->
+            <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，-->
+            <input class="input_text" type="text" id="noid" placeholder="please input your task" >
+            <!-- <button id="nonoid">点击添加task</button> -->
+            <!-- <input id="testbutton"  placeholder="please input your task"> -->
+            </div>
+            
+            <div class="task_property_area">
+              <div class="calendar_project_area">
+                <div class="calendar_area" id="calendar_area">
+                  <!-- 输入任务时间的表单 -->
+                  <!-- <a>请输任务时间</a> -->
+                  <button id="calendar" class="clock_button">
+                    <svg t="1598153562536" class="icon" 
+                    viewBox="0 0 1024 1024" version="1.1" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    p-id="3498" width="20" height="20">
+                      <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                      fill="#CFD8DC" p-id="3499">
+                      </path>
+                      <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                      fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+        
+                      </path>
+                      <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+        
+                      </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+        
+                      </path>
+                    </svg>
+                  </button>
+                  <!-- <label id="inputlabel">please input your plantime</label>
+                  <input type="text" id="plantime" > -->
+                </div>
+      
+                <div id="project_area">
+                  <!-- 任务的选择需要使用带层级标签的下拉列表 -->
+                  <!-- <a>project select</a> -->
+                  <label for="project_choose"></label>
+                  <select name="project_choose" id="project_choose">
+                    <option value="inbox">inbox</option>
+                    <option value="work">work</option>
+                    <option value="family">family</option>
+                  </select>
+                </div>
+              </div>
+      
+              <div id="tags_review_area" class="tags_review_area">
+                <div id="tasktags_area">
+                  <!-- 选择标签，需要使用multi-selector  -->
+                  <!-- <label for="tasktag">tasktag:</label> -->
+                  <select name="tasktag" id="tasktag_selector"  >
+                    <option value="ub">输入标签</option>
+                    <option value="IM">重要的</option>;
+                    <option value="HA">困难的</option>;
+                    <option value="UR">紧急的</option>;
+                  </select>
+                </div>
+      
+                <div id="reviewalgo_area">
+                  <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector  -->
+                  <div id="task_reviewalgo_area">
+                    <select name="taskreview" id="taskreview_selector" >
+                      <option value="ub">输入回顾</option>
+                      <option value="ub">使用大脑</option>
+                      <option value="atom">原子化拆分</option>
+                      <option value="diff">困难的事情</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <div>
+              <!-- 输入标签的input窗口 -->
+              <!-- <label id="tasktags" >please choose the tasktags</label> -->
+              <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> -->
+            </div>
+      
+            <div>
+              <!-- 输入review的input窗口 -->
+              <!-- <label id="reivew">please choose thd reviewalgo</label> -->
+              <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> -->
+            </div>
+          </div>
+            <div class="add_task_button_area">
+              <button class="add_task_button">添加任务</button>
+              <button class="cancel_add_task_button">取消</button>
+            </div>
+        </div>
+      </li>
+      
       <!-- 这是一个Add按键，用来把添加任务的div放进去 -->
       <li id="add_task_button_area">
         <!-- <button id="plusbutton" class="plusbutton">this is a plus</button> -->
         <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+">
       </li>
-
     </ul>
   </div>
 
 
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-  <!-- 下面是添加任务时使用的html，里面仅包含一个li标签 -->   
-<li id="add_task_item">
-  <div class="add_task_area" id="add_task" >
-    <div class="input_task_area">
-      <!-- onclick="test(this.getAttribute('id'))" -->
-      <!-- onclick 指的是鼠标指上去，并不是点上去 -->
-      <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
-      <!-- 设置输入任务的div -->
-      <div class="container">
-      <!-- <label class="input-task-class"    id="inputlabel">please input your task</label> -->
-      <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，-->
-      <input class="input_text" type="text" id="noid" placeholder="please input your task" >
-      <!-- <button id="nonoid">点击添加task</button> -->
-      <!-- <input id="testbutton"  placeholder="please input your task"> -->
-      </div>
-      
-      <div class="task_property_area">
-        <div class="calendar_project_area">
-          <div class="calendar_area" id="calendar_area">
-            <!-- 输入任务时间的表单 -->
-            <!-- <a>请输任务时间</a> -->
-            <button id="calendar" class="clock_button">
-              <svg t="1598153562536" class="icon" 
-              viewBox="0 0 1024 1024" version="1.1" 
-              xmlns="http://www.w3.org/2000/svg" 
-              p-id="3498" width="20" height="20">
-                <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
-                fill="#CFD8DC" p-id="3499">
-                </path>
-                <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
-                fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+
   
-                </path>
-                <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
   
-                </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
-  
-                </path>
-              </svg>
-            </button>
-            <!-- <label id="inputlabel">please input your plantime</label>
-            <input type="text" id="plantime" > -->
-          </div>
 
-          <div id="project_area">
-            <!-- 任务的选择需要使用带层级标签的下拉列表 -->
-            <!-- <a>project select</a> -->
-            <label for="project_choose"></label>
-            <select name="project_choose" id="project_choose">
-              <option value="inbox">inbox</option>
-              <option value="work">work</option>
-              <option value="family">family</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="tags_review_area" class="tags_review_area">
-          <div id="tasktags_area">
-            <!-- 选择标签，需要使用multi-selector  -->
-            <!-- <label for="tasktag">tasktag:</label> -->
-            <select name="tasktag" id="tasktag_selector"  >
-              <option value="ub">输入标签</option>
-              <option value="IM">重要的</option>;
-              <option value="HA">困难的</option>;
-              <option value="UR">紧急的</option>;
-            </select>
-          </div>
-
-          <div id="reviewalgo_area">
-            <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector  -->
-            <div id="task_reviewalgo_area">
-              <select name="taskreview" id="taskreview_selector" >
-                <option value="ub">输入回顾</option>
-                <option value="ub">使用大脑</option>
-                <option value="atom">原子化拆分</option>
-                <option value="diff">困难的事情</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        
-
-      </div>
-
-      <div>
-        <!-- 输入标签的input窗口 -->
-        <!-- <label id="tasktags" >please choose the tasktags</label> -->
-        <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> -->
-      </div>
-
-      <div>
-        <!-- 输入review的input窗口 -->
-        <!-- <label id="reivew">please choose thd reviewalgo</label> -->
-        <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> -->
-      </div>
-    </div>
-      <div class="add_task_button_area">
-        <button class="add_task_button">添加任务</button>
-        <button class="cancel_add_task_button">取消</button>
-      </div>
-  </div>
-  
 
  
         <!-- <style>
@@ -1205,6 +1207,85 @@ li.disabled{
 
 <script type="text/javascript">
 
+function updatetask(id){
+  // alert(`我正在输出checkbox 的 ID ${id}`)
+
+  // var updatedtask = $("#updatedtask").val()
+      var taskid = id.substring(8, 13)
+      // alert(taskid)
+
+      var updatedinfo =
+      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+      {
+        'ifdissect': 'no',
+        'deadline': 'unspecified',
+        'starttime': 'unspecified',
+        'endtime': 'unspecified',
+        'tasktagsorigin': 'unspecified',
+        'parentid': 'unspecified',
+        'timedevotedto_a_task': 0,
+        'goalcode': 'xxx',
+        'client': 'gtdcli',
+        'taglight': 'no',
+        'note': 'unspecified',
+        'reviewalgolight': 'no',
+        'reviewalgo': {},
+        'parentproject': 'unspecified',
+        'id': taskid,
+        'place': 'unspecified',
+        'finishtime': 'unspecified',
+        'inbox': 'unspecified',
+        'project': 'inbox',
+        'plantime': 'today',
+        'taskstatus': 'finished',
+        'tasktags': {}
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/v1/update",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(updatedinfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+          geteverydaytask();
+          // alert(data);
+         },
+        failure: function (errMsg) {
+          alert(errMsg);
+        }
+      })
+    }
+
+
+// alert( "Handler for .click() called." );
+      // 下面的代码用来判断任务是否完成
+      // var reviewalgo = updatedinfo.reviewalgo;
+      // var search = "yes"
+      // console.log(reviewalgo);
+      // // if ( Object.keys(reviewalgo).length == 0) 
+      // if (inArray(search, reviewalgo)) {
+      //   updatedinfo.taskstatus = "finished";
+      //   console.log(updatedinfo);
+      // }
+      // else {
+      //   alert("请先对任务进行评价才能点击完成按钮哦~");
+      //   // return false;
+      //   event.preventDefault();
+      //   // 阻止click动作之后默认的操作
+      // }
+
+
+
+
+window.onload = function() {
+  var input = document.querySelector('#g01-01');
+  if (input) {   
+    input.addEventListener('change', doalert, false);
+  }
+}
+
 function geteverydaytask(){
 
   $.get("/v1/todayjson", function(data, status){
@@ -1219,10 +1300,15 @@ function geteverydaytask(){
       var head = '<h1>Today tasks</h1><ul class="tree">'
        var  tail = '</ul>'
        var  alltask = ''
+      //  var task_id = task[i].id
       while (i<data.task.length)
     {
-
-    alltask=alltask+ "<li><a>" + tasks[i].task + "</a></li>";
+      // <input type="checkbox" name="checkfield" id="g01-01"  onchange="doalert(this.id)"/>
+      var addedtask_head = `<div class="task_list_item">  <div class="task_list_item_task_area"> <div class="container"> <div class="round2"> <input type="checkbox" id= "checkbox${tasks[i].ID}" onchange="updatetask(this.id)" /> <label for="checkbox" id="chekboxlabel"></label> </div> </div> <div class="task_list_content"> `
+      var addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      
+      alltask=alltask+ `<li id = ${tasks[i].ID}>` + addedtask_head + "<a>" + tasks[i].task + "</a>" + addedtask_trail + "</li>";
     i++;
 }
 div.innerHTML += head+alltask+tail
@@ -1254,7 +1340,7 @@ $("#plusbutton").click(function(){
 
   console.log(add_plus);
 
-  const add_task_div = '<div class="input_task_area" id="add_task" > <!-- onclick="test(this.getAttribute("id"))" --> <!-- onclick 指的是鼠标指上去，并不是点上去 --> <!-- 这里最输入任务的框，里面有各种需要传的参数 --> <!-- 设置输入任务的div --> <div class="container"> <!-- <label class="input-task-class" id="inputlabel">please input your task</label> --> <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，--> <input class="input_text" type="text" id="noid" placeholder="please input your task" > <!-- <button id="nonoid">点击添加task</button> --> <!-- <input id="testbutton" placeholder="please input your task"> --> </div> <div class="clockdiv"> <!-- 输入任务时间的表单 --> <!-- <a>请输任务时间</a> --> <button id="calendar" class="clock_button"> <svg t="1598153562536" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3498" width="20" height="20"> <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" fill="#CFD8DC" p-id="3499"> </path> <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501"> </path> <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503"> </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504"> </path> </svg> </button> <!-- <label id="inputlabel">please input your plantime</label> <input type="text" id="plantime" > --> </div> <div> <!-- 输入标签的input窗口 --> <!-- <label id="tasktags" >please choose the tasktags</label> --> <input type="text" id="tags" placeholder="please choose the tasktags"/> </div> <div> <!-- 输入review的input窗口 --> <!-- <label id="reivew">please choose thd reviewalgo</label> --> <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> </div> </div> <div class="add_task_button_area"> <button class="add_task_button">添加任务</button> <button class="cancel_add_task_button">取消</button> </div> <!-- <style> .taskwrite div{ display: inline-block; } </style> --> <!-- <svg t="1598151010848" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2596" width="20" height="20" > <path d="M512 128C300.256 128 128 300.256 128 512s172.256 384 384 384 384-172.256 384-384S723.744 128 512 128z m0 64c177.12 0 320 142.88 320 320s-142.88 320-320 320S192 689.12 192 512 334.88 192 512 192z m-32 64v288h224v-64h-160V256z" p-id="2597"> </path> </svg> --> <!-- 用的是阿里巴巴矢量图库里的svg -->'
+  const add_task_div = '<div class="add_task_area" id="add_task" > <div class="input_task_area"> <!-- onclick="test(this.getAttribute("id"))" --> <!-- onclick 指的是鼠标指上去，并不是点上去 --> <!-- 这里最输入任务的框，里面有各种需要传的参数 --> <!-- 设置输入任务的div --> <div class="container"> <!-- <label class="input-task-class" id="inputlabel">please input your task</label> --> <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，--> <input class="input_text" type="text" id="noid" placeholder="please input your task" > <!-- <button id="nonoid">点击添加task</button> --> <!-- <input id="testbutton" placeholder="please input your task"> --> </div> <div class="task_property_area"> <div class="calendar_project_area"> <div class="calendar_area" id="calendar_area"> <!-- 输入任务时间的表单 --> <!-- <a>请输任务时间</a> --> <button id="calendar" class="clock_button"> <svg t="1598153562536" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3498" width="20" height="20"> <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" fill="#CFD8DC" p-id="3499"> </path> <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501"> </path> <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503"> </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504"> </path> </svg> </button> <!-- <label id="inputlabel">please input your plantime</label> <input type="text" id="plantime" > --> </div> <div id="project_area"> <!-- 任务的选择需要使用带层级标签的下拉列表 --> <!-- <a>project select</a> --> <label for="project_choose"></label> <select name="project_choose" id="project_choose"> <option value="inbox">inbox</option> <option value="work">work</option> <option value="family">family</option> </select> </div> </div> <div id="tags_review_area" class="tags_review_area"> <div id="tasktags_area"> <!-- 选择标签，需要使用multi-selector --> <!-- <label for="tasktag">tasktag:</label> --> <select name="tasktag" id="tasktag_selector" > <option value="ub">输入标签</option> <option value="IM">重要的</option>; <option value="HA">困难的</option>; <option value="UR">紧急的</option>; </select> </div> <div id="reviewalgo_area"> <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector --> <div id="task_reviewalgo_area"> <select name="taskreview" id="taskreview_selector" > <option value="ub">输入回顾</option> <option value="ub">使用大脑</option> <option value="atom">原子化拆分</option> <option value="diff">困难的事情</option> </select> </div> </div> </div> </div> <div> <!-- 输入标签的input窗口 --> <!-- <label id="tasktags" >please choose the tasktags</label> --> <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> --> </div> <div> <!-- 输入review的input窗口 --> <!-- <label id="reivew">please choose thd reviewalgo</label> --> <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> --> </div> </div> <div class="add_task_button_area"> <button class="add_task_button">添加任务</button> <button class="cancel_add_task_button">取消</button> </div> </div>'
 
   add_plus.innerHTML += add_task_div;
 
@@ -1264,7 +1350,7 @@ $("#plusbutton").click(function(){
 
   // const nospecifiedtaskdivcode =
 
- var taskid_div = "noid";
+    var taskid_div = "noid";
 
     //  define a inital tasktags
     var tasktags = {
@@ -1616,7 +1702,7 @@ $("#plusbutton").click(function(){
 $("#test_post").click(function(){
 
  
-        alert("点击");
+        // alert("点击");
         console.log("ma is here")
         //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
 
@@ -1764,10 +1850,10 @@ $("#test_post").click(function(){
             console.log("i am printing the return data from server")
             console.log(data)
             var taskid = data.taskid;
-            alert(taskid);
+            // alert(taskid);
             const taskdom = document.querySelector("#tempid")
             console.log(taskdom);
-            taskdom.setAttribute("taskid", taskid);
+            // taskdom.setAttribute("taskid", taskid);
             taskdom.setAttribute("id", taskid);
 
             // console.log(data);
@@ -1826,23 +1912,9 @@ $("#test_post").click(function(){
     }
 
     // 点击checkbox将会执行的event
-    $("#checkbox").click(function (event) {
-      // alert( "Handler for .click() called." );
-      // 下面的代码用来判断任务是否完成
-      var reviewalgo = updatedinfo.reviewalgo;
-      var search = "yes"
-      console.log(reviewalgo);
-      // if ( Object.keys(reviewalgo).length == 0) 
-      if (inArray(search, reviewalgo)) {
-        updatedinfo.taskstatus = "finished";
-        console.log(updatedinfo);
-      }
-      else {
-        alert("请先对任务进行评价才能点击完成按钮哦~");
-        // return false;
-        event.preventDefault();
-        // 阻止click动作之后默认的操作
-      }
+    
+    $("#checkbox_box").click(function (event) {
+      
       // alert("You have to evaluate the task before finish it")
       // return false;
     }
