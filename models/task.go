@@ -26,22 +26,6 @@ import(
 type JSON []byte
 //var Modeltest int =5
 type (
-	// TodoModel describes a TodoModel type
-	TodoModel struct {
-		gorm.Model
-    Title2     string `json:"title2"`
-		Title1     string `json:"title1"`
-		Title     string `json:"title"`
-		Completed int    `json:"completed"`
-
-	}
-
-	// transformedTodo represents a formatted Todo
-	TransformedTodo struct {
-		ID        uint   `json:"id"`
-		Title     string `json:"title"`
-		Completed bool   `json:"completed"`
-	}
 
   Tasks struct {
     // gorm.Model  //this has set id ,cautous!!!http://jinzhu.me/gorm/models.html
@@ -1801,38 +1785,11 @@ func Unfinishedtaskjson(c *gin.Context) {
 
 
 
-func Reviewsjson(c *gin.Context) {
-  //i use email as identifier
-//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-  emailcookie,_:=c.Request.Cookie("email")
-  fmt.Println(emailcookie.Value)
-  email:=emailcookie.Value
-   client:= c.Request.Header.Get("client")
- fmt.Println(client)
-  var tasks []Tasks
-  //email:="yangming1"
-  //http://doc.gorm.io/crud.html#query to desc
-  //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
-  // loc, _ := time.LoadLocation("Asia/Shanghai")
-  // today :=  time.Now().In(loc).Format("060102")
-  // tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
-
-  //Query Chains http://doc.gorm.io/crud.html#query
-  db.Where("Email= ?", email).Where("project in (?)", []string{"review"}).Order("id desc").Find(&tasks)
-   if (client == "commandline"||client =="ios"){
-   c.JSON(200, gin.H{
-      "task":tasks,
-    })
-
-   }else{
-  c.HTML(http.StatusOK, "reviewfromprojectreview.html",gin.H{
-   "task":tasks,
-  })
-
-}
 
 
-}
+
+
+
 
 
 
@@ -2895,52 +2852,3 @@ c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "projects": allprojects})
 
 
 
-// createTodo add a new todo
-func CreateTodo(c *gin.Context) {
-	completed, _ := strconv.Atoi(c.PostForm("completed"))
-	todo := TodoModel{Title: c.PostForm("title"), Completed: completed}
-	db.Save(&todo)
-	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Todo item created successfully!", "resourceId": todo.ID})
-}
-
-// fetchAllTodo fetch all todos
-func FetchAllTodo(c *gin.Context) {
-	var todos []TodoModel
-	var _todos []TransformedTodo
-
-	db.Find(&todos)
-
-	if len(todos) <= 0 {
-		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
-		return
-	}
-
-	//transforms the todos for building a good response
-	for _, item := range todos {
-		completed := false
-		if item.Completed == 1 {
-			completed = true
-		} else {
-			completed = false
-		}
-		_todos = append(_todos, TransformedTodo{ID: item.ID, Title: item.Title, Completed: completed})
-	}
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": _todos})
-}
-
-
-// deleteTodo remove a todo
-func DeleteTodo(c *gin.Context) {
-	var todo TodoModel
-	todoID := c.Param("id")
-
-	db.First(&todo, todoID)
-
-	if todo.ID == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No todo found!"})
-		return
-	}
-
-	db.Delete(&todo)
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Todo deleted successfully!"})
-}

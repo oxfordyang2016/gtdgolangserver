@@ -57,7 +57,7 @@ func init() {
 	}
 
 	//Migrate the schema
-	db.AutoMigrate(&Principledetails{},&Taskexecutelog{},&Principlecodewithtasktag{},&Principlefordbs{},&Accounts{},&TodoModel{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{},&Fees{})
+	db.AutoMigrate(&Principledetails{},&Taskexecutelog{},&Principlecodewithtasktag{},&Principlefordbs{},&Accounts{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{},&Fees{})
 //http://jinzhu.me/gorm/database.html#migration delete database table column
  //db.Model(&Tasks{}).DropColumn("Uer")
 
@@ -135,6 +135,8 @@ func  Login(c *gin.Context) {
 			cookie1 := &http.Cookie{
 							Name:  "email",
 							Value: email,
+                                                        Domain:"www.blackboxo.top",
+                                                        Path:"/",
 					}
 			http.SetCookie(c.Writer, cookie1)
 			cookie2 := &http.Cookie{

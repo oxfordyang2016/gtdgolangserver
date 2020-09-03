@@ -1554,3 +1554,40 @@ return total_score
 
 
 
+
+
+
+
+
+func Reviewsjson(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+   client:= c.Request.Header.Get("client")
+ fmt.Println(client)
+  var tasks []Tasks
+  //email:="yangming1"
+  //http://doc.gorm.io/crud.html#query to desc
+  //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
+  // loc, _ := time.LoadLocation("Asia/Shanghai")
+  // today :=  time.Now().In(loc).Format("060102")
+  // tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+
+  //Query Chains http://doc.gorm.io/crud.html#query
+  db.Where("Email= ?", email).Where("project in (?)", []string{"review"}).Order("id desc").Find(&tasks)
+   if (client == "commandline"||client =="ios"){
+   c.JSON(200, gin.H{
+      "task":tasks,
+    })
+
+   }else{
+  c.HTML(http.StatusOK, "reviewfromprojectreview.html",gin.H{
+   "task":tasks,
+  })
+
+}
+
+
+}

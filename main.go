@@ -106,7 +106,9 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   v1.GET("/reviewdaydatajsonforios", Reviewalgorithmjsonforios)
   // 这里是获取今天的分数
   v1.GET("/reviewscoreoftoday", Reviewscore_today)
-	
+  
+
+
 
 
         //tasks system
