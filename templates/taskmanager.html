@@ -27,969 +27,18 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/inputtag.js"></script>
 
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
 <!-- 下面是日历的脚本 -->
 <script>
   var SimplePicker=function(e){var t={};function i(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,i),r.l=!0,r.exports}return i.m=e,i.c=t,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(e,t){if(1&t&&(e=i(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)i.d(n,r,function(t){return e[t]}.bind(null,r));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=0)}({0:function(e,t,i){i("iyB0"),e.exports=i("TYVf")},"0DyV":function(e,t,i){"use strict";function n(e,t){e=[].concat(e);for(var i=0;i<t;i++)e[i]=void 0;return e}function r(e){var i=new Date(e.getTime()),r=e.getFullYear(),s=e.getMonth(),a={date:i,month:void 0};if(t.monthTracker.current=new Date(e.getTime()),t.monthTracker.current.setDate(1),t.monthTracker.years[r]=t.monthTracker.years[r]||{},void 0!==t.monthTracker.years[r][s])return a.month=t.monthTracker.years[r][s],a;(e=new Date(e.getTime())).setDate(1),t.monthTracker.years[r][s]=[];for(var c=t.monthTracker.years[r][s],o=0;e.getMonth()===s;){var l=e.getDate(),p=e.getDay();1===l&&(c[o]=n([],p)),c[o]=c[o]||[],c[o][p]=l,6===p&&o++,e.setDate(e.getDate()+1)}var d=5;void 0===c[5]&&(d=4,c[5]=n([],7));var m=c[d].length;if(m<7){var h=c[d].concat(n([],7-m));c[d]=h}return a.month=c,a}Object.defineProperty(t,"__esModule",{value:!0}),t.monthTracker={years:{}},t.months=["January","February","March","April","May","June","July","August","September","October","November","December"],t.days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],t.scrapeMonth=r,t.scrapePreviousMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()-1),r(e)},t.scrapeNextMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()+1),r(e)};var s={st:[1,21,31],nd:[2,22],rd:[3,23]};t.getDisplayDate=function(e){var t=e.getDate();return-1!==s.st.indexOf(t)?t+"st":-1!==s.nd.indexOf(t)?t+"nd":-1!==s.rd.indexOf(t)?t+"rd":t+"th"},t.formatTimeFromInputElement=function(e){var t="",i=e.split(":"),n=i[0],r=(n=+n)>=12;return r&&n>12&&(n-=12),r||0!==n||(n=12),t+=n<10?"0"+n:n,t+=":"+i[1]+" ",t+=r?"PM":"AM"}},TYVf:function(e,t,i){"use strict";var n=i("0DyV"),r=i("ht6X"),s=new Date,a=function(){function e(e,t){var i;if("object"==typeof e&&(t=e,i=void 0),"string"==typeof(i=i||"body")&&(i=document.querySelector(i)),!i)throw new Error("SimplePicker: Valid selector or element must be passed!");t||(t={}),this.selectedDate=new Date,this.$simplepicker=i,this.initElMethod(i),this.injectTemplate(),this.init(t),this.initListeners(),this._eventHandlers={},this._validOnListeners=["submit","close"]}return e.prototype.initElMethod=function(e){this.$=function(t){return e.querySelector(t)},this.$$=function(t){return e.querySelectorAll(t)}},e.prototype.init=function(e){var t=this.$,i=this.$$;this.$simplepicker=t(".simpilepicker-date-picker"),this.$simplepickerWrapper=t(".simplepicker-wrapper"),this.$trs=i(".simplepicker-calender tbody tr"),this.$tds=i(".simplepicker-calender tbody td"),this.$headerMonthAndYear=t(".simplepicker-month-and-year"),this.$monthAndYear=t(".simplepicker-selected-date"),this.$date=t(".simplepicker-date"),this.$day=t(".simplepicker-day-header"),this.$time=t(".simplepicker-time"),this.$timeInput=t(".simplepicker-time-section input"),this.$timeSectionIcon=t(".simplepicker-icon-time"),this.$cancel=t(".simplepicker-cancel-btn"),this.$ok=t(".simplepicker-ok-btn"),this.$displayDateElements=[this.$day,this.$headerMonthAndYear,this.$date],this.$time.classList.add("simplepicker-fade"),this.render(n.scrapeMonth(s)),e=e||{},this.opts=e,this.reset(s),void 0!==e.zIndex&&(this.$simplepickerWrapper.style.zIndex=e.zIndex.toString()),e.disableTimeSection&&this.disableTimeSection(),e.compactMode&&this.compactMode()},e.prototype.reset=function(e){var t=e||new Date;this.render(n.scrapeMonth(t));var i=t.getDate().toString(),r=this.findElementWithDate(i);r.classList.contains("active")||(this.selectDateElement(r),this.updateDateComponents(t));var s=t.toTimeString().split(" ")[0].replace(/\:\d\d$/,"");this.$timeInput.value=s,this.$time.innerText=n.formatTimeFromInputElement(s)},e.prototype.compactMode=function(){this.$date.style.display="none"},e.prototype.disableTimeSection=function(){this.$timeSectionIcon.style.visibility="hidden"},e.prototype.enableTimeSection=function(){this.$timeSectionIcon.style.visibility="visible"},e.prototype.injectTemplate=function(){var e=document.createElement("template");e.innerHTML=r.htmlTemplate,this.$simplepicker.appendChild(e.content.cloneNode(!0))},e.prototype.clearRows=function(){this.$tds.forEach(function(e){e.innerHTML="",e.classList.remove("active")})},e.prototype.updateDateComponents=function(e){var t=n.days[e.getDay()],i=n.months[e.getMonth()]+" "+e.getFullYear();this.$headerMonthAndYear.innerHTML=i,this.$monthAndYear.innerHTML=i,this.$day.innerHTML=t,this.$date.innerHTML=n.getDisplayDate(e)},e.prototype.render=function(e){var t=this.$$,i=this.$trs,n=e.month,r=e.date;this.clearRows(),n.forEach(function(e,t){var n=i[t].children;e.forEach(function(e,t){var i=n[t];e?(i.removeAttribute("data-empty"),i.innerHTML=e):i.setAttribute("data-empty","")})});var s=t("table tbody tr:last-child td"),a=!0;s.forEach(function(e){void 0===e.dataset.empty&&(a=!1)});var c=s[0].parentElement;c.style.display=a&&c?"none":"table-row",this.updateDateComponents(r)},e.prototype.updateSelectedDate=function(e){var t,i=this.$monthAndYear,r=this.$time;this.$date;t=e?e.innerHTML.trim():this.$date.innerHTML.replace(/[a-z]+/,"");var s=i.innerHTML.split(" "),a=s[0],c=s[1],o=n.months.indexOf(a),l=r.innerHTML.split(":"),p=+l[0],d=l[1].split(" "),m=d[0],h=d[1];"AM"===h&&12==p&&(p=0),"PM"===h&&p<12&&(p+=12);var u=new Date(+c,+o,+t,+p,+m);this.selectedDate=u;var v=t+" ";v+=i.innerHTML.trim()+" ",v+=r.innerHTML.trim(),this.readableDate=v.replace(/^\d+/,u.getDate().toString())},e.prototype.selectDateElement=function(e){var t=this.$(".simplepicker-calender tbody .active");e.classList.add("active"),t&&t.classList.remove("active"),this.updateSelectedDate(e),this.updateDateComponents(this.selectedDate)},e.prototype.findElementWithDate=function(e,t){var i,n;return void 0===t&&(t=!1),this.$tds.forEach(function(t){var r=t.innerHTML.trim();r===e&&(i=t),""!==r&&(n=t)}),void 0===i&&t&&(i=n),i},e.prototype.handleIconButtonClick=function(e){var t,i=this.$;if(e.classList.contains("simplepicker-icon-calender")){var r=i(".simplepicker-icon-time"),s=i(".simplepicker-time-section");return(c=i(".simplepicker-calender-section")).style.display="block",s.style.display="none",r.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}if(e.classList.contains("simplepicker-icon-time")){var a=i(".simplepicker-icon-calender"),c=i(".simplepicker-calender-section");return(s=i(".simplepicker-time-section")).style.display="block",c.style.display="none",a.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}var o=i(".simplepicker-calender td.active");if(o&&(t=o.innerHTML.trim()),e.classList.contains("simplepicker-icon-next")&&this.render(n.scrapeNextMonth()),e.classList.contains("simplepicker-icon-previous")&&this.render(n.scrapePreviousMonth()),t){var l=this.findElementWithDate(t,!0);this.selectDateElement(l)}},e.prototype.initListeners=function(){var e=this,t=e.$simplepicker,i=e.$timeInput,r=e.$ok,s=e.$cancel,a=e.$simplepickerWrapper,c=this;function o(){c.close(),c.callEvent("close",function(e){e()})}t.addEventListener("click",function(e){var t=e.target,i=t.tagName.toLowerCase();e.stopPropagation(),"td"!==i?"button"===i&&t.classList.contains("simplepicker-icon")&&c.handleIconButtonClick(t):c.selectDateElement(t)}),i.addEventListener("input",function(e){if(""!==e.target.value){var t=n.formatTimeFromInputElement(e.target.value);c.$time.innerHTML=t,c.updateSelectedDate()}}),r.addEventListener("click",function(){c.close(),c.callEvent("submit",function(e){e(c.selectedDate,c.readableDate)})}),s.addEventListener("click",o),a.addEventListener("click",o)},e.prototype.callEvent=function(e,t){(this._eventHandlers[e]||[]).forEach(function(e){t(e)})},e.prototype.open=function(){this.$simplepickerWrapper.classList.add("active")},e.prototype.close=function(){this.$simplepickerWrapper.classList.remove("active")},e.prototype.on=function(e,t){var i=this._validOnListeners,n=this._eventHandlers;if(!i.includes(e))throw new Error("Not a valid event!");n[e]=n[e]||[],n[e].push(t)},e.prototype.toogleDisplayFade=function(){this.$time.classList.toggle("simplepicker-fade"),this.$displayDateElements.forEach(function(e){e.classList.toggle("simplepicker-fade")})},e}();e.exports=a},ht6X:function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.htmlTemplate='\n<div class="simplepicker-wrapper">\n  <div class="simpilepicker-date-picker">\n    <div class="simplepicker-day-header"></div>\n      <div class="simplepicker-date-section">\n        <div class="simplepicker-month-and-year"></div>\n        <div class="simplepicker-date"></div>\n        <div class="simplepicker-select-pane">\n          <button class="simplepicker-icon simplepicker-icon-calender active" title="Select date from calender!"></button>\n          <div class="simplepicker-time">12:00 PM</div>\n          <button class="simplepicker-icon simplepicker-icon-time" title="Select time"></button>\n        </div>\n      </div>\n      <div class="simplepicker-picker-section">\n        <div class="simplepicker-calender-section">\n          <div class="simplepicker-month-switcher simplepicker-select-pane">\n            <button class="simplepicker-icon simplepicker-icon-previous"></button>\n            <div class="simplepicker-selected-date"></div>\n            <button class="simplepicker-icon simplepicker-icon-next"></button>\n          </div>\n          <div class="simplepicker-calender">\n            <table>\n              <thead>\n                <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>\n              </thead>\n              <tbody>\n                '+function(e,t){for(var i="",n=1;n<=t;n++)i+=e;return i}("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>",6)+'\n              </tbody>\n            </table>\n          </div>\n        </div>\n        <div class="simplepicker-time-section">\n          <input type="time" value="12:00" autofocus="false">\n        </div>\n      </div>\n      <div class="simplepicker-bottom-part">\n        <button class="simplepicker-cancel-btn simplepicker-btn" title="Cancel">Cancel</button>\n        <button class="simplepicker-ok-btn simplepicker-btn" title="OK">OK</button>\n      </div>\n  </div>\n</div>\n'},iyB0:function(e,t,i){}});
 // #sourceMappingURL=simplepicker.js.map
 
+
 </script>
 
-<script>
-  // 漂亮的多选框
-  /*
-Copyright (C) Philippe Meyer 2019-2020
-Distributed under the MIT License  
 
-vanillaSelectBox : v0.51 : Translations for select all/clear all + minor css corrections + don't select disabled items
-vanillaSelectBox : v0.50 : PR by jaguerra2017 adding a select all/clear all check button + optgroup support !
-vanillaSelectBox : v0.41 : Bug corrected, the menu content was misplaced if a css transform was applied on a parent
-vanillaSelectBox : v0.40 : A click on one selectBox close the other opened boxes
-vanillaSelectBox : v0.35 : You can enable and disable items
-vanillaSelectBox : v0.30 : The menu stops moving around on window resize and scroll + z-index in order of creation for multiple instances
-vanillaSelectBox : v0.26 : Corrected bug in stayOpen mode with disable() function
-vanillaSelectBox : v0.25 : New option stayOpen, and the dropbox is no longer a dropbox but a nice multi-select
-previous version : v0.24 : corrected bug affecting options with more than one class
-https://github.com/PhilippeMarcMeyer/vanillaSelectBox
-*/
 
-let VSBoxCounter = function () {
-    let count = 0;
-    let instances = [];
-    return {
-        set: function (instancePtr) {
-            instances.push({offset:++count,ptr:instancePtr});
-            return instances[instances.length-1].offset;
-        },
-        remove: function (instanceNr) {
-            let temp = instances.filter(function(x){
-               return x.offset != instanceNr;
-            })
-            instances = temp.splice(0);
-            temp = [];
-        },
-        closeAllButMe:function(instanceNr){
-            temp = [];
-            instances.forEach(function(x){
-                if(x.offset != instanceNr){
-                    x.ptr.closeOrder();
-                }
-             });
-        }
-    };
-}();
-
-function vanillaSelectBox(domSelector, options) {
-    let self = this;
-    this.instanceOffset = VSBoxCounter.set(self);
-    this.domSelector = domSelector;
-    this.root = document.querySelector(domSelector)
-    this.main;
-    this.button;
-    this.title;
-    this.isMultiple = this.root.hasAttribute("multiple");
-    this.multipleSize = this.isMultiple && this.root.hasAttribute("size") ? parseInt(this.root.getAttribute("size")) : -1;
-    this.drop;
-    this.top;
-    this.left;
-    this.options;
-    this.listElements;
-    this.isDisabled = false;
-    this.search = false;
-    this.searchZone = null;
-    this.inputBox = null;
-    this.disabledItems = [];
-    this.ulminWidth = 140;
-    this.ulminHeight = 25;
-    this.userOptions = {
-        maxWidth: 500,
-        maxHeight: 400,
-        translations: { "all": "All", "items": "items","selectAll":"Select All","clearAll":"Clear All"},
-        search: false,
-        placeHolder: "",
-		stayOpen:false,
-        disableSelectAll: false,
-    }
-    if (options) {
-        if (options.maxWidth != undefined) {
-            this.userOptions.maxWidth = options.maxWidth;
-        }
-        if (options.maxHeight != undefined) {
-            this.userOptions.maxHeight = options.maxHeight;
-        }
-        if (options.translations != undefined) {
-            for (var property in options.translations) {
-                if (options.translations.hasOwnProperty(property)) {
-                    if(this.userOptions.translations[property] ){
-                        this.userOptions.translations[property] = options.translations[property];
-                    }
-                }
-              }
-        }
-        if (options.placeHolder != undefined) {
-            this.userOptions.placeHolder = options.placeHolder;
-        }
-        if (options.search != undefined) {
-            this.search = options.search;
-        }
-		if (options.stayOpen != undefined) {
-            this.userOptions.stayOpen = options.stayOpen;
-        }
-        if (options.disableSelectAll != undefined) {
-            this.userOptions.disableSelectAll = options.disableSelectAll;
-        }
-    }
-
-    this.closeOrder=function(){
-        let self = this;
-        if(!self.userOptions.stayOpen){
-            self.drop.style.display = "none";
-            if(self.search){
-                self.inputBox.value = "";
-                Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                   x.classList.remove("hide");
-                });
-            }
-        }
-    }
-
-    this.init = function () {
-        let self = this;
-        this.root.style.display = "none";
-        let already = document.getElementById("btn-group-" + self.domSelector);
-        if (already) {
-            already.remove();
-        }
-        this.main = document.createElement("div");
-        this.root.parentNode.insertBefore(this.main, this.root.nextSibling);
-        this.main.classList.add("vsb-main");
-        this.main.setAttribute("id", "btn-group-" + this.domSelector);
-        this.main.style.marginLeft = this.main.style.marginLeft;
-        if(self.userOptions.stayOpen){
-            this.main.style.minHeight =  (this.userOptions.maxHeight+10) + "px";
-        }
-
-        let btnTag = self.userOptions.stayOpen ? "div" : "button";
-        this.button = document.createElement(btnTag);
-
-        this.main.appendChild(this.button);
-        this.title = document.createElement("span");
-        this.button.appendChild(this.title);
-        this.title.classList.add("title");
-        let caret = document.createElement("span");
-        this.button.appendChild(caret);
-
-        caret.classList.add("caret");
-        caret.style.position = "absolute";
-        caret.style.right = "8px";
-        caret.style.marginTop = "8px";
-
-		if(self.userOptions.stayOpen){
-			caret.style.display = "none";
-			this.title.style.paddingLeft = "20px";
-			this.title.style.fontStyle = "italic";
-			this.title.style.verticalAlign = "20%";
-        }
-
-        this.drop = document.createElement("div");
-        this.main.appendChild(this.drop);
-        this.drop.classList.add("vsb-menu");
-        this.drop.style.zIndex = 2000 - this.instanceOffset;
-        this.ul = document.createElement("ul");
-        this.drop.appendChild(this.ul);
-
-        this.ul.style.maxHeight = this.userOptions.maxHeight + "px";
-        this.ul.style.minWidth = this.ulminWidth + "px";
-        this.ul.style.minHeight = this.ulminHeight + "px";
-        if (this.isMultiple) {
-            this.ul.classList.add("multi");
-            if (!self.userOptions.disableSelectAll) {
-                let selectAll = document.createElement("option");
-                selectAll.setAttribute("value", 'all');
-                selectAll.innerText = self.userOptions.translations.selectAll;
-                this.root.insertBefore(selectAll,(this.root.hasChildNodes())
-                  ? this.root.childNodes[0]
-                  : null);
-            }
-        }
-        let selectedTexts = ""
-        let sep = "";
-        let nrActives = 0;
-
-        if (this.search) {
-            this.searchZone = document.createElement("div");
-            this.ul.appendChild(this.searchZone);
-            this.searchZone.classList.add("vsb-js-search-zone");
-            this.searchZone.style.zIndex = 2001 - this.instanceOffset;
-            this.inputBox = document.createElement("input");
-            this.searchZone.appendChild(this.inputBox);
-            this.inputBox.setAttribute("type", "text");
-            this.inputBox.setAttribute("id", "search_" + this.domSelector);
-
-            let fontSizeForP = this.isMultiple ? "12px" : "6px";
-            var para = document.createElement("p");
-            this.ul.appendChild(para);
-            para.style.fontSize = fontSizeForP;
-            para.innerHTML = "&nbsp;";
-            this.ul.addEventListener("scroll", function (e) {
-                var y = this.scrollTop;
-                self.searchZone.parentNode.style.top = y + "px";
-            });
-        }
-
-        this.options = document.querySelectorAll(this.domSelector + " > option");
-        Array.prototype.slice.call(this.options).forEach(function (x) {
-            let text = x.textContent;
-            let value = x.value;
-            let classes = x.getAttribute("class");
-            if(classes)
-            {
-                classes=classes.split(" ");
-            }
-            else
-            {
-                classes=[];
-            }
-            let li = document.createElement("li");
-            let isSelected = x.hasAttribute("selected");
-          let isDisabled = x.hasAttribute("disabled");
-            self.ul.appendChild(li);
-            li.setAttribute("data-value", value);
-            li.setAttribute("data-text", text);
-            if (classes.length != 0) {
-                classes.forEach(function(x){
-                    li.classList.add(x);
-                });
-
-            }
-            if (isSelected) {
-                nrActives++;
-                selectedTexts += sep + text;
-                sep = ",";
-                li.classList.add("active");
-                if (!self.isMultiple) {
-                    self.title.textContent = text;
-                    if (classes.length != 0) {
-                        classes.forEach(function(x){
-                            self.title.classList.add(x);
-                        });
-                    }
-                }
-            }
-          if(isDisabled){
-            li.classList.add("disabled");
-          }
-            li.appendChild(document.createTextNode(text));
-        });
-
-        if (document.querySelector(this.domSelector + ' optgroup') !== null) {
-            this.options = document.querySelectorAll(this.domSelector + " option");
-            let groups = document.querySelectorAll(this.domSelector + ' optgroup');
-            Array.prototype.slice.call(groups).forEach(function(group) {
-                let groupOptions = group.querySelectorAll('option');
-                let li = document.createElement("li");
-                li.classList.add('grouped-option');
-                li.appendChild(document.createTextNode(group.label));
-                self.ul.appendChild(li);
-
-                Array.prototype.slice.call(groupOptions).forEach(function(x) {
-                    let text = x.textContent;
-                    let value = x.value;
-                    let classes = x.getAttribute("class");
-                    if(classes)
-                    {
-                        classes=classes.split(" ");
-                    }
-                    else
-                    {
-                        classes=[];
-                    }
-                    let li = document.createElement("li");
-                    let isSelected = x.hasAttribute("selected");
-                    self.ul.appendChild(li);
-                    li.setAttribute("data-value", value);
-                    li.setAttribute("data-text", text);
-                    if (classes.length != 0) {
-                        classes.forEach(function(x){
-                            li.classList.add(x);
-                        });
-
-                    }
-                    if (isSelected) {
-                        nrActives++;
-                        selectedTexts += sep + text;
-                        sep = ",";
-                        li.classList.add("active");
-                        if (!self.isMultiple) {
-                            self.title.textContent = text;
-                            if (classes.length != 0) {
-                                classes.forEach(function(x){
-                                    self.title.classList.add(x);
-                                });
-                            }
-                        }
-                    }
-                    li.appendChild(document.createTextNode(text));
-                })
-            })
-        }
-
-        if (self.multipleSize != -1) {
-            if (nrActives > self.multipleSize) {
-                let wordForItems = self.userOptions.translations.items || "items"
-                selectedTexts = nrActives + " " + wordForItems;
-            }
-        }
-        if (self.isMultiple) {
-            self.title.innerHTML = selectedTexts;
-        }
-        if (self.userOptions.placeHolder != "" && self.title.textContent == "") {
-            self.title.textContent = self.userOptions.placeHolder;
-        }
-        this.listElements = this.drop.querySelectorAll("li:not(.grouped-option)");
-        if (self.search) {
-            self.inputBox.addEventListener("keyup", function (e) {
-                let searchValue = e.target.value.toUpperCase();
-                let searchValueLength = searchValue.length;
-                if (searchValueLength < 2) {
-                    Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                        x.classList.remove("hidden-search");
-                    });
-                } else {
-                    Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                        let text = x.getAttribute("data-text").toUpperCase();
-                        if (text.indexOf(searchValue) == -1
-                          && x.getAttribute('data-value') !== 'all'
-                        ) {
-                            x.classList.add("hidden-search");
-                        } else {
-                            x.classList.remove("hidden-search");
-                        }
-                    });
-                }
-            });
-        }
-
-		if(self.userOptions.stayOpen){
-            self.drop.style.display = "block";
-			self.drop.style.boxShadow = "none";
-			self.drop.style.minHeight =  (this.userOptions.maxHeight+10) + "px";
-			self.drop.style.position = "relative";
-			self.drop.style.left = "0px";
-			self.drop.style.top = "0px";
-			self.button.style.border = "none";
-		}else{
-			this.main.addEventListener("click", function (e) {
-				if (self.isDisabled) return;
-                    self.drop.style.left = self.left + "px";
-                    self.drop.style.top = self.top + "px";
-                    self.drop.style.display = "block";
-                    document.addEventListener("click", docListener);
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if(!self.userOptions.stayOpen ){
-                        VSBoxCounter.closeAllButMe(self.instanceOffset);
-                    }
-				});
-		}
-        this.drop.addEventListener("click", function (e) {
-            if (self.isDisabled) return;
-
-            if (!e.target.hasAttribute("data-value")) {
-                e.preventDefault();
-                e.stopPropagation();
-                return;
-            }
-            let choiceValue = e.target.getAttribute("data-value");
-            let choiceText = e.target.getAttribute("data-text");
-            let className = e.target.getAttribute("class");
-
-            if (choiceValue === 'all') {
-                if (e.target.hasAttribute('data-selected')
-                  && e.target.getAttribute('data-selected') === 'true') {
-                    self.setValue([])
-                    e.target.innerText = self.userOptions.translations.selectAll;
-                    e.target.setAttribute('data-selected', 'false')
-                } else {
-                    let allValues = []
-                    e.target.innerText = self.userOptions.translations.clearAll;
-                    Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                        if (x.hasAttribute('data-value')
-                          && x.getAttribute('data-value') !== 'all'
-                          && !x.classList.contains('hidden-search')
-                          && !x.classList.contains('disabled')) {
-                            allValues.push(x.getAttribute('data-value'))
-                        }
-                    });
-                    e.target.setAttribute('data-selected', 'true')
-                    self.setValue(allValues)
-                    e.target.classList.add("active");
-                }
-                return;
-            }
-
-            if(className &&className.indexOf("disabled") != -1){
-                return;
-            }
-            if (!self.isMultiple) {
-                self.root.value = choiceValue;
-                self.title.textContent = choiceText;
-                if (className) {
-                    self.title.setAttribute("class", className + " title");
-                } else {
-                    self.title.setAttribute("class", "title");
-                }
-                Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                    x.classList.remove("active");
-                });
-                if (choiceText != "") {
-                    e.target.classList.add("active");
-                }
-                self.privateSendChange();
-                if(!self.userOptions.stayOpen){
-                    docListener();
-                }
-            } else {
-                let wasActive = false;
-                if (className) {
-                    wasActive = className.indexOf("active") != -1;
-                }
-                if (wasActive) {
-                    e.target.classList.remove("active");
-                } else {
-                    e.target.classList.add("active");
-                }
-                let selectedTexts = ""
-                let sep = "";
-                let nrActives = 0;
-                let nrAll = 0;
-                for (let i = 0; i < self.options.length; i++) {
-                    nrAll++;
-                    if (self.options[i].value == choiceValue) {
-                        self.options[i].selected = !wasActive;
-                    }
-                    if (self.options[i].selected) {
-                        nrActives++;
-                        selectedTexts += sep + self.options[i].textContent;
-                        sep = ",";
-                    }
-                }
-                if (nrAll == nrActives) {
-                    let wordForAll = self.userOptions.translations.all || "all";
-                    selectedTexts = wordForAll;
-                } else if (self.multipleSize != -1) {
-                    if (nrActives > self.multipleSize) {
-                        let wordForItems = self.userOptions.translations.items || "items"
-                        selectedTexts = nrActives + " " + wordForItems;
-                    }
-                }
-                self.title.textContent = selectedTexts;
-                self.privateSendChange();
-            }
-            e.preventDefault();
-            e.stopPropagation();
-            if (self.userOptions.placeHolder != "" && self.title.textContent == "") {
-                self.title.textContent = self.userOptions.placeHolder;
-            }
-        });
-        function docListener() {
-            document.removeEventListener("click", docListener);
-            self.drop.style.display = "none";
-            if(self.search){
-                self.inputBox.value = "";
-                Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                    x.classList.remove("hidden-search");
-                });
-            }
-        }
-    }
-    this.init();
-}
-
-vanillaSelectBox.prototype.disableItems = function (values) {
-    let self = this;
-    let foundValues = [];
-    if (vanillaSelectBox_type(values) == "string") {
-        values = values.split(",");
-    }
-
-    if(vanillaSelectBox_type(values) == "array"){
-        Array.prototype.slice.call(self.options).forEach(function (x) {
-            if (values.indexOf(x.value) != -1) {
-                foundValues.push(x.value);
-                x.setAttribute("disabled","");
-            }
-        });
-    }
-    Array.prototype.slice.call(self.listElements).forEach(function (x) {
-        let val = x.getAttribute("data-value");
-        if (foundValues.indexOf(val) != -1) {
-            x.classList.add("disabled");
-        }
-    });
-}
-
-vanillaSelectBox.prototype.keepInstances = function (rootId) {
-    let instanceIds;
-
-
-}
-
-vanillaSelectBox.prototype.enableItems = function (values) {
-    let self = this;
-    let foundValues = [];
-    if (vanillaSelectBox_type(values) == "string") {
-        values = values.split(",");
-    }
-
-    if(vanillaSelectBox_type(values) == "array"){
-        Array.prototype.slice.call(self.options).forEach(function (x) {
-            if (values.indexOf(x.value) != -1) {
-                foundValues.push(x.value);
-                x.removeAttribute("disabled");
-            }
-        });
-    }
-
-    Array.prototype.slice.call(self.listElements).forEach(function (x) {
-        if (foundValues.indexOf(x.getAttribute("data-value")) != -1) {
-            x.classList.remove("disabled");
-        }
-    });
-}
-
-    vanillaSelectBox.prototype.setValue = function (values) {
-		let self = this;
-        if (values == null || values == undefined || values == "") {
-            self.empty();
-        } else {
-            if (self.isMultiple) {
-                if (vanillaSelectBox_type(values) == "string") {
-                    if (values == "all") {
-                        values = [];
-                        Array.prototype.slice.call(self.options).forEach(function (x) {
-                            values.push(x.value);
-                        });
-                    } else {
-                        values = values.split(",");
-                    }
-                }
-                let foundValues = [];
-                if (vanillaSelectBox_type(values) == "array") {
-                    Array.prototype.slice.call(self.options).forEach(function (x) {
-                        if (values.indexOf(x.value) != -1) {
-                            x.selected = true;
-                            foundValues.push(x.value);
-                        } else {
-                            x.selected = false;
-                        }
-                    });
-                    let selectedTexts = ""
-                    let sep = "";
-                    let nrActives = 0;
-                    let nrAll = 0;
-                    Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                        nrAll++;
-                        if (foundValues.indexOf(x.getAttribute("data-value")) != -1) {
-                            x.classList.add("active");
-                            nrActives++;
-                            selectedTexts += sep + x.getAttribute("data-text");
-                            sep = ",";
-                        } else {
-                            x.classList.remove("active");
-                        }
-                    });
-                    if (nrAll == nrActives) {
-                        let wordForAll = self.userOptions.translations.all || "all";
-                        selectedTexts = wordForAll;
-                    } else if (self.multipleSize != -1) {
-                        if (nrActives > self.multipleSize) {
-                            let wordForItems = self.userOptions.translations.items || "items"
-                            selectedTexts = nrActives + " " + wordForItems;
-                        }
-                    }
-                    self.title.textContent = selectedTexts;
-                    self.privateSendChange();
-                }
-            } else {
-                let found = false;
-                let text = "";
-                let classNames = ""
-                Array.prototype.slice.call(self.listElements).forEach(function (x) {
-                    if (x.getAttribute("data-value") == values) {
-                        x.classList.add("active");
-                        found = true;
-                        text = x.getAttribute("data-text")
-                    } else {
-                        x.classList.remove("active");
-                    }
-                });
-                Array.prototype.slice.call(self.options).forEach(function (x) {
-                    if (x.value == values) {
-                        x.selected = true;
-                        className = x.getAttribute("class");
-                        if (!className) className = "";
-                    } else {
-                        x.selected = false;
-                    }
-                });
-                if (found) {
-                    self.title.textContent = text;
-                    if (self.userOptions.placeHolder != "" && self.title.textContent == "") {
-                        self.title.textContent = self.userOptions.placeHolder;
-                    }
-                    if (className != "") {
-                        self.title.setAttribute("class", className + " title");
-                    } else {
-                        self.title.setAttribute("class", "title");
-                    }
-                }
-            }
-        }
-    }
-
-vanillaSelectBox.prototype.privateSendChange = function () {
-    let event = document.createEvent('HTMLEvents');
-    event.initEvent('change', true, false);
-    this.root.dispatchEvent(event);
-
-}
-
-	vanillaSelectBox.prototype.empty = function () {
-        Array.prototype.slice.call(this.listElements).forEach(function (x) {
-            x.classList.remove("active");
-        });
-        Array.prototype.slice.call(this.options).forEach(function (x) {
-            x.selected = false;
-        });
-        this.title.textContent = "";
-        if (this.userOptions.placeHolder != "" && this.title.textContent == "") {
-            this.title.textContent = this.userOptions.placeHolder;
-        }
-        this.privateSendChange();
-    }
-
-    vanillaSelectBox.prototype.destroy = function () {
-        let already = document.getElementById("btn-group-" + this.domSelector);
-        if (already) {
-            VSBoxCounter.remove(this.instanceOffset);
-            already.remove();
-            this.root.style.display = "inline-block";
-        }
-    }
-    vanillaSelectBox.prototype.disable = function () {
-        let already = document.getElementById("btn-group-" + this.domSelector);
-        if (already) {
-            button = already.querySelector("button")
-			if(button) button.classList.add("disabled");
-            this.isDisabled = true;
-        }
-    }
-    vanillaSelectBox.prototype.enable = function () {
-        let already = document.getElementById("btn-group-" + this.domSelector);
-        if (already) {
-            button = already.querySelector("button")
-            if(button) button.classList.remove("disabled");
-            this.isDisabled = false;
-        }
-    }
-
-vanillaSelectBox.prototype.showOptions = function(){
-    console.log(this.userOptions);
-}
-// Polyfills for IE
-if (!('remove' in Element.prototype)) {
-    Element.prototype.remove = function () {
-        if (this.parentNode) {
-            this.parentNode.removeChild(this);
-        }
-    };
-}
-
-function vanillaSelectBox_type(target) {
-    const computedType = Object.prototype.toString.call(target);
-    const stripped = computedType.replace("[object ", "").replace("]", "");
-    const lowercased = stripped.toLowerCase();
-    return lowercased;
-}
-</script>
-
-<style>
-
-body {
-    margin:50px;
-    font-family:'Arial', sans-serif;
-}
-*{margin:0;padding: 0;}
-
-h1 {
-    color:#FA9A39;
-}
-
-p { padding-bottom:50px;}
-
-.content {
-    width:500px;
-    margin:auto;
-}
-.tree ul {
-    margin-left: 20px;
-}
-
-.tree li {
-    list-style-type: none;
-    margin:10px;
-    position: relative;
-}
-
-.tree li::before {
-    content: "";
-    position: absolute;
-    top:-7px;
-    left:-20px;
-    border-left: 1px solid #ccc;
-    border-bottom:1px solid #ccc;
-    border-radius:0 0 0 0px;
-    width:20px;
-    height:15px;
-}
-
-.tree li::after {
-    position:absolute;
-    content:"";
-    top:8px;
-    left:-20px;
-    border-left: 1px solid #ccc;
-    border-top:1px solid #ccc;
-    border-radius:0px 0 0 0;
-    width:20px;
-    height:100%;
-}
-
-.tree li:last-child::after  {
-    display:none;
-}
-
-.tree li:last-child:before{
-    border-radius: 0 0 0 5px;
-}
-
-ul.tree>li:first-child::before {
-    display:none;
-}
-
-ul.tree>li:first-child::after {
-    border-radius:5px 0 0 0;
-}
-
-.tree li a {
-    border: 1px #ccc solid;
-    border-radius: 5px;
-    padding:2px 5px;
-}
-
-.tree li a:hover, .tree li a:hover+ul li a,
-.tree li a:focus, .tree li a:focus+ul li a {
-    background: #ccc; color: #000; border: 1px solid #000;
-}
-
-.tree li a:hover+ul li::after, .tree li a:focus+ul li::after,
-.tree li a:hover+ul li::before, .tree li a:focus+ul li::before 
-.tree li a:hover+ul::before, .tree li a:focus+ul::before 
-.tree li a:hover+ul ul::before, .tree li a:focus+ul ul::before{
-    border-color:  #000; /*connector color on hover*/
-}
-
-
-  .hidden-search {
-	display: none !important;
-}
-
-.vsb-menu{
-  cursor:pointer;
-  z-index:1000;
-  display:none;
-  position:absolute;/*Don't change*/
-  border:1px solid #B2B2B2;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.15);
-  box-shadow: 0 6px 12px rgba(0,0,0,.175);
-  border-radius:4px;
-  font-size : 11px;
-}
-
-.vsb-js-search-zone{
-	position:absolute;/*Don't change*/
-    z-index:1001;
-	width: 80%;
-	min-height:1.8em;
-	padding: 2px;
-	background-color: #fff;
-}
-
-.vsb-js-search-zone input{
-	border: 1px solid grey;
-	margin-left: 2px;
-	width: 96%;
-	border-radius: 4px;
-	height: 25px !important;
-}
-
-.vsb-main{
-	position: relative;/*Don't change*/
-	display: inline-block;
-	vertical-align: middle;
-	text-align:left;
-}
-
-.vsb-menu li{
-	display: list-item;
-	font-size: 12px;
-	background-color: #fff;
-	min-height:1.4em;
-	padding: 0.2em;
-}
-
-.vsb-menu li:hover {
-	background: linear-gradient(#f5f5f5, #e8e8e8);
-}
-
-.vsb-menu ul{
-	user-select:none;
-	list-style:none;
-	white-space: nowrap;
-	margin:0px;
-	margin-top:4px;
-	padding-left:10px;
-	padding-right:10px;
-	padding-bottom:3px;
-	color: #333;
-	cursor:pointer;
-	overflow-y:auto;
-}
-
-li.disabled{
-	cursor:not-allowed;
-	opacity:0.3;
-	background-color: #999;
-}
-
-.vsb-main button{
-	min-width: 120px;
-	border-radius: 0;
-	width: 100%;
-	text-align: left;
-	z-index: 1;
-	color: #333;
-	background: white !important;
-	border: 1px solid #999 !important;
-	/* line-height:20px; */
-	font-size:12px;
-	/* padding:6px 12px; */
-}
-
-.vsb-main button.disabled{
-	cursor:not-allowed;
-	opacity:0.65;
-}
-
-.vsb-main .title {
-	margin-right: 6px;
-	user-select:none;
-}
-
-.vsb-main li:hover {
-	background: linear-gradient(#f5f5f5, #e8e8e8);
-}
-
-.vsb-main ul{
-	white-space: nowrap;
-}
-
-.vsb-menu li {
-	font-size: 14px;
-	background-color: #fff;
-	min-height:1.4em;
-	padding: 0.2em 2em 0.2em 1em;
-}
-
-.vsb-menu li.grouped-option {
-	font-weight: bold;
-	font-size: 15px;
-	padding-left: 5px;
-}
-
-.vsb-menu :not(.multi) li.active::before {
-	content: "";
-	display: inline-block;
-	font-size: inherit;
-	float:left;
-	margin-left:-16px;
-	transform: rotate(45deg);
-	height: 10px;
-	width:  5px;
-	border-bottom:  3px solid black;
-	border-right:  3px solid black;
-	border-radius:2px;
-}
-
-.vsb-menu .multi li {
-	font-size: 14px;
-	background-color: #fff;
-	min-height:1.4em;
-	padding: 0.2em 2em 0.2em 26px;
-}
-
-.vsb-menu .multi li.grouped-option {
-	font-weight: bold;
-	font-size: 15px;
-	padding-left: 5px;
-}
-
-.vsb-menu .multi li:not(.grouped-option)::before{
-	content: "";
-	display: inline-block;
-	font-size: inherit;
-	float:left;
-	font-weight:bold;
-	margin-left:-22px;
-	margin-right:2px;
-	border : 1px solid;
-	border-radius : 3px;
-	padding : 7px;
-	margin-top:2px;
-	color:black;
-}
-
-.vsb-menu .multi li.active::after {
-	content: "";
-	display: inline-block;
-	font-size: inherit;
-	color: #333;
-	float:left;
-	margin-left:-18px;
-	display: inline-block;
-	transform: rotate(45deg);
-	margin-top:2px;
-	height: 10px;
-	width:  6px;
-	border-bottom: 3px solid black;
-	border-right:  3px solid black;
-}
-
-.caret {
-	display: inline-block;
-	width: 0;
-	height: 0;
-	margin-left: 2px;
-	vertical-align: middle;
-	border-top: 4px dashed;
-	border-top: 4px solid;
-	border-right: 4px solid transparent;
-	border-left: 4px solid transparent;
-}
-
-</style>
 
 
 <!-- 日历的css -->
@@ -998,14 +47,322 @@ li.disabled{
 /*# sourceMappingURL=simplepicker.css.map*/
 </style>
 
+<style>
+  body {
+      margin:50px;
+      font-family:'Arial', sans-serif;
+  }
+  *{margin:0;padding: 0;}
+  
+  h1 {
+      color:#FA9A39;
+  }
+  
+  p { padding-bottom:50px;}
+  
+  .content {
+      width:500px;
+      margin:auto;
+  }
+  .tree ul {
+      margin-left: 20px;
+  }
+  
+  .tree li {
+      list-style-type: none;
+      margin:10px;
+      position: relative;
+  }
+  
+  .tree li::before {
+      content: "";
+      position: absolute;
+      top:-7px;
+      left:-20px;
+      border-left: 1px solid #ccc;
+      border-bottom:1px solid #ccc;
+      border-radius:0 0 0 0px;
+      width:20px;
+      height:15px;
+  }
+  
+  .tree li::after {
+      position:absolute;
+      content:"";
+      top:8px;
+      left:-20px;
+      border-left: 1px solid #ccc;
+      border-top:1px solid #ccc;
+      border-radius:0px 0 0 0;
+      width:20px;
+      height:100%;
+  }
+  
+  .tree li:last-child::after  {
+      display:none;
+  }
+  
+  .tree li:last-child:before{
+      border-radius: 0 0 0 5px;
+  }
+  
+  ul.tree>li:first-child::before {
+      display:none;
+  }
+  
+  ul.tree>li:first-child::after {
+      border-radius:5px 0 0 0;
+  }
+  
+  .tree li a {
+      border: 1px #ccc solid;
+      border-radius: 5px;
+      padding:2px 5px;
+  }
+  
+  .tree li a:hover, .tree li a:hover+ul li a,
+  .tree li a:focus, .tree li a:focus+ul li a {
+      background: #ccc; color: #000; border: 1px solid #000;
+  }
+  
+  .tree li a:hover+ul li::after, .tree li a:focus+ul li::after,
+  .tree li a:hover+ul li::before, .tree li a:focus+ul li::before 
+  .tree li a:hover+ul::before, .tree li a:focus+ul::before 
+  .tree li a:hover+ul ul::before, .tree li a:focus+ul ul::before{
+      border-color:  #000; /*connector color on hover*/
+  }
+  
+</style>
+
+<style>
+  @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic);
+  @import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
+  /* * {
+    box-sizing: border-box;
+  } */
+  .color {
+    color: #19BC9C !important;
+  }
+  /* html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    background-color: #fff;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 32px;
+  } */
+   div.container {
+    display: block;
+    width: 50%;
+    margin: 32px auto;
+    padding: 16px 32px;
+    background-color: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  } 
+  div.inputTags-list {
+    display: inline-block;
+    width: 100%;
+    padding: 6px;
+    border: 1px solid rgba(25, 188, 156, 0.35);
+    background-color: #f9f9f9;
+    box-shadow: 1px 2px 2px rgba(221, 221, 221, 0.2);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list span.inputTags-item {
+    position: relative;
+    display: inline-block;
+    margin: 2px;
+    padding: 3px 22px 4px 8px;
+    background-color: #19BC9C;
+    text-align: center;
+    color: #fff;
+    opacity: 1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list span.inputTags-item.is-edit {
+    display: none;
+  }
+  div.inputTags-list span.inputTags-item.is-hidden {
+    display: none !important;
+  }
+  div.inputTags-list span.inputTags-item.is-exists {
+    background-color: rgba(231, 76, 60, 0.7);
+  }
+  div.inputTags-list span.inputTags-item span.value {
+    cursor: pointer;
+  }
+  div.inputTags-list span.inputTags-item i {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    font-weight: 400;
+    font-family: sans-serif;
+    line-height: 1;
+    font-style: normal;
+    -webkit-transition: color 0.2s;
+    -khtml-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    -ms-transition: color 0.2s;
+    -o-transition: color 0.2s;
+    -webkit-transform: translateY(-50%);
+    -khtml-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
+  div.inputTags-list span.inputTags-item i:hover {
+    color: #e74c3c;
+  }
+  div.inputTags-list input.inputTags-field {
+    border: none;
+    margin-left: 4px;
+    background-color: transparent;
+  }
+  div.inputTags-list input.inputTags-field:focus,
+  div.inputTags-list input.inputTags-field:active {
+    outline: none;
+  }
+  div.inputTags-list input.inputTags-field.is-edit {
+    margin: 0 2px;
+    padding: 4px 8px 3px 8px;
+    border: 1px dashed #c4c4c4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list {
+    position: absolute;
+    max-height: 192px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    z-index: 100;
+    opacity: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-transform: scaleY(0);
+    -khtml-transform: scaleY(0);
+    -moz-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -webkit-transform-origin: 50% 0;
+    -khtml-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    -webkit-transition-duration: 0.2s;
+    -khtml-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -ms-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list.is-active {
+    opacity: 1;
+    -webkit-transform: scaleY(1);
+    -khtml-transform: scaleY(1);
+    -moz-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    -webkit-transition-duration: 0.3s;
+    -khtml-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -ms-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.2s;
+    -khtml-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -ms-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li:last-child {
+    border: none;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li:hover {
+    background-color: #19BC9C;
+    color: #fff;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li.is-disabled {
+    cursor: default;
+    background-color: #f7f7f7;
+    color: initial;
+  }
+  p.inputTags-error {
+    position: relative;
+    margin: 0;
+    padding: 0.5em 1em;
+    color: #fff;
+    background-color: rgba(231, 76, 60, 0.7);
+    cursor: pointer;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  p.inputTags-error:first-of-type {
+    margin-top: 8px;
+  }
+  p.inputTags-error:after {
+    position: absolute;
+    content: "\000D7";
+    top: 50%;
+    right: 0.5em;
+    -webkit-transform: translateY(-50%);
+    -khtml-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    font-size: 28px;
+  }
+</style>
+
 
 </head> 
 
-
-
-
 <body>
-  <div class="content" id="everydaytree">
+  
+<div>
+  <input type="text"  id="inputTags_d3" />
+</div>  
+
+
+  
+<div class="content" id="everydaytree">
   <div>
     <h1>Urgent tasks</h1>
     <ul class="tree">
@@ -1037,7 +394,7 @@ li.disabled{
         <div class="task_list_item">
           <!-- 任务完成的圆圈 -->
           <div class="task_list_item_task_area">
-            <div class="container">
+            <div class="div_container" >
               <div class="round">
                 <input type="checkbox" id="checkbox" />
                 <label for="checkbox" id="chekboxlabel"></label>
@@ -1066,7 +423,7 @@ li.disabled{
             <!-- onclick 指的是鼠标指上去，并不是点上去 -->
             <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
             <!-- 设置输入任务的div -->
-            <div class="container">
+            <div class="task_container">
             <!-- <label class="input-task-class"    id="inputlabel">please input your task</label> -->
             <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，-->
             <input class="input_text" type="text" id="noid" placeholder="please input your task" >
@@ -1118,22 +475,24 @@ li.disabled{
                 <div id="tasktags_area">
                   <!-- 选择标签，需要使用multi-selector  -->
                   <!-- <label for="tasktag">tasktag:</label> -->
-                  <select name="tasktag" id="tasktag_selector"  >
+                  <input type="text" name="tasktag" id="tasktag_selector" >
+                  <!-- <select name="tasktag" id="tasktag_selector" multiple >
                     <option value="ub">输入标签</option>
                     <option value="IM">重要的</option>;
                     <option value="HA">困难的</option>;
-                    <option value="UR">紧急的</option>;
+                    <option value="UR">紧急的</option>; -->
                   </select>
                 </div>
       
                 <div id="reviewalgo_area">
                   <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector  -->
                   <div id="task_reviewalgo_area">
-                    <select name="taskreview" id="taskreview_selector" >
+                    <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    <!-- <select name="taskreview" id="taskreview_selector" >
                       <option value="ub">输入回顾</option>
                       <option value="ub">使用大脑</option>
                       <option value="atom">原子化拆分</option>
-                      <option value="diff">困难的事情</option>
+                      <option value="diff">困难的事情</option> -->
                     </select>
                   </div>
                 </div>
@@ -1151,11 +510,12 @@ li.disabled{
               <!-- <label id="reivew">please choose thd reviewalgo</label> -->
               <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> -->
             </div>
-          </div>
             <div class="add_task_button_area">
               <button class="add_task_button">添加任务</button>
               <button class="cancel_add_task_button">取消</button>
             </div>
+          </div>
+            
         </div>
       </li>
       
@@ -1207,153 +567,98 @@ li.disabled{
 
 <script type="text/javascript">
 
-function updatetask(id){
-  // alert(`我正在输出checkbox 的 ID ${id}`)
-
-  // var updatedtask = $("#updatedtask").val()
-      var taskid = id.substring(8, 13)
-      // alert(taskid)
-
-      var updatedinfo =
-      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-      {
-        'ifdissect': 'no',
-        'deadline': 'unspecified',
-        'starttime': 'unspecified',
-        'endtime': 'unspecified',
-        'tasktagsorigin': 'unspecified',
-        'parentid': 'unspecified',
-        'timedevotedto_a_task': 0,
-        'goalcode': 'xxx',
-        'client': 'gtdcli',
-        'taglight': 'no',
-        'note': 'unspecified',
-        'reviewalgolight': 'no',
-        'reviewalgo': {},
-        'parentproject': 'unspecified',
-        'id': taskid,
-        'place': 'unspecified',
-        'finishtime': 'unspecified',
-        'inbox': 'nocontent',
-        'project': 'inbox',
-        'plantime': 'today',
-        'taskstatus': 'finished',
-        'tasktags': {}
+    // 翻转一个对象的key和value
+    function swap(json){
+      var ret = {};
+      for(var key in json){
+        ret[json[key]] = key;
       }
-
-      $.ajax({
-        type: "POST",
-        url: "/v1/update",
-        // The key needs to match your method's input parameter (case-sensitive).
-        data: JSON.stringify(updatedinfo),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) { 
-          geteverydaytask();
-          // alert(data);
-         },
-        failure: function (errMsg) {
-          alert(errMsg);
-        }
-      })
+      return ret;
     }
 
 
-// alert( "Handler for .click() called." );
-      // 下面的代码用来判断任务是否完成
-      // var reviewalgo = updatedinfo.reviewalgo;
-      // var search = "yes"
-      // console.log(reviewalgo);
-      // // if ( Object.keys(reviewalgo).length == 0) 
-      // if (inArray(search, reviewalgo)) {
-      //   updatedinfo.taskstatus = "finished";
-      //   console.log(updatedinfo);
-      // }
-      // else {
-      //   alert("请先对任务进行评价才能点击完成按钮哦~");
-      //   // return false;
-      //   event.preventDefault();
-      //   // 阻止click动作之后默认的操作
-      // }
+    var tagscovert = {
+      "importanttag": "重要的",
+      'feartag': "害怕的",
+      'principletag': "原则",
+      'atomtag': "原子",
+      'dfstag': "需要深度搜索",
+      'hardtag': "困难的",
+      'easytag': "容易的",
+      'urgenttag': "急迫的",
+      'challengetag': "挑战的",
+      'uncomfortabletag': "不舒服的",
+      'troublesometag': "麻烦事",
+      'keyproblemtag': "关键问题",
+      'tenminutestasktag': "10分钟",
+      'thirtyminutestasktag': "30分钟",
+      'threeminutestasktag': "3分钟",
+    }
+
+    // Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
+    var tasktags_chinese = Object.values(tagscovert);
+
+    console.log(tasktags_chinese)
+
+    // 下面这个Swap的代码是把一个字典的键和值互换
+    var tagscovert_chkey = swap(tagscovert);
+
+    // var tagscovert_chkey = {
+    //   '重要的': 'importanttag',
+    //   '害怕的': 'feartag',
+    //   '原则': 'principletag',
+    //   '原子': 'atomtag',
+    //   '需要深度搜索': 'dfstag',
+    //   '困难的': 'hardtag',
+    //   '容易的': 'easytag',
+    //   '急迫的': 'urgenttag',
+    //   '挑战的': 'challengetag',
+    //   '不舒服的': 'uncomfortabletag',
+    //   '麻烦事': 'troublesometag',
+    //   '关键问题': 'keyproblemtag',
+    //   '10分钟': 'tenminutestasktag',
+    //   '30分钟': 'thirtyminutestasktag',
+    //   '3分钟': 'threeminutestasktag'
+    // }
+
+    var reviewalgo_covert = {
+          'attackactively':"主动进攻",
+          'makeuseofthings':"利用学习到的东西",
+          'depthfirstsearch':"深度优先搜索",
+          'markataskimmediately':"立即标记任务",
+          'alwaysprofit':"总是保持进步",
+          'brainuse':"动脑筋",
+          'useprinciple':"使用原则",
+          'patience':"有耐心",
+          'solveakeyproblem':"解决关键问题",
+          'learnnewthings':"学习到新内容",
+          'battlewithlowerbrain':"战胜低级情绪",
+          'difficultthings':"完成困难事情",
+          'acceptfactandseektruth':"接受事实，寻求真相",
+          'dealwithahardtask':"处理困难任务",
+          'threeminutes':"3分钟原则",
+          'serviceforgoal':"为目标服务",
+          'buildframeandprinciple':"建立框架原则",
+          'atomadifficulttask':"原子化拆分任务",
+          'noflinch':"不退缩",
+          'learntechuse':"学习技术",
+          'doanimportantthingearly':"提前完成一件重要的事",
+          'acceptpain':"接受痛苦",
+          'conquerthefear':"战胜恐惧"
+    }
+
+// Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
+var reviewalgo_chinese = Object.values(reviewalgo_covert);
+
+console.log(reviewalgo_chinese)
+
+// 下面这个Swap的代码是把一个字典的键和值互换
+var reviewalgo_covert_chkey = swap(reviewalgo_covert);
 
 
 
-
-window.onload = function() {
-  var input = document.querySelector('#g01-01');
-  if (input) {   
-    input.addEventListener('change', doalert, false);
-  }
-}
-
-function geteverydaytask(){
-
-  $.get("/v1/todayjson", function(data, status){
-    // alert("Data: " + data + "\nStatus: " + status);
-    console.log(data.task);
-    var div = document.getElementById('todaytree');
-    div.innerHTML = ""
-    var  alltask=''
-    var tasks = data.task
-    // div.innerHTML += '<li>this is  a task<li>';
-      var i = 0
-      var head = '<h1>Today tasks</h1><ul class="tree">'
-       var  tail = '</ul>'
-       var  alltask = ''
-      //  var task_id = task[i].id
-      while (i<data.task.length)
-    {
-      // <input type="checkbox" name="checkfield" id="g01-01"  onchange="doalert(this.id)"/>
-      var addedtask_head = `<div class="task_list_item">  <div class="task_list_item_task_area"> <div class="container"> <div class="round2"> <input type="checkbox" id= "checkbox${tasks[i].ID}" onchange="updatetask(this.id)" /> <label for="checkbox" id="chekboxlabel"></label> </div> </div> <div class="task_list_content"> `
-      var addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
-      var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      
-      alltask=alltask+ `<li id = ${tasks[i].ID}>` + addedtask_head + "<a>" + tasks[i].task + "</a>" + addedtask_trail + "</li>";
-    i++;
-}
-div.innerHTML += head+alltask+tail
-
-  });
-}
-
-geteverydaytask()
-
-
-
-
-window.onload = function(){
-$("#tempid").click(function(){
-
-  var content = "任务1";
-  var task_content = document.getElementById("tempid");
-  task_content.firstChild.nodeValue = content;
-})
-
-
-
-var add_task_item = document.getElementById("add_task_item");
-// console.log(add_task_item);
-
-$("#plusbutton").click(function(){
-
-  var add_plus = document.getElementById("add_task_button_area");
-
-  console.log(add_plus);
-
-  const add_task_div = '<div class="add_task_area" id="add_task" > <div class="input_task_area"> <!-- onclick="test(this.getAttribute("id"))" --> <!-- onclick 指的是鼠标指上去，并不是点上去 --> <!-- 这里最输入任务的框，里面有各种需要传的参数 --> <!-- 设置输入任务的div --> <div class="container"> <!-- <label class="input-task-class" id="inputlabel">please input your task</label> --> <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，--> <input class="input_text" type="text" id="noid" placeholder="please input your task" > <!-- <button id="nonoid">点击添加task</button> --> <!-- <input id="testbutton" placeholder="please input your task"> --> </div> <div class="task_property_area"> <div class="calendar_project_area"> <div class="calendar_area" id="calendar_area"> <!-- 输入任务时间的表单 --> <!-- <a>请输任务时间</a> --> <button id="calendar" class="clock_button"> <svg t="1598153562536" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3498" width="20" height="20"> <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" fill="#CFD8DC" p-id="3499"> </path> <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501"> </path> <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503"> </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504"> </path> </svg> </button> <!-- <label id="inputlabel">please input your plantime</label> <input type="text" id="plantime" > --> </div> <div id="project_area"> <!-- 任务的选择需要使用带层级标签的下拉列表 --> <!-- <a>project select</a> --> <label for="project_choose"></label> <select name="project_choose" id="project_choose"> <option value="inbox">inbox</option> <option value="work">work</option> <option value="family">family</option> </select> </div> </div> <div id="tags_review_area" class="tags_review_area"> <div id="tasktags_area"> <!-- 选择标签，需要使用multi-selector --> <!-- <label for="tasktag">tasktag:</label> --> <select name="tasktag" id="tasktag_selector" > <option value="ub">输入标签</option> <option value="IM">重要的</option>; <option value="HA">困难的</option>; <option value="UR">紧急的</option>; </select> </div> <div id="reviewalgo_area"> <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector --> <div id="task_reviewalgo_area"> <select name="taskreview" id="taskreview_selector" > <option value="ub">输入回顾</option> <option value="ub">使用大脑</option> <option value="atom">原子化拆分</option> <option value="diff">困难的事情</option> </select> </div> </div> </div> </div> <div> <!-- 输入标签的input窗口 --> <!-- <label id="tasktags" >please choose the tasktags</label> --> <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> --> </div> <div> <!-- 输入review的input窗口 --> <!-- <label id="reivew">please choose thd reviewalgo</label> --> <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> --> </div> </div> <div class="add_task_button_area"> <button class="add_task_button">添加任务</button> <button class="cancel_add_task_button">取消</button> </div> </div>'
-
-  add_plus.innerHTML += add_task_div;
-
-  document.getElementById("plusbutton").outerHTML = "";
-
-})
-
-  // const nospecifiedtaskdivcode =
-
-    var taskid_div = "noid";
-
-    //  define a inital tasktags
-    var tasktags = {
+ //  define a inital tasktags
+ var tasktags = {
       'importanttag': 'no',
       'feartag': 'no',
       'principletag': 'no',
@@ -1399,6 +704,161 @@ $("#plusbutton").click(function(){
     }
 
 
+
+
+
+//  console.log(reviewalgo_covert_chkey) ;
+
+
+function updatetask(id){
+  // alert(`我正在输出checkbox 的 ID ${id}`)
+
+  // var updatedtask = $("#updatedtask").val()
+      var taskid = id.substring(8, 13)
+      // alert(taskid)
+
+      var updatedinfo =
+      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+      {
+        'ifdissect': 'no',
+        'deadline': 'unspecified',
+        'starttime': 'unspecified',
+        'endtime': 'unspecified',
+        'tasktagsorigin': 'unspecified',
+        'parentid': 'unspecified',
+        'timedevotedto_a_task': 0,
+        'goalcode': 'xxx',
+        'client': 'gtdcli',
+        'taglight': 'no',
+        'note': 'unspecified',
+        'reviewalgolight': 'no',
+        'reviewalgo': {},
+        'parentproject': 'unspecified',
+        'id': taskid,
+        'place': 'unspecified',
+        'finishtime': 'unspecified',
+        'inbox': 'unspecified',
+        'project': 'inbox',
+        'plantime': 'today',
+        'taskstatus': 'finished',
+        'tasktags': {}
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/v1/update",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(updatedinfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+          geteverydaytask();
+          // alert(data);
+         },
+        failure: function (errMsg) {
+          alert(errMsg);
+        }
+      })
+    }
+
+
+// alert( "Handler for .click() called." );
+      
+      // 判断任务是否已经的函数
+      function judge_task_finished(updatedinfo){
+        // 下面的代码用来判断任务是否完成
+        var reviewalgo = updatedinfo.reviewalgo;
+        var search = "yes"
+        console.log(reviewalgo);
+        // if ( Object.keys(reviewalgo).length == 0) 
+        if (inArray(search, reviewalgo)) {
+          updatedinfo.taskstatus = "finished";
+          console.log(updatedinfo);
+        }
+        else {
+          alert("请先对任务进行评价才能点击完成按钮哦~");
+         // return false;
+          event.preventDefault();
+         // 阻止click动作之后默认的操作
+        }
+      }
+      
+
+window.onload = function() {
+  var input = document.querySelector('#g01-01');
+  if (input) {   
+    input.addEventListener('change', doalert, false);
+  }
+}
+
+function geteverydaytask(){
+
+  $.get("/v1/todayjson", function(data, status){
+    // alert("Data: " + data + "\nStatus: " + status);
+    console.log(data.task);
+    var div = document.getElementById('todaytree');
+    div.innerHTML = ""
+    var  alltask=''
+    var tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      var i = 0
+      var head = '<h1>Today tasks</h1><ul class="tree">'
+       var  tail = '</ul>'
+       var  alltask = ''
+      while (i<data.task.length)
+    {
+      // <input type="checkbox" name="checkfield" id="g01-01"  onchange="doalert(this.id)"/>
+      var addedtask_head = `<div class="task_list_item">  <div class="task_list_item_task_area"> <div class="task_container"> <div class="round2"> <input type="checkbox" id= "checkbox${tasks[i].ID}" onchange="updatetask(this.id)" /> <label for="checkbox" id="chekboxlabel"></label> </div> </div> <div class="task_list_content"> `
+      var addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      
+      alltask=alltask+ `<li id = ${tasks[i].ID}>` + addedtask_head + "<a>" + tasks[i].task + "</a>" + addedtask_trail + "</li>";
+    i++;
+}
+div.innerHTML += head+alltask+tail
+
+  });
+}
+
+geteverydaytask()
+
+
+
+
+// window.onload = function(){
+// $("#tempid").click(function(){
+
+//   var content = "任务1";
+//   var task_content = document.getElementById("tempid");
+//   task_content.firstChild.nodeValue = content;
+// })
+
+
+
+var add_task_item = document.getElementById("add_task_item");
+// console.log(add_task_item);
+
+$("#plusbutton").click(function(){
+
+  var add_plus = document.getElementById("add_task_button_area");
+
+  console.log(add_plus);
+
+  const add_task_div = '<div class="add_task_area" id="add_task" > <div class="input_task_area"> <!-- onclick="test(this.getAttribute("id"))" --> <!-- onclick 指的是鼠标指上去，并不是点上去 --> <!-- 这里最输入任务的框，里面有各种需要传的参数 --> <!-- 设置输入任务的div --> <div class="div_container"> <!-- <label class="input-task-class" id="inputlabel">please input your task</label> --> <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，--> <input class="input_text" type="text" id="noid" placeholder="please input your task" > <!-- <button id="nonoid">点击添加task</button> --> <!-- <input id="testbutton" placeholder="please input your task"> --> </div> <div class="task_property_area"> <div class="calendar_project_area"> <div class="calendar_area" id="calendar_area"> <!-- 输入任务时间的表单 --> <!-- <a>请输任务时间</a> --> <button id="calendar" class="clock_button"> <svg t="1598153562536" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3498" width="20" height="20"> <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" fill="#CFD8DC" p-id="3499"> </path> <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501"> </path> <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503"> </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504"> </path> </svg> </button> <!-- <label id="inputlabel">please input your plantime</label> <input type="text" id="plantime" > --> </div> <div id="project_area"> <!-- 任务的选择需要使用带层级标签的下拉列表 --> <!-- <a>project select</a> --> <label for="project_choose"></label> <select name="project_choose" id="project_choose"> <option value="inbox">inbox</option> <option value="work">work</option> <option value="family">family</option> </select> </div> </div> <div id="tags_review_area" class="tags_review_area"> <div id="tasktags_area"> <!-- 选择标签，需要使用multi-selector --> <!-- <label for="tasktag">tasktag:</label> --> <select name="tasktag" id="tasktag_selector" > <option value="ub">输入标签</option> <option value="IM">重要的</option>; <option value="HA">困难的</option>; <option value="UR">紧急的</option>; </select> </div> <div id="reviewalgo_area"> <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector --> <div id="task_reviewalgo_area"> <select name="taskreview" id="taskreview_selector" > <option value="ub">输入回顾</option> <option value="ub">使用大脑</option> <option value="atom">原子化拆分</option> <option value="diff">困难的事情</option> </select> </div> </div> </div> </div> <div> <!-- 输入标签的input窗口 --> <!-- <label id="tasktags" >please choose the tasktags</label> --> <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> --> </div> <div> <!-- 输入review的input窗口 --> <!-- <label id="reivew">please choose thd reviewalgo</label> --> <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> --> </div> </div> <div class="add_task_button_area"> <button class="add_task_button">添加任务</button> <button class="cancel_add_task_button">取消</button> </div> </div>'
+
+  add_plus.innerHTML += add_task_div;
+
+  document.getElementById("plusbutton").outerHTML = "";
+
+})
+
+  // const nospecifiedtaskdivcode =
+
+    var taskid_div = "noid";
+
+   
+  
+
     //  添加日期的组件
     function yyyymmdd(dateIn) {
       var yyyy = dateIn.getFullYear();
@@ -1415,15 +875,10 @@ $("#plusbutton").click(function(){
     // console.log(yyyymmdd(today));
 
     var plantime = "unspecified"
-
     // $("#calendar").click(function () 
-    
     $(document).on("click","#calendar",function()
-    
     {
-      
       let myPicker = new SimplePicker();
-
       myPicker.open();
       myPicker.on('submit', function (date, readableDate) {
         // alert(date);
@@ -1439,117 +894,110 @@ $("#plusbutton").click(function(){
       })
       // myPicker.close()
     })
-
     // 输入任务的标签组件
     // var temtags = ['重要', '害怕', '原则','原子化','dfs','困难','容易','紧急','挑战','麻烦事','主要问题', '10分钟', '3分钟', '30分钟']
 
 
     // 更新标签的函数
-    function updatetags(elem) {
-      for (let i = 0; i < elem.length; i++) {
-        // const element = array[i];
-        //  alert("the first for");
-        for (let j = 0; j < Object.keys(tasktags).length; j++) {
-          // const element = array[j];
-          // alert("the second for");
-          if (elem[i] == Object.keys(tasktags)[j]) {
-            tasktags[elem[i]] = 'yes';
-          }
-        }
-        console.log("tag更新成功")
-        // alert(tasktags)
-      };
-      return tasktags;
+    
+    // 对字典进行中英文变换,用在tags和review中,dict是英汉对应下的字典，key是通过inputtags传入的中文
+    function getdictvaluearray(dict,keys){
+    var values = [] 
+    for (let i = 0; i < keys.length; i++) {
+      values.push(dict[keys[i]])
+    }
+    return  values
+    }
+    
+    // 更新tags
+    function updatetags(tagsarray) {
+      const tasktags_fixed = {
+      'importanttag': 'no',
+      'feartag': 'no',
+      'principletag': 'no',
+      'atomtag': 'no',
+      'dfstag': 'no',
+      'hardtag': 'no',
+      'easytag': 'no',
+      'urgenttag': 'no',
+      'challengetag': 'no',
+      'uncomfortabletag': 'no',
+      'troublesometag': 'no',
+      'keyproblemtag': 'no',
+      'tenminutestasktag': 'no',
+      'thirtyminutestasktag': 'no',
+      'threeminutestasktag': 'no'
+      }
+
+      var tem_tags = tasktags_fixed;
+      // console.log("下面是打印tasktags_fixed")
+      // console.log(tasktags_fixed)
+
+      for (let i = 0; i < tagsarray.length; i++) {
+        tem_tags[tagsarray[i]] = "yes";
+      }
+      // console.log(`我正在输出tagsarray${tagsarray}`)
+      // console.log(tagsarray)
+      // console.log("tags更新完成")
+      // console.log(tem_tags);
+      // console.log("下面是tasktags_fixed")
+      // console.log(tasktags_fixed)
+      return tem_tags;
     }
 
     // 更新评价的函数
-    function updatereviewalgo(elem) {
-      for (let i = 0; i < elem.length; i++) {
-        // const element = array[i];
-        //  alert("the first for");
-        for (let j = 0; j < Object.keys(reviewalgo).length; j++) {
-          // const element = array[j];
-          // alert("the second for");
-          if (elem[i] == Object.keys(reviewalgo)[j]) {
-            reviewalgo[elem[i]] = 'yes';
-          }
-        }
-        console.log("reviewalgo更新成功")
-        // alert(tasktags)
-      };
-      return reviewalgo;
+    function updatereviewalgo(reviewarray) {
+      const reviewalgo_fixed = {
+      'attackactively': 'no',
+      'makeuseofthings': 'no',
+      'depthfirstsearch': 'no',
+      'markataskimmediately': 'no',
+      'alwaysprofit': 'no',
+      'brainuse': 'no',
+      'useprinciple': 'no',
+      'patience': 'no',
+      'solveakeyproblem': 'no',
+      'learnnewthings': 'no',
+      'battlewithlowerbrain': 'no',
+      'difficultthings': 'no',
+      'acceptfactandseektruth': 'no',
+      'dealwithahardtask': 'no',
+      'threeminutes': 'no',
+      'serviceforgoal': 'no',
+      'buildframeandprinciple': 'no',
+      'atomadifficulttask': 'no',
+      'noflinch': 'no',
+      'learntechuse': 'no',
+      'doanimportantthingearly': 'no',
+      'acceptpain': 'no',
+      'conquerthefear': 'no'
     }
-
-    var tagscovert = {
-      "importanttag": "重要的",
-      'feartag': "害怕的",
-      'principletag': "原则",
-      'atomtag': "原子",
-      'dfstag': "dfstag",
-      'hardtag': "困难的",
-      'easytag': "容易的",
-      'urgenttag': "急迫的",
-      'challengetag': "挑战的",
-      'uncomfortabletag': "不舒服的",
-      'troublesometag': "麻烦事",
-      'keyproblemtag': "关键问题",
-      'tenminutestasktag': "10分钟",
-      'thirtyminutestasktag': "30分钟",
-      'threeminutestasktag': "3分钟",
+      var tmp_reviewalgo = reviewalgo_fixed;
+    for(var i =0; i<reviewarray.length; i++){
+      tmp_reviewalgo[reviewarray[i]] = "yes"
     }
-
-    var tagscovert = {
-      "importanttag": "重要的",
-      'feartag': "害怕的",
-      'principletag': "原则",
-      'atomtag': "原子",
-      'dfstag': "dfstag",
-      'hardtag': "困难的",
-      'easytag': "容易的",
-      'urgenttag': "急迫的",
-      'challengetag': "挑战的",
-      'uncomfortabletag': "不舒服的",
-      'troublesometag': "麻烦事",
-      'keyproblemtag': "关键问题",
-      'tenminutestasktag': "10分钟",
-      'thirtyminutestasktag': "30分钟",
-      'threeminutestasktag': "3分钟",
+    return tmp_reviewalgo;
     }
 
 
-    // 标签的输入
 
-    $("#tags").inputTags({
+   
+
+// 标签的输入
+
+  $("#tasktag_selector").inputTags({
       autocomplete: {
-        values: [
-          '重要的',
-          'feartag',
-          'principletag',
-          'atomtag',
-          'dfstag',
-          'hardtag',
-          'easytag',
-          'urgenttag',
-          'challengetag',
-          'uncomfortabletag',
-          'troublesometag',
-          'keyproblemtag',
-          'tenminutestasktag',
-          'thirtyminutestasktag',
-          'threeminutestasktag'
-        ],
+        values: tasktags_chinese,
         only: true
       },
-
       // max: 3,
-
       // create: function() {
       //     console.log('Tag added !');
       // },
 
       init: function ($elem) {
         // console.log('Event called on plugin init', $elem);
-        tasktags = updatetags($elem.tags);
+        // tasktags = updatetags($elem.tags);
       },
 
       create: function ($elem) {
@@ -1557,19 +1005,31 @@ $("#plusbutton").click(function(){
         // alert($elem.tags)
         // alert("hellohellohello");
         // console.log(tasktags);
-        // console.log($elem.tags);
-        tasktags = updatetags($elem.tags);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
         console.log(tasktags);
       },
 
       update: function ($elem) {
         console.log('Event called when an item is updated', $elem);
-        tasktags = updatetags($elem.tags);
+        // tasktags = updatetags($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+
       },
 
       destroy: function ($elem) {
         console.log('Event called when an item is deleted', $elem);
-        tasktags = updatetags($elem.tags);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+        // tasktags = updatetags($elem.tags);
       },
 
       selected: function ($elem) {
@@ -1593,35 +1053,13 @@ $("#plusbutton").click(function(){
       }
     }
     );
+
+
     // review的选择输入
 
-    $("#reviewalgo").inputTags({
+    $("#task_reviewalgo_selector").inputTags({
       autocomplete: {
-        values: [
-          'attackactively',
-          'makeuseofthings',
-          'depthfirstsearch',
-          'markataskimmediately',
-          'alwaysprofit',
-          'brainuse',
-          'useprinciple',
-          'patience',
-          'solveakeyproblem',
-          'learnnewthings',
-          'battlewithlowerbrain',
-          'difficultthings',
-          'acceptfactandseektruth',
-          'dealwithahardtask',
-          'threeminutes',
-          'serviceforgoal',
-          'buildframeandprinciple',
-          'atomadifficulttask',
-          'noflinch',
-          'learntechuse',
-          'doanimportantthingearly',
-          'acceptpain',
-          'conquerthefear'
-        ],
+        values: reviewalgo_chinese,
         only: true
       },
       // max: 3,
@@ -1632,7 +1070,8 @@ $("#plusbutton").click(function(){
 
       init: function ($elem) {
         // console.log('Event called on plugin init', $elem);
-        reviewalgo = updatereviewalgo($elem.tags);
+        // reviewalgo = updatereviewalgo($elem.tags);
+
       },
 
       create: function ($elem) {
@@ -1641,41 +1080,62 @@ $("#plusbutton").click(function(){
         // alert("hellohellohello");
         // console.log(tasktags);
         // console.log($elem.tags);
-        reviewalgo = updatereviewalgo($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
         console.log(reviewalgo);
       },
 
       update: function ($elem) {
         console.log('Event called when an item is updated', $elem);
-        reviewalgo = updatereviewalgo($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
       },
 
       destroy: function ($elem) {
         console.log('Event called when an item is deleted', $elem);
-        reviewalgo = updatereviewalgo($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
       },
 
       selected: function ($elem) {
         console.log('Event called when an item is selected', $elem);
-        reviewalgo = updatereviewalgo($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
       },
 
       unselected: function ($elem) {
         console.log('Event called when an item is unselected', $elem);
-        reviewalgo = updatereviewalgo($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
       },
 
       change: function ($elem) {
         console.log('Event called on item change', $elem);
-        reviewalgo = updatereviewalgo($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
       },
 
       autocompleteTagSelect: function ($elem) {
         console.log('Event called on tag selection', $elem);
-        reviewalgo = updatereviewalgo($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
       }
     }
     );
+    
 
     // for (var i = 0; i < tasktags.length; i++) {
     //         // const element = array[i];
@@ -1699,102 +1159,16 @@ $("#plusbutton").click(function(){
 // $("#test_post").click(function(){
 //   alert("why so  gaoxiao!!!!")
 // })
-$("#test_post").click(function(){
-
- 
-        // alert("点击");
-        console.log("ma is here")
-        //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
-
-        // 下面这行代码把在Input里输入的内容传入到inputedtask这个变量里
-        var inputedtask = $("#noid").val();
-        // var inputedtask = document.getElementById("createtask").getAttribute("placeholder");
-        // console.log(inputedtask);
-        // alert(inputedtask);
-        // var plantime =  $("#plantime").val()
-        // alert(inputedtask)
-        //  alert("检查plantime")
-        //  alert(plantime)
-        var testis = "ma is here";
-        var task =
-        // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-
-        {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'create the task', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Mon Aug 31 23:23:35 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
-        //  {
-        //   'starttime': 'unspecified',
-        //   'deadline': 'unspecified',
-        //   'endtime': 'unspecified',
-        //   'ifdissect': 'no',
-        //   'note': 'unspecified',
-        //   'parentid': 'unspecified',
-        //   'timedevotedto_a_task': 0,
-        //   'client': 'gtdcli',
-        //   'goalcode': 'aaa',
-        //   'parentproject': 'unspecified',
-        //   'inboxlist': 'empty',
-        //   'inbox': inputedtask,
-        //   'finishtime': 'unspecified',
-        //   'reviewalgolight': 'no',
-        //   'reviewalgo': "unspecified",
-        //   'place': 'unspecified',
-        //   'input-time': 'Fri Aug 21 22:38:23 2020',
-        //   'project': 'inbox',
-        //   'taskstatus': 'unfinished',
-        //   'plantime': '200831',
-        //   'taglight': 'yes',
-        //   'tasktags': "unspecified",
-        //   'tasktagsorigin': 'e'
-        // };
-        ;
-        console.log(task);
-        // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
 
 
-        $.ajax({
-          type: "POST",
-          url: "/v1/createtask",
-          // The key needs to match your method's input parameter (case-sensitive).
-          data: JSON.stringify(task),
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function (data) {
-            // var taskid = data.taskid
-            // $("#thisnode").setproperty("taskid")=taskid
-            // <p taskid=1544>
-            // alert(data);
-            var taskid = data.taskid;
-            // alert(taskid);
-            const taskdom = document.querySelector("#tempid")
-            console.log(taskdom);
-            taskdom.setAttribute("taskid", taskid);
-            taskdom.setAttribute("id", taskid);
-
-            // console.log(data);
-          },
-          failure: function (errMsg) {
-            alert(errMsg);
-          }
-          //  alert(errMsg);
-        })
-      
-    
-})
-
-
-
-
-
-    
     // $("#noid").keypress(function (event)
     $(document).on("keypress","#noid",function(event)
     {
-
       if (event.key === "Enter") {
-       
         // alert("点击回车");
+
         console.log("ma is here")
         //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
-
         // 下面这行代码把在Input里输入的内容传入到inputedtask这个变量里
         var inputedtask = $("#noid").val();
         // var inputedtask = document.getElementById("createtask").getAttribute("placeholder");
@@ -1831,8 +1205,8 @@ $("#test_post").click(function(){
           'tasktagsorigin': 'e'
         };
         console.log(task);
+        // alert(plantime);
         // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-
 
         $.ajax({
           type: "POST",
@@ -1846,6 +1220,7 @@ $("#test_post").click(function(){
             // $("#thisnode").setproperty("taskid")=taskid
             // <p taskid=1544>
               geteverydaytask()
+              // 上面使用了geteverydaytask的函数来达到把输入的task放到上面的效果
             // alert(data);
             console.log("i am printing the return data from server")
             console.log(data)
@@ -1854,8 +1229,7 @@ $("#test_post").click(function(){
             const taskdom = document.querySelector("#tempid")
             console.log(taskdom);
             // taskdom.setAttribute("taskid", taskid);
-            taskdom.setAttribute("id", taskid);
-
+            // taskdom.setAttribute("id", taskid);
             // console.log(data);
           },
           failure: function (errMsg) {
@@ -1865,10 +1239,6 @@ $("#test_post").click(function(){
         })
       }
     });
-
-
-
-
 
     // 这是更新任务的JS代码
 
@@ -1900,7 +1270,6 @@ $("#test_post").click(function(){
       'tasktags': {}
     }
 
-
     // 下面的函数用来判断一个字典里面是否含有某个value
     function inArray(search, array) {
       for (var i in array) {
@@ -1924,10 +1293,7 @@ $("#test_post").click(function(){
 
 
     $("#updatetask").click(function () {
-
-
       //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
-
       var updatedtask = $("#updatedtask").val()
       var taskid = $("#taskid").val()
       alert(taskid)
@@ -1958,11 +1324,6 @@ $("#test_post").click(function(){
         'taskstatus': 'unfinished',
         'tasktags': {}
       }
-
-
-
-
-
       $.ajax({
         type: "POST",
         url: "/v1/update",
@@ -1977,7 +1338,6 @@ $("#test_post").click(function(){
       })
     })
 
-}
 
 </script>
    
