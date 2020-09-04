@@ -36,27 +36,7 @@ div#intro {
 <script src="/v1/jquery.js"></script>
   <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png"> 
   </head>
-  <script>
-       var time = new Date().getTime();
-       $(document.body).bind("mousemove keypress", function(e) {
-           time = new Date().getTime();
-       });
-
-       function refresh() {
-          //var img ="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/"+Math.floor(Math.random() * 25)+".JPG";
-          //document.body.style.backgroundImage = "url("+img+")";
-
-
-
-         <!--5s-->
-           if(new Date().getTime() - time >= 300000)
-               window.location.reload(true);
-           else
-               setTimeout(refresh, 10000);
-       }
-
-       setTimeout(refresh, 10000);
-  </script>
+ 
 
 <!--
 <script>
@@ -85,16 +65,69 @@ $(document).ready(function(){
 <h2 class="title">Make use of the things {{.countforunfinishedtasks}} you have learned {{.finishedrate}}</h2>
 <a href="/v1/taskmanager" style="color:blue;">=manager=</a><a href="/v1/bigscreenfortoday" style="color:blue;">=today=</a><a href="/v1/review?reviewtype=statistics" style="color:blue;">=data=</a><a href="/v1/review?reviewtype=goals" style="color:blue;">=goalgraph=</a><a href="/v1/review" style="color:blue;">=graph=</a><a href="/v1/pride" style="color:blue;">=pride=</a><a href="/v1/place" style="color:blue;">=place=</a><a href="/v1/inbox" style="color:blue;">=inbox=</a><a style="color:blue;" href="/v1/everyday">=everyday=</a><a style="color:blue;" href="/v1/project">=project=</a><a style="color:blue;" href="/v1/reviewsjson">=review=</a><a style="color:blue;" href="/v1/errorlog">=error=</a>
 <ul>
+  <button onclick="giveuptasks()">batch abandon tasks</button>
 <!--u can reference testgolangtemplaterender.html to do anythings-->
 {{ range .task}}
-<li><a class="{{.Status}}">{{.ID}} {{.Task}}</a></li>
+<li><input type="checkbox" id= "{{.ID}}" onchange="add2tasksidarray(this.id)" class = "checkbox" id="scales" name="scales"
+  ><a class="{{.Status}}">{{.ID}} {{.Task}}</a></li>
 {{end}}
-
-
       </ul>
       <p class="footer">
         by <a>yangming</a> | <a href="yang756260386@gmail.com">feedback</a> |<a href="https://github.com/oxfordyang2016/">source</a> |<a href="https://yangmingweatherapp.herokuapp.com">page</a>
       </p>
     </div>
-  </bod>
+  </body>
+  <script>
+    var   taskids = [];
+    function add2tasksidarray(taskid){
+      taskids.push(taskid)
+    }
+    
+
+    $('.checkbox').hide();
+    function giveuptasks(){
+      console.log(`任务数组的长度为${taskids.length}`)
+      if (taskids.length ==0){
+      
+        $('.checkbox').show();
+      }
+      if (taskids.length >0){
+        $('.checkbox').hide();
+        var updatedtask = $("#updatedtask").val()
+   
+
+      var info =
+      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+      {
+        'giveuptaskids':taskids,
+      }
+      $.ajax({
+        type: "POST",
+        url: "/v1/giveuptasksbatch",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(info),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+          taskids = []
+          // alert(data);
+          
+         },
+        failure: function (errMsg) {
+          alert(errMsg);
+        }
+      })
+      
+
+
+
+
+       
+      }
+
+    }
+
+
+
+ </script>
 </html>
