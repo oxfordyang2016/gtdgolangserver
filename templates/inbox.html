@@ -83,7 +83,7 @@ $(document).ready(function(){
   <body>
 <div id="intro">
 <h2 class="title">Make use of the things {{.countforunfinishedtasks}} you have learned {{.finishedrate}}</h2>
-<a href="/today" style="color:blue;">=today=</a><a href="/v1/review?reviewtype=statistics" style="color:blue;">=data=</a><a href="/v1/review?reviewtype=goals" style="color:blue;">=goalgraph=</a><a href="/v1/review" style="color:blue;">=graph=</a><a href="/v1/pride" style="color:blue;">=pride=</a><a href="/v1/place" style="color:blue;">=place=</a><a href="/v1/inbox" style="color:blue;">=inbox=</a><a style="color:blue;" href="/v1/everyday">=everyday=</a><a style="color:blue;" href="/v1/project">=project=</a><a style="color:blue;" href="/v1/reviewsjson">=review=</a><a style="color:blue;" href="/v1/errorlog">=error=</a>
+<a href="/v1/taskmanager" style="color:blue;">=manager=</a><a href="/v1/bigscreenfortoday" style="color:blue;">=today=</a><a href="/v1/review?reviewtype=statistics" style="color:blue;">=data=</a><a href="/v1/review?reviewtype=goals" style="color:blue;">=goalgraph=</a><a href="/v1/review" style="color:blue;">=graph=</a><a href="/v1/pride" style="color:blue;">=pride=</a><a href="/v1/place" style="color:blue;">=place=</a><a href="/v1/inbox" style="color:blue;">=inbox=</a><a style="color:blue;" href="/v1/everyday">=everyday=</a><a style="color:blue;" href="/v1/project">=project=</a><a style="color:blue;" href="/v1/reviewsjson">=review=</a><a style="color:blue;" href="/v1/errorlog">=error=</a>
 <ul>
 <!--u can reference testgolangtemplaterender.html to do anythings-->
 {{ range .task}}
