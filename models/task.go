@@ -2069,7 +2069,7 @@ func   compute_time_range(start string,end string)  [][3]int{
       fmt.Println(this_hour_start_int-this_hour_end_int)
       //计算中间的时间组
       if (this_hour_end_int-this_hour_start_int>1){
-        color.Yellow("------我在这里检测--------")
+        color.Yellow("------我在这��检测--------")
         for i:= this_hour_start_int+1;i<this_hour_end_int;i++{
           for j:=0;j<60;j++{
             b := [3]int{i, j,1}
@@ -2118,6 +2118,9 @@ func Startend(plantime string) [][3]int{
  
   //  loc, _ := time.LoadLocation("Asia/Shanghai")
   //  now :=  time.Now().In(loc)
+  // emailcookie,_:=c.Request.Cookie("email")
+  // fmt.Println(emailcookie.Value)
+  // email:=emailcookie.Value
    email:= "yang756260386@gmail.com"
    db.Where("Email= ?", email).Where("plantime = ?",plantime).Not("starttime", []string{"unspecified"," ",""}).Not("endtime", []string{"unspecified",""," "}).Order("id desc").Find(&tasks)
    
@@ -2138,6 +2141,45 @@ return alllocationandcolor
 
 
 
+func Giveuptasksbatch(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  // email:= "yang756260386@gmail.com"
+  fmt.Println(email)
+  buf := make([]byte, 1024000)
+  num, _ := c.Request.Body.Read(buf)
+  reqBody := string(buf[0:num])
+//--------------using gjson to parse------------
+//https://github.com/tidwall/gjson
+  taskarrayids:= gjson.Get(reqBody, "giveuptaskids")
+  var k = taskarrayids.Array()
+  fmt.Println(len(k))
+  fmt.Println(reflect.TypeOf(k[0].Int()))
+  var taskids_int []int64
+  //http://doc.gorm.io/crud.html#query to desc
+  //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
+  for i := 0; i < len(k); i++ {
+		taskids_int = append(taskids_int,k[i].Int())
+	}
+
+
+  loc, _ := time.LoadLocation("Asia/Shanghai")
+  now :=  time.Now().In(loc)
+  today := now.Format("060102")
+//  db.Model(&task).Update("Finishtime",now.Format("060102"))
+ db.Table("tasks").Where("Email= ?", email).Where("id IN (?)", taskids_int).Updates(map[string]interface{}{"status": "giveup", "finishtime": today})
+//   Query Chains http://doc.gorm.io/crud.html#query
+//  db.Where("Email= ?", email).Where("plantime = ?",now.Format("060102")).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks)
+c.JSON(200, gin.H{
+  "status":"ok",
+}) 
+
+
+
+}
 
 //这里是获取今天没有完成的任务
 //获取今天计划时间色块表
@@ -2145,10 +2187,10 @@ return alllocationandcolor
 func Todaytaskjson(c *gin.Context) {
   //i use email as identifier
 //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
-  // emailcookie,_:=c.Request.Cookie("email")
-  // fmt.Println(emailcookie.Value)
-  // email:=emailcookie.Value
-  email:= "yang756260386@gmail.com"
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  // email:= "yang756260386@gmail.com"
   //fmt.Println(cookie1.Value)
   var tasks []Tasks
   //email:="yangming1"
