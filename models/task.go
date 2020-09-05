@@ -1518,7 +1518,9 @@ if websocket_switch{
         c.HTML(http.StatusOK, "taskmanager.html",nil)
        }
 
-
+       func Goallist(c *gin.Context){
+        c.HTML(http.StatusOK, "goallist.html",nil)
+       }
 
 
        func  Todaytaskweb(c *gin.Context) {

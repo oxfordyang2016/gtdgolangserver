@@ -136,7 +136,7 @@ v1.StaticFile("/background.png", "./static/images/background.png")
   v1.GET("/searchwithgoalcode",Searchwithgoalcode)  
   v1.GET("/goaljson",Goalsystem)
   v1.GET("/goalsgraph",Goalsjson)
-
+  v1.GET("/goallist",Goallist)
  //web page
  //v1.GET("/mainboard",Mainboard)
         v1.GET("/inbox",Inbox)
