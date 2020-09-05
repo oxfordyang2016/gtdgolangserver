@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/v1/show.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/v1/style.css" media="screen" />
 <style>
-.l-title {
+/* .l-title {
    white-space: nowrap;
    text-overflow: ellipsis;
    overflow: hidden;
@@ -21,14 +21,14 @@
 
 
 
-div#intro {
+div#goallist {
     width: 520px;
     min-width: 520px;
     max-width: 520px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 120px;
-}
+} */
 
 
 
@@ -61,30 +61,73 @@ $(document).ready(function(){
 
 
   <body>
-<div id="intro">
-<h2 class="title">Make use of the things {{.countforunfinishedtasks}} you have learned {{.finishedrate}}</h2>
-<a href="/v1/goallist" style="color:blue;">=goallist=</a><a href="/v1/taskmanager" style="color:blue;">=manager=</a><a href="/v1/bigscreenfortoday" style="color:blue;">=today=</a><a href="/v1/review?reviewtype=statistics" style="color:blue;">=data=</a><a href="/v1/review?reviewtype=goals" style="color:blue;">=goalgraph=</a><a href="/v1/review" style="color:blue;">=graph=</a><a href="/v1/pride" style="color:blue;">=pride=</a><a href="/v1/place" style="color:blue;">=place=</a><a href="/v1/inbox" style="color:blue;">=inbox=</a><a style="color:blue;" href="/v1/everyday">=everyday=</a><a style="color:blue;" href="/v1/project">=project=</a><a style="color:blue;" href="/v1/reviewsjson">=review=</a><a style="color:blue;" href="/v1/errorlog">=error=</a>
-<ul>
-  <button onclick="giveuptasks()">batch abandon tasks</button>
-<!--u can reference testgolangtemplaterender.html to do anythings-->
-{{ range .task}}
-<li><input type="checkbox" id= "{{.ID}}" onchange="add2tasksidarray(this.id)" class = "checkbox" id="scales" name="scales"
-  ><a class="{{.Status}}">{{.ID}} {{.Task}}</a></li>
-{{end}}
-      </ul>
-      <p class="footer">
-        by <a>yangming</a> | <a href="yang756260386@gmail.com">feedback</a> |<a href="https://github.com/oxfordyang2016/">source</a> |<a href="https://yangmingweatherapp.herokuapp.com">page</a>
-      </p>
+<div id="intro" >
+
+
+
     </div>
   </body>
   <script>
+
+
+getgoallist()
+
     var   taskids = [];
     function add2tasksidarray(taskid){
       taskids.push(taskid)
     }
     
+    function getgoallist(){
+        $.get("/v1/goalsgraph?type=noproject", function(data, status){
+    // alert("Data: " + data + "\nStatus: " + status);
+    console.log(data);
+    var div = document.getElementById('intro');
+    div.innerHTML = ""
+    var  alltask=''
+    // goals.sort(function(a, b){return (a.Priority-b.Priority)&(a.Name-b.Name)});
+    var goals = data.goals
+    goals.sort(function(a, b){
+        if  (b.Priority>a.Priority) return 1;
+        if  (b.Priority<a.Priority) return -1;
+        if  (b.Name>a.Name) return -1;
+        if  (b.Name<a.Name) return 1;
+    
+    });
+    var tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      var i = 0
+     
+      var head = '<h1 style="color:blue;">Today tasks</h1><ul class="tree">'
+       var  tail = '</ul>'
+       var  goalisthtml = '<button onclick="giveuptasks()">batch abandon tasks</button>'
+      while (i<goals.length)
+    {
+       var goaltitle = '<h5 style="color:blue;">'+goals[i].Name+'<h5>'
+        var  tasksingoalhtml = ''
+        var j = 0
+        console.log(`目标是${goals[i].Name}`)
+        console.log(`目标里面任务的长度为${goals[i].Alltasksingoal.length}`)
+      while (j<goals[i].Alltasksingoal.length){
+       tasksingoalhtml =  tasksingoalhtml + `<li><input type="checkbox" id= ${goals[i].Alltasksingoal[j].ID} onchange="add2tasksidarray(this.id)" class = "checkbox" id="scales" name="scales"
+  ><a> ${goals[i].Alltasksingoal[j].task}</a></li>`
+       console.log(`目标里面任务的长度为${goals[i].Alltasksingoal.length}`)
+       j++ 
+      }
+     goalisthtml = goalisthtml +goaltitle+tasksingoalhtml
+    i++;
+}
+div.innerHTML  = '<ul>'+ goalisthtml +'</ul>'
+$('.checkbox').hide(); 
+  });
+    };
 
-    $('.checkbox').hide();
+    function add2tasksidarray(taskid){
+      taskids.push(taskid)
+    }
+
+
+
+   
     function giveuptasks(){
       console.log(`任务数组的长度为${taskids.length}`)
       if (taskids.length ==0){
@@ -111,21 +154,25 @@ $(document).ready(function(){
         success: function (data) { 
           taskids = []
           // alert(data);
-
+          
          },
         failure: function (errMsg) {
           alert(errMsg);
         }
       })
-      
-
-
-
-
        
       }
 
     }
+
+
+
+
+
+
+
+
+
 
 
 
