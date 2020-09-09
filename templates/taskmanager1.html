@@ -47,7 +47,6 @@
 /*# sourceMappingURL=simplepicker.css.map*/
 </style>
 
-
 <style>
   body {
       margin:50px;
@@ -71,11 +70,8 @@
   
   .tree li {
       list-style-type: none;
-      /* margin:10px; */
-      /* position: relative; */
-      border-top: #ccc solid 1px;
-      border-bottom: #ccc solid 1px ; 
-    
+      margin:10px;
+      position: relative;
   }
   
   .tree li::before {
@@ -119,15 +115,14 @@
   }
   
   .tree li a {
-      /* border: 1px #ccc solid; */
-      /* border-radius: 5px; */
+      border: 1px #ccc solid;
+      border-radius: 5px;
       padding:2px 5px;
   }
   
   .tree li a:hover, .tree li a:hover+ul li a,
   .tree li a:focus, .tree li a:focus+ul li a {
-      background: #ccc; color: #000; 
-      /* border: 1px solid #000; */
+      background: #ccc; color: #000; border: 1px solid #000;
   }
   
   .tree li a:hover+ul li::after, .tree li a:focus+ul li::after,
@@ -139,8 +134,6 @@
   
 </style>
 
-
-<!-- 下面是input tags组件的CSS -->
 <style>
   @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic);
   @import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
@@ -363,30 +356,62 @@
 
 <body>
   
+<div>
+  <input type="text"  id="inputTags_d3" />
+</div>  
+
+
   
- 
-  <div class="content" id="everydaytree">
-    <div>
-      <h1>Urgent tasks</h1>
-      <ul class="tree">
-        <li><a>发布新的gtd网页版本</a></li>
-      </ul>
-  </div>
+<div class="content" id="everydaytree">
+  <div>
+    <h1>Urgent tasks</h1>
+    <ul class="tree">
+      <li><a>发布新的gtd网页版本</a></li>
+    </ul>
+</div>
+<div id="todaytree">
+  <h1>Today tasks</h1>
+</div>
 
-  <div id="todaytree">
-    <h1>Today tasks</h1>
-  </div>
-
-  </div>
+</div>
   <div id="everyday">
     
   </div>
   <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
   <!-- 这是一个项目的div，里面有任务列表和添加任务一系列的html文件 -->
 
+  <!-- 项目名称 -->
+  <div class="section">
+    <header class="project_area">
+      <h1>这里是项目名称</h1>
+    </header>
 
-  
-      
+    <!-- 已经输入的任务，下面是正常显示任务时使用的html -->
+
+    <ul class="items">
+      <!-- 下面是已经添加完任务的html，每个任务用一个li标签 -->
+      <li>
+        <div class="task_list_item">
+          <!-- 任务完成的圆圈 -->
+          <div class="task_list_item_task_area">
+            <div class="div_container" >
+              <div class="round">
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox" id="chekboxlabel"></label>
+              </div>
+            </div>
+            <!-- 单独一个任务的html -->
+            <div class="task_list_content">
+              <span type="text" name="" id="tempid" class="task_list_item_input">这里是已经创建的任务 </span>
+            </div>
+          </div>
+          <!-- 任务下面的日期 -->
+          <div class="task_list_item_date_area">
+            <span class="task_list_item_date_button">这里是日期</span>
+          </div>
+        </div>
+      </li>
+
      
 
       <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
@@ -421,9 +446,12 @@
                       </path>
                       <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
                       fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+        
                       </path>
                       <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+        
                       </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+        
                       </path>
                     </svg>
                   </button>
@@ -441,17 +469,6 @@
                     <option value="family">family</option>
                   </select>
                 </div>
-
-                <div id="goal_area">
-                  <!-- 任务的选择需要使用带层级标签的下拉列表 -->
-                  <!-- <a>project select</a> -->
-                  <label for="goal_choose"></label>
-                  <select name="goal_choose" id="goal_choose">
-                    <option value="health">health</option>
-                    <option value="wealth">wealth</option>
-                    <option value="happy">happy</option>
-                  </select>
-                </div>
               </div>
       
               <div id="tags_review_area" class="tags_review_area">
@@ -467,57 +484,78 @@
                   </select>
                 </div>
       
-                <!-- <div id="reviewalgo_area"> -->
+                <div id="reviewalgo_area">
                   <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector  -->
-                  <!-- <div id="task_reviewalgo_area">
+                  <div id="task_reviewalgo_area">
                     <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    <!-- <select name="taskreview" id="taskreview_selector" >
+                      <option value="ub">输入回顾</option>
+                      <option value="ub">使用大脑</option>
+                      <option value="atom">原子化拆分</option>
+                      <option value="diff">困难的事情</option> -->
+                    </select>
                   </div>
-                </div> -->
+                </div>
               </div>
             </div>
       
-            <!-- <div> -->
+            <div>
               <!-- 输入标签的input窗口 -->
               <!-- <label id="tasktags" >please choose the tasktags</label> -->
               <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> -->
-            <!-- </div> -->
+            </div>
       
-            <!-- <div> -->
+            <div>
               <!-- 输入review的input窗口 -->
               <!-- <label id="reivew">please choose thd reviewalgo</label> -->
               <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> -->
-            <!-- </div> -->
-          </div>
-         
-          <div class="add_task_button_area">
+            </div>
+            <div class="add_task_button_area">
               <button class="add_task_button">添加任务</button>
               <button class="cancel_add_task_button">取消</button>
+            </div>
           </div>
+            
         </div>
       </li>
+      
       <!-- 这是一个Add按键，用来把添加任务的div放进去 -->
-     
       <li id="add_task_button_area">
-        <div class="add_task_button">
-            <button id="plusbutton" class="plusbutton">
-              <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-              viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-              <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
-              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
-              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
-              </svg>
-          </button>
-
-            <!-- <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+"> -->
-        </div>
+        <!-- <button id="plusbutton" class="plusbutton">this is a plus</button> -->
+        <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+">
       </li>
     </ul>
   </div>
 
 
 
+  
+  
 
-  <!-- <input type="text" name="lname" value="Doe" -->
+
+ 
+        <!-- <style>
+        .taskwrite div{
+            display: inline-block;
+          }
+        </style> -->
+
+    
+        <!-- <svg 
+        t="1598151010848" 
+        class="icon" 
+        viewBox="0 0 1024 1024" 
+        version="1.1" 
+        xmlns="http://www.w3.org/2000/svg" 
+        p-id="2596" 
+        width="20" 
+        height="20"
+        >
+          <path d="M512 128C300.256 128 128 300.256 128 512s172.256 384 384 384 384-172.256 384-384S723.744 128 512 128z m0 64c177.12 0 320 142.88 320 320s-142.88 320-320 320S192 689.12 192 512 334.88 192 512 192z m-32 64v288h224v-64h-160V256z" p-id="2597">
+          </path>
+        </svg> -->
+        <!-- 用的是阿里巴巴矢量图库里的svg -->
+<!-- </li> -->
 
 
 <!-- <button id="test_post">test the post function</button> -->
@@ -525,11 +563,9 @@
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 <!-- 下面是脚本文件，最后要做分离的 -->
 
+
+
 <script type="text/javascript">
-
-var reviewalgoforalltasksintoday = {}
-
-
 
     // 翻转一个对象的key和value
     function swap(json){
@@ -539,6 +575,7 @@ var reviewalgoforalltasksintoday = {}
       }
       return ret;
     }
+
 
     var tagscovert = {
       "importanttag": "重要的",
@@ -618,6 +655,8 @@ console.log(reviewalgo_chinese)
 // 下面这个Swap的代码是把一个字典的键和值互换
 var reviewalgo_covert_chkey = swap(reviewalgo_covert);
 
+
+
  //  define a inital tasktags
  var tasktags = {
       'importanttag': 'no',
@@ -671,121 +710,70 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
 //  console.log(reviewalgo_covert_chkey) ;
 
 
-// function updatetask(id){
-//   alert(`我正在调用update这个函数`)
+function updatetask(id){
+  // alert(`我正在输出checkbox 的 ID ${id}`)
 
-//   // var updatedtask = $("#updatedtask").val()
-//       var taskid = id.substring(8, 13)
-//       // alert(taskid)
+  // var updatedtask = $("#updatedtask").val()
+      var taskid = id.substring(8, 13)
+      // alert(taskid)
 
-//       var updatedinfo =
-//       // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-//       {
-//         'ifdissect': 'no',
-//         'deadline': 'unspecified',
-//         'starttime': 'unspecified',
-//         'endtime': 'unspecified',
-//         'tasktagsorigin': 'unspecified',
-//         'parentid': 'unspecified',
-//         'timedevotedto_a_task': 0,
-//         'goalcode': 'xxx',
-//         'client': 'gtdcli',
-//         'taglight': 'no',
-//         'note': 'unspecified',
-//         'reviewalgolight': 'no',
-//         'reviewalgo': {},
-//         'parentproject': 'unspecified',
-//         'id': taskid,
-//         'place': 'unspecified',
-//         'finishtime': 'unspecified',
-//         'inbox': 'unspecified',
-//         'project': 'inbox',
-//         'plantime': 'today',
-//         'taskstatus': 'finished',
-//         'tasktags': {}
-//       }
+      var updatedinfo =
+      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+      {
+        'ifdissect': 'no',
+        'deadline': 'unspecified',
+        'starttime': 'unspecified',
+        'endtime': 'unspecified',
+        'tasktagsorigin': 'unspecified',
+        'parentid': 'unspecified',
+        'timedevotedto_a_task': 0,
+        'goalcode': 'xxx',
+        'client': 'gtdcli',
+        'taglight': 'no',
+        'note': 'unspecified',
+        'reviewalgolight': 'no',
+        'reviewalgo': {},
+        'parentproject': 'unspecified',
+        'id': taskid,
+        'place': 'unspecified',
+        'finishtime': 'unspecified',
+        'inbox': 'nocontent',
+        'project': 'inbox',
+        'plantime': 'today',
+        'taskstatus': 'finished',
+        'tasktags': {}
+      }
 
-//       $.ajax({
-//         type: "POST",
-//         url: "/v1/update",
-//         // The key needs to match your method's input parameter (case-sensitive).
-//         data: JSON.stringify(updatedinfo),
-//         contentType: "application/json; charset=utf-8",
-//         dataType: "json",
-//         success: function (data) { 
-//           geteverydaytask();
-//           // alert(data);
-//          },
-//         failure: function (errMsg) {
-//           alert(errMsg);
-//         }
-//       })
-//     }
+      $.ajax({
+        type: "POST",
+        url: "/v1/update",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(updatedinfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+          geteverydaytask();
+          // alert(data);
+         },
+        failure: function (errMsg) {
+          alert(errMsg);
+        }
+      })
+    }
 
 
 // alert( "Handler for .click() called." );
       
-      // 判断任务是否已经评价的函数，如果评价就更新任务
-    function judge_task_finished(updatedinfo){
-        // console.log("我正在调用judge这个函数")
-        //  alert("我正在输出inboxtext")
-         console.log("我正在输出info")
-        //  alert(updatedinfo)
-         console.log(updatedinfo)
-      
-      //   // 下面的代码用来判断任务是否完成
-      // console.log(updatedinfo)
-        var temp_reviewalgo = updatedinfo.reviewalgo;
+      // 判断任务是否已经的函数
+      function judge_task_finished(updatedinfo){
+        // 下面的代码用来判断任务是否完成
+        var reviewalgo = updatedinfo.reviewalgo;
         var search = "yes"
-      //   console.log(temp_reviewalgo);
+        console.log(reviewalgo);
         // if ( Object.keys(reviewalgo).length == 0) 
-        if (inArray(search, temp_reviewalgo)) {
+        if (inArray(search, reviewalgo)) {
           updatedinfo.taskstatus = "finished";
-        // console.log("==========we cam=============")
           console.log(updatedinfo);
-        
-        // 更新任务
-          $.ajax({
-          type: "POST",
-          url: "/v1/update",
-          // The key needs to match your method's input parameter (case-sensitive).
-          data: JSON.stringify(updatedinfo),
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function (data) {       
-            // alert(data); 
-            geteverydaytask();
-            console.log(data)
-            reviewalgo = {
-            'attackactively': 'no',
-            'makeuseofthings': 'no',
-            'depthfirstsearch': 'no',
-            'markataskimmediately': 'no',
-            'alwaysprofit': 'no',
-            'brainuse': 'no',
-            'useprinciple': 'no',
-            'patience': 'no',
-            'solveakeyproblem': 'no',
-            'learnnewthings': 'no',
-            'battlewithlowerbrain': 'no',
-            'difficultthings': 'no',
-            'acceptfactandseektruth': 'no',
-            'dealwithahardtask': 'no',
-            'threeminutes': 'no',
-            'serviceforgoal': 'no',
-            'buildframeandprinciple': 'no',
-            'atomadifficulttask': 'no',
-            'noflinch': 'no',
-            'learntechuse': 'no',
-            'doanimportantthingearly': 'no',
-            'acceptpain': 'no',
-            'conquerthefear': 'no'
-            }
-            },
-          failure: function (errMsg) {
-            alert(errMsg);
-          }
-          })
         }
         else {
           alert("请先对任务进行评价才能点击完成按钮哦~");
@@ -810,7 +798,6 @@ function geteverydaytask(){
     console.log(data.task);
     var div = document.getElementById('todaytree');
     div.innerHTML = ""
-    
     var  alltask=''
     var tasks = data.task
     // div.innerHTML += '<li>this is  a task<li>';
@@ -821,37 +808,23 @@ function geteverydaytask(){
       while (i<data.task.length)
     {
       // <input type="checkbox" name="checkfield" id="g01-01"  onchange="doalert(this.id)"/>
-      var addedtask_head = 
-      `<div class="task_list_item" id="task_list_div${tasks[i].ID}"> 
-        <div class="task_checkbox"> 
-            <input type="checkbox" class = "checkbox" id= "checkbox${tasks[i].ID}" /> 
-          </div>  
-          <div class="task_list_content" id= "checkbox${tasks[i].ID}">
-            <div class = "task_list_text"> `
-        //  "<a>" + tasks[i].task + "</a>"
-        //  </div>
-          //<div>
-       //    <span class="task_list_item_date_button">这里是日期</span>  
-          //</div>
-    //    </div>
-  //  
-  // </div>
+      var addedtask_head = `<div class="task_list_item">  <div class="task_list_item_task_area"> <div class="task_container"> <div class="round2"> <input type="checkbox" id= "checkbox${tasks[i].ID}" onchange="updatetask(this.id)" /> <label for="checkbox" id="chekboxlabel"></label> </div> </div> <div class="task_list_content"> `
       var addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
-      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      var addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
-      alltask = alltask+ `<li id = ${tasks[i].ID} >` + addedtask_head + `<a id = "tasktext${tasks[i].ID}">` + tasks[i].task + "</a>" + addedtask_trail + "</li>";
-      i++;
-    }
-    div.innerHTML += head+alltask+tail
-
-    // $(document).on("click",".checkbox",function(){
-    //   alert("请先对任务进行评价才完成哦~")
-    // })
+      var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      
+      alltask=alltask+ `<li id = ${tasks[i].ID}>` + addedtask_head + "<a>" + tasks[i].task + "</a>" + addedtask_trail + "</li>";
+    i++;
+}
+div.innerHTML += head+alltask+tail
 
   });
 }
 
+
+
+
 geteverydaytask()
+
 
 var yourgoals = []
 function getgoallist(){
@@ -866,14 +839,12 @@ $.get("/v1/goaljson", function(data, status){
     yourgoals.push(data.goals[index].name)
     index++
   }
-  
-
   console.log(yourgoals)
 });
 }
 
-getgoallist()
 
+getgoallist()
 
 
 
@@ -1024,7 +995,7 @@ $("#plusbutton").click(function(){
       'acceptpain': 'no',
       'conquerthefear': 'no'
     }
-    var tmp_reviewalgo = reviewalgo_fixed;
+      var tmp_reviewalgo = reviewalgo_fixed;
     for(var i =0; i<reviewarray.length; i++){
       tmp_reviewalgo[reviewarray[i]] = "yes"
     }
@@ -1152,7 +1123,6 @@ $("#plusbutton").click(function(){
         console.log(newreviewalgo);
         reviewalgo = updatereviewalgo(newreviewalgo);
         console.log(reviewalgo);
-
       },
 
       selected: function ($elem) {
@@ -1208,11 +1178,13 @@ $("#plusbutton").click(function(){
     //   }
   
     // });
+    
+// $("#test_post").click(function(){
+//   alert("why so  gaoxiao!!!!")
+// })
 
 
     // $("#noid").keypress(function (event)
-
-    // 下面是创建任务的JS部分
     $(document).on("keypress","#noid",function(event)
     {
       if (event.key === "Enter") {
@@ -1259,10 +1231,6 @@ $("#plusbutton").click(function(){
         // alert(plantime);
         // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
 
-       
-        
-
-
         $.ajax({
           type: "POST",
           url: "/v1/createtask",
@@ -1286,7 +1254,6 @@ $("#plusbutton").click(function(){
             // taskdom.setAttribute("taskid", taskid);
             // taskdom.setAttribute("id", taskid);
             // console.log(data);
-            $("#noid").val('');
           },
           failure: function (errMsg) {
             alert(errMsg);
@@ -1299,32 +1266,32 @@ $("#plusbutton").click(function(){
     // 这是更新任务的JS代码
 
     // 这里使用的是回调函数的taskinfo，而不是自己凭空创建的
-    // var updatedinfo =
-    // // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-    // {
-    //   'ifdissect': 'no',
-    //   'deadline': 'unspecified',
-    //   'starttime': 'unspecified',
-    //   'endtime': 'unspecified',
-    //   'tasktagsorigin': 'unspecified',
-    //   'parentid': 'unspecified',
-    //   'timedevotedto_a_task': 0,
-    //   'goalcode': 'xxx',
-    //   'client': 'gtdcli',
-    //   'taglight': 'no',
-    //   'note': 'unspecified',
-    //   'reviewalgolight': 'no',
-    //   'reviewalgo': { "123": "" },
-    //   'parentproject': 'unspecified',
-    //   'id': "unspecified",
-    //   'place': 'unspecified',
-    //   'finishtime': 'unspecified',
-    //   'inbox': 'unspecified',
-    //   'project': 'inbox',
-    //   'plantime': 'today',
-    //   'taskstatus': 'unfinished',
-    //   'tasktags': {}
-    // }
+    var updatedinfo =
+    // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+    {
+      'ifdissect': 'no',
+      'deadline': 'unspecified',
+      'starttime': 'unspecified',
+      'endtime': 'unspecified',
+      'tasktagsorigin': 'unspecified',
+      'parentid': 'unspecified',
+      'timedevotedto_a_task': 0,
+      'goalcode': 'xxx',
+      'client': 'gtdcli',
+      'taglight': 'no',
+      'note': 'unspecified',
+      'reviewalgolight': 'no',
+      'reviewalgo': { "123": "" },
+      'parentproject': 'unspecified',
+      'id': "unspecified",
+      'place': 'unspecified',
+      'finishtime': 'unspecified',
+      'inbox': 'unspecified',
+      'project': 'inbox',
+      'plantime': 'today',
+      'taskstatus': 'unfinished',
+      'tasktags': {}
+    }
 
     // 下面的函数用来判断一个字典里面是否含有某个value
     function inArray(search, array) {
@@ -1336,351 +1303,7 @@ $("#plusbutton").click(function(){
       return false;
     }
 
-
-  // edit and update the task
-
-  
-
-  //  点击任务的ul区域得到一个扩大的ID，然后把文字内容传进去
-    $(document).on("click","div.task_list_content",function(){
-      // 提取任务id
-      var choosed_taskid = $(this).attr("id").substring(8, 13);
-      var tasktext = "tasktext" + String(choosed_taskid);
-
-      var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
-      console.log(choosed_task_div)
-      
-      // 提取任务内容
-      // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
-      var choosed_task_input = document.getElementById(tasktext)
-      // console.log(choosed_task_input)
-      var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
-      // console.log(choosed_task_input_text)
-      // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
-      // alert(choosed_task_input)
-      // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
-      // alert(choosed_task_text)
-      // alert(choosed_taskid);
-      var div = document.getElementById(`${choosed_taskid}`);
-      var insert_task_html = `<div class="add_task_area" id="add_task" >
-          <div class="input_task_area">
-            <!-- onclick="test(this.getAttribute('id'))" -->
-            <!-- onclick 指的是鼠标指上去，并不是点上去 -->
-            <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
-            <!-- 设置输入任务的div -->
-            <div class="task_container">
-            <input type="checkbox" class = "checkbox" id= "checkbox${choosed_taskid}"  /> 
-            <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
-            </div>
-            <div class="task_property_area">
-              <div class="calendar_project_area">
-                <div class="calendar_area" id="calendar_area">
-                  <!-- 输入任务时间的表单 -->
-                  <!-- <a>请输任务时间</a> -->
-                  <button id="calendar" class="clock_button">
-                    <svg t="1598153562536" class="icon" 
-                    viewBox="0 0 1024 1024" version="1.1" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    p-id="3498" width="20" height="20">
-                      <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
-                      fill="#CFD8DC" p-id="3499">
-                      </path>
-                      <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
-                      fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
-                      </path>
-                      <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
-                      </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
-                      </path>
-                    </svg>
-                  </button>
-                  <!-- <label id="inputlabel">please input your plantime</label>
-                  <input type="text" id="plantime" > -->
-                </div>
-      
-                <div id="project_area">
-                  <!-- 任务的选择需要使用带层级标签的下拉列表 -->
-                  <!-- <a>project select</a> -->
-                  <label for="project_choose"></label>
-                  <select name="project_choose" id="project_choose">
-                    <option value="inbox">inbox</option>
-                    <option value="work">work</option>
-                    <option value="family">family</option>
-                  </select>
-                </div>
-              </div>
-
-              <!--
-              <div id="tags_review_area" class="tags_review_area">
-                <div id="tasktags_area">
-                  <input type="text" name="tasktag" id="tasktag_selector" >
-                </div>
-              -->
-
-                <div id="reviewalgo_area">
-                  <div id="task_reviewalgo_area">
-                    <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> 
-        </div>`
-        div.innerHTML += insert_task_html;
-        document.getElementById(choosed_task_div).innerHTML = "";
-      // //使用js提取id对应的任务信息,得到json文件
-      // var choosed_taskid_info = $
-      // 把任务的那一块进行整体html的替换
-      
-      // //判断任务是否进行了review,并且进行更新
-      // judge_task_finished(choosed_taskid_info);
-      // console.log($(this))
-    })
-
-    //修改文字内容之后对其进行更新 
-    $(document).on("keypress","input.edite_text",function(event)
-    {
-      console.log("我正在调用回车事件")
-      if (event.key === "Enter") {
-        // find the task's id
-        var choosed_taskid = $(this).attr("id").substring(10, 14);
-        // console.log(choosed_taskid)
-        var updatedtask = $(`#edite_text${choosed_taskid}`).val()
-        // var taskid = $("#taskid").val()
-        console.log(updatedtask)
-        var updatedinfo =
-        // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-        {
-          'ifdissect': 'no',
-          'deadline': 'unspecified',
-          'starttime': 'unspecified',
-          'endtime': 'unspecified',
-          'tasktagsorigin': 'unspecified',
-          'parentid': 'unspecified',
-          'timedevotedto_a_task': 0,
-          'goalcode': 'xxx',
-          'client': 'gtdcli',
-          'taglight': 'no',
-          'note': 'unspecified',
-          'reviewalgolight': 'no',
-          'reviewalgo': reviewalgo,
-          'parentproject': 'unspecified',
-          'id': choosed_taskid,
-          'place': 'unspecified',
-          'finishtime': 'unspecified',
-          'inbox': updatedtask,
-          'project': 'inbox',
-          'plantime': 'today',
-          'taskstatus': 'unfinished',
-          'tasktags': {}
-        }
-        console.log(updatedinfo)
-        $.ajax({
-          type: "POST",
-          url: "/v1/update",
-          // The key needs to match your method's input parameter (case-sensitive).
-          data: JSON.stringify(updatedinfo),
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-          success: function (data) { alert(data); },
-          failure: function (errMsg) {
-            alert(errMsg);
-          }
-        })
-      }
-      })
-
-
-
-// 点击checkbox将会判断任务是否已经评价，然后决定是否完成
-$(document).on("click","input.checkbox",function(){
-      // 提取任务id
-      var choosed_taskid = $(this).attr("id").substring(8, 13);
-      // alert(choosed_taskid)
-      //使用js提取id对应的任务信息
-     var choosed_text = document.getElementById(`edite_text${choosed_taskid}`).getAttribute("value")
-    //  console.log(choosed_text)
-      //判断任务是否进行了review,并且进行更新
-      var choosed_task = {
-        'ifdissect': 'no',
-        'deadline': 'unspecified',
-        'starttime': 'unspecified',
-        'endtime': 'unspecified',
-        'tasktagsorigin': 'unspecified',
-        'parentid': 'unspecified',
-        'timedevotedto_a_task': 0,
-        'goalcode': 'xxx',
-        'client': 'gtdcli',
-        'taglight': 'no',
-        'note': 'unspecified',
-        'reviewalgolight': 'yes',
-        'reviewalgo': reviewalgo,
-        'parentproject': 'unspecified',
-        'id': choosed_taskid,
-        'place': 'unspecified',
-        'finishtime': 'unspecified',
-        'inbox': choosed_text,
-        'project': 'inbox',
-        'plantime': 'today',
-        'taskstatus': 'unfinished',
-        'tasktags': {}
-        }
-      judge_task_finished(choosed_task);
-      // console.log($(this))
-    })
-
-// 更新任务的tasktags 和 reviewalgo
-$(document).on("mouseover","#tasktag_selector",function(){
-  $("#tasktag_selector").inputTags({
-      autocomplete: {
-        values: tasktags_chinese,
-        only: true
-      },
-      // max: 3,
-      // create: function() {
-      //     console.log('Tag added !');
-      // },
-
-      init: function ($elem) {
-        // console.log('Event called on plugin init', $elem);
-        // tasktags = updatetags($elem.tags);
-      },
-
-      create: function ($elem) {
-        console.log('Event called when an item is created', $elem);
-        // alert($elem.tags)
-        // alert("hellohellohello");
-        // console.log(tasktags);
-        console.log($elem.tags);
-        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
-        console.log(newtag);
-        tasktags = updatetags(newtag);
-        console.log(tasktags);
-      },
-
-      update: function ($elem) {
-        console.log('Event called when an item is updated', $elem);
-        // tasktags = updatetags($elem.tags);
-        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
-        console.log(newtag);
-        tasktags = updatetags(newtag);
-        console.log(tasktags);
-
-      },
-
-      destroy: function ($elem) {
-        console.log('Event called when an item is deleted', $elem);
-        console.log($elem.tags);
-        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
-        console.log(newtag);
-        tasktags = updatetags(newtag);
-        console.log(tasktags);
-        // tasktags = updatetags($elem.tags);
-      },
-
-      selected: function ($elem) {
-        console.log('Event called when an item is selected', $elem);
-        tasktags = updatetags($elem.tags);
-      },
-
-      unselected: function ($elem) {
-        console.log('Event called when an item is unselected', $elem);
-        tasktags = updatetags($elem.tags);
-      },
-
-      change: function ($elem) {
-        console.log('Event called on item change', $elem);
-        tasktags = updatetags($elem.tags);
-      },
-
-      autocompleteTagSelect: function ($elem) {
-        console.log('Event called on tag selection', $elem);
-        tasktags = updatetags($elem.tags);
-      }
-    }
-    );
-})
-
-$(document).on("mouseover","#task_reviewalgo_selector",function(){
-  $("#task_reviewalgo_selector").inputTags({
-      autocomplete: {
-        values: reviewalgo_chinese,
-        only: true
-      },
-      // max: 3,
-
-      // create: function() {
-      //     console.log('Tag added !');
-      // },
-
-      init: function ($elem) {
-        // console.log('Event called on plugin init', $elem);
-        // reviewalgo = updatereviewalgo($elem.tags);
-
-      },
-
-      create: function ($elem) {
-        // console.log('Event called when an item is created', $elem);
-        // alert($elem.tags)
-        // alert("hellohellohello");
-        // console.log(tasktags);
-        // console.log($elem.tags);
-        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
-        console.log(newreviewalgo);
-        reviewalgo = updatereviewalgo(newreviewalgo);
-        console.log(reviewalgo);
-      },
-
-      update: function ($elem) {
-        console.log('Event called when an item is updated', $elem);
-        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
-        console.log(newreviewalgo);
-        reviewalgo = updatereviewalgo(newreviewalgo);
-        console.log(reviewalgo);
-      },
-
-      destroy: function ($elem) {
-        console.log('Event called when an item is deleted', $elem);
-        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
-        console.log(newreviewalgo);
-        reviewalgo = updatereviewalgo(newreviewalgo);
-        console.log(reviewalgo);
-      },
-
-      selected: function ($elem) {
-        console.log('Event called when an item is selected', $elem);
-        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
-        console.log(newreviewalgo);
-        reviewalgo = updatereviewalgo(newreviewalgo);
-        console.log(reviewalgo);
-      },
-
-      unselected: function ($elem) {
-        console.log('Event called when an item is unselected', $elem);
-        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
-        console.log(newreviewalgo);
-        reviewalgo = updatereviewalgo(newreviewalgo);
-        console.log(reviewalgo);
-      },
-
-      change: function ($elem) {
-        console.log('Event called on item change', $elem);
-        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
-        console.log(newreviewalgo);
-        reviewalgo = updatereviewalgo(newreviewalgo);
-        console.log(reviewalgo);
-      },
-
-      autocompleteTagSelect: function ($elem) {
-        console.log('Event called on tag selection', $elem);
-        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
-        console.log(newreviewalgo);
-        reviewalgo = updatereviewalgo(newreviewalgo);
-        console.log(reviewalgo);
-      }
-    }
-    );
-})
-
+    // 点击checkbox将会执行的event
     
     $("#checkbox_box").click(function (event) {
       
@@ -1692,56 +1315,51 @@ $(document).on("mouseover","#task_reviewalgo_selector",function(){
 
 
 
+    $("#updatetask").click(function () {
+      //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
+      var updatedtask = $("#updatedtask").val()
+      var taskid = $("#taskid").val()
+      alert(taskid)
 
-
-// 更新任务的函数
-
-    // $("#updatetask").click(function () {
-    //   //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
-    //   var updatedtask = $("#updatedtask").val()
-    //   var taskid = $("#taskid").val()
-    //   alert(taskid)
-
-    //   var updatedinfo =
-    //   // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-    //   {
-    //     'ifdissect': 'no',
-    //     'deadline': 'unspecified',
-    //     'starttime': 'unspecified',
-    //     'endtime': 'unspecified',
-    //     'tasktagsorigin': 'unspecified',
-    //     'parentid': 'unspecified',
-    //     'timedevotedto_a_task': 0,
-    //     'goalcode': 'xxx',
-    //     'client': 'gtdcli',
-    //     'taglight': 'no',
-    //     'note': 'unspecified',
-    //     'reviewalgolight': 'no',
-    //     'reviewalgo': reviewalgo,
-    //     'parentproject': 'unspecified',
-    //     'id': taskid,
-    //     'place': 'unspecified',
-    //     'finishtime': 'unspecified',
-    //     'inbox': updatedtask,
-    //     'project': 'inbox',
-    //     'plantime': 'today',
-    //     'taskstatus': 'unfinished',
-    //     'tasktags': {}
-    //   }
-    //   // console.log(updatedinfo)
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "/v1/update",
-    //     // The key needs to match your method's input parameter (case-sensitive).
-    //     data: JSON.stringify(updatedinfo),
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     success: function (data) { alert(data); },
-    //     failure: function (errMsg) {
-    //       alert(errMsg);
-    //     }
-    //   })
-    // })
+      var updatedinfo =
+      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+      {
+        'ifdissect': 'no',
+        'deadline': 'unspecified',
+        'starttime': 'unspecified',
+        'endtime': 'unspecified',
+        'tasktagsorigin': 'unspecified',
+        'parentid': 'unspecified',
+        'timedevotedto_a_task': 0,
+        'goalcode': 'xxx',
+        'client': 'gtdcli',
+        'taglight': 'no',
+        'note': 'unspecified',
+        'reviewalgolight': 'no',
+        'reviewalgo': {},
+        'parentproject': 'unspecified',
+        'id': taskid,
+        'place': 'unspecified',
+        'finishtime': 'unspecified',
+        'inbox': updatedtask,
+        'project': 'inbox',
+        'plantime': 'today',
+        'taskstatus': 'unfinished',
+        'tasktags': {}
+      }
+      $.ajax({
+        type: "POST",
+        url: "/v1/update",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(updatedinfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { alert(data); },
+        failure: function (errMsg) {
+          alert(errMsg);
+        }
+      })
+    })
 
 
 </script>

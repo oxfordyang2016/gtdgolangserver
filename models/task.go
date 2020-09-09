@@ -604,6 +604,16 @@ fmt.Println(value.String())
 
     fmt.Println("------------------yangming /is here----------")
     fmt.Println(tasktags)
+    //检查tag是否正确
+    if !strings.Contains(tasktags, "}")&&strings.Contains(tasktags, "{"){
+      c.JSON(403, gin.H{
+        "status":  "not work",
+        "message": "uploaded tag  not wrok.check!!!",
+        })
+    }   
+ 
+
+
     //选择任务状态
     status := gjson.Get(reqBody, "taskstatus").String()
     fmt.Println(status) 
@@ -2462,9 +2472,9 @@ return alleverydays[i].Name > alleverydays[j].Name
 
 
       fmt.Println("====================")
-      k:=alleverydays[0].Alldays
-      fmt.Println(k[0].ID)
-      fmt.Println(k[0])
+      // k:=alleverydays[0].Alldays
+      // fmt.Println(k[0].ID)
+      // fmt.Println(k[0])
       fmt.Println("=====================")
 
       fmt.Println(alleverydays)
