@@ -390,8 +390,46 @@
      
 
       <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-      <!-- 下面是添加任务时使用的html，里面仅包含一个li标签 -->   
-      <li id="add_task_item">
+      
+
+
+
+      <!-- 这是一个Add按键，用来把添加任务的div放进去 -->
+     
+      <li id="add_task_button_area">
+        <div class="add_task_button" id="plusbutton" >
+            <!-- <button id="plusbutton" class="add_childtask_button"> -->
+              <input id = "addtask_button" class="add_grandtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
+              <!-- <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
+              </svg> -->
+          <!-- </button> -->
+
+            <!-- <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+"> -->
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+
+  <!-- <input type="text" name="lname" value="Doe" -->
+
+
+<!-- <button id="test_post">test the post function</button> -->
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<!-- 下面是脚本文件，最后要做分离的 -->
+
+<script type="text/javascript">
+
+// <!-- 下面是添加任务时使用的html，里面仅包含一个li标签 -->   
+     
+    var add_task_div = `<li id="add_task_item">
         <div class="add_task_area" id="add_task" >
           <div class="input_task_area">
             <!-- onclick="test(this.getAttribute('id'))" -->
@@ -447,46 +485,26 @@
                   <!-- <a>project select</a> -->
                   <label for="goal_choose"></label>
                   <select name="goal_choose" id="goal_choose">
-                    <option value="health">health</option>
+                    <!-- <option value="health">health</option>
                     <option value="wealth">wealth</option>
-                    <option value="happy">happy</option>
+                    <option value="happy">happy</option> -->
                   </select>
                 </div>
               </div>
       
               <div id="tags_review_area" class="tags_review_area">
                 <div id="tasktags_area">
-                  <!-- 选择标签，需要使用multi-selector  -->
-                  <!-- <label for="tasktag">tasktag:</label> -->
+                
                   <input type="text" name="tasktag" id="tasktag_selector" >
-                  <!-- <select name="tasktag" id="tasktag_selector" multiple >
-                    <option value="ub">输入标签</option>
-                    <option value="IM">重要的</option>;
-                    <option value="HA">困难的</option>;
-                    <option value="UR">紧急的</option>; -->
+                
                   </select>
                 </div>
       
-                <!-- <div id="reviewalgo_area"> -->
-                  <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector  -->
-                  <!-- <div id="task_reviewalgo_area">
-                    <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
-                  </div>
-                </div> -->
+              
               </div>
             </div>
       
-            <!-- <div> -->
-              <!-- 输入标签的input窗口 -->
-              <!-- <label id="tasktags" >please choose the tasktags</label> -->
-              <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> -->
-            <!-- </div> -->
-      
-            <!-- <div> -->
-              <!-- 输入review的input窗口 -->
-              <!-- <label id="reivew">please choose thd reviewalgo</label> -->
-              <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> -->
-            <!-- </div> -->
+           
           </div>
          
           <div class="add_task_button_area">
@@ -494,38 +512,12 @@
               <button class="cancel_add_task_button">取消</button>
           </div>
         </div>
-      </li>
-      <!-- 这是一个Add按键，用来把添加任务的div放进去 -->
-     
-      <li id="add_task_button_area">
-        <div class="add_task_button">
-            <button id="plusbutton" class="plusbutton">
-              <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-              viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-              <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
-              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
-              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
-              </svg>
-          </button>
-
-            <!-- <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+"> -->
-        </div>
-      </li>
-    </ul>
-  </div>
+      </li>`
 
 
 
-
-  <!-- <input type="text" name="lname" value="Doe" -->
-
-
-<!-- <button id="test_post">test the post function</button> -->
-
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-<!-- 下面是脚本文件，最后要做分离的 -->
-
-<script type="text/javascript">
+var onedit  =  false
+parentid = 'unspecified'
 
 var reviewalgoforalltasksintoday = {}
 
@@ -664,7 +656,110 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'conquerthefear': 'no'
     }
 
+// var add_task_div = `<li id="add_task_item">
+//         <div class="add_task_area" id="add_task" >
+//           <div class="input_task_area">
+//             <!-- onclick="test(this.getAttribute('id'))" -->
+//             <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+//             <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+//             <!-- 设置输入任务的div -->
+//             <div class="task_container">
+//             <!-- <label class="input-task-class"    id="inputlabel">please input your task</label> -->
+//             <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，-->
+//             <input class="input_text" type="text" id="edite_taskid" placeholder="please input your task" >
+//             <!-- <button id="nonoid">点击添加task</button> -->
+//             <!-- <input id="testbutton"  placeholder="please input your task"> -->
+//             </div>
+            
+//             <div class="task_property_area">
+//               <div class="calendar_project_area">
+//                 <div class="calendar_area" id="calendar_area">
+//                   <!-- 输入任务时间的表单 -->
+//                   <!-- <a>请输任务时间</a> -->
+//                   <button id="calendar" class="clock_button">
+//                     <svg t="1598153562536" class="icon" 
+//                     viewBox="0 0 1024 1024" version="1.1" 
+//                     xmlns="http://www.w3.org/2000/svg" 
+//                     p-id="3498" width="20" height="20">
+//                       <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+//                       fill="#CFD8DC" p-id="3499">
+//                       </path>
+//                       <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+//                       fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+//                       </path>
+//                       <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+//                       </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+//                       </path>
+//                     </svg>
+//                   </button>
+//                   <!-- <label id="inputlabel">please input your plantime</label>
+//                   <input type="text" id="plantime" > -->
+//                 </div>
+      
+//                 <div id="project_area">
+//                   <!-- 任务的选择需要使用带层级标签的下拉列表 -->
+//                   <!-- <a>project select</a> -->
+//                   <label for="project_choose"></label>
+//                   <select name="project_choose" id="project_choose">
+//                     <option value="inbox">inbox</option>
+//                     <option value="work">work</option>
+//                     <option value="family">family</option>
+//                   </select>
+//                 </div>
 
+//                 <div id="goal_area">
+//                   <!-- 任务的选择需要使用带层级标签的下拉列表 -->
+//                   <!-- <a>project select</a> -->
+//                   <label for="goal_choose"></label>
+//                   <select name="goal_choose" id="goal_choose">
+//                     <!-- <option value="health">health</option>
+//                     <option value="wealth">wealth</option>
+//                     <option value="happy">happy</option> -->
+//                   </select>
+//                 </div>
+//               </div>
+      
+//               <div id="tags_review_area" class="tags_review_area">
+//                 <div id="tasktags_area">
+//                   <!-- 选择标签，需要使用multi-selector  -->
+//                   <!-- <label for="tasktag">tasktag:</label> -->
+//                   <input type="text" name="tasktag" id="tasktag_selector" >
+//                   <!-- <select name="tasktag" id="tasktag_selector" multiple >
+//                     <option value="ub">输入标签</option>
+//                     <option value="IM">重要的</option>;
+//                     <option value="HA">困难的</option>;
+//                     <option value="UR">紧急的</option>; -->
+//                   </select>
+//                 </div>
+      
+//                 <!-- <div id="reviewalgo_area"> -->
+//                   <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector  -->
+//                   <!-- <div id="task_reviewalgo_area">
+//                     <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+//                   </div>
+//                 </div> -->
+//               </div>
+//             </div>
+      
+//             <!-- <div> -->
+//               <!-- 输入标签的input窗口 -->
+//               <!-- <label id="tasktags" >please choose the tasktags</label> -->
+//               <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> -->
+//             <!-- </div> -->
+      
+//             <!-- <div> -->
+//               <!-- 输入review的input窗口 -->
+//               <!-- <label id="reivew">please choose thd reviewalgo</label> -->
+//               <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> -->
+//             <!-- </div> -->
+//           </div>
+         
+//           <div class="add_task_button_area">
+//               <button class="add_task_button">添加任务</button>
+//               <button class="cancel_add_task_button">取消</button>
+//           </div>
+//         </div>
+//       </li>`
 
 
 
@@ -808,25 +903,70 @@ function geteverydaytask(){
   $.get("/v1/todayjson", function(data, status){
     // alert("Data: " + data + "\nStatus: " + status);
     console.log(data.task);
+    onedit = false 
+    $('#todaytree').replaceWith($('#todaytree').clone());
     var div = document.getElementById('todaytree');
     div.innerHTML = ""
-    
+    //origin event   was not  delletd
     var  alltask=''
     var tasks = data.task
     // div.innerHTML += '<li>this is  a task<li>';
-      var i = 0
+      // var i = 0
       var head = '<h1>Today tasks</h1><ul class="tree">'
        var  tail = '</ul>'
        var  alltask = ''
-      while (i<data.task.length)
-    {
-      // <input type="checkbox" name="checkfield" id="g01-01"  onchange="doalert(this.id)"/>
-      var addedtask_head = 
-      `<div class="task_list_item" id="task_list_div${tasks[i].ID}"> 
+       console.log("我正在输出data.task")
+       var todayjson = data.task
+       var todaytest =  data.task
+      // console.log("我正在打印todayjson")
+      //  console.log(todayjson)
+    
+      var taskids = []
+      for(var i=0;i<todayjson.length;i++){
+        taskids.push(todayjson[i].ID)
+      }
+       var  tasktree ={"first":[],"second":[],"three":[],"four":[],"five":[]}
+       var  sontree = {}
+       var  parents = []
+// 生成儿子和孙子
+      for (let i = 0; i< todayjson.length; i++) {
+      sontree[todayjson[i].ID] =[]
+       
+      }
+     
+      for (let i = 0; i< todayjson.length; i++) {
+      if (todayjson[i].parentid !="unspecified") {
+        sontree[todayjson[i].parentid].push(todayjson[i])
+      }
+      }
+
+      console.log("这是sons")
+       console.log(sontree)
+
+// 生成爸爸们
+      for (let i = 0; i < todayjson.length; i++) {
+        var single_parenttask = todayjson[i].parentid
+        console.log(single_parenttask)
+        if (single_parenttask == "unspecified" ) {
+          parents.push(todayjson[i])
+          tasktree.first.push(todayjson[i])
+            // todayjson.splice(i,i)
+        } 
+      }
+      console.log("这是parents")
+       console.log(parents)
+
+      //  + "</li>"
+// 生成div tree
+       var tree_div = ""
+  for (let i = 0; i < parents.length; i++) {
+    var  parent_id = parents[i].ID
+
+    var parent_addedtask_head = `<div class="task_list_item" id="task_list_div${parent_id}"> 
         <div class="task_checkbox"> 
-            <input type="checkbox" class = "checkbox" id= "checkbox${tasks[i].ID}" /> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${parent_id}" /> 
           </div>  
-          <div class="task_list_content" id= "checkbox${tasks[i].ID}">
+          <div class="task_list_content" id= "checkbox${parent_id}">
             <div class = "task_list_text"> `
         //  "<a>" + tasks[i].task + "</a>"
         //  </div>
@@ -836,22 +976,181 @@ function geteverydaytask(){
     //    </div>
   //  
   // </div>
-      var addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      var parent_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
       // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      var addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
-      alltask = alltask+ `<li id = ${tasks[i].ID} >` + addedtask_head + `<a id = "tasktext${tasks[i].ID}">` + tasks[i].task + "</a>" + addedtask_trail + "</li>";
-      i++;
-    }
-    div.innerHTML += head+alltask+tail
+      var parent_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
+      tree_div = tree_div + `<li id = ${parent_id} >` + parent_addedtask_head + `<a id = "tasktext${parent_id}" class = "task_text">` + parents[i].task + '</a>' + '<input class="add_childtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">' + parent_addedtask_trail;
 
-    // $(document).on("click",".checkbox",function(){
-    //   alert("请先对任务进行评价才完成哦~")
-    // })
+    // console.log("第一层嵌套")
+    // console.log(parent_id)
+    //判断是否有儿子，如果没有的话，加上</li> 
+    // if (sontree[parent_id].length == 0) {
+    //   tree_div = tree_div + ' </li>'
+    // }
+      // var son_div = ""
 
-  });
+
+    for (let j = 0; j < sontree[parent_id].length; j++) {
+      var son_id = sontree[parent_id][j].ID
+      
+      if (j==0) {
+        tree_div = tree_div + "<ul>"
+      }
+      console.log("正在打印第2层")
+      console.log(sontree[parent_id].length)
+      console.log(sontree[parent_id])
+      // console.log(sontree[parent_id][1].ID)
+      console.log(sontree[3691])
+      var son_addedtask_head = `<div class="task_list_item" id="task_list_div${son_id}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${son_id}" /> 
+          </div>  
+          <div class="task_list_content" id= "checkbox${son_id}">
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+      var son_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var son_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
+      tree_div = tree_div + `<li id = ${son_id} >` + son_addedtask_head + `<a id = "tasktext${son_id}" class = "task_text" >` + sontree[parent_id][j].task + '</a>' + '<input class="add_childtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">' + son_addedtask_trail  ;
+
+      // console.log("第二层嵌套")
+      // console.log(son_id)
+
+
+    for (let z = 0; z < sontree[son_id].length; z++) {
+      console.log(z)
+      var grandson_id = sontree[son_id][z].ID
+      if (z==0) {
+        tree_div = tree_div + "<ul>"
+      }
+      console.log("正在打印第3层")
+      console.log([son_id].length)
+      console.log(sontree[son_id][z])
+      var grandson_addedtask_head = `<div class="task_list_item" id="task_list_div${grandson_id}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${grandson_id}" /> 
+          </div>  
+          <div class="task_list_content" id= "checkbox${grandson_id}">
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+
+      var grandson_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var grandson_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
+      tree_div = tree_div + `<li id = ${grandson_id} >` + grandson_addedtask_head + `<a id = "tasktext${grandson_id}" class = "task_text" >` + sontree[son_id][z].task + '</a>' + '<input class="add_childtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">' + grandson_addedtask_trail +"</li>" ;
+       
+      var temp_z = z+1
+            if (temp_z == sontree[son_id].length ) {
+              tree_div = tree_div + "</ul>"
+            }
+
+      // console.log("第三层嵌套")
+      // console.log(sontree[son_id])
+    }    
+    
+    
+    tree_div = tree_div + "</li>"
+    var temp_j = j + 1
+      if ( temp_j == sontree[parent_id].length ) {
+        tree_div = tree_div + ' </ul> '
+      }
+    }  
+    tree_div = tree_div + "</li>"
+  }
+
+  div.innerHTML += head + tree_div + tail
+  // console.log("print tree")
+  // console.log(tree_div)
+  parentid = 'unspecified'
+
+  }
+  );
 }
 
 geteverydaytask()
+
+
+
+
+// 子任务点击任务后面的+号之后可以新建子任务
+
+
+      // 把文本转换成div的对象格式
+      function createNode(txt) {
+            // const template = `${txt}`;
+            let tempNode = document.createElement('div');
+            tempNode.innerHTML = txt;
+            return tempNode.firstChild;
+        }
+
+
+
+// 点击按键添加子任务的事件
+$(document).on("click","input.add_childtask_button",function(){
+     
+     console.log(`我正在输出onedit变量${onedit}`)
+     console.log("正在执行点击加号的事件")
+     if (onedit == true){
+       alert("请先消除任务编辑框")
+       return;
+     }
+     if (onedit == false){
+       console.log("正在执行把onedit变成true的if语句")
+       onedit = true //进入编辑模式
+       console.log(`我正在if里输出onedit变量${onedit}`)
+     }
+      var parent_id = $(this).prev().attr("id").substring(8,13)
+     // 寻找点击+号的父ID
+     console.log(parent_id)
+// 下面的操作是出现输入任务的窗口，加上一个<ul></ul>
+    var insert_div = ""
+     var ul_div = $('<ul/>')
+     console.log(ul_div)
+     ul_div.attr("id","sontask")
+     insert_div = ul_div.append(createNode(add_task_div))
+     console.log(insert_div)
+     $(`#${parent_id}`).append(insert_div)
+     // 把父id传过去
+     parentid = parent_id
+   })
+
+// 点击+号添加按爷爷级别事件
+   $(document).on("click","input.add_grandtask_button",function(){
+     
+     console.log(`我正在输出onedit变量${onedit}`)
+     console.log("正在执行点击加号的事件")
+     if (onedit == true){
+       alert("请先消除任务编辑框")
+       return;
+     }
+     if (onedit == false){
+       console.log("正在执行把onedit变成true的if语句")
+       onedit = true //进入编辑模式
+       console.log(`我正在if里输出onedit变量${onedit}`)
+     }
+      parentid = "unspecified"
+      var add_plus = document.getElementById("add_task_button_area");
+      console.log(add_plus);
+      add_plus.innerHTML += add_task_div;
+      document.getElementById("plusbutton").outerHTML = "";
+     
+     
+   })
+
 
 var yourgoals = []
 function getgoallist(){
@@ -867,6 +1166,19 @@ $.get("/v1/goaljson", function(data, status){
     index++
   }
   
+  var goal_option_div = ""
+  goal_option_div = ''
+  for (let i = 0; i < yourgoals.length; i++) {
+    // var goal_option = document.createElement("option")
+    // goal_option += goal_option.setAttribute("value",yourgoals[i])
+
+    // goal_option += goal_option.
+    // console(goal_option)
+    // goal_option_div.innerHTML += goal_option
+  }
+ 
+
+
 
   console.log(yourgoals)
 });
@@ -890,19 +1202,13 @@ getgoallist()
 var add_task_item = document.getElementById("add_task_item");
 // console.log(add_task_item);
 
-$("#plusbutton").click(function(){
 
-  var add_plus = document.getElementById("add_task_button_area");
+// 点击加号出现添加任务的窗口
+// $("#plusbutton").click(function(){
 
-  console.log(add_plus);
+  
 
-  const add_task_div = '<div class="add_task_area" id="add_task" > <div class="input_task_area"> <!-- onclick="test(this.getAttribute("id"))" --> <!-- onclick 指的是鼠标指上去，并不是点上去 --> <!-- 这里最输入任务的框，里面有各种需要传的参数 --> <!-- 设置输入任务的div --> <div class="div_container"> <!-- <label class="input-task-class" id="inputlabel">please input your task</label> --> <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，--> <input class="input_text" type="text" id="noid" placeholder="please input your task" > <!-- <button id="nonoid">点击添加task</button> --> <!-- <input id="testbutton" placeholder="please input your task"> --> </div> <div class="task_property_area"> <div class="calendar_project_area"> <div class="calendar_area" id="calendar_area"> <!-- 输入任务时间的表单 --> <!-- <a>请输任务时间</a> --> <button id="calendar" class="clock_button"> <svg t="1598153562536" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3498" width="20" height="20"> <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" fill="#CFD8DC" p-id="3499"> </path> <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501"> </path> <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503"> </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504"> </path> </svg> </button> <!-- <label id="inputlabel">please input your plantime</label> <input type="text" id="plantime" > --> </div> <div id="project_area"> <!-- 任务的选择需要使用带层级标签的下拉列表 --> <!-- <a>project select</a> --> <label for="project_choose"></label> <select name="project_choose" id="project_choose"> <option value="inbox">inbox</option> <option value="work">work</option> <option value="family">family</option> </select> </div> </div> <div id="tags_review_area" class="tags_review_area"> <div id="tasktags_area"> <!-- 选择标签，需要使用multi-selector --> <!-- <label for="tasktag">tasktag:</label> --> <select name="tasktag" id="tasktag_selector" > <option value="ub">输入标签</option> <option value="IM">重要的</option>; <option value="HA">困难的</option>; <option value="UR">紧急的</option>; </select> </div> <div id="reviewalgo_area"> <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector --> <div id="task_reviewalgo_area"> <select name="taskreview" id="taskreview_selector" > <option value="ub">输入回顾</option> <option value="ub">使用大脑</option> <option value="atom">原子化拆分</option> <option value="diff">困难的事情</option> </select> </div> </div> </div> </div> <div> <!-- 输入标签的input窗口 --> <!-- <label id="tasktags" >please choose the tasktags</label> --> <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> --> </div> <div> <!-- 输入review的input窗口 --> <!-- <label id="reivew">please choose thd reviewalgo</label> --> <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> --> </div> </div> <div class="add_task_button_area"> <button class="add_task_button">添加任务</button> <button class="cancel_add_task_button">取消</button> </div> </div>'
-
-  add_plus.innerHTML += add_task_div;
-
-  document.getElementById("plusbutton").outerHTML = "";
-
-})
+// })
 
   // const nospecifiedtaskdivcode =
 
@@ -1236,7 +1542,7 @@ $("#plusbutton").click(function(){
           'endtime': 'unspecified',
           'ifdissect': 'no',
           'note': 'unspecified',
-          'parentid': 'unspecified',
+          'parentid': parentid,
           'timedevotedto_a_task': 0,
           'client': 'gtdcli',
           'goalcode': 'aaa',
@@ -1274,6 +1580,7 @@ $("#plusbutton").click(function(){
             // var taskid = data.taskid
             // $("#thisnode").setproperty("taskid")=taskid
             // <p taskid=1544>
+              // window.location.replace("/v1/taskmanager");
               geteverydaytask()
               // 上面使用了geteverydaytask的函数来达到把输入的task放到上面的效果
             // alert(data);
@@ -1342,7 +1649,7 @@ $("#plusbutton").click(function(){
   
 
   //  点击任务的ul区域得到一个扩大的ID，然后把文字内容传进去
-    $(document).on("click","div.task_list_content",function(){
+    $(document).on("click","a.task_text",function(){
       // 提取任务id
       var choosed_taskid = $(this).attr("id").substring(8, 13);
       var tasktext = "tasktext" + String(choosed_taskid);
@@ -1369,7 +1676,7 @@ $("#plusbutton").click(function(){
             <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
             <!-- 设置输入任务的div -->
             <div class="task_container">
-            <input type="checkbox" class = "checkbox" id= "checkbox${choosed_taskid}"  /> 
+            <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
             <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
             </div>
             <div class="task_property_area">
@@ -1455,7 +1762,7 @@ $("#plusbutton").click(function(){
           'starttime': 'unspecified',
           'endtime': 'unspecified',
           'tasktagsorigin': 'unspecified',
-          'parentid': 'unspecified',
+          'parentid': parentid,
           'timedevotedto_a_task': 0,
           'goalcode': 'xxx',
           'client': 'gtdcli',
@@ -1491,8 +1798,13 @@ $("#plusbutton").click(function(){
 
 
 
+// 在任务前面点击完成，没有点进去任务进行评价的情况下的会提示要求评价
+$(document).on("click",".checkbox",function(){
+      alert("请先对任务进行评价才完成哦~")
+    })
+
 // 点击checkbox将会判断任务是否已经评价，然后决定是否完成
-$(document).on("click","input.checkbox",function(){
+$(document).on("click","input.edite_checkbox",function(){
       // 提取任务id
       var choosed_taskid = $(this).attr("id").substring(8, 13);
       // alert(choosed_taskid)
