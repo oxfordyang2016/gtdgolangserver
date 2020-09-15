@@ -299,6 +299,106 @@ fmt.Println(goals)
   }
   
 
+  func Find(slice []string, val string) (int, bool) {
+	for i, item := range slice {
+		if item == val {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
+
+
+  func Goalincludeproject(c *gin.Context) {
+	//i use email as identifier
+  //https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+	emailcookie,_:=c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email:=emailcookie.Value
+	//fmt.Println(cookie1.Value)
+	type Result struct {
+		
+		Project string
+		Goal  string
+	  }
+	//   type Goals struct{
+	// 	  Goals string
+	//   }
+	var result []Result
+	var goals []Goalfordbs 
+	var sql2 = `SELECT DISTINCT  project ,goal   FROM tasks  WHERE email ="`+email+`"`+" and"+ ` goal  IN (SELECT name  FROM goalfordbs  WHERE   email =`+`"`+email+`"`+")"
+
+	//var goals []Tasksdb.Distinct("name", "age").Order("name, age desc").Find(&results)
+	// var sql = fmt.Sprintf("SELECT  DISTINCT  project ,goal  FROM tasks WHERE email ='%s'",email)
+	var sql1 = fmt.Sprintf("SELECT  DISTINCT  name FROM goalfordbs WHERE email ='%s'",email);
+	fmt.Println(sql2)
+	
+
+
+	db.Raw(sql2).Scan(&result)
+    
+	db.Raw(sql1).Scan(&goals)
+	fmt.Println(result)
+	fmt.Println(sql1)
+	fmt.Println(goals)
+
+
+
+	// type Result struct {
+	// 	Name string
+	// 	Goalcode string
+	// 	Priority int
+		
+	// }
+	
+	// loc, _ := time.LoadLocation("Asia/Shanghai")
+	// var result []Result
+	// today :=  time.Now().In(loc).Format("060102")
+	//    db.Raw(`SELECT name,goalcode,priority  FROM goalfordbs  WHERE email ="`+email+`"`+" and goalstatus not in ("+`"giveup","g","finished","finish"`+`) and `+ ` name   NOT IN (SELECT goal  FROM tasks  WHERE finishtime=` +`"`+today+`"`+` and email =`+`"`+email+`"`+`);`).Scan(&result)
+	//    color.Red("red")
+
+
+
+
+	   allprojects_ingoal:=make(map[string] []string)
+	
+	   for _,item :=range result{
+		//    if item.Goal == ""{
+		// 	alltasks_ingoal["no goal"]=append(alltasks_ingoal["no goal"],item)
+		// 	devotedtime_for_goal["no goal"] = devotedtime_for_goal["no goal"] + item.Devotedtime
+		
+		// 	alltasks_ingoal[item.Goal]=append(alltasks_ingoal[item.Goal],item)
+		// 	devotedtime_for_goal[item.Goal] = devotedtime_for_goal[item.Goal] + item.Devotedtime
+		//    }
+		// contains(arr,"plum")
+		// if  (item.Goal != "")
+		// _, found := Find(goals, item.Goal)
+		
+		// if found{
+		// 	fmt.Println(item.Goal)
+			if item.Goal !=""{
+				allprojects_ingoal[item.Goal]=append(allprojects_ingoal[item.Goal],item.Project)	
+			// }
+			  
+		}
+	 }
+
+
+
+
+	// db.Where("email =  ?", email).Select("goal", "project").Scan(&tasks)
+	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
+	// db.Where("email =  ?", email).Order("id").Find(&goals)
+	c.JSON(200, gin.H{
+		"goals":allprojects_ingoal,
+	  })
+  
+  }
+
+
+
+
 
 
 

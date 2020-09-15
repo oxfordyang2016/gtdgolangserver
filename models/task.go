@@ -1303,16 +1303,16 @@ fmt.Println("Response status:", resp.Status)
    goalcoefficient :=  Get_goal_coffient(goal,email)
 
    if goal!="unspecified"{
-fmt.Println("目标的权限等级错误")  
- fmt.Println(goal) 
-  if goal!= "no goal"&&goal!=""{
-    var goalsforemail []Goalfordbs 
-    db.Where("Email= ?", email).Where("Name=?",goal).Find(&goalsforemail)
-    task_priority = goalsforemail[0].Priority
-}else{
-   fmt.Println("目标的权限等级错误")
-}    
-db.Model(&task).Update("Priority", task_priority) 
+      fmt.Println("目标的权限等级错误")  
+      fmt.Println(goal) 
+      if goal!= "no goal"&&goal!=""{
+      var goalsforemail []Goalfordbs 
+      db.Where("Email= ?", email).Where("Name=?",goal).Find(&goalsforemail)
+      task_priority = goalsforemail[0].Priority
+       }else{
+       fmt.Println("目标的权限等级错误")
+       }    
+    db.Model(&task).Update("Priority", task_priority) 
     db.Model(&task).Update("Goal", goal)}
 
     if place!="unspecified"{
@@ -2192,6 +2192,63 @@ c.JSON(200, gin.H{
 
 
 }
+
+
+
+
+func Tomorrowtasksbatch(c *gin.Context) {
+  //i use email as identifier
+//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+  emailcookie,_:=c.Request.Cookie("email")
+  fmt.Println(emailcookie.Value)
+  email:=emailcookie.Value
+  // email:= "yang756260386@gmail.com"
+  fmt.Println(email)
+  buf := make([]byte, 1024000)
+  num, _ := c.Request.Body.Read(buf)
+  reqBody := string(buf[0:num])
+//--------------using gjson to parse------------
+//https://github.com/tidwall/gjson
+  taskarrayids:= gjson.Get(reqBody, "tomorrowtaskids")
+  var k = taskarrayids.Array()
+  fmt.Println(len(k))
+  fmt.Println(reflect.TypeOf(k[0].Int()))
+  var taskids_int []int64
+  //http://doc.gorm.io/crud.html#query to desc
+  //db.Where("Email= ?", email).Order("id desc").Find(&tasks)
+  for i := 0; i < len(k); i++ {
+		taskids_int = append(taskids_int,k[i].Int())
+	}
+
+
+  loc, _ := time.LoadLocation("Asia/Shanghai")
+  // now :=  time.Now().In(loc)
+  // today := now.Format("060102")
+  tomorrow :=  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+//  db.Model(&task).Update("Finishtime",now.Format("060102"))
+ db.Table("tasks").Where("Email= ?", email).Where("id IN (?)", taskids_int).Updates(map[string]interface{}{"plantime": tomorrow})
+//   Query Chains http://doc.gorm.io/crud.html#query
+//  db.Where("Email= ?", email).Where("plantime = ?",now.Format("060102")).Where("status in (?)", []string{"unfinish", "unfinished"}).Order("id desc").Find(&tasks)
+c.JSON(200, gin.H{
+  "status":"ok",
+}) 
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //这里是获取今天没有完成的任务
 //获取今天计划时间色块表
