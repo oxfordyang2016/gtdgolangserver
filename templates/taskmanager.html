@@ -16,15 +16,22 @@
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 <!-- <link rel="stylesheet" href="/v1/user.css"> -->
 <!-- 上面的css中包含背景，给注释掉了，这样就不显示背景了 -->
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+<!-- <script src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/inputtag.js"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
 
+<!-- JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
 
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
 <!-- <script  src="/v1/index.js"></script> -->
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
 <script src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/inputtag.js"></script>
 
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
@@ -469,29 +476,36 @@
                   <input type="text" id="plantime" > -->
                 </div>
       
-                <div id="project_area">
-                  <!-- 任务的选择需要使用带层级标签的下拉列表 -->
-                  <!-- <a>project select</a> -->
-                  <label for="project_choose"></label>
-                  <select name="project_choose" id="project_choose">
-                    <option value="inbox">inbox</option>
-                    <option value="work">work</option>
-                    <option value="family">family</option>
-                  </select>
-                </div>
-
-                <div id="goal_area">
-                  <!-- 任务的选择需要使用带层级标签的下拉列表 -->
-                  <!-- <a>project select</a> -->
-                  <label for="goal_choose"></label>
-                  <select name="goal_choose" id="goal_choose">
-                    <!-- <option value="health">health</option>
-                    <option value="wealth">wealth</option>
-                    <option value="happy">happy</option> -->
-                  </select>
+               
+                <div id="goal_list" class="goal_list">
                 </div>
               </div>
       
+              <div id="timedevotedto_a_task">                  
+                  <select name="time_devoted_select" id="time_devoted_select">
+                    <option value="5">5分钟</option>
+                    <option value="10">10分钟</option>
+                    <option value="15">15分钟</option>
+                    <option value="20">20分钟</option>
+                    <option value="25">25分钟</option>
+                    <option value="30">30分钟</option>
+                    <option value="40">40分钟</option>
+                    <option value="50">50分钟</option>
+                    <option value="60">1小时</option>
+                    <option value="90">1.5小时</option>
+                    <option value="120">2小时</option>
+                    <option value="150">2.5小时</option>
+                    <option value="180">3小时</option>
+                    <option value="210">3.5小时</option>
+                    <option value="240">4小时</option>
+                    <option value="240">6小时</option>
+                    <option value="480">8小时</option>
+                    <option value="720">12小时</option>
+                  </select>
+                </div>
+
+
+
               <div id="tags_review_area" class="tags_review_area">
                 <div id="tasktags_area">
                 
@@ -515,13 +529,34 @@
       </li>`
 
 
+      var plusbutton = 
+      `<div class="add_task_button" id="plusbutton" >
+            <!-- <button id="plusbutton" class="add_childtask_button"> -->
+              <input id = "addtask_button" class="add_grandtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
+              <!-- <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
+              </svg> -->
+          <!-- </button> -->
 
+            <!-- <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+"> -->
+        </div>`
+
+// 定义全局变量onedit 用来用来保证窗口只有一个task编辑窗口
 var onedit  =  false
 parentid = 'unspecified'
-
+// 定义goal和project的全局变量，传到create和updatetask的API中
+var selected_goal = "no goal"
+var selected_project = "inbox"
+// 定义timedevotedto_a_task的全局变量，只传到updatetask的API中
+var devotedtime = 0
+// 
 var reviewalgoforalltasksintoday = {}
 
-
+// 定义这个sendback_tasks用来存放geteveryday传回来的所有task，是一个array,形式是这样的[{},{},{}……]
+var sendback_tasks = []
 
     // 翻转一个对象的key和value
     function swap(json){
@@ -602,6 +637,8 @@ var reviewalgoforalltasksintoday = {}
           'conquerthefear':"战胜恐惧"
     }
 
+
+
 // Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
 var reviewalgo_chinese = Object.values(reviewalgo_covert);
 
@@ -655,7 +692,7 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'acceptpain': 'no',
       'conquerthefear': 'no'
     }
-
+// 早些时候使用的add_task_div还没有删除
 // var add_task_div = `<li id="add_task_item">
 //         <div class="add_task_area" id="add_task" >
 //           <div class="input_task_area">
@@ -774,7 +811,6 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
 //       // alert(taskid)
 
 //       var updatedinfo =
-//       // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
 //       {
 //         'ifdissect': 'no',
 //         'deadline': 'unspecified',
@@ -820,7 +856,87 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
 
 // alert( "Handler for .click() called." );
       
-      // 判断任务是否已经评价的函数，如果评价就更新任务
+// 这是用来生成goal和project div的的函数
+function create_goalllist_div(goalincludeproject){
+      // console.log(goalincludeproject)
+        // var  divstring = `
+        //                 <div >
+        //                   <select name="goal_choose" id="goal_choose">
+        //                     <optgroup label="health">
+        //                         <option id = "running" value="running">running</option>
+        //                         <option  id = "swimming" value="swimming">swimming</option>
+        //                     </optgroup>
+        //                   <optgroup label="wealth">
+        //                       <option id = "work" value="work">happy</option>
+        //                   </optgroup>
+        //                   </select>
+        //                 </div>`
+        
+         var yourgoals = Object.keys(goalincludeproject)
+        //  console.log("这里在输出yourgoaas")
+        //  console.log(yourgoals)
+          var select = document.createElement("select")
+          select.setAttribute("id","goal_list_select")
+          select.setAttribute("name","goal_list_select")
+          document.getElementById("goal_list").appendChild(select)
+        
+
+        for (let i = 0; i < yourgoals.length; i++) {
+          
+          var optgroup = document.createElement("optgroup")
+          optgroup.setAttribute( "label", `${yourgoals[i]}`)
+          // console.log(optgroup)
+          // console.log("这里在输出yourgoaas")
+          var yourgoal_now = yourgoals[i]
+          var yourprojects_inthis_goal = goalincludeproject[yourgoal_now]
+          for (let j = 0; j < yourprojects_inthis_goal.length; j++) {
+            
+            var option = document.createElement("option")
+            option.setAttribute("id",yourprojects_inthis_goal[j])
+            option.setAttribute("value",yourprojects_inthis_goal[j])
+            // console.log(option)
+
+            // console.log(single_project)
+            option.text = yourprojects_inthis_goal[j]
+            optgroup.appendChild(option)
+            // option.firstChild.nodeValue = single_project
+              // console.log(optgroup)
+          }
+          // group =  optgroup.appendChild(option)opt
+          document.getElementById("goal_list_select").appendChild(optgroup)
+        }
+        // document.getElementById("goal_list_select").appendChild(optgroup)
+        }
+
+
+function use_chosen_style(){
+  
+    $("#goal_list_select").chosen().on("change", function(event, params){
+    console.log("触发change事件")
+    console.log(params)
+    console.log(event)
+    selected_project = params.selected
+    var option_value = document.getElementById(params.selected).innerHTML
+    console.log(option_value)
+
+    var goal_label = $("#"+params.selected).parent().attr("label")
+    selected_goal = goal_label
+    // var goal_and_project = [selected_goal,selected_project]
+    // console.log(goal_and_project)
+    // return goal_and_project
+  })
+
+  $("#time_devoted_select").chosen({width: "95%"}).on("change", function(event, params){
+    console.log("触发change事件")
+    // console.log(params)
+    // console.log(event)
+    devotedtime = Number.parseInt(params.selected) 
+    console.log(typeof(devotedtime))
+  })
+
+}
+ 
+     // 判断任务是否已经评价的函数，如果评价就更新任务
     function judge_task_finished(updatedinfo){
         // console.log("我正在调用judge这个函数")
         //  alert("我正在输出inboxtext")
@@ -828,6 +944,7 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
         //  alert(updatedinfo)
          console.log(updatedinfo)
       
+
       //   // 下面的代码用来判断任务是否完成
       // console.log(updatedinfo)
         var temp_reviewalgo = updatedinfo.reviewalgo;
@@ -909,7 +1026,9 @@ function geteverydaytask(){
     div.innerHTML = ""
     //origin event   was not  delletd
     var  alltask=''
+    // data.task是从服务器传回的所有任务
     var tasks = data.task
+    sendback_tasks = data.task
     // div.innerHTML += '<li>this is  a task<li>';
       // var i = 0
       var head = '<h1>Today tasks</h1><ul class="tree">'
@@ -940,8 +1059,8 @@ function geteverydaytask(){
       }
       }
 
-      console.log("这是sons")
-       console.log(sontree)
+      // console.log("这是sons")
+      //  console.log(sontree)
 
 // 生成爸爸们
       for (let i = 0; i < todayjson.length; i++) {
@@ -953,20 +1072,23 @@ function geteverydaytask(){
             // todayjson.splice(i,i)
         } 
       }
-      console.log("这是parents")
-       console.log(parents)
-
+      
+      // console.log("这是parents")
+      // console.log(parents)
+      // goal = "${}" project = "${}"
       //  + "</li>"
 // 生成div tree
        var tree_div = ""
   for (let i = 0; i < parents.length; i++) {
     var  parent_id = parents[i].ID
-
-    var parent_addedtask_head = `<div class="task_list_item" id="task_list_div${parent_id}"> 
+    var task_goal = parents[i].goal
+    var task_project = parents[i].project
+    // console.log(`我正在输出goal ${goal_for_checkbox}`)
+    var parent_addedtask_head = `<div class="task_list_item" id="task_list_div${parent_id}" goal = "${task_goal}" project = "${task_project}"> 
         <div class="task_checkbox"> 
-            <input type="checkbox" class = "checkbox" id= "checkbox${parent_id}" /> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${parent_id}" goal = "${task_goal}" project = "${task_project}" /> 
           </div>  
-          <div class="task_list_content" id= "checkbox${parent_id}">
+          <div class="task_list_content" id= "checkbox${parent_id}" >
             <div class = "task_list_text"> `
         //  "<a>" + tasks[i].task + "</a>"
         //  </div>
@@ -979,7 +1101,7 @@ function geteverydaytask(){
       var parent_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
       // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
       var parent_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
-      tree_div = tree_div + `<li id = ${parent_id} >` + parent_addedtask_head + `<a id = "tasktext${parent_id}" class = "task_text">` + parents[i].task + '</a>' + '<input class="add_childtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">' + parent_addedtask_trail;
+      tree_div = tree_div + `<li id = ${parent_id} >` + parent_addedtask_head + `<a id = "tasktext${parent_id}" class = "task_text">` + parents[i].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">` + parent_addedtask_trail;
 
     // console.log("第一层嵌套")
     // console.log(parent_id)
@@ -992,18 +1114,18 @@ function geteverydaytask(){
 
     for (let j = 0; j < sontree[parent_id].length; j++) {
       var son_id = sontree[parent_id][j].ID
-      
+      var task_goal = sontree[parent_id][j].goal
+      var task_project = sontree[parent_id][j].project
       if (j==0) {
         tree_div = tree_div + "<ul>"
       }
-      console.log("正在打印第2层")
-      console.log(sontree[parent_id].length)
-      console.log(sontree[parent_id])
+      // console.log("正在打印第2层")
+      // console.log(sontree[parent_id].length)
+      // console.log(sontree[parent_id])
       // console.log(sontree[parent_id][1].ID)
-      console.log(sontree[3691])
-      var son_addedtask_head = `<div class="task_list_item" id="task_list_div${son_id}"> 
+      var son_addedtask_head = `<div class="task_list_item" id="task_list_div${son_id}" goal = "${task_goal}" project = "${task_project}"> 
         <div class="task_checkbox"> 
-            <input type="checkbox" class = "checkbox" id= "checkbox${son_id}" /> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${son_id}" goal = "${task_goal}" project = "${task_project}" /> 
           </div>  
           <div class="task_list_content" id= "checkbox${son_id}">
             <div class = "task_list_text"> `
@@ -1017,8 +1139,8 @@ function geteverydaytask(){
   // </div>
       var son_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
       // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      var son_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
-      tree_div = tree_div + `<li id = ${son_id} >` + son_addedtask_head + `<a id = "tasktext${son_id}" class = "task_text" >` + sontree[parent_id][j].task + '</a>' + '<input class="add_childtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">' + son_addedtask_trail  ;
+      var son_addedtask_trail = '</div><div><span class="task_list_item_date_button"> </span></div></div></div>'
+      tree_div = tree_div + `<li id = ${son_id} >` + son_addedtask_head + `<a id = "tasktext${son_id}" class = "son_task_text" >` + sontree[parent_id][j].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">` + son_addedtask_trail  ;
 
       // console.log("第二层嵌套")
       // console.log(son_id)
@@ -1027,17 +1149,19 @@ function geteverydaytask(){
     for (let z = 0; z < sontree[son_id].length; z++) {
       console.log(z)
       var grandson_id = sontree[son_id][z].ID
+      var task_goal = sontree[son_id][z].goal
+      var task_project = sontree[son_id][z].project
       if (z==0) {
         tree_div = tree_div + "<ul>"
       }
-      console.log("正在打印第3层")
-      console.log([son_id].length)
-      console.log(sontree[son_id][z])
+      // console.log("正在打印第3层")
+      // console.log([son_id].length)
+      // console.log(sontree[son_id][z])
       var grandson_addedtask_head = `<div class="task_list_item" id="task_list_div${grandson_id}"> 
         <div class="task_checkbox"> 
-            <input type="checkbox" class = "checkbox" id= "checkbox${grandson_id}" /> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${grandson_id}" goal = "${task_goal}" project = "${task_project}" /> 
           </div>  
-          <div class="task_list_content" id= "checkbox${grandson_id}">
+          <div class="task_list_content" id= "checkbox${grandson_id}" goal = "${task_goal}" project = "${task_project}">
             <div class = "task_list_text"> `
         //  "<a>" + tasks[i].task + "</a>"
         //  </div>
@@ -1050,8 +1174,8 @@ function geteverydaytask(){
 
       var grandson_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
       // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      var grandson_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
-      tree_div = tree_div + `<li id = ${grandson_id} >` + grandson_addedtask_head + `<a id = "tasktext${grandson_id}" class = "task_text" >` + sontree[son_id][z].task + '</a>' + '<input class="add_childtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">' + grandson_addedtask_trail +"</li>" ;
+      var grandson_addedtask_trail = '</div><div><span class="task_list_item_date_button"></span></div></div></div>'
+      tree_div = tree_div + `<li id = ${grandson_id} >` + grandson_addedtask_head + `<a id = "tasktext${grandson_id}" class = "son_task_text" >` + sontree[son_id][z].task + '</a>' + grandson_addedtask_trail +"</li>" ;
        
       var temp_z = z+1
             if (temp_z == sontree[son_id].length ) {
@@ -1073,6 +1197,9 @@ function geteverydaytask(){
   }
 
   div.innerHTML += head + tree_div + tail
+    
+  make_parent_task_checkbox_hidden()
+
   // console.log("print tree")
   // console.log(tree_div)
   parentid = 'unspecified'
@@ -1083,6 +1210,28 @@ function geteverydaytask(){
 
 geteverydaytask()
 
+
+
+function make_parent_task_checkbox_hidden(){
+     // 隐掉父任务的checkbox
+    // console.log(`i am printint sendback_tasks ${sendback_tasks}`)
+    for (let i = 0; i< sendback_tasks.length; i++) {
+    var task_id = Number.parseInt(sendback_tasks[i].ID)
+    // console.log(`"i am print the task_id ${task_id}"`)
+    // 循环任务的ID都不是别的任务的父ID，那么它的checkbox才可以显示出来
+      for (let j = 0; j < sendback_tasks.length; j++) {
+        var parent_id = Number.parseInt(sendback_tasks[j].parentid)
+        // console.log(`"iam print the parent_id ${parent_id}"`)
+        // console.log(`判断 ${task_id == parent_id}`)
+        if (task_id == parent_id) {
+            var this_checkbox = document.getElementById(`checkbox${task_id}`)
+            console.log(`"checkbox${task_id}"`)
+            // console.log(this_checkbox)
+            this_checkbox.style.visibility = "hidden"
+        }
+      }
+    }
+}
 
 
 
@@ -1113,10 +1262,26 @@ $(document).on("click","input.add_childtask_button",function(){
        onedit = true //进入编辑模式
        console.log(`我正在if里输出onedit变量${onedit}`)
      }
+
+        
+    //  console.log("我正在打印兄弟节点")
+    //  console.log($(this).prev())
       var parent_id = $(this).prev().attr("id").substring(8,13)
-     // 寻找点击+号的父ID
+     // 通过寻找兄弟节点来寻找点击+号的父ID
+
+    // 这里是找到goal and project，把它传到全局变量里，就来更新任务时使用
+        var get_task_li_dom = document.getElementById(`${parent_id}`)
+        console.log(get_task_li_dom)
+        selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+        selected_project = get_task_li_dom.children[0].getAttribute("project")
+        console.log("我正在输出goal和project")
+        console.log(selected_goal)
+        console.log(selected_project)
+
+
      console.log(parent_id)
-// 下面的操作是出现输入任务的窗口，加上一个<ul></ul>
+
+    // 下面的操作是出现输入任务的窗口，加上一个<ul></ul>
     var insert_div = ""
      var ul_div = $('<ul/>')
      console.log(ul_div)
@@ -1124,6 +1289,8 @@ $(document).on("click","input.add_childtask_button",function(){
      insert_div = ul_div.append(createNode(add_task_div))
      console.log(insert_div)
      $(`#${parent_id}`).append(insert_div)
+     getgoalincludeproject()
+    
      // 把父id传过去
      parentid = parent_id
    })
@@ -1140,18 +1307,34 @@ $(document).on("click","input.add_childtask_button",function(){
      if (onedit == false){
        console.log("正在执行把onedit变成true的if语句")
        onedit = true //进入编辑模式
-       console.log(`我正在if里输出onedit变量${onedit}`)
+      //  console.log(`我正在if里输出onedit变量${onedit}`)
      }
       parentid = "unspecified"
       var add_plus = document.getElementById("add_task_button_area");
       console.log(add_plus);
       add_plus.innerHTML += add_task_div;
       document.getElementById("plusbutton").outerHTML = "";
-     
-     
+      getgoalincludeproject()
+
    })
 
 
+
+
+function getgoalincludeproject(){
+  $.get("/v1/goalincludeproject", function(data, status){
+  yourgoals = []
+  // alert("Data: " + data + "\nStatus: " + status);
+  console.log("输出data")
+  console.log(data);
+  console.log("输出data.goals")
+  console.log(data.goals)
+  create_goalllist_div(data.goals);
+  use_chosen_style()
+  })
+}
+
+// 早些版本调goallist的API
 var yourgoals = []
 function getgoallist(){
   // r= requests.get(str(localhosturl)+'/v1/goaljson',cookies=cookie)
@@ -1176,10 +1359,6 @@ $.get("/v1/goaljson", function(data, status){
     // console(goal_option)
     // goal_option_div.innerHTML += goal_option
   }
- 
-
-
-
   console.log(yourgoals)
 });
 }
@@ -1201,21 +1380,9 @@ getgoallist()
 
 var add_task_item = document.getElementById("add_task_item");
 // console.log(add_task_item);
-
-
-// 点击加号出现添加任务的窗口
-// $("#plusbutton").click(function(){
-
   
-
-// })
-
   // const nospecifiedtaskdivcode =
-
     var taskid_div = "noid";
-
-   
-  
 
     //  添加日期的组件
     function yyyymmdd(dateIn) {
@@ -1227,7 +1394,6 @@ var add_task_item = document.getElementById("add_task_item");
       return finaltime
       // Leading zeros for mm and dd
     }
-
     // 把日期传入的js代码
     // var today = new Date();
     // console.log(yyyymmdd(today));
@@ -1336,10 +1502,6 @@ var add_task_item = document.getElementById("add_task_item");
     }
     return tmp_reviewalgo;
     }
-
-
-
-   
 
 // 标签的输入
 
@@ -1518,14 +1680,14 @@ var add_task_item = document.getElementById("add_task_item");
 
     // $("#noid").keypress(function (event)
 
-    // 下面是创建任务的JS部分
-    $(document).on("keypress","#noid",function(event)
-    {
-      if (event.key === "Enter") {
-        // alert("点击回车");
 
-        console.log("ma is here")
-        //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
+
+// 把点击button封闭成一个事件
+
+// 把创建任务封装成一个函数
+
+function clickAndPress_add_task_function(){
+  console.log("ma is here")
         // 下面这行代码把在Input里输入的内容传入到inputedtask这个变量里
         var inputedtask = $("#noid").val();
         // var inputedtask = document.getElementById("createtask").getAttribute("placeholder");
@@ -1535,7 +1697,6 @@ var add_task_item = document.getElementById("add_task_item");
         // alert(inputedtask)
         //  alert("检查plantime")
         //  alert(plantime)
-        var testis = "ma is here";
         var task = {
           'starttime': 'unspecified',
           'deadline': 'unspecified',
@@ -1543,9 +1704,8 @@ var add_task_item = document.getElementById("add_task_item");
           'ifdissect': 'no',
           'note': 'unspecified',
           'parentid': parentid,
-          'timedevotedto_a_task': 0,
-          'client': 'gtdcli',
-          'goalcode': 'aaa',
+          'timedevotedto_a_task': devotedtime,
+          'goal': selected_goal,
           'parentproject': 'unspecified',
           'inboxlist': 'empty',
           'inbox': inputedtask,
@@ -1554,20 +1714,17 @@ var add_task_item = document.getElementById("add_task_item");
           'reviewalgo': reviewalgo,
           'place': 'unspecified',
           'input-time': 'Fri Aug 21 22:38:23 2020',
-          'project': 'inbox',
+          'project': selected_project,
           'taskstatus': 'unfinished',
           'plantime': plantime,
           'taglight': 'yes',
           'tasktags': tasktags,
+          'client':"dreamforlifeweb",
           'tasktagsorigin': 'e'
         };
+        console.log("创建任务的时候输入task")
         console.log(task);
         // alert(plantime);
-        // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-
-       
-        
-
 
         $.ajax({
           type: "POST",
@@ -1584,8 +1741,8 @@ var add_task_item = document.getElementById("add_task_item");
               geteverydaytask()
               // 上面使用了geteverydaytask的函数来达到把输入的task放到上面的效果
             // alert(data);
-            console.log("i am printing the return data from server")
-            console.log(data)
+            // console.log("i am printing the return data from server")
+            // console.log(data)
             var taskid = data.taskid;
             // alert(taskid);
             const taskdom = document.querySelector("#tempid")
@@ -1600,38 +1757,53 @@ var add_task_item = document.getElementById("add_task_item");
           }
           //  alert(errMsg);
         })
+}
+
+
+
+
+  $(document).on("click",".add_task_button",function(){
+    clickAndPress_add_task_function()
+    
+  })
+
+
+
+
+
+    // 下面是创建任务的JS部分
+    $(document).on("keypress","#noid",function(event)
+    {
+      if (event.key === "Enter") {
+        // alert("点击回车");
+        clickAndPress_add_task_function()
       }
     });
 
-    // 这是更新任务的JS代码
+    // 这里是点击取消之后，隐去添加任务窗口变加号的事件
 
-    // 这里使用的是回调函数的taskinfo，而不是自己凭空创建的
-    // var updatedinfo =
-    // // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-    // {
-    //   'ifdissect': 'no',
-    //   'deadline': 'unspecified',
-    //   'starttime': 'unspecified',
-    //   'endtime': 'unspecified',
-    //   'tasktagsorigin': 'unspecified',
-    //   'parentid': 'unspecified',
-    //   'timedevotedto_a_task': 0,
-    //   'goalcode': 'xxx',
-    //   'client': 'gtdcli',
-    //   'taglight': 'no',
-    //   'note': 'unspecified',
-    //   'reviewalgolight': 'no',
-    //   'reviewalgo': { "123": "" },
-    //   'parentproject': 'unspecified',
-    //   'id': "unspecified",
-    //   'place': 'unspecified',
-    //   'finishtime': 'unspecified',
-    //   'inbox': 'unspecified',
-    //   'project': 'inbox',
-    //   'plantime': 'today',
-    //   'taskstatus': 'unfinished',
-    //   'tasktags': {}
-    // }
+    $(document).on("click",".cancel_add_task_button",function(){
+      if (document.getElementById("sontask") != null){
+        remove_add_subtask_area()
+      }
+      else{
+        remove_add_task_area()
+      }
+    })
+
+    function remove_add_task_area(){
+      document.getElementById("add_task_item").outerHTML = ""
+      document.getElementById("add_task_button_area").appendChild(createNode(plusbutton))
+      onedit = false
+    }
+
+    function remove_add_subtask_area(){
+      document.getElementById("sontask").outerHTML = ""
+      // document.getElementById("add_task_button_area").appendChild(createNode(plusbutton))
+      onedit = false
+    }
+
+
 
     // 下面的函数用来判断一个字典里面是否含有某个value
     function inArray(search, array) {
@@ -1648,114 +1820,283 @@ var add_task_item = document.getElementById("add_task_item");
 
   
 
+
+
+
   //  点击任务的ul区域得到一个扩大的ID，然后把文字内容传进去
     $(document).on("click","a.task_text",function(){
-      // 提取任务id
-      var choosed_taskid = $(this).attr("id").substring(8, 13);
-      var tasktext = "tasktext" + String(choosed_taskid);
-
-      var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
-      console.log(choosed_task_div)
       
-      // 提取任务内容
-      // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
-      var choosed_task_input = document.getElementById(tasktext)
-      // console.log(choosed_task_input)
-      var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
-      // console.log(choosed_task_input_text)
-      // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
-      // alert(choosed_task_input)
-      // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
-      // alert(choosed_task_text)
-      // alert(choosed_taskid);
-      var div = document.getElementById(`${choosed_taskid}`);
-      var insert_task_html = `<div class="add_task_area" id="add_task" >
-          <div class="input_task_area">
-            <!-- onclick="test(this.getAttribute('id'))" -->
-            <!-- onclick 指的是鼠标指上去，并不是点上去 -->
-            <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
-            <!-- 设置输入任务的div -->
-            <div class="task_container">
-            <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
-            <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
-            </div>
-            <div class="task_property_area">
-              <div class="calendar_project_area">
-                <div class="calendar_area" id="calendar_area">
-                  <!-- 输入任务时间的表单 -->
-                  <!-- <a>请输任务时间</a> -->
-                  <button id="calendar" class="clock_button">
-                    <svg t="1598153562536" class="icon" 
-                    viewBox="0 0 1024 1024" version="1.1" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    p-id="3498" width="20" height="20">
-                      <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
-                      fill="#CFD8DC" p-id="3499">
-                      </path>
-                      <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
-                      fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
-                      </path>
-                      <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
-                      </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
-                      </path>
-                    </svg>
-                  </button>
-                  <!-- <label id="inputlabel">please input your plantime</label>
-                  <input type="text" id="plantime" > -->
-                </div>
+      // 判断当前界面是否已经有编辑窗口了，如果有，则执行出现窗口的代码，如果已经有，则不执行
+      if ( document.getElementsByClassName("edite_task_area").length == 0 ) {
+        
       
-                <div id="project_area">
-                  <!-- 任务的选择需要使用带层级标签的下拉列表 -->
-                  <!-- <a>project select</a> -->
-                  <label for="project_choose"></label>
-                  <select name="project_choose" id="project_choose">
-                    <option value="inbox">inbox</option>
-                    <option value="work">work</option>
-                    <option value="family">family</option>
-                  </select>
-                </div>
+        // 提取任务id
+        var choosed_taskid = $(this).attr("id").substring(8, 13);
+        var tasktext = "tasktext" + String(choosed_taskid);
+  
+        var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
+       
+        var get_task_li_dom = document.getElementById(`${choosed_taskid}`)
+          console.log(get_task_li_dom)
+          selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+          selected_project = get_task_li_dom.children[0].getAttribute("project")
+          console.log("我正在输出goal和project")
+          console.log(selected_goal)
+          console.log(selected_project)
+        
+        // 提取任务内容
+        // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
+        var choosed_task_input = document.getElementById(tasktext)
+        // console.log(choosed_task_input)
+        var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
+        // console.log(choosed_task_input_text)
+        // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
+        // alert(choosed_task_input)
+        // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
+        // alert(choosed_task_text)
+        // alert(choosed_taskid);
+        var div = document.getElementById(`${choosed_taskid}`);
+        var insert_task_html = 
+        // `<div class="edite_subtask_area" id="add_task" >
+            `<div class="edite_task_area">
+              <!-- onclick="test(this.getAttribute('id'))" -->
+              <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+              <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+              <!-- 设置输入任务的div -->
+              <div class="task_container">
+              <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
+              <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
               </div>
-
-              <!--
-              <div id="tags_review_area" class="tags_review_area">
-                <div id="tasktags_area">
-                  <input type="text" name="tasktag" id="tasktag_selector" >
+              <div class="task_property_area">
+                <div class="calendar_project_area">
+                  <div class="calendar_area" id="calendar_area">
+                    <!-- 输入任务时间的表单 -->
+                    <!-- <a>请输任务时间</a> -->
+                    <button id="calendar" class="clock_button">
+                      <svg t="1598153562536" class="icon" 
+                      viewBox="0 0 1024 1024" version="1.1" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      p-id="3498" width="20" height="20">
+                        <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                        fill="#CFD8DC" p-id="3499">
+                        </path>
+                        <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                        fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                        </path>
+                        <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                        </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                        </path>
+                      </svg>
+                    </button>
+                    <!-- <label id="inputlabel">please input your plantime</label>
+                    <input type="text" id="plantime" > -->
+                  </div>
+        
+                  <div id="goal_list" class="goal_list">
+                 
+                  </div>
+  
+                  <div id="timedevotedto_a_task">                  
+                    <select name="time_devoted_select" id="time_devoted_select">
+                      <option value="5">5分钟</option>
+                      <option value="10">10分钟</option>
+                      <option value="15">15分钟</option>
+                      <option value="20">20分钟</option>
+                      <option value="25">25分钟</option>
+                      <option value="30">30分钟</option>
+                      <option value="40">40分钟</option>
+                      <option value="50">50分钟</option>
+                      <option value="60">1小时</option>
+                      <option value="90">1.5小时</option>
+                      <option value="120">2小时</option>
+                      <option value="150">2.5小时</option>
+                      <option value="180">3小时</option>
+                      <option value="210">3.5小时</option>
+                      <option value="240">4小时</option>
+                      <option value="240">6小时</option>
+                      <option value="480">8小时</option>
+                      <option value="720">12小时</option>
+                    </select>
+                  </div>
                 </div>
-              -->
-
-                <div id="reviewalgo_area">
-                  <div id="task_reviewalgo_area">
-                    <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                  <div id="reviewalgo_area">
+                    <div id="task_reviewalgo_area">
+                      <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div> 
-        </div>`
-        div.innerHTML += insert_task_html;
-        document.getElementById(choosed_task_div).innerHTML = "";
-      // //使用js提取id对应的任务信息,得到json文件
-      // var choosed_taskid_info = $
-      // 把任务的那一块进行整体html的替换
+            </div> `
+          // </div>`
+          div.innerHTML += insert_task_html;
+          document.getElementById(choosed_task_div).innerHTML = "";
+          console.log(choosed_task_div)
+        getgoalincludeproject()
+  
+  // 下面这个for用来实现在选定的任务有子任务时，不显示checkbox的按键
+        for (let i = 0; i < sendback_tasks.length; i++) {
+         
+         if (choosed_taskid == sendback_tasks[i].parentid){
+          console.log("----------------------")
+           document.getElementById(`checkbox${choosed_taskid}`).style.visibility = "hidden"
+         }
+       }
+        // //使用js提取id对应的任务信息,得到json文件
+        // var choosed_taskid_info = $
+        // 把任务的那一块进行整体html的替换
+        
+        // //判断任务是否进行了review,并且进行更新
+        // judge_task_finished(choosed_taskid_info);
+        // console.log($(this))
+      }
+      else{
+        return
+      }
+    })
+    $(document).on("click","a.son_task_text",function(){
       
-      // //判断任务是否进行了review,并且进行更新
-      // judge_task_finished(choosed_taskid_info);
-      // console.log($(this))
+      // 判断当前界面是否已经有编辑窗口了，如果有，则执行出现窗口的代码，如果已经有，则不执行
+      if ( document.getElementsByClassName("edite_task_area").length == 0 ) {
+        
+      
+        // 提取任务id
+        var choosed_taskid = $(this).attr("id").substring(8, 13);
+        var tasktext = "tasktext" + String(choosed_taskid);
+  
+        var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
+       
+        var get_task_li_dom = document.getElementById(`${choosed_taskid}`)
+          console.log(get_task_li_dom)
+          selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+          selected_project = get_task_li_dom.children[0].getAttribute("project")
+          console.log("我正在输出goal和project")
+          console.log(selected_goal)
+          console.log(selected_project)
+        
+        // 提取任务内容
+        // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
+        var choosed_task_input = document.getElementById(tasktext)
+        // console.log(choosed_task_input)
+        var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
+        // console.log(choosed_task_input_text)
+        // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
+        // alert(choosed_task_input)
+        // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
+        // alert(choosed_task_text)
+        // alert(choosed_taskid);
+        var div = document.getElementById(`${choosed_taskid}`);
+        var insert_task_html = 
+        // `<div class="edite_subtask_area" id="add_task" >
+            `<div class="edite_task_area">
+              <!-- onclick="test(this.getAttribute('id'))" -->
+              <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+              <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+              <!-- 设置输入任务的div -->
+              <div class="task_container">
+              <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
+              <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
+              </div>
+              <div class="task_property_area">
+                <div class="calendar_project_area">
+                  <div class="calendar_area" id="calendar_area">
+                    <!-- 输入任务时间的表单 -->
+                    <!-- <a>请输任务时间</a> -->
+                    <button id="calendar" class="clock_button">
+                      <svg t="1598153562536" class="icon" 
+                      viewBox="0 0 1024 1024" version="1.1" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      p-id="3498" width="20" height="20">
+                        <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                        fill="#CFD8DC" p-id="3499">
+                        </path>
+                        <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                        fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                        </path>
+                        <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                        </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                        </path>
+                      </svg>
+                    </button>
+                    <!-- <label id="inputlabel">please input your plantime</label>
+                    <input type="text" id="plantime" > -->
+                  </div>
+        
+                  <div id="goal_list" class="goal_list">
+                 
+                  </div>
+  
+                  <div id="timedevotedto_a_task">                  
+                    <select name="time_devoted_select" id="time_devoted_select">
+                      <option value="5">5分钟</option>
+                      <option value="10">10分钟</option>
+                      <option value="15">15分钟</option>
+                      <option value="20">20分钟</option>
+                      <option value="25">25分钟</option>
+                      <option value="30">30分钟</option>
+                      <option value="40">40分钟</option>
+                      <option value="50">50分钟</option>
+                      <option value="60">1小时</option>
+                      <option value="90">1.5小时</option>
+                      <option value="120">2小时</option>
+                      <option value="150">2.5小时</option>
+                      <option value="180">3小时</option>
+                      <option value="210">3.5小时</option>
+                      <option value="240">4小时</option>
+                      <option value="240">6小时</option>
+                      <option value="480">8小时</option>
+                      <option value="720">12小时</option>
+                    </select>
+                  </div>
+                </div>
+                  <div id="reviewalgo_area">
+                    <div id="task_reviewalgo_area">
+                      <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> `
+          // </div>`
+          div.innerHTML += insert_task_html;
+          document.getElementById(choosed_task_div).innerHTML = "";
+          console.log(choosed_task_div)
+        getgoalincludeproject()
+  
+  // 下面这个for用来实现在选定的任务有子任务时，不显示checkbox的按键
+        for (let i = 0; i < sendback_tasks.length; i++) {
+         
+         if (choosed_taskid == sendback_tasks[i].parentid){
+          console.log("----------------------")
+           document.getElementById(`checkbox${choosed_taskid}`).style.visibility = "hidden"
+         }
+       }
+        // //使用js提取id对应的任务信息,得到json文件
+        // var choosed_taskid_info = $
+        // 把任务的那一块进行整体html的替换
+        
+        // //判断任务是否进行了review,并且进行更新
+        // judge_task_finished(choosed_taskid_info);
+        // console.log($(this))
+      }
+      else{
+        return
+      }
     })
 
     //修改文字内容之后对其进行更新 
     $(document).on("keypress","input.edite_text",function(event)
     {
-      console.log("我正在调用回车事件")
+      // console.log("我正在调用回车事件")
       if (event.key === "Enter") {
         // find the task's id
         var choosed_taskid = $(this).attr("id").substring(10, 14);
+
+
         // console.log(choosed_taskid)
         var updatedtask = $(`#edite_text${choosed_taskid}`).val()
         // var taskid = $("#taskid").val()
         console.log(updatedtask)
         var updatedinfo =
-        // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
         {
           'ifdissect': 'no',
           'deadline': 'unspecified',
@@ -1763,9 +2104,9 @@ var add_task_item = document.getElementById("add_task_item");
           'endtime': 'unspecified',
           'tasktagsorigin': 'unspecified',
           'parentid': parentid,
-          'timedevotedto_a_task': 0,
-          'goalcode': 'xxx',
-          'client': 'gtdcli',
+          'timedevotedto_a_task': devotedtime,
+          'goal': selected_goal,
+          'client': 'dreamforlifeweb',
           'taglight': 'no',
           'note': 'unspecified',
           'reviewalgolight': 'no',
@@ -1775,7 +2116,7 @@ var add_task_item = document.getElementById("add_task_item");
           'place': 'unspecified',
           'finishtime': 'unspecified',
           'inbox': updatedtask,
-          'project': 'inbox',
+          'project': selected_project,
           'plantime': 'today',
           'taskstatus': 'unfinished',
           'tasktags': {}
@@ -1788,12 +2129,20 @@ var add_task_item = document.getElementById("add_task_item");
           data: JSON.stringify(updatedinfo),
           contentType: "application/json; charset=utf-8",
           dataType: "json",
-          success: function (data) { alert(data); },
+          success: function (data) { 
+            console.log("this is success")
+            console.log(data)
+            // alert(data); 
+            geteverydaytask()
+          },
           failure: function (errMsg) {
+            console.log("this is erro")
             alert(errMsg);
+
           }
         })
       }
+      
       })
 
 
@@ -1819,9 +2168,9 @@ $(document).on("click","input.edite_checkbox",function(){
         'endtime': 'unspecified',
         'tasktagsorigin': 'unspecified',
         'parentid': 'unspecified',
-        'timedevotedto_a_task': 0,
-        'goalcode': 'xxx',
-        'client': 'gtdcli',
+        'timedevotedto_a_task': devotedtime,
+        'goal': selected_goal,
+        'client': 'dreamforlifeweb',
         'taglight': 'no',
         'note': 'unspecified',
         'reviewalgolight': 'yes',
@@ -1831,7 +2180,7 @@ $(document).on("click","input.edite_checkbox",function(){
         'place': 'unspecified',
         'finishtime': 'unspecified',
         'inbox': choosed_text,
-        'project': 'inbox',
+        'project': selected_project,
         'plantime': 'today',
         'taskstatus': 'unfinished',
         'tasktags': {}
@@ -2006,54 +2355,7 @@ $(document).on("mouseover","#task_reviewalgo_selector",function(){
 
 
 
-// 更新任务的函数
 
-    // $("#updatetask").click(function () {
-    //   //var task1 = {'starttime': 'unspecified', 'deadline': 'unspecified', 'endtime': 'unspecified', 'ifdissect': 'no', 'note': 'unspecified', 'parentid': 'unspecified', 'timedevotedto_a_task': 0, 'client': 'gtdcli', 'goalcode': 'aaa', 'parentproject': 'unspecified', 'inboxlist': 'empty', 'inbox': 'we ar', 'finishtime': 'unspecified', 'reviewalgolight': 'no', 'reviewalgo': {}, 'place': 'unspecified', 'input-time': 'Fri Aug 21 22:38:23 2020', 'project': 'inbox', 'taskstatus': 'unfinished', 'plantime': 'today', 'taglight': 'yes', 'tasktags': {'importanttag': 'no', 'feartag': 'no', 'principletag': 'no', 'atomtag': 'no', 'dfstag': 'no', 'hardtag': 'no', 'easytag': 'yes', 'urgenttag': 'no', 'challengetag': 'no', 'uncomfortabletag': 'no', 'troublesometag': 'no', 'keyproblemtag': 'no', 'tenminutestasktag': 'no', 'thirtyminutestasktag': 'no', 'threeminutestasktag': 'no'}, 'tasktagsorigin': 'e'}
-    //   var updatedtask = $("#updatedtask").val()
-    //   var taskid = $("#taskid").val()
-    //   alert(taskid)
-
-    //   var updatedinfo =
-    //   // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
-    //   {
-    //     'ifdissect': 'no',
-    //     'deadline': 'unspecified',
-    //     'starttime': 'unspecified',
-    //     'endtime': 'unspecified',
-    //     'tasktagsorigin': 'unspecified',
-    //     'parentid': 'unspecified',
-    //     'timedevotedto_a_task': 0,
-    //     'goalcode': 'xxx',
-    //     'client': 'gtdcli',
-    //     'taglight': 'no',
-    //     'note': 'unspecified',
-    //     'reviewalgolight': 'no',
-    //     'reviewalgo': reviewalgo,
-    //     'parentproject': 'unspecified',
-    //     'id': taskid,
-    //     'place': 'unspecified',
-    //     'finishtime': 'unspecified',
-    //     'inbox': updatedtask,
-    //     'project': 'inbox',
-    //     'plantime': 'today',
-    //     'taskstatus': 'unfinished',
-    //     'tasktags': {}
-    //   }
-    //   // console.log(updatedinfo)
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "/v1/update",
-    //     // The key needs to match your method's input parameter (case-sensitive).
-    //     data: JSON.stringify(updatedinfo),
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     success: function (data) { alert(data); },
-    //     failure: function (errMsg) {
-    //       alert(errMsg);
-    //     }
-    //   })
-    // })
 
 
 </script>
