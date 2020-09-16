@@ -162,7 +162,7 @@ body {
   /* height: 4em; */
 }
 
-.input_task_area{
+.input_task_area, .edite_task_area{
   max-width: 30em;
   height: 4em;
   /* 输入任务的框已经限定死是5em了 */
@@ -187,19 +187,29 @@ body {
   padding-top: 0.4em;
   padding-bottom: 0.2em;
   border: none;
-  /* width: 100%; */
+  width: 100%;
   max-width:30em;
+  word-break:break-all;
+  /* overflow-wrap: break-word; */
+}
+
+.son_task_text{
+  font-size: 0.8em;
+}
+
+div input {
+  display: inline;
 }
 
 .edite_text{
- 
   font-size: 18px;;
   padding-top: 0.4em;
   padding-bottom: 0.2em;
   border: none;
-  /* width: 100%; */
+  width: 95%;
   max-width:30em;
 }
+
 .task_property_area div{
   display: inline-block;
 }
