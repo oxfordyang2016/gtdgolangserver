@@ -30,6 +30,11 @@ div#goallist {
     margin-bottom: 120px;
 } */
 
+.urgent{
+  color:red
+}
+
+
 
 
 </style>
@@ -107,10 +112,17 @@ $(document).ready(function(){
         var j = 0
         console.log(`目标是${goals[i].Name}`)
         console.log(`目标里面任务的长度为${goals[i].Alltasksingoal.length}`)
+        var tasktag = "no"
       while (j<goals[i].Alltasksingoal.length){
+        var tasktags= JSON.parse(goals[i].Alltasksingoal[j].tasktags)
+        // console.log(temp.urgenttag)
+        if(tasktags.urgenttag == "yes"){
+          tasktag = "urgent"
+        }
        tasksingoalhtml =  tasksingoalhtml + `<li><input type="checkbox" id= ${goals[i].Alltasksingoal[j].ID} onchange="add2tasksidarray(this.id)" class = "checkbox" id="scales" name="scales"
-  ><a> ${goals[i].Alltasksingoal[j].task}<input type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12"><input type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/cancel.svg" alt="Submit" width="12" height="12"></a></li>`
+  ><a class="${tasktag}"> ${goals[i].Alltasksingoal[j].task}<input type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12"><input type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/cancel.svg" alt="Submit" width="12" height="12"></a></li>`
        console.log(`目标里面任务的长度为${goals[i].Alltasksingoal.length}`)
+       tasktag = "no"
        j++ 
       }
      goalisthtml = goalisthtml +goaltitle+tasksingoalhtml
