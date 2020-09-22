@@ -543,6 +543,11 @@ fmt.Println(value.String())
   }  
   inbox := gjson.Get(reqBody, "inbox").String()
   tasktagsorigin := gjson.Get(reqBody, "tasktagsorigin").String()
+
+ color.Red("我们正在检测上传上来的标签")
+  color.Red(tasktagsorigin)
+
+
   //不允许用户创建不含tag的任务,这里是检测命令行端啦
   if tasktagsorigin == "unspecified"{
    fmt.Println("不允许用户上唇空标签")
@@ -666,7 +671,7 @@ fmt.Println(value.String())
    }else{
     childtask := Tasks{Starttime_exe:starttime_exe,Endtime_exe:endtime_exe,Starttime:starttime,Deadline:deadline,Endtime:endtime,Reviewdatas:task.Reviewdatas,Goalcode:task.Goalcode,Devotedtime:task.Devotedtime,
       Tasktagsorigin:tasktagsorigin,Goalcoefficient:task.Goalcoefficient,Priority:task.Priority,Parentid:parentid_fromgtdcli,Goal:task.Goal,Task:inbox,User:email,
-      Status:task.Status,Email:email,Place:task.Place, Project:task.Project, Plantime:task.Plantime,Tasktags:task.Tasktags,Finishtime:task.Finishtime}
+      Status:task.Status,Email:email,Place:task.Place, Project:task.Project, Plantime:task.Plantime,Tasktags:tasktags,Finishtime:task.Finishtime}
     db.Create(&childtask).Scan(&childtask)
     Check_reviewdaylog(task.Plantime,email)
     var score =   Compute_singleday(task.Plantime,email)

@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+
+
+<title>beautiful dream</title>
+
+<link rel="stylesheet" href="/v1/taskmanage.css">
+
+<link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+<!-- <link rel="stylesheet" href="/v1/user.css"> -->
+<!-- 上面的css中包含背景，给注释掉了，这样就不显示背景了 -->
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+<!-- <script src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/inputtag.js"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
+
+<!-- JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- <script  src="/v1/index.js"></script> -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
+<script src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/inputtag.js"></script>
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
+<!-- 下面是日历的脚本 -->
+<script>
+  var SimplePicker=function(e){var t={};function i(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,i),r.l=!0,r.exports}return i.m=e,i.c=t,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(e,t){if(1&t&&(e=i(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)i.d(n,r,function(t){return e[t]}.bind(null,r));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=0)}({0:function(e,t,i){i("iyB0"),e.exports=i("TYVf")},"0DyV":function(e,t,i){"use strict";function n(e,t){e=[].concat(e);for(var i=0;i<t;i++)e[i]=void 0;return e}function r(e){var i=new Date(e.getTime()),r=e.getFullYear(),s=e.getMonth(),a={date:i,month:void 0};if(t.monthTracker.current=new Date(e.getTime()),t.monthTracker.current.setDate(1),t.monthTracker.years[r]=t.monthTracker.years[r]||{},void 0!==t.monthTracker.years[r][s])return a.month=t.monthTracker.years[r][s],a;(e=new Date(e.getTime())).setDate(1),t.monthTracker.years[r][s]=[];for(var c=t.monthTracker.years[r][s],o=0;e.getMonth()===s;){var l=e.getDate(),p=e.getDay();1===l&&(c[o]=n([],p)),c[o]=c[o]||[],c[o][p]=l,6===p&&o++,e.setDate(e.getDate()+1)}var d=5;void 0===c[5]&&(d=4,c[5]=n([],7));var m=c[d].length;if(m<7){var h=c[d].concat(n([],7-m));c[d]=h}return a.month=c,a}Object.defineProperty(t,"__esModule",{value:!0}),t.monthTracker={years:{}},t.months=["January","February","March","April","May","June","July","August","September","October","November","December"],t.days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],t.scrapeMonth=r,t.scrapePreviousMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()-1),r(e)},t.scrapeNextMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()+1),r(e)};var s={st:[1,21,31],nd:[2,22],rd:[3,23]};t.getDisplayDate=function(e){var t=e.getDate();return-1!==s.st.indexOf(t)?t+"st":-1!==s.nd.indexOf(t)?t+"nd":-1!==s.rd.indexOf(t)?t+"rd":t+"th"},t.formatTimeFromInputElement=function(e){var t="",i=e.split(":"),n=i[0],r=(n=+n)>=12;return r&&n>12&&(n-=12),r||0!==n||(n=12),t+=n<10?"0"+n:n,t+=":"+i[1]+" ",t+=r?"PM":"AM"}},TYVf:function(e,t,i){"use strict";var n=i("0DyV"),r=i("ht6X"),s=new Date,a=function(){function e(e,t){var i;if("object"==typeof e&&(t=e,i=void 0),"string"==typeof(i=i||"body")&&(i=document.querySelector(i)),!i)throw new Error("SimplePicker: Valid selector or element must be passed!");t||(t={}),this.selectedDate=new Date,this.$simplepicker=i,this.initElMethod(i),this.injectTemplate(),this.init(t),this.initListeners(),this._eventHandlers={},this._validOnListeners=["submit","close"]}return e.prototype.initElMethod=function(e){this.$=function(t){return e.querySelector(t)},this.$$=function(t){return e.querySelectorAll(t)}},e.prototype.init=function(e){var t=this.$,i=this.$$;this.$simplepicker=t(".simpilepicker-date-picker"),this.$simplepickerWrapper=t(".simplepicker-wrapper"),this.$trs=i(".simplepicker-calender tbody tr"),this.$tds=i(".simplepicker-calender tbody td"),this.$headerMonthAndYear=t(".simplepicker-month-and-year"),this.$monthAndYear=t(".simplepicker-selected-date"),this.$date=t(".simplepicker-date"),this.$day=t(".simplepicker-day-header"),this.$time=t(".simplepicker-time"),this.$timeInput=t(".simplepicker-time-section input"),this.$timeSectionIcon=t(".simplepicker-icon-time"),this.$cancel=t(".simplepicker-cancel-btn"),this.$ok=t(".simplepicker-ok-btn"),this.$displayDateElements=[this.$day,this.$headerMonthAndYear,this.$date],this.$time.classList.add("simplepicker-fade"),this.render(n.scrapeMonth(s)),e=e||{},this.opts=e,this.reset(s),void 0!==e.zIndex&&(this.$simplepickerWrapper.style.zIndex=e.zIndex.toString()),e.disableTimeSection&&this.disableTimeSection(),e.compactMode&&this.compactMode()},e.prototype.reset=function(e){var t=e||new Date;this.render(n.scrapeMonth(t));var i=t.getDate().toString(),r=this.findElementWithDate(i);r.classList.contains("active")||(this.selectDateElement(r),this.updateDateComponents(t));var s=t.toTimeString().split(" ")[0].replace(/\:\d\d$/,"");this.$timeInput.value=s,this.$time.innerText=n.formatTimeFromInputElement(s)},e.prototype.compactMode=function(){this.$date.style.display="none"},e.prototype.disableTimeSection=function(){this.$timeSectionIcon.style.visibility="hidden"},e.prototype.enableTimeSection=function(){this.$timeSectionIcon.style.visibility="visible"},e.prototype.injectTemplate=function(){var e=document.createElement("template");e.innerHTML=r.htmlTemplate,this.$simplepicker.appendChild(e.content.cloneNode(!0))},e.prototype.clearRows=function(){this.$tds.forEach(function(e){e.innerHTML="",e.classList.remove("active")})},e.prototype.updateDateComponents=function(e){var t=n.days[e.getDay()],i=n.months[e.getMonth()]+" "+e.getFullYear();this.$headerMonthAndYear.innerHTML=i,this.$monthAndYear.innerHTML=i,this.$day.innerHTML=t,this.$date.innerHTML=n.getDisplayDate(e)},e.prototype.render=function(e){var t=this.$$,i=this.$trs,n=e.month,r=e.date;this.clearRows(),n.forEach(function(e,t){var n=i[t].children;e.forEach(function(e,t){var i=n[t];e?(i.removeAttribute("data-empty"),i.innerHTML=e):i.setAttribute("data-empty","")})});var s=t("table tbody tr:last-child td"),a=!0;s.forEach(function(e){void 0===e.dataset.empty&&(a=!1)});var c=s[0].parentElement;c.style.display=a&&c?"none":"table-row",this.updateDateComponents(r)},e.prototype.updateSelectedDate=function(e){var t,i=this.$monthAndYear,r=this.$time;this.$date;t=e?e.innerHTML.trim():this.$date.innerHTML.replace(/[a-z]+/,"");var s=i.innerHTML.split(" "),a=s[0],c=s[1],o=n.months.indexOf(a),l=r.innerHTML.split(":"),p=+l[0],d=l[1].split(" "),m=d[0],h=d[1];"AM"===h&&12==p&&(p=0),"PM"===h&&p<12&&(p+=12);var u=new Date(+c,+o,+t,+p,+m);this.selectedDate=u;var v=t+" ";v+=i.innerHTML.trim()+" ",v+=r.innerHTML.trim(),this.readableDate=v.replace(/^\d+/,u.getDate().toString())},e.prototype.selectDateElement=function(e){var t=this.$(".simplepicker-calender tbody .active");e.classList.add("active"),t&&t.classList.remove("active"),this.updateSelectedDate(e),this.updateDateComponents(this.selectedDate)},e.prototype.findElementWithDate=function(e,t){var i,n;return void 0===t&&(t=!1),this.$tds.forEach(function(t){var r=t.innerHTML.trim();r===e&&(i=t),""!==r&&(n=t)}),void 0===i&&t&&(i=n),i},e.prototype.handleIconButtonClick=function(e){var t,i=this.$;if(e.classList.contains("simplepicker-icon-calender")){var r=i(".simplepicker-icon-time"),s=i(".simplepicker-time-section");return(c=i(".simplepicker-calender-section")).style.display="block",s.style.display="none",r.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}if(e.classList.contains("simplepicker-icon-time")){var a=i(".simplepicker-icon-calender"),c=i(".simplepicker-calender-section");return(s=i(".simplepicker-time-section")).style.display="block",c.style.display="none",a.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}var o=i(".simplepicker-calender td.active");if(o&&(t=o.innerHTML.trim()),e.classList.contains("simplepicker-icon-next")&&this.render(n.scrapeNextMonth()),e.classList.contains("simplepicker-icon-previous")&&this.render(n.scrapePreviousMonth()),t){var l=this.findElementWithDate(t,!0);this.selectDateElement(l)}},e.prototype.initListeners=function(){var e=this,t=e.$simplepicker,i=e.$timeInput,r=e.$ok,s=e.$cancel,a=e.$simplepickerWrapper,c=this;function o(){c.close(),c.callEvent("close",function(e){e()})}t.addEventListener("click",function(e){var t=e.target,i=t.tagName.toLowerCase();e.stopPropagation(),"td"!==i?"button"===i&&t.classList.contains("simplepicker-icon")&&c.handleIconButtonClick(t):c.selectDateElement(t)}),i.addEventListener("input",function(e){if(""!==e.target.value){var t=n.formatTimeFromInputElement(e.target.value);c.$time.innerHTML=t,c.updateSelectedDate()}}),r.addEventListener("click",function(){c.close(),c.callEvent("submit",function(e){e(c.selectedDate,c.readableDate)})}),s.addEventListener("click",o),a.addEventListener("click",o)},e.prototype.callEvent=function(e,t){(this._eventHandlers[e]||[]).forEach(function(e){t(e)})},e.prototype.open=function(){this.$simplepickerWrapper.classList.add("active")},e.prototype.close=function(){this.$simplepickerWrapper.classList.remove("active")},e.prototype.on=function(e,t){var i=this._validOnListeners,n=this._eventHandlers;if(!i.includes(e))throw new Error("Not a valid event!");n[e]=n[e]||[],n[e].push(t)},e.prototype.toogleDisplayFade=function(){this.$time.classList.toggle("simplepicker-fade"),this.$displayDateElements.forEach(function(e){e.classList.toggle("simplepicker-fade")})},e}();e.exports=a},ht6X:function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.htmlTemplate='\n<div class="simplepicker-wrapper">\n  <div class="simpilepicker-date-picker">\n    <div class="simplepicker-day-header"></div>\n      <div class="simplepicker-date-section">\n        <div class="simplepicker-month-and-year"></div>\n        <div class="simplepicker-date"></div>\n        <div class="simplepicker-select-pane">\n          <button class="simplepicker-icon simplepicker-icon-calender active" title="Select date from calender!"></button>\n          <div class="simplepicker-time">12:00 PM</div>\n          <button class="simplepicker-icon simplepicker-icon-time" title="Select time"></button>\n        </div>\n      </div>\n      <div class="simplepicker-picker-section">\n        <div class="simplepicker-calender-section">\n          <div class="simplepicker-month-switcher simplepicker-select-pane">\n            <button class="simplepicker-icon simplepicker-icon-previous"></button>\n            <div class="simplepicker-selected-date"></div>\n            <button class="simplepicker-icon simplepicker-icon-next"></button>\n          </div>\n          <div class="simplepicker-calender">\n            <table>\n              <thead>\n                <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>\n              </thead>\n              <tbody>\n                '+function(e,t){for(var i="",n=1;n<=t;n++)i+=e;return i}("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>",6)+'\n              </tbody>\n            </table>\n          </div>\n        </div>\n        <div class="simplepicker-time-section">\n          <input type="time" value="12:00" autofocus="false">\n        </div>\n      </div>\n      <div class="simplepicker-bottom-part">\n        <button class="simplepicker-cancel-btn simplepicker-btn" title="Cancel">Cancel</button>\n        <button class="simplepicker-ok-btn simplepicker-btn" title="OK">OK</button>\n      </div>\n  </div>\n</div>\n'},iyB0:function(e,t,i){}});
+// #sourceMappingURL=simplepicker.js.map
+
+
+</script>
+
+
+
+
+
+<!-- 日历的css -->
+<style>
+.simplepicker-wrapper{position:fixed;top:0;left:0;overflow:auto;background-color:#4c4c4c7d;width:100vw;height:100vh;display:none}.simplepicker-wrapper.active{display:block}.simpilepicker-date-picker{width:326px;cursor:auto;font-family:Verdana,Geneva,Tahoma,sans-serif;font-size:14px;background-color:#fff;margin:2% auto;box-shadow:1px 2px 4px .5px rgba(0,0,0,.22),1px 2px 4px .5px transparent}.simplepicker-day-header{color:#fff;background-color:#016565;text-align:center;padding:4px 0}.simplepicker-date-section{text-align:center;background-color:#078e8e;color:#fff}.simplepicker-date-section .simplepicker-month-and-year{font-size:22px;padding:14px 0 7px;font-weight:200}.simplepicker-date-section .simplepicker-date{font-size:35px;padding:2px;margin-bottom:12px}.simplepicker-select-pane{display:flex;width:100%}.simplepicker-select-pane .simplepicker-time,.simplepicker-selected-date{text-align:center;flex:2}.simplepicker-icon,.simplepicker-selected-date,.simplepicker-time{border:none;background:transparent;padding:2px;margin:4px 6px;width:25px;height:25px;opacity:.5}.simplepicker-selected-date,.simplepicker-time{opacity:1}.simplepicker-month-switcher{margin-top:5px}.simplepicker-icon:hover{opacity:.8}.simplepicker-icon.active,.simplepicker-icon:active{opacity:1}.simplepicker-icon:focus{outline:none}.simplepicker-icon-next{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1hcnJvdy1yaWdodCI+PGxpbmUgeDE9IjUiIHkxPSIxMiIgeDI9IjE5IiB5Mj0iMTIiPjwvbGluZT48cG9seWxpbmUgcG9pbnRzPSIxMiA1IDE5IDEyIDEyIDE5Ij48L3BvbHlsaW5lPjwvc3ZnPg==)}.simplepicker-icon-previous{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1hcnJvdy1sZWZ0Ij48bGluZSB4MT0iMTkiIHkxPSIxMiIgeDI9IjUiIHkyPSIxMiI+PC9saW5lPjxwb2x5bGluZSBwb2ludHM9IjEyIDE5IDUgMTIgMTIgNSI+PC9wb2x5bGluZT48L3N2Zz4=)}.simplepicker-icon-calender{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jYWxlbmRhciI+PHJlY3QgeD0iMyIgeT0iNCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiPjwvcmVjdD48bGluZSB4MT0iMTYiIHkxPSIyIiB4Mj0iMTYiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjgiIHkxPSIyIiB4Mj0iOCIgeTI9IjYiPjwvbGluZT48bGluZSB4MT0iMyIgeTE9IjEwIiB4Mj0iMjEiIHkyPSIxMCI+PC9saW5lPjwvc3ZnPg==)}.simplepicker-icon-time{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jbG9jayI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjEyIDYgMTIgMTIgMTYgMTQiPjwvcG9seWxpbmU+PC9zdmc+)}.simplepicker-bottom-part{padding-top:6px;padding-bottom:12px;padding-left:48%}.simplepicker-calender table{width:100%;font-size:13px}.simplepicker-calender thead th{font-weight:400;font-size:15px;padding-bottom:6px;width:14.28%;height:30px;text-align:center}.simplepicker-calender tbody td{position:relative;text-align:center;vertical-align:middle;padding:12px;z-index:1}.simplepicker-calender tbody td:after{content:" ";visibility:hidden;display:block;position:absolute;left:50%;top:50%;height:35px;width:35px;border-radius:50%;transform:translate(-50%,-50%);background-color:rgba(0,0,0,.05)}.simplepicker-calender tbody td:hover:after{visibility:visible}.simplepicker-calender tbody td.active,.simplepicker-calender tbody td:active{color:#fff}.simplepicker-calender tbody .active:after,.simplepicker-calender tbody td:active:after{visibility:visible;background-color:teal;z-index:-1}.simplepicker-calender tbody td[data-empty]{pointer-events:none}.simplepicker-time-section{display:none;height:120px}.simplepicker-time-section input{box-sizing:border-box;width:120px;height:32px;max-width:120px;max-height:32px;padding:4px 3px;border:none;border-bottom:2px solid #ccc;font-size:14px;font-family:Verdana,Geneva,Tahoma,sans-serif;display:block;margin:25% auto}.simplepicker-time-section input:focus{outline:none;border-bottom-color:teal}.simplepicker-picker-section{width:100%;height:auto}.simplepicker-btn{border:none;background:transparent;font-family:Verdana,Geneva,Tahoma,sans-serif;font-size:16px;padding:7px 14px;border:1px solid #ddd;margin:0 5px;border-color:#016565;color:#016565;font-size:13px}.simplepicker-btn:active,.simplepicker-btn:hover{color:#fff;background-color:#016565}.simplepicker-fade{color:hsla(0,0%,88%,.95)}.simplepicker-btn,.simplepicker-icon,.simplepicker-wrapper{cursor:pointer}
+/*# sourceMappingURL=simplepicker.css.map*/
+</style>
+
+
+<style>
+  body {
+      margin:50px;
+      font-family:'Arial', sans-serif;
+  }
+  *{margin:0;padding: 0;}
+  
+  h1 {
+      color:#FA9A39;
+  }
+  
+  p { padding-bottom:50px;}
+  
+  .content {
+      width:500px;
+      margin:auto;
+  }
+  .tree ul {
+      margin-left: 20px;
+  }
+  
+  .tree li {
+      list-style-type: none;
+      /* margin:10px; */
+      /* position: relative; */
+      border-top: #ccc solid 1px;
+      border-bottom: #ccc solid 1px ; 
+    
+  }
+  
+  .tree li::before {
+      content: "";
+      position: absolute;
+      top:-7px;
+      left:-20px;
+      border-left: 1px solid #ccc;
+      border-bottom:1px solid #ccc;
+      border-radius:0 0 0 0px;
+      width:20px;
+      height:15px;
+  }
+  
+  .tree li::after {
+      position:absolute;
+      content:"";
+      top:8px;
+      left:-20px;
+      border-left: 1px solid #ccc;
+      border-top:1px solid #ccc;
+      border-radius:0px 0 0 0;
+      width:20px;
+      height:100%;
+  }
+  
+  .tree li:last-child::after  {
+      display:none;
+  }
+  
+  .tree li:last-child:before{
+      border-radius: 0 0 0 5px;
+  }
+  
+  ul.tree>li:first-child::before {
+      display:none;
+  }
+  
+  ul.tree>li:first-child::after {
+      border-radius:5px 0 0 0;
+  }
+  
+  .tree li a {
+      /* border: 1px #ccc solid; */
+      /* border-radius: 5px; */
+      padding:2px 5px;
+  }
+  
+  .tree li a:hover, .tree li a:hover+ul li a,
+  .tree li a:focus, .tree li a:focus+ul li a {
+      background: #ccc; color: #000; 
+      /* border: 1px solid #000; */
+  }
+  
+  .tree li a:hover+ul li::after, .tree li a:focus+ul li::after,
+  .tree li a:hover+ul li::before, .tree li a:focus+ul li::before 
+  .tree li a:hover+ul::before, .tree li a:focus+ul::before 
+  .tree li a:hover+ul ul::before, .tree li a:focus+ul ul::before{
+      border-color:  #000; /*connector color on hover*/
+  }
+  
+</style>
+
+
+<!-- 下面是input tags组件的CSS -->
+<style>
+  @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic);
+  @import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
+  /* * {
+    box-sizing: border-box;
+  } */
+  .color {
+    color: #19BC9C !important;
+  }
+  /* html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    background-color: #fff;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 32px;
+  } */
+   div.container {
+    display: block;
+    width: 50%;
+    margin: 32px auto;
+    padding: 16px 32px;
+    background-color: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  } 
+  div.inputTags-list {
+    display: inline-block;
+    width: 100%;
+    padding: 6px;
+    border: 1px solid rgba(25, 188, 156, 0.35);
+    background-color: #f9f9f9;
+    box-shadow: 1px 2px 2px rgba(221, 221, 221, 0.2);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list span.inputTags-item {
+    position: relative;
+    display: inline-block;
+    margin: 2px;
+    padding: 3px 22px 4px 8px;
+    background-color: #19BC9C;
+    text-align: center;
+    color: #fff;
+    opacity: 1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list span.inputTags-item.is-edit {
+    display: none;
+  }
+  div.inputTags-list span.inputTags-item.is-hidden {
+    display: none !important;
+  }
+  div.inputTags-list span.inputTags-item.is-exists {
+    background-color: rgba(231, 76, 60, 0.7);
+  }
+  div.inputTags-list span.inputTags-item span.value {
+    cursor: pointer;
+  }
+  div.inputTags-list span.inputTags-item i {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    font-weight: 400;
+    font-family: sans-serif;
+    line-height: 1;
+    font-style: normal;
+    -webkit-transition: color 0.2s;
+    -khtml-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    -ms-transition: color 0.2s;
+    -o-transition: color 0.2s;
+    -webkit-transform: translateY(-50%);
+    -khtml-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
+  div.inputTags-list span.inputTags-item i:hover {
+    color: #e74c3c;
+  }
+  div.inputTags-list input.inputTags-field {
+    border: none;
+    margin-left: 4px;
+    background-color: transparent;
+  }
+  div.inputTags-list input.inputTags-field:focus,
+  div.inputTags-list input.inputTags-field:active {
+    outline: none;
+  }
+  div.inputTags-list input.inputTags-field.is-edit {
+    margin: 0 2px;
+    padding: 4px 8px 3px 8px;
+    border: 1px dashed #c4c4c4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list {
+    position: absolute;
+    max-height: 192px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    z-index: 100;
+    opacity: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-transform: scaleY(0);
+    -khtml-transform: scaleY(0);
+    -moz-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -webkit-transform-origin: 50% 0;
+    -khtml-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    -webkit-transition-duration: 0.2s;
+    -khtml-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -ms-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list.is-active {
+    opacity: 1;
+    -webkit-transform: scaleY(1);
+    -khtml-transform: scaleY(1);
+    -moz-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    -webkit-transition-duration: 0.3s;
+    -khtml-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -ms-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.2s;
+    -khtml-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -ms-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li:last-child {
+    border: none;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li:hover {
+    background-color: #19BC9C;
+    color: #fff;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li.is-disabled {
+    cursor: default;
+    background-color: #f7f7f7;
+    color: initial;
+  }
+  p.inputTags-error {
+    position: relative;
+    margin: 0;
+    padding: 0.5em 1em;
+    color: #fff;
+    background-color: rgba(231, 76, 60, 0.7);
+    cursor: pointer;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  p.inputTags-error:first-of-type {
+    margin-top: 8px;
+  }
+  p.inputTags-error:after {
+    position: absolute;
+    content: "\000D7";
+    top: 50%;
+    right: 0.5em;
+    -webkit-transform: translateY(-50%);
+    -khtml-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    font-size: 28px;
+  }
+</style>
+
+
+</head> 
+
+<body>
+  
+  
+ 
+  <div class="content" id="everydaytree">
+    <div>
+      <h1>Urgent tasks</h1>
+      <ul class="tree">
+        <li><a>发布新的gtd网页版本</a></li>
+      </ul>
+  </div>
+
+  <div id="todaytree">
+    <h1>Today tasks</h1>
+  </div>
+
+  </div>
+  <div id="everyday">
+    
+  </div>
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- 这是一个项目的div，里面有任务列表和添加任务一系列的html文件 -->
+
+
+  
+      
+     
+
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+      
+
+
+
+      <!-- 这是一个Add按键，用来把添加任务的div放进去 -->
+     
+      <li id="add_task_button_area">
+        <div class="add_task_button" id="plusbutton" >
+            <!-- <button id="plusbutton" class="add_childtask_button"> -->
+              <input id = "addtask_button" class="add_grandtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
+              <!-- <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
+              </svg> -->
+          <!-- </button> -->
+
+            <!-- <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+"> -->
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+
+  <!-- <input type="text" name="lname" value="Doe" -->
+
+
+<!-- <button id="test_post">test the post function</button> -->
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<!-- 下面是脚本文件，最后要做分离的 -->
+
+<script type="text/javascript">
+
+// <!-- 下面是添加任务时使用的html，里面仅包含一个li标签 -->   
+     
+    var add_task_div = `<li id="add_task_item">
+        <div class="add_task_area" id="add_task" >
+          <div class="input_task_area">
+            <!-- onclick="test(this.getAttribute('id'))" -->
+            <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+            <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+            <!-- 设置输入任务的div -->
+            <div class="task_container">
+            <!-- <label class="input-task-class"    id="inputlabel">please input your task</label> -->
+            <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，-->
+            <input class="input_text" type="text" id="noid" placeholder="please input your task" >
+            <!-- <button id="nonoid">点击添加task</button> -->
+            <!-- <input id="testbutton"  placeholder="please input your task"> -->
+            </div>
+            
+            <div class="task_property_area">
+              <div class="calendar_project_area">
+                <div class="calendar_area" id="calendar_area">
+                  <!-- 输入任务时间的表单 -->
+                  <!-- <a>请输任务时间</a> -->
+                  <button id="calendar" class="clock_button">
+                    <svg t="1598153562536" class="icon" 
+                    viewBox="0 0 1024 1024" version="1.1" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    p-id="3498" width="20" height="20">
+                      <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                      fill="#CFD8DC" p-id="3499">
+                      </path>
+                      <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                      fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                      </path>
+                      <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                      </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                      </path>
+                    </svg>
+                  </button>
+                  <!-- <label id="inputlabel">please input your plantime</label>
+                  <input type="text" id="plantime" > -->
+                </div>
+      
+               
+                <div id="goal_list" class="goal_list">
+                </div>
+              </div>
+      
+              <div id="timedevotedto_a_task">                  
+                  <select name="time_devoted_select" id="time_devoted_select">
+                    <option value="5">5分钟</option>
+                    <option value="10">10分钟</option>
+                    <option value="15">15分钟</option>
+                    <option value="20">20分钟</option>
+                    <option value="25">25分钟</option>
+                    <option value="30">30分钟</option>
+                    <option value="40">40分钟</option>
+                    <option value="50">50分钟</option>
+                    <option value="60">1小时</option>
+                    <option value="90">1.5小时</option>
+                    <option value="120">2小时</option>
+                    <option value="150">2.5小时</option>
+                    <option value="180">3小时</option>
+                    <option value="210">3.5小时</option>
+                    <option value="240">4小时</option>
+                    <option value="240">6小时</option>
+                    <option value="480">8小时</option>
+                    <option value="720">12小时</option>
+                  </select>
+                </div>
+
+
+
+              <div id="tags_review_area" class="tags_review_area">
+                <div id="tasktags_area">
+                
+                  <input type="text" name="tasktag" id="tasktag_selector" >
+                
+                  </select>
+                </div>
+      
+              
+              </div>
+            </div>
+      
+           
+          </div>
+         
+          <div class="add_task_button_area">
+              <button class="add_task_button">添加任务</button>
+              <button class="cancel_add_task_button">取消</button>
+          </div>
+        </div>
+      </li>`
+
+
+      var plusbutton = 
+      `<div class="add_task_button" id="plusbutton" >
+            <!-- <button id="plusbutton" class="add_childtask_button"> -->
+              <input id = "addtask_button" class="add_grandtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
+              <!-- <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
+              </svg> -->
+          <!-- </button> -->
+
+            <!-- <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+"> -->
+        </div>`
+
+// 定义全局变量onedit 用来用来保证窗口只有一个task编辑窗口
+var onedit  =  false
+parentid = 'unspecified'
+// 定义goal和project的全局变量，传到create和updatetask的API中
+var selected_goal = "no goal"
+var selected_project = "inbox"
+// 定义timedevotedto_a_task的全局变量，只传到updatetask的API中
+var devotedtime = 0
+// 
+var reviewalgoforalltasksintoday = {}
+
+// 定义这个sendback_tasks用来存放geteveryday传回来的所有task，是一个array,形式是这样的[{},{},{}……]
+var sendback_tasks = []
+
+    // 翻转一个对象的key和value
+    function swap(json){
+      var ret = {};
+      for(var key in json){
+        ret[json[key]] = key;
+      }
+      return ret;
+    }
+
+    var tagscovert = {
+      "importanttag": "重要的",
+      'feartag': "害怕的",
+      'principletag': "原则",
+      'atomtag': "原子",
+      'dfstag': "需要深度搜索",
+      'hardtag': "困难的",
+      'easytag': "容易的",
+      'urgenttag': "急迫的",
+      'challengetag': "挑战的",
+      'uncomfortabletag': "不舒服的",
+      'troublesometag': "麻烦事",
+      'keyproblemtag': "关键问题",
+      'tenminutestasktag': "10分钟",
+      'thirtyminutestasktag': "30分钟",
+      'threeminutestasktag': "3分钟",
+    }
+
+    // Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
+    var tasktags_chinese = Object.values(tagscovert);
+
+    console.log(tasktags_chinese)
+
+    // 下面这个Swap的代码是把一个字典的键和值互换
+    var tagscovert_chkey = swap(tagscovert);
+
+    // var tagscovert_chkey = {
+    //   '重要的': 'importanttag',
+    //   '害怕的': 'feartag',
+    //   '原则': 'principletag',
+    //   '原子': 'atomtag',
+    //   '需要深度搜索': 'dfstag',
+    //   '困难的': 'hardtag',
+    //   '容易的': 'easytag',
+    //   '急迫的': 'urgenttag',
+    //   '挑战的': 'challengetag',
+    //   '不舒服的': 'uncomfortabletag',
+    //   '麻烦事': 'troublesometag',
+    //   '关键问题': 'keyproblemtag',
+    //   '10分钟': 'tenminutestasktag',
+    //   '30分钟': 'thirtyminutestasktag',
+    //   '3分钟': 'threeminutestasktag'
+    // }
+
+    var reviewalgo_covert = {
+          'attackactively':"主动进攻",
+          'makeuseofthings':"利用学习到的东西",
+          'depthfirstsearch':"深度优先搜索",
+          'markataskimmediately':"立即标记任务",
+          'alwaysprofit':"总是保持进步",
+          'brainuse':"动脑筋",
+          'useprinciple':"使用原则",
+          'patience':"有耐心",
+          'solveakeyproblem':"解决关键问题",
+          'learnnewthings':"学习到新内容",
+          'battlewithlowerbrain':"战胜低级情绪",
+          'difficultthings':"完成困难事情",
+          'acceptfactandseektruth':"接受事实，寻求真相",
+          'dealwithahardtask':"处理困难任务",
+          'threeminutes':"3分钟原则",
+          'serviceforgoal':"为目标服务",
+          'buildframeandprinciple':"建立框架原则",
+          'atomadifficulttask':"原子化拆分任务",
+          'noflinch':"不退缩",
+          'learntechuse':"学习技术",
+          'doanimportantthingearly':"提前完成一件重要的事",
+          'acceptpain':"接受痛苦",
+          'conquerthefear':"战胜恐惧"
+    }
+
+
+
+// Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
+var reviewalgo_chinese = Object.values(reviewalgo_covert);
+
+console.log(reviewalgo_chinese)
+
+// 下面这个Swap的代码是把一个字典的键和值互换
+var reviewalgo_covert_chkey = swap(reviewalgo_covert);
+
+ //  define a inital tasktags
+ var tasktags = {
+      'importanttag': 'no',
+      'feartag': 'no',
+      'principletag': 'no',
+      'atomtag': 'no',
+      'dfstag': 'no',
+      'hardtag': 'no',
+      'easytag': 'no',
+      'urgenttag': 'no',
+      'challengetag': 'no',
+      'uncomfortabletag': 'no',
+      'troublesometag': 'no',
+      'keyproblemtag': 'no',
+      'tenminutestasktag': 'no',
+      'thirtyminutestasktag': 'no',
+      'threeminutestasktag': 'no'
+    }
+
+    // define a inital reviewalgo
+    var reviewalgo = {
+      'attackactively': 'no',
+      'makeuseofthings': 'no',
+      'depthfirstsearch': 'no',
+      'markataskimmediately': 'no',
+      'alwaysprofit': 'no',
+      'brainuse': 'no',
+      'useprinciple': 'no',
+      'patience': 'no',
+      'solveakeyproblem': 'no',
+      'learnnewthings': 'no',
+      'battlewithlowerbrain': 'no',
+      'difficultthings': 'no',
+      'acceptfactandseektruth': 'no',
+      'dealwithahardtask': 'no',
+      'threeminutes': 'no',
+      'serviceforgoal': 'no',
+      'buildframeandprinciple': 'no',
+      'atomadifficulttask': 'no',
+      'noflinch': 'no',
+      'learntechuse': 'no',
+      'doanimportantthingearly': 'no',
+      'acceptpain': 'no',
+      'conquerthefear': 'no'
+    }
+// 早些时候使用的add_task_div还没有删除
+// var add_task_div = `<li id="add_task_item">
+//         <div class="add_task_area" id="add_task" >
+//           <div class="input_task_area">
+//             <!-- onclick="test(this.getAttribute('id'))" -->
+//             <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+//             <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+//             <!-- 设置输入任务的div -->
+//             <div class="task_container">
+//             <!-- <label class="input-task-class"    id="inputlabel">please input your task</label> -->
+//             <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，-->
+//             <input class="input_text" type="text" id="edite_taskid" placeholder="please input your task" >
+//             <!-- <button id="nonoid">点击添加task</button> -->
+//             <!-- <input id="testbutton"  placeholder="please input your task"> -->
+//             </div>
+            
+//             <div class="task_property_area">
+//               <div class="calendar_project_area">
+//                 <div class="calendar_area" id="calendar_area">
+//                   <!-- 输入任务时间的表单 -->
+//                   <!-- <a>请输任务时间</a> -->
+//                   <button id="calendar" class="clock_button">
+//                     <svg t="1598153562536" class="icon" 
+//                     viewBox="0 0 1024 1024" version="1.1" 
+//                     xmlns="http://www.w3.org/2000/svg" 
+//                     p-id="3498" width="20" height="20">
+//                       <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+//                       fill="#CFD8DC" p-id="3499">
+//                       </path>
+//                       <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+//                       fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+//                       </path>
+//                       <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+//                       </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+//                       </path>
+//                     </svg>
+//                   </button>
+//                   <!-- <label id="inputlabel">please input your plantime</label>
+//                   <input type="text" id="plantime" > -->
+//                 </div>
+      
+//                 <div id="project_area">
+//                   <!-- 任务的选择需要使用带层级标签的下拉列表 -->
+//                   <!-- <a>project select</a> -->
+//                   <label for="project_choose"></label>
+//                   <select name="project_choose" id="project_choose">
+//                     <option value="inbox">inbox</option>
+//                     <option value="work">work</option>
+//                     <option value="family">family</option>
+//                   </select>
+//                 </div>
+
+//                 <div id="goal_area">
+//                   <!-- 任务的选择需要使用带层级标签的下拉列表 -->
+//                   <!-- <a>project select</a> -->
+//                   <label for="goal_choose"></label>
+//                   <select name="goal_choose" id="goal_choose">
+//                     <!-- <option value="health">health</option>
+//                     <option value="wealth">wealth</option>
+//                     <option value="happy">happy</option> -->
+//                   </select>
+//                 </div>
+//               </div>
+      
+//               <div id="tags_review_area" class="tags_review_area">
+//                 <div id="tasktags_area">
+//                   <!-- 选择标签，需要使用multi-selector  -->
+//                   <!-- <label for="tasktag">tasktag:</label> -->
+//                   <input type="text" name="tasktag" id="tasktag_selector" >
+//                   <!-- <select name="tasktag" id="tasktag_selector" multiple >
+//                     <option value="ub">输入标签</option>
+//                     <option value="IM">重要的</option>;
+//                     <option value="HA">困难的</option>;
+//                     <option value="UR">紧急的</option>; -->
+//                   </select>
+//                 </div>
+      
+//                 <!-- <div id="reviewalgo_area"> -->
+//                   <!-- 评价任务的窗口，和选择标签一样，都需要multi-secector  -->
+//                   <!-- <div id="task_reviewalgo_area">
+//                     <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+//                   </div>
+//                 </div> -->
+//               </div>
+//             </div>
+      
+//             <!-- <div> -->
+//               <!-- 输入标签的input窗口 -->
+//               <!-- <label id="tasktags" >please choose the tasktags</label> -->
+//               <!-- <input type="text" id="tags" placeholder="please choose the tasktags"/> -->
+//             <!-- </div> -->
+      
+//             <!-- <div> -->
+//               <!-- 输入review的input窗口 -->
+//               <!-- <label id="reivew">please choose thd reviewalgo</label> -->
+//               <!-- <input type="text" id="reviewalgo" placeholder="please choose thd reviewalgo" /> -->
+//             <!-- </div> -->
+//           </div>
+         
+//           <div class="add_task_button_area">
+//               <button class="add_task_button">添加任务</button>
+//               <button class="cancel_add_task_button">取消</button>
+//           </div>
+//         </div>
+//       </li>`
+
+
+
+//  console.log(reviewalgo_covert_chkey) ;
+
+
+// function updatetask(id){
+//   alert(`我正在调用update这个函数`)
+
+//   // var updatedtask = $("#updatedtask").val()
+//       var taskid = id.substring(8, 13)
+//       // alert(taskid)
+
+//       var updatedinfo =
+//       {
+//         'ifdissect': 'no',
+//         'deadline': 'unspecified',
+//         'starttime': 'unspecified',
+//         'endtime': 'unspecified',
+//         'tasktagsorigin': 'unspecified',
+//         'parentid': 'unspecified',
+//         'timedevotedto_a_task': 0,
+//         'goalcode': 'xxx',
+//         'client': 'gtdcli',
+//         'taglight': 'no',
+//         'note': 'unspecified',
+//         'reviewalgolight': 'no',
+//         'reviewalgo': {},
+//         'parentproject': 'unspecified',
+//         'id': taskid,
+//         'place': 'unspecified',
+//         'finishtime': 'unspecified',
+//         'inbox': 'unspecified',
+//         'project': 'inbox',
+//         'plantime': 'today',
+//         'taskstatus': 'finished',
+//         'tasktags': {}
+//       }
+
+//       $.ajax({
+//         type: "POST",
+//         url: "/v1/update",
+//         // The key needs to match your method's input parameter (case-sensitive).
+//         data: JSON.stringify(updatedinfo),
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         success: function (data) { 
+//           geteverydaytask();
+//           // alert(data);
+//          },
+//         failure: function (errMsg) {
+//           alert(errMsg);
+//         }
+//       })
+//     }
+
+
+// alert( "Handler for .click() called." );
+      
+// 这是用来生成goal和project div的的函数
+function create_goalllist_div(goalincludeproject){
+      // console.log(goalincludeproject)
+        // var  divstring = `
+        //                 <div >
+        //                   <select name="goal_choose" id="goal_choose">
+        //                     <optgroup label="health">
+        //                         <option id = "running" value="running">running</option>
+        //                         <option  id = "swimming" value="swimming">swimming</option>
+        //                     </optgroup>
+        //                   <optgroup label="wealth">
+        //                       <option id = "work" value="work">happy</option>
+        //                   </optgroup>
+        //                   </select>
+        //                 </div>`
+        
+         var yourgoals = Object.keys(goalincludeproject)
+        //  console.log("这里在输出yourgoaas")
+        //  console.log(yourgoals)
+          var select = document.createElement("select")
+          select.setAttribute("id","goal_list_select")
+          select.setAttribute("name","goal_list_select")
+          document.getElementById("goal_list").appendChild(select)
+        
+
+        for (let i = 0; i < yourgoals.length; i++) {
+          
+          var optgroup = document.createElement("optgroup")
+          optgroup.setAttribute( "label", `${yourgoals[i]}`)
+          // console.log(optgroup)
+          // console.log("这里在输出yourgoaas")
+          var yourgoal_now = yourgoals[i]
+          var yourprojects_inthis_goal = goalincludeproject[yourgoal_now]
+          for (let j = 0; j < yourprojects_inthis_goal.length; j++) {
+            
+            var option = document.createElement("option")
+            option.setAttribute("id",yourprojects_inthis_goal[j])
+            option.setAttribute("value",yourprojects_inthis_goal[j])
+            // console.log(option)
+
+            // console.log(single_project)
+            option.text = yourprojects_inthis_goal[j]
+            optgroup.appendChild(option)
+            // option.firstChild.nodeValue = single_project
+              // console.log(optgroup)
+          }
+          // group =  optgroup.appendChild(option)opt
+          document.getElementById("goal_list_select").appendChild(optgroup)
+        }
+        // document.getElementById("goal_list_select").appendChild(optgroup)
+        }
+
+
+function use_chosen_style(){
+  
+    $("#goal_list_select").chosen().on("change", function(event, params){
+    console.log("触发change事件")
+    console.log(params)
+    console.log(event)
+    selected_project = params.selected
+    var option_value = document.getElementById(params.selected).innerHTML
+    console.log(option_value)
+
+    var goal_label = $("#"+params.selected).parent().attr("label")
+    selected_goal = goal_label
+    // var goal_and_project = [selected_goal,selected_project]
+    // console.log(goal_and_project)
+    // return goal_and_project
+  })
+
+  $("#time_devoted_select").chosen({width: "95%"}).on("change", function(event, params){
+    console.log("触发change事件")
+    // console.log(params)
+    // console.log(event)
+    devotedtime = Number.parseInt(params.selected) 
+    console.log(typeof(devotedtime))
+  })
+
+}
+ 
+     // 判断任务是否已经评价的函数，如果评价就更新任务
+    function judge_task_finished(updatedinfo){
+        // console.log("我正在调用judge这个函数")
+        //  alert("我正在输出inboxtext")
+         console.log("我正在输出info")
+        //  alert(updatedinfo)
+         console.log(updatedinfo)
+      
+
+      //   // 下面的代码用来判断任务是否完成
+      // console.log(updatedinfo)
+        var temp_reviewalgo = updatedinfo.reviewalgo;
+        var search = "yes"
+      //   console.log(temp_reviewalgo);
+        // if ( Object.keys(reviewalgo).length == 0) 
+        if (inArray(search, temp_reviewalgo)) {
+          updatedinfo.taskstatus = "finished";
+        // console.log("==========we cam=============")
+          console.log(updatedinfo);
+        
+        // 更新任务
+          $.ajax({
+          type: "POST",
+          url: "/v1/update",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(updatedinfo),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) {       
+            // alert(data); 
+            geteverydaytask();
+            console.log(data)
+            reviewalgo = {
+            'attackactively': 'no',
+            'makeuseofthings': 'no',
+            'depthfirstsearch': 'no',
+            'markataskimmediately': 'no',
+            'alwaysprofit': 'no',
+            'brainuse': 'no',
+            'useprinciple': 'no',
+            'patience': 'no',
+            'solveakeyproblem': 'no',
+            'learnnewthings': 'no',
+            'battlewithlowerbrain': 'no',
+            'difficultthings': 'no',
+            'acceptfactandseektruth': 'no',
+            'dealwithahardtask': 'no',
+            'threeminutes': 'no',
+            'serviceforgoal': 'no',
+            'buildframeandprinciple': 'no',
+            'atomadifficulttask': 'no',
+            'noflinch': 'no',
+            'learntechuse': 'no',
+            'doanimportantthingearly': 'no',
+            'acceptpain': 'no',
+            'conquerthefear': 'no'
+            }
+            },
+          failure: function (errMsg) {
+            alert(errMsg);
+          }
+          })
+        }
+        else {
+          alert("请先对任务进行评价才能点击完成按钮哦~");
+         // return false;
+          event.preventDefault();
+         // 阻止click动作之后默认的操作
+        }
+      }
+      
+
+window.onload = function() {
+  var input = document.querySelector('#g01-01');
+  if (input) {   
+    input.addEventListener('change', doalert, false);
+  }
+}
+
+function geteverydaytask(){
+
+  $.get("/v1/todayjson", function(data, status){
+    // alert("Data: " + data + "\nStatus: " + status);
+    console.log(data.task);
+    onedit = false 
+    $('#todaytree').replaceWith($('#todaytree').clone());
+    var div = document.getElementById('todaytree');
+    div.innerHTML = ""
+    //origin event   was not  delletd
+    var  alltask=''
+    // data.task是从服务器传回的所有任务
+    var tasks = data.task
+    sendback_tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      // var i = 0
+      var head = '<h1>Today tasks</h1><ul class="tree">'
+       var  tail = '</ul>'
+       var  alltask = ''
+       console.log("我正在输出data.task")
+       var todayjson = data.task
+       var todaytest =  data.task
+      // console.log("我正在打印todayjson")
+      //  console.log(todayjson)
+    
+      var taskids = []
+      for(var i=0;i<todayjson.length;i++){
+        taskids.push(todayjson[i].ID)
+      }
+       var  tasktree ={"first":[],"second":[],"three":[],"four":[],"five":[]}
+       var  sontree = {}
+       var  parents = []
+// 生成儿子和孙子
+      for (let i = 0; i< todayjson.length; i++) {
+      sontree[todayjson[i].ID] =[]
+       
+      }
+     
+      for (let i = 0; i< todayjson.length; i++) {
+      if (todayjson[i].parentid !="unspecified") {
+        sontree[todayjson[i].parentid].push(todayjson[i])
+      }
+      }
+
+      // console.log("这是sons")
+      //  console.log(sontree)
+
+// 生成爸爸们
+      for (let i = 0; i < todayjson.length; i++) {
+        var single_parenttask = todayjson[i].parentid
+        console.log(single_parenttask)
+        if (single_parenttask == "unspecified" ) {
+          parents.push(todayjson[i])
+          tasktree.first.push(todayjson[i])
+            // todayjson.splice(i,i)
+        } 
+      }
+      
+      // console.log("这是parents")
+      // console.log(parents)
+      // goal = "${}" project = "${}"
+      //  + "</li>"
+// 生成div tree
+       var tree_div = ""
+  for (let i = 0; i < parents.length; i++) {
+    var  parent_id = parents[i].ID
+    var task_goal = parents[i].goal
+    var task_project = parents[i].project
+    // console.log(`我正在输出goal ${goal_for_checkbox}`)
+    var parent_addedtask_head = `<div class="task_list_item" id="task_list_div${parent_id}" goal = "${task_goal}" project = "${task_project}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${parent_id}" goal = "${task_goal}" project = "${task_project}" /> 
+          </div>  
+          <div class="task_list_content" id= "checkbox${parent_id}" >
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+      var parent_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var parent_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
+      tree_div = tree_div + `<li id = ${parent_id} >` + parent_addedtask_head + `<a id = "tasktext${parent_id}" class = "task_text">` + parents[i].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">` + parent_addedtask_trail;
+
+    // console.log("第一层嵌套")
+    // console.log(parent_id)
+    //判断是否有儿子，如果没有的话，加上</li> 
+    // if (sontree[parent_id].length == 0) {
+    //   tree_div = tree_div + ' </li>'
+    // }
+      // var son_div = ""
+
+
+    for (let j = 0; j < sontree[parent_id].length; j++) {
+      var son_id = sontree[parent_id][j].ID
+      var task_goal = sontree[parent_id][j].goal
+      var task_project = sontree[parent_id][j].project
+      if (j==0) {
+        tree_div = tree_div + "<ul>"
+      }
+      // console.log("正在打印第2层")
+      // console.log(sontree[parent_id].length)
+      // console.log(sontree[parent_id])
+      // console.log(sontree[parent_id][1].ID)
+      var son_addedtask_head = `<div class="task_list_item" id="task_list_div${son_id}" goal = "${task_goal}" project = "${task_project}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${son_id}" goal = "${task_goal}" project = "${task_project}" /> 
+          </div>  
+          <div class="task_list_content" id= "checkbox${son_id}">
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+      var son_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var son_addedtask_trail = '</div><div><span class="task_list_item_date_button"> </span></div></div></div>'
+      tree_div = tree_div + `<li id = ${son_id} >` + son_addedtask_head + `<a id = "tasktext${son_id}" class = "son_task_text" >` + sontree[parent_id][j].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">` + son_addedtask_trail  ;
+
+      // console.log("第二层嵌套")
+      // console.log(son_id)
+
+
+    for (let z = 0; z < sontree[son_id].length; z++) {
+      console.log(z)
+      var grandson_id = sontree[son_id][z].ID
+      var task_goal = sontree[son_id][z].goal
+      var task_project = sontree[son_id][z].project
+      if (z==0) {
+        tree_div = tree_div + "<ul>"
+      }
+      // console.log("正在打印第3层")
+      // console.log([son_id].length)
+      // console.log(sontree[son_id][z])
+      var grandson_addedtask_head = `<div class="task_list_item" id="task_list_div${grandson_id}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${grandson_id}" goal = "${task_goal}" project = "${task_project}" /> 
+          </div>  
+          <div class="task_list_content" id= "checkbox${grandson_id}" goal = "${task_goal}" project = "${task_project}">
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+
+      var grandson_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var grandson_addedtask_trail = '</div><div><span class="task_list_item_date_button"></span></div></div></div>'
+      tree_div = tree_div + `<li id = ${grandson_id} >` + grandson_addedtask_head + `<a id = "tasktext${grandson_id}" class = "son_task_text" >` + sontree[son_id][z].task + '</a>' + grandson_addedtask_trail +"</li>" ;
+       
+      var temp_z = z+1
+            if (temp_z == sontree[son_id].length ) {
+              tree_div = tree_div + "</ul>"
+            }
+
+      // console.log("第三层嵌套")
+      // console.log(sontree[son_id])
+    }    
+    
+    
+    tree_div = tree_div + "</li>"
+    var temp_j = j + 1
+      if ( temp_j == sontree[parent_id].length ) {
+        tree_div = tree_div + ' </ul> '
+      }
+    }  
+    tree_div = tree_div + "</li>"
+  }
+
+  div.innerHTML += head + tree_div + tail
+    
+  make_parent_task_checkbox_hidden()
+
+  // console.log("print tree")
+  // console.log(tree_div)
+  parentid = 'unspecified'
+
+  }
+  );
+}
+
+geteverydaytask()
+
+
+
+function make_parent_task_checkbox_hidden(){
+     // 隐掉父任务的checkbox
+    // console.log(`i am printint sendback_tasks ${sendback_tasks}`)
+    for (let i = 0; i< sendback_tasks.length; i++) {
+    var task_id = Number.parseInt(sendback_tasks[i].ID)
+    // console.log(`"i am print the task_id ${task_id}"`)
+    // 循环任务的ID都不是别的任务的父ID，那么它的checkbox才可以显示出来
+      for (let j = 0; j < sendback_tasks.length; j++) {
+        var parent_id = Number.parseInt(sendback_tasks[j].parentid)
+        // console.log(`"iam print the parent_id ${parent_id}"`)
+        // console.log(`判断 ${task_id == parent_id}`)
+        if (task_id == parent_id) {
+            var this_checkbox = document.getElementById(`checkbox${task_id}`)
+            console.log(`"checkbox${task_id}"`)
+            // console.log(this_checkbox)
+            this_checkbox.style.visibility = "hidden"
+        }
+      }
+    }
+}
+
+
+
+// 子任务点击任务后面的+号之后可以新建子任务
+
+
+      // 把文本转换成div的对象格式
+      function createNode(txt) {
+            // const template = `${txt}`;
+            let tempNode = document.createElement('div');
+            tempNode.innerHTML = txt;
+            return tempNode.firstChild;
+        }
+
+
+
+// 点击按键添加子任务的事件
+$(document).on("click","input.add_childtask_button",function(){
+     
+     console.log(`我正在输出onedit变量${onedit}`)
+     console.log("正在执行点击加号的事件")
+     if (onedit == true){
+       alert("请先消除任务编辑框")
+       return;
+     }
+     if (onedit == false){
+       console.log("正在执行把onedit变成true的if语句")
+       onedit = true //进入编辑模式
+       console.log(`我正在if里输出onedit变量${onedit}`)
+     }
+
+        
+    //  console.log("我正在打印兄弟节点")
+    //  console.log($(this).prev())
+      var parent_id = $(this).prev().attr("id").substring(8,13)
+     // 通过寻找兄弟节点来寻找点击+号的父ID
+
+    // 这里是找到goal and project，把它传到全局变量里，就来更新任务时使用
+        var get_task_li_dom = document.getElementById(`${parent_id}`)
+        console.log(get_task_li_dom)
+        selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+        selected_project = get_task_li_dom.children[0].getAttribute("project")
+        console.log("我正在输出goal和project")
+        console.log(selected_goal)
+        console.log(selected_project)
+
+
+     console.log(parent_id)
+
+    // 下面的操作是出现输入任务的窗口，加上一个<ul></ul>
+    var insert_div = ""
+     var ul_div = $('<ul/>')
+     console.log(ul_div)
+     ul_div.attr("id","sontask")
+     insert_div = ul_div.append(createNode(add_task_div))
+     console.log(insert_div)
+     $(`#${parent_id}`).append(insert_div)
+     getgoalincludeproject()
+    
+     // 把父id传过去
+     parentid = parent_id
+   })
+
+// 点击+号添加按爷爷级别事件
+   $(document).on("click","input.add_grandtask_button",function(){
+     
+     console.log(`我正在输出onedit变量${onedit}`)
+     console.log("正在执行点击加号的事件")
+     if (onedit == true){
+       alert("请先消除任务编辑框")
+       return;
+     }
+     if (onedit == false){
+       console.log("正在执行把onedit变成true的if语句")
+       onedit = true //进入编辑模式
+      //  console.log(`我正在if里输出onedit变量${onedit}`)
+     }
+      parentid = "unspecified"
+      var add_plus = document.getElementById("add_task_button_area");
+      console.log(add_plus);
+      add_plus.innerHTML += add_task_div;
+      document.getElementById("plusbutton").outerHTML = "";
+      getgoalincludeproject()
+
+   })
+
+
+
+
+function getgoalincludeproject(){
+  $.get("/v1/goalincludeproject", function(data, status){
+  yourgoals = []
+  // alert("Data: " + data + "\nStatus: " + status);
+  console.log("输出data")
+  console.log(data);
+  console.log("输出data.goals")
+  console.log(data.goals)
+  create_goalllist_div(data.goals);
+  use_chosen_style()
+  })
+}
+
+// 早些版本调goallist的API
+var yourgoals = []
+function getgoallist(){
+  // r= requests.get(str(localhosturl)+'/v1/goaljson',cookies=cookie)
+$.get("/v1/goaljson", function(data, status){
+  yourgoals = []
+  // alert("Data: " + data + "\nStatus: " + status);
+  console.log(data);
+  var index = 0 
+  while(index<data.goals.length){
+    console.log(data.goals[index].name)
+    yourgoals.push(data.goals[index].name)
+    index++
+  }
+  
+  var goal_option_div = ""
+  goal_option_div = ''
+  for (let i = 0; i < yourgoals.length; i++) {
+    // var goal_option = document.createElement("option")
+    // goal_option += goal_option.setAttribute("value",yourgoals[i])
+
+    // goal_option += goal_option.
+    // console(goal_option)
+    // goal_option_div.innerHTML += goal_option
+  }
+  console.log(yourgoals)
+});
+}
+
+getgoallist()
+
+
+
+
+// window.onload = function(){
+// $("#tempid").click(function(){
+
+//   var content = "任务1";
+//   var task_content = document.getElementById("tempid");
+//   task_content.firstChild.nodeValue = content;
+// })
+
+
+
+var add_task_item = document.getElementById("add_task_item");
+// console.log(add_task_item);
+  
+  // const nospecifiedtaskdivcode =
+    var taskid_div = "noid";
+
+    //  添加日期的组件
+    function yyyymmdd(dateIn) {
+      var yyyy = dateIn.getFullYear();
+      var mm = dateIn.getMonth() + 1; // getMonth() is zero-based
+      var dd = dateIn.getDate();
+      var timereturn = String(10000 * yyyy + 100 * mm + dd);
+      var finaltime = timereturn.substring(2, 8)
+      return finaltime
+      // Leading zeros for mm and dd
+    }
+    // 把日期传入的js代码
+    // var today = new Date();
+    // console.log(yyyymmdd(today));
+
+    var plantime = "unspecified"
+    // $("#calendar").click(function () 
+    $(document).on("click","#calendar",function()
+    {
+      let myPicker = new SimplePicker();
+      myPicker.open();
+      myPicker.on('submit', function (date, readableDate) {
+        // alert(date);
+        plantime = yyyymmdd(date)
+        // alert("ma is here!!!!!!!!!!!")
+        // alert(plantime)
+        // plantime = conver
+        // alert(readableDate)
+      })
+      // alert("ma is here")
+      myPicker.on('close', function (date) {
+        // ...
+      })
+      // myPicker.close()
+    })
+    // 输入任务的标签组件
+    // var temtags = ['重要', '害怕', '原则','原子化','dfs','困难','容易','紧急','挑战','麻烦事','主要问题', '10分钟', '3分钟', '30分钟']
+
+
+    // 更新标签的函数
+    
+    // 对字典进行中英文变换,用在tags和review中,dict是英汉对应下的字典，key是通过inputtags传入的中文
+    function getdictvaluearray(dict,keys){
+    var values = [] 
+    for (let i = 0; i < keys.length; i++) {
+      values.push(dict[keys[i]])
+    }
+    return  values
+    }
+    
+    // 更新tags
+    function updatetags(tagsarray) {
+      const tasktags_fixed = {
+      'importanttag': 'no',
+      'feartag': 'no',
+      'principletag': 'no',
+      'atomtag': 'no',
+      'dfstag': 'no',
+      'hardtag': 'no',
+      'easytag': 'no',
+      'urgenttag': 'no',
+      'challengetag': 'no',
+      'uncomfortabletag': 'no',
+      'troublesometag': 'no',
+      'keyproblemtag': 'no',
+      'tenminutestasktag': 'no',
+      'thirtyminutestasktag': 'no',
+      'threeminutestasktag': 'no'
+      }
+
+      var tem_tags = tasktags_fixed;
+      // console.log("下面是打印tasktags_fixed")
+      // console.log(tasktags_fixed)
+
+      for (let i = 0; i < tagsarray.length; i++) {
+        tem_tags[tagsarray[i]] = "yes";
+      }
+      // console.log(`我正在输出tagsarray${tagsarray}`)
+      // console.log(tagsarray)
+      // console.log("tags更新完成")
+      // console.log(tem_tags);
+      // console.log("下面是tasktags_fixed")
+      // console.log(tasktags_fixed)
+      return tem_tags;
+    }
+
+    // 更新评价的函数
+    function updatereviewalgo(reviewarray) {
+      const reviewalgo_fixed = {
+      'attackactively': 'no',
+      'makeuseofthings': 'no',
+      'depthfirstsearch': 'no',
+      'markataskimmediately': 'no',
+      'alwaysprofit': 'no',
+      'brainuse': 'no',
+      'useprinciple': 'no',
+      'patience': 'no',
+      'solveakeyproblem': 'no',
+      'learnnewthings': 'no',
+      'battlewithlowerbrain': 'no',
+      'difficultthings': 'no',
+      'acceptfactandseektruth': 'no',
+      'dealwithahardtask': 'no',
+      'threeminutes': 'no',
+      'serviceforgoal': 'no',
+      'buildframeandprinciple': 'no',
+      'atomadifficulttask': 'no',
+      'noflinch': 'no',
+      'learntechuse': 'no',
+      'doanimportantthingearly': 'no',
+      'acceptpain': 'no',
+      'conquerthefear': 'no'
+    }
+    var tmp_reviewalgo = reviewalgo_fixed;
+    for(var i =0; i<reviewarray.length; i++){
+      tmp_reviewalgo[reviewarray[i]] = "yes"
+    }
+    return tmp_reviewalgo;
+    }
+
+// 标签的输入
+
+  $("#tasktag_selector").inputTags({
+      autocomplete: {
+        values: tasktags_chinese,
+        only: true
+      },
+      // max: 3,
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      create: function ($elem) {
+        console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        // tasktags = updatetags($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        tasktags = updatetags($elem.tags);
+      }
+    }
+    );
+
+
+    // review的选择输入
+
+    $("#task_reviewalgo_selector").inputTags({
+      autocomplete: {
+        values: reviewalgo_chinese,
+        only: true
+      },
+      // max: 3,
+
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // reviewalgo = updatereviewalgo($elem.tags);
+
+      },
+
+      create: function ($elem) {
+        // console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        // console.log($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      }
+    }
+    );
+    
+
+    // for (var i = 0; i < tasktags.length; i++) {
+    //         // const element = array[i];
+    //         if($elem[i]= Object.keys(tasktags)[i]){
+    //           tasktags[i] = $elem[i];
+    //         }
+    //           alert("tasktags")
+    //     };
+
+    // 下面是输入任务的JS代码
+
+    // $("#testbutton").keypress(function(event){
+    //   if(event.key === "Enter"){
+    //     $.get("/v1/test", function(data, status){
+    //       alert("Data: " + data + "\nStatus: " + status);
+    //     });
+    //   }
+  
+    // });
+
+
+    // $("#noid").keypress(function (event)
+
+
+
+// 把点击button封闭成一个事件
+
+// 把创建任务封装成一个函数
+
+function clickAndPress_add_task_function(){
+  console.log("ma is here")
+        // 下面这行代码把在Input里输入的内容传入到inputedtask这个变量里
+        var inputedtask = $("#noid").val();
+        // var inputedtask = document.getElementById("createtask").getAttribute("placeholder");
+        // console.log(inputedtask);
+        // alert(inputedtask);
+        // var plantime =  $("#plantime").val()
+        // alert(inputedtask)
+        //  alert("检查plantime")
+        //  alert(plantime)
+        var task = {
+          'starttime': 'unspecified',
+          'deadline': 'unspecified',
+          'endtime': 'unspecified',
+          'ifdissect': 'no',
+          'note': 'unspecified',
+          'parentid': parentid,
+          'timedevotedto_a_task': devotedtime,
+          'goal': selected_goal,
+          'parentproject': 'unspecified',
+          'inboxlist': 'empty',
+          'inbox': inputedtask,
+          'finishtime': 'unspecified',
+          'reviewalgolight': 'no',
+          'reviewalgo': reviewalgo,
+          'place': 'unspecified',
+          'input-time': 'Fri Aug 21 22:38:23 2020',
+          'project': selected_project,
+          'taskstatus': 'unfinished',
+          'plantime': plantime,
+          'taglight': 'yes',
+          'tasktags': tasktags,
+          'client':"dreamforlifeweb",
+          'tasktagsorigin': 'e'
+        };
+        console.log("创建任务的时候输入task")
+        console.log(task);
+        // alert(plantime);
+
+        $.ajax({
+          type: "POST",
+          url: "/v1/createtask",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(task),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) {
+            // var taskid = data.taskid
+            // $("#thisnode").setproperty("taskid")=taskid
+            // <p taskid=1544>
+              // window.location.replace("/v1/taskmanager");
+              geteverydaytask()
+              // 上面使用了geteverydaytask的函数来达到把输入的task放到上面的效果
+            // alert(data);
+            // console.log("i am printing the return data from server")
+            // console.log(data)
+            var taskid = data.taskid;
+            // alert(taskid);
+            const taskdom = document.querySelector("#tempid")
+            console.log(taskdom);
+            // taskdom.setAttribute("taskid", taskid);
+            // taskdom.setAttribute("id", taskid);
+            // console.log(data);
+            $("#noid").val('');
+          },
+          failure: function (errMsg) {
+            alert(errMsg);
+          }
+          //  alert(errMsg);
+        })
+}
+
+
+
+
+  $(document).on("click",".add_task_button",function(){
+    clickAndPress_add_task_function()
+    
+  })
+
+
+
+
+
+    // 下面是创建任务的JS部分
+    $(document).on("keypress","#noid",function(event)
+    {
+      if (event.key === "Enter") {
+        // alert("点击回车");
+        clickAndPress_add_task_function()
+      }
+    });
+
+    // 这里是点击取消之后，隐去添加任务窗口变加号的事件
+
+    $(document).on("click",".cancel_add_task_button",function(){
+      if (document.getElementById("sontask") != null){
+        remove_add_subtask_area()
+      }
+      else{
+        remove_add_task_area()
+      }
+    })
+
+    function remove_add_task_area(){
+      document.getElementById("add_task_item").outerHTML = ""
+      document.getElementById("add_task_button_area").appendChild(createNode(plusbutton))
+      onedit = false
+    }
+
+    function remove_add_subtask_area(){
+      document.getElementById("sontask").outerHTML = ""
+      // document.getElementById("add_task_button_area").appendChild(createNode(plusbutton))
+      onedit = false
+    }
+
+
+
+    // 下面的函数用来判断一个字典里面是否含有某个value
+    function inArray(search, array) {
+      for (var i in array) {
+        if (array[i] == search) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+
+  // edit and update the task
+
+  
+
+
+
+
+  //  点击任务的ul区域得到一个扩大的ID，然后把文字内容传进去
+    $(document).on("click","a.task_text",function(){
+      
+      // 判断当前界面是否已经有编辑窗口了，如果有，则执行出现窗口的代码，如果已经有，则不执行
+      if ( document.getElementsByClassName("edite_task_area").length == 0 ) {
+        
+      
+        // 提取任务id
+        var choosed_taskid = $(this).attr("id").substring(8, 13);
+        var tasktext = "tasktext" + String(choosed_taskid);
+  
+        var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
+       
+        var get_task_li_dom = document.getElementById(`${choosed_taskid}`)
+          console.log(get_task_li_dom)
+          selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+          selected_project = get_task_li_dom.children[0].getAttribute("project")
+          console.log("我正在输出goal和project")
+          console.log(selected_goal)
+          console.log(selected_project)
+        
+        // 提取任务内容
+        // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
+        var choosed_task_input = document.getElementById(tasktext)
+        // console.log(choosed_task_input)
+        var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
+        // console.log(choosed_task_input_text)
+        // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
+        // alert(choosed_task_input)
+        // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
+        // alert(choosed_task_text)
+        // alert(choosed_taskid);
+        var div = document.getElementById(`${choosed_taskid}`);
+        var insert_task_html = 
+        // `<div class="edite_subtask_area" id="add_task" >
+            `<div class="edite_task_area">
+              <!-- onclick="test(this.getAttribute('id'))" -->
+              <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+              <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+              <!-- 设置输入任务的div -->
+              <div class="task_container">
+              <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
+              <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
+              </div>
+              <div class="task_property_area">
+                <div class="calendar_project_area">
+                  <div class="calendar_area" id="calendar_area">
+                    <!-- 输入任务时间的表单 -->
+                    <!-- <a>请输任务时间</a> -->
+                    <button id="calendar" class="clock_button">
+                      <svg t="1598153562536" class="icon" 
+                      viewBox="0 0 1024 1024" version="1.1" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      p-id="3498" width="20" height="20">
+                        <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                        fill="#CFD8DC" p-id="3499">
+                        </path>
+                        <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                        fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                        </path>
+                        <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                        </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                        </path>
+                      </svg>
+                    </button>
+                    <!-- <label id="inputlabel">please input your plantime</label>
+                    <input type="text" id="plantime" > -->
+                  </div>
+        
+                  <div id="goal_list" class="goal_list">
+                 
+                  </div>
+  
+                  <div id="timedevotedto_a_task">                  
+                    <select name="time_devoted_select" id="time_devoted_select">
+                      <option value="5">5分钟</option>
+                      <option value="10">10分钟</option>
+                      <option value="15">15分钟</option>
+                      <option value="20">20分钟</option>
+                      <option value="25">25分钟</option>
+                      <option value="30">30分钟</option>
+                      <option value="40">40分钟</option>
+                      <option value="50">50分钟</option>
+                      <option value="60">1小时</option>
+                      <option value="90">1.5小时</option>
+                      <option value="120">2小时</option>
+                      <option value="150">2.5小时</option>
+                      <option value="180">3小时</option>
+                      <option value="210">3.5小时</option>
+                      <option value="240">4小时</option>
+                      <option value="240">6小时</option>
+                      <option value="480">8小时</option>
+                      <option value="720">12小时</option>
+                    </select>
+                  </div>
+                </div>
+                  <div id="reviewalgo_area">
+                    <div id="task_reviewalgo_area">
+                      <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> `
+          // </div>`
+          div.innerHTML += insert_task_html;
+          document.getElementById(choosed_task_div).innerHTML = "";
+          console.log(choosed_task_div)
+        getgoalincludeproject()
+  
+  // 下面这个for用来实现在选定的任务有子任务时，不显示checkbox的按键
+        for (let i = 0; i < sendback_tasks.length; i++) {
+         
+         if (choosed_taskid == sendback_tasks[i].parentid){
+          console.log("----------------------")
+           document.getElementById(`checkbox${choosed_taskid}`).style.visibility = "hidden"
+         }
+       }
+        // //使用js提取id对应的任务信息,得到json文件
+        // var choosed_taskid_info = $
+        // 把任务的那一块进行整体html的替换
+        
+        // //判断任务是否进行了review,并且进行更新
+        // judge_task_finished(choosed_taskid_info);
+        // console.log($(this))
+      }
+      else{
+        return
+      }
+    })
+    $(document).on("click","a.son_task_text",function(){
+      
+      // 判断当前界面是否已经有编辑窗口了，如果有，则执行出现窗口的代码，如果已经有，则不执行
+      if ( document.getElementsByClassName("edite_task_area").length == 0 ) {
+        
+      
+        // 提取任务id
+        var choosed_taskid = $(this).attr("id").substring(8, 13);
+        var tasktext = "tasktext" + String(choosed_taskid);
+  
+        var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
+       
+        var get_task_li_dom = document.getElementById(`${choosed_taskid}`)
+          console.log(get_task_li_dom)
+          selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+          selected_project = get_task_li_dom.children[0].getAttribute("project")
+          console.log("我正在输出goal和project")
+          console.log(selected_goal)
+          console.log(selected_project)
+        
+        // 提取任务内容
+        // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
+        var choosed_task_input = document.getElementById(tasktext)
+        // console.log(choosed_task_input)
+        var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
+        // console.log(choosed_task_input_text)
+        // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
+        // alert(choosed_task_input)
+        // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
+        // alert(choosed_task_text)
+        // alert(choosed_taskid);
+        var div = document.getElementById(`${choosed_taskid}`);
+        var insert_task_html = 
+        // `<div class="edite_subtask_area" id="add_task" >
+            `<div class="edite_task_area">
+              <!-- onclick="test(this.getAttribute('id'))" -->
+              <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+              <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+              <!-- 设置输入任务的div -->
+              <div class="task_container">
+              <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
+              <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
+              </div>
+              <div class="task_property_area">
+                <div class="calendar_project_area">
+                  <div class="calendar_area" id="calendar_area">
+                    <!-- 输入任务时间的表单 -->
+                    <!-- <a>请输任务时间</a> -->
+                    <button id="calendar" class="clock_button">
+                      <svg t="1598153562536" class="icon" 
+                      viewBox="0 0 1024 1024" version="1.1" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      p-id="3498" width="20" height="20">
+                        <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                        fill="#CFD8DC" p-id="3499">
+                        </path>
+                        <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                        fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                        </path>
+                        <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                        </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                        </path>
+                      </svg>
+                    </button>
+                    <!-- <label id="inputlabel">please input your plantime</label>
+                    <input type="text" id="plantime" > -->
+                  </div>
+        
+                  <div id="goal_list" class="goal_list">
+                 
+                  </div>
+  
+                  <div id="timedevotedto_a_task">                  
+                    <select name="time_devoted_select" id="time_devoted_select">
+                      <option value="5">5分钟</option>
+                      <option value="10">10分钟</option>
+                      <option value="15">15分钟</option>
+                      <option value="20">20分钟</option>
+                      <option value="25">25分钟</option>
+                      <option value="30">30分钟</option>
+                      <option value="40">40分钟</option>
+                      <option value="50">50分钟</option>
+                      <option value="60">1小时</option>
+                      <option value="90">1.5小时</option>
+                      <option value="120">2小时</option>
+                      <option value="150">2.5小时</option>
+                      <option value="180">3小时</option>
+                      <option value="210">3.5小时</option>
+                      <option value="240">4小时</option>
+                      <option value="240">6小时</option>
+                      <option value="480">8小时</option>
+                      <option value="720">12小时</option>
+                    </select>
+                  </div>
+                </div>
+                  <div id="reviewalgo_area">
+                    <div id="task_reviewalgo_area">
+                      <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> `
+          // </div>`
+          div.innerHTML += insert_task_html;
+          document.getElementById(choosed_task_div).innerHTML = "";
+          console.log(choosed_task_div)
+        getgoalincludeproject()
+  
+  // 下面这个for用来实现在选定的任务有子任务时，不显示checkbox的按键
+        for (let i = 0; i < sendback_tasks.length; i++) {
+         
+         if (choosed_taskid == sendback_tasks[i].parentid){
+          console.log("----------------------")
+           document.getElementById(`checkbox${choosed_taskid}`).style.visibility = "hidden"
+         }
+       }
+        // //使用js提取id对应的任务信息,得到json文件
+        // var choosed_taskid_info = $
+        // 把任务的那一块进行整体html的替换
+        
+        // //判断任务是否进行了review,并且进行更新
+        // judge_task_finished(choosed_taskid_info);
+        // console.log($(this))
+      }
+      else{
+        return
+      }
+    })
+
+    //修改文字内容之后对其进行更新 
+    $(document).on("keypress","input.edite_text",function(event)
+    {
+      // console.log("我正在调用回车事件")
+      if (event.key === "Enter") {
+        // find the task's id
+        var choosed_taskid = $(this).attr("id").substring(10, 14);
+
+
+        // console.log(choosed_taskid)
+        var updatedtask = $(`#edite_text${choosed_taskid}`).val()
+        // var taskid = $("#taskid").val()
+        console.log(updatedtask)
+        var updatedinfo =
+        {
+          'ifdissect': 'no',
+          'deadline': 'unspecified',
+          'starttime': 'unspecified',
+          'endtime': 'unspecified',
+          'tasktagsorigin': 'unspecified',
+          'parentid': parentid,
+          'timedevotedto_a_task': devotedtime,
+          'goal': selected_goal,
+          'client': 'dreamforlifeweb',
+          'taglight': 'no',
+          'note': 'unspecified',
+          'reviewalgolight': 'no',
+          'reviewalgo': reviewalgo,
+          'parentproject': 'unspecified',
+          'id': choosed_taskid,
+          'place': 'unspecified',
+          'finishtime': 'unspecified',
+          'inbox': updatedtask,
+          'project': selected_project,
+          'plantime': 'today',
+          'taskstatus': 'unfinished',
+          'tasktags': {}
+        }
+        console.log(updatedinfo)
+        $.ajax({
+          type: "POST",
+          url: "/v1/update",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(updatedinfo),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) { 
+            console.log("this is success")
+            console.log(data)
+            // alert(data); 
+            geteverydaytask()
+          },
+          failure: function (errMsg) {
+            console.log("this is erro")
+            alert(errMsg);
+
+          }
+        })
+      }
+      
+      })
+
+
+
+// 在任务前面点击完成，没有点进去任务进行评价的情况下的会提示要求评价
+$(document).on("click",".checkbox",function(){
+      alert("请先对任务进行评价才完成哦~")
+    })
+
+// 点击checkbox将会判断任务是否已经评价，然后决定是否完成
+$(document).on("click","input.edite_checkbox",function(){
+      // 提取任务id
+      var choosed_taskid = $(this).attr("id").substring(8, 13);
+      // alert(choosed_taskid)
+      //使用js提取id对应的任务信息
+     var choosed_text = document.getElementById(`edite_text${choosed_taskid}`).getAttribute("value")
+    //  console.log(choosed_text)
+      //判断任务是否进行了review,并且进行更新
+      var choosed_task = {
+        'ifdissect': 'no',
+        'deadline': 'unspecified',
+        'starttime': 'unspecified',
+        'endtime': 'unspecified',
+        'tasktagsorigin': 'unspecified',
+        'parentid': 'unspecified',
+        'timedevotedto_a_task': devotedtime,
+        'goal': selected_goal,
+        'client': 'dreamforlifeweb',
+        'taglight': 'no',
+        'note': 'unspecified',
+        'reviewalgolight': 'yes',
+        'reviewalgo': reviewalgo,
+        'parentproject': 'unspecified',
+        'id': choosed_taskid,
+        'place': 'unspecified',
+        'finishtime': 'unspecified',
+        'inbox': choosed_text,
+        'project': selected_project,
+        'plantime': 'today',
+        'taskstatus': 'unfinished',
+        'tasktags': {}
+        }
+      judge_task_finished(choosed_task);
+      // console.log($(this))
+    })
+
+// 更新任务的tasktags 和 reviewalgo
+$(document).on("mouseover","#tasktag_selector",function(){
+  $("#tasktag_selector").inputTags({
+      autocomplete: {
+        values: tasktags_chinese,
+        only: true
+      },
+      // max: 3,
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      create: function ($elem) {
+        console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        // tasktags = updatetags($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        tasktags = updatetags($elem.tags);
+      }
+    }
+    );
+})
+
+$(document).on("mouseover","#task_reviewalgo_selector",function(){
+  $("#task_reviewalgo_selector").inputTags({
+      autocomplete: {
+        values: reviewalgo_chinese,
+        only: true
+      },
+      // max: 3,
+
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // reviewalgo = updatereviewalgo($elem.tags);
+
+      },
+
+      create: function ($elem) {
+        // console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        // console.log($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      }
+    }
+    );
+})
+
+    
+    $("#checkbox_box").click(function (event) {
+      
+      // alert("You have to evaluate the task before finish it")
+      // return false;
+    }
+    );
+
+
+
+
+
+
+
+
+
+</script>
+   
+     
+ 
+
+
+</body>
+
+</html>
