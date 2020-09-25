@@ -390,7 +390,6 @@
       <li id="goal_manager" class="goal_manager">
         <span >目标管理</span>
       </li>
-
     </ul>
   </div>
 
@@ -455,6 +454,23 @@
   <!-- 这是一个项目的div，里面有任务列表和添加任务一系列的html文件 -->
 
       <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+
+
+<!-- <div id="main" style="width: 300px;height:300px;">
+</div> -->
+
+ 
+
+
+
+
+  
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- 这是一个项目的div，里面有任务列表和添加任务一系列的html文件 -->
+
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
 
       <!-- 这是一个Add按键，用来把添加任务的div放进去 -->
 
@@ -610,6 +626,9 @@ var selected_project = "inbox"
 var devotedtime = 0
 // 
 var reviewalgoforalltasksintoday = {}
+
+// 定义一个sontree的全局变量
+var sontree = {}
 
 // 定义这个sendback_tasks用来存放geteveryday传回来的所有task，是一个array,形式是这样的[{},{},{}……]
 var sendback_tasks = []
@@ -926,7 +945,7 @@ function geteverydaytask(){
         taskids.push(todayjson[i].ID)
       }
        var  tasktree ={"first":[],"second":[],"three":[],"four":[],"five":[]}
-       var  sontree = {}
+      //  var  sontree = {}
        var  parents = []
 // 生成儿子和孙子
       for (let i = 0; i< todayjson.length; i++) {
@@ -965,10 +984,12 @@ function geteverydaytask(){
     var task_goal = parents[i].goal
     var task_project = parents[i].project
     // console.log(`我正在输出goal ${goal_for_checkbox}`)
-    var parent_addedtask_head = `<div class="task_list_item" id="task_list_div${parent_id}" goal = "${task_goal}" project = "${task_project}"> 
+    var parent_addedtask_head = 
+    `<div class="task_list_item" id="task_list_div${parent_id}" goal = "${task_goal}" project = "${task_project}"> 
         <div class="task_checkbox"> 
             <input type="checkbox" class = "checkbox" id= "checkbox${parent_id}" goal = "${task_goal}" project = "${task_project}" /> 
-          </div>  
+          
+            </div>  
           <div class="task_list_content" id= "checkbox${parent_id}" >
             <div class = "task_list_text"> `
         //  "<a>" + tasks[i].task + "</a>"
@@ -979,9 +1000,10 @@ function geteverydaytask(){
     //    </div>
   //  
   // </div>
+      var giveup_button = `<button class="giveup_button" >&times;</button>`
       var parent_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
       // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      var parent_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div></div>'
+      var parent_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div>'+giveup_button+ '</div>'
       tree_div = tree_div + `<li id = ${parent_id} >` + parent_addedtask_head + `<a id = "tasktext${parent_id}" class = "task_text">` + parents[i].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">` + parent_addedtask_trail;
 
     // console.log("第一层嵌套")
@@ -1020,7 +1042,7 @@ function geteverydaytask(){
   // </div>
       var son_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
       // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      var son_addedtask_trail = '</div><div><span class="task_list_item_date_button"> </span></div></div></div>'
+      var son_addedtask_trail = '</div><div><span class="task_list_item_date_button"> </span></div></div>'+ giveup_button +'</div>'
       tree_div = tree_div + `<li id = ${son_id} >` + son_addedtask_head + `<a id = "tasktext${son_id}" class = "son_task_text" >` + sontree[parent_id][j].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">` + son_addedtask_trail  ;
 
       // console.log("第二层嵌套")
@@ -1055,7 +1077,7 @@ function geteverydaytask(){
 
       var grandson_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
       // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
-      var grandson_addedtask_trail = '</div><div><span class="task_list_item_date_button"></span></div></div></div>'
+      var grandson_addedtask_trail = '</div><div><span class="task_list_item_date_button"></span></div></div>'+ giveup_button +'</div>'
       tree_div = tree_div + `<li id = ${grandson_id} >` + grandson_addedtask_head + `<a id = "tasktext${grandson_id}" class = "son_task_text" >` + sontree[son_id][z].task + '</a>' + grandson_addedtask_trail +"</li>" ;
        
       var temp_z = z+1
@@ -1092,6 +1114,54 @@ function geteverydaytask(){
 geteverydaytask()
 
 
+
+// 点击任务右边的[x]，完成放弃任务的事件
+$(document).on("click",".giveup_button",function(){
+
+  var clicked_taskid = $(this).prev().attr("id").substring(8.13)
+  
+  var giveup_taskids = []
+  giveup_taskids.push(clicked_taskid)
+  var sons = sontree[clicked_taskid]
+  for (let i = 0; i < sons.length; i++) {
+    var grandson_id = sons[i].ID
+    giveup_taskids.push(grandson_id)
+    grandsons = sontree[grandson_id]
+    for (let j = 0; j < grandsons.length; j++) {
+     
+      giveup_taskids.push(grandsons[j].ID)
+    }
+  }
+  console.log("==========这里是所有要放弃的ID=============")
+  console.log(giveup_taskids)
+  var info = {
+    "giveuptaskids":giveup_taskids,
+  }
+
+  
+        // console.log(updatedinfo)
+
+        $.ajax({
+          type: "POST",
+          url: "/v1/giveuptasksbatch",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(info),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) { 
+            console.log("=======give up task successful=========")
+            console.log(data)
+            // alert(data); 
+            geteverydaytask()
+          },
+          failure: function (errMsg) {
+            console.log("this is erro")
+            alert(errMsg);
+
+          }
+        })
+        
+})
 
 function make_parent_task_checkbox_hidden(){
      // 隐掉父任务的checkbox
