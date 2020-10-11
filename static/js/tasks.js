@@ -1,5 +1,3 @@
-
-
 // 调pride的API
 $.ajaxSetup({
     headers:{

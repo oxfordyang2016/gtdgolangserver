@@ -863,6 +863,16 @@ window.onload = function() {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
 // var  parents = []
 // 生成今日任务的函数
 function geteverydaytask(){
@@ -888,12 +898,19 @@ function geteverydaytask(){
        var todaytest =  data.task
       console.log("我正在打印todayjson")
        console.log(todayjson)
+
+      
     
       var taskids = []
+      var  alltasks = {}
       // 把所有的今日任务的ID提取出来
       for(var i=0;i<todayjson.length;i++){
         taskids.push(todayjson[i].ID)
+        alltasks[todayjson[i].ID] = todayjson[i]
       }
+       
+      
+
       var id_values_task = {}
       for (let i = 0; i < taskids.length; i++) {
        id_values_task[taskids[i]] = todayjson[i]
@@ -928,9 +945,7 @@ function geteverydaytask(){
      
       }
 
-
-      console.log("这是sons")
-       console.log(sontree)
+    
 
 
       // 生成爷爷们
@@ -973,10 +988,111 @@ function geteverydaytask(){
       $.each(parents, function(i, el){
         if($.inArray(el, unique_parents) === -1) unique_parents.push(el);
       });
+
+
+     
+
+
+/*
+这里是python的源代码
+In [84]: def showtree(tasks): 
+    ...:     if len(tasks)==0: 
+    ...:         #print("this is the last depth") 
+    ...:         return 
+    ...:     else: 
+    ...:         for k in tasks: 
+    ...:             #print(k) 
+    ...:             #print(k["task"]) 
+    ...:             if len(sons[str(k["ID"])])>0: 
+    ...:                 showtree(sons[str(k["ID"])]) 
+    ...:             else: 
+    ...:                 print(alltasks[str(k["ID"])]['task']) 
+    ...:                 return 
+*/
+
+
+   
+
+
+
       parents = unique_parents;
-      
+      console.log("这是所有tasks从服务器载入的所有tasks包含了id")
+       console.log(alltasks)
+      console.log("这是sons")
+       console.log(sontree)
        console.log("这是parents")
       console.log(parents)
+
+
+      function  showtree(tasks){
+        if (tasks.length == 0){
+          console.log("已经没有孩子")
+          return
+        }else{
+          for(var k=0;k<tasks.length;k++){
+            // console.log(k["task"])
+            // console.log("*")
+
+            var thistaskid =  tasks[k].ID
+            
+            //检查当前任务的
+            if(sontree[thistaskid].length>0){
+              console.log(alltasks[String(thistaskid)]['task'])
+              showtree(sontree[String(thistaskid)])
+            }else{
+              console.log("------")
+              console.log(thistaskid)
+              console.log(sontree[thistaskid].length)
+             console.log(alltasks[String(thistaskid)]['task'])
+             return 
+            }
+            }
+          }
+        }
+
+/*
+
+      for k in parents: 
+          id  = k["ID"] 
+          print(alltasks[str(id)]["task"]) 
+          #print(sons[str(id)]) 
+          showtree(sons[str(id)]) 
+
+*/
+
+     //下面是测试部分
+      // for(var k=0;k<parents.length;k++){
+      //   var parentid = parents[k].ID
+      //   console.log(parents[k].task)
+      //   var childsofparent = sontree[parents[k].ID]
+      //   if(childsofparent.length>0){
+      
+      //     for(var i=0;i<childsofparent.length;i++){
+      //       console.log(childsofparent[i].task)
+      //     }
+      //   }
+
+      // }
+
+
+      for(var k=0;k<parents.length;k++){
+        var parentid = parents[k].ID
+        console.log(parents[k].task)
+        showtree(sontree[String(parentid)])
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
       // goal = "${}" project = "${}"
       //  + "</li>"
 // 生成div tree

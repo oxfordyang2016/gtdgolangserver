@@ -524,6 +524,12 @@ func Goalsjson(c *gin.Context) {
 	 }
 	 fmt.Println("========i am here 1========")
    if querytype == "noproject"{
+	sort.Slice(allgoalsonlyincludetasks, func(i, j int) bool {
+		if allgoalsonlyincludetasks[i].Priority  == allgoalsonlyincludetasks[j].Priority{
+			return allgoalsonlyincludetasks[i].Name <allgoalsonlyincludetasks[j].Name
+		}
+		return allgoalsonlyincludetasks[i].Priority > allgoalsonlyincludetasks[j].Priority
+	  })
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "goals": allgoalsonlyincludetasks})
 	fmt.Println("========i am here========")
 	return
