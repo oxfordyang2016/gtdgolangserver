@@ -1016,35 +1016,96 @@ In [84]: def showtree(tasks):
 
 
       parents = unique_parents;
+
+ // get parentid
+     parentids = []
+    for(var i =0;i<parents.length;i++){
+      parentids.push(String(parents[i].ID))
+    }
+
+
       console.log("这是所有tasks从服务器载入的所有tasks包含了id")
        console.log(alltasks)
       console.log("这是sons")
        console.log(sontree)
+       Object.keys(sontree).forEach(key=>{
+      // console.log(`${key} : ${obj[key]}`);
+      sontree[key].sort(function(a, b){
+            // console.log("检测随最先能够执行")
+            if  (b.ID>a.ID) return -1;
+        });
+    });
+       
        console.log("这是parents")
       console.log(parents)
+      parents.sort(function(a, b){
+        console.log("检测随最先能够执行")
+        if  (b.ID>a.ID) return -1;
+    });
+      console.log(parents)
+      console.log("这是parents id 的数组")
+      console.log(parentids)
+    
+
+   
+    
+  
+  function getdepthoftask(taskid){
+      var parentid  = String(taskid)
+        
+        var depth = 1
+        // console.log(typeof(parentid))
+        // console.log(typeof(parentids[0]))
+        // console.log(typeof(alltasks[String(taskid)].parentid))
+        while(!parentids.includes(parentid)){
+          depth+=1
+          // console.log("深度加1")
+          parentid = alltasks[String(parentid)].parentid
+          // console.log("此时parentid的类型为如下")
+          // console.log(typeof(parentid))
+          // console.log(parentid)
+          if (depth ==10){
+            console.log("可能某些位置出了问题")
+            return
+          }
+        }
+
+    return depth
+  }
+
+
 
 
       function  showtree(tasks){
         if (tasks.length == 0){
-          console.log("已经没有孩子")
+          // console.log("已经没有孩子")
           return
         }else{
           for(var k=0;k<tasks.length;k++){
+
             // console.log(k["task"])
             // console.log("*")
 
             var thistaskid =  tasks[k].ID
             
-            //检查当前任务的
+            //检查当前任务的,如果有孩子就调用showtree
             if(sontree[thistaskid].length>0){
-              console.log(alltasks[String(thistaskid)]['task'])
+              // console.log(getdepthoftask(thistaskid))
+              var depth = getdepthoftask(thistaskid)
+              console.log("   ".repeat(depth)+alltasks[String(thistaskid)]['task'])
               showtree(sontree[String(thistaskid)])
             }else{
-              console.log("------")
-              console.log(thistaskid)
-              console.log(sontree[thistaskid].length)
-             console.log(alltasks[String(thistaskid)]['task'])
-             return 
+              // console.log("------")
+              // console.log(thistaskid)
+              // console.log(sontree[thistaskid].length)
+            //  console.log(getdepthoftask(thistaskid))
+             var depth = getdepthoftask(thistaskid)
+             console.log("   ".repeat(depth)+"[]"+alltasks[String(thistaskid)]['task'])
+            //  这里有可能return太早如果有两个并列级别的bug
+             if (k==tasks.length){
+              return 
+             }
+             
             }
             }
           }
@@ -1077,7 +1138,12 @@ In [84]: def showtree(tasks):
 
       for(var k=0;k<parents.length;k++){
         var parentid = parents[k].ID
-        console.log(parents[k].task)
+        if(sontree[String(parentid)].length==0){
+          console.log("[]"+parents[k].task)
+        }else{
+          console.log(parents[k].task)
+        }
+        
         showtree(sontree[String(parentid)])
       }
 
