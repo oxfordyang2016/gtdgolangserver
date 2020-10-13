@@ -116,6 +116,14 @@ type (
     }
 
 
+
+
+
+
+
+
+    
+
    
 
 
@@ -1441,7 +1449,10 @@ color.Red(starttime)
 color.Red(plantime)
 color.Red(status)
 color.Yellow("--------------yacccccccccc-------")
-if (task.Starttime!="unspecified"&&task.Plantime!="unspecified"&&task.Status=="unfinished"){
+fmt.Println(task.Starttime)
+fmt.Println(reflect.TypeOf(task.Starttime))
+color.Yellow("--------------yacccccccccc-------")
+if ((task.Starttime!="unspecified"&&task.Starttime!="")&&task.Plantime!="unspecified"&&task.Status=="unfinished"){
   month,_ := strconv.Atoi(task.Plantime[2:4])
   day,_ := strconv.Atoi(task.Plantime[4:6])
   hour,_ := strconv.Atoi(task.Starttime[0:2])
@@ -1454,7 +1465,7 @@ if (task.Starttime!="unspecified"&&task.Plantime!="unspecified"&&task.Status=="u
 
 }
 
-if (task.Endtime!="unspecified"&&task.Plantime!="unspecified"&&task.Status=="unfinished"){
+if ((task.Endtime!="unspecified"&&task.Endtime!="")&&task.Plantime!="unspecified"&&task.Status=="unfinished"){
   month,_ := strconv.Atoi(task.Plantime[2:4])
   day,_ := strconv.Atoi(task.Plantime[4:6])
   hour,_ := strconv.Atoi(task.Endtime[0:2])

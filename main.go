@@ -61,6 +61,8 @@ v1.StaticFile("/show.css", "./static/css/show.css")
 v1.StaticFile("/user.css", "./static/css/user.css")
 v1.StaticFile("/taskmanage.css", "./static/css/taskmanage.css")
 v1.StaticFile("/moment.js", "./static/js/moment.js")
+v1.StaticFile("/tasks.js", "./static/js/tasks.js")
+
 
 v1.StaticFile("/echart.js", "./static/js/echart.js")
 v1.StaticFile("/finance.js", "./static/js/finance.js")
