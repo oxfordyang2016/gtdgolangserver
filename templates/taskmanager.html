@@ -1885,6 +1885,7 @@ function clickAndPress_add_task_function(){
             // <p taskid=1544>
               // window.location.replace("/v1/taskmanager");
               geteverydaytask()
+              get_all_unfinished_tasks_list(); 
               // 上面使用了geteverydaytask的函数来达到把输入的task放到上面的效果
             // alert(data);
             // console.log("i am printing the return data from server")
@@ -1921,7 +1922,7 @@ function clickAndPress_add_task_function(){
     if (myInput && myInput.value) {
       if (tasktags != "" ) {
         clickAndPress_add_task_function(); 
-        get_all_unfinished_tasks_list(); 
+        
       }
     }
     else{
@@ -1946,7 +1947,7 @@ function clickAndPress_add_task_function(){
       if (myInput && myInput.value) {
         if (tasktags != "" ) {
         clickAndPress_add_task_function(); 
-        get_all_unfinished_tasks_list(); 
+        
         
         }
       }
