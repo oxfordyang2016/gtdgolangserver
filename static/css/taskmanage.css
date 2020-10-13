@@ -63,7 +63,7 @@ body {
   #right{
     right:0; 
     background:#ccc; 
-    left:309px; 
+    left:50%; 
     width:auto;
     
   }
@@ -71,7 +71,7 @@ body {
   .scrollbar {
     /* margin-left: 30px; */
     /* float: left; */
-    height: 500px;
+    height: 98%;
     /* width: 65px; */
     /* background: #F5F5F5; */
     overflow-y: scroll;
