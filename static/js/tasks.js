@@ -142,7 +142,7 @@ var all_unfinished_tasks = []
 var all_unfinished_tasks_tree = {}
 
 function get_all_unfinished_tasks_list() {
-    $.get("/v1/goalsgraph?type=noproject", function (data, status) {
+    $.get("/v1/goalsgraph", function (data, status) {
         // alert("Data: " + data + "\nStatus: " + status);
         console.log("我正在打印所有未完成的任务")
         console.log(data);

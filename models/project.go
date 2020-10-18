@@ -9,6 +9,7 @@ import (
 	// "strconv"
 	"time"
 	// // "math"
+	"github.com/fatih/color"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 
@@ -22,13 +23,18 @@ import (
 	// "github.com/gomodule/redigo/redis"
 )
 
+type Projects struct {
+	Name              string
+	Alltasksinproject []Tasks
+}
+
 type Projectofgoals struct {
 	gorm.Model
 	Createtime string `json:"createtime" gorm:"default:'unsepcified'"`
 	Goal       string `json:"goal"`
 	Goalcode   string `json:"goalcode"`
 	Project    string `json:"project"`
-	Status     string `json:"status"`
+	Status     string `json:"status" gorm:"default:'unfinished'"`
 	Email      string `json:"email"`
 	// Sarttime   string `json:"starttime" gorm:"default:'unspecified'"`
 	Endtime string `json:"endtime" gorm:"default:'unspecified'"`
@@ -66,7 +72,7 @@ func Createprojectofgoal(c *gin.Context) {
 	db.Where("Email= ?", email).Where("Project=?", projectname).Where("Goalcode=?", goalcode).Find(&project).Count(&countofproject)
 	// db.Where(&Projectofgoals{Goalcode: goalcode, Project: projectname, Email: email}).Count(&countofproject)
 	if countofproject > 0 {
-		c.JSON(200, gin.H{
+		c.JSON(802, gin.H{
 			"result": "u have created project",
 		})
 		return
@@ -76,6 +82,20 @@ func Createprojectofgoal(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"result": " created project successfully",
 	})
+}
+
+func Getprojectofgoal(email string) map[string][]string {
+	var projects []Projectofgoals
+	db.Where("Email= ?", email).Where("Status= ?", "unspecified").Find(&projects)
+	var goalmapproject = make(map[string][]string)
+	for i := 0; i < len(projects); i++ {
+		// allplaces[item.Place] = append(allplaces[item.Place], item)
+		goalmapproject[projects[i].Goal] = append(goalmapproject[projects[i].Goal], projects[i].Project)
+	}
+	color.Yellow("9999999999")
+	fmt.Println(len(projects))
+	fmt.Println(goalmapproject)
+	return goalmapproject
 }
 
 func Updateprojectofgoal(c *gin.Context) {

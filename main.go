@@ -127,7 +127,7 @@ func main() {
 	v1.GET("/goaljson", Goalsystem)
 	v1.GET("/goalsgraph", Goalsjson)
 	v1.GET("/goallist", Goallist)
-	v1.GET("/goalincludeproject", Goalincludeproject)
+	v1.GET("/goalincludeproject", Goalincludeprojectforserver)
 	//web page
 	//v1.GET("/mainboard",Mainboard)
 	v1.GET("/inbox", Inbox)
