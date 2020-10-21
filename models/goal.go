@@ -619,7 +619,12 @@ func Goalsjson(c *gin.Context) {
 	}
 
 	sort.Slice(allgoals, func(i, j int) bool {
-		return allgoals[i].Priority > allgoals[j].Priority
+		if allgoals[i].Priority == allgoals[j].Priority{
+			return allgoals[i].Name < allgoals[j].Name
+		}else{
+			return allgoals[i].Priority > allgoals[j].Priority
+		}
+	
 	})
 
 	//fmt.Println(allclassproject["gtd1"])
