@@ -1,0 +1,2698 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+
+
+<title>beautiful dream</title>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script src="/v1/jquery.js"></script>
+<script src="/v1/echart.js"></script>
+<link rel="stylesheet" href="/v1/taskmanage.css">
+
+
+<link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+<!-- <link rel="stylesheet" href="/v1/user.css"> -->
+<!-- 上面的css中包含背景，给注释掉了，这样就不显示背景了 -->
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+<!-- <script src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/inputtag.js"></script> -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
+<!-- <link href="https://cdn.bootcdn.net/ajax/libs/chosen/1.8.8.rc1/chosen.min.css" rel="stylesheet"> -->
+<!-- <link href="https://cdn.bootcdn.net/ajax/libs/chosen/1.4.1/chosen.css" rel="stylesheet"> -->
+
+<!-- JS -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script> -->
+<script type="text/javascript" src="/v1/chosen.js"></script>
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/chosen/1.8.8.rc6/chosen.proto.min.js"></script>\ -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/chosen/1.8.8.rc1/chosen.proto.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/chosen/1.4.1/chosen.jquery.min.js"></script> -->
+
+<!-- <script src="/v1/chosen.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- <script  src="/v1/index.js"></script> -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
+<script src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/inputtag.js"></script>
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
+
+<!-- 下面是review_echarts的引用库 -->
+<!-- <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png"> -->
+<!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> -->
+<script src="/v1/echart.js"></script>
+
+
+<!-- 下面是日历的脚本 -->
+<script>
+  var SimplePicker=function(e){var t={};function i(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,i),r.l=!0,r.exports}return i.m=e,i.c=t,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(e,t){if(1&t&&(e=i(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)i.d(n,r,function(t){return e[t]}.bind(null,r));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=0)}({0:function(e,t,i){i("iyB0"),e.exports=i("TYVf")},"0DyV":function(e,t,i){"use strict";function n(e,t){e=[].concat(e);for(var i=0;i<t;i++)e[i]=void 0;return e}function r(e){var i=new Date(e.getTime()),r=e.getFullYear(),s=e.getMonth(),a={date:i,month:void 0};if(t.monthTracker.current=new Date(e.getTime()),t.monthTracker.current.setDate(1),t.monthTracker.years[r]=t.monthTracker.years[r]||{},void 0!==t.monthTracker.years[r][s])return a.month=t.monthTracker.years[r][s],a;(e=new Date(e.getTime())).setDate(1),t.monthTracker.years[r][s]=[];for(var c=t.monthTracker.years[r][s],o=0;e.getMonth()===s;){var l=e.getDate(),p=e.getDay();1===l&&(c[o]=n([],p)),c[o]=c[o]||[],c[o][p]=l,6===p&&o++,e.setDate(e.getDate()+1)}var d=5;void 0===c[5]&&(d=4,c[5]=n([],7));var m=c[d].length;if(m<7){var h=c[d].concat(n([],7-m));c[d]=h}return a.month=c,a}Object.defineProperty(t,"__esModule",{value:!0}),t.monthTracker={years:{}},t.months=["January","February","March","April","May","June","July","August","September","October","November","December"],t.days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],t.scrapeMonth=r,t.scrapePreviousMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()-1),r(e)},t.scrapeNextMonth=function(){var e=t.monthTracker.current;if(!e)throw Error("scrapePrevoisMonth called without setting monthTracker.current!");return e.setMonth(e.getMonth()+1),r(e)};var s={st:[1,21,31],nd:[2,22],rd:[3,23]};t.getDisplayDate=function(e){var t=e.getDate();return-1!==s.st.indexOf(t)?t+"st":-1!==s.nd.indexOf(t)?t+"nd":-1!==s.rd.indexOf(t)?t+"rd":t+"th"},t.formatTimeFromInputElement=function(e){var t="",i=e.split(":"),n=i[0],r=(n=+n)>=12;return r&&n>12&&(n-=12),r||0!==n||(n=12),t+=n<10?"0"+n:n,t+=":"+i[1]+" ",t+=r?"PM":"AM"}},TYVf:function(e,t,i){"use strict";var n=i("0DyV"),r=i("ht6X"),s=new Date,a=function(){function e(e,t){var i;if("object"==typeof e&&(t=e,i=void 0),"string"==typeof(i=i||"body")&&(i=document.querySelector(i)),!i)throw new Error("SimplePicker: Valid selector or element must be passed!");t||(t={}),this.selectedDate=new Date,this.$simplepicker=i,this.initElMethod(i),this.injectTemplate(),this.init(t),this.initListeners(),this._eventHandlers={},this._validOnListeners=["submit","close"]}return e.prototype.initElMethod=function(e){this.$=function(t){return e.querySelector(t)},this.$$=function(t){return e.querySelectorAll(t)}},e.prototype.init=function(e){var t=this.$,i=this.$$;this.$simplepicker=t(".simpilepicker-date-picker"),this.$simplepickerWrapper=t(".simplepicker-wrapper"),this.$trs=i(".simplepicker-calender tbody tr"),this.$tds=i(".simplepicker-calender tbody td"),this.$headerMonthAndYear=t(".simplepicker-month-and-year"),this.$monthAndYear=t(".simplepicker-selected-date"),this.$date=t(".simplepicker-date"),this.$day=t(".simplepicker-day-header"),this.$time=t(".simplepicker-time"),this.$timeInput=t(".simplepicker-time-section input"),this.$timeSectionIcon=t(".simplepicker-icon-time"),this.$cancel=t(".simplepicker-cancel-btn"),this.$ok=t(".simplepicker-ok-btn"),this.$displayDateElements=[this.$day,this.$headerMonthAndYear,this.$date],this.$time.classList.add("simplepicker-fade"),this.render(n.scrapeMonth(s)),e=e||{},this.opts=e,this.reset(s),void 0!==e.zIndex&&(this.$simplepickerWrapper.style.zIndex=e.zIndex.toString()),e.disableTimeSection&&this.disableTimeSection(),e.compactMode&&this.compactMode()},e.prototype.reset=function(e){var t=e||new Date;this.render(n.scrapeMonth(t));var i=t.getDate().toString(),r=this.findElementWithDate(i);r.classList.contains("active")||(this.selectDateElement(r),this.updateDateComponents(t));var s=t.toTimeString().split(" ")[0].replace(/\:\d\d$/,"");this.$timeInput.value=s,this.$time.innerText=n.formatTimeFromInputElement(s)},e.prototype.compactMode=function(){this.$date.style.display="none"},e.prototype.disableTimeSection=function(){this.$timeSectionIcon.style.visibility="hidden"},e.prototype.enableTimeSection=function(){this.$timeSectionIcon.style.visibility="visible"},e.prototype.injectTemplate=function(){var e=document.createElement("template");e.innerHTML=r.htmlTemplate,this.$simplepicker.appendChild(e.content.cloneNode(!0))},e.prototype.clearRows=function(){this.$tds.forEach(function(e){e.innerHTML="",e.classList.remove("active")})},e.prototype.updateDateComponents=function(e){var t=n.days[e.getDay()],i=n.months[e.getMonth()]+" "+e.getFullYear();this.$headerMonthAndYear.innerHTML=i,this.$monthAndYear.innerHTML=i,this.$day.innerHTML=t,this.$date.innerHTML=n.getDisplayDate(e)},e.prototype.render=function(e){var t=this.$$,i=this.$trs,n=e.month,r=e.date;this.clearRows(),n.forEach(function(e,t){var n=i[t].children;e.forEach(function(e,t){var i=n[t];e?(i.removeAttribute("data-empty"),i.innerHTML=e):i.setAttribute("data-empty","")})});var s=t("table tbody tr:last-child td"),a=!0;s.forEach(function(e){void 0===e.dataset.empty&&(a=!1)});var c=s[0].parentElement;c.style.display=a&&c?"none":"table-row",this.updateDateComponents(r)},e.prototype.updateSelectedDate=function(e){var t,i=this.$monthAndYear,r=this.$time;this.$date;t=e?e.innerHTML.trim():this.$date.innerHTML.replace(/[a-z]+/,"");var s=i.innerHTML.split(" "),a=s[0],c=s[1],o=n.months.indexOf(a),l=r.innerHTML.split(":"),p=+l[0],d=l[1].split(" "),m=d[0],h=d[1];"AM"===h&&12==p&&(p=0),"PM"===h&&p<12&&(p+=12);var u=new Date(+c,+o,+t,+p,+m);this.selectedDate=u;var v=t+" ";v+=i.innerHTML.trim()+" ",v+=r.innerHTML.trim(),this.readableDate=v.replace(/^\d+/,u.getDate().toString())},e.prototype.selectDateElement=function(e){var t=this.$(".simplepicker-calender tbody .active");e.classList.add("active"),t&&t.classList.remove("active"),this.updateSelectedDate(e),this.updateDateComponents(this.selectedDate)},e.prototype.findElementWithDate=function(e,t){var i,n;return void 0===t&&(t=!1),this.$tds.forEach(function(t){var r=t.innerHTML.trim();r===e&&(i=t),""!==r&&(n=t)}),void 0===i&&t&&(i=n),i},e.prototype.handleIconButtonClick=function(e){var t,i=this.$;if(e.classList.contains("simplepicker-icon-calender")){var r=i(".simplepicker-icon-time"),s=i(".simplepicker-time-section");return(c=i(".simplepicker-calender-section")).style.display="block",s.style.display="none",r.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}if(e.classList.contains("simplepicker-icon-time")){var a=i(".simplepicker-icon-calender"),c=i(".simplepicker-calender-section");return(s=i(".simplepicker-time-section")).style.display="block",c.style.display="none",a.classList.remove("active"),e.classList.add("active"),void this.toogleDisplayFade()}var o=i(".simplepicker-calender td.active");if(o&&(t=o.innerHTML.trim()),e.classList.contains("simplepicker-icon-next")&&this.render(n.scrapeNextMonth()),e.classList.contains("simplepicker-icon-previous")&&this.render(n.scrapePreviousMonth()),t){var l=this.findElementWithDate(t,!0);this.selectDateElement(l)}},e.prototype.initListeners=function(){var e=this,t=e.$simplepicker,i=e.$timeInput,r=e.$ok,s=e.$cancel,a=e.$simplepickerWrapper,c=this;function o(){c.close(),c.callEvent("close",function(e){e()})}t.addEventListener("click",function(e){var t=e.target,i=t.tagName.toLowerCase();e.stopPropagation(),"td"!==i?"button"===i&&t.classList.contains("simplepicker-icon")&&c.handleIconButtonClick(t):c.selectDateElement(t)}),i.addEventListener("input",function(e){if(""!==e.target.value){var t=n.formatTimeFromInputElement(e.target.value);c.$time.innerHTML=t,c.updateSelectedDate()}}),r.addEventListener("click",function(){c.close(),c.callEvent("submit",function(e){e(c.selectedDate,c.readableDate)})}),s.addEventListener("click",o),a.addEventListener("click",o)},e.prototype.callEvent=function(e,t){(this._eventHandlers[e]||[]).forEach(function(e){t(e)})},e.prototype.open=function(){this.$simplepickerWrapper.classList.add("active")},e.prototype.close=function(){this.$simplepickerWrapper.classList.remove("active")},e.prototype.on=function(e,t){var i=this._validOnListeners,n=this._eventHandlers;if(!i.includes(e))throw new Error("Not a valid event!");n[e]=n[e]||[],n[e].push(t)},e.prototype.toogleDisplayFade=function(){this.$time.classList.toggle("simplepicker-fade"),this.$displayDateElements.forEach(function(e){e.classList.toggle("simplepicker-fade")})},e}();e.exports=a},ht6X:function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.htmlTemplate='\n<div class="simplepicker-wrapper">\n  <div class="simpilepicker-date-picker">\n    <div class="simplepicker-day-header"></div>\n      <div class="simplepicker-date-section">\n        <div class="simplepicker-month-and-year"></div>\n        <div class="simplepicker-date"></div>\n        <div class="simplepicker-select-pane">\n          <button class="simplepicker-icon simplepicker-icon-calender active" title="Select date from calender!"></button>\n          <div class="simplepicker-time">12:00 PM</div>\n          <button class="simplepicker-icon simplepicker-icon-time" title="Select time"></button>\n        </div>\n      </div>\n      <div class="simplepicker-picker-section">\n        <div class="simplepicker-calender-section">\n          <div class="simplepicker-month-switcher simplepicker-select-pane">\n            <button class="simplepicker-icon simplepicker-icon-previous"></button>\n            <div class="simplepicker-selected-date"></div>\n            <button class="simplepicker-icon simplepicker-icon-next"></button>\n          </div>\n          <div class="simplepicker-calender">\n            <table>\n              <thead>\n                <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>\n              </thead>\n              <tbody>\n                '+function(e,t){for(var i="",n=1;n<=t;n++)i+=e;return i}("<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>",6)+'\n              </tbody>\n            </table>\n          </div>\n        </div>\n        <div class="simplepicker-time-section">\n          <input type="time" value="12:00" autofocus="false">\n        </div>\n      </div>\n      <div class="simplepicker-bottom-part">\n        <button class="simplepicker-cancel-btn simplepicker-btn" title="Cancel">Cancel</button>\n        <button class="simplepicker-ok-btn simplepicker-btn" title="OK">OK</button>\n      </div>\n  </div>\n</div>\n'},iyB0:function(e,t,i){}});
+// #sourceMappingURL=simplepicker.js.map
+
+
+</script>
+
+
+
+
+
+<!-- 日历的css -->
+<style>
+.simplepicker-wrapper{position:fixed;top:0;left:0;overflow:auto;background-color:#4c4c4c7d;width:100vw;height:100vh;display:none}.simplepicker-wrapper.active{display:block}.simpilepicker-date-picker{width:326px;cursor:auto;font-family:Verdana,Geneva,Tahoma,sans-serif;font-size:14px;background-color:#fff;margin:2% auto;box-shadow:1px 2px 4px .5px rgba(0,0,0,.22),1px 2px 4px .5px transparent}.simplepicker-day-header{color:#fff;background-color:#016565;text-align:center;padding:4px 0}.simplepicker-date-section{text-align:center;background-color:#078e8e;color:#fff}.simplepicker-date-section .simplepicker-month-and-year{font-size:22px;padding:14px 0 7px;font-weight:200}.simplepicker-date-section .simplepicker-date{font-size:35px;padding:2px;margin-bottom:12px}.simplepicker-select-pane{display:flex;width:100%}.simplepicker-select-pane .simplepicker-time,.simplepicker-selected-date{text-align:center;flex:2}.simplepicker-icon,.simplepicker-selected-date,.simplepicker-time{border:none;background:transparent;padding:2px;margin:4px 6px;width:25px;height:25px;opacity:.5}.simplepicker-selected-date,.simplepicker-time{opacity:1}.simplepicker-month-switcher{margin-top:5px}.simplepicker-icon:hover{opacity:.8}.simplepicker-icon.active,.simplepicker-icon:active{opacity:1}.simplepicker-icon:focus{outline:none}.simplepicker-icon-next{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1hcnJvdy1yaWdodCI+PGxpbmUgeDE9IjUiIHkxPSIxMiIgeDI9IjE5IiB5Mj0iMTIiPjwvbGluZT48cG9seWxpbmUgcG9pbnRzPSIxMiA1IDE5IDEyIDEyIDE5Ij48L3BvbHlsaW5lPjwvc3ZnPg==)}.simplepicker-icon-previous{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1hcnJvdy1sZWZ0Ij48bGluZSB4MT0iMTkiIHkxPSIxMiIgeDI9IjUiIHkyPSIxMiI+PC9saW5lPjxwb2x5bGluZSBwb2ludHM9IjEyIDE5IDUgMTIgMTIgNSI+PC9wb2x5bGluZT48L3N2Zz4=)}.simplepicker-icon-calender{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jYWxlbmRhciI+PHJlY3QgeD0iMyIgeT0iNCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiPjwvcmVjdD48bGluZSB4MT0iMTYiIHkxPSIyIiB4Mj0iMTYiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjgiIHkxPSIyIiB4Mj0iOCIgeTI9IjYiPjwvbGluZT48bGluZSB4MT0iMyIgeTE9IjEwIiB4Mj0iMjEiIHkyPSIxMCI+PC9saW5lPjwvc3ZnPg==)}.simplepicker-icon-time{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jbG9jayI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjEyIDYgMTIgMTIgMTYgMTQiPjwvcG9seWxpbmU+PC9zdmc+)}.simplepicker-bottom-part{padding-top:6px;padding-bottom:12px;padding-left:48%}.simplepicker-calender table{width:100%;font-size:13px}.simplepicker-calender thead th{font-weight:400;font-size:15px;padding-bottom:6px;width:14.28%;height:30px;text-align:center}.simplepicker-calender tbody td{position:relative;text-align:center;vertical-align:middle;padding:12px;z-index:1}.simplepicker-calender tbody td:after{content:" ";visibility:hidden;display:block;position:absolute;left:50%;top:50%;height:35px;width:35px;border-radius:50%;transform:translate(-50%,-50%);background-color:rgba(0,0,0,.05)}.simplepicker-calender tbody td:hover:after{visibility:visible}.simplepicker-calender tbody td.active,.simplepicker-calender tbody td:active{color:#fff}.simplepicker-calender tbody .active:after,.simplepicker-calender tbody td:active:after{visibility:visible;background-color:teal;z-index:-1}.simplepicker-calender tbody td[data-empty]{pointer-events:none}.simplepicker-time-section{display:none;height:120px}.simplepicker-time-section input{box-sizing:border-box;width:120px;height:32px;max-width:120px;max-height:32px;padding:4px 3px;border:none;border-bottom:2px solid #ccc;font-size:14px;font-family:Verdana,Geneva,Tahoma,sans-serif;display:block;margin:25% auto}.simplepicker-time-section input:focus{outline:none;border-bottom-color:teal}.simplepicker-picker-section{width:100%;height:auto}.simplepicker-btn{border:none;background:transparent;font-family:Verdana,Geneva,Tahoma,sans-serif;font-size:16px;padding:7px 14px;border:1px solid #ddd;margin:0 5px;border-color:#016565;color:#016565;font-size:13px}.simplepicker-btn:active,.simplepicker-btn:hover{color:#fff;background-color:#016565}.simplepicker-fade{color:hsla(0,0%,88%,.95)}.simplepicker-btn,.simplepicker-icon,.simplepicker-wrapper{cursor:pointer}
+/*# sourceMappingURL=simplepicker.css.map*/
+</style>
+
+<!-- 这是todaytree的css -->
+<style>
+  body {
+      margin:50px;
+      font-family:'Arial', sans-serif;
+  }
+  *{margin:0;padding: 0;}
+  
+  h1 {
+      color:#FA9A39;
+  }
+  
+  p { padding-bottom:50px;}
+  
+  .content {
+      width:500px;
+      margin:auto;
+  }
+  .tree ul {
+      margin-left: 20px;
+  }
+  
+  .tree li {
+      list-style-type: none;
+      /* margin:10px; */
+      /* position: relative; */
+      border-top: #ccc solid 1px;
+      border-bottom: #ccc solid 1px ; 
+    
+  }
+  
+  .tree li::before {
+      content: "";
+      position: absolute;
+      top:-7px;
+      left:-20px;
+      border-left: 1px solid #ccc;
+      border-bottom:1px solid #ccc;
+      border-radius:0 0 0 0px;
+      width:20px;
+      height:15px;
+  }
+  
+  .tree li::after {
+      position:absolute;
+      content:"";
+      top:8px;
+      left:-20px;
+      border-left: 1px solid #ccc;
+      border-top:1px solid #ccc;
+      border-radius:0px 0 0 0;
+      width:20px;
+      height:100%;
+  }
+  
+  .tree li:last-child::after  {
+      display:none;
+  }
+  
+  .tree li:last-child:before{
+      border-radius: 0 0 0 5px;
+  }
+  
+  ul.tree>li:first-child::before {
+      display:none;
+  }
+  
+  ul.tree>li:first-child::after {
+      border-radius:5px 0 0 0;
+  }
+  
+  .tree li a {
+      /* border: 1px #ccc solid; */
+      /* border-radius: 5px; */
+      padding:2px 5px;
+  }
+  
+  .tree li a:hover, .tree li a:hover+ul li a,
+  .tree li a:focus, .tree li a:focus+ul li a {
+      background: #ccc; color: #000; 
+      /* border: 1px solid #000; */
+  }
+  
+  .tree li a:hover+ul li::after, .tree li a:focus+ul li::after,
+  .tree li a:hover+ul li::before, .tree li a:focus+ul li::before 
+  .tree li a:hover+ul::before, .tree li a:focus+ul::before 
+  .tree li a:hover+ul ul::before, .tree li a:focus+ul ul::before{
+      border-color:  #000; /*connector color on hover*/
+  }
+  
+</style>
+
+
+<!-- 下面是input tags组件的CSS -->
+<style>
+  @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic);
+  @import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);
+  /* * {
+    box-sizing: border-box;
+  } */
+  .color {
+    color: #19BC9C !important;
+  }
+  /* html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    background-color: #fff;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 32px;
+  } */
+   div.container {
+    display: block;
+    width: 50%;
+    margin: 32px auto;
+    padding: 16px 32px;
+    background-color: #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  } 
+  div.inputTags-list {
+    display: inline-block;
+    width: 100%;
+    padding: 6px;
+    border: 1px solid rgba(25, 188, 156, 0.35);
+    background-color: #f9f9f9;
+    box-shadow: 1px 2px 2px rgba(221, 221, 221, 0.2);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list span.inputTags-item {
+    position: relative;
+    display: inline-block;
+    margin: 2px;
+    padding: 3px 22px 4px 8px;
+    background-color: #19BC9C;
+    text-align: center;
+    color: #fff;
+    opacity: 1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list span.inputTags-item.is-edit {
+    display: none;
+  }
+  div.inputTags-list span.inputTags-item.is-hidden {
+    display: none !important;
+  }
+  div.inputTags-list span.inputTags-item.is-exists {
+    background-color: rgba(231, 76, 60, 0.7);
+  }
+  div.inputTags-list span.inputTags-item span.value {
+    cursor: pointer;
+  }
+  div.inputTags-list span.inputTags-item i {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    font-weight: 400;
+    font-family: sans-serif;
+    line-height: 1;
+    font-style: normal;
+    -webkit-transition: color 0.2s;
+    -khtml-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    -ms-transition: color 0.2s;
+    -o-transition: color 0.2s;
+    -webkit-transform: translateY(-50%);
+    -khtml-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
+  div.inputTags-list span.inputTags-item i:hover {
+    color: #e74c3c;
+  }
+  div.inputTags-list input.inputTags-field {
+    border: none;
+    margin-left: 4px;
+    background-color: transparent;
+  }
+  div.inputTags-list input.inputTags-field:focus,
+  div.inputTags-list input.inputTags-field:active {
+    outline: none;
+  }
+  div.inputTags-list input.inputTags-field.is-edit {
+    margin: 0 2px;
+    padding: 4px 8px 3px 8px;
+    border: 1px dashed #c4c4c4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list {
+    position: absolute;
+    max-height: 192px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    z-index: 100;
+    opacity: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-transform: scaleY(0);
+    -khtml-transform: scaleY(0);
+    -moz-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -webkit-transform-origin: 50% 0;
+    -khtml-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    -webkit-transition-duration: 0.2s;
+    -khtml-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -ms-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list.is-active {
+    opacity: 1;
+    -webkit-transform: scaleY(1);
+    -khtml-transform: scaleY(1);
+    -moz-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    -webkit-transition-duration: 0.3s;
+    -khtml-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -ms-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.2s;
+    -khtml-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -ms-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li:last-child {
+    border: none;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li:hover {
+    background-color: #19BC9C;
+    color: #fff;
+  }
+  div.inputTags-list ul.inputTags-autocomplete-list li.is-disabled {
+    cursor: default;
+    background-color: #f7f7f7;
+    color: initial;
+  }
+  p.inputTags-error {
+    position: relative;
+    margin: 0;
+    padding: 0.5em 1em;
+    color: #fff;
+    background-color: rgba(231, 76, 60, 0.7);
+    cursor: pointer;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  p.inputTags-error:first-of-type {
+    margin-top: 8px;
+  }
+  p.inputTags-error:after {
+    position: absolute;
+    content: "\000D7";
+    top: 50%;
+    right: 0.5em;
+    -webkit-transform: translateY(-50%);
+    -khtml-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    font-size: 28px;
+  }
+</style>
+
+
+</head> 
+
+<body>
+  
+
+  <!-- 侧边导航栏 -->
+  <!-- <div id="navigation" class="navigation">
+    <ul>
+      <li id="today_task" class="today_tasks">
+        <span>今日任务</span>
+      </li>
+      <li id="goal_manager" class="goal_manager">
+        <span>目标管理</span>
+      </li>
+     
+    </ul>
+  </div> -->
+
+
+<!-- <div class="shown_area"> -->
+  <div id="left" >
+    <div class="list" id="today_task_area">
+
+      <!-- <div id="todaytree">
+        <h1>Today tasks</h1>
+      </div> -->
+      <div id="task_new_shown">
+        <h1>Today tasks</h1>
+        <ul id="today_tree">
+          I am here
+        </ul>
+      </div>
+  
+      <li id="add_task_button_area">
+        <div class="add_task_button" id="plusbutton" >
+              
+              <input id = "addtask_button" class="add_grandtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
+        </div>
+      </li>
+
+    </div>
+  </br>
+
+   
+
+  </div>
+
+  </div>
+  <div id="middle">
+  </div> 
+
+  <div id="right" class="scrollbar"> 
+    <div class="force-overflow">
+    <div  class="list" id="all_unfinished_task_shown_area">
+      <div id="goal_shown_and_edit" class="goal_shown_and_edit">
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+<!-- </div> -->
+
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+<!-- <div id="main" style="width: 300px;height:300px;">
+</div> -->
+  
+  <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+  <!-- 这是一个项目的div，里面有任务列表和添加任务一系列的html文件 -->
+
+      <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+      <!-- 这是一个Add按键，用来把添加任务的div放进去 -->
+
+  <!-- <input type="text" name="lname" value="Doe" -->
+
+
+<!-- <button id="test_post">test the post function</button> -->
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<!-- 下面是脚本文件，最后要做分离的 -->
+
+<script type="text/javascript">
+
+
+// 这里写点击左边按键切换显示内容的js
+// $(function(){
+// 									//获取点击事件的对象
+// 									$(".navigation li").click(function(){
+// 										//获取要显示或隐藏的对象
+// 										var divShow = $(".right_shown_area").children('.list');
+// 										//判断当前对象是否被选中，如果没选中的话进入if循环
+// 										if (!$(this).hasClass('selected')) {
+// 											//获取当前对象的索引
+// 											var index = $(this).index();
+// 											//当前对象添加选中样式并且其同胞移除选中样式；
+// 											$(this).addClass('selected').siblings('li').removeClass('selected');
+// 											//索引对应的div块显示
+// 											$(divShow[index]).show();
+// 											//索引对应的div块的同胞隐藏
+// 											$(divShow[index]).siblings('.list').hide();
+// 										}
+// 									});
+// 								});
+
+
+// <!-- 下面是添加任务时使用的html，里面仅包含一个li标签 -->   
+    // this is commit
+    var add_task_div = `<li id="add_task_item">
+        <div class="add_task_area" id="add_task" >
+          <div class="input_task_area" id="input_task_area">
+            <!-- onclick="test(this.getAttribute('id'))" -->
+            <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+            <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+            <!-- 设置输入任务的div -->
+            <div class="task_container">
+            <!-- <label class="input-task-class"    id="inputlabel">please input your task</label> -->
+            <!-- 这一个input的位置出现了问题，原因就是使用了form标签，一点击就会重新刷新页面，去掉就好了，-->
+            <input class="input_text" type="text" id="noid" placeholder="please input your task" >
+            <!-- <button id="nonoid">点击添加task</button> -->
+            <!-- <input id="testbutton"  placeholder="please input your task"> -->
+            </div>
+            
+            <div class="task_property_area">
+              <div class="calendar_project_area">
+                <div class="calendar_area" id="calendar_area">
+                  <!-- 输入任务时间的表单 -->
+                  <!-- <a>请输任务时间</a> -->
+                  <button id="calendar" class="clock_button">
+                    <svg t="1598153562536" class="icon" 
+                    viewBox="0 0 1024 1024" version="1.1" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    p-id="3498" width="20" height="20">
+                      <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                      fill="#CFD8DC" p-id="3499">
+                      </path>
+                      <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                      fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                      </path>
+                      <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                      </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                      </path>
+                    </svg>
+                  </button>
+                  <!-- <label id="inputlabel">please input your plantime</label>
+                  <input type="text" id="plantime" > -->
+                </div>
+      
+               
+                <div id="goal_list" class="goal_list">
+                </div>
+              </div>
+
+              <div id="tags_review_area" class="tags_review_area">
+                <div id="tasktags_area">
+                  <button id="tags_button" class="tags_button">
+                    <svg t="1602774165074" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2453" width="15" height="15"><path d="M344.064 194.56c-72.704 0-132.096 59.392-132.096 132.096s59.392 132.096 132.096 132.096c72.704 0 132.096-59.392 132.096-132.096S416.768 194.56 344.064 194.56z m0 185.344c-29.696 0-53.248-23.552-53.248-53.248 0-29.696 23.552-53.248 53.248-53.248 29.696 0 53.248 23.552 53.248 53.248 0 29.696-24.576 53.248-53.248 53.248z m656.384 143.36L512 32.768C496.64 17.408 476.16 9.216 454.656 9.216H79.872C35.84 9.216 0 45.056 0 89.088v345.088c0 21.504 8.192 40.96 23.552 56.32l503.808 501.76c15.36 15.36 35.84 23.552 57.344 23.552 21.504 0 41.984-8.192 56.32-23.552L1000.448 634.88c31.744-30.72 31.744-80.896 0-111.616zM583.68 934.912l-503.808-501.76V89.088h374.784l488.448 490.496L583.68 934.912z" p-id="2454" fill="#d81e06"></path></svg>
+                  </button>
+                  
+                </div>
+      
+              
+              </div>
+            </div>
+          </div>
+          <div class="add_task_button_area" id="add_task_button_area")>
+              <button class="add_task_click_button">添加任务</button>
+              <button class="cancel_add_task_button">取消</button>
+              <div class="add_tasktags_area" id="add_tasktags_area">
+              </div>
+          </div>
+        </div>
+      </li>`
+
+ var plusbutton = 
+      `<div class="add_task_button" id="plusbutton" >
+            <!-- <button id="plusbutton" class="add_childtask_button"> -->
+              <input id = "addtask_button" class="add_grandtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
+              <!-- <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
+              <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
+              </svg> -->
+          <!-- </button> -->
+
+            <!-- <input type="button" name="plus" id="plusbutton" class="plusbutton" value="+"> -->
+        </div>`
+
+// 定义全局变量onedit 用来用来保证窗口只有一个task编辑窗口
+var onedit  =  false
+
+parentid = 'unspecified'
+// 定义goal和project的全局变量，传到create和updatetask的API中
+var selected_goal = "no goal"
+var selected_project = "inbox"
+// 定义timedevotedto_a_task的全局变量，只传到updatetask的API中
+var devotedtime = 0
+// 
+var reviewalgoforalltasksintoday = {}
+
+// 定义一个sontree的全局变量
+var sontree = {}
+
+// 定义这个sendback_tasks用来存放geteveryday传回来的所有task，是一个array,形式是这样的[{},{},{}……]
+var sendback_tasks = []
+
+    // 翻转一个对象的key和value
+    function swap(json){
+      var ret = {};
+      for(var key in json){
+        ret[json[key]] = key;
+      }
+      return ret;
+    }
+
+    var tagscovert = {
+      "importanttag": "重要的",
+      'feartag': "害怕的",
+      'principletag': "原则",
+      'atomtag': "原子",
+      'dfstag': "需要深度搜索",
+      'hardtag': "困难的",
+      'easytag': "容易的",
+      'urgenttag': "急迫的",
+      'challengetag': "挑战的",
+      'uncomfortabletag': "不舒服的",
+      'troublesometag': "麻烦事",
+      'keyproblemtag': "关键问题",
+      'tenminutestasktag': "10分钟",
+      'thirtyminutestasktag': "30分钟",
+      'threeminutestasktag': "3分钟",
+    }
+
+    // Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
+    var tasktags_chinese = Object.values(tagscovert);
+
+    console.log(tasktags_chinese)
+
+    // 下面这个Swap的代码是把一个字典的键和值互换
+    var tagscovert_chkey = swap(tagscovert);
+
+    // var tagscovert_chkey = {
+    //   '重要的': 'importanttag',
+    //   '害怕的': 'feartag',
+    //   '原则': 'principletag',
+    //   '原子': 'atomtag',
+    //   '需要深度搜索': 'dfstag',
+    //   '困难的': 'hardtag',
+    //   '容易的': 'easytag',
+    //   '急迫的': 'urgenttag',
+    //   '挑战的': 'challengetag',
+    //   '不舒服的': 'uncomfortabletag',
+    //   '麻烦事': 'troublesometag',
+    //   '关键问题': 'keyproblemtag',
+    //   '10分钟': 'tenminutestasktag',
+    //   '30分钟': 'thirtyminutestasktag',
+    //   '3分钟': 'threeminutestasktag'
+    // }
+
+    var reviewalgo_covert = {
+          'attackactively':"主动进攻",
+          'makeuseofthings':"利用学习到的东西",
+          'depthfirstsearch':"深度优先搜索",
+          'markataskimmediately':"立即标记任务",
+          'alwaysprofit':"总是保持进步",
+          'brainuse':"动脑筋",
+          'useprinciple':"使用原则",
+          'patience':"有耐心",
+          'solveakeyproblem':"解决关键问题",
+          'learnnewthings':"学习到新内容",
+          'battlewithlowerbrain':"战胜低级情绪",
+          'difficultthings':"完成困难事情",
+          'acceptfactandseektruth':"接受事实，寻求真相",
+          'dealwithahardtask':"处理困难任务",
+          'threeminutes':"3分钟原则",
+          'serviceforgoal':"为目标服务",
+          'buildframeandprinciple':"建立框架原则",
+          'atomadifficulttask':"原子化拆分任务",
+          'noflinch':"不退缩",
+          'learntechuse':"学习技术",
+          'doanimportantthingearly':"提前完成一件重要的事",
+          'acceptpain':"接受痛苦",
+          'conquerthefear':"战胜恐惧"
+    }
+
+
+
+// Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
+var reviewalgo_chinese = Object.values(reviewalgo_covert);
+
+console.log(reviewalgo_chinese)
+
+// 下面这个Swap的代码是把一个字典的键和值互换
+var reviewalgo_covert_chkey = swap(reviewalgo_covert);
+
+ //  define a inital tasktags
+ var tasktags = {
+      'importanttag': 'no',
+      'feartag': 'no',
+      'principletag': 'no',
+      'atomtag': 'no',
+      'dfstag': 'no',
+      'hardtag': 'no',
+      'easytag': 'no',
+      'urgenttag': 'no',
+      'challengetag': 'no',
+      'uncomfortabletag': 'no',
+      'troublesometag': 'no',
+      'keyproblemtag': 'no',
+      'tenminutestasktag': 'no',
+      'thirtyminutestasktag': 'no',
+      'threeminutestasktag': 'no'
+    }
+
+    // define a inital reviewalgo
+    var reviewalgo = {
+      'attackactively': 'no',
+      'makeuseofthings': 'no',
+      'depthfirstsearch': 'no',
+      'markataskimmediately': 'no',
+      'alwaysprofit': 'no',
+      'brainuse': 'no',
+      'useprinciple': 'no',
+      'patience': 'no',
+      'solveakeyproblem': 'no',
+      'learnnewthings': 'no',
+      'battlewithlowerbrain': 'no',
+      'difficultthings': 'no',
+      'acceptfactandseektruth': 'no',
+      'dealwithahardtask': 'no',
+      'threeminutes': 'no',
+      'serviceforgoal': 'no',
+      'buildframeandprinciple': 'no',
+      'atomadifficulttask': 'no',
+      'noflinch': 'no',
+      'learntechuse': 'no',
+      'doanimportantthingearly': 'no',
+      'acceptpain': 'no',
+      'conquerthefear': 'no'
+    }
+
+
+// alert( "Handler for .click() called." );
+
+
+
+// 这是用来生成goal和project div的的函数
+function create_goalllist_div(goalincludeproject){
+     
+         var yourgoals = Object.keys(goalincludeproject)
+        //  console.log("这里在输出yourgoaas")
+        //  console.log(yourgoals)
+          var select = document.createElement("select")
+          select.setAttribute("id","goal_list_select")
+          select.setAttribute("name","goal_list_select")
+          document.getElementById("goal_list").appendChild(select)
+        
+
+        for (let i = 0; i < yourgoals.length; i++) {
+          
+          var optgroup = document.createElement("optgroup")
+          optgroup.setAttribute( "label", `${yourgoals[i]}`)
+          // console.log(optgroup)
+          // console.log("这里在输出yourgoaas")
+          var yourgoal_now = yourgoals[i]
+          var yourprojects_inthis_goal = goalincludeproject[yourgoal_now]
+          for (let j = 0; j < yourprojects_inthis_goal.length; j++) {
+            
+           
+            var option = document.createElement("option")
+            option.setAttribute("id",`${yourgoal_now}@${yourprojects_inthis_goal[j]}`.hashCode())
+            option.setAttribute("value",`${yourgoal_now}@${yourprojects_inthis_goal[j]}`.hashCode())
+            // console.log(option)
+
+            // console.log(single_project)
+            option.text = yourprojects_inthis_goal[j]
+            optgroup.appendChild(option)
+            // option.firstChild.nodeValue = single_project
+              // console.log(optgroup)
+          }
+          // group =  optgroup.appendChild(option)opt
+          document.getElementById("goal_list_select").appendChild(optgroup)
+        }
+        // document.getElementById("goal_list_select").appendChild(optgroup)
+        }
+
+        
+
+// 使用chosen非常厉害的选择列表插件
+function use_chosen_style(){
+  
+    $("#goal_list_select").chosen().on("change", function(event, params){
+    console.log("触发change事件")
+    console.log(params)
+    console.log(event)
+    selected_goal_project_hashcode = params.selected
+    var option_value = document.getElementById(params.selected).innerHTML
+    console.log(option_value)
+    selected_project = option_value
+
+    var goal_label = $("#"+params.selected).parent().attr("label")
+    selected_goal = goal_label
+    alert(selected_goal)
+    // var goal_and_project = [selected_goal,selected_project]
+    // console.log(goal_and_project)
+    // return goal_and_project
+  })
+
+  $("#time_devoted_select").chosen({width: "95%"}).on("change", function(event, params){
+    console.log("触发change事件")
+    // console.log(params)
+    // console.log(event)
+    devotedtime = Number.parseInt(params.selected) 
+    console.log(typeof(devotedtime))
+  })
+  }
+ 
+     // 判断任务是否已经评价的函数，如果评价就更新任务
+    function judge_task_finished(updatedinfo){
+        // console.log("我正在调用judge这个函数")
+        //  alert("我正在输出inboxtext")
+         console.log("我正在输出info")
+        //  alert(updatedinfo)
+         console.log(updatedinfo)
+        // 下面的代码用来判断任务是否完成
+      // console.log(updatedinfo)
+        var temp_reviewalgo = updatedinfo.reviewalgo;
+        var search = "yes"
+      //   console.log(temp_reviewalgo);
+        // if ( Object.keys(reviewalgo).length == 0) 
+        if (inArray(search, temp_reviewalgo)) {
+          updatedinfo.taskstatus = "finished";
+        // console.log("==========we cam=============")
+          console.log(updatedinfo);
+        
+        // 更新任务
+          $.ajax({
+          type: "POST",
+          url: "/v1/update",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(updatedinfo),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) {       
+            // alert(data); 
+            geteverydaytask();
+            
+            console.log(data)
+            reviewalgo = {
+            'attackactively': 'no',
+            'makeuseofthings': 'no',
+            'depthfirstsearch': 'no',
+            'markataskimmediately': 'no',
+            'alwaysprofit': 'no',
+            'brainuse': 'no',
+            'useprinciple': 'no',
+            'patience': 'no',
+            'solveakeyproblem': 'no',
+            'learnnewthings': 'no',
+            'battlewithlowerbrain': 'no',
+            'difficultthings': 'no',
+            'acceptfactandseektruth': 'no',
+            'dealwithahardtask': 'no',
+            'threeminutes': 'no',
+            'serviceforgoal': 'no',
+            'buildframeandprinciple': 'no',
+            'atomadifficulttask': 'no',
+            'noflinch': 'no',
+            'learntechuse': 'no',
+            'doanimportantthingearly': 'no',
+            'acceptpain': 'no',
+            'conquerthefear': 'no'
+            }
+            },
+          failure: function (errMsg) {
+            alert(errMsg);
+          }
+          })
+        }
+        else {
+          
+          
+          alert("请先对任务进行评价才能点击完成按钮哦~");
+          event.preventDefault();
+          return false;
+         // return false;
+          event.preventDefault();
+         // 阻止click动作之后默认的操作
+        }
+      }
+      
+
+window.onload = function() {
+  var input = document.querySelector('#g01-01');
+  if (input) {   
+    input.addEventListener('change', doalert, false);
+  }
+}
+
+
+
+
+// var  parents = []
+// 生成今日任务的函数
+function geteverydaytask(){
+ $.get("/v1/todayjson", function(data, status){
+    //alert("Data: " + data + "\nStatus: " + status);
+    console.log(data.task);
+    onedit = false 
+    
+    $('#today_tree').replaceWith($('#today_tree').clone());
+    var div = document.getElementById('today_tree');
+    div.innerHTML = ""
+    
+    //origin event   was not  delletd
+    var  alltask=''
+    // data.task是从服务器传回的所有任务
+    var tasks = data.task
+    sendback_tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      // var i = 0
+      var head = '<h1>Today tasks</h1><ul class="tree">'
+       var  tail = '</ul>'
+       var  alltask = ''
+       console.log("我正在输出data.task")
+       var todayjson = data.task
+       var todaytest =  data.task
+      console.log("我正在打印todayjson")
+       console.log(todayjson)
+
+      
+    
+      var taskids = []
+      var  alltasks = {}
+      // 把所有的今日任务的ID提取出来
+      for(var i=0;i<todayjson.length;i++){
+        taskids.push(todayjson[i].ID)
+        alltasks[todayjson[i].ID] = todayjson[i]
+      }
+       
+      
+
+      var id_values_task = {}
+      for (let i = 0; i < taskids.length; i++) {
+       id_values_task[taskids[i]] = todayjson[i]
+      }
+      console.log("===============key values tasks===================")
+      console.log(id_values_task)
+      
+      // console.log(taskids)
+       var  tasktree ={"first":[],"second":[],"three":[],"four":[],"five":[]}
+      //  var  sontree = {}
+       
+
+
+       // 生成儿子和孙子
+      for (let i = 0; i< todayjson.length; i++) {
+      sontree[todayjson[i].ID] =[]
+      }
+     
+      for (let i = 0; i< todayjson.length; i++) {
+        var parent_id_i = todayjson[i].parentid;
+        for (let j = 0; j < todayjson.length; j++) {
+          var id_j = todayjson[j].ID;
+
+          if ( parent_id_i == id_j ) {
+            sontree[todayjson[i].parentid].push(todayjson[i])
+        }
+        else{
+          var unspedc = "unspecified"
+          // sontree[todayjson[i].parentid].push(unspedc)
+        }
+        }
+      }
+      // 生成爷爷们
+      var parents = todayjson;
+      var need_delete_task = [];
+      for (let i = 0; i < todayjson.length; i++) {
+        
+        var single_parenttask_id = todayjson[i].parentid
+
+        // console.log(single_parenttask)
+        for (let j = 0; j < todayjson.length; j++){
+          var other_task_parent_id = todayjson[j].ID
+        // single_parenttask_id == "unspecified"
+          if ( single_parenttask_id == other_task_parent_id  ) {
+            // console.log("这个任务需要删除")
+            // 把需要删除的子任务及孙子任务放到一个Array里
+            need_delete_task.push(todayjson[i])
+            // console.log(need_delete_task)
+          // parents.push(todayjson[i])
+          // tasktree.first.push(todayjson[i])
+          // 用splice会改变位置，所以不能
+          // parents.splice(i,1)
+        }
+        } 
+      }
+      // 使用filter删除在所有任务里的重复项，得到的就是所有的爷爷节点
+      var parents = parents.filter(function(v){ return need_delete_task.indexOf(v) == -1 })
+      console.log(parents)
+      // for (let i = 0; i < need_delete_task.length; i++) {
+      //   var index = parents.indexOf(need_delete_task[i])
+      //   if (index > -1) {
+      //       parents.splice(index, 1);
+      //   }
+      // }
+
+      // let parents = [...new Set(parents)];
+
+      // 生成todaytree的div
+
+/*
+这里是python的源代码
+In [84]: def showtree(tasks): 
+    ...:     if len(tasks)==0: 
+    ...:         #print("this is the last depth") 
+    ...:         return 
+    ...:     else: 
+    ...:         for k in tasks: 
+    ...:             #print(k) 
+    ...:             #print(k["task"]) 
+    ...:             if len(sons[str(k["ID"])])>0: 
+    ...:                 showtree(sons[str(k["ID"])]) 
+    ...:             else: 
+    ...:                 print(alltasks[str(k["ID"])]['task']) 
+    ...:                 return 
+*/
+
+
+   
+var unique_parents = [];
+      $.each(parents, function(i, el){
+        if($.inArray(el, unique_parents) === -1) unique_parents.push(el);
+      });
+
+
+parents = unique_parents;
+
+// get parentid
+    parentids = []
+   for(var i =0;i<parents.length;i++){
+     parentids.push(String(parents[i].ID))
+   }
+
+
+     console.log("这是所有tasks从服务器载入的所有tasks包含了id")
+      console.log(alltasks)
+     console.log("这是sons")
+      console.log(sontree)
+      Object.keys(sontree).forEach(key=>{
+     // console.log(`${key} : ${obj[key]}`);
+     sontree[key].sort(function(a, b){
+           // console.log("检测随最先能够执行")
+           if  (b.ID>a.ID) return -1;
+       });
+   });
+      
+      console.log("这是parents")
+     console.log(parents)
+     parents.sort(function(a, b){
+       console.log("检测随最先能够执行")
+       if  (b.ID>a.ID) return -1;
+   });
+     console.log(parents)
+     console.log("这是parents id 的数组")
+     console.log(parentids)
+   
+
+  
+   
+ 
+ function getdepthoftask(taskid){
+     var parentid  = String(taskid)
+       
+       var depth = 1
+       // console.log(typeof(parentid))
+       // console.log(typeof(parentids[0]))
+       // console.log(typeof(alltasks[String(taskid)].parentid))
+       while(!parentids.includes(parentid)){
+         depth+=1
+         // console.log("深度加1")
+         parentid = alltasks[String(parentid)].parentid
+         // console.log("此时parentid的类型为如下")
+         // console.log(typeof(parentid))
+         // console.log(parentid)
+         if (depth ==10){
+           console.log("可能某些位置出了问题")
+           return
+         }
+       }
+
+   return depth
+ }
+
+     function  showtree(tasks){
+       if (tasks.length == 0){
+         // console.log("已经没有孩子")
+         return
+       }else{
+         for(var k=0;k<tasks.length;k++){
+
+           // console.log(k["task"])
+           // console.log("*")
+
+           var thistaskid =  tasks[k].ID
+           
+           //检查当前任务的,如果有孩子就调用showtree
+           if(sontree[thistaskid].length>0){
+             // console.log(getdepthoftask(thistaskid))
+
+             var depth = getdepthoftask(thistaskid)
+
+             add_task_div2tree(tasks[k],depth)
+
+             console.log("   ".repeat(depth)+ `${depth} ` +alltasks[String(thistaskid)]['task'])
+             showtree(sontree[String(thistaskid)])
+           }else{
+             // console.log("------")
+             // console.log(thistaskid)
+             // console.log(sontree[thistaskid].length)
+           //  console.log(getdepthoftask(thistaskid))
+            var depth = getdepthoftask(thistaskid)
+            add_task_div2tree(tasks[k],depth)
+            console.log("   ".repeat(depth)+ `${depth} ` +"[]"+alltasks[String(thistaskid)]['task'])
+           //  这里有可能return太早如果有两个并列级别的bug
+            if (k==tasks.length){
+             return 
+            }
+            
+           }
+           }
+         }
+       }
+
+/*
+
+     for k in parents: 
+         id  = k["ID"] 
+         print(alltasks[str(id)]["task"]) 
+         #print(sons[str(id)]) 
+         showtree(sons[str(id)]) 
+
+*/
+
+    //下面是测试部分
+     // for(var k=0;k<parents.length;k++){
+     //   var parentid = parents[k].ID
+     //   console.log(parents[k].task)
+     //   var childsofparent = sontree[parents[k].ID]
+     //   if(childsofparent.length>0){
+     
+     //     for(var i=0;i<childsofparent.length;i++){
+     //       console.log(childsofparent[i].task)
+     //     }
+     //   }
+
+     // }
+/*
+     <div>
+     <span class="task_list_item_date_button">这里是日期</span>
+     </div>
+*/
+
+ function add_task_div2tree(add_task,task_depth){
+   var task_content = add_task.task
+   var task_id = add_task.ID
+   var task_goal = add_task.goal
+   var task_project = add_task.project
+   var single_task_div = 
+   `<li id="${task_id}" class="task_list_margin" depth="${task_depth}">
+       <div class="task_list_item" id="task_list_div${task_id}" goal="${task_goal}" project="${task_project}"> 
+         <div class="task_checkbox"> 
+           <input type="checkbox" class="checkbox" id="checkbox${task_id}" goal="${task_goal}" project="${task_project}"> 
+         </div>
+         <div class="task_list_content" id="checkbox${task_id}">
+             <div class="task_list_text">    
+                 <a id="tasktext${task_id}" class="task_text">${task_content}</a>
+                 <input class="add_childtask_button" type="image" goal="${task_goal}" project="${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
+                     <button class="giveup_button">
+                       <svg t="1601058861469" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17099" width="12" height="12">
+                       <path d="M573.597516 827.791137c0.614169-19.490827 1.282529-38.96359-0.036127-58.47248-0.469658-7.026813 0.234829-14.143946 0.28902-21.206887 0.108383-12.716907 0.036128-25.433813 0.252893-38.15072 0.162574-8.941575 0.650296-17.88315 0.541914-26.842789-0.307084-24.855772-0.433531-49.69348-0.415467-74.549252 0-5.599774-1.282529-10.8744-2.402484-16.239345-0.848998-4.064352-5.491391-7.351962-10.368614-6.828112-6.864239 0.722552-13.836861 1.029636-20.430144 3.450184-1.354784 0.487722-2.781823 0.794807-4.190799 1.029636-3.865651 0.614169-7.67711 1.300593-11.000847 3.594693-1.589613 1.101891-3.504375 1.300593-5.419136 1.101892a10.766017 10.766017 0 0 0-5.906859 1.011572c-4.877223 2.38442-10.260231 2.799887-15.462602 3.919842-2.402484 0.505786-4.732712 1.119955-7.081005 1.824442-4.136607 1.210274-8.453853 1.806379-12.680779 2.691505-1.842506 0.37934-3.757268 0.578041-5.473327 1.264465-6.647474 2.673441-13.656224 3.630821-20.64691 4.76884-6.015241 0.993508-7.785493 2.817951-7.695173 8.851256 0.072255 5.455264-0.578041 11.000847 1.445103 16.293536 0.289021 0.776743 0.37934 1.752187 0.198701 2.565058-1.697996 7.460344-0.216765 14.992944-0.415467 22.471352-0.180638 6.358453-0.054191 12.716907-2.510866 18.768275-0.325148 0.794807-0.52385 1.679932-0.578041 2.528931-0.451595 7.207451-3.901778 13.475586-6.069433 20.159187-2.185718 6.755857-5.690093 12.879481-8.255151 19.454699-2.167655 5.545583-5.274626 10.892464-7.67711 16.383856-2.691504 6.195879-6.10556 12.06661-8.508044 18.407-1.011572 2.673441-2.420548 5.256562-3.919842 7.695173-4.353373 7.135196-7.984194 14.703923-12.698843 21.640418-1.950889 2.854078-3.811459 5.726221-7.189387 7.279706-2.113463 0.975445-3.522439 2.962461-5.021733 4.714649-4.967542 5.798476-9.880892 11.669207-14.848434 17.467683-3.793395 4.443692-4.841095 4.552075-9.068021 0.722551a174.290262 174.290262 0 0 1-8.128705-7.803556c-3.05278-3.143099-3.468247-5.491391-1.463166-9.411234 1.372848-2.691504 2.872142-5.401073 4.786903-7.695173 3.919842-4.678521 6.575219-10.20604 10.296359-14.97488 1.697996-2.185718 2.510866-4.823031 4.082416-7.099069 2.023144-2.944397 4.154671-5.888795 5.942987-8.941575 2.149591-3.666949 3.414056-7.948067 4.443691-12.120801 1.517358-6.213943 3.612758-12.193057 6.918431-17.59413 2.76376-4.534011 4.118544-9.519616 5.870731-14.378775 1.752187-4.895286 4.118544-9.519616 5.780412-14.432966 0.270957-0.81287 0.921253-1.57155 0.975445-2.38442 0.830934-9.754445 5.545583-18.912786 4.461755-28.974316-0.180638-1.697996-0.14451-3.540502 0.343212-5.166243 3.323737-11.181485 1.770251-22.670054 2.23991-34.032176 0.054191-1.463167-0.234829-2.890206-0.758679-4.24499-1.57155-4.118544-4.046288-5.401073-8.092577-3.703077-6.539091 2.745696-13.078182 5.383009-19.924358 7.261643-2.781823 0.758679-5.527519 1.679932-8.399661 2.059272-9.573808 1.264465-18.497319 4.425628-26.951172 9.049958-6.015241 3.287609-12.608524 5.021733-19.129551 6.882303-11.940164 3.395992-23.970646 6.502964-35.928874 9.862828-4.172735 1.174146-8.255151 2.619249-12.337567 4.082416-4.642393 1.661868-9.338978 3.161163-14.180073 3.937906-8.453853 1.354784-16.239345 5.220435-24.65707 6.611346-8.273215 1.354784-16.419983 2.890206-24.042902 6.611346-2.438611 1.19221-5.274626 1.390912-8.074513 1.33672-7.839684-0.180638-15.552921-0.975445-23.031329-3.522438-2.510866-0.848998-4.678521-2.330229-6.737793-3.865651-4.660457-3.43212-8.815128-7.406153-11.687271-12.572396-0.632233-1.138019-0.776743-2.113463 0.108383-3.161163 3.414056-4.046288 6.972622-7.044877 13.005927-7.261643 6.972622-0.270957 13.999436-1.138019 20.881739-3.215354 10.20604-3.088908 20.646909-5.509455 31.087778-7.749365 9.754445-2.095399 19.255998-5.130116 28.938188-7.514535 3.323737-0.81287 6.4849-2.402484 9.627999-3.847587 12.680779-5.780412 26.264747-8.706746 39.595823-12.427886 6.954558-1.950889 14.125882-3.251482 20.863675-5.762348 12.355631-4.588202 25.217048-7.29777 37.825571-10.856337 7.081005-2.00508 13.999436-4.570138 21.279142-5.780412 1.011572-0.162574 1.914762-0.614169 2.76376-1.210274 2.962461-2.059272 5.997178-4.028225 8.923511-6.141688 2.709568-1.932825 3.269546-3.414056 2.023144-6.286198-3.630821-8.327406-4.24499-16.998024-3.359864-25.885408 0.289021-2.799887-0.126447-5.4372-1.174147-8.056449-1.553486-3.883714 0.036128-8.309342 3.612758-10.440869 1.914762-1.138019 3.883714-1.0477 5.762348 0.036127 4.353373 2.52893 8.833192 4.841095 12.933672 7.839684 5.455264 4.010161 11.199548 7.622918 17.07028 11.036975 5.834603 3.414056 11.452441 7.207451 17.088343 10.946655 5.527519 3.666949 11.380186 5.726221 17.991533 3.757268 12.987863-3.865651 26.37313-6.304262 39.216483-10.675699 2.601185-0.885126 5.274626-1.57155 8.074513-1.408975 4.24499 0.234829 8.219023-0.830934 12.337567-1.770251 7.406153-1.679932 14.30652-4.515947 21.134632-7.622919 4.714649-2.149591 9.176404-4.479819 11.994355-9.411233 2.023144-3.540502 2.637313-7.099069 2.239909-10.784082-0.686424-6.575219 0.180638-13.25882-1.842506-19.779847-1.156082-3.757268 2.980525-8.833192 7.351962-9.104149 5.906859-0.361276 11.831781-0.903189 17.720575-0.848998 5.780412 0.054191 9.790573 3.612758 11.542761 8.977702 1.770251 5.383009 4.588202 10.260231 6.647474 15.49873 1.878634 4.750776 5.14818 7.930003 10.386678 8.797065 1.119955 0.180638 2.402484 0.415467 3.251481 1.083827 3.215354 2.565058 6.846176 2.474739 10.675699 2.474739 8.652554 0 17.323172 0.37934 25.975727 0.614169 1.011572 0.018064 2.077336 0.289021 3.016652 0.054191 5.563647-1.372848 11.217612-0.66836 16.835451-0.704488 4.353373-0.036128 8.652554-0.307084 12.807225-1.824442 2.474739-0.903189 5.112052-0.758679 7.713237-0.794807 17.774767-0.252893 35.531471-0.451595 53.288174-0.867062 6.34039-0.14451 12.698843-0.650296 18.858595-2.456675 3.666949-1.065763 7.478408-0.686424 11.217612-0.578041 8.363534 0.216765 16.69094-0.108383 25.072537 0.848998 12.427886 1.427039 20.990121 8.092577 27.709851 17.973469 2.203782 3.251482 4.082416 6.62941 5.364945 10.35055 1.932825 5.617838 1.011572 10.802145-2.456675 15.589049-0.885126 1.210274-2.095399 1.878634-3.486312 2.420548-3.95597 1.589613-8.020322 2.23991-12.283375 2.095399-9.573808-0.325148-18.985041-1.463167-28.053063-4.750776-3.57663-1.300593-7.279706-1.71606-11.073101-1.86057-5.491391-0.198702-10.856336-1.553486-16.293537-2.185719-2.149591-0.252893-4.299181-0.794807-6.430708-0.776742-12.301439 0.108383-24.458369-1.842506-36.687553-2.727632-3.594694-0.252893-7.225515-0.036128-10.820209-0.018064-22.977138 0.036128-45.954276 0.072255-68.91335 0.090319-3.937906 0-7.893875 0.415467-11.506633 1.806379-5.509455 2.131527-10.007338 5.708157-12.319504 11.434377-1.083827 2.673441-2.167655 5.346881-3.648885 7.839684-1.228338 2.077336-1.372848 4.335309-1.246401 6.701665 0.975445 18.334745 1.029636 36.669489 0.072255 55.004234-0.072255 1.445103-0.162574 2.890206-0.072255 4.335309 1.300593 18.045724 0.66836 36.091448-0.234829 54.137172-0.126447 2.438611 0 4.91335 0.180638 7.351962 0.740615 9.808637 0.578041 19.635337 0.252893 29.462037-0.307084 9.230596-0.686424 18.443127-0.37934 27.709851 0.415467 12.120802-0.018064 24.259667-0.162574 36.398532-0.072255 5.202371 0.198702 10.386678 0.596105 15.589049 0.66836 8.797065 0.650296 17.612193 0.054191 26.427321-0.632233 9.230596-0.650296 18.479255-0.469658 27.709851 0.108383 5.346881 0.216765 10.693762 0.28902 16.040643 0.090319 6.77392-1.445103 13.186565-4.515946 19.201807-0.66836 1.300593-1.282529 2.655377-1.336721 4.082416-0.126447 3.377928-2.131527 5.563647-4.53401 7.532599-1.228338 1.011572-2.456675 2.023144-3.721141 2.980525-1.679932 1.264465-2.781823 2.691504-2.90827 5.003669-0.126447 2.438611-1.264465 2.980525-4.714648 2.944398-2.872142-0.018064-3.775332-0.451595-3.757268-2.90827 0.018064-3.612758-2.38442-5.473328-4.678521-7.370025a23.855038 23.855038 0 0 1-7.388089-10.476997c-0.794807-2.185718-1.390912-4.425628-1.517358-6.737793-0.848998-15.281964-2.565058-30.491674-1.517359-45.863957 0.758679-10.838273-0.054191-21.857183 0.867062-32.821903zM386.727632 338.045724c-13.005927 0-26.011854-0.036128-38.999718 0.018064-2.565058 0.018064-4.76884-0.66836-6.846175-2.185719-5.942986-4.317245-9.917019-10.440869-14.667796-15.860005-2.149591-2.456675-0.975445-4.443692 2.294101-5.14818 8.435789-1.842506 17.052216-2.52893 25.596387-3.685012 4.425628-0.596105 8.923511-0.650296 13.385267-0.90319 2.619249-0.14451 5.14818-0.704488 7.532599-1.806379 7.568727-3.450183 15.733559-4.91335 23.771945-6.521027 8.237087-1.661868 16.239345-3.811459 24.22354-6.430708 8.363534-2.745696 16.672876-5.617838 24.909963-8.706746 9.049958-3.395992 17.287045-8.634491 26.300875-12.211121 11.940164-4.732712 23.609371-10.133785 35.441151-15.101326 11.289867-4.732712 22.543607-9.609935 33.580582-15.029072 7.171324-3.522439 14.432966-6.918431 22.182331-9.429297 8.237087-2.655377 16.239345-1.914762 24.386114-1.914761 4.028225 0 8.056449 0.596105 12.084674 0.939317 3.504375 0.307084 6.810048 1.228338 9.844764 3.070844 0.848998 0.52385 1.788315 0.975445 2.745696 1.246401 6.304262 1.824443 11.235676 5.708157 15.607112 10.404742 1.445103 1.535422 2.041208 3.359865 2.257974 5.473327 0.596105 5.653966-0.704488 10.549252-4.877223 14.595541-1.174146 1.138019-2.366356 2.185718-3.992097 2.456675-5.29269 0.848998-10.603443 1.607677-15.841942-0.126447-2.221846-0.740615-4.479819-1.083827-6.791984-1.210273-4.317245-0.234829-8.616427-0.559977-12.915608-1.318657-6.087496-1.065763-12.06661-0.198702-17.919278 1.770251-7.243579 2.438611-14.487158 4.877223-21.495907 7.966131-3.685013 1.625741-7.388089 3.251482-10.946656 5.148179-6.611346 3.522439-13.276884 7.00875-19.617273 11.000847-3.486311 2.185718-6.466836 5.238498-9.429297 8.146768-1.968953 1.932825-3.811459 4.028225-6.232007 5.328818-4.136607 2.221846-7.351962 5.545583-10.820209 8.562235-2.583122 2.257973-3.215354 5.744285-5.455264 8.255151-3.106971 3.504375-3.992097 8.273215-6.358453 12.229184-1.119955 1.878634-0.505786 4.263054-0.487722 6.412645 0.018064 2.52893-0.885126 4.642393-1.824443 6.972622-2.059272 5.130116-5.29269 9.989275-4.967542 15.87807 0.216765 4.136607-1.932825 7.622918-3.648885 10.964719-2.890206 5.617838-6.051369 11.235676-8.074513 17.124471-2.167655 6.358453-5.852667 11.831781-8.417725 17.919277-2.113463 5.021733-5.81654 9.266723-9.627999 13.240756-1.499294 1.57155-3.125035 3.034716-4.425628 4.750777-2.38442 3.161163-2.420548 6.737793-0.379339 9.212531 2.077336 2.510866 5.708157 3.359865 9.086085 1.246402 7.622918-4.786904 16.329664-6.358453 24.693198-9.086086 6.015241-1.968953 12.301439-3.179227 18.045724-6.015241 2.348292-1.156082 4.24499-2.962461 6.737793-3.883714 12.572396-4.570138 24.946091-9.736382 37.861699-13.385267 4.859159-1.372848 9.664126-3.016653 14.324583-4.949478 5.708157-2.366356 5.852667-3.215354 2.474739-8.580299-2.38442-3.775332-4.949478-7.442281-7.189387-11.307931-2.059272-3.558566-3.558566-7.478408-6.575219-10.549252-1.824443-1.86057-1.499294-3.630821 0.66836-5.166243 3.143099-2.23991 6.10556-4.91335 9.989275-5.924923 0.704488-0.180638 1.481231-0.270957 2.041208-0.66836 4.028225-2.836015 7.081005-1.264465 10.35055 1.643805 8.453853 7.496472 15.986452 15.860006 23.753881 24.024837 1.788315 1.86057 3.251482 4.046288 4.76884 6.159752 4.750776 6.539091 9.53768 13.042055 14.125882 19.689529 1.607677 2.348292 2.817951 5.039797 3.901778 7.695173 1.0477 2.583122 2.546994 4.841095 4.263054 6.990686 0.361276 0.451595 0.722552 0.903189 1.065764 1.372848 3.666949 4.877223 7.117132 20.502399 5.924922 26.102173-0.704488 3.269546-2.149591 5.852667-5.148179 7.604855-2.727632 1.589613-5.364945 3.359865-7.966131 5.184307-3.847587 2.709568-5.274626 2.510866-8.851256-0.451595-5.130116-4.226926-9.627999-9.140277-14.469094-13.692351a1347.901778 1347.901778 0 0 0-13.945244-12.987863c-3.323737-3.034716-5.491391-3.179227-9.212532-0.505786-2.872142 2.059272-6.34039 2.691504-9.447361 4.208862-5.798476 2.817951-11.669207 5.473328-17.810894 7.604855-6.430708 2.221846-13.132374 3.450183-19.545019 5.635902-4.877223 1.661868-9.844764 3.251482-14.378775 5.798476-1.156082 0.650296-2.366356 1.101891-3.648885 1.282529-1.625741 0.234829-3.070844 0.758679-4.24499 1.950889-1.390912 1.408975-3.359865 1.607677-5.003669 2.456675-6.665538 3.43212-13.276884 6.936494-19.924358 10.386678-3.305673 1.71606-6.77392 3.161163-10.169913 4.588202-5.690093 2.38442-11.018911 5.852667-17.305108 6.683601-0.289021 0.036128-0.559977 0.14451-0.830935 0.270957-6.755857 3.414056-14.180073 4.76884-21.387524 6.701665-1.264465 0.343212-2.438611 0.848998-3.57663 1.499295-1.119955 0.632233-2.294101 1.372848-3.540503 1.571549-6.10556 1.011572-11.994355 3.269546-18.262489 3.395992-1.752187 0.036128-3.486311 0.252893-4.949478 1.318657-3.811459 2.76376-8.219023 2.565058-12.518205 2.257973-4.443692-0.325148-9.230596-6.177815-9.140276-10.675698 0.162574-7.514536 0.614169-15.011008 0-22.50748-0.234829-2.781823 0.957381-4.931414 2.745695-7.026813 6.286198-7.351962 13.475586-13.909117 19.274062-21.676546 4.642393-6.232007 9.519616-12.301439 13.63816-18.912785 3.125035-5.021733 7.279706-9.320914 10.061529-14.595541 3.703076-7.00875 7.478408-13.963308 11.524697-20.773356 1.987017-3.359865 3.414056-6.972622 5.383009-10.314423 1.589613-2.709568 2.185718-5.870731 3.57663-8.742873 1.788315-3.757268 3.468247-7.568727 5.455264-11.235676 0.343212-0.614169 0.632233-1.354784 0.650296-2.041208 0.054191-4.91335 0.252893-9.826701-0.054191-14.703923-0.198702-3.179227-2.492803-5.093988-5.509456-5.997178-1.553486-0.469658-3.143099-0.397403-4.732712-0.397403-12.716907 0.018064-25.433813 0.018064-38.132656 0.018064v-0.090319zM522.151849 171.87694c0.054191 3.847587-0.848998 6.593283-3.486311 8.995767-4.353373 3.992097-8.291279 8.453853-12.500141 12.626587-2.691504 2.673441-2.980525 2.745696-6.394581 0.885126-2.438611-1.33672-5.003669-1.33672-7.568727-1.300593-2.980525 0.036128-5.708157-0.451595-8.164832-2.276037-1.390912-1.029636-3.016653-1.896698-4.786904-1.86057-3.811459 0.072255-6.900367-1.824443-10.20604-3.251482-4.479819-1.932825-8.959639-3.865651-13.511714-5.635902-1.824443-0.704488-3.070844-2.131527-4.678521-3.070844-9.375106-5.491391-16.419983-13.060119-20.520462-23.230031-0.614169-1.535422-1.661868-2.673441-2.601186-3.937905-2.438611-3.269546-0.216765-8.48998 3.847587-8.905448 2.854078-0.289021 5.780412-0.126447 8.652554-0.126446 5.924922-0.018064 11.849845-0.018064 17.774767 0 2.456675 0 4.859159-0.018064 6.882304 1.896697 1.174146 1.101891 2.926334 1.119955 4.515946 1.282529 3.323737 0.361276 6.521027 1.083827 9.555744 2.601186 2.348292 1.174146 4.949478 1.499294 7.568727 1.71606 1.57155 0.126447 3.269546 0 4.642394 0.867061 4.479819 2.836015 9.68219 4.263054 13.999435 7.424217 2.438611 1.788315 5.075924 3.359865 8.164832 3.865651 2.456675 0.397403 4.136607 1.770251 5.364945 3.955969 1.427039 2.546994 4.497883 4.371437 3.450184 7.478408z" p-id="17100" fill="#d4237a"></path>    
+                     </button>
+             </div>
+         </div>
+       </div>
+     </li>`
+     var find_task_div_area = document.getElementById("today_tree")
+     find_task_div_area.innerHTML += single_task_div
+     var margin_left_size = (task_depth-1)*1.75;
+     var styles = 
+     `.task_list_margin[depth="${task_depth}"]{
+      margin-left: ${margin_left_size}em;
+      }`
+     var styleSheet = document.createElement("style")
+      styleSheet.type = "text/css"
+      styleSheet.innerText = styles
+      document.head.appendChild(styleSheet)
+}
+
+
+// 下面的循环是找到父节点和子节点对其进行排列
+    
+     for(var k=0;k<parents.length;k++){
+       console.log(parents)
+       var parentid = parents[k].ID
+       var depth = 1
+       if(sontree[String(parentid)].length==0){
+         
+         add_task_div2tree(parents[k],depth)
+         console.log("[]"+parents[k].task)
+         
+       }else{
+         add_task_div2tree(parents[k],depth)
+         console.log(parents[k].task)
+       }
+       
+       showtree(sontree[String(parentid)])
+     }
+   
+
+
+
+
+
+
+      // goal = "${}" project = "${}"
+      //  + "</li>"
+/*
+// 生成div tree
+       var tree_div = ""
+
+  for (let i = 0; i < parents.length; i++) {
+    var  parent_id = parents[i].ID
+    var task_goal = parents[i].goal
+    var task_project = parents[i].project
+    // console.log(`我正在输出goal ${goal_for_checkbox}`)
+    var parent_addedtask_head = 
+    `<div class="task_list_item" id="task_list_div${parent_id}" goal = "${task_goal}" project = "${task_project}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${parent_id}" goal = "${task_goal}" project = "${task_project}" /> 
+          
+            </div>  
+          <div class="task_list_content" id= "checkbox${parent_id}" >
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+
+// 下面这个&times的是那个叉号
+  // &times;
+      var giveup_button = `<button class="giveup_button" >
+        <svg t="1601058861469" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17099" width="12" height="12"><path d="M573.597516 827.791137c0.614169-19.490827 1.282529-38.96359-0.036127-58.47248-0.469658-7.026813 0.234829-14.143946 0.28902-21.206887 0.108383-12.716907 0.036128-25.433813 0.252893-38.15072 0.162574-8.941575 0.650296-17.88315 0.541914-26.842789-0.307084-24.855772-0.433531-49.69348-0.415467-74.549252 0-5.599774-1.282529-10.8744-2.402484-16.239345-0.848998-4.064352-5.491391-7.351962-10.368614-6.828112-6.864239 0.722552-13.836861 1.029636-20.430144 3.450184-1.354784 0.487722-2.781823 0.794807-4.190799 1.029636-3.865651 0.614169-7.67711 1.300593-11.000847 3.594693-1.589613 1.101891-3.504375 1.300593-5.419136 1.101892a10.766017 10.766017 0 0 0-5.906859 1.011572c-4.877223 2.38442-10.260231 2.799887-15.462602 3.919842-2.402484 0.505786-4.732712 1.119955-7.081005 1.824442-4.136607 1.210274-8.453853 1.806379-12.680779 2.691505-1.842506 0.37934-3.757268 0.578041-5.473327 1.264465-6.647474 2.673441-13.656224 3.630821-20.64691 4.76884-6.015241 0.993508-7.785493 2.817951-7.695173 8.851256 0.072255 5.455264-0.578041 11.000847 1.445103 16.293536 0.289021 0.776743 0.37934 1.752187 0.198701 2.565058-1.697996 7.460344-0.216765 14.992944-0.415467 22.471352-0.180638 6.358453-0.054191 12.716907-2.510866 18.768275-0.325148 0.794807-0.52385 1.679932-0.578041 2.528931-0.451595 7.207451-3.901778 13.475586-6.069433 20.159187-2.185718 6.755857-5.690093 12.879481-8.255151 19.454699-2.167655 5.545583-5.274626 10.892464-7.67711 16.383856-2.691504 6.195879-6.10556 12.06661-8.508044 18.407-1.011572 2.673441-2.420548 5.256562-3.919842 7.695173-4.353373 7.135196-7.984194 14.703923-12.698843 21.640418-1.950889 2.854078-3.811459 5.726221-7.189387 7.279706-2.113463 0.975445-3.522439 2.962461-5.021733 4.714649-4.967542 5.798476-9.880892 11.669207-14.848434 17.467683-3.793395 4.443692-4.841095 4.552075-9.068021 0.722551a174.290262 174.290262 0 0 1-8.128705-7.803556c-3.05278-3.143099-3.468247-5.491391-1.463166-9.411234 1.372848-2.691504 2.872142-5.401073 4.786903-7.695173 3.919842-4.678521 6.575219-10.20604 10.296359-14.97488 1.697996-2.185718 2.510866-4.823031 4.082416-7.099069 2.023144-2.944397 4.154671-5.888795 5.942987-8.941575 2.149591-3.666949 3.414056-7.948067 4.443691-12.120801 1.517358-6.213943 3.612758-12.193057 6.918431-17.59413 2.76376-4.534011 4.118544-9.519616 5.870731-14.378775 1.752187-4.895286 4.118544-9.519616 5.780412-14.432966 0.270957-0.81287 0.921253-1.57155 0.975445-2.38442 0.830934-9.754445 5.545583-18.912786 4.461755-28.974316-0.180638-1.697996-0.14451-3.540502 0.343212-5.166243 3.323737-11.181485 1.770251-22.670054 2.23991-34.032176 0.054191-1.463167-0.234829-2.890206-0.758679-4.24499-1.57155-4.118544-4.046288-5.401073-8.092577-3.703077-6.539091 2.745696-13.078182 5.383009-19.924358 7.261643-2.781823 0.758679-5.527519 1.679932-8.399661 2.059272-9.573808 1.264465-18.497319 4.425628-26.951172 9.049958-6.015241 3.287609-12.608524 5.021733-19.129551 6.882303-11.940164 3.395992-23.970646 6.502964-35.928874 9.862828-4.172735 1.174146-8.255151 2.619249-12.337567 4.082416-4.642393 1.661868-9.338978 3.161163-14.180073 3.937906-8.453853 1.354784-16.239345 5.220435-24.65707 6.611346-8.273215 1.354784-16.419983 2.890206-24.042902 6.611346-2.438611 1.19221-5.274626 1.390912-8.074513 1.33672-7.839684-0.180638-15.552921-0.975445-23.031329-3.522438-2.510866-0.848998-4.678521-2.330229-6.737793-3.865651-4.660457-3.43212-8.815128-7.406153-11.687271-12.572396-0.632233-1.138019-0.776743-2.113463 0.108383-3.161163 3.414056-4.046288 6.972622-7.044877 13.005927-7.261643 6.972622-0.270957 13.999436-1.138019 20.881739-3.215354 10.20604-3.088908 20.646909-5.509455 31.087778-7.749365 9.754445-2.095399 19.255998-5.130116 28.938188-7.514535 3.323737-0.81287 6.4849-2.402484 9.627999-3.847587 12.680779-5.780412 26.264747-8.706746 39.595823-12.427886 6.954558-1.950889 14.125882-3.251482 20.863675-5.762348 12.355631-4.588202 25.217048-7.29777 37.825571-10.856337 7.081005-2.00508 13.999436-4.570138 21.279142-5.780412 1.011572-0.162574 1.914762-0.614169 2.76376-1.210274 2.962461-2.059272 5.997178-4.028225 8.923511-6.141688 2.709568-1.932825 3.269546-3.414056 2.023144-6.286198-3.630821-8.327406-4.24499-16.998024-3.359864-25.885408 0.289021-2.799887-0.126447-5.4372-1.174147-8.056449-1.553486-3.883714 0.036128-8.309342 3.612758-10.440869 1.914762-1.138019 3.883714-1.0477 5.762348 0.036127 4.353373 2.52893 8.833192 4.841095 12.933672 7.839684 5.455264 4.010161 11.199548 7.622918 17.07028 11.036975 5.834603 3.414056 11.452441 7.207451 17.088343 10.946655 5.527519 3.666949 11.380186 5.726221 17.991533 3.757268 12.987863-3.865651 26.37313-6.304262 39.216483-10.675699 2.601185-0.885126 5.274626-1.57155 8.074513-1.408975 4.24499 0.234829 8.219023-0.830934 12.337567-1.770251 7.406153-1.679932 14.30652-4.515947 21.134632-7.622919 4.714649-2.149591 9.176404-4.479819 11.994355-9.411233 2.023144-3.540502 2.637313-7.099069 2.239909-10.784082-0.686424-6.575219 0.180638-13.25882-1.842506-19.779847-1.156082-3.757268 2.980525-8.833192 7.351962-9.104149 5.906859-0.361276 11.831781-0.903189 17.720575-0.848998 5.780412 0.054191 9.790573 3.612758 11.542761 8.977702 1.770251 5.383009 4.588202 10.260231 6.647474 15.49873 1.878634 4.750776 5.14818 7.930003 10.386678 8.797065 1.119955 0.180638 2.402484 0.415467 3.251481 1.083827 3.215354 2.565058 6.846176 2.474739 10.675699 2.474739 8.652554 0 17.323172 0.37934 25.975727 0.614169 1.011572 0.018064 2.077336 0.289021 3.016652 0.054191 5.563647-1.372848 11.217612-0.66836 16.835451-0.704488 4.353373-0.036128 8.652554-0.307084 12.807225-1.824442 2.474739-0.903189 5.112052-0.758679 7.713237-0.794807 17.774767-0.252893 35.531471-0.451595 53.288174-0.867062 6.34039-0.14451 12.698843-0.650296 18.858595-2.456675 3.666949-1.065763 7.478408-0.686424 11.217612-0.578041 8.363534 0.216765 16.69094-0.108383 25.072537 0.848998 12.427886 1.427039 20.990121 8.092577 27.709851 17.973469 2.203782 3.251482 4.082416 6.62941 5.364945 10.35055 1.932825 5.617838 1.011572 10.802145-2.456675 15.589049-0.885126 1.210274-2.095399 1.878634-3.486312 2.420548-3.95597 1.589613-8.020322 2.23991-12.283375 2.095399-9.573808-0.325148-18.985041-1.463167-28.053063-4.750776-3.57663-1.300593-7.279706-1.71606-11.073101-1.86057-5.491391-0.198702-10.856336-1.553486-16.293537-2.185719-2.149591-0.252893-4.299181-0.794807-6.430708-0.776742-12.301439 0.108383-24.458369-1.842506-36.687553-2.727632-3.594694-0.252893-7.225515-0.036128-10.820209-0.018064-22.977138 0.036128-45.954276 0.072255-68.91335 0.090319-3.937906 0-7.893875 0.415467-11.506633 1.806379-5.509455 2.131527-10.007338 5.708157-12.319504 11.434377-1.083827 2.673441-2.167655 5.346881-3.648885 7.839684-1.228338 2.077336-1.372848 4.335309-1.246401 6.701665 0.975445 18.334745 1.029636 36.669489 0.072255 55.004234-0.072255 1.445103-0.162574 2.890206-0.072255 4.335309 1.300593 18.045724 0.66836 36.091448-0.234829 54.137172-0.126447 2.438611 0 4.91335 0.180638 7.351962 0.740615 9.808637 0.578041 19.635337 0.252893 29.462037-0.307084 9.230596-0.686424 18.443127-0.37934 27.709851 0.415467 12.120802-0.018064 24.259667-0.162574 36.398532-0.072255 5.202371 0.198702 10.386678 0.596105 15.589049 0.66836 8.797065 0.650296 17.612193 0.054191 26.427321-0.632233 9.230596-0.650296 18.479255-0.469658 27.709851 0.108383 5.346881 0.216765 10.693762 0.28902 16.040643 0.090319 6.77392-1.445103 13.186565-4.515946 19.201807-0.66836 1.300593-1.282529 2.655377-1.336721 4.082416-0.126447 3.377928-2.131527 5.563647-4.53401 7.532599-1.228338 1.011572-2.456675 2.023144-3.721141 2.980525-1.679932 1.264465-2.781823 2.691504-2.90827 5.003669-0.126447 2.438611-1.264465 2.980525-4.714648 2.944398-2.872142-0.018064-3.775332-0.451595-3.757268-2.90827 0.018064-3.612758-2.38442-5.473328-4.678521-7.370025a23.855038 23.855038 0 0 1-7.388089-10.476997c-0.794807-2.185718-1.390912-4.425628-1.517358-6.737793-0.848998-15.281964-2.565058-30.491674-1.517359-45.863957 0.758679-10.838273-0.054191-21.857183 0.867062-32.821903zM386.727632 338.045724c-13.005927 0-26.011854-0.036128-38.999718 0.018064-2.565058 0.018064-4.76884-0.66836-6.846175-2.185719-5.942986-4.317245-9.917019-10.440869-14.667796-15.860005-2.149591-2.456675-0.975445-4.443692 2.294101-5.14818 8.435789-1.842506 17.052216-2.52893 25.596387-3.685012 4.425628-0.596105 8.923511-0.650296 13.385267-0.90319 2.619249-0.14451 5.14818-0.704488 7.532599-1.806379 7.568727-3.450183 15.733559-4.91335 23.771945-6.521027 8.237087-1.661868 16.239345-3.811459 24.22354-6.430708 8.363534-2.745696 16.672876-5.617838 24.909963-8.706746 9.049958-3.395992 17.287045-8.634491 26.300875-12.211121 11.940164-4.732712 23.609371-10.133785 35.441151-15.101326 11.289867-4.732712 22.543607-9.609935 33.580582-15.029072 7.171324-3.522439 14.432966-6.918431 22.182331-9.429297 8.237087-2.655377 16.239345-1.914762 24.386114-1.914761 4.028225 0 8.056449 0.596105 12.084674 0.939317 3.504375 0.307084 6.810048 1.228338 9.844764 3.070844 0.848998 0.52385 1.788315 0.975445 2.745696 1.246401 6.304262 1.824443 11.235676 5.708157 15.607112 10.404742 1.445103 1.535422 2.041208 3.359865 2.257974 5.473327 0.596105 5.653966-0.704488 10.549252-4.877223 14.595541-1.174146 1.138019-2.366356 2.185718-3.992097 2.456675-5.29269 0.848998-10.603443 1.607677-15.841942-0.126447-2.221846-0.740615-4.479819-1.083827-6.791984-1.210273-4.317245-0.234829-8.616427-0.559977-12.915608-1.318657-6.087496-1.065763-12.06661-0.198702-17.919278 1.770251-7.243579 2.438611-14.487158 4.877223-21.495907 7.966131-3.685013 1.625741-7.388089 3.251482-10.946656 5.148179-6.611346 3.522439-13.276884 7.00875-19.617273 11.000847-3.486311 2.185718-6.466836 5.238498-9.429297 8.146768-1.968953 1.932825-3.811459 4.028225-6.232007 5.328818-4.136607 2.221846-7.351962 5.545583-10.820209 8.562235-2.583122 2.257973-3.215354 5.744285-5.455264 8.255151-3.106971 3.504375-3.992097 8.273215-6.358453 12.229184-1.119955 1.878634-0.505786 4.263054-0.487722 6.412645 0.018064 2.52893-0.885126 4.642393-1.824443 6.972622-2.059272 5.130116-5.29269 9.989275-4.967542 15.87807 0.216765 4.136607-1.932825 7.622918-3.648885 10.964719-2.890206 5.617838-6.051369 11.235676-8.074513 17.124471-2.167655 6.358453-5.852667 11.831781-8.417725 17.919277-2.113463 5.021733-5.81654 9.266723-9.627999 13.240756-1.499294 1.57155-3.125035 3.034716-4.425628 4.750777-2.38442 3.161163-2.420548 6.737793-0.379339 9.212531 2.077336 2.510866 5.708157 3.359865 9.086085 1.246402 7.622918-4.786904 16.329664-6.358453 24.693198-9.086086 6.015241-1.968953 12.301439-3.179227 18.045724-6.015241 2.348292-1.156082 4.24499-2.962461 6.737793-3.883714 12.572396-4.570138 24.946091-9.736382 37.861699-13.385267 4.859159-1.372848 9.664126-3.016653 14.324583-4.949478 5.708157-2.366356 5.852667-3.215354 2.474739-8.580299-2.38442-3.775332-4.949478-7.442281-7.189387-11.307931-2.059272-3.558566-3.558566-7.478408-6.575219-10.549252-1.824443-1.86057-1.499294-3.630821 0.66836-5.166243 3.143099-2.23991 6.10556-4.91335 9.989275-5.924923 0.704488-0.180638 1.481231-0.270957 2.041208-0.66836 4.028225-2.836015 7.081005-1.264465 10.35055 1.643805 8.453853 7.496472 15.986452 15.860006 23.753881 24.024837 1.788315 1.86057 3.251482 4.046288 4.76884 6.159752 4.750776 6.539091 9.53768 13.042055 14.125882 19.689529 1.607677 2.348292 2.817951 5.039797 3.901778 7.695173 1.0477 2.583122 2.546994 4.841095 4.263054 6.990686 0.361276 0.451595 0.722552 0.903189 1.065764 1.372848 3.666949 4.877223 7.117132 20.502399 5.924922 26.102173-0.704488 3.269546-2.149591 5.852667-5.148179 7.604855-2.727632 1.589613-5.364945 3.359865-7.966131 5.184307-3.847587 2.709568-5.274626 2.510866-8.851256-0.451595-5.130116-4.226926-9.627999-9.140277-14.469094-13.692351a1347.901778 1347.901778 0 0 0-13.945244-12.987863c-3.323737-3.034716-5.491391-3.179227-9.212532-0.505786-2.872142 2.059272-6.34039 2.691504-9.447361 4.208862-5.798476 2.817951-11.669207 5.473328-17.810894 7.604855-6.430708 2.221846-13.132374 3.450183-19.545019 5.635902-4.877223 1.661868-9.844764 3.251482-14.378775 5.798476-1.156082 0.650296-2.366356 1.101891-3.648885 1.282529-1.625741 0.234829-3.070844 0.758679-4.24499 1.950889-1.390912 1.408975-3.359865 1.607677-5.003669 2.456675-6.665538 3.43212-13.276884 6.936494-19.924358 10.386678-3.305673 1.71606-6.77392 3.161163-10.169913 4.588202-5.690093 2.38442-11.018911 5.852667-17.305108 6.683601-0.289021 0.036128-0.559977 0.14451-0.830935 0.270957-6.755857 3.414056-14.180073 4.76884-21.387524 6.701665-1.264465 0.343212-2.438611 0.848998-3.57663 1.499295-1.119955 0.632233-2.294101 1.372848-3.540503 1.571549-6.10556 1.011572-11.994355 3.269546-18.262489 3.395992-1.752187 0.036128-3.486311 0.252893-4.949478 1.318657-3.811459 2.76376-8.219023 2.565058-12.518205 2.257973-4.443692-0.325148-9.230596-6.177815-9.140276-10.675698 0.162574-7.514536 0.614169-15.011008 0-22.50748-0.234829-2.781823 0.957381-4.931414 2.745695-7.026813 6.286198-7.351962 13.475586-13.909117 19.274062-21.676546 4.642393-6.232007 9.519616-12.301439 13.63816-18.912785 3.125035-5.021733 7.279706-9.320914 10.061529-14.595541 3.703076-7.00875 7.478408-13.963308 11.524697-20.773356 1.987017-3.359865 3.414056-6.972622 5.383009-10.314423 1.589613-2.709568 2.185718-5.870731 3.57663-8.742873 1.788315-3.757268 3.468247-7.568727 5.455264-11.235676 0.343212-0.614169 0.632233-1.354784 0.650296-2.041208 0.054191-4.91335 0.252893-9.826701-0.054191-14.703923-0.198702-3.179227-2.492803-5.093988-5.509456-5.997178-1.553486-0.469658-3.143099-0.397403-4.732712-0.397403-12.716907 0.018064-25.433813 0.018064-38.132656 0.018064v-0.090319zM522.151849 171.87694c0.054191 3.847587-0.848998 6.593283-3.486311 8.995767-4.353373 3.992097-8.291279 8.453853-12.500141 12.626587-2.691504 2.673441-2.980525 2.745696-6.394581 0.885126-2.438611-1.33672-5.003669-1.33672-7.568727-1.300593-2.980525 0.036128-5.708157-0.451595-8.164832-2.276037-1.390912-1.029636-3.016653-1.896698-4.786904-1.86057-3.811459 0.072255-6.900367-1.824443-10.20604-3.251482-4.479819-1.932825-8.959639-3.865651-13.511714-5.635902-1.824443-0.704488-3.070844-2.131527-4.678521-3.070844-9.375106-5.491391-16.419983-13.060119-20.520462-23.230031-0.614169-1.535422-1.661868-2.673441-2.601186-3.937905-2.438611-3.269546-0.216765-8.48998 3.847587-8.905448 2.854078-0.289021 5.780412-0.126447 8.652554-0.126446 5.924922-0.018064 11.849845-0.018064 17.774767 0 2.456675 0 4.859159-0.018064 6.882304 1.896697 1.174146 1.101891 2.926334 1.119955 4.515946 1.282529 3.323737 0.361276 6.521027 1.083827 9.555744 2.601186 2.348292 1.174146 4.949478 1.499294 7.568727 1.71606 1.57155 0.126447 3.269546 0 4.642394 0.867061 4.479819 2.836015 9.68219 4.263054 13.999435 7.424217 2.438611 1.788315 5.075924 3.359865 8.164832 3.865651 2.456675 0.397403 4.136607 1.770251 5.364945 3.955969 1.427039 2.546994 4.497883 4.371437 3.450184 7.478408z" p-id="17100" fill="#d4237a"></path></svg>
+        
+        
+    
+        </button>`
+      var parent_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var parent_addedtask_trail = '</div><div><span class="task_list_item_date_button">这里是日期</span></div></div>'+ '</div>'
+      tree_div = tree_div + `<li id = ${parent_id} >` + parent_addedtask_head + `<a id = "tasktext${parent_id}" class = "task_text">` + parents[i].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">` +giveup_button+ parent_addedtask_trail;
+
+    // console.log("第一层嵌套")
+    // console.log(parent_id)
+    //判断是否有儿子，如果没有的话，加上</li> 
+    // if (sontree[parent_id].length == 0) {
+    //   tree_div = tree_div + ' </li>'
+    // }
+      // var son_div = ""
+
+
+    for (let j = 0; j < sontree[parent_id].length; j++) {
+      var son_id = sontree[parent_id][j].ID
+      var task_goal = sontree[parent_id][j].goal
+      var task_project = sontree[parent_id][j].project
+      if (j==0) {
+        tree_div = tree_div + "<ul>"
+      }
+      // console.log("正在打印第2层")
+      // console.log(sontree[parent_id].length)
+      // console.log(sontree[parent_id])
+      // console.log(sontree[parent_id][1].ID)
+      var son_addedtask_head = `<div class="task_list_item" id="task_list_div${son_id}" goal = "${task_goal}" project = "${task_project}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${son_id}" goal = "${task_goal}" project = "${task_project}" /> 
+          </div>  
+          <div class="task_list_content" id= "checkbox${son_id}">
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+      var son_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var son_addedtask_trail = '</div><div><span class="task_list_item_date_button"> </span></div></div>'+'</div>'
+      tree_div = tree_div + `<li id = ${son_id} >` + son_addedtask_head + `<a id = "tasktext${son_id}" class = "son_task_text" >` + sontree[parent_id][j].task + '</a>' + `<input class="add_childtask_button" type="image" goal = "${task_goal}" project = "${task_project}" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">`+giveup_button + son_addedtask_trail  ;
+
+      // console.log("第二层嵌套")
+      // console.log(son_id)
+
+
+    for (let z = 0; z < sontree[son_id].length; z++) {
+      console.log(z)
+      var grandson_id = sontree[son_id][z].ID
+      var task_goal = sontree[son_id][z].goal
+      var task_project = sontree[son_id][z].project
+      if (z==0) {
+        tree_div = tree_div + "<ul>"
+      }
+      // console.log("正在打印第3层")
+      // console.log([son_id].length)
+      // console.log(sontree[son_id][z])
+      var grandson_addedtask_head = `<div class="task_list_item" id="task_list_div${grandson_id}"> 
+        <div class="task_checkbox"> 
+            <input type="checkbox" class = "checkbox" id= "checkbox${grandson_id}" goal = "${task_goal}" project = "${task_project}" /> 
+          </div>  
+          <div class="task_list_content" id= "checkbox${grandson_id}" goal = "${task_goal}" project = "${task_project}">
+            <div class = "task_list_text"> `
+        //  "<a>" + tasks[i].task + "</a>"
+        //  </div>
+          //<div>
+       //    <span class="task_list_item_date_button">这里是日期</span>  
+          //</div>
+    //    </div>
+  //  
+  // </div>
+
+      var grandson_addedtask_body = '<span type="text" name="" id=  class="task_list_item_input">这里是已经创建的任务 </span> '
+      // var addedtask_trail = '</div> </div> <div class="task_list_item_date_area"> <span class="task_list_item_date_button">这里是日期</span> </div> </div>'
+      var grandson_addedtask_trail = '</div><div><span class="task_list_item_date_button"></span></div></div>' +'</div>'
+      tree_div = tree_div + `<li id = ${grandson_id} >` + grandson_addedtask_head + `<a id = "tasktext${grandson_id}" class = "son_task_text" >` + sontree[son_id][z].task + '</a>'+giveup_button + grandson_addedtask_trail +"</li>" ;
+       
+      var temp_z = z+1
+            if (temp_z == sontree[son_id].length ) {
+              tree_div = tree_div + "</ul>"
+            }
+
+      // console.log("第三层嵌套")
+      // console.log(sontree[son_id])
+    }    
+    
+    
+    tree_div = tree_div + "</li>"
+    var temp_j = j + 1
+      if ( temp_j == sontree[parent_id].length ) {
+        tree_div = tree_div + ' </ul> '
+      }
+    }  
+    tree_div = tree_div + "</li>"
+  }
+
+  div.innerHTML += head + tree_div + tail
+     */
+  make_parent_task_checkbox_hidden()
+ 
+
+  // console.log("print tree")
+  // console.log(tree_div)
+  parentid = 'unspecified'
+  selected_goal = "no goal"
+  selected_project = "inbox"
+
+  }
+  );
+}
+
+geteverydaytask()
+
+
+
+
+// 点击任务右边的[x]，完成放弃任务的事件
+$(document).on("click",".giveup_button",function(){
+// console.log($(this).prev().attr("id"))
+  //  alert($(this).parent().parent().attr("id"))
+  var clicked_taskid = $(this).parent().parent().attr("id").replace(/\D/g,'');
+  
+  var giveup_taskids = []
+  giveup_taskids.push(clicked_taskid)
+  var sons = sontree[clicked_taskid]
+  //这里限制了他只能有两个孩子
+  for (let i = 0; i < sons.length; i++) {
+    var grandson_id = sons[i].ID
+    giveup_taskids.push(grandson_id)
+    grandsons = sontree[grandson_id]
+    for (let j = 0; j < grandsons.length; j++) {
+     
+      giveup_taskids.push(grandsons[j].ID)
+    }
+  }
+  console.log("==========这里是所有要放弃的ID=============")
+  console.log(giveup_taskids)
+  var info = {
+    "giveuptaskids":giveup_taskids,
+  }
+        // console.log(updatedinfo)
+        $.ajax({
+          type: "POST",
+          url: "/v1/giveuptasksbatch",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(info),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) { 
+            console.log("=======give up task successful=========")
+            console.log(data)
+            // alert(data); 
+            geteverydaytask()
+            
+          },
+          failure: function (errMsg) {
+            console.log("this is erro")
+            alert(errMsg);
+
+          }
+        })
+        
+})
+
+function make_parent_task_checkbox_hidden(){
+     // 隐掉父任务的checkbox
+    // console.log(`i am printint sendback_tasks ${sendback_tasks}`)
+    for (let i = 0; i< sendback_tasks.length; i++) {
+    var task_id = Number.parseInt(sendback_tasks[i].ID)
+    // console.log(`"i am print the task_id ${task_id}"`)
+    // 循环任务的ID都不是别的任务的父ID，那么它的checkbox才可以显示出来
+      for (let j = 0; j < sendback_tasks.length; j++) {
+        var parent_id = Number.parseInt(sendback_tasks[j].parentid)
+        // console.log(`"iam print the parent_id ${parent_id}"`)
+        // console.log(`判断 ${task_id == parent_id}`)
+        if (task_id == parent_id) {
+            var this_checkbox = document.getElementById(`checkbox${task_id}`)
+            console.log(`"checkbox${task_id}"`)
+            // console.log(this_checkbox)
+            this_checkbox.style.visibility = "hidden"
+        }
+      }
+    }
+}
+
+// 子任务点击任务后面的+号之后可以新建子任务
+
+      // 把文本转换成div的对象格式
+      function createNode(txt) {
+            // const template = `${txt}`;
+            let tempNode = document.createElement('div');
+            tempNode.innerHTML = txt;
+            return tempNode.firstChild;
+        }
+
+// 点击加号添加子任务div的事件
+  $(document).on("click","input.add_childtask_button",function(){
+     
+    //  console.log(`我正在输出onedit变量${onedit}`)
+    //  console.log("正在执行点击加号的事件")
+     if (onedit == true){
+       alert("请先消除任务编辑框")
+       return;
+     }
+     if (onedit == false){
+      //  console.log("正在执行把onedit变成true的if语句")
+       onedit = true //进入编辑模式
+      //  console.log(`我正在if里输出onedit变量${onedit}`)
+     }
+      //  console.log("我正在打印兄弟节点")
+      //  console.log($(this).prev())
+      var parent_id = $(this).prev().attr("id").replace(/\D/g,'');
+      // 通过寻找兄弟节点来寻找点击+号的父ID
+
+      // 这里是找到goal and project，把它传到全局变量里，就来更新任务时使用
+        var get_task_li_dom = document.getElementById(`${parent_id}`)
+        console.log(get_task_li_dom)
+        selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+        selected_project = get_task_li_dom.children[0].getAttribute("project")
+        console.log("我正在输出goal和project")
+        console.log(selected_goal)
+        console.log(selected_project)
+
+     for (let i = 0; i < sendback_tasks.length; i++) {
+       if ( sendback_tasks[i].ID == parent_id ) {
+         selected_goal = sendback_tasks[i].goal
+         selected_project = sendback_tasks[i].project
+         plantime = sendback_tasks[i].plantime
+       } 
+     }
+     console.log(parent_id)
+
+    // 下面的操作是出现输入任务的窗口，加上一个<ul></ul>
+    var insert_div = ""
+     var ul_div = $('<ul/>')
+     console.log(ul_div)
+     ul_div.attr("id","sontask")
+     insert_div = ul_div.append(createNode(add_task_div))
+     console.log(insert_div)
+     $(`#${parent_id}`).append(insert_div)
+     getgoalincludeproject()
+    
+     // 把父id传过去
+     parentid = parent_id
+
+  })
+
+// 点击+号按键添加爷爷级别事件
+  $(document).on("click","input.add_grandtask_button",function(){
+     
+     console.log(`我正在输出onedit变量${onedit}`)
+     console.log("正在执行点击加号的事件")
+     if (onedit == true){
+       alert("请先使用ESC消除任务编辑框")
+       return;
+     }
+     if (onedit == false){
+       console.log("正在执行把onedit变成true的if语句")
+       onedit = true //进入编辑模式
+      //  console.log(`我正在if里输出onedit变量${onedit}`)
+     }
+      parentid = "unspecified"
+      var add_plus = document.getElementById("add_task_button_area");
+      console.log(add_plus);
+      add_plus.innerHTML += add_task_div;
+      document.getElementById("plusbutton").outerHTML = "";
+      // 下面这行代码是用来生成Project选择项目的
+      getgoalincludeproject()
+
+   })
+
+
+
+
+function getgoalincludeproject(){
+  $.get("/v1/goalincludeproject", function(data, status){
+  yourgoals = []
+  // alert("Data: " + data + "\nStatus: " + status);
+  console.log("输出data")
+  console.log(data);
+  console.log("输出data.goals")
+  console.log(data.goals)
+  create_goalllist_div(data.goalincludeproject);
+  use_chosen_style()
+  })
+}
+
+// 早些版本调goallist的API,目前不用
+var yourgoals = []
+function getgoallist(){
+  // r= requests.get(str(localhosturl)+'/v1/goaljson',cookies=cookie)
+$.get("/v1/goaljson", function(data, status){
+  yourgoals = []
+  // alert("Data: " + data + "\nStatus: " + status);
+  console.log(data);
+  var index = 0 
+  while(index<data.goals.length){
+    console.log(data.goals[index].name)
+    yourgoals.push(data.goals[index].name)
+    index++
+  }
+  
+  var goal_option_div = ""
+  goal_option_div = ''
+
+  for (let i = 0; i < yourgoals.length; i++) {
+    // var goal_option = document.createElement("option")
+    // goal_option += goal_option.setAttribute("value",yourgoals[i])
+
+    // goal_option += goal_option.
+    // console(goal_option)
+    // goal_option_div.innerHTML += goal_option
+  }
+  console.log(yourgoals)
+});
+}
+
+// getgoallist()
+
+// window.onload = function(){
+// $("#tempid").click(function(){
+
+//   var content = "任务1";
+//   var task_content = document.getElementById("tempid");
+//   task_content.firstChild.nodeValue = content;
+// })
+
+
+
+var add_task_item = document.getElementById("add_task_item");
+// console.log(add_task_item);
+  
+  // const nospecifiedtaskdivcode =
+    var taskid_div = "noid";
+
+    //  添加日期的组件
+    function yyyymmdd(dateIn) {
+      var yyyy = dateIn.getFullYear();
+      var mm = dateIn.getMonth() + 1; // getMonth() is zero-based
+      var dd = dateIn.getDate();
+      var timereturn = String(10000 * yyyy + 100 * mm + dd);
+      var finaltime = timereturn.substring(2, 8)
+      return finaltime
+      // Leading zeros for mm and dd
+    }
+    // 把日期传入的js代码
+    // var today = new Date();
+    // console.log(yyyymmdd(today));
+
+// 这里定义了一个全局变量plantime用来输入时间
+    var plantime = "unspecified"
+    // $("#calendar").click(function () 
+    $(document).on("click","#calendar",function()
+    {
+      let myPicker = new SimplePicker();
+      myPicker.open();
+      myPicker.on('submit', function (date, readableDate) {
+        // alert(date);
+        plantime = yyyymmdd(date)
+        // alert("ma is here!!!!!!!!!!!")
+        // alert(plantime)
+        // plantime = conver
+        // alert(readableDate)
+      })
+      // alert("ma is here")
+      myPicker.on('close', function (date) {
+        // ...
+      })
+      // myPicker.close()
+    })
+    // 输入任务的标签组件
+    // var temtags = ['重要', '害怕', '原则','原子化','dfs','困难','容易','紧急','挑战','麻烦事','主要问题', '10分钟', '3分钟', '30分钟']
+
+
+    // 更新标签的函数
+    
+    // 对字典进行中英文变换,用在tags和review中,dict是英汉对应下的字典，key是通过inputtags传入的中文
+    function getdictvaluearray(dict,keys){
+    var values = [] 
+    for (let i = 0; i < keys.length; i++) {
+      values.push(dict[keys[i]])
+    }
+    return  values
+    }
+    
+    // 更新tags
+    function updatetags(tagsarray) {
+      const tasktags_fixed = {
+      'importanttag': 'no',
+      'feartag': 'no',
+      'principletag': 'no',
+      'atomtag': 'no',
+      'dfstag': 'no',
+      'hardtag': 'no',
+      'easytag': 'no',
+      'urgenttag': 'no',
+      'challengetag': 'no',
+      'uncomfortabletag': 'no',
+      'troublesometag': 'no',
+      'keyproblemtag': 'no',
+      'tenminutestasktag': 'no',
+      'thirtyminutestasktag': 'no',
+      'threeminutestasktag': 'no'
+      }
+
+      var tem_tags = tasktags_fixed;
+      // console.log("下面是打印tasktags_fixed")
+      // console.log(tasktags_fixed)
+
+      for (let i = 0; i < tagsarray.length; i++) {
+        tem_tags[tagsarray[i]] = "yes";
+      }
+      // console.log(`我正在输出tagsarray${tagsarray}`)
+      // console.log(tagsarray)
+      // console.log("tags更新完成")
+      // console.log(tem_tags);
+      // console.log("下面是tasktags_fixed")
+      // console.log(tasktags_fixed)
+      return tem_tags;
+    }
+
+    // 更新评价的函数
+    function updatereviewalgo(reviewarray) {
+      const reviewalgo_fixed = {
+      'attackactively': 'no',
+      'makeuseofthings': 'no',
+      'depthfirstsearch': 'no',
+      'markataskimmediately': 'no',
+      'alwaysprofit': 'no',
+      'brainuse': 'no',
+      'useprinciple': 'no',
+      'patience': 'no',
+      'solveakeyproblem': 'no',
+      'learnnewthings': 'no',
+      'battlewithlowerbrain': 'no',
+      'difficultthings': 'no',
+      'acceptfactandseektruth': 'no',
+      'dealwithahardtask': 'no',
+      'threeminutes': 'no',
+      'serviceforgoal': 'no',
+      'buildframeandprinciple': 'no',
+      'atomadifficulttask': 'no',
+      'noflinch': 'no',
+      'learntechuse': 'no',
+      'doanimportantthingearly': 'no',
+      'acceptpain': 'no',
+      'conquerthefear': 'no'
+    }
+    var tmp_reviewalgo = reviewalgo_fixed;
+    for(var i =0; i<reviewarray.length; i++){
+      tmp_reviewalgo[reviewarray[i]] = "yes"
+    }
+    return tmp_reviewalgo;
+    }
+
+
+// 点击标签的图标出现图标
+    $(document).on("click","#tags_button",function(){
+      if(document.getElementsByClassName("inputTags-list").length ==0){
+        var test_div = document.getElementById("add_tasktags_area")
+        var tags_tag = `<input type="text" name="tasktag" id="tasktag_selector" >`
+        test_div.innerHTML += tags_tag
+        add_tags_plugin()
+      }
+      else{
+        return;
+      }
+    
+})
+
+
+
+// 标签的输入
+
+function add_tags_plugin(){
+  $("#tasktag_selector").inputTags({
+      autocomplete: {
+        values: tasktags_chinese,
+        only: true
+      },
+      // max: 3,
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      create: function ($elem) {
+        console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        // tasktags = updatetags($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        tasktags = updatetags($elem.tags);
+      }
+    }
+    );
+}
+  
+
+
+    // review的选择输入
+
+    $("#task_reviewalgo_selector").inputTags({
+      autocomplete: {
+        values: reviewalgo_chinese,
+        only: true
+      },
+      // max: 3,
+
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // reviewalgo = updatereviewalgo($elem.tags);
+
+      },
+
+      create: function ($elem) {
+        // console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        // console.log($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      }
+    }
+    );
+    
+
+    // for (var i = 0; i < tasktags.length; i++) {
+    //         // const element = array[i];
+    //         if($elem[i]= Object.keys(tasktags)[i]){
+    //           tasktags[i] = $elem[i];
+    //         }
+    //           alert("tasktags")
+    //     };
+
+    // 下面是输入任务的JS代码
+
+    // $("#testbutton").keypress(function(event){
+    //   if(event.key === "Enter"){
+    //     $.get("/v1/test", function(data, status){
+    //       alert("Data: " + data + "\nStatus: " + status);
+    //     });
+    //   }
+  
+    // });
+
+
+    // $("#noid").keypress(function (event)
+
+
+
+// 把点击button封闭成一个事件
+
+
+// 判断Plantime是今天、明天还是其它日出的函数
+function judge_plantime_today_tomorrow_or_other_day(plantime){
+  // 判断今天输出1，明天输出2，其它时间输出3
+  var myDate = new Date();
+  var year = myDate.getFullYear()-2000;        //获取当前年份(4位),作取前两位的操作
+  var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
+  var date = myDate.getDate();        //获取当前日(1-31)
+  var nextdate = date + 1;
+  if ( month < 10 ) {
+    month = "" + month;
+    month = "0" + month;
+  }
+  year = "" + year;
+  month = "" +month;
+  date = "" + date;
+  nextdate  = "" + nextdate;
+
+  var today = year + month + date;
+  console.log(today)
+  var tomorrow = year + month + nextdate;
+
+  if ( plantime == today ) {
+    return 1;
+  }
+  else{
+    if ( plantime == tomorrow ) {
+    return 2;
+  }
+  else{
+    return 3;
+  }
+  }
+}
+
+
+
+
+
+
+// 把创建任务封装成一个函数
+function clickAndPress_add_task_function(){
+  console.log("ma is here")
+        // 下面这行代码把在Input里输入的内容传入到inputedtask这个变量里
+        var inputedtask = $("#noid").val();
+        // var inputedtask = document.getElementById("createtask").getAttribute("placeholder");
+        // console.log(inputedtask);
+        // alert(inputedtask);
+        // var plantime =  $("#plantime").val()
+        // alert(inputedtask)
+        //  alert("检查plantime")
+        //  alert(plantime)
+        var task = {
+          'starttime': 'unspecified',
+          'deadline': 'unspecified',
+          'endtime': 'unspecified',
+          'ifdissect': 'no',
+          'note': 'unspecified',
+          'parentid': parentid,
+          'timedevotedto_a_task': devotedtime,
+          'goal': selected_goal,
+          'parentproject': 'unspecified',
+          'inboxlist': 'empty',
+          'inbox': inputedtask,
+          'finishtime': 'unspecified',
+          'reviewalgolight': 'no',
+          'reviewalgo': reviewalgo,
+          'place': 'unspecified',
+          'input-time': 'Fri Aug 21 22:38:23 2020',
+          'project': selected_project,
+          'taskstatus': 'unfinished',
+          'plantime': plantime,
+          'taglight': 'yes',
+          'tasktags': tasktags,
+          'client':"dreamforlifeweb",
+          'tasktagsorigin': 'e'
+        };
+        console.log("创建任务的时候输入task")
+        console.log(task);
+        // alert(plantime);
+
+        $.ajax({
+          type: "POST",
+          url: "/v1/createtask",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(task),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) {
+            console.log("***************更新任务成功*******************")
+            console.log(data)
+            // var taskid = data.taskid
+            // $("#thisnode").setproperty("taskid")=taskid
+            // <p taskid=1544>
+              // window.location.replace("/v1/taskmanager");
+              var plan_time = judge_plantime_today_tomorrow_or_other_day(plantime)
+              if (plan_time == 1) {
+                geteverydaytask()
+              }
+              if (plan_time == 2) {
+                // update tomorrow
+              }
+              if (plan_time == 3) {
+                // update tasktree
+                // get_all_unfinished_tasks_list(); 
+                console.log("我正在调用函数3")
+                show_new_added_task(inputedtask,data.id,parentid,selected_goal,selected_project)
+                onedit = false
+              }
+              
+              // 上面使用了geteverydaytask的函数来达到把输入的task放到上面的效果
+            // alert(data);
+            // console.log("i am printing the return data from server")
+            // console.log(data)
+            var taskid = data.taskid;
+            // alert(taskid);
+            const taskdom = document.querySelector("#tempid")
+            console.log(taskdom);
+            // taskdom.setAttribute("taskid", taskid);
+            // taskdom.setAttribute("id", taskid);
+            // console.log(data);
+            $("#noid").val('');
+            // 创建任务之后把目标和项目恢复默认值
+            selected_goal = "no goal"
+            selected_project = "inbox"
+
+            // 创建任务之后把plantime恢复成默认
+            plantime = "unspecified"
+
+          },
+          failure: function (errMsg) {
+            alert(errMsg);
+          }
+          //  alert(errMsg);
+        })
+}
+
+
+
+// 点击添加任务的按键创建任务的事件
+  $(document).on("click","button.add_task_click_button",function(){
+    // document.getElementById("goal_shown_and_edit").childNodes.outerHTML = ""
+    
+    var myInput = document.getElementById("noid");
+    if (myInput && myInput.value) {
+      if (tasktags != "" ) {
+        clickAndPress_add_task_function(); 
+        get_all_unfinished_tasks_list(); 
+      }
+    }
+    else{
+      alert("请检查您的标签或输入的内容是否正确")
+    }
+   
+  })
+
+
+
+
+
+    // 下面是创建任务的JS部分
+    $(document).on("keypress","#noid",function(event)
+    {
+      console.log("~~~~~~~~~~~~~~this is the goal and project~~~~~~~~~~~~~")
+      console.log(selected_goal)
+      console.log(selected_project)
+
+      if (event.key === "Enter") {
+        var myInput = document.getElementById("noid");
+      if (myInput && myInput.value) {
+        if (tasktags != "" ) {
+        clickAndPress_add_task_function(); 
+        get_all_unfinished_tasks_list(); 
+        
+        }
+      }
+       else{
+      alert("请检查您的标签或输入的内容是否正确")
+    }
+      }
+    });
+
+    // 这里是点击取消之后，隐去添加任务窗口变加号的事件
+
+    $(document).on("click",".cancel_add_task_button",function(){
+      if (document.getElementById("sontask") != null){
+        remove_add_subtask_area()
+      }
+      else{
+        remove_add_task_area()
+      }
+    })
+
+    // 使用Esc按键取消当前输入的窗口
+    $("body").on("keyup",function(event)
+    {
+      // console.log("我正在调用esc事件")
+      // remove_edit_task_area()
+      if (event.key === "Escape") {
+        if (document.getElementById("sontask") != null){
+        remove_add_subtask_area()
+        }
+        if (document.getElementsByClassName("edite_task_area") != null) {
+          remove_edit_task_area()
+        }
+        if (document.getElementById("add_task_item") != null) {
+          remove_add_task_area()
+        }  
+        if (document.getElementsByClassName("add_project_area") != null) {
+          remove_add_project_area()
+        }
+      }
+    })  
+
+    function remove_add_task_area(){
+      document.getElementById("add_task_item").outerHTML = ""
+      document.getElementById("add_task_button_area").appendChild(createNode(plusbutton))
+      onedit = false
+    }
+
+    function remove_add_subtask_area(){
+      document.getElementById("sontask").outerHTML = ""
+      // document.getElementById("add_task_button_area").appendChild(createNode(plusbutton))
+      onedit = false
+    }
+
+    function remove_edit_task_area(){
+      document.getElementsByClassName("edite_task_area").outerHTML = ""
+      geteverydaytask()
+    }
+   
+
+    // 下面的函数用来判断一个字典里面是否含有某个value
+    function inArray(search, array) {
+      for (var i in array) {
+        if (array[i] == search) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+
+  // edit and update the task
+
+  
+
+
+
+
+  //  点击任务的ul区域得到一个扩大的ID，然后把文字内容传进去
+    $(document).on("click","a.task_text",function(){
+      
+      // 判断当前界面是否已经有编辑窗口了，如果有，则执行出现窗口的代码，如果已经有，则不执行
+      if ( document.getElementsByClassName("edite_task_area").length == 0 ) {
+        
+      
+        // 提取任务id
+        var choosed_taskid = $(this).attr("id").match(/[0-9]+/g);
+        var tasktext = "tasktext" + String(choosed_taskid);
+  
+        var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
+       
+        var get_task_li_dom = document.getElementById(`${choosed_taskid}`)
+          console.log(get_task_li_dom)
+          selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+          selected_project = get_task_li_dom.children[0].getAttribute("project")
+          console.log("我正在输出goal和project")
+          console.log(selected_goal)
+          console.log(selected_project)
+        // 提取任务内容
+        // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
+        var choosed_task_input = document.getElementById(tasktext)
+        // console.log(choosed_task_input)
+        var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
+        // console.log(choosed_task_input_text)
+        // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
+        // alert(choosed_task_input)
+        // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
+        // alert(choosed_task_text)
+        // alert(choosed_taskid);
+        var div = document.getElementById(`${choosed_taskid}`);
+        var insert_task_html = 
+        // `<div class="edite_subtask_area" id="add_task" >
+            `<div class="edite_task_area">
+              <!-- onclick="test(this.getAttribute('id'))" -->
+              <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+              <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+              <!-- 设置输入任务的div -->
+              <div class="task_container">
+              <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
+              <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
+              </div>
+              <div class="task_property_area">
+                <div class="calendar_project_area">
+                  <div class="calendar_area" id="calendar_area">
+                    <!-- 输入任务时间的表单 -->
+                    <!-- <a>请输任务时间</a> -->
+                    <button id="calendar" class="clock_button">
+                      <svg t="1598153562536" class="icon" 
+                      viewBox="0 0 1024 1024" version="1.1" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      p-id="3498" width="20" height="20">
+                        <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                        fill="#CFD8DC" p-id="3499">
+                        </path>
+                        <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                        fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                        </path>
+                        <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                        </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                        </path>
+                      </svg>
+                    </button>
+                    <!-- <label id="inputlabel">please input your plantime</label>
+                    <input type="text" id="plantime" > -->
+                  </div>
+        
+                  <div id="goal_list" class="goal_list">
+                 
+                  </div>
+  
+                  <div id="timedevotedto_a_task">                  
+                    <select name="time_devoted_select" id="time_devoted_select">
+                      <option value="5">5分钟</option>
+                      <option value="10">10分钟</option>
+                      <option value="15">15分钟</option>
+                      <option value="20">20分钟</option>
+                      <option value="25">25分钟</option>
+                      <option value="30">30分钟</option>
+                      <option value="40">40分钟</option>
+                      <option value="50">50分钟</option>
+                      <option value="60">1小时</option>
+                      <option value="90">1.5小时</option>
+                      <option value="120">2小时</option>
+                      <option value="150">2.5小时</option>
+                      <option value="180">3小时</option>
+                      <option value="210">3.5小时</option>
+                      <option value="240">4小时</option>
+                      <option value="240">6小时</option>
+                      <option value="480">8小时</option>
+                      <option value="720">12小时</option>
+                    </select>
+                  </div>
+                </div>
+                  <div id="reviewalgo_area">
+                    <div id="task_reviewalgo_area">
+                      <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> `
+          // </div>`
+          div.innerHTML += insert_task_html;
+          document.getElementById(choosed_task_div).innerHTML = "";
+          console.log(choosed_task_div)
+        getgoalincludeproject()
+  
+  // 下面这个for用来实现在选定的任务有子任务时，不显示checkbox的按键
+        for (let i = 0; i < sendback_tasks.length; i++) {
+         
+         if (choosed_taskid == sendback_tasks[i].parentid){
+          console.log("----------------------")
+           document.getElementById(`checkbox${choosed_taskid}`).style.visibility = "hidden"
+         }
+       }
+        // //使用js提取id对应的任务信息,得到json文件
+        // var choosed_taskid_info = $
+        // 把任务的那一块进行整体html的替换
+        
+        // //判断任务是否进行了review,并且进行更新
+        // judge_task_finished(choosed_taskid_info);
+        // console.log($(this))
+      }
+      else{
+        return
+      }
+    })
+    $(document).on("click","a.son_task_text",function(){
+      
+      // 判断当前界面是否已经有编辑窗口了，如果有，则执行出现窗口的代码，如果已经有，则不执行
+      if ( document.getElementsByClassName("edite_task_area").length == 0 ) {
+        
+      
+        // 提取任务id
+        var choosed_taskid = $(this).attr("id").match(/[0-9]+/g);
+        var tasktext = "tasktext" + String(choosed_taskid);
+  
+        var choosed_task_div =  "task_list_div" + String(choosed_taskid) 
+       
+        var get_task_li_dom = document.getElementById(`${choosed_taskid}`)
+          console.log(get_task_li_dom)
+          selected_goal = get_task_li_dom.children[0].getAttribute("goal")
+          selected_project = get_task_li_dom.children[0].getAttribute("project")
+          console.log("我正在输出goal和project")
+          console.log(selected_goal)
+          console.log(selected_project)
+        
+        // 提取任务内容
+        // var choosed_task_input = document.getElementById(`check${choosed_taskid}`);
+        var choosed_task_input = document.getElementById(tasktext)
+        // console.log(choosed_task_input)
+        var choosed_task_input_text = choosed_task_input.firstChild.nodeValue
+        // console.log(choosed_task_input_text)
+        // console.log(typeof(choosed_task_input_text)==typeof("testtask"))
+        // alert(choosed_task_input)
+        // var choosed_task_text = choosed_task_input.childNodes[3].nodeValue
+        // alert(choosed_task_text)
+        // alert(choosed_taskid);
+        var div = document.getElementById(`${choosed_taskid}`);
+        var insert_task_html = 
+        // `<div class="edite_subtask_area" id="add_task" >
+            `<div class="edite_task_area">
+              <!-- onclick="test(this.getAttribute('id'))" -->
+              <!-- onclick 指的是鼠标指上去，并不是点上去 -->
+              <!-- 这里最输入任务的框，里面有各种需要传的参数 -->
+              <!-- 设置输入任务的div -->
+              <div class="task_container">
+              <input type="checkbox" class = "edite_checkbox" id= "checkbox${choosed_taskid}"  /> 
+              <input class="edite_text" type="text" id="edite_text${choosed_taskid}" placeholder="please input your task" value = "${choosed_task_input_text}" >
+              </div>
+              <div class="task_property_area">
+                <div class="calendar_project_area">
+                  <div class="calendar_area" id="calendar_area">
+                    <!-- 输入任务时间的表单 -->
+                    <!-- <a>请输任务时间</a> -->
+                    <button id="calendar" class="clock_button">
+                      <svg t="1598153562536" class="icon" 
+                      viewBox="0 0 1024 1024" version="1.1" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      p-id="3498" width="20" height="20">
+                        <path d="M106.666667 810.666667V298.666667h810.666666v512c0 46.933333-38.4 85.333333-85.333333 85.333333H192c-46.933333 0-85.333333-38.4-85.333333-85.333333z" 
+                        fill="#CFD8DC" p-id="3499">
+                        </path>
+                        <path d="M917.333333 213.333333v128H106.666667v-128c0-46.933333 38.4-85.333333 85.333333-85.333333h640c46.933333 0 85.333333 38.4 85.333333 85.333333z" 
+                        fill="#F44336" p-id="3500"></path><path d="M704 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3501">
+                        </path>
+                        <path d="M320 213.333333m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#B71C1C" p-id="3502"></path><path d="M704 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667zM320 64c-23.466667 0-42.666667 19.2-42.666667 42.666667v106.666666c0 23.466667 19.2 42.666667 42.666667 42.666667s42.666667-19.2 42.666667-42.666667V106.666667c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#B0BEC5" p-id="3503">
+                        </path><path d="M277.333333 426.666667h85.333334v85.333333h-85.333334zM405.333333 426.666667h85.333334v85.333333h-85.333334zM533.333333 426.666667h85.333334v85.333333h-85.333334zM661.333333 426.666667h85.333334v85.333333h-85.333334zM277.333333 554.666667h85.333334v85.333333h-85.333334zM405.333333 554.666667h85.333334v85.333333h-85.333334zM533.333333 554.666667h85.333334v85.333333h-85.333334zM661.333333 554.666667h85.333334v85.333333h-85.333334zM277.333333 682.666667h85.333334v85.333333h-85.333334zM405.333333 682.666667h85.333334v85.333333h-85.333334zM533.333333 682.666667h85.333334v85.333333h-85.333334zM661.333333 682.666667h85.333334v85.333333h-85.333334z" fill="#90A4AE" p-id="3504">
+                        </path>
+                      </svg>
+                    </button>
+                    <!-- <label id="inputlabel">please input your plantime</label>
+                    <input type="text" id="plantime" > -->
+                  </div>
+        
+                  <div id="goal_list" class="goal_list">
+                 
+                  </div>
+  
+                  <div id="timedevotedto_a_task">                  
+                    <select name="time_devoted_select" id="time_devoted_select">
+                      <option value="5">5分钟</option>
+                      <option value="10">10分钟</option>
+                      <option value="15">15分钟</option>
+                      <option value="20">20分钟</option>
+                      <option value="25">25分钟</option>
+                      <option value="30">30分钟</option>
+                      <option value="40">40分钟</option>
+                      <option value="50">50分钟</option>
+                      <option value="60">1小时</option>
+                      <option value="90">1.5小时</option>
+                      <option value="120">2小时</option>
+                      <option value="150">2.5小时</option>
+                      <option value="180">3小时</option>
+                      <option value="210">3.5小时</option>
+                      <option value="240">4小时</option>
+                      <option value="240">6小时</option>
+                      <option value="480">8小时</option>
+                      <option value="720">12小时</option>
+                    </select>
+                  </div>
+                </div>
+                  <div id="reviewalgo_area">
+                    <div id="task_reviewalgo_area">
+                      <input type="text" name="reviewalgo" id="task_reviewalgo_selector">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> `
+          // </div>`
+          div.innerHTML += insert_task_html;
+          document.getElementById(choosed_task_div).innerHTML = "";
+          console.log(choosed_task_div)
+        getgoalincludeproject()
+  
+  // 下面这个for用来实现在选定的任务有子任务时，不显示checkbox的按键
+        for (let i = 0; i < sendback_tasks.length; i++) {
+         
+         if (choosed_taskid == sendback_tasks[i].parentid){
+          console.log("----------------------")
+           document.getElementById(`checkbox${choosed_taskid}`).style.visibility = "hidden"
+         }
+       }
+        // //使用js提取id对应的任务信息,得到json文件
+        // var choosed_taskid_info = $
+        // 把任务的那一块进行整体html的替换
+        
+        // //判断任务是否进行了review,并且进行更新
+        // judge_task_finished(choosed_taskid_info);
+        // console.log($(this))
+      }
+      else{
+        return
+      }
+    })
+
+    //修改文字内容之后对其进行更新 
+    $(document).on("keypress","input.edite_text",function(event)
+    {
+      // console.log("我正在调用回车事件")
+      if (event.key === "Enter") {
+        // find the task's id
+        var choosed_taskid = $(this).attr("id").replace(/\D/g,'');
+
+
+        // console.log(choosed_taskid)
+        var updatedtask = $(`#edite_text${choosed_taskid}`).val()
+        // var taskid = $("#taskid").val()
+        console.log(updatedtask)
+        var updatedinfo =
+        {
+          'ifdissect': 'no',
+          'deadline': 'unspecified',
+          'starttime': 'unspecified',
+          'endtime': 'unspecified',
+          'tasktagsorigin': 'unspecified',
+          'parentid': parentid,
+          'timedevotedto_a_task': devotedtime,
+          'goal': selected_goal,
+          'client': 'dreamforlifeweb',
+          'taglight': 'no',
+          'note': 'unspecified',
+          'reviewalgolight': 'no',
+          'reviewalgo': reviewalgo,
+          'parentproject': 'unspecified',
+          'id': choosed_taskid,
+          'place': 'unspecified',
+          'finishtime': 'unspecified',
+          'inbox': updatedtask,
+          'project': selected_project,
+          'plantime': 'today',
+          'taskstatus': 'unfinished',
+          'tasktags': {}
+        }
+        console.log(updatedinfo)
+        $.ajax({
+          type: "POST",
+          url: "/v1/update",
+          // The key needs to match your method's input parameter (case-sensitive).
+          data: JSON.stringify(updatedinfo),
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          success: function (data) { 
+            console.log("this is success")
+            console.log(data)
+            // alert(data); 
+            geteverydaytask()
+          
+          },
+          failure: function (errMsg) {
+            console.log("this is erro")
+            alert(errMsg);
+
+          }
+        })
+      }
+      
+      })
+
+
+
+// 在任务前面点击完成，没有点进去任务进行评价的情况下的会提示要求评价
+$(document).on("click",".checkbox",function(){
+
+      event.preventDefault()
+      alert("请先对任务进行评价才完成哦~")
+    })
+
+// 点击checkbox将会判断任务是否已经评价，然后决定是否完成
+$(document).on("click","input.edite_checkbox",function(){
+      // 提取任务id
+      var choosed_taskid = $(this).attr("id").replace(/\D/g,'');
+      // alert(choosed_taskid)
+      //使用js提取id对应的任务信息
+     var choosed_text = document.getElementById(`edite_text${choosed_taskid}`).getAttribute("value")
+    //  console.log(choosed_text)
+      //判断任务是否进行了review,并且进行更新
+      var choosed_task = {
+        'ifdissect': 'no',
+        'deadline': 'unspecified',
+        'starttime': 'unspecified',
+        'endtime': 'unspecified',
+        'tasktagsorigin': 'unspecified',
+        'parentid': 'unspecified',
+        'timedevotedto_a_task': devotedtime,
+        'goal': selected_goal,
+        'client': 'dreamforlifeweb',
+        'taglight': 'no',
+        'note': 'unspecified',
+        'reviewalgolight': 'yes',
+        'reviewalgo': reviewalgo,
+        'parentproject': 'unspecified',
+        'id': choosed_taskid,
+        'place': 'unspecified',
+        'finishtime': 'unspecified',
+        'inbox': choosed_text,
+        'project': selected_project,
+        'plantime': 'today',
+        'taskstatus': 'unfinished',
+        'tasktags': {}
+        }
+      judge_task_finished(choosed_task);
+      // console.log($(this))
+    })
+
+// 更新任务的tasktags 和 reviewalgo
+$(document).on("mouseover","#tasktag_selector",function(){
+  $("#tasktag_selector").inputTags({
+      autocomplete: {
+        values: tasktags_chinese,
+        only: true
+      },
+      // max: 3,
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      create: function ($elem) {
+        console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        // tasktags = updatetags($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        console.log($elem.tags);
+        var newtag = getdictvaluearray(tagscovert_chkey,$elem.tags);
+        console.log(newtag);
+        tasktags = updatetags(newtag);
+        console.log(tasktags);
+        // tasktags = updatetags($elem.tags);
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        tasktags = updatetags($elem.tags);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        tasktags = updatetags($elem.tags);
+      }
+    }
+    );
+})
+
+$(document).on("mouseover","#task_reviewalgo_selector",function(){
+  $("#task_reviewalgo_selector").inputTags({
+      autocomplete: {
+        values: reviewalgo_chinese,
+        only: true
+      },
+      // max: 3,
+
+      // create: function() {
+      //     console.log('Tag added !');
+      // },
+
+      init: function ($elem) {
+        // console.log('Event called on plugin init', $elem);
+        // reviewalgo = updatereviewalgo($elem.tags);
+
+      },
+
+      create: function ($elem) {
+        // console.log('Event called when an item is created', $elem);
+        // alert($elem.tags)
+        // alert("hellohellohello");
+        // console.log(tasktags);
+        // console.log($elem.tags);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      update: function ($elem) {
+        console.log('Event called when an item is updated', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      destroy: function ($elem) {
+        console.log('Event called when an item is deleted', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      selected: function ($elem) {
+        console.log('Event called when an item is selected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      unselected: function ($elem) {
+        console.log('Event called when an item is unselected', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      change: function ($elem) {
+        console.log('Event called on item change', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      },
+
+      autocompleteTagSelect: function ($elem) {
+        console.log('Event called on tag selection', $elem);
+        var newreviewalgo = getdictvaluearray(reviewalgo_covert_chkey,$elem.tags);
+        console.log(newreviewalgo);
+        reviewalgo = updatereviewalgo(newreviewalgo);
+        console.log(reviewalgo);
+      }
+    }
+    );
+})
+
+    
+    $("#checkbox_box").click(function (event) {
+      
+      // alert("You have to evaluate the task before finish it")
+      // return false;
+    }
+    );
+
+</script>
+   
+     
+ 
+<script type="text/javascript" src="/v1/tasks.js"></script>
+
+</body>
+
+</html>
