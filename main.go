@@ -60,6 +60,7 @@ func main() {
 	v1.StaticFile("/finance.js", "./static/js/finance.js")
 	v1.StaticFile("/jquery.js", "./static/js/jquery.js")
 	v1.StaticFile("/chosen.js", "./static/js/chosen.js")
+	v1.StaticFile("/chosen.css", "./static/css/chosen.css")
 	v1.StaticFile("/style.css", "./static/css/style.css")
 	v1.StaticFile("/index.js", "./static/js/index.js")
 	v1.StaticFile("/background.png", "./static/images/background.png")
