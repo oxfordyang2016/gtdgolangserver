@@ -62,7 +62,7 @@ func init() {
 	}
 
 	//Migrate the schema
-	db.AutoMigrate(&Principledetails{},&Projectofgoals{},&Taskexecutelog{},&Principlecodewithtasktag{},&Principlefordbs{},&Accounts{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{},&Fees{})
+	db.Set("gorm:table_options", "CHARSET=utf8").AutoMigrate(&Principledetails{},&Projectofgoals{},&Taskexecutelog{},&Principlecodewithtasktag{},&Principlefordbs{},&Accounts{},&Tasks{},&Reviewofday{},&Reviewfortimescount{},&Goalfordbs{},&Fees{})
 //http://jinzhu.me/gorm/database.html#migration delete database table column
  //db.Model(&Tasks{}).DropColumn("Uer")
 

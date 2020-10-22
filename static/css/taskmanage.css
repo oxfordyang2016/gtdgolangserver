@@ -49,13 +49,14 @@ body {
      position:absolute;
     }
   #left{
-    width:300px; 
+    width:70%; 
+    right: 25%;
     /* background:#ccc; */
   }
   #middle{ 
     width:9px; 
     background:#666;
-    left:300px;
+    /* left:300px; */
   }
   #middle:hover{ 
     cursor:w-resize;
@@ -64,14 +65,14 @@ body {
     right:0; 
     background:#ccc; 
     left:50%; 
+    height:100%;
     width:auto;
-    
   }
 
   .scrollbar {
     /* margin-left: 30px; */
     /* float: left; */
-    height: 98%;
+    height: 500px;
     /* width: 65px; */
     /* background: #F5F5F5; */
     overflow-y: scroll;
@@ -84,7 +85,7 @@ body {
 
 /* 任务编辑区 */
 .right_shown_area{
-  margin-left: 10em;
+  margin-left: 15em;
 }
 
 #today_task_area{
@@ -120,7 +121,7 @@ body {
 
 /* 每一个项目的css */
 .section{
-  max-width: 30em;
+  /* max-width: 30em; */
   /* margin-right: auto; */
   margin-left: 0;
 }
@@ -129,6 +130,26 @@ body {
   margin-bottom: .5em;
   
 }
+
+/* 不同级别任务的缩进实现CSS */
+
+/* .task_list_margin[depth="1"]{
+  margin-left: 0;
+}
+
+.task_list_margin[depth="2"]{
+  margin-left: 28px;
+}
+.task_list_margin[depth="3"]{
+  margin-left: 56px;
+}
+.task_list_margin[depth="4"]{
+  margin-left: 84px;
+}
+.task_list_margin[depth="5"]{
+  margin-left: 112px;
+} */
+
 
 
 
@@ -154,7 +175,7 @@ body {
 .task_list_item_input{
   outline: none;
   font-size: 0.875em;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .task_list_item_date_area{
@@ -177,7 +198,7 @@ body {
 .task_checkbox{
   display: inline-block;
   position: relative;
-  top: -0.9em;
+  /* top: -0.9em; */
 }
 .task_list_content{
   display: inline-block;
@@ -195,10 +216,14 @@ body {
   /* max-width: 30em; */
   /* margin-left: 10em; */
   /* height: 4em; */
+  width:100%;
+  background:white;
 }
 
 .input_task_area, .edite_task_area{
-  max-width: 30em;
+  /* max-width: 30em; */
+  /* width: 700px; */
+  width:50%;
   height: 4em;
   /* 输入任务的框已经限定死是5em了 */
   /* margin-left: auto; */
@@ -223,7 +248,7 @@ body {
   padding-bottom: 0.2em;
   border: none;
   width: 100%;
-  max-width:30em;
+  /* max-width:30em; */
   word-break:break-all;
   /* overflow-wrap: break-word; */
 }
@@ -246,8 +271,8 @@ div input {
   padding-top: 0.4em;
   padding-bottom: 0.2em;
   border: none;
-  width: 95%;
-  max-width:30em;
+  /* width: 95%; */
+  /* max-width:30em; */
 }
 
 .task_property_area div{
@@ -332,11 +357,13 @@ div input {
   /* float: right; */
 /* } */ 
 
-.add_task_button{
+.add_task_button,.add_tasktags_area{
   display: inline-block;
 } 
 
-.add_task_button{
+
+
+.add_task_click_button{
   background-color: #db4c3f;
   border-color: #db4c3f;
   /* border-radius: 0.2em; */
@@ -358,6 +385,11 @@ div input {
 
 .plusbutton{
   max-width: 1em;
+}
+
+.tags_button{
+  background: none;
+  border: none;
 }
 
 /* 日历的css样式 */
