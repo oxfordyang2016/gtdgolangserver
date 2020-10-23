@@ -1,0 +1,397 @@
+
+
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+  display: block;
+}
+
+
+
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+/* 
+body{
+   margin-top: 200px;
+   
+ } */
+
+
+/* 这是一行注释 */
+
+
+body {
+    margin: 0;
+    margin-top: 10em;
+    /* 这里10em不起作用的原因是系统有一个预设的css，我不知道怎么禁用它 */
+  }
+
+
+
+/* 下面是把页面分成两栏的css,需要配合JS使用 */
+  div,body,html{
+    margin:0; 
+    padding:0; 
+    /* width:100%; */
+  }
+  #left,#right,#middle{
+     /* height:10000px;  */
+     position:absolute;
+    }
+  #left{
+    width:70%; 
+    right: 25%;
+    /* background:#ccc; */
+  }
+  #middle{ 
+    width:9px; 
+    background:#666;
+    /* left:300px; */
+  }
+  #middle:hover{ 
+    cursor:w-resize;
+  }
+  #right{
+    right:0; 
+    background:#ccc; 
+    left:50%; 
+    height:100%;
+    width:auto;
+  }
+
+  .scrollbar {
+    /* margin-left: 30px; */
+    /* float: left; */
+    height: 500px;
+    /* width: 65px; */
+    /* background: #F5F5F5; */
+    overflow-y: scroll;
+    margin-bottom: 25px;
+}
+
+.force-overflow {
+  min-height: 450px;
+}
+
+/* 任务编辑区 */
+.right_shown_area{
+  margin-left: 15em;
+}
+
+#today_task_area{
+  /* display: inline-block; */
+  /* border: #ddd solid; */
+  /* float: left; */
+  /* max-width: 20em; */
+  /* min-width: 20em; */
+}
+
+#all_unfinished_task_shown_area{
+  /* display: inline-block; */
+  /* float: right; */
+  /* max-width: 20em; */
+}
+
+
+
+.goal_manager,.today_tasks {
+  border: solid #db4c3f 0.1em;
+  padding: 0.2em;
+  margin: 0.2em;
+}
+.goal_manager:hover,.today_tasks:hover{
+  cursor: pointer;
+} 
+
+.list::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa; /* or add it to the track */
+}
+
+/* 每一个项目的css */
+.section{
+  /* max-width: 30em; */
+  /* margin-right: auto; */
+  margin-left: 0;
+}
+
+.project_area{
+  margin-bottom: .5em;
+  
+}
+
+/* 不同级别任务的缩进实现CSS */
+
+/* .task_list_margin[depth="1"]{
+  margin-left: 0;
+}
+
+.task_list_margin[depth="2"]{
+  margin-left: 28px;
+}
+.task_list_margin[depth="3"]{
+  margin-left: 56px;
+}
+.task_list_margin[depth="4"]{
+  margin-left: 84px;
+}
+.task_list_margin[depth="5"]{
+  margin-left: 112px;
+} */
+
+
+
+
+/* 输入完成的任务的css */
+
+.task_list_item{
+  /* height: 2.5em; */
+  /* 高度是输入任务时文本框的一半，先这样设，如果丑的话再改 */
+  /* border-top: #ccc solid 1px;
+  border-bottom: #ccc solid 1px ; */
+  /* margin-top: .2em;
+  margin-bottom: .2em; */
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin: 0;
+}
+
+.task_list_item_task_area{
+  height: 1.5em;
+  display: inline-block;
+}
+
+.task_list_item_input{
+  outline: none;
+  font-size: 0.875em;
+  /* width: 100%; */
+}
+
+.task_list_item_date_area{
+  height: 1em;
+}
+
+.task_list_item_date_button{
+  /* height: 1.2em; */
+  margin-left: 0.5em;
+  /* -webkit-transform: scale(0.6); */
+  font-size: 0.75em;
+  color: #b8b8b8;
+
+  vertical-align: middle;
+  position: relative;
+  padding-bottom: 0.4em;
+  padding-top: 0.4em;
+}
+
+.task_checkbox{
+  display: inline-block;
+  position: relative;
+  /* top: -0.9em; */
+}
+.task_list_content{
+  display: inline-block;
+  /* display: flex; */
+}
+
+
+.task_container input{
+  display: inline-block;
+}
+
+/* 下面是输入任务框体的css */
+
+.add_task_area{
+  /* max-width: 30em; */
+  /* margin-left: 10em; */
+  /* height: 4em; */
+  width:100%;
+  background:white;
+}
+
+.input_task_area, .edite_task_area{
+  /* max-width: 30em; */
+  /* width: 700px; */
+  width:50%;
+  height: 4em;
+  /* 输入任务的框已经限定死是5em了 */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  margin-top: 0.2em;
+  border: solid 0.1em #ccc;
+  border-radius: 0.5em;
+}
+
+.input_text:focus{
+  outline: none;
+}
+
+.input_text:active{
+  cursor: none;
+}
+
+.input_text{
+ 
+  font-size: 18px;;
+  padding-top: 0.4em;
+  padding-bottom: 0.2em;
+  border: none;
+  width: 100%;
+  /* max-width:30em; */
+  word-break:break-all;
+  /* overflow-wrap: break-word; */
+}
+
+.task_text{
+  font-size: 0.8em;
+  
+}
+
+.son_task_text{
+  font-size: 0.6em;
+}
+
+div input {
+  display: inline;
+}
+
+.edite_text{
+  font-size: 18px;;
+  padding-top: 0.4em;
+  padding-bottom: 0.2em;
+  border: none;
+  /* width: 95%; */
+  /* max-width:30em; */
+}
+
+.task_property_area div{
+  display: inline-block;
+}
+
+
+/* .calendar_project_area{
+  float: left;
+  
+}  */
+
+/* 下面是放弃按键的css */
+.giveup_button{
+  border: none;
+  background: none;
+  /* float: right; */
+}
+/* 右边栏添加任务到今天的button的CSS */
+.add_task2today_button,.giveup_task_button,.add_task2tomorrow_button{
+  border: none;
+  background: none;
+}
+
+
+/* 下面是所有未完成任务列表的CSS */
+.goal_shown_and_edit{
+  margin-left: 1em;
+}
+.goal_li {
+  margin-left: 0%;
+  font-size: 1em;
+  
+  color: #FA9A39;
+}
+.project_li{
+  margin-left: 1em;
+  font-size: 0.8em;
+  color: #016565;
+  
+}
+.task_li{
+  margin-left: 2em;
+  border-top: #ddd;
+  border-bottom: #ddd;
+  color: black;
+  font-size: 0.6em;
+}
+
+.add_task2today_button {
+  /* position: relative;
+  float: right; */
+}
+
+.giveup_task_button{
+  /* position: relative; */
+  /* float: right; */
+}
+
+
+
+/* 下面是日历按键的css */
+.clock_button{
+  background: none;
+  outline: none;
+  border: none;
+}
+
+.tags_review_area{
+  float: right;
+}
+
+.tasktag_selector{
+  width: 5em;
+  height: 1em;
+}
+
+
+
+/* .createtask{
+  margin-right: 2em;
+  /* float: right; */
+/* } */ 
+
+.add_task_button,.add_tasktags_area{
+  display: inline-block;
+} 
+
+
+
+.add_task_click_button{
+  background-color: #db4c3f;
+  border-color: #db4c3f;
+  /* border-radius: 0.2em; */
+  -webkit-webkit: border radius 0.3em;
+  -moz-webkit: border radius 0.3em;
+  -ms-webkit: border radius 0.3em;
+  -o-webkit: border radius 0.3em;
+  webkit: border radius 0.3em;;
+  color: #fff;
+}
+
+.cancel_add_task_button{
+  background: none;
+  outline: none;
+  padding: 0;
+  border: none;
+
+}
+
+.plusbutton{
+  max-width: 1em;
+}
+
+.tags_button{
+  background: none;
+  border: none;
+}
+
+/* 日历的css样式 */
+.simplepicker-wrapper{position:fixed;top:0;left:0;overflow:auto;background-color:#4c4c4c7d;width:100vw;height:100vh;display:none}.simplepicker-wrapper.active{display:block}.simpilepicker-date-picker{width:326px;cursor:auto;font-family:Verdana,Geneva,Tahoma,sans-serif;font-size:14px;background-color:#fff;margin:2% auto;box-shadow:1px 2px 4px .5px rgba(0,0,0,.22),1px 2px 4px .5px transparent}.simplepicker-day-header{color:#fff;background-color:#016565;text-align:center;padding:4px 0}.simplepicker-date-section{text-align:center;background-color:#078e8e;color:#fff}.simplepicker-date-section .simplepicker-month-and-year{font-size:22px;padding:14px 0 7px;font-weight:200}.simplepicker-date-section .simplepicker-date{font-size:35px;padding:2px;margin-bottom:12px}.simplepicker-select-pane{display:flex;width:100%}.simplepicker-select-pane .simplepicker-time,.simplepicker-selected-date{text-align:center;flex:2}.simplepicker-icon,.simplepicker-selected-date,.simplepicker-time{border:none;background:transparent;padding:2px;margin:4px 6px;width:25px;height:25px;opacity:.5}.simplepicker-selected-date,.simplepicker-time{opacity:1}.simplepicker-month-switcher{margin-top:5px}.simplepicker-icon:hover{opacity:.8}.simplepicker-icon.active,.simplepicker-icon:active{opacity:1}.simplepicker-icon:focus{outline:none}.simplepicker-icon-next{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1hcnJvdy1yaWdodCI+PGxpbmUgeDE9IjUiIHkxPSIxMiIgeDI9IjE5IiB5Mj0iMTIiPjwvbGluZT48cG9seWxpbmUgcG9pbnRzPSIxMiA1IDE5IDEyIDEyIDE5Ij48L3BvbHlsaW5lPjwvc3ZnPg==)}.simplepicker-icon-previous{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1hcnJvdy1sZWZ0Ij48bGluZSB4MT0iMTkiIHkxPSIxMiIgeDI9IjUiIHkyPSIxMiI+PC9saW5lPjxwb2x5bGluZSBwb2ludHM9IjEyIDE5IDUgMTIgMTIgNSI+PC9wb2x5bGluZT48L3N2Zz4=)}.simplepicker-icon-calender{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jYWxlbmRhciI+PHJlY3QgeD0iMyIgeT0iNCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiPjwvcmVjdD48bGluZSB4MT0iMTYiIHkxPSIyIiB4Mj0iMTYiIHkyPSI2Ij48L2xpbmU+PGxpbmUgeDE9IjgiIHkxPSIyIiB4Mj0iOCIgeTI9IjYiPjwvbGluZT48bGluZSB4MT0iMyIgeTE9IjEwIiB4Mj0iMjEiIHkyPSIxMCI+PC9saW5lPjwvc3ZnPg==)}.simplepicker-icon-time{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1jbG9jayI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiPjwvY2lyY2xlPjxwb2x5bGluZSBwb2ludHM9IjEyIDYgMTIgMTIgMTYgMTQiPjwvcG9seWxpbmU+PC9zdmc+)}.simplepicker-bottom-part{padding-top:6px;padding-bottom:12px;padding-left:48%}.simplepicker-calender table{width:100%;font-size:13px}.simplepicker-calender thead th{font-weight:400;font-size:15px;padding-bottom:6px;width:14.28%;height:30px;text-align:center}.simplepicker-calender tbody td{position:relative;text-align:center;vertical-align:middle;padding:12px;z-index:1}.simplepicker-calender tbody td:after{content:" ";visibility:hidden;display:block;position:absolute;left:50%;top:50%;height:35px;width:35px;border-radius:50%;transform:translate(-50%,-50%);background-color:rgba(0,0,0,.05)}.simplepicker-calender tbody td:hover:after{visibility:visible}.simplepicker-calender tbody td.active,.simplepicker-calender tbody td:active{color:#fff}.simplepicker-calender tbody .active:after,.simplepicker-calender tbody td:active:after{visibility:visible;background-color:teal;z-index:-1}.simplepicker-calender tbody td[data-empty]{pointer-events:none}.simplepicker-time-section{display:none;height:120px}.simplepicker-time-section input{box-sizing:border-box;width:120px;height:32px;max-width:120px;max-height:32px;padding:4px 3px;border:none;border-bottom:2px solid #ccc;font-size:14px;font-family:Verdana,Geneva,Tahoma,sans-serif;display:block;margin:25% auto}.simplepicker-time-section input:focus{outline:none;border-bottom-color:teal}.simplepicker-picker-section{width:100%;height:auto}.simplepicker-btn{border:none;background:transparent;font-family:Verdana,Geneva,Tahoma,sans-serif;font-size:16px;padding:7px 14px;border:1px solid #ddd;margin:0 5px;border-color:#016565;color:#016565;font-size:13px}.simplepicker-btn:active,.simplepicker-btn:hover{color:#fff;background-color:#016565}.simplepicker-fade{color:hsla(0,0%,88%,.95)}.simplepicker-btn,.simplepicker-icon,.simplepicker-wrapper{cursor:pointer}
+
