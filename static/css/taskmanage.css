@@ -205,6 +205,17 @@ body {
   /* display: flex; */
 }
 
+/* 标签属性 */
+[urgenttag="yes"]{
+  color:red
+}
+
+[keyproblemtag="yes"]{
+  color:blueviolet
+}
+
+
+
 
 .task_container input{
   display: inline-block;

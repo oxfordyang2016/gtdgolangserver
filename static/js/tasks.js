@@ -324,13 +324,21 @@ function create_goal_project_task_div(){
             //   if( all_tasks_in_one_project[z].project == project[j] ){
                 var task_id = all_tasks_in_one_project[z].ID
                 var parentid = all_tasks_in_one_project[z].parentid
+                var tasktags = all_tasks_in_one_project[z].tasktags
+                var obj = JSON.parse(tasktags)
+                var urgenttag = obj["urgenttag"]
+                var keyproblemtag = obj["keyproblemtag"]
+                
+                // var urgenttag = obj[""]
                 var task_li = document.createElement("li")
                 task_li.setAttribute("id",`${task_id}`)
                 task_li.setAttribute("class","task_li")
                 task_li.setAttribute("parentid",`${parentid}`)
+                task_li.setAttribute("urgenttag",`${urgenttag}`)
                 var task_div = document.createElement("div")
                 var task_span = document.createElement("span")
-
+                task_span.setAttribute("urgenttag",`${urgenttag}`)
+                task_span.setAttribute("keyproblemtag",`${keyproblemtag}`)
                 var add_sontask_button = document.createElement("input")
                 add_sontask_button.setAttribute("class","add_sontask_button")
                 add_sontask_button.type = "image"
