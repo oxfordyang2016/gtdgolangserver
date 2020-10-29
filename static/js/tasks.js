@@ -1370,7 +1370,7 @@ $.get("/v1/reviewdaydatajson", function(data, status){
             
             datecategory.push(data.reviewdata[i].date);
             var dateofreview =  data.reviewdata[i].date
-            if (data.reviewdata[i].details != ""|| dateofreview =="unspecified"){
+            if (data.reviewdata[i].details != ""&& dateofreview =="unspecified"){
                var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
           totalscore.push(obj_detailofreview.totalscore);
           patience.push(obj_detailofreview["patience"]);
