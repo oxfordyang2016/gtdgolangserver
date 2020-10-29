@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+
 	// "github.com/fatih/color"
 	// "encoding/json"
 	// "net/http"
@@ -92,6 +93,7 @@ func Getprojectofgoal(email string) map[string][]string {
 		// allplaces[item.Place] = append(allplaces[item.Place], item)
 		goalmapproject[projects[i].Goal] = append(goalmapproject[projects[i].Goal], projects[i].Project)
 	}
+
 	color.Yellow("9999999999")
 	fmt.Println(len(projects))
 	fmt.Println(goalmapproject)

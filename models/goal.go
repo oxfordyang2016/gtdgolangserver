@@ -567,7 +567,7 @@ func Goalsjson(c *gin.Context) {
 		color.Red("77777777777777777777")
 		fmt.Println(projectsofgoalfromptojectstable)
 		for _, singleproject := range projectsofgoalfromptojectstable[key] {
-			//检测singleproject 是否在allclassproject当中
+			//检测singleproject 是否在allclassproject当中，如果不在就加空的数组
 			_, found := Find(projectnames, singleproject)
 			if !found {
 				var k []Tasks
@@ -618,13 +618,37 @@ func Goalsjson(c *gin.Context) {
 
 	}
 
+	//在末尾进行检测是否空的goals被检测到
+	//在这里查询新创建的目标来不及创建目标的那种
+	//查询所有对应的goal
+	var goalsfinal []Goalfordbs
+	db.Where("Email= ?", email).Find(&goalsfinal)
+	//提取所有的keys
+	// exsiting_goals := reflect.ValueOf(goalmapproject).MapKeys()
+	// exsiting_goals := make([]string, len(goalmapproject))
+	var exsiting_goals []string
+	for k := 0; k < len(allgoals); k++ {
+		exsiting_goals = append(exsiting_goals, allgoals[k].Name)
+	}
+
+	for i := 0; i < len(goalsfinal); i++ {
+		_, found := Find(exsiting_goals, goalsfinal[i].Name)
+		if !found {
+			// var d []Projects
+			d := make([]Projects, 0)
+			// goalmapproject[goals[i].Name] = d
+			allgoals = append(allgoals, Goals{goalsfinal[i].Name, goalsfinal[i].Priority, goalsfinal[i].Goalcode, d})
+			// allprojects_ingoal[item.Goal] = append(allprojects_ingoal[item.Goal], item.Project)
+		}
+	}
+
 	sort.Slice(allgoals, func(i, j int) bool {
-		if allgoals[i].Priority == allgoals[j].Priority{
+		if allgoals[i].Priority == allgoals[j].Priority {
 			return allgoals[i].Name < allgoals[j].Name
-		}else{
+		} else {
 			return allgoals[i].Priority > allgoals[j].Priority
 		}
-	
+
 	})
 
 	//fmt.Println(allclassproject["gtd1"])

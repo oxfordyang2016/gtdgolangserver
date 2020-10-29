@@ -205,6 +205,17 @@ body {
   /* display: flex; */
 }
 
+/* 标签属性 */
+[urgenttag="yes"]{
+  color:red
+}
+
+[keyproblemtag="yes"]{
+  color:blueviolet
+}
+
+
+
 
 .task_container input{
   display: inline-block;
@@ -292,10 +303,24 @@ div input {
   /* float: right; */
 }
 /* 右边栏添加任务到今天的button的CSS */
-.add_task2today_button,.giveup_task_button,.add_task2tomorrow_button{
+.add_task2today_button,.giveup_task_button,.add_task2tomorrow_button,
+.todaytree_add_task2tomorrow_button,.todaytree_move_task2someday_button,
+.date_button{
   border: none;
   background: none;
 }
+
+.date_button{
+  font-size: 1.2em;
+  /* color: #FA9A39 ; */
+  border-color:transparent!important;
+  outline:none;
+}
+
+#today_tasks_button{
+  color:red;
+}
+
 
 
 /* 下面是所有未完成任务列表的CSS */

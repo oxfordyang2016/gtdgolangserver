@@ -962,10 +962,10 @@ $(document).on("click","#goal_manager",function(){
 
 
 
-// 任务饼状图的echarts
+// 所有任务的echarts
 function review_echarts(){
      // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
-        var myChart = echarts.init(document.getElementById('main'));
+        var myChart = echarts.init(document.getElementById(' '),{width:"300px",height:"60px"});
 
         // 指定图表的配置项和数据
 /*        var option = {
@@ -1022,17 +1022,17 @@ return projectsfortree
 }
 var data = {"name":"dm","children":getprojectrees()}
 
-myChart.showLoading();
+    myChart.showLoading();
     myChart.hideLoading();
     var _zr = myChart.getZr();
-//  ShowObjProperty(_zr);
+    //  ShowObjProperty(_zr);
     _zr.add(new echarts.graphic.Text({
      style: {            
    x: _zr.getWidth() / 2,
    y: _zr.getHeight() / 2,
-   color: '#666', 
+   color: '#666',
    text: '集团重大风险',
-   textAlign: 'center', 
+   textAlign: 'center',
    textFont : 'bold 20px verdana'
    }}  
     ));
@@ -1123,14 +1123,42 @@ myChart.setOption(option = {
 // review_echarts()
 
 
+// var my2Chart = echarts.init(document.getElementById('reviewalgo_temp'));
+
+    // 指定图表的配置项和数据
+    // var option = {
+    //     title: {
+    //         text: 'ECharts 入门示例'
+    //     },
+    //     tooltip: {},
+    //     legend: {
+    //         data:['销量']
+    //     },
+    //     xAxis: {
+    //         data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    //     },
+    //     yAxis: {},
+    //     series: [{
+    //         name: '销量',
+    //         type: 'bar',
+    //         data: [5, 20, 36, 10, 10, 20]
+    //     }]
+        
+    // };
+
+    // 使用刚指定的配置项和数据显示图表。
+    // my2Chart.setOption(option);
 
 
 
-// -------------------------------------------------------------------------------------------
-// reviewalgo 的echarts
 
-function reviewalgo_echarts(){
-    var  WebSocketurl = 'ws://47.100.100.141:777'
+
+
+
+// ---------------------------------------------------
+// ----------------------------------------------------
+
+var  WebSocketurl = 'ws://47.100.100.141:777'
 var localhostWebSocketurl = "ws://localhost:777"
 var httpsWebSocketurl ='wss://www.blackboxo.top/wss'
 var heartCheck = {
@@ -1243,7 +1271,7 @@ function calculateMA(dayCount, data) {
 
 
 //echarts.init(document.getElementById('main')).dispose();
-var myChart = echarts.init(document.getElementById('main'));
+var myChart = echarts.init(document.getElementById('reviewalgo_tem'));
 
 
 function gettoday(){
@@ -1260,8 +1288,10 @@ return today
 
 var resize = function() {
       myChart.resize({
-        width: window.innerWidth ,
-        height: window.innerHeight
+        // width: window.innerWidth ,
+        // height: window.innerHeight
+        width: $(window).width()/2,
+        height: "600px"
       });
     };
 
@@ -1335,31 +1365,61 @@ $.get("/v1/reviewdaydatajson", function(data, status){
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
         for(i=0;i<data.reviewdata.length;i++){
           
-             datecategory.push(data.reviewdata[i].date);
-           var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
-           totalscore.push(obj_detailofreview.totalscore);
-           patience.push(obj_detailofreview["patience"]);
-          // alert(obj_detailofreview.patience);
-           usebrain.push(obj_detailofreview["usebrain"]);
-          // alert(obj_detailofreview.usebrain);
-           battlewithlowerbrain.push(obj_detailofreview.battlewithlowerbrain);
-           learnnewthings.push(obj_detailofreview.learnnewthings);
-           makeuseofthingsuhavelearned.push(obj_detailofreview.makeuseofthingsuhavelearned);
-           difficultthings.push(obj_detailofreview.difficultthings);
-           threeminutes.push(obj_detailofreview.threeminutes);
-           executeablity.push(obj_detailofreview.executeability_score*obj_detailofreview.totalscore);
-            getlesson.push(obj_detailofreview.getlesson);
-            learntechuse.push(obj_detailofreview.learntechuse);
-           alwaysprofit.push(obj_detailofreview.alwaysprofit);
-           thenumberoftasks_score.push(obj_detailofreview.thenumberoftasks_score);
-           serviceforgoal_score.push(obj_detailofreview.serviceforgoal_score);
-            onlystartatask_score.push(obj_detailofreview.onlystartatask_score);
-            atomadifficulttask_score.push(obj_detailofreview.atomadifficulttask);
-         doanimportantthingearly.push(obj_detailofreview.doanimportantthingearly);
-         markataskimmediately.push(obj_detailofreview.markataskimmediately);
-         buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
-         acceptfact.push(obj_detailofreview.acceptfact)
-          
+
+
+            
+            datecategory.push(data.reviewdata[i].date);
+            if (data.reviewdata[i].details != ""){
+               var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
+          totalscore.push(obj_detailofreview.totalscore);
+          patience.push(obj_detailofreview["patience"]);
+         // alert(obj_detailofreview.patience);
+          usebrain.push(obj_detailofreview["usebrain"]);
+         // alert(obj_detailofreview.usebrain);
+          battlewithlowerbrain.push(obj_detailofreview.battlewithlowerbrain);
+          learnnewthings.push(obj_detailofreview.learnnewthings);
+          makeuseofthingsuhavelearned.push(obj_detailofreview.makeuseofthingsuhavelearned);
+          difficultthings.push(obj_detailofreview.difficultthings);
+          threeminutes.push(obj_detailofreview.threeminutes);
+          executeablity.push(obj_detailofreview.executeability_score*obj_detailofreview.totalscore);
+           getlesson.push(obj_detailofreview.getlesson);
+           learntechuse.push(obj_detailofreview.learntechuse);
+          alwaysprofit.push(obj_detailofreview.alwaysprofit);
+          thenumberoftasks_score.push(obj_detailofreview.thenumberoftasks_score);
+          serviceforgoal_score.push(obj_detailofreview.serviceforgoal_score);
+           onlystartatask_score.push(obj_detailofreview.onlystartatask_score);
+           atomadifficulttask_score.push(obj_detailofreview.atomadifficulttask);
+        doanimportantthingearly.push(obj_detailofreview.doanimportantthingearly);
+        markataskimmediately.push(obj_detailofreview.markataskimmediately);
+        buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
+        acceptfact.push(obj_detailofreview.acceptfact)
+            }else{
+
+               totalscore.push(0);
+          patience.push(0);
+         // alert(obj_detailofreview.patience);
+          usebrain.push(0);
+         // alert(obj_detailofreview.usebrain);
+          battlewithlowerbrain.push(0);
+          learnnewthings.push(0);
+          makeuseofthingsuhavelearned.push(0);
+          difficultthings.push(0);
+          threeminutes.push(0);
+          executeablity.push(0);
+           getlesson.push(0);
+           learntechuse.push(0);
+          alwaysprofit.push(0);
+          thenumberoftasks_score.push(0);
+          serviceforgoal_score.push(0);
+           onlystartatask_score.push(0);
+           atomadifficulttask_score.push(0);
+        doanimportantthingearly.push(0);
+        markataskimmediately.push(0);
+        buildframeandprinciple.push(0);
+        acceptfact.push(0)
+
+
+            }
          if (data.reviewdata[i].date===gettoday()){break;}
          
 };    
@@ -1430,8 +1490,8 @@ option = {
             id: 'text1',
             style: {
             text: totalscore[totalscore.length - 1].toFixed(2),
-            x: 100,
-            y: 200
+            x: 10,
+            y: 20
     }
         },
 
@@ -1454,12 +1514,12 @@ option = {
             saveAsImage: {}
         }
     },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
+    // grid: {
+    //     left: '3%',
+    //     right: '4%',
+    //     bottom: '3%',
+    //     containLabel: true
+    // },
         graphic:[{ // 一个图形元素，类型是 text，指定了 id。
             type: 'text',
             id: 'text2',
@@ -1805,19 +1865,13 @@ option = {
 }
 
 
+
 loadlink(); // This will run on page load
+
+
 
 setInterval(function(){
     loadlink() // this will run after every 5 seconds
 }, 10*60000);
-
-//alert("-------------");
-}
-
-// reviewalgo_echarts()
-
-
-
-
 
 

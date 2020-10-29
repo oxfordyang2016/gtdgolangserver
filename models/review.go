@@ -912,6 +912,16 @@ func   Check_reviewdaylog(date string,email string){
 check if date row was created in reviewday table,if it is no,the function will create it
 
 */
+if len(date) != 6 {
+  return 
+}
+
+if date == "unspecified" {
+  return 
+}
+
+
+
 
 var reviewday Reviewofday 
 var reviewfortimecount  Reviewfortimescount
@@ -940,6 +950,14 @@ if reviewfortimecount.Date!=date{
 
 //执行能力评价部分
 func  Check_execute(date string,email string) float64{
+  
+  if len(date) != 6 {
+    return -0.1
+  }
+  
+  if date == "unspecified" {
+    return -0.2
+  }
   /*
   check if date row was created in reviewday table,if it is no,the function will create it
   
@@ -982,6 +1000,18 @@ func  Check_execute(date string,email string) float64{
 //compute total_scores of someday
 
 func Compute_singleday(date string,email string) float64{
+
+
+  if len(date) != 6 {
+    return -0.1
+  }
+  
+  if date == "unspecified" {
+    return -0.2
+  }
+
+
+
 //获取执行能力细节
 executeability_score  := Check_execute(date,email) 
 

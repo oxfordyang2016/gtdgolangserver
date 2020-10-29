@@ -224,8 +224,10 @@ return today
 
 var resize = function() {
       myChart.resize({
-        width: window.innerWidth ,
-        height: window.innerHeight
+        // width: window.innerWidth ,
+        // height: window.innerHeight
+        width: "700px" ,
+        height: "600px"
       });
     };
 
@@ -302,7 +304,8 @@ $.get("/v1/reviewdaydatajson", function(data, status){
 
 
              datecategory.push(data.reviewdata[i].date);
-           var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
+             if (data.reviewdata[i].details != ""){
+                var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
            totalscore.push(obj_detailofreview.totalscore);
            patience.push(obj_detailofreview["patience"]);
           // alert(obj_detailofreview.patience);
@@ -325,6 +328,34 @@ $.get("/v1/reviewdaydatajson", function(data, status){
          markataskimmediately.push(obj_detailofreview.markataskimmediately);
          buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
          acceptfact.push(obj_detailofreview.acceptfact)
+             }else{
+
+                totalscore.push(0);
+           patience.push(0);
+          // alert(obj_detailofreview.patience);
+           usebrain.push(0);
+          // alert(obj_detailofreview.usebrain);
+           battlewithlowerbrain.push(0);
+           learnnewthings.push(0);
+           makeuseofthingsuhavelearned.push(0);
+           difficultthings.push(0);
+           threeminutes.push(0);
+           executeablity.push(0);
+            getlesson.push(0);
+            learntechuse.push(0);
+           alwaysprofit.push(0);
+           thenumberoftasks_score.push(0);
+           serviceforgoal_score.push(0);
+            onlystartatask_score.push(0);
+            atomadifficulttask_score.push(0);
+         doanimportantthingearly.push(0);
+         markataskimmediately.push(0);
+         buildframeandprinciple.push(0);
+         acceptfact.push(0)
+
+
+             }
+          
           
          if (data.reviewdata[i].date===gettoday()){break;}
          

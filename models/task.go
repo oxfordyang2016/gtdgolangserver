@@ -121,7 +121,7 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-var  websocket_switch = true
+var  websocket_switch = false
 var  voice_websocekt = false
 var image_websocket = true
 
@@ -1264,12 +1264,33 @@ func Update(c *gin.Context) {
 		}
 	}
 
+/*
+
+
+这种前后先更新再更新的任务逻辑我认为是有问题的
+
+
+
+*/
+
+
+//这里再更新任务的时候似乎有些问题
+
+
+
+//这里主要是用来如果没有任务的时间的话
+/*
+1.情况1更新
+
+*/
+
+
+//如果任务已经完成或者放弃
 	if status != "unfinished" {
-		db.Model(&task).Update("Finishtime", finishtime)
 		//locate timezone https://stackoverflow.com/questions/27991671/how-to-get-the-current-timestamp-in-other-timezones-in-golang
 		loc, _ := time.LoadLocation("Asia/Shanghai")
 		now := time.Now().In(loc)
-		db.Model(&task).Update("Finishtime", now.Format("060102"))
+		
 		//now1 :=  time.Now().In(loc)
 
 		//db.Model(&task).Update("Finishtime", finishtime)
@@ -1277,14 +1298,31 @@ func Update(c *gin.Context) {
 
 		db.Model(&task).Update("Status", status)
 
-		Check_reviewdaylog(now.Format("060102"), email)
-		return_info := Compute_singleday(now.Format("060102"), email)
-		fmt.Println(return_info)
+	
 
+     //这里和上面的逻辑迎来重合
+			if finishtime != "unspecified" {
+				db.Model(&task).Update("Finishtime", finishtime)
+
+				Check_reviewdaylog(finishtime, email)
+				return_info := Compute_singleday(finishtime, email)
+				fmt.Println(return_info)
+			}else{
+				// db.Model(&task).Update("Finishtime", "")
+				db.Model(&task).Update("Finishtime", now.Format("060102"))
+				fmt.Println("---")
+				Check_reviewdaylog(now.Format("060102"), email)
+				return_info := Compute_singleday(now.Format("060102"), email)
+				fmt.Println(return_info)
+
+			}
 	} else {
-		loc, _ := time.LoadLocation("Asia/Shanghai")
-		now := time.Now().In(loc)
-		db.Model(&task).Update("Finishtime", now.Format("060102"))
+      //等于unfinished的时候该咋办？？？？什么都不更新
+     //任务没有完成的时候
+
+		// loc, _ := time.LoadLocation("Asia/Shanghai")
+		// now := time.Now().In(loc)
+		// db.Model(&task).Update("Finishtime", now.Format("060102"))
 		//now1 :=  time.Now().In(loc)
 
 		//db.Model(&task).Update("Finishtime", finishtime)
@@ -1293,18 +1331,16 @@ func Update(c *gin.Context) {
 		fmt.Println("---------------i am confed in unfeid  even if user only update the one part the algo will update the score------------------------------")
 		db.Model(&task).Update("Status", status)
 
-		Check_reviewdaylog(now.Format("060102"), email)
-		return_info := Compute_singleday(now.Format("060102"), email)
+		//这里可以更新计划时间
+		Check_reviewdaylog(plantime, email)
+		return_info := Compute_singleday(plantime, email)
 		fmt.Println(return_info)
 
 	}
-	if finishtime != "unspecified" {
-		db.Model(&task).Update("Finishtime", finishtime)
 
-		Check_reviewdaylog(finishtime, email)
-		return_info := Compute_singleday(finishtime, email)
-		fmt.Println(return_info)
-	}
+
+
+   
 
 	color.Yellow("--------------yacccccccccc-------")
 	fmt.Println(task.Starttime)
@@ -1359,10 +1395,15 @@ func Update(c *gin.Context) {
 	fmt.Println(ttsclienttext)
 	//ttsclient(ttsclienttext)
 	if websocket_switch {
-		//这里分别向前段推送语音合成数据
+		if voice_websocekt{
+         //这里分别向前段推送语音合成数据
 		go ttsclient(ttsclienttext)
-		//这里是向前段推送图像数据
-		go visiualdata2websocket(ttsclienttext)
+		}
+		if image_websocket{
+	//这里是向前段推送图像数据
+	go visiualdata2websocket(ttsclienttext)
+		}
+	
 	}
 
 	c.JSON(200, gin.H{
