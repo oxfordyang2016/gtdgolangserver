@@ -101,6 +101,9 @@ func Getprojectofgoal(email string) map[string][]string {
 }
 
 func Updateprojectofgoal(c *gin.Context) {
+
+	
+	
 	buf := make([]byte, 1024)
 	num, _ := c.Request.Body.Read(buf)
 	reqBody := string(buf[0:num])
@@ -111,7 +114,16 @@ func Updateprojectofgoal(c *gin.Context) {
 	goalcode := gjson.Get(reqBody, "goalcode").String()
 	fmt.Println(goalcode)
 	projectname := gjson.Get(reqBody, "projectname").String()
-	status := gjson.Get(reqBody, "status").String()
+	status := gjson.Get(reqBody, "projectstatus").String()
+	AllowedStatus := [8]string{"f", "finished", "finish","g" ,"giveup","unfinish" ,"unfinished","unspecified"}
+	if !itemExists(AllowedStatus, status){
+		c.JSON(905, gin.H{
+			"result": "status not allowed",
+		})
+		return
+	}
+	color.Yellow("------这是客户端的project status---------")
+    fmt.Println(status)
 	projectstatus := "unspecified"
 	endtime := "unspecified"
 	if status == "unspecified" || status == "" {
@@ -120,15 +132,16 @@ func Updateprojectofgoal(c *gin.Context) {
 	if status == "finished" {
 		projectstatus = "finished"
 		loc, _ := time.LoadLocation("Asia/Shanghai")
-		endtime = time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+		endtime = time.Now().In(loc).Format("060102")
 	}
 
 	if status == "giveup" {
 		projectstatus = "giveup"
 		loc, _ := time.LoadLocation("Asia/Shanghai")
-		endtime = time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
+		endtime = time.Now().In(loc).Format("060102")
 	}
 
+   
 	var projectfromclient Projectofgoals
 	db.Where(&Projectofgoals{Goalcode: goalcode, Project: projectname, Email: email}).First(&projectfromclient)
 	//   if goalname != "unspecified"{
@@ -142,7 +155,8 @@ func Updateprojectofgoal(c *gin.Context) {
 		projectfromclient.Status = projectstatus
 		projectfromclient.Endtime = endtime
 	}
-
+	color.Yellow("------我在这里检查传入的projetc信息---------")
+    fmt.Println(projectstatus)
 	db.Save(&projectfromclient)
 	c.JSON(200, gin.H{
 		"result": "u have update project",

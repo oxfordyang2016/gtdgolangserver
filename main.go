@@ -63,6 +63,7 @@ func main() {
 	v1.StaticFile("/chosen.css", "./static/css/chosen.css")
 	v1.StaticFile("/style.css", "./static/css/style.css")
 	v1.StaticFile("/index.js", "./static/js/index.js")
+	v1.StaticFile("/balancealgo.js", "./static/js/balance.js")
 	v1.StaticFile("/background.png", "./static/images/background.png")
 
 	//test api
@@ -97,6 +98,9 @@ func main() {
 	// 这里是获取今天的分数
 	v1.GET("/reviewscoreoftoday", Reviewscore_today)
 
+	//平衡算法系统
+	v1.GET("/balancealgo", Balancealgo)
+	v1.GET("/rebalance", Rebalancealgo)
 	//tasks system
 	v1.POST("/createtask", CreatetaskbyJSON)
 	//v1.POST("/gtdcli",Createtask)

@@ -87,10 +87,17 @@ $('span').bind('dblclick',
 // ***********************************************************************
 // 下面是创建目标
 // ***********************************************************************
-your_created_goal = {'goal':"test_add_goal",'priority':1}
 
 
-function create_goal(){
+var priority
+
+$("#goal_socer_select").chosen().change(function(Event,eventobje){
+    priority = eventobje.selected
+})
+
+$(document).on("click","#add_goal",function(){
+    var goal = $("#add_goal_text").val()
+    var your_created_goal = {'goal':goal,'priority':priority}
     $.ajax({
         type: "POST",
         url: "/v1/creategoal",
@@ -99,14 +106,15 @@ function create_goal(){
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            console.log("输出创建的goals")
-            console.log(data)
+            console.log("我已经成功创建了目标")
+            get_all_unfinished_tasks_list()
         },
         failure: function (errMsg) {
           alert(errMsg);
         }
 })
-}
+})
+
 
 // create_goal()
 
@@ -114,7 +122,7 @@ function create_goal(){
 // 更新目标
 
 // var update_goal = {'goal':goal,'goalcode':id,'priority':priority,"goalstatus":goalstatus,"plantime":plantime,"finishtime":finishtime,"timerange":planmonth}
-function create_goal(){
+function _goal(){
     $.ajax({
         type: "POST",
         url: "/v1/updategoal",
@@ -146,16 +154,20 @@ function get_all_unfinished_tasks_list(){
     // alert("Data: " + data + "\nStatus: " + status);
     console.log("~~~~~~~~~~~~~~~我正在打印所有未完成的任务~~~~~~~~~")
     console.log(data);
-   
-   
-
     // 提取所有的Goal = [{goal1的所有task},{goal2的所有task},{}]
     all_unfinished_tasks = data.goals;
     console.log("I AM PRINTING THE ALL UNFINISHED TASK")
     console.log(all_unfinished_tasks)
-    // return all_unfinished_tasks;
+    if (all_unfinished_tasks == null) {
+        return
+    }
+    else{
+         // return all_unfinished_tasks;
     document.getElementById("goal_shown_and_edit").innerHTML = ""
     create_goal_project_task_div()
+    }
+   
+   
 
 // =======================================================
 // 这是一个浮层的js部分，来自codepen
@@ -174,16 +186,21 @@ jQuery(document).ready(function($){
 			$(this).removeClass('is-visible');
 		}
 	});
-	//close popup when clicking the esc keyboard button
-	$(document).keyup(function(event){
-    	if(event.which=='27'){
-    		$('.cd-popup').removeClass('is-visible');
-	    }
-    });
+    //close popup when clicking the esc keyboard button
+    document.onkeydown = function (evt) {
+        if (evt.keyCode == 27) evt.preventDefault();
+        $('.cd-popup').removeClass('is-visible');
+    }
+
+	// $(document).keyup(function(event){
+    // 	if(event.which=='27'){
+    // 		$('.cd-popup').removeClass('is-visible');
+	//     }
+    // });
 });
 
     })
-    // return all_unfinished_tasks
+    
 }
 
 get_all_unfinished_tasks_list()
@@ -228,11 +245,9 @@ String.prototype.hashCode = function(){
 function create_goal_project_task_div(){
     // get_all_unfinished_tasks_list()
     // 创建all_goals的列表
-    
     console.log("---------print all_unfinished_tasks-----------")
     console.log(all_unfinished_tasks)
     var goal_ul = document.createElement("ul")
-
     // project = [];
     // for (let i = 0; i < all_unfinished_tasks.length; i++) {
     //     var this_goal_name = all_unfinished_tasks.Name
@@ -245,15 +260,14 @@ function create_goal_project_task_div(){
     // }
 
 
-   
-
     //第一层循环，对所有的Goal 
     for (let i = 0; i < all_unfinished_tasks.length; i++) {
         // all_goals.push(all_unfinished_tasks[i].Name)
         // get one goal
         var temp_goal =  all_unfinished_tasks[i].Name
-        // console.log("!!!!!!!!! printint goal !!!!!!!!!!")
-        // console.log(temp_goal)
+        var goal_priority = all_unfinished_tasks[i].Priority
+        console.log("!!!!!!!!! printint goal !!!!!!!!!!")
+        console.log(temp_goal)
         // var project = get_no_repeat_project(all_tasks_in_one_project)
         // 输出当下Goal里的所有Projects到一个array
         var project = []
@@ -261,6 +275,8 @@ function create_goal_project_task_div(){
         for (let j = 0; j < projects_in_this_goal.length; j++) {
             project.push(projects_in_this_goal[j].Name)
         }
+        console.log("!!!!!!!!! printint project !!!!!!!!!!")
+        console.log(projects_in_this_goal)
         // 输出当下Goal里的所有task到一个
 
         // var all_tasks_in_one_project = all_unfinished_tasks[i].Alltasksingoal
@@ -282,14 +298,41 @@ function create_goal_project_task_div(){
         add_project2goal_button.setAttribute("width","12")
         add_project2goal_button.setAttribute("height","12")
         add_project2goal_button.setAttribute("src","https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg")
-
         
+        
+        var finish_goal = document.createElement("button");
+        finish_goal.setAttribute("class","finish_goal_class");
+        finish_goal.setAttribute("goalcode",`${goalcode}`);
+        finish_goal.setAttribute("goalname",`${temp_goal}`);
+        finish_goal.setAttribute("priority",`${goal_priority}`);
+        finish_goal.innerHTML = finish_goal_project_button;
+
+        var giveup_goal = document.createElement("button");
+        giveup_goal.setAttribute("class","giveup_goal_class");
+        giveup_goal.setAttribute("goalcode",`${goalcode}`);
+        giveup_goal.setAttribute("goalname",`${temp_goal}`);
+        giveup_goal.setAttribute("priority",`${goal_priority}`);
+        giveup_goal.innerHTML = giveup_goal_project_button;
+        
+
+
         goal_li.appendChild(goal_span)
         goal_li.appendChild(add_project2goal_button)
+        if (project.length == 0) {
+            goal_li.appendChild(finish_goal)
+            goal_li.appendChild(giveup_goal) 
+        }
+       
         // goal_li.appendChild(project_input)
 
         // 第二层循环，对第一个Goal下的所有Projects
         for (let j = 0; j < project.length; j++) {
+            
+             // 得到一个project下的所有tasks
+            var all_tasks_in_one_project =  all_unfinished_tasks[i].Allprojectsingoal[j].Alltasksinproject
+            console.log("!!!!!!!!! printint all tasks in one project !!!!!!!!!!")
+            console.log(all_tasks_in_one_project)
+
             var project_ul = document.createElement("ul")
             var project_li = document.createElement("li")
             project_li.setAttribute("class","project_li")
@@ -301,18 +344,36 @@ function create_goal_project_task_div(){
             add_task2project_button.setAttribute("width","12")
             add_task2project_button.setAttribute("height","12")
             add_task2project_button.setAttribute("src","https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg")
+            
+            var finish_project = document.createElement("button");
+            finish_project.setAttribute("class","finish_project_class");
+            finish_project.setAttribute("goalcode",`${goalcode}`)
+            finish_project.setAttribute("projectname",`${project[j]}`)
+            finish_project.innerHTML = finish_goal_project_button;
+    
+            var giveup_project = document.createElement("button");
+            giveup_project.setAttribute("class","giveup_project_class");
+            giveup_project.setAttribute("goalcode",`${goalcode}`)
+            giveup_project.setAttribute("projectname",`${project[j]}`)
+            giveup_project.innerHTML = giveup_goal_project_button;
+            
             project_span.textContent =project[j]
             project_li.appendChild(project_span)
             project_li.appendChild(add_task2project_button)
+
+            if (all_tasks_in_one_project == null) {
+                project_li.appendChild(finish_project)
+                project_li.appendChild(giveup_project) 
+            }
+
             project_ul.appendChild(project_li)
             goal_li.appendChild(project_ul)
+
             var task_ul = document.createElement("ul");
             task_ul.setAttribute("id",`${temp_goal}_${project[j]}`)
         //get one project
 
-        // 得到一个project下的所有tasks
-        var all_tasks_in_one_project =  all_unfinished_tasks[i].Allprojectsingoal[j].Alltasksinproject
-
+       
         // 第三层循环，对一个Project下的所有tasks
         if ( all_tasks_in_one_project == null ) {
             
@@ -349,12 +410,12 @@ function create_goal_project_task_div(){
                 var add_task2today_button = document.createElement("button")
                 add_task2today_button.setAttribute("class","add_task2today_button")
                 // add_task2today_button.textContent = "Today"
-                
                 add_task2today_button.innerHTML = today_word;
+
                 var add_task2tomorrow_button = document.createElement("button")
                 add_task2tomorrow_button.setAttribute("class","add_task2tomorrow_button")
-                
                 add_task2tomorrow_button.innerHTML = tomorrow_word
+
                 var giveup_task_button = document.createElement("button")
                 giveup_task_button.setAttribute("class","giveup_task_button")
                 // giveup_task_button.textContent = "Giveup"
@@ -369,13 +430,14 @@ function create_goal_project_task_div(){
                 task_li.appendChild(task_div)
                 task_ul.appendChild(task_li)
             //   }
+            }
         }
-           }
            project_li.appendChild(task_ul)
+           goal_li.appendChild(project_ul)
         // temp_project[`${temp_project}`] = temp_tasks
         }
         // all_unfinished_tasks_tree[`${temp_goal}`] = temp_project
-        goal_li.appendChild(project_ul)
+        
         goal_ul.appendChild(goal_li)
     }
     document.getElementById("goal_shown_and_edit").appendChild(goal_ul)
@@ -948,6 +1010,164 @@ $(document).on("click","#goal_manager",function(){
 
 
 
+// 点击目标完成的按键，完成目标
+$(document).on("click",".finish_goal_class",function(){
+        var goal_name = $(this).attr("goalname")
+        var goal_status = "finished"
+        var goal_code = $(this).attr("goalcode")
+        var finish_time = today
+        var plan_time = 201020
+        var priority = $(this).attr("priority")
+        var this_goal_div = $(this).parent()[0]
+    
+        var updatedinfo = {
+            "goalcode":goal_code,
+            "goalname":goal_name,
+            "goalstatus":goal_status,
+            "finishtime":finish_time,
+            "plantime":plan_time,
+            "priority":priority
+        }
+        console.log(updatedinfo)
+        $.ajax({
+            type: "POST",
+            url: "/v1/updategoal",
+            // The key needs to match your method's input parameter (case-sensitive).
+            data: JSON.stringify(updatedinfo),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) { 
+            //   alert("我正在把任务调度到今天")
+              console.log(data)
+              // alert(data); 
+              this_goal_div.outerHTML = ""
+            },
+            failure: function (errMsg) {
+              console.log("this is erro")
+              alert(errMsg);
+            }
+          })
+    })
+
+
+
+// 点击目标放弃的按键，放弃目标
+$(document).on("click",".giveup_goal_class",function(){
+    alert("放弃目标需谨慎，你确定要放弃这个目标吗？")
+    var goal_name = $(this).attr("goalname")
+    var goal_status = "giveup"
+    var goal_code = $(this).attr("goalcode")
+    var finish_time = today
+    var plan_time = 201020
+    var priority = $(this).attr("priority")
+    var this_goal_div = $(this).parent()[0]
+
+    var updatedinfo = {
+        "goalcode":goal_code,
+        "goalname":goal_name,
+        "goalstatus":goal_status,
+        "finishtime":finish_time,
+        "plantime":plan_time,
+        "priority":priority
+    }
+    console.log(updatedinfo)
+    $.ajax({
+        type: "POST",
+        url: "/v1/updategoal",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(updatedinfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+        //   alert("我正在把任务调度到今天")
+          console.log(data)
+          // alert(data); 
+          this_goal_div.outerHTML = ""
+        },
+        failure: function (errMsg) {
+          console.log("this is erro")
+          alert(errMsg);
+        }
+      })
+})
+
+// 点击项目完成的按键，完成项目
+$(document).on("click",".finish_project_class",function(){
+    var project_name = $(this).attr("projectname")
+    var goal_code = $(this).attr("goalcode")
+    var projects_status = "finished"
+    var this_project_div = $(this).parent().parent()[0]
+    console.log(this_project_div)
+    var updatedinfo = {
+        "projectname":project_name,
+        "goalcode":goal_code,
+        "projectstatus":projects_status
+    }
+    console.log(updatedinfo)
+    $.ajax({
+        type: "POST",
+        url: "/v1/updateproject",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(updatedinfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+        //   alert("我正在把任务调度到今天")
+          console.log(data)
+          // alert(data); 
+          this_project_div.outerHTML = ""
+        },
+        failure: function (errMsg) {
+          console.log("this is erro")
+          alert(errMsg);
+        }
+      })
+      
+
+})
+
+
+
+// 点击项目放弃的按键，放弃项目
+$(document).on("click",".giveup_project_class",function(){
+    var project_name = $(this).attr("projectname")
+    var goal_code = $(this).attr("goalcode")
+    var projects_status = "giveup"
+    var this_project_div = $(this).parent().parent()[0]
+    console.log(this_project_div)
+
+    var updatedinfo = {
+        "projectname":project_name,
+        "goalcode":goal_code,
+        "projectstatus":projects_status
+    }
+    console.log(updatedinfo)
+    $.ajax({
+        type: "POST",
+        url: "/v1/updateproject",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(updatedinfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+        //   alert("我正在把任务调度到今天")
+          console.log(data)
+          // alert(data); 
+          this_project_div.outerHTML = ""
+        },
+        failure: function (errMsg) {
+          console.log("this is erro")
+          alert(errMsg);
+        }
+      })
+})
+
+
+
+function getCookieValue(a) {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
 
 
 
@@ -956,16 +1176,10 @@ $(document).on("click","#goal_manager",function(){
 
 
 
-
-
-
-
-
-
-// 任务饼状图的echarts
+// 所有任务的echarts
 function review_echarts(){
      // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
-        var myChart = echarts.init(document.getElementById('main'));
+        var myChart = echarts.init(document.getElementById(' '),{width:"300px",height:"60px"});
 
         // 指定图表的配置项和数据
 /*        var option = {
@@ -1022,17 +1236,17 @@ return projectsfortree
 }
 var data = {"name":"dm","children":getprojectrees()}
 
-myChart.showLoading();
+    myChart.showLoading();
     myChart.hideLoading();
     var _zr = myChart.getZr();
-//  ShowObjProperty(_zr);
+    //  ShowObjProperty(_zr);
     _zr.add(new echarts.graphic.Text({
      style: {            
    x: _zr.getWidth() / 2,
    y: _zr.getHeight() / 2,
-   color: '#666', 
+   color: '#666',
    text: '集团重大风险',
-   textAlign: 'center', 
+   textAlign: 'center',
    textFont : 'bold 20px verdana'
    }}  
     ));
@@ -1123,14 +1337,42 @@ myChart.setOption(option = {
 // review_echarts()
 
 
+// var my2Chart = echarts.init(document.getElementById('reviewalgo_temp'));
+
+    // 指定图表的配置项和数据
+    // var option = {
+    //     title: {
+    //         text: 'ECharts 入门示例'
+    //     },
+    //     tooltip: {},
+    //     legend: {
+    //         data:['销量']
+    //     },
+    //     xAxis: {
+    //         data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    //     },
+    //     yAxis: {},
+    //     series: [{
+    //         name: '销量',
+    //         type: 'bar',
+    //         data: [5, 20, 36, 10, 10, 20]
+    //     }]
+        
+    // };
+
+    // 使用刚指定的配置项和数据显示图表。
+    // my2Chart.setOption(option);
 
 
 
-// -------------------------------------------------------------------------------------------
-// reviewalgo 的echarts
 
-function reviewalgo_echarts(){
-    var  WebSocketurl = 'ws://47.100.100.141:777'
+
+
+
+// ---------------------------------------------------
+// ----------------------------------------------------
+var token = getCookieValue("email")
+var  WebSocketurl = 'ws://47.100.100.141:777'
 var localhostWebSocketurl = "ws://localhost:777"
 var httpsWebSocketurl ='wss://www.blackboxo.top/wss'
 var heartCheck = {
@@ -1214,8 +1456,8 @@ function connect(url) {
 
 //connect(localhostWebSocketurl)
  //connect('ws://localhost:777')
-connect(httpsWebSocketurl)
-
+// connect(httpsWebSocketurl)
+connect(localhostWebSocketurl+"/email="+token)
 
 
 
@@ -1243,7 +1485,7 @@ function calculateMA(dayCount, data) {
 
 
 //echarts.init(document.getElementById('main')).dispose();
-var myChart = echarts.init(document.getElementById('main'));
+var myChart = echarts.init(document.getElementById('reviewalgo_tem'));
 
 
 function gettoday(){
@@ -1260,8 +1502,10 @@ return today
 
 var resize = function() {
       myChart.resize({
-        width: window.innerWidth ,
-        height: window.innerHeight
+        // width: window.innerWidth ,
+        // height: window.innerHeight
+        width: $(window).width()/2,
+        height: "600px"
       });
     };
 
@@ -1334,32 +1578,65 @@ var executeablity = [];
 $.get("/v1/reviewdaydatajson", function(data, status){
        // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
         for(i=0;i<data.reviewdata.length;i++){
-          
-             datecategory.push(data.reviewdata[i].date);
-           var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
-           totalscore.push(obj_detailofreview.totalscore);
-           patience.push(obj_detailofreview["patience"]);
-          // alert(obj_detailofreview.patience);
-           usebrain.push(obj_detailofreview["usebrain"]);
-          // alert(obj_detailofreview.usebrain);
-           battlewithlowerbrain.push(obj_detailofreview.battlewithlowerbrain);
-           learnnewthings.push(obj_detailofreview.learnnewthings);
-           makeuseofthingsuhavelearned.push(obj_detailofreview.makeuseofthingsuhavelearned);
-           difficultthings.push(obj_detailofreview.difficultthings);
-           threeminutes.push(obj_detailofreview.threeminutes);
-           executeablity.push(obj_detailofreview.executeability_score*obj_detailofreview.totalscore);
-            getlesson.push(obj_detailofreview.getlesson);
-            learntechuse.push(obj_detailofreview.learntechuse);
-           alwaysprofit.push(obj_detailofreview.alwaysprofit);
-           thenumberoftasks_score.push(obj_detailofreview.thenumberoftasks_score);
-           serviceforgoal_score.push(obj_detailofreview.serviceforgoal_score);
-            onlystartatask_score.push(obj_detailofreview.onlystartatask_score);
-            atomadifficulttask_score.push(obj_detailofreview.atomadifficulttask);
-         doanimportantthingearly.push(obj_detailofreview.doanimportantthingearly);
-         markataskimmediately.push(obj_detailofreview.markataskimmediately);
-         buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
-         acceptfact.push(obj_detailofreview.acceptfact)
-          
+            var dateofreview =  data.reviewdata[i].date
+
+            if (dateofreview !="unspecified"){
+
+            
+            datecategory.push(data.reviewdata[i].date);
+            
+            if (data.reviewdata[i].details != ""){
+               var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
+          totalscore.push(obj_detailofreview.totalscore);
+          patience.push(obj_detailofreview["patience"]);
+         // alert(obj_detailofreview.patience);
+          usebrain.push(obj_detailofreview["usebrain"]);
+         // alert(obj_detailofreview.usebrain);
+          battlewithlowerbrain.push(obj_detailofreview.battlewithlowerbrain);
+          learnnewthings.push(obj_detailofreview.learnnewthings);
+          makeuseofthingsuhavelearned.push(obj_detailofreview.makeuseofthingsuhavelearned);
+          difficultthings.push(obj_detailofreview.difficultthings);
+          threeminutes.push(obj_detailofreview.threeminutes);
+          executeablity.push(obj_detailofreview.executeability_score*obj_detailofreview.totalscore);
+           getlesson.push(obj_detailofreview.getlesson);
+           learntechuse.push(obj_detailofreview.learntechuse);
+          alwaysprofit.push(obj_detailofreview.alwaysprofit);
+          thenumberoftasks_score.push(obj_detailofreview.thenumberoftasks_score);
+          serviceforgoal_score.push(obj_detailofreview.serviceforgoal_score);
+           onlystartatask_score.push(obj_detailofreview.onlystartatask_score);
+           atomadifficulttask_score.push(obj_detailofreview.atomadifficulttask);
+        doanimportantthingearly.push(obj_detailofreview.doanimportantthingearly);
+        markataskimmediately.push(obj_detailofreview.markataskimmediately);
+        buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
+        acceptfact.push(obj_detailofreview.acceptfact)
+            }else{
+
+               totalscore.push(0);
+          patience.push(0);
+         // alert(obj_detailofreview.patience);
+          usebrain.push(0);
+         // alert(obj_detailofreview.usebrain);
+          battlewithlowerbrain.push(0);
+          learnnewthings.push(0);
+          makeuseofthingsuhavelearned.push(0);
+          difficultthings.push(0);
+          threeminutes.push(0);
+          executeablity.push(0);
+           getlesson.push(0);
+           learntechuse.push(0);
+          alwaysprofit.push(0);
+          thenumberoftasks_score.push(0);
+          serviceforgoal_score.push(0);
+           onlystartatask_score.push(0);
+           atomadifficulttask_score.push(0);
+        doanimportantthingearly.push(0);
+        markataskimmediately.push(0);
+        buildframeandprinciple.push(0);
+        acceptfact.push(0)
+
+
+            }
+        }
          if (data.reviewdata[i].date===gettoday()){break;}
          
 };    
@@ -1430,8 +1707,8 @@ option = {
             id: 'text1',
             style: {
             text: totalscore[totalscore.length - 1].toFixed(2),
-            x: 100,
-            y: 200
+            x: 10,
+            y: 20
     }
         },
 
@@ -1454,12 +1731,12 @@ option = {
             saveAsImage: {}
         }
     },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
+    // grid: {
+    //     left: '3%',
+    //     right: '4%',
+    //     bottom: '3%',
+    //     containLabel: true
+    // },
         graphic:[{ // 一个图形元素，类型是 text，指定了 id。
             type: 'text',
             id: 'text2',
@@ -1805,19 +2082,13 @@ option = {
 }
 
 
+
 loadlink(); // This will run on page load
+
+
 
 setInterval(function(){
     loadlink() // this will run after every 5 seconds
 }, 10*60000);
-
-//alert("-------------");
-}
-
-// reviewalgo_echarts()
-
-
-
-
 
 

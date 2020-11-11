@@ -121,8 +121,8 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-var  websocket_switch = false
-var  voice_websocekt = false
+var websocket_switch = true
+var voice_websocekt = false
 var image_websocket = true
 
 //  // createTodo add a new todo
@@ -607,14 +607,14 @@ func CreatetaskbyJSON(c *gin.Context) {
 			if websocket_switch {
 				if websocket_switch && voice_websocekt {
 					//这里分别向前段推送语音合成数据
-					go ttsclient(ttsclienttext)
+					go ttsclient(email, ttsclienttext)
 					//这里是向前段推送图像数据
 
 				}
 
 				if websocket_switch && image_websocket {
 
-					go visiualdata2websocket(ttsclienttext)
+					go visiualdata2websocket(email, ttsclienttext)
 				}
 
 			}
@@ -900,14 +900,14 @@ func CreatetaskbyJSON(c *gin.Context) {
 	if websocket_switch {
 		if websocket_switch && voice_websocekt {
 			//这里分别向前段推送语音合成数据
-			go ttsclient(ttsclienttext)
+			go ttsclient(email, ttsclienttext)
 			//这里是向前段推送图像数据
 
 		}
 
 		if websocket_switch && image_websocket {
 
-			go visiualdata2websocket(ttsclienttext)
+			go visiualdata2websocket(email, ttsclienttext)
 		}
 
 	}
@@ -949,8 +949,9 @@ func CreatetaskbyJSON(c *gin.Context) {
 
 //向腾讯语音合成推流
 
-func ttsclient(text string) {
+func ttsclient(email string, text string) {
 	//访问flask服务器，去合成音频流
+	fmt.Println(email)
 	ttsurl := "http://localhost:5050/pcm?%s"
 	var rq = url.Values{}
 	rq.Add("text", text)
@@ -975,10 +976,10 @@ func ttsclient(text string) {
 
 //向echart推送图像服务
 
-func visiualdata2websocket(text string) {
+func visiualdata2websocket(email string, text string) {
 	//直接访问包含webscoket的node服务器
 	//echarturl := "http://127.0.0.1:3030/pushtreedatetoweb"
-	echarturl := "http://localhost:3030/pushtreedatetoweb"
+	echarturl := "http://localhost:3030/pushtreedatetoweb?email=" + email
 	// ttsurl := "http://localhost:5050/pcm?%s"
 	// var rq = url.Values{}
 	// rq.Add("text",text)
@@ -1264,33 +1265,29 @@ func Update(c *gin.Context) {
 		}
 	}
 
-/*
+	/*
 
 
-这种前后先更新再更新的任务逻辑我认为是有问题的
-
-
-
-*/
-
-
-//这里再更新任务的时候似乎有些问题
+	   这种前后先更新再更新的任务逻辑我认为是有问题的
 
 
 
-//这里主要是用来如果没有任务的时间的话
-/*
-1.情况1更新
+	*/
 
-*/
+	//这里再更新任务的时候似乎有些问题
 
+	//这里主要是用来如果没有任务的时间的话
+	/*
+	   1.情况1更新
 
-//如果任务已经完成或者放弃
+	*/
+
+	//如果任务已经完成或者放弃
 	if status != "unfinished" {
 		//locate timezone https://stackoverflow.com/questions/27991671/how-to-get-the-current-timestamp-in-other-timezones-in-golang
 		loc, _ := time.LoadLocation("Asia/Shanghai")
 		now := time.Now().In(loc)
-		
+
 		//now1 :=  time.Now().In(loc)
 
 		//db.Model(&task).Update("Finishtime", finishtime)
@@ -1298,27 +1295,25 @@ func Update(c *gin.Context) {
 
 		db.Model(&task).Update("Status", status)
 
-	
+		//这里和上面的逻辑迎来重合
+		if finishtime != "unspecified" {
+			db.Model(&task).Update("Finishtime", finishtime)
 
-     //这里和上面的逻辑迎来重合
-			if finishtime != "unspecified" {
-				db.Model(&task).Update("Finishtime", finishtime)
+			Check_reviewdaylog(finishtime, email)
+			return_info := Compute_singleday(finishtime, email)
+			fmt.Println(return_info)
+		} else {
+			// db.Model(&task).Update("Finishtime", "")
+			db.Model(&task).Update("Finishtime", now.Format("060102"))
+			fmt.Println("---")
+			Check_reviewdaylog(now.Format("060102"), email)
+			return_info := Compute_singleday(now.Format("060102"), email)
+			fmt.Println(return_info)
 
-				Check_reviewdaylog(finishtime, email)
-				return_info := Compute_singleday(finishtime, email)
-				fmt.Println(return_info)
-			}else{
-				// db.Model(&task).Update("Finishtime", "")
-				db.Model(&task).Update("Finishtime", now.Format("060102"))
-				fmt.Println("---")
-				Check_reviewdaylog(now.Format("060102"), email)
-				return_info := Compute_singleday(now.Format("060102"), email)
-				fmt.Println(return_info)
-
-			}
+		}
 	} else {
-      //等于unfinished的时候该咋办？？？？什么都不更新
-     //任务没有完成的时候
+		//等于unfinished的时候该咋办？？？？什么都不更新
+		//任务没有完成的时候
 
 		// loc, _ := time.LoadLocation("Asia/Shanghai")
 		// now := time.Now().In(loc)
@@ -1337,10 +1332,6 @@ func Update(c *gin.Context) {
 		fmt.Println(return_info)
 
 	}
-
-
-
-   
 
 	color.Yellow("--------------yacccccccccc-------")
 	fmt.Println(task.Starttime)
@@ -1395,15 +1386,15 @@ func Update(c *gin.Context) {
 	fmt.Println(ttsclienttext)
 	//ttsclient(ttsclienttext)
 	if websocket_switch {
-		if voice_websocekt{
-         //这里分别向前段推送语音合成数据
-		go ttsclient(ttsclienttext)
+		if voice_websocekt {
+			//这里分别向前段推送语音合成数据
+			go ttsclient(email, ttsclienttext)
 		}
-		if image_websocket{
-	//这里是向前段推送图像数据
-	go visiualdata2websocket(ttsclienttext)
+		if image_websocket {
+			//这里是向前段推送图像数据
+			go visiualdata2websocket(email, ttsclienttext)
 		}
-	
+
 	}
 
 	c.JSON(200, gin.H{

@@ -55,22 +55,27 @@ type (
 	}
 )
 
-func Creategoal(c *gin.Context) {
+func Creategoal(g *gin.Context) {
 	buf := make([]byte, 1024)
-	num, _ := c.Request.Body.Read(buf)
+	num, _ := g.Request.Body.Read(buf)
 	reqBody := string(buf[0:num])
-	emailcookie, _ := c.Request.Cookie("email")
+	emailcookie, _ := g.Request.Cookie("email")
 	fmt.Println(emailcookie.Value)
 	email := emailcookie.Value
 	goal := gjson.Get(reqBody, "goal").String()
 	priority := gjson.Get(reqBody, "priority").Int()
+	color.Red("--------ts========")
+	fmt.Println(priority)
 	var goalsforemail []Goalfordbs
 	var goalcountforsamegoal = 0
 	var goalcount = 0
+	color.Red(goal)
+	loc, _ := time.LoadLocation("Asia/Shanghai")
+	today := time.Now().In(loc).Format("060102")
 	alphabet := [26]string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
 	db.Where("Email= ?", email).Where("Name=?", goal).Find(&goalsforemail).Count(&goalcountforsamegoal)
 	if goalcountforsamegoal > 0 {
-		c.JSON(200, gin.H{
+		g.JSON(902, gin.H{
 			"status":  "posted",
 			"message": "the goal had ben created,not repeated youself",
 		})
@@ -78,8 +83,13 @@ func Creategoal(c *gin.Context) {
 	} else {
 		db.Where("Email= ?", email).Find(&goalsforemail).Count(&goalcount)
 		if goalcount == 0 {
-			goalfromclient := Goalfordbs{Name: goal, Email: email, Goalcode: "aaa", Priority: int(priority)}
+
+			goalfromclient := Goalfordbs{Name: goal, Plantime: today,Finishtime:"unspecified" ,Email: email, Goalstatus: "unfinished", Goalcode: "aaa", Priority: int(priority)}
 			db.Create(&goalfromclient).Scan(&goalfromclient)
+			g.JSON(200, gin.H{
+				"status":  "posted",
+				"message": "the goal had ben created,not repeated youself",
+			})
 		} else {
 			goalcode := goalsforemail[len(goalsforemail)-1].Goalcode
 			a, b, c := string(goalcode[0]), string(goalcode[1]), string(goalcode[2])
@@ -96,8 +106,12 @@ func Creategoal(c *gin.Context) {
 				}
 			}
 			//这里原来引号出了问题。。。。多出了一个空格
-			goalfromclient := Goalfordbs{Name: goal, Email: email, Goalcode: fmt.Sprintf("%s%s%s ", a, b, c)}
+			goalfromclient := Goalfordbs{Name: goal, Plantime: today, Priority: int(priority),Finishtime:"unspecified",Goalstatus: "unfinished", Email: email, Goalcode: fmt.Sprintf("%s%s%s ", a, b, c)}
 			db.Create(&goalfromclient).Scan(&goalfromclient)
+			g.JSON(200, gin.H{
+				"status":  "posted",
+				"message": "the goal had ben created,not repeated youself",
+			})
 		}
 	}
 }
@@ -118,20 +132,39 @@ func Updategoal(c *gin.Context) {
 	plantime := gjson.Get(reqBody, "plantime").String()
 	priority := gjson.Get(reqBody, "priority").Int()
 	timerange := gjson.Get(reqBody, "timerange").Int()
+
+
+    //完成时间使用今天
+	loc, _ := time.LoadLocation("Asia/Shanghai")
+	today := time.Now().In(loc).Format("060102")
 	fmt.Println(timerange)
+	fmt.Println(plantime)
 	var goalindb Goalfordbs
 	db.Where("Email= ?", email).Where("Goalcode= ?", goalcode).Find(&goalindb)
 	if priority != -1 {
 		db.Model(&goalindb).Update("Priority", int(priority))
 	}
-	if goal != "unspecified" {
+
+	//这里很容易出错，如果你真想更新目标的话，你可以更新权重，但是此时你不能更新状态
+	if goal != "unspecified" && goalstatus == "unspecified" && goalstatus != "" {
+		// ""  giveup  0
+		color.Yellow("-----能不能给点面子------")
 		if goal != "nocontent" {
+			color.Yellow("-----能不能给点面子------")
+			color.Yellow(goal)
+			color.Yellow(goalstatus)
+			fmt.Println(len(goal))
+			// color.Yellow(goalstatus)
 			db.Model(&goalindb).Update("Name", goal)
 		}
 	}
+
 	if timerange != 0 {
 		db.Model(&goalindb).Update("Timerange", int(timerange))
 	}
+
+
+	
 	if goalstatus != "unspecified" {
 		if goalstatus == "f" {
 			goalstatus = "finished"
@@ -140,14 +173,15 @@ func Updategoal(c *gin.Context) {
 			goalstatus = "giveup"
 		}
 		db.Model(&goalindb).Update("Goalstatus", goalstatus)
+		if finishtime != "unspecified" {
+			db.Model(&goalindb).Update("Finishtime", today)
+		}
 
 	}
-	if finishtime != "unspecified" {
-		db.Model(&goalindb).Update("Finishtime", finishtime)
-	}
-	if plantime != "unspecified" {
-		db.Model(&goalindb).Update("Plantime", plantime)
-	}
+
+	// if plantime != "unspecified" {
+	// 	db.Model(&goalindb).Update("Plantime", plantime)
+	// }
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK})
 }
 
@@ -426,6 +460,27 @@ func Get_goal_coffient(goal string, email string) float64 {
 }
 
 func Goalsjson(c *gin.Context) {
+/*
+【A】这里生成goal的逻辑
+1.获取所有没有完成的任务
+2.将任务当中的goal抽取出来，组成以goal为key，任务数组为value的字典
+3.loop 3中的每个key，然后提取任务的projetc生成三级goal
+4.最后补充前面没有的goal，
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+
+
 
 	//the algorithm can be upgrade
 	//i use email as identifier
@@ -532,20 +587,71 @@ func Goalsjson(c *gin.Context) {
 	}
 
 	fmt.Println("========i am here 3========")
-
+	 
+	//这里提取所有的project！！！！
 	//获取所有目标字符串的数组
+
+
+	//alltasks_ingoal  目标里包含的所有任务
+
+
+
+
 	var goals []string
 	for k := range alltasks_ingoal {
 		goals = append(goals, k)
 	}
 	fmt.Println(len(goals))
 
+
+
+
+    	//-------这里的代码非常的危险-------------
+	//在末尾进行检测是否空的goals被检测到
+	//在这里查询新创建的目标来不及创建目标的那种
+	//查询所有对应的goal
+
+	type Result struct {
+		Name       string
+		Goalcode   string
+		Priority   int
+		Goalstatus string
+	}
+	
+	
+
+
+	//这里因该在补充goals
+	var goalsfinal []Result
+	db.Raw(`SELECT name,goalcode,priority,goalstatus  FROM goalfordbs  WHERE email ="` + email + `"` + " and goalstatus not in (" + `"giveup","g","finished","finish"` + `)`).Scan(&goalsfinal)
+	color.Red("red")
+
+
+	for i := 0; i < len(goalsfinal); i++ {
+		_, found := Find(goals, goalsfinal[i].Name)
+		if !found {
+			// var d []Projects
+			// d := make([]Projects, 0)
+			// goalmapproject[goals[i].Name] = d
+			goals = append(goals, goalsfinal[i].Name)
+			// allprojects_ingoal[item.Goal] = append(allprojects_ingoal[item.Goal], item.Project)
+		}
+	}
+
+
+
+	//如果这里还有空的project也需要处理的！！！
+	
+
+
+
 	//这里可能包含具体的projects
 	allclassgoals := make(map[string][]Projects)
-	for _, key := range goals {
+	//这里的goals不包含所有的goal！！！！
+	for _, singlegoal := range goals {
 		allclassproject := make(map[string][]Tasks)
 		//这里原来决定了他们提取的key所包含的project
-		for _, item := range alltasks_ingoal[key] {
+		for _, item := range alltasks_ingoal[singlegoal] {
 			//projects -- goal ,firsr to generate project and then goals
 			allclassproject[item.Project] = append(allclassproject[item.Project], item)
 		}
@@ -566,7 +672,7 @@ func Goalsjson(c *gin.Context) {
 
 		color.Red("77777777777777777777")
 		fmt.Println(projectsofgoalfromptojectstable)
-		for _, singleproject := range projectsofgoalfromptojectstable[key] {
+		for _, singleproject := range projectsofgoalfromptojectstable[singlegoal] {
 			//检测singleproject 是否在allclassproject当中，如果不在就加空的数组
 			_, found := Find(projectnames, singleproject)
 			if !found {
@@ -586,10 +692,25 @@ func Goalsjson(c *gin.Context) {
 			return allprojects[i].Name > allprojects[j].Name
 		})
 
+
+
+		color.Red("--------在这里再次检测-------是否allproject为nil")
+		fmt.Println(singlegoal)
+		fmt.Println(allprojects)
 		//这里已经实在目标层面了，就是将最终的project塞进去
-		allclassgoals[key] = allprojects
+		if len(allprojects) == 0{
+			d := make([]Projects, 0)
+			allclassgoals[singlegoal] = d
+		}else{
+			allclassgoals[singlegoal] = allprojects
+		}
+		
 
 	}
+
+
+
+
 
 	var allgoals []Goals
 	for k, v := range allclassgoals {
@@ -618,11 +739,9 @@ func Goalsjson(c *gin.Context) {
 
 	}
 
-	//在末尾进行检测是否空的goals被检测到
-	//在这里查询新创建的目标来不及创建目标的那种
-	//查询所有对应的goal
-	var goalsfinal []Goalfordbs
-	db.Where("Email= ?", email).Find(&goalsfinal)
+
+	// var goalsfinal []Goalfordbs
+	// db.Where("Email= ?", email).Where("").Find(&goalsfinal)
 	//提取所有的keys
 	// exsiting_goals := reflect.ValueOf(goalmapproject).MapKeys()
 	// exsiting_goals := make([]string, len(goalmapproject))
@@ -641,6 +760,8 @@ func Goalsjson(c *gin.Context) {
 			// allprojects_ingoal[item.Goal] = append(allprojects_ingoal[item.Goal], item.Project)
 		}
 	}
+
+	//------------------------这里写的代码非常的危险---------
 
 	sort.Slice(allgoals, func(i, j int) bool {
 		if allgoals[i].Priority == allgoals[j].Priority {
