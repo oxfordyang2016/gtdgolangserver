@@ -94,9 +94,20 @@
 
 
 <script type="text/javascript">
-var  WebSocketurl = 'ws://47.100.100.141:777'
-var localhostWebSocketurl = "ws://localhost:777"
-var httpsWebSocketurl ='wss://www.blackboxo.top/wss'
+
+function getCookieValue(a) {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
+
+
+
+
+var WebSocketswitch = true
+var token = getCookieValue("email")
+var  WebSocketurl = 'ws://47.100.100.141:777'+"/email="+token
+var localhostWebSocketurl = "ws://localhost:777"+"/email="+token
+var httpsWebSocketurl ='wss://www.blackboxo.top/wss'+"/email="+token
 var heartCheck = {
     timeout: 6000,//60ms
     timeoutObj: null,
@@ -126,7 +137,10 @@ var heartCheck = {
 
 
 
-function connect(url) {
+function connect(url,switchofws) {
+    if (!switchofws){
+        return
+    }
   var ws = new WebSocket(url);
   
  //   ws.binaryType = 'arraybuffer';
@@ -161,10 +175,15 @@ function connect(url) {
   
   //超市重新链接
   ws.onclose = function(e) {
+    // var tempurl = url + "/email="+token
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
     // connect('ws://localhost:777');
-    connect(url);
+    // connect(url);
+    
+    console.log(url)
+    // console.log(tempurl)
+    connect(url,WebSocketswitch)
     // connect('ws://localhost:777');
     }, 1000);
   };
@@ -178,7 +197,10 @@ function connect(url) {
 
 //connect(localhostWebSocketurl)
  //connect('ws://localhost:777')
-connect(httpsWebSocketurl)
+// connect(httpsWebSocketurl)
+connect(localhostWebSocketurl,WebSocketswitch)
+
+
 
 
 
@@ -226,8 +248,10 @@ var resize = function() {
       myChart.resize({
         // width: window.innerWidth ,
         // height: window.innerHeight
-        width: "700px" ,
-        height: "600px"
+        // width: "700px" ,
+        // height: "600px"
+        width: $(window).width(),
+        height: $(window).height()
       });
     };
 

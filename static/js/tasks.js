@@ -133,7 +133,7 @@ function _goal(){
         success: function (data) {
             console.log("输出创建的goals")
             console.log(data)
-            rebalance()
+            // rebalance()
         },
         failure: function (errMsg) {
           alert(errMsg);
@@ -825,7 +825,7 @@ $(document).on("click",".todaytree_add_task2tomorrow_button",function(){
                   task_li_div.outerHTML = ""
                 //   geteverydaytask()
                 show_today_or_tomorrow_task()
-                rebalance()
+                // rebalance()
                 //   get_all_unfinished_tasks_list()
                   
                 },
@@ -868,7 +868,7 @@ $(document).on("click",".todaytree_move_task2someday_button",function(){
             //   geteverydaytask()
             show_today_or_tomorrow_task()
               get_all_unfinished_tasks_list()
-              rebalance()
+            //   rebalance()
               
             },
             failure: function (errMsg) {
@@ -991,7 +991,7 @@ $(document).on("click",".add_task2today_button",function(){
               // alert(data); 
               task_li_div.outerHTML = ""
               show_today_tree()
-              rebalance()
+            //   rebalance()
             },
             failure: function (errMsg) {
               console.log("this is erro")
@@ -1049,7 +1049,7 @@ $(document).on("click",".finish_goal_class",function(){
               console.log(data)
               // alert(data); 
               this_goal_div.outerHTML = ""
-              rebalance()
+            //   rebalance()
             },
             failure: function (errMsg) {
               console.log("this is erro")
@@ -1092,7 +1092,7 @@ $(document).on("click",".giveup_goal_class",function(){
           console.log(data)
           // alert(data); 
           this_goal_div.outerHTML = ""
-          rebalance()
+        //   rebalance()
         },
         failure: function (errMsg) {
           console.log("this is erro")
@@ -1126,7 +1126,7 @@ $(document).on("click",".finish_project_class",function(){
           console.log(data)
           // alert(data); 
           this_project_div.outerHTML = ""
-          rebalance()
+        //   rebalance()
         },
         failure: function (errMsg) {
           console.log("this is erro")
@@ -1382,6 +1382,7 @@ myChart.setOption(option = {
 
 // ---------------------------------------------------
 // ----------------------------------------------------
+var WebSocketswitch = false
 var token = getCookieValue("email")
 var  WebSocketurl = 'ws://47.100.100.141:777'
 var localhostWebSocketurl = "ws://localhost:777"
@@ -1415,7 +1416,10 @@ var heartCheck = {
 
 
 
-function connect(url) {
+function connect(url,switchofws) {
+    if (!switchofws){
+        return
+    }
   var ws = new WebSocket(url);
   
  //   ws.binaryType = 'arraybuffer';
@@ -1453,7 +1457,8 @@ function connect(url) {
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
     // connect('ws://localhost:777');
-    connect(url);
+    // connect(url);
+    connect(url+"/email="+token,WebSocketswitch)
     // connect('ws://localhost:777');
     }, 1000);
   };
@@ -1468,7 +1473,7 @@ function connect(url) {
 //connect(localhostWebSocketurl)
  //connect('ws://localhost:777')
 // connect(httpsWebSocketurl)
-connect(localhostWebSocketurl+"/email="+token)
+connect(localhostWebSocketurl+"/email="+token,WebSocketswitch)
 
 
 

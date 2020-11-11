@@ -14,54 +14,55 @@
 }
  
 var allcombined_factors_hashs
+var tagscovert = {
+    "importanttag": "重要的",
+    'feartag': "害怕的",
+    'principletag': "原则",
+    'atomtag': "原子",
+    'dfstag': "需要深度搜索",
+    'hardtag': "困难的",
+    'easytag': "容易的",
+    'urgenttag': "急迫的",
+    'challengetag': "挑战的",
+    'uncomfortabletag': "不舒服的",
+    'troublesometag': "麻烦事",
+    'keyproblemtag': "关键问题",
+    'tenminutestasktag': "10分钟",
+    'thirtyminutestasktag': "30分钟",
+    'threeminutestasktag': "3分钟",
+  }
+  
+  
+  var reviewalgo_covert = {
+        'attackactively':"主动进攻",
+        'makeuseofthings':"利用学习到的东西",
+        'depthfirstsearch':"深度优先搜索",
+        'markataskimmediately':"立即标记任务",
+        'alwaysprofit':"总是保持进步",
+        'brainuse':"动脑筋",
+        'useprinciple':"使用原则",
+        'patience':"有耐心",
+        'solveakeyproblem':"解决关键问题",
+        'learnnewthings':"学习到新内容",
+        'battlewithlowerbrain':"战胜低级情绪",
+        'difficultthings':"完成困难事情",
+        'acceptfactandseektruth':"接受事实，寻求真相",
+        'dealwithahardtask':"处理困难任务",
+        'threeminutes':"3分钟原则",
+        'serviceforgoal':"为目标服务",
+        'buildframeandprinciple':"建立框架原则",
+        'atomadifficulttask':"原子化拆分任务",
+        'noflinch':"不退缩",
+        'learntechuse':"学习技术",
+        'doanimportantthingearly':"提前完成一件重要的事",
+        'acceptpain':"接受痛苦",
+        'conquerthefear':"战胜恐惧"
+  }
+
 
 function loadbalanceui(){
     // var grid_place = grid_place_algo(need_to_created_factors.length)
   
-    var tagscovert = {
-      "importanttag": "重要的",
-      'feartag': "害怕的",
-      'principletag': "原则",
-      'atomtag': "原子",
-      'dfstag': "需要深度搜索",
-      'hardtag': "困难的",
-      'easytag': "容易的",
-      'urgenttag': "急迫的",
-      'challengetag': "挑战的",
-      'uncomfortabletag': "不舒服的",
-      'troublesometag': "麻烦事",
-      'keyproblemtag': "关键问题",
-      'tenminutestasktag': "10分钟",
-      'thirtyminutestasktag': "30分钟",
-      'threeminutestasktag': "3分钟",
-    }
-    
-    
-    var reviewalgo_covert = {
-          'attackactively':"主动进攻",
-          'makeuseofthings':"利用学习到的东西",
-          'depthfirstsearch':"深度优先搜索",
-          'markataskimmediately':"立即标记任务",
-          'alwaysprofit':"总是保持进步",
-          'brainuse':"动脑筋",
-          'useprinciple':"使用原则",
-          'patience':"有耐心",
-          'solveakeyproblem':"解决关键问题",
-          'learnnewthings':"学习到新内容",
-          'battlewithlowerbrain':"战胜低级情绪",
-          'difficultthings':"完成困难事情",
-          'acceptfactandseektruth':"接受事实，寻求真相",
-          'dealwithahardtask':"处理困难任务",
-          'threeminutes':"3分钟原则",
-          'serviceforgoal':"为目标服务",
-          'buildframeandprinciple':"建立框架原则",
-          'atomadifficulttask':"原子化拆分任务",
-          'noflinch':"不退缩",
-          'learntechuse':"学习技术",
-          'doanimportantthingearly':"提前完成一件重要的事",
-          'acceptpain':"接受痛苦",
-          'conquerthefear':"战胜恐惧"
-    }
 
       // 这一段写入到请求回调当中
       var balgo = document.getElementById('balgo')
@@ -113,7 +114,14 @@ function loadbalanceui(){
       console.log(all_grids_lenth)
       console.log(combined_factors_names)
       console.log(combined_factors_hashs)
-      append2balance(balgo,combined_factors_hashs)
+      goal_len = allgoals_names.length
+      review_len =  reviewalgo_names.length
+      tag_len =  tasktags_names.length
+      factorsarray =  [goal_len,goal_len+review_len,tag_len+goal_len+review_len]
+    //   append2balance(balgo,allgoals_names_hash,"goal_balgo")
+    //   append2balance(balgo,reviewalgo_names_hash,"review_balgo")
+    //   append2balance(balgo,tasktags_names_hash,"tag_balgo")
+      append2balance(balgo,combined_factors_hashs,factorsarray)
     })
 
 
@@ -133,13 +141,25 @@ function loadbalanceui(){
 
   }  
 
-  function append2balance(node_be_appended,need_to_created_factors){
+  function append2balance(node_be_appended,need_to_created_factors,factorsarray){
     node_be_appended.innerHTML = "";
     for (var i = 0; i < need_to_created_factors.length; i++){
       var item2 = document.createElement("div");
-      item2.setAttribute("class",`item item${i}`)
-      item2.setAttribute("id",`${need_to_created_factors[i]}`)
+      if (i<factorsarray[0]){
+        item2.setAttribute("class",`item goal_balgo item${i}`)
+        item2.setAttribute("id",`${need_to_created_factors[i]}`)
+      }
+      if (i>=factorsarray[0]&&i<factorsarray[1]){
+        item2.setAttribute("class",`item review_balgo item${i}`)
+        item2.setAttribute("id",`${need_to_created_factors[i]}`)
+      }
+      if (i>=factorsarray[1]&&i<factorsarray[2]){
+        item2.setAttribute("class",`item tag_balgo item${i}`)
+        item2.setAttribute("id",`${need_to_created_factors[i]}`)
+      }
+     
       // item2.innerHTML = "1"
+    //   console.log(typeoffactors)
       node_be_appended.appendChild(item2)
       // console.log(`这是${i}`)
     } 
@@ -172,55 +192,8 @@ function loadbalanceui(){
 
   function rebalance(marked_colors){
     // var grid_place = grid_place_algo(need_to_created_factors.length)
-  
-    var tagscovert = {
-      "importanttag": "重要的",
-      'feartag': "害怕的",
-      'principletag': "原则",
-      'atomtag': "原子",
-      'dfstag': "需要深度搜索",
-      'hardtag': "困难的",
-      'easytag': "容易的",
-      'urgenttag': "急迫的",
-      'challengetag': "挑战的",
-      'uncomfortabletag': "不舒服的",
-      'troublesometag': "麻烦事",
-      'keyproblemtag': "关键问题",
-      'tenminutestasktag': "10分钟",
-      'thirtyminutestasktag': "30分钟",
-      'threeminutestasktag': "3分钟",
-    }
-    
-    
-    var reviewalgo_covert = {
-          'attackactively':"主动进攻",
-          'makeuseofthings':"利用学习到的东西",
-          'depthfirstsearch':"深度优先搜索",
-          'markataskimmediately':"立即标记任务",
-          'alwaysprofit':"总是保持进步",
-          'brainuse':"动脑筋",
-          'useprinciple':"使用原则",
-          'patience':"有耐心",
-          'solveakeyproblem':"解决关键问题",
-          'learnnewthings':"学习到新内容",
-          'battlewithlowerbrain':"战胜低级情绪",
-          'difficultthings':"完成困难事情",
-          'acceptfactandseektruth':"接受事实，寻求真相",
-          'dealwithahardtask':"处理困难任务",
-          'threeminutes':"3分钟原则",
-          'serviceforgoal':"为目标服务",
-          'buildframeandprinciple':"建立框架原则",
-          'atomadifficulttask':"原子化拆分任务",
-          'noflinch':"不退缩",
-          'learntechuse':"学习技术",
-          'doanimportantthingearly':"提前完成一件重要的事",
-          'acceptpain':"接受痛苦",
-          'conquerthefear':"战胜恐惧"
-    }
-
     // 这一段写入到请求回调当中
-    var balgo = document.getElementById('balgo')
-
+    // var balgo = document.getElementById('balgo')
     $.get("/v1/rebalance", function(data, status){
       var marked_goals = data.allmarked.goal
       var marked_review = data.allmarked.review

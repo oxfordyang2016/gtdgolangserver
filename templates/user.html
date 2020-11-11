@@ -86,7 +86,8 @@ $(document).on("click","#login_button",function(){
       dataType: "json",
       success: function (data) { 
       alert("登录账户成功")
-      window.location.href= "http://127.0.0.1:8081/v1/taskmanager"
+      var origin  = window.location.origin
+      window.location.href= origin + "/v1/taskmanager"
       console.log(data)
       // window.location.href("http://127.0.0.1:8081/v1/inbox")
       },
