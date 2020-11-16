@@ -290,11 +290,19 @@ func Goalsystem(c *gin.Context) {
 		email = emailcookie.Value
 	}
 
+	goaltype := c.Query("goaltype")
+
+
 	//var goals []Tasks
 	var goals []Goalfordbs
 	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
 	//db.Where("email =  ?", email).Not("goalstatus", []string{"finished"}).Order("id").Find(&goals)
-	db.Where("email =  ?", email).Order("id").Find(&goals)
+	if goaltype =="unfinished"{
+		db.Where("email =  ?", email).Where("goalstatus=?","unfinished").Order("id").Find(&goals)
+	}else{
+		db.Where("email =  ?", email).Order("id").Find(&goals)
+	}
+	
 	fmt.Println(goals)
 	c.JSON(200, gin.H{
 		"goals": goals,

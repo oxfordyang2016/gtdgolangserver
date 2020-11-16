@@ -67,7 +67,7 @@ function loadbalanceui(){
       // 这一段写入到请求回调当中
       var balgo = document.getElementById('balgo')
 
-    $.get("/v1/goaljson", function(data, status){
+    $.get("/v1/goaljson?goaltype=unfinished", function(data, status){
       var allgoals = data.goals
       console.log(data.goals)
       // 提取任务tag的数据
