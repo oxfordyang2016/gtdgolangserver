@@ -53,6 +53,7 @@
 <!-- <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png"> -->
 <!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script> -->
 <script src="/v1/echart.js"></script>
+<script type="text/javascript" src="/v1/balancealgo.js"></script> 
 
 
 <!-- 下面是日历的脚本 -->
@@ -292,6 +293,54 @@
     -o-transform: translateY(-50%);
     font-size: 28px;
   }
+
+  .balancealgo {
+  display: grid;
+  /* grid-template-columns: 20px 20px 20px; */
+  /* grid-template-rows: 20px 20px 20px; */
+  grid-gap: 2rem;
+}
+
+
+/* .item { */
+  /* background-color:red; */
+  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  /* color: yellow; */
+  /* border-radius: 10px; */
+  /* border: 6px solid #171717; */
+/* } */
+
+.goal_balgo {
+  background-color:red;
+  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  /* color: yellow; */
+  border-radius: 10px;
+  /* border: 6px solid #171717; */
+}
+
+.review_balgo {
+  background-color:black;
+  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  /* color: yellow; */
+  border-radius: 10px;
+  /* border: 6px solid #171717; */
+}
+
+.tag_balgo {
+  background-color:blue;
+  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  /* color: yellow; */
+  border-radius: 10px;
+  /* border: 6px solid #171717; */
+}
+
+
+
+
 </style>
 
 
@@ -325,14 +374,18 @@
       <button id="tomorrow_tasks_button" class="date_button">Tomorrow</button>
       <div id="task_new_shown">
         <!-- <h1>Today tasks</h1> -->
+       
+        <p class="p_overdue_today">overdue</p>
         <ul id="overdue">
-          <p>overdue</p>
+        </ul>
+        <p class="p_overdue_today">today</p>
+        <ul id="today_tree">
+        </ul>
+        <ul id="tomorrow_tree">
 
         </ul>
-        <p>today</p>
-        <ul id="today_tree">
-          <!-- I am here -->
-        </ul>
+      
+        
       </div>
   
       <li id="add_task_button_area">
@@ -340,6 +393,9 @@
               <input id = "addtask_button" class="add_grandtask_button" type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12">
         </div>
       </li>
+    </div>
+    <div class="balancealgo" id ='balgo'>
+    
     </div>
   </br>
 
@@ -408,7 +464,7 @@
 <!-- 下面是脚本文件，最后要做分离的 -->
 
 <script type="text/javascript">
-
+loadbalanceui()
 
 // 这里写点击左边按键切换显示内容的js
 // $(function(){
@@ -791,7 +847,8 @@ function use_chosen_style(){
           success: function (data) {       
             // alert(data); 
             // alert("我正在评价函数")
-            geteverydaytask(API_scr);
+            // geteverydaytask(API_scr);
+            show_today_or_tomorrow_task()
             
             console.log(data)
             reviewalgo = {
@@ -849,215 +906,74 @@ window.onload = function() {
 var API_scr = "/v1/todayjson"
 var day_word = tomorrow_word
 var today_or_tomorrow = 1
+var task_tree_position = "today_tree"
+
 function set_todayandtomorrow_style_defult(){
   $("#today_tasks_button").css("font-size","1.6em")
   $("#today_tasks_button").css("color","red")
     $("#tomorrow_tasks_button").css("font-size","1.2em")
     $("#tomorrow_tasks_button").css("color","black")
 }
+
 function set_todayandtomorrow_style_changed(){
   $("#tomorrow_tasks_button").css("font-size","1.6em")
   $("#tomorrow_tasks_button").css("color","red")
     $("#today_tasks_button").css("font-size","1.2em")
     $("#today_tasks_button").css("color","black")
-
 }
 set_todayandtomorrow_style_defult()
+
 // 显示左边今天的任务树
 function show_today_tree(){
     today_or_tomorrow = 1
-    API_scr = "/v1/todayjson"
     day_word = tomorrow_word
-    geteverydaytask(API_scr)
+    get_today_task_tree("/v1/todayjson","today_tree")
+    get_overdue_task_tree("/v1/yesterdayjson","overdue")
     set_todayandtomorrow_style_defult()
 }
 
 function show_tomorrow_tree(){
     today_or_tomorrow = 2
     API_scr = "/v1/tomorrowjson"
+    task_tree_position = "tomorrow_tree"
     day_word = today_word
-    geteverydaytask(API_scr)
+    get_tomorrow_task_tree(API_scr,task_tree_position)
     set_todayandtomorrow_style_changed()
 }
 
-function show_overdue_tree(){
-  API_scr = "/v1/yesterdayjson"
-    day_word = today_word
-    geteverydaytask(API_scr)
+// 先判断today或tomorrow再选择性展示
+function show_today_or_tomorrow_task(){
+  rebalance(["white","white","white"])
+  loadlink()
+  if (today_or_tomorrow == 1) {
+    show_today_tree()
+  }
+  if (today_or_tomorrow == 2) {
+    show_tomorrow_tree()
+  }
 }
 
+// 点击上方的today和tomorrow按键，选择显示不同的任务
 $(document).on("click",".date_button",function(){
   var date = $(this).attr("id")
   // alert(date)
   if (date == "today_tasks_button" ) {
    show_today_tree()
-  //  show_overdue_tree()
-    
+   
   }
   if (date == "tomorrow_tasks_button") {
     show_tomorrow_tree()
   }
 })
 
-
-// var  parents = []
-// 生成今日任务的函数
-function geteverydaytask(API_scr){
-
- $.get(API_scr, function(data, status){
-    //alert("Data: " + data + "\nStatus: " + status);
-    console.log(data.task);
-    onedit = false 
-    
-    $('#today_tree').replaceWith($('#today_tree').clone());
-    var div = document.getElementById('today_tree');
-    div.innerHTML = ""
-    
-    //origin event   was not  delletd
-    var  alltask=''
-    // data.task是从服务器传回的所有任务
-    var tasks = data.task
-    sendback_tasks = data.task
-    // div.innerHTML += '<li>this is  a task<li>';
-      // var i = 0
-      var head = '<h1>Today tasks</h1><ul class="tree">'
-       var  tail = '</ul>'
-       var  alltask = ''
-       console.log("我正在输出data.task")
-       var todayjson = data.task
-       var todaytest =  data.task
-      console.log("我正在打印todayjson")
-      console.log(todayjson)
-
-      var taskids = []
-      var  alltasks = {}
-      // 把所有的今日任务的ID提取出来
-      for(var i=0;i<todayjson.length;i++){
-      taskids.push(todayjson[i].ID)
-      alltasks[todayjson[i].ID] = todayjson[i]
-      }
-
-      var id_values_task = {}
-      for (let i = 0; i < taskids.length; i++) {
-       id_values_task[taskids[i]] = todayjson[i]
-      }
-      console.log("===============key values tasks===================")
-      console.log(id_values_task)
-      
-      // console.log(taskids)
-       var  tasktree ={"first":[],"second":[],"three":[],"four":[],"five":[]}
-      //  var  sontree = {}
-       
+show_today_tree()
 
 
-       // 生成儿子和孙子
-      for (let i = 0; i< todayjson.length; i++) {
-      sontree[todayjson[i].ID] =[]
-      }
-     
-      for (let i = 0; i< todayjson.length; i++) {
-        var parent_id_i = todayjson[i].parentid;
-        for (let j = 0; j < todayjson.length; j++) {
-          var id_j = todayjson[j].ID;
+// 下在函数全部用来写生成左边的tree
 
-          if ( parent_id_i == id_j ) {
-            sontree[todayjson[i].parentid].push(todayjson[i])
-        }
-        else{
-          var unspedc = "unspecified"
-          // sontree[todayjson[i].parentid].push(unspedc)
-        }
-        }
-      }
-      // 生成爷爷们
-      var parents = todayjson;
-      var need_delete_task = [];
-      for (let i = 0; i < todayjson.length; i++) {
-        
-        var single_parenttask_id = todayjson[i].parentid
-
-        // console.log(single_parenttask)
-        for (let j = 0; j < todayjson.length; j++){
-          var other_task_parent_id = todayjson[j].ID
-        // single_parenttask_id == "unspecified"
-          if ( single_parenttask_id == other_task_parent_id  ) {
-            // console.log("这个任务需要删除")
-            // 把需要删除的子任务及孙子任务放到一个Array里
-            need_delete_task.push(todayjson[i])
-            // console.log(need_delete_task)
-          // parents.push(todayjson[i])
-          // tasktree.first.push(todayjson[i])
-          // 用splice会改变位置，所以不能
-          // parents.splice(i,1)
-        }
-        } 
-      }
-      // 使用filter删除在所有任务里的重复项，得到的就是所有的爷爷节点
-      var parents = parents.filter(function(v){ return need_delete_task.indexOf(v) == -1 })
-      console.log(parents)
-      // for (let i = 0; i < need_delete_task.length; i++) {
-      //   var index = parents.indexOf(need_delete_task[i])
-      //   if (index > -1) {
-      //       parents.splice(index, 1);
-      //   }
-      // }
-
-      // let parents = [...new Set(parents)];
-
-      // 生成todaytree的div
-
-/*
-这里是python的源代码
-In [84]: def showtree(tasks): 
-    ...:     if len(tasks)==0: 
-    ...:         #print("this is the last depth") 
-    ...:         return 
-    ...:     else: 
-    ...:         for k in tasks: 
-    ...:             #print(k) 
-    ...:             #print(k["task"]) 
-    ...:             if len(sons[str(k["ID"])])>0: 
-    ...:                 showtree(sons[str(k["ID"])]) 
-    ...:             else: 
-    ...:                 print(alltasks[str(k["ID"])]['task']) 
-    ...:                 return 
-*/
-
-var unique_parents = [];
-      $.each(parents, function(i, el){
-        if($.inArray(el, unique_parents) === -1) unique_parents.push(el);
-      });
-
-parents = unique_parents;
-
-// get parentid
-    parentids = []
-   for(var i =0;i<parents.length;i++){
-     parentids.push(String(parents[i].ID))
-   }
-     console.log("这是所有tasks从服务器载入的所有tasks包含了id")
-      console.log(alltasks)
-     console.log("这是sons")
-      console.log(sontree)
-      Object.keys(sontree).forEach(key=>{
-     // console.log(`${key} : ${obj[key]}`);
-     sontree[key].sort(function(a, b){
-           // console.log("检测随最先能够执行")
-           if  (b.ID>a.ID) return -1;
-       });
-   });
-      
-      console.log("这是parents")
-     console.log(parents)
-     parents.sort(function(a, b){
-       console.log("检测随最先能够执行")
-       if  (b.ID>a.ID) return -1;
-   });
-     console.log(parents)
-     console.log("这是parents id 的数组")
-     console.log(parentids)
-
- function getdepthoftask(taskid){
+var  alltasks = {}
+// 拿到task的深度,只是把它的深度得到
+function getdepthoftask(taskid){
      var parentid  = String(taskid)
        
        var depth = 1
@@ -1080,10 +996,12 @@ parents = unique_parents;
    return depth
  }
 
-     function  showtree(tasks){
+//显示儿子task的tree
+ function  showtree(tasks,task_tree_position){
        if (tasks.length == 0){
          // console.log("已经没有孩子")
          return
+      //下面是生成成为任务的函数 
        }else{
          for(var k=0;k<tasks.length;k++){
 
@@ -1095,61 +1013,29 @@ parents = unique_parents;
            //检查当前任务的,如果有孩子就调用showtree
            if(sontree[thistaskid].length>0){
              // console.log(getdepthoftask(thistaskid))
-
              var depth = getdepthoftask(thistaskid)
-
-             add_task_div2tree(tasks[k],depth)
-
-             console.log("   ".repeat(depth)+ `${depth} ` +alltasks[String(thistaskid)]['task'])
-             showtree(sontree[String(thistaskid)])
-           }else{
-             // console.log("------")
-             // console.log(thistaskid)
-             // console.log(sontree[thistaskid].length)
-           //  console.log(getdepthoftask(thistaskid))
+             add_task_div2tree(tasks[k],depth,task_tree_position)
+             showtree(sontree[String(thistaskid)],task_tree_position)
+           }
+           else{
+              // console.log("------")
+              // console.log(thistaskid)
+              // console.log(sontree[thistaskid].length)
+              //  console.log(getdepthoftask(thistaskid))
             var depth = getdepthoftask(thistaskid)
-            add_task_div2tree(tasks[k],depth)
-            console.log("   ".repeat(depth)+ `${depth} ` +"[]"+alltasks[String(thistaskid)]['task'])
+            add_task_div2tree(tasks[k],depth,task_tree_position)
            //  这里有可能return太早如果有两个并列级别的bug
             if (k==tasks.length){
              return 
             }
-            
            }
-           }
+          }
          }
        }
 
-/*
-
-     for k in parents: 
-         id  = k["ID"] 
-         print(alltasks[str(id)]["task"]) 
-         #print(sons[str(id)]) 
-         showtree(sons[str(id)]) 
-
-*/
-
-    //下面是测试部分
-     // for(var k=0;k<parents.length;k++){
-     //   var parentid = parents[k].ID
-     //   console.log(parents[k].task)
-     //   var childsofparent = sontree[parents[k].ID]
-     //   if(childsofparent.length>0){
-     
-     //     for(var i=0;i<childsofparent.length;i++){
-     //       console.log(childsofparent[i].task)
-     //     }
-     //   }
-
-     // }
-/*
-     <div>
-     <span class="task_list_item_date_button">这里是日期</span>
-     </div>
-*/
-
- function add_task_div2tree(add_task,task_depth){
+ //把任务div添加到tree中
+// 输入的三个参数是这个任务、任务深度、要把这个任务插入的位置（today、tomorrow、overdue）
+function add_task_div2tree(add_task,task_depth,task_tree_position){
    var task_content = add_task.task
    var task_id = add_task.ID
    var task_goal = add_task.goal
@@ -1177,7 +1063,7 @@ parents = unique_parents;
          </div>
        </div>
      </li>`
-     var find_task_div_area = document.getElementById("today_tree")
+     var find_task_div_area = document.getElementById(task_tree_position)
      find_task_div_area.innerHTML += single_task_div
      var margin_left_size = (task_depth-1)*1.75;
      var styles = 
@@ -1190,44 +1076,532 @@ parents = unique_parents;
       document.head.appendChild(styleSheet)
 }
 
-
-// 下面的循环是找到父节点和子节点对其进行排列
+// -----------------------------------------------------
+// -----------------------------------------------------
+// var  parents = []
+// 生成今日任务的函数
+function get_today_task_tree(API_scr,task_tree_position){
+  // 
+ $.get(API_scr, function(data, status){
+    //alert("Data: " + data + "\nStatus: " + status);
+    console.log(data.task);
+    onedit = false 
     
+    $('#today_tree').replaceWith($('#today_tree').clone());
+    
+    var div = document.getElementById(task_tree_position);
+    div.innerHTML = ""
+
+    var div2 = document.getElementById("tomorrow_tree")
+    div2.innerHTML = ""
+    
+    //origin event   was not  delletd
+    var  alltask=''
+
+    // data.task是从服务器传回的所有任务
+    var tasks = data.task
+    sendback_tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      // var i = 0
+    var head = '<h1>Today tasks</h1><ul class="tree">'
+    var  tail = '</ul>'
+    var  alltask = ''
+      console.log("我正在输出data.task")
+       var todayjson = data.task
+       var todaytest =  data.task
+      console.log("我正在打印todayjson")
+      console.log(todayjson)
+
+      var taskids = []
+    
+      // 把所有的今日任务的ID提取出来
+      for(var i=0;i<todayjson.length;i++){
+      taskids.push(todayjson[i].ID);
+      alltasks[todayjson[i].ID] = todayjson[i]
+      }
+      
+      console.log("=====我正在打印Alltasks======");
+      console.log(alltasks);
+      var id_values_task = {}
+      for (let i = 0; i < taskids.length; i++) {
+       id_values_task[taskids[i]] = todayjson[i]
+      }
+
+      console.log("===============key values tasks===================")
+      console.log(id_values_task)
+      
+      // console.log(taskids)
+       var  tasktree ={"first":[],"second":[],"three":[],"four":[],"five":[]}
+      //  var  sontree = {}
+
+       // 生成儿子和孙子
+      for (let i = 0; i< todayjson.length; i++) {
+      sontree[todayjson[i].ID] =[]
+      }
+     
+      for (let i = 0; i< todayjson.length; i++) {
+        var parent_id_i = todayjson[i].parentid;
+        for (let j = 0; j < todayjson.length; j++) {
+          var id_j = todayjson[j].ID;
+
+          if ( parent_id_i == id_j ) {
+            sontree[todayjson[i].parentid].push(todayjson[i])
+        }
+        else{
+          var unspedc = "unspecified"
+          // sontree[todayjson[i].parentid].push(unspedc)
+        }
+        }
+      }
+
+      // 生成爷爷们
+      var parents = todayjson;
+      var need_delete_task = [];
+      for (let i = 0; i < todayjson.length; i++) {
+        var single_parenttask_id = todayjson[i].parentid
+        // console.log(single_parenttask)
+        for (let j = 0; j < todayjson.length; j++){
+          var other_task_parent_id = todayjson[j].ID
+        // single_parenttask_id == "unspecified"
+          if ( single_parenttask_id == other_task_parent_id  ) {
+            // console.log("这个任务需要删除")
+            // 把需要删除的子任务及孙子任务放到一个Array里
+            need_delete_task.push(todayjson[i])
+            // console.log(need_delete_task)
+          // parents.push(todayjson[i])
+          // tasktree.first.push(todayjson[i])
+          // 用splice会改变位置，所以不能
+          // parents.splice(i,1)
+        }
+        } 
+      }
+
+      // 使用filter删除在所有任务里的重复项，得到的就是所有的爷爷节点
+      var parents = parents.filter(function(v){ return need_delete_task.indexOf(v) == -1 })
+      console.log(parents)
+      // for (let i = 0; i < need_delete_task.length; i++) {
+      //   var index = parents.indexOf(need_delete_task[i])
+      //   if (index > -1) {
+      //       parents.splice(index, 1);
+      //   }
+      // }
+      // let parents = [...new Set(parents)];
+
+
+
+  var unique_parents = [];
+        $.each(parents, function(i, el){
+          if($.inArray(el, unique_parents) === -1) unique_parents.push(el);
+        });
+
+  parents = unique_parents;
+
+  // get parentid
+    parentids = []
+   for(var i =0;i<parents.length;i++){
+     parentids.push(String(parents[i].ID))
+   }
+     console.log("这是所有tasks从服务器载入的所有tasks包含了id")
+      console.log(alltasks)
+     console.log("这是sons")
+      console.log(sontree)
+      Object.keys(sontree).forEach(key=>{
+     // console.log(`${key} : ${obj[key]}`);
+     sontree[key].sort(function(a, b){
+           // console.log("检测随最先能够执行")
+           if  (b.ID>a.ID) return -1;
+       });
+   });
+
+      console.log("这是parents")
+     console.log(parents)
+     parents.sort(function(a, b){
+       console.log("检测随最先能够执行")
+       if  (b.ID>a.ID) return -1;
+   });
+     console.log(parents)
+     console.log("这是parents id 的数组")
+     console.log(parentids)
+
+// 下面的循环是找到父节点和子节点对其进行排列,展示在左边
      for(var k=0;k<parents.length;k++){
        console.log(parents)
        var parentid = parents[k].ID
        var depth = 1
        if(sontree[String(parentid)].length==0){
-         
-         add_task_div2tree(parents[k],depth)
+         add_task_div2tree(parents[k],depth,task_tree_position)
          console.log("[]"+parents[k].task)
-         
        }else{
-         add_task_div2tree(parents[k],depth)
+         add_task_div2tree(parents[k],depth,task_tree_position)
          console.log(parents[k].task)
        }
        
-       showtree(sontree[String(parentid)])
+       showtree(sontree[String(parentid)],task_tree_position)
      }
-      // goal = "${}" project = "${}"
-      //  + "</li>"
 
-  make_parent_task_checkbox_hidden()
+  make_parent_task_checkbox_hidden();
   // console.log("print tree")
   // console.log(tree_div)
   parentid = 'unspecified'
   selected_goal = "no goal"
   selected_project = "inbox"
-  }
-  );
+  alltasks = {}
+  });
 }
 
-geteverydaytask(API_scr)
+// -----------------------------------------------
+// -----------------------------------------------
+
+// 生成overdue任务的函数
+function get_overdue_task_tree(API_scr,task_tree_position){
+  // 
+ $.get(API_scr, function(data, status){
+    //alert("Data: " + data + "\nStatus: " + status);
+    console.log(data.task);
+    onedit = false 
+    // var overdue_tag = document.getElementsByClassName("p_overdue_today")
+    // overdue_tag.style.display = "show"
+    if (Object.keys(data.task).length == 0 ) {
+      $(".p_overdue_today").hide()
+      return
+    }
+    
+    $(".p_overdue_today").show()
+    
+    $('#overdue').replaceWith($('#overdue').clone());
+    var div = document.getElementById("overdue");
+    div.innerHTML = ""
+    
+    var div2 = document.getElementById("tomorrow_tree")
+    div2.innerHTML = ""
+
+    //origin event   was not  delletd
+    var  alltask=''
+    // data.task是从服务器传回的所有任务
+    var tasks = data.task
+    sendback_tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      // var i = 0
+    var head = '<h1>Today tasks</h1><ul class="tree">'
+    var  tail = '</ul>'
+    var  alltask = ''
+      console.log("我正在输出data.task")
+       var todayjson = data.task
+       var todaytest =  data.task
+      console.log("我正在打印todayjson")
+      console.log(todayjson)
+
+      var taskids = []
+    //  var alltasks = {}
+      // 把所有的今日任务的ID提取出来
+      for(var i=0;i<todayjson.length;i++){
+      taskids.push(todayjson[i].ID);
+      alltasks[todayjson[i].ID] = todayjson[i]
+      }
+      
+      console.log("=====我正在打印Alltasks======");
+      console.log(alltasks);
+      var id_values_task = {}
+      for (let i = 0; i < taskids.length; i++) {
+       id_values_task[taskids[i]] = todayjson[i]
+      }
+
+      console.log("===============key values tasks===================")
+      console.log(id_values_task)
+      
+      
+       // 生成儿子和孙子
+      for (let i = 0; i< todayjson.length; i++) {
+      sontree[todayjson[i].ID] =[]
+      }
+     
+      for (let i = 0; i< todayjson.length; i++) {
+        var parent_id_i = todayjson[i].parentid;
+        for (let j = 0; j < todayjson.length; j++) {
+          var id_j = todayjson[j].ID;
+
+          if ( parent_id_i == id_j ) {
+            sontree[todayjson[i].parentid].push(todayjson[i])
+        }
+        else{
+          var unspedc = "unspecified"
+          // sontree[todayjson[i].parentid].push(unspedc)
+        }
+        }
+      }
+
+      // 生成爷爷们
+      var parents = todayjson;
+      var need_delete_task = [];
+      for (let i = 0; i < todayjson.length; i++) {
+        var single_parenttask_id = todayjson[i].parentid
+        // console.log(single_parenttask)
+        for (let j = 0; j < todayjson.length; j++){
+          var other_task_parent_id = todayjson[j].ID
+        // single_parenttask_id == "unspecified"
+          if ( single_parenttask_id == other_task_parent_id  ) {
+            // console.log("这个任务需要删除")
+            // 把需要删除的子任务及孙子任务放到一个Array里
+            need_delete_task.push(todayjson[i])
+            // console.log(need_delete_task)
+          // parents.push(todayjson[i])
+          // tasktree.first.push(todayjson[i])
+          // 用splice会改变位置，所以不能
+          // parents.splice(i,1)
+        }
+        } 
+      }
+
+      // 使用filter删除在所有任务里的重复项，得到的就是所有的爷爷节点
+      var parents = parents.filter(function(v){ return need_delete_task.indexOf(v) == -1 })
+      console.log(parents)
+      // for (let i = 0; i < need_delete_task.length; i++) {
+      //   var index = parents.indexOf(need_delete_task[i])
+      //   if (index > -1) {
+      //       parents.splice(index, 1);
+      //   }
+      // }
+      // let parents = [...new Set(parents)];
 
 
 
+  var unique_parents = [];
+        $.each(parents, function(i, el){
+          if($.inArray(el, unique_parents) === -1) unique_parents.push(el);
+        });
 
-// 点击任务右边的[x]，完成放弃任务的事件
+  parents = unique_parents;
+
+  // get parentid
+    parentids = []
+   for(var i =0;i<parents.length;i++){
+     parentids.push(String(parents[i].ID))
+   }
+     console.log("这是所有tasks从服务器载入的所有tasks包含了id")
+      console.log(alltasks)
+     console.log("这是sons")
+      console.log(sontree)
+      Object.keys(sontree).forEach(key=>{
+     // console.log(`${key} : ${obj[key]}`);
+     sontree[key].sort(function(a, b){
+           // console.log("检测随最先能够执行")
+           if  (b.ID>a.ID) return -1;
+       });
+   });
+
+      console.log("这是parents")
+     console.log(parents)
+     parents.sort(function(a, b){
+       console.log("检测随最先能够执行")
+       if  (b.ID>a.ID) return -1;
+   });
+     console.log(parents)
+     console.log("这是parents id 的数组")
+     console.log(parentids)
+
+// 下面的循环是找到父节点和子节点对其进行排列,展示在左边
+     for(var k=0;k<parents.length;k++){
+       console.log(parents)
+       var parentid = parents[k].ID
+       var depth = 1
+       if(sontree[String(parentid)].length==0){
+         add_task_div2tree(parents[k],depth,task_tree_position)
+         console.log("[]"+parents[k].task)
+       }else{
+         add_task_div2tree(parents[k],depth,task_tree_position)
+         console.log(parents[k].task)
+       }
+       
+       showtree(sontree[String(parentid)],task_tree_position)
+     }
+
+  make_parent_task_checkbox_hidden();
+  // console.log("print tree")
+  // console.log(tree_div)
+  parentid = 'unspecified';
+  selected_goal = "no goal";
+  selected_project = "inbox";
+  alltasks = {};
+  });
+}
+// ------------------------------------------------------
+// ------------------------------------------------------
+// 生成tomorrow任务的函数
+function get_tomorrow_task_tree(API_scr,task_tree_position){
+  // 
+ $.get(API_scr, function(data, status){
+    //alert("Data: " + data + "\nStatus: " + status);
+    console.log(data.task);
+    onedit = false 
+    
+  // var overdue_tag = document.getElementsByClassName("p_overdue_today")
+  // overdue_tag.style.display = "none"
+
+  $(".p_overdue_today").hide()
+
+    $('#overdue').replaceWith($('#overdue').clone());
+    var div = document.getElementById("overdue");
+    div.innerHTML = ""
+
+    var div2 = document.getElementById("today_tree")
+     div2.innerHTML = ""
+
+     var div3 = document.getElementById("tomorrow_tree")
+     div3.innerHTML = ""
+    //origin event   was not  delletd
+    var  alltask=''
+    // data.task是从服务器传回的所有任务
+    var tasks = data.task
+    sendback_tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      // var i = 0
+    var head = '<h1>Today tasks</h1><ul class="tree">'
+    var  tail = '</ul>'
+    var  alltask = ''
+      console.log("我正在输出data.task")
+       var todayjson = data.task
+       var todaytest =  data.task
+      console.log("我正在打印todayjson")
+      console.log(todayjson)
+
+      var taskids = []
+    //  var alltasks = {}
+      // 把所有的今日任务的ID提取出来
+      for(var i=0;i<todayjson.length;i++){
+      taskids.push(todayjson[i].ID);
+      alltasks[todayjson[i].ID] = todayjson[i]
+      }
+      
+      console.log("=====我正在打印Alltasks======");
+      console.log(alltasks);
+      var id_values_task = {}
+      for (let i = 0; i < taskids.length; i++) {
+       id_values_task[taskids[i]] = todayjson[i]
+      }
+
+      console.log("===============key values tasks===================")
+      console.log(id_values_task)
+      
+      // console.log(taskids)
+       var  tasktree ={"first":[],"second":[],"three":[],"four":[],"five":[]}
+      //  var  sontree = {}
+
+       // 生成儿子和孙子
+      for (let i = 0; i< todayjson.length; i++) {
+      sontree[todayjson[i].ID] =[]
+      }
+     
+      for (let i = 0; i< todayjson.length; i++) {
+        var parent_id_i = todayjson[i].parentid;
+        for (let j = 0; j < todayjson.length; j++) {
+          var id_j = todayjson[j].ID;
+
+          if ( parent_id_i == id_j ) {
+            sontree[todayjson[i].parentid].push(todayjson[i])
+        }
+        else{
+          var unspedc = "unspecified"
+          // sontree[todayjson[i].parentid].push(unspedc)
+        }
+        }
+      }
+
+      // 生成爷爷们
+      var parents = todayjson;
+      var need_delete_task = [];
+      for (let i = 0; i < todayjson.length; i++) {
+        var single_parenttask_id = todayjson[i].parentid
+        // console.log(single_parenttask)
+        for (let j = 0; j < todayjson.length; j++){
+          var other_task_parent_id = todayjson[j].ID
+        // single_parenttask_id == "unspecified"
+          if ( single_parenttask_id == other_task_parent_id  ) {
+            // console.log("这个任务需要删除")
+            // 把需要删除的子任务及孙子任务放到一个Array里
+            need_delete_task.push(todayjson[i])
+            // console.log(need_delete_task)
+          // parents.push(todayjson[i])
+          // tasktree.first.push(todayjson[i])
+          // 用splice会改变位置，所以不能
+          // parents.splice(i,1)
+        }
+        } 
+      }
+
+      // 使用filter删除在所有任务里的重复项，得到的就是所有的爷爷节点
+      var parents = parents.filter(function(v){ return need_delete_task.indexOf(v) == -1 })
+      console.log(parents)
+      // for (let i = 0; i < need_delete_task.length; i++) {
+      //   var index = parents.indexOf(need_delete_task[i])
+      //   if (index > -1) {
+      //       parents.splice(index, 1);
+      //   }
+      // }
+      // let parents = [...new Set(parents)];
+
+
+
+  var unique_parents = [];
+        $.each(parents, function(i, el){
+          if($.inArray(el, unique_parents) === -1) unique_parents.push(el);
+        });
+
+  parents = unique_parents;
+
+  // get parentid
+    parentids = []
+   for(var i =0;i<parents.length;i++){
+     parentids.push(String(parents[i].ID))
+   }
+     console.log("这是所有tasks从服务器载入的所有tasks包含了id")
+      console.log(alltasks)
+     console.log("这是sons")
+      console.log(sontree)
+      Object.keys(sontree).forEach(key=>{
+     // console.log(`${key} : ${obj[key]}`);
+     sontree[key].sort(function(a, b){
+           // console.log("检测随最先能够执行")
+           if  (b.ID>a.ID) return -1;
+       });
+   });
+
+      console.log("这是parents")
+     console.log(parents)
+     parents.sort(function(a, b){
+       console.log("检测随最先能够执行")
+       if  (b.ID>a.ID) return -1;
+   });
+     console.log(parents)
+     console.log("这是parents id 的数组")
+     console.log(parentids)
+
+// 下面的循环是找到父节点和子节点对其进行排列,展示在左边
+     for(var k=0;k<parents.length;k++){
+       console.log(parents)
+       var parentid = parents[k].ID
+       var depth = 1
+       if(sontree[String(parentid)].length==0){
+         add_task_div2tree(parents[k],depth,task_tree_position)
+         console.log("[]"+parents[k].task)
+       }else{
+         add_task_div2tree(parents[k],depth,task_tree_position)
+         console.log(parents[k].task)
+       }
+       
+       showtree(sontree[String(parentid)],task_tree_position)
+     }
+
+  make_parent_task_checkbox_hidden();
+  // console.log("print tree")
+  // console.log(tree_div)
+  parentid = 'unspecified';
+  selected_goal = "no goal";
+  selected_project = "inbox";
+  alltasks = {};
+  });
+}
+
+// 点击弃，完成放弃任务的事件
 $(document).on("click",".giveup_button",function(){
 // console.log($(this).prev().attr("id"))
   //  alert($(this).parent().parent().attr("id"))
@@ -1263,7 +1637,8 @@ $(document).on("click",".giveup_button",function(){
             console.log("=======give up task successful=========")
             console.log(data)
             // alert(data); 
-            geteverydaytask(API_scr)
+            // geteverydaytask(API_scr)
+            show_today_or_tomorrow_task()
             
           },
           failure: function (errMsg) {
@@ -1880,10 +2255,12 @@ function clickAndPress_add_task_function(){
               // window.location.replace("/v1/taskmanager");
               var plan_time = judge_plantime_today_tomorrow_or_other_day(plantime)
               if (plan_time == 1) {
-                geteverydaytask(API_scr)
+                // geteverydaytask(API_scr)
+                show_today_or_tomorrow_task()
               }
               if (plan_time == 2) {
                 // update tomorrow
+                show_today_or_tomorrow_task()
               }
               if (plan_time == 3) {
                 // update tasktree
@@ -1930,6 +2307,8 @@ function clickAndPress_add_task_function(){
     if (myInput && myInput.value) {
       if (tasktags != "" ) {
         clickAndPress_add_task_function(); 
+        // geteverydaytask(API_scr)
+        show_today_or_tomorrow_task()
         get_all_unfinished_tasks_list(); 
       }
     }
@@ -1938,9 +2317,6 @@ function clickAndPress_add_task_function(){
     }
    
   })
-
-
-
 
 
     // 下面是创建任务的JS部分
@@ -1955,8 +2331,9 @@ function clickAndPress_add_task_function(){
       if (myInput && myInput.value) {
         if (tasktags != "" ) {
         clickAndPress_add_task_function(); 
+        // geteverydaytask(API_scr)
+        show_today_or_tomorrow_task()
         get_all_unfinished_tasks_list(); 
-        
         }
       }
        else{
@@ -2011,7 +2388,8 @@ function clickAndPress_add_task_function(){
 
     function remove_edit_task_area(){
       document.getElementsByClassName("edite_task_area").outerHTML = ""
-      geteverydaytask(API_scr)
+      // geteverydaytask(API_scr)
+      show_today_or_tomorrow_task()
     }
    
 
@@ -2343,7 +2721,9 @@ function clickAndPress_add_task_function(){
             console.log("this is success")
             console.log(data)
             // alert(data); 
-            geteverydaytask(API_scr)
+            // geteverydaytask(API_scr)
+            show_today_or_tomorrow_task()
+            // rebalance()
           
           },
           failure: function (errMsg) {
@@ -2567,7 +2947,7 @@ $(document).on("mouseover","#task_reviewalgo_selector",function(){
 </script>
    
      
- 
+
 <script type="text/javascript" src="/v1/tasks.js"></script>
 
 </body>

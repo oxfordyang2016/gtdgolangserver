@@ -133,6 +133,7 @@ function _goal(){
         success: function (data) {
             console.log("输出创建的goals")
             console.log(data)
+            // rebalance()
         },
         failure: function (errMsg) {
           alert(errMsg);
@@ -245,8 +246,8 @@ String.prototype.hashCode = function(){
 function create_goal_project_task_div(){
     // get_all_unfinished_tasks_list()
     // 创建all_goals的列表
-    console.log("---------print all_unfinished_tasks-----------")
-    console.log(all_unfinished_tasks)
+    // console.log("---------print all_unfinished_tasks-----------")
+    // console.log(all_unfinished_tasks)
     var goal_ul = document.createElement("ul")
     // project = [];
     // for (let i = 0; i < all_unfinished_tasks.length; i++) {
@@ -266,8 +267,8 @@ function create_goal_project_task_div(){
         // get one goal
         var temp_goal =  all_unfinished_tasks[i].Name
         var goal_priority = all_unfinished_tasks[i].Priority
-        console.log("!!!!!!!!! printint goal !!!!!!!!!!")
-        console.log(temp_goal)
+        // console.log("!!!!!!!!! printint goal !!!!!!!!!!")
+        // console.log(temp_goal)
         // var project = get_no_repeat_project(all_tasks_in_one_project)
         // 输出当下Goal里的所有Projects到一个array
         var project = []
@@ -275,8 +276,9 @@ function create_goal_project_task_div(){
         for (let j = 0; j < projects_in_this_goal.length; j++) {
             project.push(projects_in_this_goal[j].Name)
         }
-        console.log("!!!!!!!!! printint project !!!!!!!!!!")
-        console.log(projects_in_this_goal)
+        // console.log("!!!!!!!!! printint project !!!!!!!!!!")
+        // console.log(projects_in_this_goal)
+
         // 输出当下Goal里的所有task到一个
 
         // var all_tasks_in_one_project = all_unfinished_tasks[i].Alltasksingoal
@@ -330,8 +332,8 @@ function create_goal_project_task_div(){
             
              // 得到一个project下的所有tasks
             var all_tasks_in_one_project =  all_unfinished_tasks[i].Allprojectsingoal[j].Alltasksinproject
-            console.log("!!!!!!!!! printint all tasks in one project !!!!!!!!!!")
-            console.log(all_tasks_in_one_project)
+            // console.log("!!!!!!!!! printint all tasks in one project !!!!!!!!!!")
+            // console.log(all_tasks_in_one_project)
 
             var project_ul = document.createElement("ul")
             var project_li = document.createElement("li")
@@ -761,7 +763,8 @@ $(document).on("click",".todaytree_add_task2tomorrow_button",function(){
                 //   geteverydaytask()
                 // alert("您已经成功把任务添加到明天")
                 task_li_div.outerHTML = ""
-                geteverydaytask()
+                // geteverydaytask()
+                show_today_or_tomorrow_task()
                 },
                 failure: function (errMsg) {
                   console.log("this is erro")
@@ -820,7 +823,9 @@ $(document).on("click",".todaytree_add_task2tomorrow_button",function(){
                   console.log(data)
                   // alert(data); 
                   task_li_div.outerHTML = ""
-                  geteverydaytask()
+                //   geteverydaytask()
+                show_today_or_tomorrow_task()
+                // rebalance()
                 //   get_all_unfinished_tasks_list()
                   
                 },
@@ -860,8 +865,10 @@ $(document).on("click",".todaytree_move_task2someday_button",function(){
               console.log(data)
               // alert(data); 
               task_li_div.outerHTML = ""
-              geteverydaytask()
+            //   geteverydaytask()
+            show_today_or_tomorrow_task()
               get_all_unfinished_tasks_list()
+            //   rebalance()
               
             },
             failure: function (errMsg) {
@@ -984,6 +991,7 @@ $(document).on("click",".add_task2today_button",function(){
               // alert(data); 
               task_li_div.outerHTML = ""
               show_today_tree()
+            //   rebalance()
             },
             failure: function (errMsg) {
               console.log("this is erro")
@@ -1041,6 +1049,7 @@ $(document).on("click",".finish_goal_class",function(){
               console.log(data)
               // alert(data); 
               this_goal_div.outerHTML = ""
+            //   rebalance()
             },
             failure: function (errMsg) {
               console.log("this is erro")
@@ -1083,6 +1092,7 @@ $(document).on("click",".giveup_goal_class",function(){
           console.log(data)
           // alert(data); 
           this_goal_div.outerHTML = ""
+        //   rebalance()
         },
         failure: function (errMsg) {
           console.log("this is erro")
@@ -1116,6 +1126,7 @@ $(document).on("click",".finish_project_class",function(){
           console.log(data)
           // alert(data); 
           this_project_div.outerHTML = ""
+        //   rebalance()
         },
         failure: function (errMsg) {
           console.log("this is erro")
@@ -1371,6 +1382,7 @@ myChart.setOption(option = {
 
 // ---------------------------------------------------
 // ----------------------------------------------------
+var WebSocketswitch = false
 var token = getCookieValue("email")
 var  WebSocketurl = 'ws://47.100.100.141:777'
 var localhostWebSocketurl = "ws://localhost:777"
@@ -1404,7 +1416,10 @@ var heartCheck = {
 
 
 
-function connect(url) {
+function connect(url,switchofws) {
+    if (!switchofws){
+        return
+    }
   var ws = new WebSocket(url);
   
  //   ws.binaryType = 'arraybuffer';
@@ -1442,7 +1457,8 @@ function connect(url) {
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
     // connect('ws://localhost:777');
-    connect(url);
+    // connect(url);
+    connect(url+"/email="+token,WebSocketswitch)
     // connect('ws://localhost:777');
     }, 1000);
   };
@@ -1457,7 +1473,7 @@ function connect(url) {
 //connect(localhostWebSocketurl)
  //connect('ws://localhost:777')
 // connect(httpsWebSocketurl)
-connect(localhostWebSocketurl+"/email="+token)
+connect(localhostWebSocketurl+"/email="+token,WebSocketswitch)
 
 
 
