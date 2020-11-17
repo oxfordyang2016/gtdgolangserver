@@ -33642,3 +33642,251 @@ FROM reviewofdays
 WHERE reviewofdays.email = %(email_1)s AND reviewofdays.date IN (%(date_1)s, %(date_2)s, %(date_3)s, %(date_4)s, %(date_5)s, %(date_6)s, %(date_7)s, %(date_8)s, %(date_9)s, %(date_10)s, %(date_11)s, %(date_12)s, %(date_13)s, %(date_14)s, %(date_15)s, %(date_16)s, %(date_17)s, %(date_18)s, %(date_19)s, %(date_20)s, %(date_21)s, %(date_22)s, %(date_23)s, %(date_24)s, %(date_25)s, %(date_26)s, %(date_27)s, %(date_28)s, %(date_29)s, %(date_30)s, %(date_31)s, %(date_32)s, %(date_33)s, %(date_34)s, %(date_35)s, %(date_36)s, %(date_37)s, %(date_38)s, %(date_39)s, %(date_40)s, %(date_41)s, %(date_42)s, %(date_43)s, %(date_44)s, %(date_45)s, %(date_46)s, %(date_47)s, %(date_48)s, %(date_49)s, %(date_50)s, %(date_51)s, %(date_52)s, %(date_53)s, %(date_54)s, %(date_55)s, %(date_56)s, %(date_57)s, %(date_58)s, %(date_59)s, %(date_60)s, %(date_61)s, %(date_62)s, %(date_63)s, %(date_64)s, %(date_65)s, %(date_66)s, %(date_67)s, %(date_68)s, %(date_69)s, %(date_70)s, %(date_71)s, %(date_72)s, %(date_73)s, %(date_74)s, %(date_75)s, %(date_76)s, %(date_77)s, %(date_78)s, %(date_79)s, %(date_80)s, %(date_81)s, %(date_82)s, %(date_83)s, %(date_84)s, %(date_85)s, %(date_86)s, %(date_87)s, %(date_88)s, %(date_89)s, %(date_90)s, %(date_91)s, %(date_92)s, %(date_93)s, %(date_94)s, %(date_95)s, %(date_96)s, %(date_97)s, %(date_98)s, %(date_99)s, %(date_100)s, %(date_101)s, %(date_102)s, %(date_103)s, %(date_104)s, %(date_105)s, %(date_106)s, %(date_107)s, %(date_108)s, %(date_109)s, %(date_110)s, %(date_111)s, %(date_112)s, %(date_113)s, %(date_114)s, %(date_115)s, %(date_116)s, %(date_117)s, %(date_118)s, %(date_119)s, %(date_120)s, %(date_121)s, %(date_122)s, %(date_123)s, %(date_124)s, %(date_125)s, %(date_126)s, %(date_127)s, %(date_128)s, %(date_129)s, %(date_130)s, %(date_131)s, %(date_132)s, %(date_133)s, %(date_134)s, %(date_135)s, %(date_136)s, %(date_137)s, %(date_138)s, %(date_139)s, %(date_140)s, %(date_141)s, %(date_142)s, %(date_143)s, %(date_144)s, %(date_145)s, %(date_146)s, %(date_147)s, %(date_148)s, %(date_149)s, %(date_150)s, %(date_151)s, %(date_152)s, %(date_153)s, %(date_154)s, %(date_155)s, %(date_156)s, %(date_157)s, %(date_158)s, %(date_159)s, %(date_160)s, %(date_161)s, %(date_162)s, %(date_163)s, %(date_164)s, %(date_165)s, %(date_166)s, %(date_167)s, %(date_168)s, %(date_169)s, %(date_170)s, %(date_171)s, %(date_172)s, %(date_173)s, %(date_174)s, %(date_175)s, %(date_176)s, %(date_177)s, %(date_178)s, %(date_179)s, %(date_180)s, %(date_181)s, %(date_182)s, %(date_183)s, %(date_184)s, %(date_185)s, %(date_186)s, %(date_187)s, %(date_188)s, %(date_189)s, %(date_190)s, %(date_191)s, %(date_192)s, %(date_193)s, %(date_194)s, %(date_195)s, %(date_196)s, %(date_197)s, %(date_198)s, %(date_199)s, %(date_200)s, %(date_201)s, %(date_202)s, %(date_203)s, %(date_204)s, %(date_205)s, %(date_206)s, %(date_207)s, %(date_208)s, %(date_209)s, %(date_210)s, %(date_211)s, %(date_212)s, %(date_213)s, %(date_214)s, %(date_215)s, %(date_216)s, %(date_217)s, %(date_218)s, %(date_219)s, %(date_220)s, %(date_221)s, %(date_222)s, %(date_223)s, %(date_224)s, %(date_225)s, %(date_226)s, %(date_227)s, %(date_228)s, %(date_229)s, %(date_230)s, %(date_231)s, %(date_232)s, %(date_233)s, %(date_234)s, %(date_235)s, %(date_236)s, %(date_237)s, %(date_238)s, %(date_239)s, %(date_240)s, %(date_241)s, %(date_242)s, %(date_243)s, %(date_244)s, %(date_245)s, %(date_246)s, %(date_247)s, %(date_248)s, %(date_249)s, %(date_250)s, %(date_251)s, %(date_252)s, %(date_253)s, %(date_254)s, %(date_255)s, %(date_256)s, %(date_257)s, %(date_258)s, %(date_259)s, %(date_260)s, %(date_261)s, %(date_262)s, %(date_263)s, %(date_264)s, %(date_265)s, %(date_266)s, %(date_267)s, %(date_268)s, %(date_269)s, %(date_270)s, %(date_271)s, %(date_272)s, %(date_273)s, %(date_274)s, %(date_275)s, %(date_276)s, %(date_277)s, %(date_278)s, %(date_279)s, %(date_280)s, %(date_281)s, %(date_282)s, %(date_283)s, %(date_284)s, %(date_285)s, %(date_286)s, %(date_287)s, %(date_288)s, %(date_289)s, %(date_290)s, %(date_291)s, %(date_292)s, %(date_293)s, %(date_294)s, %(date_295)s, %(date_296)s)]
 [parameters: {'email_1': 'yang756260386@gmail.com', 'date_1': '200101', 'date_2': '200102', 'date_3': '200103', 'date_4': '200104', 'date_5': '200105', 'date_6': '200106', 'date_7': '200107', 'date_8': '200108', 'date_9': '200109', 'date_10': '200110', 'date_11': '200111', 'date_12': '200112', 'date_13': '200113', 'date_14': '200114', 'date_15': '200115', 'date_16': '200116', 'date_17': '200117', 'date_18': '200118', 'date_19': '200119', 'date_20': '200120', 'date_21': '200121', 'date_22': '200122', 'date_23': '200123', 'date_24': '200124', 'date_25': '200125', 'date_26': '200126', 'date_27': '200127', 'date_28': '200128', 'date_29': '200129', 'date_30': '200130', 'date_31': '200131', 'date_32': '200201', 'date_33': '200202', 'date_34': '200203', 'date_35': '200204', 'date_36': '200205', 'date_37': '200206', 'date_38': '200207', 'date_39': '200208', 'date_40': '200209', 'date_41': '200210', 'date_42': '200211', 'date_43': '200212', 'date_44': '200213', 'date_45': '200214', 'date_46': '200215', 'date_47': '200216', 'date_48': '200217', 'date_49': '200218', 'date_50': '200219', 'date_51': '200220', 'date_52': '200221', 'date_53': '200222', 'date_54': '200223', 'date_55': '200224', 'date_56': '200225', 'date_57': '200226', 'date_58': '200227', 'date_59': '200228', 'date_60': '200229', 'date_61': '200301', 'date_62': '200302', 'date_63': '200303', 'date_64': '200304', 'date_65': '200305', 'date_66': '200306', 'date_67': '200307', 'date_68': '200308', 'date_69': '200309', 'date_70': '200310', 'date_71': '200311', 'date_72': '200312', 'date_73': '200313', 'date_74': '200314', 'date_75': '200315', 'date_76': '200316', 'date_77': '200317', 'date_78': '200318', 'date_79': '200319', 'date_80': '200320', 'date_81': '200321', 'date_82': '200322', 'date_83': '200323', 'date_84': '200324', 'date_85': '200325', 'date_86': '200326', 'date_87': '200327', 'date_88': '200328', 'date_89': '200329', 'date_90': '200330', 'date_91': '200331', 'date_92': '200401', 'date_93': '200402', 'date_94': '200403', 'date_95': '200404', 'date_96': '200405', 'date_97': '200406', 'date_98': '200407', 'date_99': '200408', 'date_100': '200409', 'date_101': '200410', 'date_102': '200411', 'date_103': '200412', 'date_104': '200413', 'date_105': '200414', 'date_106': '200415', 'date_107': '200416', 'date_108': '200417', 'date_109': '200418', 'date_110': '200419', 'date_111': '200420', 'date_112': '200421', 'date_113': '200422', 'date_114': '200423', 'date_115': '200424', 'date_116': '200425', 'date_117': '200426', 'date_118': '200427', 'date_119': '200428', 'date_120': '200429', 'date_121': '200430', 'date_122': '200501', 'date_123': '200502', 'date_124': '200503', 'date_125': '200504', 'date_126': '200505', 'date_127': '200506', 'date_128': '200507', 'date_129': '200508', 'date_130': '200509', 'date_131': '200510', 'date_132': '200511', 'date_133': '200512', 'date_134': '200513', 'date_135': '200514', 'date_136': '200515', 'date_137': '200516', 'date_138': '200517', 'date_139': '200518', 'date_140': '200519', 'date_141': '200520', 'date_142': '200521', 'date_143': '200522', 'date_144': '200523', 'date_145': '200524', 'date_146': '200525', 'date_147': '200526', 'date_148': '200527', 'date_149': '200528', 'date_150': '200529', 'date_151': '200530', 'date_152': '200531', 'date_153': '200601', 'date_154': '200602', 'date_155': '200603', 'date_156': '200604', 'date_157': '200605', 'date_158': '200606', 'date_159': '200607', 'date_160': '200608', 'date_161': '200609', 'date_162': '200610', 'date_163': '200611', 'date_164': '200612', 'date_165': '200613', 'date_166': '200614', 'date_167': '200615', 'date_168': '200616', 'date_169': '200617', 'date_170': '200618', 'date_171': '200619', 'date_172': '200620', 'date_173': '200621', 'date_174': '200622', 'date_175': '200623', 'date_176': '200624', 'date_177': '200625', 'date_178': '200626', 'date_179': '200627', 'date_180': '200628', 'date_181': '200629', 'date_182': '200630', 'date_183': '200701', 'date_184': '200702', 'date_185': '200703', 'date_186': '200704', 'date_187': '200705', 'date_188': '200706', 'date_189': '200707', 'date_190': '200708', 'date_191': '200709', 'date_192': '200710', 'date_193': '200711', 'date_194': '200712', 'date_195': '200713', 'date_196': '200714', 'date_197': '200715', 'date_198': '200716', 'date_199': '200717', 'date_200': '200718', 'date_201': '200719', 'date_202': '200720', 'date_203': '200721', 'date_204': '200722', 'date_205': '200723', 'date_206': '200724', 'date_207': '200725', 'date_208': '200726', 'date_209': '200727', 'date_210': '200728', 'date_211': '200729', 'date_212': '200730', 'date_213': '200731', 'date_214': '200801', 'date_215': '200802', 'date_216': '200803', 'date_217': '200804', 'date_218': '200805', 'date_219': '200806', 'date_220': '200807', 'date_221': '200808', 'date_222': '200809', 'date_223': '200810', 'date_224': '200811', 'date_225': '200812', 'date_226': '200813', 'date_227': '200814', 'date_228': '200815', 'date_229': '200816', 'date_230': '200817', 'date_231': '200818', 'date_232': '200819', 'date_233': '200820', 'date_234': '200821', 'date_235': '200822', 'date_236': '200823', 'date_237': '200824', 'date_238': '200825', 'date_239': '200826', 'date_240': '200827', 'date_241': '200828', 'date_242': '200829', 'date_243': '200830', 'date_244': '200831', 'date_245': '200901', 'date_246': '200902', 'date_247': '200903', 'date_248': '200904', 'date_249': '200905', 'date_250': '200906', 'date_251': '200907', 'date_252': '200908', 'date_253': '200909', 'date_254': '200910', 'date_255': '200911', 'date_256': '200912', 'date_257': '200913', 'date_258': '200914', 'date_259': '200915', 'date_260': '200916', 'date_261': '200917', 'date_262': '200918', 'date_263': '200919', 'date_264': '200920', 'date_265': '200921', 'date_266': '200922', 'date_267': '200923', 'date_268': '200924', 'date_269': '200925', 'date_270': '200926', 'date_271': '200927', 'date_272': '200928', 'date_273': '200929', 'date_274': '200930', 'date_275': '201001', 'date_276': '201002', 'date_277': '201003', 'date_278': '201004', 'date_279': '201005', 'date_280': '201006', 'date_281': '201007', 'date_282': '201008', 'date_283': '201009', 'date_284': '201010', 'date_285': '201011', 'date_286': '201012', 'date_287': '201013', 'date_288': '201014', 'date_289': '201015', 'date_290': '201016', 'date_291': '201017', 'date_292': '201018', 'date_293': '201019', 'date_294': '201020', 'date_295': '201021', 'date_296': '201022'}]
 (Background on this error at: http://sqlalche.me/e/13/e3q8)[0m
+[32m2020-11-17 13:33:45.570[0m | [31m[1mERROR   [0m | [36m__main__[0m:[36mrewardfun[0m:[36m307[0m - [31m[1m获取回馈数据异常[0m
+[33m[1mTraceback (most recent call last):[0m
+
+  File "/usr/lib64/python3.6/threading.py", line 884, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x7f544ad517b8>
+    └ <Thread(Thread-8, started daemon 139999787276032)>
+  File "/usr/lib64/python3.6/threading.py", line 916, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x7f544ad51598>
+    └ <Thread(Thread-8, started daemon 139999787276032)>
+  File "/usr/lib64/python3.6/threading.py", line 864, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-8, started daemon 139999787276032)>
+    │    │        │    └ (<socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6000), raddr=('...
+    │    │        └ <Thread(Thread-8, started daemon 139999787276032)>
+    │    └ <bound method ThreadingMixIn.process_request_thread of <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>>
+    └ <Thread(Thread-8, started daemon 139999787276032)>
+  File "/usr/lib64/python3.6/socketserver.py", line 654, in process_request_thread
+    self.finish_request(request, client_address)
+    │    │              │        └ ('127.0.0.1', 52586)
+    │    │              └ <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6000), raddr=('1...
+    │    └ <function BaseServer.finish_request at 0x7f544175dae8>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>
+  File "/usr/lib64/python3.6/socketserver.py", line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    │    │                   │        │               └ <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>
+    │    │                   │        └ ('127.0.0.1', 52586)
+    │    │                   └ <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6000), raddr=('1...
+    │    └ <class 'werkzeug.serving.WSGIRequestHandler'>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>
+  File "/usr/lib64/python3.6/socketserver.py", line 724, in __init__
+    self.handle()
+    │    └ <function WSGIRequestHandler.handle at 0x7f54413d3840>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x7f543ea2cf98>
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m345[0m, in [35mhandle[0m
+    [1mBaseHTTPRequestHandler[0m[35m[1m.[0m[1mhandle[0m[1m([0m[1mself[0m[1m)[0m
+    [36m│                      │      └ [0m[36m[1m<werkzeug.serving.WSGIRequestHandler object at 0x7f543ea2cf98>[0m
+    [36m│                      └ [0m[36m[1m<function BaseHTTPRequestHandler.handle at 0x7f5441439488>[0m
+    [36m└ [0m[36m[1m<class 'http.server.BaseHTTPRequestHandler'>[0m
+
+  File "/usr/lib64/python3.6/http/server.py", line 418, in handle
+    self.handle_one_request()
+    │    └ <function WSGIRequestHandler.handle_one_request at 0x7f54413d39d8>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x7f543ea2cf98>
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m379[0m, in [35mhandle_one_request[0m
+    [35m[1mreturn[0m [1mself[0m[35m[1m.[0m[1mrun_wsgi[0m[1m([0m[1m)[0m
+    [36m       │    └ [0m[36m[1m<function WSGIRequestHandler.run_wsgi at 0x7f54413d37b8>[0m
+    [36m       └ [0m[36m[1m<werkzeug.serving.WSGIRequestHandler object at 0x7f543ea2cf98>[0m
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m323[0m, in [35mrun_wsgi[0m
+    [1mexecute[0m[1m([0m[1mself[0m[35m[1m.[0m[1mserver[0m[35m[1m.[0m[1mapp[0m[1m)[0m
+    [36m│       │    │      └ [0m[36m[1m<werkzeug.debug.DebuggedApplication object at 0x7f543f2c2668>[0m
+    [36m│       │    └ [0m[36m[1m<werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>[0m
+    [36m│       └ [0m[36m[1m<werkzeug.serving.WSGIRequestHandler object at 0x7f543ea2cf98>[0m
+    [36m└ [0m[36m[1m<function WSGIRequestHandler.run_wsgi.<locals>.execute at 0x7f543d13bbf8>[0m
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m314[0m, in [35mexecute[0m
+    [35m[1mfor[0m [1mdata[0m [35m[1min[0m [1mapplication_iter[0m[1m:[0m
+    [36m            └ [0m[36m[1m<generator object DebuggedApplication.debug_application at 0x7f543f276af0>[0m
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/debug/[0m[32m[1m__init__.py[0m", line [33m304[0m, in [35mdebug_application[0m
+    [1mapp_iter[0m [35m[1m=[0m [1mself[0m[35m[1m.[0m[1mapp[0m[1m([0m[1menviron[0m[1m,[0m [1mstart_response[0m[1m)[0m
+    [36m           │    │   │        └ [0m[36m[1m<function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x7f543d13bb70>[0m
+    [36m           │    │   └ [0m[36m[1m{'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=8>, 'wsgi.errors': <_io.TextIOWrap...[0m
+    [36m           │    └ [0m[36m[1m<Flask 'fees'>[0m
+    [36m           └ [0m[36m[1m<werkzeug.debug.DebuggedApplication object at 0x7f543f2c2668>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m2464[0m, in [35m__call__[0m
+    [35m[1mreturn[0m [1mself[0m[35m[1m.[0m[1mwsgi_app[0m[1m([0m[1menviron[0m[1m,[0m [1mstart_response[0m[1m)[0m
+    [36m       │    │        │        └ [0m[36m[1m<function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x7f543d13bb70>[0m
+    [36m       │    │        └ [0m[36m[1m{'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=8>, 'wsgi.errors': <_io.TextIOWrap...[0m
+    [36m       │    └ [0m[36m[1m<function Flask.wsgi_app at 0x7f5440bc3510>[0m
+    [36m       └ [0m[36m[1m<Flask 'fees'>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m2447[0m, in [35mwsgi_app[0m
+    [1mresponse[0m [35m[1m=[0m [1mself[0m[35m[1m.[0m[1mfull_dispatch_request[0m[1m([0m[1m)[0m
+    [36m           │    └ [0m[36m[1m<function Flask.full_dispatch_request at 0x7f5440bc0bf8>[0m
+    [36m           └ [0m[36m[1m<Flask 'fees'>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m1950[0m, in [35mfull_dispatch_request[0m
+    [1mrv[0m [35m[1m=[0m [1mself[0m[35m[1m.[0m[1mdispatch_request[0m[1m([0m[1m)[0m
+    [36m     │    └ [0m[36m[1m<function Flask.dispatch_request at 0x7f5440bc0b70>[0m
+    [36m     └ [0m[36m[1m<Flask 'fees'>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m1936[0m, in [35mdispatch_request[0m
+    [35m[1mreturn[0m [1mself[0m[35m[1m.[0m[1mview_functions[0m[1m[[0m[1mrule[0m[35m[1m.[0m[1mendpoint[0m[1m][0m[1m([0m[35m[1m**[0m[1mreq[0m[35m[1m.[0m[1mview_args[0m[1m)[0m
+    [36m       │    │              │    │           │   └ [0m[36m[1m{}[0m
+    [36m       │    │              │    │           └ [0m[36m[1m<Request 'http://127.0.0.1:6000/finance/getrewardleft' [GET]>[0m
+    [36m       │    │              │    └ [0m[36m[1m'rewardfun'[0m
+    [36m       │    │              └ [0m[36m[1m<Rule '/finance/getrewardleft' (POST, PUT, OPTIONS, GET, HEAD) -> rewardfun>[0m
+    [36m       │    └ [0m[36m[1m{'static': <bound method _PackageBoundObject.send_static_file of <Flask 'fees'>>, 'hello_world': <function hello_world at 0x7...[0m
+    [36m       └ [0m[36m[1m<Flask 'fees'>[0m
+
+> File "[32m/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/finance/[0m[32m[1mfees.py[0m", line [33m303[0m, in [35mrewardfun[0m
+    [1mfinance[0m [35m[1m=[0m [1mrewardorpunishment[0m[1m([0m[1m)[0m
+    [36m          └ [0m[36m[1m<function rewardorpunishment at 0x7f543f348840>[0m
+
+  File "[32m/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/finance/[0m[32m[1mfees.py[0m", line [33m195[0m, in [35mrewardorpunishment[0m
+    [1mbc[0m [35m[1m=[0m [1m[[0m[1mast[0m[35m[1m.[0m[1mliteral_eval[0m[1m([0m[1mk[0m[1m)[0m[1m[[0m[36m"totalscore"[0m[1m][0m [35m[1mfor[0m [1mk[0m [35m[1min[0m [1mall[0m [35m[1mif[0m [1mlen[0m[1m([0m[1mk[0m[1m)[0m[35m[1m>[0m[34m[1m0[0m[1m][0m
+    [36m      │   │                                      └ [0m[36m[1m['{"totalscore":0,"averagescoreofhistory":0,"patience":0,"attackactively":0,"usebrain":0,"useprinciple":0,"battlewithlowerbra...[0m
+    [36m      │   └ [0m[36m[1m<function literal_eval at 0x7f5446fda2f0>[0m
+    [36m      └ [0m[36m[1m<module 'ast' from '/usr/lib64/python3.6/ast.py'>[0m
+
+  File "[32m/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/finance/[0m[32m[1mfees.py[0m", line [33m195[0m, in [35m<listcomp>[0m
+    [1mbc[0m [35m[1m=[0m [1m[[0m[1mast[0m[35m[1m.[0m[1mliteral_eval[0m[1m([0m[1mk[0m[1m)[0m[1m[[0m[36m"totalscore"[0m[1m][0m [35m[1mfor[0m [1mk[0m [35m[1min[0m [1mall[0m [35m[1mif[0m [1mlen[0m[1m([0m[1mk[0m[1m)[0m[35m[1m>[0m[34m[1m0[0m[1m][0m
+    [36m      │   │            │                    │               └ [0m[36m[1m'no'[0m
+    [36m      │   │            │                    └ [0m[36m[1m'no'[0m
+    [36m      │   │            └ [0m[36m[1m'no'[0m
+    [36m      │   └ [0m[36m[1m<function literal_eval at 0x7f5446fda2f0>[0m
+    [36m      └ [0m[36m[1m<module 'ast' from '/usr/lib64/python3.6/ast.py'>[0m
+
+  File "/usr/lib64/python3.6/ast.py", line 85, in literal_eval
+    return _convert(node_or_string)
+           │        └ <_ast.Name object at 0x7f543cff51d0>
+           └ <function literal_eval.<locals>._convert at 0x7f543d0fc2f0>
+  File "/usr/lib64/python3.6/ast.py", line 84, in _convert
+    raise ValueError('malformed node or string: ' + repr(node))
+                                                         └ <_ast.Name object at 0x7f543cff51d0>
+
+[31m[1mValueError[0m:[1m malformed node or string: <_ast.Name object at 0x7f543cff51d0>[0m
+[32m2020-11-17 13:33:45.770[0m | [31m[1mERROR   [0m | [36m__main__[0m:[36mrewardfun[0m:[36m307[0m - [31m[1m获取回馈数据异常[0m
+[33m[1mTraceback (most recent call last):[0m
+
+  File "/usr/lib64/python3.6/threading.py", line 884, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x7f544ad517b8>
+    └ <Thread(Thread-9, started daemon 139999776786176)>
+  File "/usr/lib64/python3.6/threading.py", line 916, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x7f544ad51598>
+    └ <Thread(Thread-9, started daemon 139999776786176)>
+  File "/usr/lib64/python3.6/threading.py", line 864, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-9, started daemon 139999776786176)>
+    │    │        │    └ (<socket.socket fd=11, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6000), raddr=(...
+    │    │        └ <Thread(Thread-9, started daemon 139999776786176)>
+    │    └ <bound method ThreadingMixIn.process_request_thread of <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>>
+    └ <Thread(Thread-9, started daemon 139999776786176)>
+  File "/usr/lib64/python3.6/socketserver.py", line 654, in process_request_thread
+    self.finish_request(request, client_address)
+    │    │              │        └ ('127.0.0.1', 52590)
+    │    │              └ <socket.socket fd=11, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6000), raddr=('...
+    │    └ <function BaseServer.finish_request at 0x7f544175dae8>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>
+  File "/usr/lib64/python3.6/socketserver.py", line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    │    │                   │        │               └ <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>
+    │    │                   │        └ ('127.0.0.1', 52590)
+    │    │                   └ <socket.socket fd=11, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6000), raddr=('...
+    │    └ <class 'werkzeug.serving.WSGIRequestHandler'>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>
+  File "/usr/lib64/python3.6/socketserver.py", line 724, in __init__
+    self.handle()
+    │    └ <function WSGIRequestHandler.handle at 0x7f54413d3840>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x7f543cff57b8>
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m345[0m, in [35mhandle[0m
+    [1mBaseHTTPRequestHandler[0m[35m[1m.[0m[1mhandle[0m[1m([0m[1mself[0m[1m)[0m
+    [36m│                      │      └ [0m[36m[1m<werkzeug.serving.WSGIRequestHandler object at 0x7f543cff57b8>[0m
+    [36m│                      └ [0m[36m[1m<function BaseHTTPRequestHandler.handle at 0x7f5441439488>[0m
+    [36m└ [0m[36m[1m<class 'http.server.BaseHTTPRequestHandler'>[0m
+
+  File "/usr/lib64/python3.6/http/server.py", line 418, in handle
+    self.handle_one_request()
+    │    └ <function WSGIRequestHandler.handle_one_request at 0x7f54413d39d8>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x7f543cff57b8>
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m379[0m, in [35mhandle_one_request[0m
+    [35m[1mreturn[0m [1mself[0m[35m[1m.[0m[1mrun_wsgi[0m[1m([0m[1m)[0m
+    [36m       │    └ [0m[36m[1m<function WSGIRequestHandler.run_wsgi at 0x7f54413d37b8>[0m
+    [36m       └ [0m[36m[1m<werkzeug.serving.WSGIRequestHandler object at 0x7f543cff57b8>[0m
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m323[0m, in [35mrun_wsgi[0m
+    [1mexecute[0m[1m([0m[1mself[0m[35m[1m.[0m[1mserver[0m[35m[1m.[0m[1mapp[0m[1m)[0m
+    [36m│       │    │      └ [0m[36m[1m<werkzeug.debug.DebuggedApplication object at 0x7f543f2c2668>[0m
+    [36m│       │    └ [0m[36m[1m<werkzeug.serving.ThreadedWSGIServer object at 0x7f543f28c198>[0m
+    [36m│       └ [0m[36m[1m<werkzeug.serving.WSGIRequestHandler object at 0x7f543cff57b8>[0m
+    [36m└ [0m[36m[1m<function WSGIRequestHandler.run_wsgi.<locals>.execute at 0x7f543d0fc0d0>[0m
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/[0m[32m[1mserving.py[0m", line [33m314[0m, in [35mexecute[0m
+    [35m[1mfor[0m [1mdata[0m [35m[1min[0m [1mapplication_iter[0m[1m:[0m
+    [36m            └ [0m[36m[1m<generator object DebuggedApplication.debug_application at 0x7f543d05c8e0>[0m
+
+  File "[32m/usr/local/lib/python3.6/site-packages/werkzeug/debug/[0m[32m[1m__init__.py[0m", line [33m304[0m, in [35mdebug_application[0m
+    [1mapp_iter[0m [35m[1m=[0m [1mself[0m[35m[1m.[0m[1mapp[0m[1m([0m[1menviron[0m[1m,[0m [1mstart_response[0m[1m)[0m
+    [36m           │    │   │        └ [0m[36m[1m<function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x7f543d0fc158>[0m
+    [36m           │    │   └ [0m[36m[1m{'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=11>, 'wsgi.errors': <_io.TextIOWra...[0m
+    [36m           │    └ [0m[36m[1m<Flask 'fees'>[0m
+    [36m           └ [0m[36m[1m<werkzeug.debug.DebuggedApplication object at 0x7f543f2c2668>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m2464[0m, in [35m__call__[0m
+    [35m[1mreturn[0m [1mself[0m[35m[1m.[0m[1mwsgi_app[0m[1m([0m[1menviron[0m[1m,[0m [1mstart_response[0m[1m)[0m
+    [36m       │    │        │        └ [0m[36m[1m<function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x7f543d0fc158>[0m
+    [36m       │    │        └ [0m[36m[1m{'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=11>, 'wsgi.errors': <_io.TextIOWra...[0m
+    [36m       │    └ [0m[36m[1m<function Flask.wsgi_app at 0x7f5440bc3510>[0m
+    [36m       └ [0m[36m[1m<Flask 'fees'>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m2447[0m, in [35mwsgi_app[0m
+    [1mresponse[0m [35m[1m=[0m [1mself[0m[35m[1m.[0m[1mfull_dispatch_request[0m[1m([0m[1m)[0m
+    [36m           │    └ [0m[36m[1m<function Flask.full_dispatch_request at 0x7f5440bc0bf8>[0m
+    [36m           └ [0m[36m[1m<Flask 'fees'>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m1950[0m, in [35mfull_dispatch_request[0m
+    [1mrv[0m [35m[1m=[0m [1mself[0m[35m[1m.[0m[1mdispatch_request[0m[1m([0m[1m)[0m
+    [36m     │    └ [0m[36m[1m<function Flask.dispatch_request at 0x7f5440bc0b70>[0m
+    [36m     └ [0m[36m[1m<Flask 'fees'>[0m
+
+  File "[32m/usr/local/lib64/python3.6/site-packages/flask/[0m[32m[1mapp.py[0m", line [33m1936[0m, in [35mdispatch_request[0m
+    [35m[1mreturn[0m [1mself[0m[35m[1m.[0m[1mview_functions[0m[1m[[0m[1mrule[0m[35m[1m.[0m[1mendpoint[0m[1m][0m[1m([0m[35m[1m**[0m[1mreq[0m[35m[1m.[0m[1mview_args[0m[1m)[0m
+    [36m       │    │              │    │           │   └ [0m[36m[1m{}[0m
+    [36m       │    │              │    │           └ [0m[36m[1m<Request 'http://127.0.0.1:6000/finance/getrewardleft' [GET]>[0m
+    [36m       │    │              │    └ [0m[36m[1m'rewardfun'[0m
+    [36m       │    │              └ [0m[36m[1m<Rule '/finance/getrewardleft' (POST, PUT, OPTIONS, GET, HEAD) -> rewardfun>[0m
+    [36m       │    └ [0m[36m[1m{'static': <bound method _PackageBoundObject.send_static_file of <Flask 'fees'>>, 'hello_world': <function hello_world at 0x7...[0m
+    [36m       └ [0m[36m[1m<Flask 'fees'>[0m
+
+> File "[32m/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/finance/[0m[32m[1mfees.py[0m", line [33m303[0m, in [35mrewardfun[0m
+    [1mfinance[0m [35m[1m=[0m [1mrewardorpunishment[0m[1m([0m[1m)[0m
+    [36m          └ [0m[36m[1m<function rewardorpunishment at 0x7f543f348840>[0m
+
+  File "[32m/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/finance/[0m[32m[1mfees.py[0m", line [33m195[0m, in [35mrewardorpunishment[0m
+    [1mbc[0m [35m[1m=[0m [1m[[0m[1mast[0m[35m[1m.[0m[1mliteral_eval[0m[1m([0m[1mk[0m[1m)[0m[1m[[0m[36m"totalscore"[0m[1m][0m [35m[1mfor[0m [1mk[0m [35m[1min[0m [1mall[0m [35m[1mif[0m [1mlen[0m[1m([0m[1mk[0m[1m)[0m[35m[1m>[0m[34m[1m0[0m[1m][0m
+    [36m      │   │                                      └ [0m[36m[1m['{"totalscore":0,"averagescoreofhistory":0,"patience":0,"attackactively":0,"usebrain":0,"useprinciple":0,"battlewithlowerbra...[0m
+    [36m      │   └ [0m[36m[1m<function literal_eval at 0x7f5446fda2f0>[0m
+    [36m      └ [0m[36m[1m<module 'ast' from '/usr/lib64/python3.6/ast.py'>[0m
+
+  File "[32m/root/yangming/gtdgolangserver/src/github.com/gtdgolangserver/models/finance/[0m[32m[1mfees.py[0m", line [33m195[0m, in [35m<listcomp>[0m
+    [1mbc[0m [35m[1m=[0m [1m[[0m[1mast[0m[35m[1m.[0m[1mliteral_eval[0m[1m([0m[1mk[0m[1m)[0m[1m[[0m[36m"totalscore"[0m[1m][0m [35m[1mfor[0m [1mk[0m [35m[1min[0m [1mall[0m [35m[1mif[0m [1mlen[0m[1m([0m[1mk[0m[1m)[0m[35m[1m>[0m[34m[1m0[0m[1m][0m
+    [36m      │   │            │                    │               └ [0m[36m[1m'no'[0m
+    [36m      │   │            │                    └ [0m[36m[1m'no'[0m
+    [36m      │   │            └ [0m[36m[1m'no'[0m
+    [36m      │   └ [0m[36m[1m<function literal_eval at 0x7f5446fda2f0>[0m
+    [36m      └ [0m[36m[1m<module 'ast' from '/usr/lib64/python3.6/ast.py'>[0m
+
+  File "/usr/lib64/python3.6/ast.py", line 85, in literal_eval
+    return _convert(node_or_string)
+           │        └ <_ast.Name object at 0x7f543d002940>
+           └ <function literal_eval.<locals>._convert at 0x7f543cff1378>
+  File "/usr/lib64/python3.6/ast.py", line 84, in _convert
+    raise ValueError('malformed node or string: ' + repr(node))
+                                                         └ <_ast.Name object at 0x7f543d002940>
+
+[31m[1mValueError[0m:[1m malformed node or string: <_ast.Name object at 0x7f543d002940>[0m
