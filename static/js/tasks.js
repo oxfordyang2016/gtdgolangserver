@@ -5,20 +5,20 @@ $.ajaxSetup({
     }
  });
 
-// 获取所有已经完成的任务
-function get_all_finished_tasks(){
-    $.get("/v1/pride", function(data, status){    
-        console.log("-------output pride----------")
-        console.log(data.memories)
-        console.log(status)
-        all_finished_tasks = data.memories
-        // data.memories的形式是[{Name:date,Alldays:{task1,task2,task3,……}]
-        console.log(all_finished_tasks[0].Name)
-        console.log(all_finished_tasks[0].Alldays)
-    })
-}
+// 获取所有已经完成的任务，用来生成那个完成度任务的时间权
+// function get_all_finished_tasks(){
+//     $.get("/v1/pride", function(data, status){    
+//         console.log("-------output pride----------")
+//         console.log(data.memories)
+//         console.log(status)
+//         all_finished_tasks = data.memories
+//         // data.memories的形式是[{Name:date,Alldays:{task1,task2,task3,……}]
+//         console.log(all_finished_tasks[0].Name)
+//         console.log(all_finished_tasks[0].Alldays)
+//     })
+// }
 
-get_all_finished_tasks()
+// get_all_finished_tasks()
 
 
 // ***********************************************************************
@@ -26,7 +26,7 @@ get_all_finished_tasks()
 // ***********************************************************************
 all_goals = []
 all_project = {}
-    function get_all_goals(){
+function get_all_goals(){
         $.get("/v1/goaljson", function(data, status){
         // yourgoals = []
         // alert("Data: " + data + "\nStatus: " + status);
@@ -75,20 +75,34 @@ function make_ul(array) {
     return list;
 }
 
-
-
-
 $('span').bind('dblclick',
     function(){
         $(this).attr('contentEditable',true);
     });
 
-
 // ***********************************************************************
 // 下面是创建目标
 // ***********************************************************************
 
+// 下面的代码是点击添加目标的时候出现添加目标的选项
 
+$(document).on("click","#click_add_input_goal_div",function(){
+    var input_goal_area  =`<input id="add_goal_text" type="text" placeholder="Please input your goal">
+    <select name="goal_socer_select" id="goal_socer_select">
+     <option value="5">重要等级5</option>
+     <option value="4">重要等级4</option>
+     <option value="3">重要等级3</option>
+     <option value="2">重要等级2</option>
+     <option value="1">重要等级1</option>
+     </select>
+    <button id="add_goal" class="add_goal">添加目标</button>`
+    var add_goal_area = document.getElementById("click_add_input_goal_div")
+    add_goal_area.insertAdjacentElement("afterend",createNode(input_goal_area))
+    add_goal_area.outerHTML = ""
+})
+
+
+// 下面的代码是点击创建目标这个button的时候，开始创建一个目标
 var priority
 
 $("#goal_socer_select").chosen().change(function(Event,eventobje){
@@ -115,14 +129,12 @@ $(document).on("click","#add_goal",function(){
 })
 })
 
-
 // create_goal()
-
 
 // 更新目标
 
 // var update_goal = {'goal':goal,'goalcode':id,'priority':priority,"goalstatus":goalstatus,"plantime":plantime,"finishtime":finishtime,"timerange":planmonth}
-function _goal(){
+function create_goal(){
     $.ajax({
         type: "POST",
         url: "/v1/updategoal",
@@ -133,7 +145,6 @@ function _goal(){
         success: function (data) {
             console.log("输出创建的goals")
             console.log(data)
-            // rebalance()
         },
         failure: function (errMsg) {
           alert(errMsg);
@@ -316,8 +327,6 @@ function create_goal_project_task_div(){
         giveup_goal.setAttribute("priority",`${goal_priority}`);
         giveup_goal.innerHTML = giveup_goal_project_button;
         
-
-
         goal_li.appendChild(goal_span)
         goal_li.appendChild(add_project2goal_button)
         if (project.length == 0) {
@@ -450,7 +459,6 @@ function create_goal_project_task_div(){
 function add_class2sontask(){
     var all_tasks_div = document.getElementById("goal_shown_and_edit")
     if (condition) {
-
     }
 }
 
@@ -467,9 +475,18 @@ $(document).on("click","input.add_project2goal_button",function(){
     add_project_plusbutton = $(this);
     console.log(add_project_plusbutton);
     var goal_code = $(this).prev().attr("goal_code")
+    // 下面两行代码实现隐藏后面的对号和叉号
+    if ( $(`button[goalcode=${goal_code}]`) == null){
+    }
+    else{
+        var need_hidden_button = $(`button[goalcode=${goal_code}]`)
+        need_hidden_button.hide()
+    }
+
     var project_input = document.createElement("input")
-    project_input.setAttribute("goal_code",`${goal_code}`)  
-    project_input.setAttribute("class","add_project_area") 
+    project_input.setAttribute("goal_code",`${goal_code}`)
+    project_input.setAttribute("class","add_project_area")
+    project_input.setAttribute("placeholder","please input your project")
     console.log("-------------这里是goal_code------------------------")
     console.log(goal_code)
     var goal_name_hash = $(this).prev().text().hashCode()
@@ -523,7 +540,7 @@ $(document).on("keypress",".add_project_area",function(event)
         $(".add_project_area").after(add_project_plusbutton);
         $(".add_project_area").remove();
       }
-
+    
     // 不刷新页面显示出新添加的Project
     function show_new_added_project(goal_code,added_project){
 
@@ -567,32 +584,65 @@ $(document).on("click","input.add_task2project_button",function(){
      parentid = "unspecified"
      selected_project = $(this).prev().text()
      selected_goal = $(this).parent().parent().parent()["0"].firstChild.innerHTML
-     
+    //  如果后面有对号和叉号，不进行显示
+     if ( $(`button[projectname=${selected_project}]`) == null){
+        
+    }
+    else{
+        var need_hidden_button = $(`button[projectname=${selected_project}]`)
+        need_hidden_button.hide()
+    }
+
+
      console.log("-------------------我正在输出project========")
      console.log(selected_project)
      console.log(selected_goal)
     //  console.log(selected_goal.firstChild.innerHTML)
     // console.log(createNode(add_task_div))
-
     // var add_task_div = createNode(add_task_div)
-    
     var temp_selected_id = `${selected_goal}_${selected_project}`.hashCode()
     console.log(temp_selected_id)
-    
+
     var add_plus = document.getElementById(temp_selected_id);
 
+    var add_task_div_right_side = 
+    `<li id="add_task_item_right_side">
+    <div class="add_task_area" id="add_task" >
+      <div class="input_task_area" id="input_task_area">
+        <div class="task_container">
+        <input class="input_text" type="text" id="noid" placeholder="please input your task" >
+        </div>
+        <div class="task_property_area">
+          <div class="calendar_project_area">
+            <div class="calendar_area" id="calendar_area">
+              <button id="calendar" class="clock_button">
+              ${calendar_button}
+              </button>
+            </div>
+            <div id="goal_list" class="goal_list">
+            </div>
+            </div>
+          <div id="tags_review_area" class="tags_review_area">
+            <div id="tasktags_area">
+              <button id="tags_button" class="tags_button">
+                ${tags_button}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="add_task_button_area" id="add_task_button_area")>
+          <button class="add_task_click_button">添加任务</button>
+          <button class="cancel_add_task_button">取消</button>
+          <div class="add_tasktags_area" id="add_tasktags_area">
+          </div>
+      </div>
+    </div>
+  </li>`
     // $(temp_selected_id).append("<a>test the task append</a>");
     // var div = document.createElement("div");
-    add_plus.insertAdjacentElement('afterend',createNode(add_task_div))
-    // add_plus.appendChild(div)
-    //  $(this).append("<button>这是一个按键</button>")
-    //  var add_plus = $(this);
-    //  console.log("-------------------我正在输出add_plus========")
-    //  console.log(add_plus);
-    //  add_plus.innerHTML = "字符串测试";
-    //  document.getElementById("add_task2project_button").outerHTML = "";
-    //  getgoalincludeproject()
-
+    // 在获取到的div后面插入任务输入窗口，这个方法也可以用在子任务上面
+    add_plus.insertAdjacentElement('afterend',createNode(add_task_div_right_side))
   })
 
 //===============================================================================//
@@ -619,26 +669,50 @@ $(document).on("click","input.add_sontask_button",function(){
     console.log(parentid)
      console.log(selected_project)
      console.log(selected_goal)
-    //  console.log(selected_goal.firstChild.innerHTML)
-    // console.log(createNode(add_task_div))
 
-    // var add_task_div = createNode(add_task_div)
-    
-    // var temp_selected_id = `${selected_goal}_${selected_project}`.hashCode()
-    // console.log(temp_selected_id)
     var add_plus = document.getElementById(parentid);
 
+    var add_task_div_right_side = 
+    `
+    <li id="add_task_item_right_side">
+    <div class="add_task_area" id="add_task" >
+      <div class="input_task_area" id="input_task_area">
+        <div class="task_container">
+        <input class="input_text" type="text" id="noid" placeholder="please input your task" >
+        </div>
+        <div class="task_property_area">
+          <div class="calendar_project_area">
+            <div class="calendar_area" id="calendar_area">
+              <button id="calendar" class="clock_button">
+              ${calendar_button}
+              </button>
+            </div>
+
+            <div id="goal_list" class="goal_list">
+            </div>
+            </div>
+
+          <div id="tags_review_area" class="tags_review_area">
+            
+            <div id="tasktags_area">
+              <button id="tags_button" class="tags_button">
+                ${tags_button}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="add_task_button_area" id="add_task_button_area")>
+          <button class="add_task_click_button">添加任务</button>
+          <button class="cancel_add_task_button">取消</button>
+          <div class="add_tasktags_area" id="add_tasktags_area">
+          </div>
+      </div>
+    </div>
+  </li>`
     // $(temp_selected_id).append("<a>test the task append</a>");
     var div = document.createElement("div");
-    add_plus.insertAdjacentElement('afterend',createNode(add_task_div))
-    // add_plus.appendChild(div)
-    //  $(this).append("<button>这是一个按键</button>")
-    //  var add_plus = $(this);
-    //  console.log("-------------------我正在输出add_plus========")
-    //  console.log(add_plus);
-    //  add_plus.innerHTML = "字符串测试";
-    //  document.getElementById("add_task2project_button").outerHTML = "";
-    //  getgoalincludeproject()
+    add_plus.insertAdjacentElement('afterend',createNode(add_task_div_right_side))
   })
 
 
@@ -736,9 +810,9 @@ $(document).on("click",".add_task2tomorrow_button",function(){
   })
 
 // 左边todaytree点击明天的按键把任务添加到明天  todaytree_add_task2tomorrow_button
-$(document).on("click",".todaytree_add_task2tomorrow_button",function(){
+$(document).on("click",".left_add_task2tomorrow_button",function(){
     // 先判断是今天还是明天，然后决定是把任务更新到今天，还是更新到明天
-    if(today_or_tomorrow == 1){
+    
         var clicked_taskid = []
         clicked_taskid.push($(this).attr("value"))
         var task_li_div = document.getElementById(clicked_taskid)
@@ -764,7 +838,7 @@ $(document).on("click",".todaytree_add_task2tomorrow_button",function(){
                 // alert("您已经成功把任务添加到明天")
                 task_li_div.outerHTML = ""
                 // geteverydaytask()
-                show_today_or_tomorrow_task()
+                show_tomorrow_tree()
                 },
                 failure: function (errMsg) {
                   console.log("this is erro")
@@ -772,9 +846,16 @@ $(document).on("click",".todaytree_add_task2tomorrow_button",function(){
       
                 }
               })   
-    }
+   
     
-    if(today_or_tomorrow == 2){
+});
+
+
+
+
+    $(document).on("click",".left_add_task2today_button",function(){
+    
+   
         // alert("我正在调用这个今天的函数")
         var clicked_taskid = $(this).attr("value")
         // alert(clicked_taskid)
@@ -823,9 +904,8 @@ $(document).on("click",".todaytree_add_task2tomorrow_button",function(){
                   console.log(data)
                   // alert(data); 
                   task_li_div.outerHTML = ""
-                //   geteverydaytask()
-                show_today_or_tomorrow_task()
-                // rebalance()
+              show_today_tree()
+            
                 //   get_all_unfinished_tasks_list()
                   
                 },
@@ -834,9 +914,11 @@ $(document).on("click",".todaytree_add_task2tomorrow_button",function(){
                   alert(errMsg);
                 }
               })
-    }
+    
 
   })
+
+
 
 // 点击左侧Todaytree的向右的键头，把任务日期调到660606这一天，同时移除左侧的任务
 $(document).on("click",".todaytree_move_task2someday_button",function(){
@@ -868,7 +950,6 @@ $(document).on("click",".todaytree_move_task2someday_button",function(){
             //   geteverydaytask()
             show_today_or_tomorrow_task()
               get_all_unfinished_tasks_list()
-            //   rebalance()
               
             },
             failure: function (errMsg) {
@@ -935,18 +1016,7 @@ $(document).on("click",".add_task2today_button",function(){
     // alert("调试到今天的事件被触发")
     var clicked_taskid = $(this).parent().parent().attr("id")
     var task_li_div = document.getElementById(clicked_taskid)
-    // var giveup_taskids = []
-    // giveup_taskids.push(clicked_taskid)
-    // var sons = sontree[clicked_taskid]
-    // for (let i = 0; i < sons.length; i++) {
-    //   var grandson_id = sons[i].ID
-    //   giveup_taskids.push(grandson_id)
-    //   grandsons = sontree[grandson_id]
-    //   for (let j = 0; j < grandsons.length; j++) {
-       
-    //     giveup_taskids.push(grandsons[j].ID)
-    //   }
-    // }
+
     console.log("==========这里是所有要调度到今天任务的ID=============")
     console.log(clicked_taskid)
     // console.log(giveup_taskids)
@@ -986,12 +1056,11 @@ $(document).on("click",".add_task2today_button",function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) { 
-            //   alert("我正在把任务调度到今天")
+            //   alert("我成功把任务调度到今天")
               console.log(data)
               // alert(data); 
               task_li_div.outerHTML = ""
               show_today_tree()
-            //   rebalance()
             },
             failure: function (errMsg) {
               console.log("this is erro")
@@ -1049,7 +1118,6 @@ $(document).on("click",".finish_goal_class",function(){
               console.log(data)
               // alert(data); 
               this_goal_div.outerHTML = ""
-            //   rebalance()
             },
             failure: function (errMsg) {
               console.log("this is erro")
@@ -1092,7 +1160,6 @@ $(document).on("click",".giveup_goal_class",function(){
           console.log(data)
           // alert(data); 
           this_goal_div.outerHTML = ""
-        //   rebalance()
         },
         failure: function (errMsg) {
           console.log("this is erro")
@@ -1126,7 +1193,6 @@ $(document).on("click",".finish_project_class",function(){
           console.log(data)
           // alert(data); 
           this_project_div.outerHTML = ""
-        //   rebalance()
         },
         failure: function (errMsg) {
           console.log("this is erro")
@@ -1382,7 +1448,6 @@ myChart.setOption(option = {
 
 // ---------------------------------------------------
 // ----------------------------------------------------
-var WebSocketswitch = false
 var token = getCookieValue("email")
 var  WebSocketurl = 'ws://47.100.100.141:777'
 var localhostWebSocketurl = "ws://localhost:777"
@@ -1416,10 +1481,7 @@ var heartCheck = {
 
 
 
-function connect(url,switchofws) {
-    if (!switchofws){
-        return
-    }
+function connect(url) {
   var ws = new WebSocket(url);
   
  //   ws.binaryType = 'arraybuffer';
@@ -1457,8 +1519,7 @@ function connect(url,switchofws) {
     console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
     setTimeout(function() {
     // connect('ws://localhost:777');
-    // connect(url);
-    connect(url+"/email="+token,WebSocketswitch)
+    connect(url);
     // connect('ws://localhost:777');
     }, 1000);
   };
@@ -1473,7 +1534,7 @@ function connect(url,switchofws) {
 //connect(localhostWebSocketurl)
  //connect('ws://localhost:777')
 // connect(httpsWebSocketurl)
-connect(localhostWebSocketurl+"/email="+token,WebSocketswitch)
+// connect(localhostWebSocketurl+"/email="+token)
 
 
 
@@ -1521,7 +1582,7 @@ var resize = function() {
         // width: window.innerWidth ,
         // height: window.innerHeight
         width: $(window).width()/2,
-        height: "600px"
+        height: "300px"
       });
     };
 
