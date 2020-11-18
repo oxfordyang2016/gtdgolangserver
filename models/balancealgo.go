@@ -71,9 +71,8 @@ func Allmarked_factors(email string) map[string][]string {
 	var result []Result
 	today := time.Now().In(loc).Format("060102")
 
-	db.Raw(`SELECT name,goalcode,priority  FROM goalfordbs  WHERE email ="` + email + `"` + ` and ` + ` name   IN (SELECT goal  FROM tasks  WHERE  status in (` + `"giveup","g","finished","finish"` + `)` + `and  finishtime=` + `"` + today + `"` + ` and email =` + `"` + email + `"` + `);`).Scan(&result)
+	db.Raw(`SELECT name,goalcode,priority  FROM goalfordbs  WHERE email ="` + email + `"` + ` and ` + ` name   IN (SELECT goal  FROM tasks  WHERE  status in (` + `"finished","f","finish"` + `)` + `and  finishtime=` + `"` + today + `"` + ` and email =` + `"` + email + `"` + `);`).Scan(&result)
 	var allgoals_finished = []string{}
-
 	for i, _ := range result {
 		allgoals_finished = append(allgoals_finished, result[i].Name)
 	}
