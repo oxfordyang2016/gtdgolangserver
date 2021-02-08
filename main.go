@@ -16,8 +16,12 @@ import (
 	//"github.com/yangming/stringutil"
 	//"fmt"
 	// "os"
-	// "io"
+
 	//"./math"
+
+	"io"
+	"os"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -44,8 +48,18 @@ func main() {
 
 	// f, _ := os.Create("engine.log")
 	// gin.DefaultWriter = io.MultiWriter(f)
+	f, _ := os.Create("gin.log")
+	gin.DefaultWriter = io.MultiWriter(f)
 	router := gin.Default()
 	router.Use(cors.Default())
+	// Recovery middleware recovers from any panics and writes a 500 if there was one.
+	// router.Use(gin.CustomRecovery(func(c *gin.Context, recovered interface{}) {
+	// 	if err, ok := recovered.(string); ok {
+	// 		c.String(http.StatusInternalServerError, fmt.Sprintf("error: %s", err))
+	// 	}
+	// 	c.AbortWithStatus(http.StatusInternalServerError)
+	// }))
+
 	v1 := router.Group("/v1")
 
 	router.LoadHTMLGlob("templates/*.html")
@@ -69,8 +83,14 @@ func main() {
 	//test api
 	v1.GET("/test", Test)
 	v1.GET("/time", Clock)
+	v1.GET("/panic", func(c *gin.Context) {
+		// panic with a string -- the custom middleware could save this to a database or report it to the user
+		panic("foo")
+	})
+	v1.GET("/location", Canvas)
 	//user system
 	v1.GET("/", User)
+	v1.GET("/emailverify", EmailGenerateCode)
 	v1.POST("/login", Login)
 	v1.POST("/register", Register)
 
@@ -111,7 +131,6 @@ func main() {
 	v1.POST("/tomorrowtasksbatch", Tomorrowtasksbatch)
 	v1.POST("/updateforios", Updateforios)
 	v1.GET("/map", Googlemapservice)
-	v1.GET("/location", Canvas)
 	v1.GET("/deadlinesystemjson", Deadlinesystem)
 	v1.POST("/taskexecute", Taskexecutelogfun)
 	//principle system

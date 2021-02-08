@@ -25,6 +25,7 @@ import (
 
 	//"github.com/go-redis/redis"
 	//"github.com/garyburd/redigo/redis"
+	_ "github.com/robfig/cron/v3"
 
 	"github.com/tidwall/gjson"
 )
@@ -418,6 +419,23 @@ func Createtaskfromsiri(c *gin.Context) {
 		"score":   score,
 		"message": "u have uploaded info,please come on!",
 	})
+}
+
+// 外部的创建任务函数供定时调度器使用
+func Createtaskbyscheduler() {
+	//检测当前执行时间,将其设为计划执行时间
+	loc, _ := time.LoadLocation("Asia/Shanghai")
+	plantime := time.Now().In(loc).Format("060102")
+	// 要将返回的调度器对应任务的id也绑定在任务上面
+	// 这样做可以保证从多个任务直接修改对应调度器
+	//每次执行任务都传入的是同样的id，这样保证在第一次创建的时候就需要拿到id
+
+	//这里可以先声明一个打印字符串，获取到运行任务id，然后将其他函数的功能加在这个上面
+	//初步设计想法是增加
+	/*
+	   WHO 增加了一个什么任务，开始时间、结束时间、调度语法
+	*/
+	fmt.Sprintf("%s", plantime)
 }
 
 // createTodo add a new todo
@@ -1433,6 +1451,15 @@ func Todaytaskweb(c *gin.Context) {
 
 // createTodo add a new todo
 func Test(c *gin.Context) {
+	// entryid, _ := crontab.AddFunc("* * * * *", func() { fmt.Println("Every hour on the half hour") })
+	// fmt.Println("启动一个调度器")
+	// fmt.Println(entryid)
+	// crontab.Start()
+	// fmt.Println(crontab)
+
+	if 5 > 4 {
+		panic("runtime error: first name cannot be nil")
+	}
 	c.JSON(200, gin.H{
 		"status":  "conected........",
 		"message": "welcome to new world",
