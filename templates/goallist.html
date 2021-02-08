@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>beautiful dream</title>
+    <!--https://stackoverflow.com/questions/4888377/how-to-add-a-browser-tab-icon-favicon-for-a-website-->
+  <!--https://stackoverflow.com/questions/4644027/how-to-automatically-reload-a-page-after-a-given-period-of-inactivity-->
+<link rel="stylesheet" type="text/css" href="/v1/show.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/v1/style.css" media="screen" />
+<style>
+/* .l-title {
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   display: inline-block;
+   max-width: 160px;
+   min-width: 150px;
+   font-size: 34px;
+}
+
+
+
+div#goallist {
+    width: 520px;
+    min-width: 520px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 120px;
+} */
+
+.urgent{
+  color:red
+}
+
+
+
+
+</style>
+<script src="/v1/jquery.js"></script>
+  <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png"> 
+  </head>
+ 
+
+<!--
+<script>
+$(document).ready(function(){
+
+
+        //var a= "https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/IMG_0348.JPG"
+        //var a= "https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/IMG_0343.JPG"
+        //var a="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/IMG_0339.JPG"
+        var a="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/IMG_0326.JPG"
+        //var a ="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/IMG_0325.JPG"
+
+        var img ="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/"+Math.floor(Math.random() * 25)+".JPG";
+        //document.body.style.backgroundImage = "url("+img+")";
+        document.body.style.backgroundImage = "url("+img+")";
+});
+</script>
+-->
+
+
+
+
+
+  <body>
+<div id="intro" >
+
+
+
+    </div>
+  </body>
+  <script>
+
+
+   getgoallist()
+
+    var   taskids = [];
+    function add2tasksidarray(taskid){
+      taskids.push(taskid)
+    }
+    
+    function getgoallist(){
+        $.get("/v1/goalsgraph?type=noproject", function(data, status){
+    // alert("Data: " + data + "\nStatus: " + status);
+    console.log(data);
+    var div = document.getElementById('intro');
+    div.innerHTML = ""
+    var  alltask=''
+    // goals.sort(function(a, b){return (a.Priority-b.Priority)&(a.Name-b.Name)});
+    var goals = data.goals
+    goals.sort(function(a, b){
+        if  (b.Priority>a.Priority) return 1;
+        if  (b.Priority<a.Priority) return -1;
+        if  (b.Name>a.Name) return -1;
+        if  (b.Name<a.Name) return 1;
+    
+    });
+    var tasks = data.task
+    // div.innerHTML += '<li>this is  a task<li>';
+      var i = 0
+     
+      var head = '<h1 style="color:blue;">Today tasks</h1><ul class="tree">'
+       var  tail = '</ul>'
+       var  goalisthtml = '<button onclick="giveuptasks()">batch abandon</button><button onclick="tomorrowtasks()">tomorrow batch</button>'
+      while (i<goals.length)
+    {
+       var goaltitle = '<h5 style="color:blue;">'+goals[i].Name+'<h5>'
+        var  tasksingoalhtml = ''
+        var j = 0
+        console.log(`目标是${goals[i].Name}`)
+        console.log(`目标里面任务的长度为${goals[i].Alltasksingoal.length}`)
+        var tasktag = "no"
+      while (j<goals[i].Alltasksingoal.length){
+        var tasktags= JSON.parse(goals[i].Alltasksingoal[j].tasktags)
+        // console.log(temp.urgenttag)
+        if(tasktags.urgenttag == "yes"){
+          tasktag = "urgent"
+        }
+       tasksingoalhtml =  tasksingoalhtml + `<li><input type="checkbox" id= ${goals[i].Alltasksingoal[j].ID} onchange="add2tasksidarray(this.id)" class = "checkbox" id="scales" name="scales"
+  ><a class="${tasktag}"> ${goals[i].Alltasksingoal[j].task}<input type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/plus.svg" alt="Submit" width="12" height="12"><input type="image" src="https://test-1255367272.cos.ap-chengdu.myqcloud.com/cancel.svg" alt="Submit" width="12" height="12"></a></li>`
+       console.log(`目标里面任务的长度为${goals[i].Alltasksingoal.length}`)
+       tasktag = "no"
+       j++ 
+      }
+     goalisthtml = goalisthtml +goaltitle+tasksingoalhtml
+    i++;
+}
+div.innerHTML  = '<ul>'+ goalisthtml +'</ul>'
+$('.checkbox').hide(); 
+  });
+    };
+
+    function add2tasksidarray(taskid){
+      taskids.push(taskid)
+    }
+
+
+
+   
+    function giveuptasks(){
+      console.log(`任务数组的长度为${taskids.length}`)
+      
+      if (taskids.length ==0){
+      
+        $('.checkbox').show();
+      }
+      if (taskids.length >0){
+        $('.checkbox').hide();
+        var updatedtask = $("#updatedtask").val()
+   
+
+      var info =
+      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+      {
+        'giveuptaskids':taskids,
+      }
+      $.ajax({
+        type: "POST",
+        url: "/v1/giveuptasksbatch",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(info),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+          taskids = []
+          // alert(data);
+          
+         },
+        failure: function (errMsg) {
+          alert(errMsg);
+        }
+      })
+       
+      }
+
+    }
+
+
+
+    function tomorrowtasks(){
+      console.log(`任务数组的长度为${taskids.length}`)
+      if (taskids.length ==0){
+      
+        $('.checkbox').show();
+      }
+      if (taskids.length >0){
+        $('.checkbox').hide();
+        var updatedtask = $("#updatedtask").val()
+   
+
+      var info =
+      // {"inbox":"we am creating task","client":"gtdcli","goalcode":"aaa","tasktags":{"importanttag":"yes"},"parentid":"unspecified"}
+      {
+        'tomorrowtaskids':taskids,
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/v1/tomorrowtasksbatch",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(info),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) { 
+          taskids = []
+          // alert(data);
+         },
+        failure: function (errMsg) {
+          alert(errMsg);
+        }
+      })
+       
+      }
+
+    }
+
+
+
+
+
+
+
+
+
+
+ </script>
+</html>

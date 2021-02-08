@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>beautiful dream</title>
+    <!-- 引入 echarts.js -->
+
+    <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/v1/echart.js"></script>
+</head>
+<script>
+    jQuery.ajaxSetup({async:false});
+    // Set the date we're counting down to
+    var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
+    
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+    
+        // Get todays date and time
+        var now = new Date();
+        
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var hour = now.getHours();
+        var stringhour =  hour.toString();
+        if (stringhour.length<2){
+            stringhour = "0" + stringhour;
+        }
+    
+        
+    
+        var minutes = now.getMinutes();
+    
+         var stringminutes =  minutes.toString();
+        if (stringminutes.length<2){
+            stringminutes = "0" + stringminutes;
+        }
+    
+    
+        var seconds = now.getSeconds();
+    
+           var stringseconds =  seconds.toString();
+        if (stringseconds.length<2){
+            stringseconds = "0" + stringseconds;
+        }
+    
+    
+    
+        // Output the result in an element with id="demo"
+        //document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        //+ minutes + "m " + seconds + "s ";
+        
+        document.getElementById("demo").innerHTML = stringhour +":"+stringminutes+":"+stringseconds+"s";
+    
+        // If the count down is over, write some text 
+        // if (distance < 0) {
+        //     clearInterval(x);
+        //     document.getElementById("demo").innerHTML = "EXPIRED";
+        // }
+    }, 1000);
+    
+    
+    </script>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="time" style="width: 3000px;height:200px;">
+        <ul id="demo"></ul>
+    </div>
+    <div id="main" style="width: 3000px;height:3000px;"></div>
+    <script type="text/javascript">
+     // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+/*        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+ data: [5, 20, 36, 10, 10, 20]
+}]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+*/
+//myChart.showLoading();
+//$.get('data/asset/data/flare.json', function (data) {
+//myChart.hideLoading();
+
+jQuery.ajaxSetup({async:false});
+  function  getprojectrees(){
+    projectsfortree = []
+    $.get("/v1/projectsjson", function(data, status){
+    var datafromserver = data
+    //console.log(indicators.hist)
+    projects = datafromserver.projects
+    // histv = indicators.hist
+    // signalv = indicators.signal
+    // kdjkv =  indicators.kdjk
+    // kdjdv =  indicators.kdjd
+    // kdjjv =  indicatof       rs.kdjj
+
+    for(j=0;j<projects.length;j++){
+        console.log("--------")
+    //macdvalue.push(projects[i])
+    singleproject_tasks = []
+    for(i=0;i<projects[j].Alltasksinproject.length;i++){
+     var alltasks = projects[j].Alltasksinproject
+      singleproject_tasks.push({"name":alltasks[i].task +"-"+alltasks[i].ID.toString(),"value":223})
+    }
+    projectsfortree.push({"name":projects[j].Name,"children":singleproject_tasks})
+    }
+   })
+return projectsfortree
+}
+var data = {"name":"dm","children":getprojectrees()}
+
+myChart.showLoading();
+    myChart.hideLoading();
+    var _zr = myChart.getZr();
+ ShowObjProperty(_zr);
+    _zr.add(new echarts.graphic.Text({
+     style: {            
+   x: _zr.getWidth() / 2,
+   y: _zr.getHeight() / 2,
+   color: '#666', 
+   text: '集团重大风险',
+   textAlign: 'center', 
+   textFont : 'bold 20px verdana'
+   }}  
+    ));
+/*
+    echarts.util.each(data.children, function (datum, index) {
+        index % 2 === 0 && (datum.collapsed = true);
+    });
+
+    myChart.setOption(option = {
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
+        },
+        series: [
+            {
+                type: 'tree',
+
+                data: [data],
+
+                top: '2%',
+                left: '7%',
+                bottom: '1%',
+                right: '20%',
+
+                symbolSize: 7,
+
+                label: {
+                    normal: {
+                        position: 'left',
+                        verticalAlign: 'middle',
+                        align: 'right',
+                        fontSize: 15
+                    }
+                },
+
+                leaves: {
+                    label: {
+                        normal: {
+                            position: 'right',
+                            verticalAlign: 'middle',
+                            align: 'left'
+                        }
+                    }
+                },
+
+                expandAndCollapse: true,
+                animationDuration: 550,
+                animationDurationUpdate: 750
+            }
+        ]
+    });
+*/
+myChart.setOption(option = {
+    tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove'
+    },
+    series: [
+        {
+            type: 'tree',
+
+            data: [data],
+
+            top: '18%',
+            bottom: '14%',
+
+            layout: 'radial',
+
+            symbol: 'pin',
+
+            symbolSize: 10,
+
+            initialTreeDepth: 2,
+            rom:true,
+            emphasis:{
+                lineStyle:{width:20}
+            },
+            label:{show:true,position:"right",rotate:12,fontStyle:'italic',fontSize:15},
+            lineStyle:{width:1,color:"red",curveness:0.1},
+            animationDurationUpdate: 750
+
+        }
+    ]
+});
+
+</script>
+</body>
+</html>

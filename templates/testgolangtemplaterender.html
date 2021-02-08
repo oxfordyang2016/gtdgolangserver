@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>beautiful dream</title>
+    <!--https://stackoverflow.com/questions/4888377/how-to-add-a-browser-tab-icon-favicon-for-a-website-->
+  <!--https://stackoverflow.com/questions/4644027/how-to-automatically-reload-a-page-after-a-given-period-of-inactivity-->
+<link rel="stylesheet" type="text/css" href="/show.css" media="screen" />
+<script src="/jquery.js"></script>
+  <link rel="icon" sizes="192x192" type="image/png" href="https://d3ptyyxy2at9ui.cloudfront.net/d2043167d727a78186d9f8e734590f5a.png">
+  </head>
+  <script>
+       var time = new Date().getTime();
+       $(document.body).bind("mousemove keypress", function(e) {
+           time = new Date().getTime();
+       });
+
+       function refresh() {
+         <!--5s-->
+           if(new Date().getTime() - time >= 300000)
+               window.location.reload(true);
+           else
+               setTimeout(refresh, 10000);
+       }
+
+       setTimeout(refresh, 10000);
+  </script>
+  <body>
+    <div id="intro">
+      <h2 class="title">春花秋月</h2>
+      <ul>
+        <!--using gplang templates-->
+      <!--
+
+        func Inbox(c *gin.Context) {
+      emails2 := []string{"yang756260386@qq.com","satish@rubylearning.org", "satishtalim@gmail.com"}
+      emails3:=[3]string{"yang","ming","handsome"}
+      inttest :=[3]int{1,2,3,}
+      var A [2]string
+      A[0] = "Hello"
+      A[1] = "World"
+      fmt.Println(A[0], A[1])
+      fmt.Println(A)
+      var tasks []Tasks
+      db.Find(&tasks)
+      var projects []string
+      var things []string
+      for _, item := range tasks {
+        fmt.Println(item.Project)
+        projects = append(projects,item.Project)
+        things =append(things,item.Task)
+        //_todos = append(_todos, TransformedTodo{ID: item.ID, Title: item.Title, Completed: completed})
+      }
+
+      fmt.Println(projects)
+
+      person := Person{
+              Name:   "Satish",
+              Emails: []string{"satish@rubylearning.org", "satishtalim@gmail.com"},
+      }
+
+
+      testgroup :=[4]Person{Person{
+              Name:   "yangming",
+              Emails: []string{"satish@rubytest.org", "satishtalim@goo.com"},
+      },Person{
+              Name:   "finish",
+              Emails: []string{"satish@rubylearning.org", "satishtalim@gmail.com"},
+      },Person{
+              Name:   "unfinish",
+              Emails: []string{"satish@rubylearning.org", "satishtalim@gmail.com"},
+      },
+
+      Person{
+              Name:   "finish",
+              Emails: []string{"satish@rubylearning.org", "test@gmail.com"},
+      },
+      }
+
+
+      //fmt.Println(tasks)
+      //html  render https://medium.com/@IndianGuru/understanding-go-s-template-package-c5307758fab0
+        //  looptest := "string"
+        //fmt.Println(looptest)
+        c.HTML(http.StatusOK, "inbox.html",gin.H{
+         "title":"yangming","looptest":A,
+         "code":234,"person":person,"email":emails2,"email3":emails3,
+         "inttest":inttest,"task":tasks,"projects":projects,"things":things,
+         "testgroup":testgroup,
+        })
+        	}
+
+
+    -->
+  <li><a class="">{{ .title }}</a></li>
+  <li><a class="">{{ .title }}</a></li>
+  <li><a class="">{{ .title }}</a></li>
+  <li><a class="">yangming </a></li>
+   <li><a class="">yangming </a></li>
+   <li><a class="">{{ .title }}</a></li>
+<li><a class="">{{ .code }}</a></li>
+  {{ range .person.Emails}}
+<li><a class=""> yangming {{ .}}</a></li>
+ {{end}}
+ {{ range .person.Emails}}
+<li><a class=""> yangming {{ .}}</a></li>
+{{end}}
+{{ range .email}}
+<li><a class=""> yangming {{ .}}</a></li>
+{{end}}
+{{ range .email3}}
+<li><a class=""> yangming fuck u{{ .}}</a></li>
+{{end}}
+{{ range .inttest}}
+<li><a class=""> yangming fuck u{{ .}}</a></li>
+{{end}}
+{{ range .projects}}
+<li><a class=""> yangming fuck yangming {{ .}}</a></li>
+{{end}}
+{{ range .things}}
+<li><a class="finish"> yangming fuck yangming {{ .}}</a></li>
+{{end}}
+{{ range .task}}
+<li><a class="{{.status}}"> yangming fuck yangming {{ .Task}}</a></li>
+{{end}}
+
+
+
+{{ range .testgroup}}
+{{$variable := .Name}}
+<!--https://stackoverflow.com/questions/15455289/changing-variable-by-html-button-->
+{{ range .Emails}}
+<li><a class="{{$variable}}"> yangming fuck yangming {{ .}}</a></li>
+{{end}}
+{{end}}
+
+
+
+
+      </ul>
+      <p class="footer">
+        by <a>yangming</a> | <a href="yang756260386@gmail.com">feedback</a> |<a href="https://github.com/oxfordyang2016/">source</a> |<a href="https://yangmingweatherapp.herokuapp.com">page</a>
+      </p>
+    </div>
+  </bod>
+</html>

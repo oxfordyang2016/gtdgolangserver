@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>beautiful dream</title>
+    <!-- 引入 echarts.js -->
+    <script src="/v1/echart.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+   <div id="main" style="display: inline-block;"></div>
+
+<script type="text/javascript">
+
+
+
+
+var myChart = echarts.init(document.getElementById('main'));
+
+
+
+
+//https://stackoverflow.com/questions/25446628/ajax-jquery-refresh-div-every-5-seconds
+
+var resize = function() {
+      myChart.resize({
+        width: window.innerWidth ,
+        height: window.innerHeight
+      });
+    };
+
+    resize();
+
+    //窗口变动时自适应
+    window.onresize = function() {
+      resize();
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
+      //  var myChart = echarts.init(document.getElementById('main'));
+//https://stackoverflow.com/questions/133310/how-can-i-get-jquery-to-perform-a-synchronous-rather-than-asynchronous-ajax-re
+//https://stackoverflow.com/questions/25488915/async-false-for-shorthand-ajax-get-request
+jQuery.ajaxSetup({async:false});
+
+
+
+
+function loadlink(){
+var standard_group = ['totalscore','alwaysprofit','patience','usebrain','battlewithlowerbrain','learnnewthings','makeofthingsuhavelearned','difficultthings','threeminutes','getlesson','learntechuse','thenumberoftasks_score','serviceforgoal_score'];
+var datecategory = [];
+var totalscore = [];
+var patience = [];
+var alwaysprofit = [];
+var usebrain = [];
+var battlewithlowerbrain = [];
+var learnnewthings = [];
+var makeuseofthingsuhavelearned = [];
+var difficultthings = [];
+var threeminutes = [];
+var getlesson = [];
+var learntechuse = [];
+var thenumberoftasks_score = [];
+var serviceforgoal_score = [];
+var onlystartatask_score = [];
+var atomadifficulttask_score = []; 
+
+
+$.get("http://47.100.100.141/v1/reviewdaydatajsonforios?email=yang756260386@gmail.com", function(data, status){
+       // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
+        for(i=0;i<data.reviewdata.length;i++){
+             datecategory.push(data.reviewdata[i].date);
+           var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
+           totalscore.push(obj_detailofreview.totalscore);
+           patience.push(obj_detailofreview["patience"]);
+          // alert(obj_detailofreview.patience);
+           usebrain.push(obj_detailofreview["usebrain"]);
+          // alert(obj_detailofreview.usebrain);
+           battlewithlowerbrain.push(obj_detailofreview.battlewithlowerbrain);
+           learnnewthings.push(obj_detailofreview.learnnewthings);
+           makeuseofthingsuhavelearned.push(obj_detailofreview.makeuseofthingsuhavelearned);
+           difficultthings.push(obj_detailofreview.difficultthings);
+           threeminutes.push(obj_detailofreview.threeminutes);
+            getlesson.push(obj_detailofreview.getlesson);
+            learntechuse.push(obj_detailofreview.learntechuse);
+           alwaysprofit.push(obj_detailofreview.alwaysprofit);
+           thenumberoftasks_score.push(obj_detailofreview.thenumberoftasks_score);
+           serviceforgoal_score.push(obj_detailofreview.serviceforgoal_score);
+            onlystartatask_score.push(obj_detailofreview.onlystartatask_score);
+            atomadifficulttask_score.push(obj_detailofreview.atomadifficulttask);
+
+};    
+
+
+//alert(serviceforgoal_score);
+/*
+
+alert(totalscore);
+alert(datecategory);
+alert(patience);
+alert(makeuseofthingsuhavelearned);
+alert(learnnewthings);
+alert(usebrain);
+alert(battlewithlowerbrain);
+
+*/
+}
+);
+
+
+
+
+myChart.showLoading();
+myChart.hideLoading();
+var datafromserver = ['yangming','is','181923','201942','周五','周六','周日'];
+myChart.clear();
+myChart.setOption(
+
+
+
+option = {
+    title: {
+        text: 'Evaluation system'
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+    legend: {
+        data:standard_group
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : datecategory
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+
+
+    {
+            name:'Make use of things u have learned',
+            type:'line',
+            stack: 'make',
+            areaStyle: {},
+            data:makeuseofthingsuhavelearned
+        },
+
+        {
+            name:'The total score of  number of tasks finished',
+            type:'line',
+            stack: 'number',
+            areaStyle: {},
+            data:thenumberoftasks_score
+        },
+
+
+
+
+     
+        {
+            name:'Service for goal',
+            type:'line',
+            stack: 'serviceforgoal',
+            areaStyle: {},
+            data:serviceforgoal_score
+        },
+
+
+
+
+               {
+            name:'Atom a difficult task',
+            type:'line',
+            stack: 'atomadifficulttask',
+            areaStyle: {},
+            data:atomadifficulttask_score
+        },
+
+
+
+
+
+            {
+            name:'Only start a task',
+            type:'line',
+            stack: 'onlystartatask',
+            areaStyle: {},
+            data:onlystartatask_score
+        },
+
+
+
+
+    {
+            name:'Finish difficult things',
+            type:'line',
+            stack: 'difficult',
+            areaStyle: {},
+            data:difficultthings
+        },
+
+    {
+            name:'Threeminutes',
+            type:'line',
+            stack: 'three',
+            areaStyle: {},
+            data:threeminutes
+        },
+
+    {
+            name:'Alwaysproft',
+            type:'line',
+            stack: 'three',
+            areaStyle: {},
+            data:alwaysprofit
+        },
+
+
+    {
+            name:'Getlesson',
+            type:'line',
+            stack: 'getlesson',
+            areaStyle: {},
+            data:getlesson
+        },
+
+    {
+            name:'Learntechuse',
+            type:'line',
+            stack: 'learntech',
+            areaStyle: {},
+            data:learntechuse
+        },
+
+
+
+
+
+   {
+            name:'Use brain to deal with things',
+            type:'line',
+            stack: 'brain',
+            areaStyle: {},
+            data:usebrain
+        },
+
+ {
+            name:'Patience with the task',
+            type:'line',
+            stack: 'patience',
+            areaStyle: {},
+            data:patience
+        },
+
+
+
+  {
+            name:'Battle with lower brain',
+            type:'line',
+            stack: 'battle',
+            areaStyle: {},
+            data:battlewithlowerbrain
+        },
+
+
+
+   {
+            name:'Learn new things',
+            type:'line',
+            stack: 'learn',
+            areaStyle: {},
+            data:learnnewthings
+        },
+
+
+
+
+
+        {
+            name:'Totalscore',
+            type:'line',
+            stack: 'total',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            areaStyle: {normal: {}},
+            data:totalscore
+        }
+    ]
+}
+);
+
+}
+
+loadlink(); // This will run on page load
+setInterval(function(){
+    loadlink() // this will run after every 5 seconds
+}, 50000);
+
+
+
+
+
+
+
+//alert("-------------");
+</script>
+</body>
+</html>

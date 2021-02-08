@@ -1,0 +1,98 @@
+
+/* CSS reset: http://meyerweb.com/eric/tools/css/reset/ */
+
+ol, ul {
+list-style: none;
+}
+
+/* Layout and typography */
+body {
+font-family: 'Georgia', serif;
+font-size: 16px;
+line-height: 3;
+line-height: 20px;
+color: #252519;
+}
+h2 {
+text-align: center;
+border: 3px solid red;
+font-size: 32px;
+line-height: 40px;
+margin-top: 40px;
+border-radius: 10px;
+}
+
+
+p.footer {
+color: grey;
+}
+p.footer a, p.footer a:visited {
+color: grey;
+}
+div#intro {
+width: 420px;
+min-width: 420px;
+max-width: 420px;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 120px;
+}
+div#intro ul {
+padding-top: 20px;
+}
+
+/*radius https://www.w3schools.com/css/css_border.asp*/
+.finish{
+text-decoration: line-through;
+background: red;
+border: 2px solid #4CAF50;
+border-radius: 10px;
+}
+
+.project{
+background: yellow;
+border: 5px solid #311141;
+border-radius: 10px;
+}
+
+.everyday{
+background: yellow;
+border: 2px solid #4CAF50;
+}
+
+
+.unfinished,.unfinish{
+border: 2px solid #4CAF50;
+background:white;
+}
+
+
+.giveup{
+text-decoration: line-through;
+background: teal;
+}
+
+.anotherday{
+text-decoration: line-through;
+background: green;
+}
+
+
+/*set the task that i have finished but i have forgotten*/
+.forgotten{
+text-decoration: line-through;
+background:lime;
+}
+
+
+.replace{
+text-decoration: line-through;
+background:blue;
+}
+
+
+
+.subproject{
+text-decoration: line-through;
+background: blue;
+}

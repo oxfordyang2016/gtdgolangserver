@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>beautiful dream</title>
+ <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
+    <!-- 引入 echarts.js -->
+    <!-- <script src="/v1/echart.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/echarts-en.common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="top">
+       
+        <div id="main" style="display: inline-block;" ></div>
+        <div><ul id="demo"></ul></div>
+    </div>
+   <style>
+   #top{
+
+   height:100%  
+}
+/* hide  scroll bar */
+/* https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll */
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+   </style>
+
+
+   <script>
+    jQuery.ajaxSetup({async:false});
+    // Set the date we're counting down to
+    var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
+    
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+    
+        // Get todays date and time
+        var now = new Date();
+        
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var hour = now.getHours();
+        var stringhour =  hour.toString();
+        if (stringhour.length<2){
+            stringhour = "0" + stringhour;
+        }
+    
+        
+    
+        var minutes = now.getMinutes();
+    
+         var stringminutes =  minutes.toString();
+        if (stringminutes.length<2){
+            stringminutes = "0" + stringminutes;
+        }
+    
+    
+        var seconds = now.getSeconds();
+    
+           var stringseconds =  seconds.toString();
+        if (stringseconds.length<2){
+            stringseconds = "0" + stringseconds;
+        }
+    
+    
+    
+        // Output the result in an element with id="demo"
+        //document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        //+ minutes + "m " + seconds + "s ";
+        
+        document.getElementById("demo").innerHTML = stringhour +":"+stringminutes+":"+stringseconds+"s";
+    
+        // If the count down is over, write some text 
+        // if (distance < 0) {
+        //     clearInterval(x);
+        //     document.getElementById("demo").innerHTML = "EXPIRED";
+        // }
+    }, 1000);
+    
+    
+    </script>
+
+
+<script type="text/javascript">
+
+function getCookieValue(a) {
+    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+}
+
+
+
+
+var WebSocketswitch = true
+var token = getCookieValue("email")
+var  WebSocketurl = 'ws://47.100.100.141:777'+"/email="+token
+var localhostWebSocketurl = "ws://localhost:777"+"/email="+token
+var httpsWebSocketurl ='wss://www.blackboxo.top/wss'+"/email="+token
+var heartCheck = {
+    timeout: 6000,//60ms
+    timeoutObj: null,
+    ws:null,
+    serverTimeoutObj: null,
+    reset: function(){
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+　　　　 this.start();
+    },
+    start: function(){
+        //alert(this.ws)
+        var self = this;
+        this.timeoutObj = setTimeout(function(){
+        console.log("------我在这里测试心跳-----------")
+        // alert(self.ws)
+        console.log("------我在这里测试心跳-----------")
+        self.ws.send("HeartBeat");
+        self.serverTimeoutObj = setTimeout(function(){
+        self.ws.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+            }, self.timeout)
+        }, this.timeout)
+    },
+}
+
+
+
+
+
+function connect(url,switchofws) {
+    if (!switchofws){
+        return
+    }
+  var ws = new WebSocket(url);
+  
+ //   ws.binaryType = 'arraybuffer';
+    ws.onopen = function() {
+    //alert(ws)
+    heartCheck.ws = ws;
+    // alert(heartCheck.ws)
+    heartCheck.start()
+    // subscribe to some channels
+    console.log("发送数据到服务器进行测试")
+    ws.send("Message to send");
+    console.log("发送数据到服务器进行测试")
+    // ws.send(JSON.stringify({
+    //   "a":1
+    //     //.... some message the I must send when I connect ....
+    // }));
+  };
+
+  ws.onmessage = function(e) {
+    heartCheck.reset();
+    console.log('Message:', e.data);
+    if (e.data =="服务器发送图像数据到前端"){
+     //var data = {"name":"goals","children":getgoaltrees()}
+    //  doooo(data)
+     loadlink()
+    }
+   
+    // var data = new Uint8Array(e.data);
+    // player.feed(data);
+    
+  };
+  
+  //超市重新链接
+  ws.onclose = function(e) {
+    // var tempurl = url + "/email="+token
+    console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+    setTimeout(function() {
+    // connect('ws://localhost:777');
+    // connect(url);
+    
+    console.log(url)
+    // console.log(tempurl)
+    connect(url,WebSocketswitch)
+    // connect('ws://localhost:777');
+    }, 1000);
+  };
+
+  ws.onerror = function(err) {
+    console.error('Socket encountered error: ', err.message, 'Closing socket');
+    ws.close();
+  };
+}
+
+
+//connect(localhostWebSocketurl)
+ //connect('ws://localhost:777')
+// connect(httpsWebSocketurl)
+// connect(localhostWebSocketurl,WebSocketswitch)
+connect(httpsWebSocketurl,WebSocketswitch)
+
+
+
+
+
+
+
+function calculateMA(dayCount, data) {
+    console.log("i had no ho")
+    var result = [];
+    for (var i = 0, len = data.length; i < len; i++) {
+        if (i < dayCount) {
+            result.push('-');
+            continue;
+        }
+        var sum = 0;
+        for (var j = 0; j < dayCount; j++) {
+            sum += data[i - j];
+        }
+        result.push(+(sum / dayCount).toFixed(3));
+    }
+    console.log(result)
+    return result;
+    
+}
+
+
+
+//echarts.init(document.getElementById('main')).dispose();
+var myChart = echarts.init(document.getElementById('main'));
+
+
+function gettoday(){
+    var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy.toString().substring(2,4)+mm+dd  ;
+return today
+}
+
+//https://stackoverflow.com/questions/25446628/ajax-jquery-refresh-div-every-5-seconds
+
+var resize = function() {
+      myChart.resize({
+        // width: window.innerWidth ,
+        // height: window.innerHeight
+        // width: "700px" ,
+        // height: "600px"
+        width: $(window).width(),
+        height: $(window).height()
+      });
+    };
+
+    resize();
+
+    //窗口变动时自适应
+    window.onresize = function() {
+      resize();
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     // 基于准备好的dom，初始化echarts实例 http://echarts.baidu.com/examples/#chart-type-treemap
+      //  var myChart = echarts.init(document.getElementById('main'));
+//https://stackoverflow.com/questions/133310/how-can-i-get-jquery-to-perform-a-synchronous-rather-than-asynchronous-ajax-re
+//https://stackoverflow.com/questions/25488915/async-false-for-shorthand-ajax-get-request
+jQuery.ajaxSetup({async:false});
+
+
+
+
+function loadlink(){
+var standard_group = ['totalscore',"todayscore",'doanimportantthingearly','markataskimmediately','alwaysprofit','patience','usebrain','battlewithlowerbrain','learnnewthings','makeofthingsuhavelearned','difficultthings','threeminutes','getlesson','learntechuse','thenumberoftasks_score','serviceforgoal_score'];
+var datecategory = [];
+var totalscore = [];
+var todayscore = [];
+var patience = [];
+var alwaysprofit = [];
+var usebrain = [];
+var battlewithlowerbrain = [];
+var learnnewthings = [];
+var makeuseofthingsuhavelearned = [];
+var difficultthings = [];
+var threeminutes = [];
+var getlesson = [];
+var learntechuse = [];
+var thenumberoftasks_score = [];
+var serviceforgoal_score = [];
+var onlystartatask_score = [];
+var atomadifficulttask_score = []; 
+var doanimportantthingearly = [];
+var markataskimmediately = [];
+var buildframeandprinciple = [];
+var acceptfact = [];
+var executeablity = [];
+
+
+$.get("/v1/reviewdaydatajson", function(data, status){
+       // alert("Data: " + data.reviewdata[0].ID + "\nStatus: " + status);
+        for(i=0;i<data.reviewdata.length;i++){
+          
+
+
+             datecategory.push(data.reviewdata[i].date);
+             if (data.reviewdata[i].details != ""){
+                var obj_detailofreview = JSON.parse(data.reviewdata[i].details);
+           totalscore.push(obj_detailofreview.totalscore);
+           patience.push(obj_detailofreview["patience"]);
+          // alert(obj_detailofreview.patience);
+           usebrain.push(obj_detailofreview["usebrain"]);
+          // alert(obj_detailofreview.usebrain);
+           battlewithlowerbrain.push(obj_detailofreview.battlewithlowerbrain);
+           learnnewthings.push(obj_detailofreview.learnnewthings);
+           makeuseofthingsuhavelearned.push(obj_detailofreview.makeuseofthingsuhavelearned);
+           difficultthings.push(obj_detailofreview.difficultthings);
+           threeminutes.push(obj_detailofreview.threeminutes);
+           executeablity.push(obj_detailofreview.executeability_score*obj_detailofreview.totalscore);
+            getlesson.push(obj_detailofreview.getlesson);
+            learntechuse.push(obj_detailofreview.learntechuse);
+           alwaysprofit.push(obj_detailofreview.alwaysprofit);
+           thenumberoftasks_score.push(obj_detailofreview.thenumberoftasks_score);
+           serviceforgoal_score.push(obj_detailofreview.serviceforgoal_score);
+            onlystartatask_score.push(obj_detailofreview.onlystartatask_score);
+            atomadifficulttask_score.push(obj_detailofreview.atomadifficulttask);
+         doanimportantthingearly.push(obj_detailofreview.doanimportantthingearly);
+         markataskimmediately.push(obj_detailofreview.markataskimmediately);
+         buildframeandprinciple.push(obj_detailofreview.buildframeandprinciple);
+         acceptfact.push(obj_detailofreview.acceptfact)
+             }else{
+
+                totalscore.push(0);
+           patience.push(0);
+          // alert(obj_detailofreview.patience);
+           usebrain.push(0);
+          // alert(obj_detailofreview.usebrain);
+           battlewithlowerbrain.push(0);
+           learnnewthings.push(0);
+           makeuseofthingsuhavelearned.push(0);
+           difficultthings.push(0);
+           threeminutes.push(0);
+           executeablity.push(0);
+            getlesson.push(0);
+            learntechuse.push(0);
+           alwaysprofit.push(0);
+           thenumberoftasks_score.push(0);
+           serviceforgoal_score.push(0);
+            onlystartatask_score.push(0);
+            atomadifficulttask_score.push(0);
+         doanimportantthingearly.push(0);
+         markataskimmediately.push(0);
+         buildframeandprinciple.push(0);
+         acceptfact.push(0)
+
+
+             }
+          
+          
+         if (data.reviewdata[i].date===gettoday()){break;}
+         
+};    
+
+
+
+
+
+
+
+
+//添加一条今日线
+todayscore = new Array(totalscore.length).fill(totalscore[totalscore.length-1]);
+// alert(todayscore)
+//alert(serviceforgoal_score);
+/*
+
+alert(totalscore);
+alert(datecategory);
+alert(patience);
+alert(makeuseofthingsuhavelearned);
+alert(learnnewthings);
+alert(usebrain);
+alert(battlewithlowerbrain);
+
+*/
+}
+);
+
+
+//finance api
+var thisyear = 10000
+var left = 100090
+$.get("/finance/getrewardleft", function(data, status){
+    /*
+    
+    {"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
+    */
+    var k = JSON.parse(data)
+        thisyear = k.thisyear
+        left = k.left
+        // alert(data)
+        // alert(left)     
+});  
+
+// alert(thisyear)
+
+myChart.showLoading();
+myChart.hideLoading();
+var datafromserver = ['yangming','is','181923','201942','周五','周六','周日'];
+myChart.clear();
+myChart.setOption(
+
+
+
+option = {
+    graphic: { // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text1'
+        },
+    title: {
+        text: 'Evaluation system'
+    },
+
+
+    graphic:{ // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text1',
+            style: {
+            text: totalscore[totalscore.length - 1].toFixed(2),
+            x: 100,
+            y: 200
+    }
+        },
+
+
+    tooltip : {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a7985'
+            }
+        }
+    },
+  
+    legend: {
+        data:['Totalscore','MA5','MA10','Make use of things u have learned','The total score of  number of tasks finished','Start an important thing early']
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+        graphic:[{ // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text2',
+            style: {
+            text: totalscore[totalscore.length - 1].toFixed(2),
+               x: myChart.getZr().getWidth()*4/5,
+            y: myChart.getZr().getHeight()/3, 
+   textFill:'red',
+//    textAlign: 'center', 
+   textFont : 'bold 50px verdana'
+    }
+        },
+        { // 一个图形元素，类型是 text，指定了 id。
+            type: 'text',
+            id: 'text0',
+            style: {
+            text: left.toFixed(1),
+            x: myChart.getZr().getWidth()*1/5,
+            y: myChart.getZr().getHeight()/3, 
+   textFill:'green',
+//    textAlign: 'center', 
+   textFont : 'bold 50px verdana'
+    }
+        },
+        ],
+
+
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : datecategory
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+    series : [
+/*
+
+    {
+            name:'Make use of things you have learned',
+            type:'line',
+            stack: 'make',
+            areaStyle: {},
+            data:makeuseofthingsuhavelearned
+        },
+
+        // {
+        //     name:'The total score of  number of tasks finished',
+        //     type:'line',
+        //     stack: 'number',
+        //     areaStyle: {},
+        //     data:thenumberoftasks_score
+        // },
+
+
+
+
+     
+        {
+            name:'Service for goal',
+            type:'line',
+            stack: 'serviceforgoal',
+            areaStyle: {},
+            data:serviceforgoal_score
+        },
+
+
+
+
+               {
+            name:'Atom a difficult task',
+            type:'line',
+            stack: 'atomadifficulttask',
+            areaStyle: {},
+            data:atomadifficulttask_score
+        },
+
+
+
+
+
+            {
+            name:'Only start a task',
+            type:'line',
+            stack: 'onlystartatask',
+            areaStyle: {},
+            data:onlystartatask_score
+        },
+
+
+
+
+    {
+            name:'Finish difficult things',
+            type:'line',
+            stack: 'difficult',
+            areaStyle: {},
+            data:difficultthings
+        },
+
+    {
+            name:'Threeminutes',
+            type:'line',
+            stack: 'three',
+            areaStyle: {},
+            data:threeminutes
+        },
+
+    {
+            name:'Alwaysproft',
+            type:'line',
+            stack: 'three',
+            areaStyle: {},
+            data:alwaysprofit
+        },
+
+
+    {
+            name:'Getlesson',
+            type:'line',
+            stack: 'getlesson',
+            areaStyle: {},
+            data:getlesson
+        },
+
+    
+
+
+
+
+    {
+            name:'Learntechuse',
+            type:'line',
+            stack: 'learntech',
+            areaStyle: {},
+            data:learntechuse
+        },
+
+*/
+ 
+ /*    
+  
+
+
+
+    {
+            name:'Start an important thing early',
+            type:'line',
+            stack: 'learntech',
+            areaStyle: {},
+            data:doanimportantthingearly
+        },
+
+    {
+            name:'Mark a task immediately',
+            type:'line',
+            stack: 'learntech',
+            areaStyle: {},
+            data:markataskimmediately
+        },
+
+
+
+
+   {
+            name:'Use brain to deal with things',
+            type:'line',
+            stack: 'brain',
+            areaStyle: {},
+            data:usebrain
+        },
+
+ {
+            name:'Patience with the task',
+            type:'line',
+            stack: 'patience',
+            areaStyle: {},
+            data:patience
+        },
+
+
+
+  {
+            name:'Battle with lower brain',
+            type:'line',
+            stack: 'battle',
+            areaStyle: {},
+            data:battlewithlowerbrain
+        },
+
+
+
+   {
+            name:'Learn new things',
+            type:'line',
+            stack: 'learn',
+            areaStyle: {},
+            data:learnnewthings
+        },
+
+        {
+            name:'Build frame and principle',
+            type:'line',
+            stack: 'learn',
+            areaStyle: {},
+            data:buildframeandprinciple
+        },
+        {
+            name:'Accept fact ',
+            type:'line',
+            stack: 'learn',
+            areaStyle: {},
+            data:acceptfact
+        },
+
+
+        {
+                name: 'MA5',
+                type: 'line',
+                color:'red',
+                data: calculateMA(5, totalscore),
+                smooth: true,
+                lineStyle: {
+                    normal: { opacity: 0.5 }
+                }
+            },
+
+            {
+                name: 'MA10',
+                type: 'line',
+                color:'black',
+                data: calculateMA(10, totalscore),
+                smooth: true,
+                lineStyle: {
+                    normal: { opacity: 0.5 }
+                }
+            },
+
+
+
+*/
+
+  //同时在图像中添加别的类型的曲线
+       
+        {
+            name:'Executeability',
+            type:'line',
+            color:"brown",
+  //          stack: 'e',
+//            areaStyle: {},
+            data:executeablity,
+            smooth: true,
+                lineStyle: {
+                    normal: { opacity: 1.0, 
+                    width:2,
+                    
+                    }
+
+                }
+
+
+
+
+        },
+
+
+ {
+            name:'todayscore',
+            type:'line',
+            // stack: 'e',
+            color:'red',
+            // areaStyle: {},
+            data:todayscore,
+            smooth: true,
+                lineStyle: {
+                    normal: { opacity: 1.0, 
+                    width:10
+                    }
+
+                }
+
+
+        },
+        {
+            name:'Totalscore',
+            type:'line',
+            smooth: true,
+            color:'blue',
+//            stack: 'e',
+          
+/*
+  label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            areaStyle: {normal: {}},
+*/  
+                lineStyle: {
+                    normal: { opacity: 1,
+                    width:2
+                    }
+
+                },
+          data:totalscore
+        }
+    ]
+}
+);
+// 这里需要检查异步,必须要在图像再入完成后再
+//myChart.getZr().dispose();
+// var _zr = myChart.getZr();
+// alert(_zr)
+// alert(_zr.getWidth())
+// alert(_zr.getHeight())
+//  ShowObjProperty(_zr);
+//     _zr.add(new echarts.graphic.Text({
+//      style: {            
+//    x: _zr.getWidth()*4/5,
+//    y: _zr.getHeight()/3,
+//    textFill:'red',
+//    text:totalscore[totalscore.length - 1].toFixed(2),
+// //    textAlign: 'center', 
+//    textFont : 'bold 50px verdana'
+//    }}  
+//     ));
+//     _zr.add(new echarts.graphic.Text({
+//      style: {            
+//    x: _zr.getWidth()*1/5,
+//    y: _zr.getHeight()/3, 
+//    textFill:'green',
+//    text: '10000',
+// //    textAlign: 'center', 
+//    textFont : 'bold 50px verdana'
+//    }}  
+//     ));
+
+}
+
+
+
+loadlink(); // This will run on page load
+
+
+
+setInterval(function(){
+    loadlink() // this will run after every 5 seconds
+}, 10*60000);
+
+
+
+
+
+
+
+//alert("-------------");
+</script>
+</body>
+</html>

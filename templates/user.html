@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>beautiful dream</title>
+
+ <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+<link rel="stylesheet" href="/v1/user.css">
+
+
+</head>
+
+<body>
+<div class="container">
+  <div class="info">
+    <h1>春花秋月</h1><span>Made with <i class="fa fa-heart"></i> by <a>Andy Tran</a></span>
+  </div>
+</div>
+<div class="form">
+  <div class="thumbnail"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/hat.svg"/></div>
+  <!-- i use the attibute to not open a new tab https://www.thesitewizard.com/html-tutorial/open-links-in-new-window-or-tab.shtml-->
+  <form class="register-form" enctype="application/json">
+    <input type="text" name="username" placeholder="name"/>
+    <input type="text" name="email" placeholder="email address"/>
+    <input type="password" name="password" placeholder="password"/>
+    <p id="create_button" class="p_button">create</p>
+    <p class="message">Already registered? <a href="#">Sign In</a></p>
+  </form>
+  <form class="login-form"   >
+    <input type="text" name="email" placeholder="email"/>
+    <input type="password" name="password" placeholder="password"/>
+    <!--input hidden-->
+    <input type="hidden" name="client" value="web" placeholder="client"/>
+    <p id="login_button" class="p_button">login</p>
+    <p class="message">Not registered? <a href="#">Create an account</a></p>
+  </form>
+</div>
+
+<div>
+  <button id="login_button">login</button>
+</div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <!-- <script  src="/v1/index.js"></script> -->
+<script>
+
+$('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+
+
+// login account
+$(document).on("click","#login_button",function(){
+   
+  var login_info = $(".login-form").serializeArray()
+  console.log("1"); 
+  console.log(login_info);
+   email = login_info[0].value
+   password = login_info[1].value
+   console.log("2")
+   console.log(email);
+   console.log("2")
+   console.log(password);
+
+   account_info = {
+      'email':email,
+      'password':password,
+      'client':'web'
+   }
+   console.log("3")
+   console.log(account_info)
+
+   $.ajax({
+      type: "POST",
+      url: "/v1/login",
+      // The key needs to match your method's input parameter (case-sensitive).
+      data: JSON.stringify(account_info),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function (data) { 
+      alert("登录账户成功")
+      var origin  = window.location.origin
+      window.location.href= origin + "/v1/taskmanager"
+      console.log(data)
+      // window.location.href("http://127.0.0.1:8081/v1/inbox")
+      },
+      failure: function (errMsg) {
+        console.log("this is erro")
+        alert(errMsg);
+      }
+    })
+})
+
+
+
+</script>
+</body>
+</html>

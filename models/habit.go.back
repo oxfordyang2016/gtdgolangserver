@@ -1,0 +1,70 @@
+package models
+
+import (
+"fmt"
+"encoding/json"
+"net/http"
+//"github.com/jinzhu/gorm"
+"github.com/gin-gonic/gin"
+//"github.com/gin-contrib/sessions"
+//_ "github.com/jinzhu/gorm/dialects/mysql"
+_ "github.com/jinzhu/gorm/dialects/postgres"
+_ "github.com/lib/pq"
+
+"github.com/tidwall/gjson"
+
+)
+
+
+
+
+
+//https://stackoverflow.com/questions/26327391/json-marshalstruct-returns
+type Habitdetail struct{
+Everydaytask   string `json:"everydaytask"`
+Frequency      int  `json:"frequency"`
+Starttime      int   `json:"starttime"`
+Endtime         int   `json:"endtime"`
+Datatracked  int    `json:"datatraced"`
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

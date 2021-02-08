@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>beautiful dream</title>
+    <!--https://stackoverflow.com/questions/4888377/how-to-add-a-browser-tab-icon-favicon-for-a-website-->
+  <!--https://stackoverflow.com/questions/4644027/how-to-automatically-reload-a-page-after-a-given-period-of-inactivity-->
+<link rel="stylesheet" type="text/css" href="/show.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/style.css" media="screen" />
+<script src="/jquery.js"></script>
+ <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">  
+</head>
+  <script>
+       var time = new Date().getTime();
+       $(document.body).bind("mousemove keypress", function(e) {
+           time = new Date().getTime();
+       });
+
+       function refresh() {
+          //var img ="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/"+Math.floor(Math.random() * 25)+".JPG";
+          //document.body.style.backgroundImage = "url("+img+")";
+
+
+         <!--5s-->
+           if(new Date().getTime() - time >= 300000)
+               window.location.reload(true);
+                    //var img ="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/"+Math.floor(Math.random() * 25)+".JPG";
+          //document.body.style.backgroundImage = "url("+img+")";
+               else
+               setTimeout(refresh, 10000);
+       }
+
+       setTimeout(refresh, 10000);
+  </script>
+  <body>
+<div id="intro">
+<h2 class="title">小楼昨夜又东风</h2>
+<a href="http://47.100.100.141/review?reviewtype=statistics" style="color:blue;">=data=</a><a href="/pride" style="color:blue;">=pride=</a><a href="/place" style="color:blue;">=place=</a><a href="/inbox" style="color:blue;">=inbox=</a><a style="color:blue;" href="/everyday">=everyday=</a><a style="color:blue;" href="/project">=project=</a><a style="color:blue;" href="/reviewsjson">=review=</a>
+<ul>
+<!--u can reference testgolangtemplaterender.html to do anythings-->
+{{ range .places}}
+<li><a class="everyday">{{ .Name}}</a></li>
+{{ range .Allplaces}}
+<li><a class="{{.Status}}">{{.ID}} {{.Task}}</a></li>
+{{end}}
+{{end}}
+
+
+      </ul>
+      <p class="footer">
+        by <a>yangming</a> | <a href="yang756260386@gmail.com">feedback</a> |<a href="https://github.com/oxfordyang2016/">source</a> |<a href="https://yangmingweatherapp.herokuapp.com">page</a>
+      </p>
+    </div>
+  </bod>
+</html>

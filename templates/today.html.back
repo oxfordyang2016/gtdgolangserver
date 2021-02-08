@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous"></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <title>思考与笔记</title>
+ <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+<h2>today tasks</h2>
+<div id="app">
+        <table class="table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th>plantime</th>
+            <th>task</th>
+            <th>control</th>
+            <th>devoted time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="task in tasks">
+             <th scope="row">10:50-11:00</th>
+             <td>
+                    <button class = "start"  v = "75"  status= "unselected" color= "red" v-on:click="start"  v-bind:switch="task.tasksexecute_start_status" v-bind:taskid="task.ID"    v-bind:task="task.task">Start</button>
+             
+                       <button class = "end"  status= "unselected" v-on:click="end"  v-bind:switch="task.tasksexecute_end_status" v-bind:taskid="task.ID"   v-bind:taskid="task.ID" v-bind:task="task.task">End</button>
+                       <button class = "prepare"  status= "unselected" v-bind:switch="task.test" v-bind:switch="task.tasksexecute_end_status" v-bind:taskid="task.ID"   v-bind:taskid="task.ID" v-bind:task="task.task">preparing</button> 
+                    </td>  
+             <td>{{ task.task }}</td> 
+              <td>50</td> 
+          </tr>
+         </tbody>
+      </table>
+      </div>
+</body>
+
+<!-- <embed src="http://127.0.0.1:9999/thinkingforlife/getbookmark?code=fe2546fa1fcb93ae42e2f2e5980449f2" width="800px" height="2100px" /> -->
+<script>
+// const btn = document.querySelector('#btn');
+// btn.addEventListener('click',() => {
+// 	const input = document.createElement('input');
+//     input.setAttribute('readonly', 'readonly');
+//     input.setAttribute('value', 'hello world');
+//     document.body.appendChild(input);
+// 	input.setSelectionRange(0, 9999);
+// 	if (document.execCommand('copy')) {
+// 		document.execCommand('copy');
+// 		console.log('复制成功');
+// 	}
+//     document.body.removeChild(input);
+var k = 0
+// })
+new Vue({
+  el: "#app",
+data () {
+    return {
+        name:"yangming",
+        sales: [
+        [{'Year': 2018, 'Month': 01, 'Sale': "yangming is here"}, {'Year': 2018, 'Month': 02, 'Sale': "test task id"}],
+            [{'Year': 2017, 'Month': 01, 'Sale': 155}, {'Year': 2017, 'Month': 02, 'Sale': 12}]
+    ],
+      info: null,
+      tasks:null,
+    }
+  },
+methods:{
+    start: function (event) {
+      // `this` inside methods point to the Vue instance
+      //alert('Hello ' + this.name + '!')
+    //   class="w3-button w3-black"
+      // `event` is the native DOM event
+      //alert(event.target.tagName)
+      //alert(event.target.getAttribute("v"))
+    //   event.target.setAttribute("background-color", "red");
+      //这里要向服务器发送时间
+    //   e.target.style.color= 'red'
+    const now =  Date.now().toString()
+    const taskid = event.target.getAttribute("taskid")
+    const task = event.target.getAttribute("task")
+    const thisswitch = event.target.getAttribute("switch")
+    if (thisswitch=="on"){
+        alert("please not repeated")
+        return 
+    }
+   
+    
+    //检查任务中是否有tbody中是否有没结束的任务
+    //不允许重复点击
+
+    var query = ".start[status!="+now+"][switch!='off']"
+    var a = $(query).length
+    if (a>0){
+        alert("----i ma here------")
+        alert("please end other tasks")
+    }else{
+        
+       // alert("ifthis was executed it was a bug")
+    event.target.setAttribute("status", now);
+    event.target.setAttribute("switch",  "on");
+    event.target.nextElementSibling.setAttribute("switch","off")
+    event.target.nextElementSibling.setAttribute("status",now)
+          //将按钮变红
+          event.target.style.background= 'red'
+    event.target.nextElementSibling.style.background= 'white'
+    const fakeData = [ { fake: 'data' } ];
+    alert(taskid)
+    const url = 'http://localhost:8081/v1/taskexecute';
+     axios.post(url, {
+    topic: 'topic',
+    operationtype:"start",
+    timestamp:now,
+    task:task,
+    taskid:taskid,
+    logs: fakeData, // look ma, no JSON.stringify()!
+    });
+    }
+  
+    //   alert(event.target.v)
+    },
+    end: function (event) {
+      // `this` inside methods point to the Vue instance
+    //   alert('Hello ' + this.name + '!')
+    // previousSibling
+    
+    const taskid = event.target.getAttribute("taskid")
+    const task = event.target.getAttribute("task")
+    const thisswitch = event.target.getAttribute("switch")
+    if (thisswitch=="on"){
+        alert("please not repeated")
+        return 
+    }
+
+    //如果两个switch都是end的时候请不要从end开始
+    const endswitch = event.target.getAttribute("switch")
+    const startswitch= event.target.previousElementSibling.getAttribute("switch")
+
+   if (endswitch=="off"&&startswitch=="off"){
+       alert("firstly you need to start")
+       return;
+   }
+   event.target.previousElementSibling.style.background= 'white'
+    event.target.style.background= 'red'
+    const now =  Date.now().toString()
+    event.target.setAttribute("status", now);
+    event.target.setAttribute("switch",  "on");
+    event.target.previousElementSibling.setAttribute("switch","off")
+    event.target.previousElementSibling.setAttribute("status",now)
+
+   
+   
+    
+     
+
+    var query = ".end[status!="+now+"][switch!='off']"
+    var a = $(query).length
+    
+          //将按钮变红
+    //检查任务中是否有tbody中是否有没结束的任务
+      // `event` is the native DOM event
+    //   alert(event.target.tagName)
+    const fakeData = [ { fake: 'data' } ];
+    const url = 'http://localhost:8081/v1/taskexecute';
+     axios.post(url, {
+    topic: 'topic',
+    operationtype:"end",
+    timestamp:now,
+    taskid:taskid,
+    task:task,
+    logs: fakeData, // look ma, no JSON.stringify()!
+    });
+    
+    }
+
+
+
+
+  },
+mounted () {
+    axios
+      .get('http://localhost:8081/v1/todayjson')
+      .then(response => {
+          this.info = response;
+    this.tasks = response.data.task;
+//       for (vari = 0; i < 5; i++) {
+ 
+// },
+ for (var i=0;i<this.tasks.length;i++){
+     alert(this.tasks[i])
+     this.tasks[i].test = "yangming is here"
+ };
+//       //修改默认颜色
+      k=response.data.task})
+  }
+}
+
+
+
+)
+
+
+
+
+// var app4 = new Vue({
+//   el: '#app-4',
+//   data: {
+//     todos: [
+//       { text: 'learn javaScript' },
+//       { text: 'learn Vue' },
+//       { text: 'to do aproject' }
+//     ]
+//   }
+// })
+
+
+$(".btn1").on("click",function(){
+    var url=$(this).attr("url");
+    var summary=$(this).attr("summary");
+    //执行之后的代码
+  //  alert(canshu)
+   var oInput = document.createElement('input');
+        oInput.value = summary+" "+url;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        alert('复制成功');
+});
+ 
+// function copyUrl2()
+//     {
+//         var Url2=document.getElementById("biao1").innerText;
+//         var oInput = document.createElement('input');
+//         var x = document.getElementById("biao1").parentNode.parentNode.children[0].innerText;
+//         alert(x)
+//         oInput.value = Url2;
+//         document.body.appendChild(oInput);
+//         oInput.select(); // 选择对象
+//         document.execCommand("Copy"); // 执行浏览器复制命令
+//         oInput.className = 'oInput';
+//         oInput.style.display='none';
+//         alert('复制成功');
+//     }
+
+
+
+
+    function send(bookname,pagenumber) {
+        var person = {
+            name: $("#id-name").val(),
+            address:$("#id-address").val(),
+            phone:$("#id-phone").val()
+        }
+        var bookinfo = {
+            bookname:"241_introducing_pdfkit_on_ios.pdf",
+            pagenumber:50
+        }
+
+        var resulttoserver = `{"bookname":"${bookname}","pagenumber":${pagenumber}}`
+var thinkingforlife = `http://127.0.0.1:3030/pushtothinkingforlifeiostest?bookname=${bookname}&pagenumber=`+pagenumber
+        // $('#target').html('sending..');
+// console.log(thinkingforlife)
+        // alert(JSON.stringify(bookinfo))
+        $.ajax({
+            url: thinkingforlife,
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                // $('#target').html(data.msg);
+                alert("----杨明在这里----------")
+                alert(data.msg)
+            },
+            data: JSON.stringify({"bookname":"yangming"})
+        });
+    }
+
+
+    $(".btn2").click(function(){
+    //     var bookname=$(this).attr("bookname");
+    //    var pagenumber=$(this).attr("pagenumber");
+    //   // alert(bookname,pagenumber)
+    //    send(bookname,pagenumber)
+   
+        alert("we can here")
+//   $.get("http://localhost:3030/pushtothinkingforlifeios?filename=yang&pagenumber=50", function(data, status){
+//     alert("Data: " + data + "\nStatus: " + status);
+//   });
+});
+
+// jQuery.ajaxSetup({async:false});
+// // Set the date we're counting down to
+// var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
+
+// // Update the count down every 1 second
+// var x = setInterval(function() {
+
+//     // Get todays date and time
+//     var now = new Date();
+    
+//     // Find the distance between now and the count down date
+//     var distance = countDownDate - now;
+    
+//     // Time calculations for days, hours, minutes and seconds
+//     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+//     var hour = now.getHours();
+//     var stringhour =  hour.toString();
+//     if (stringhour.length<2){
+//         stringhour = "0" + stringhour;
+//     }
+
+    
+
+//     var minutes = now.getMinutes();
+
+//      var stringminutes =  minutes.toString();
+//     if (stringminutes.length<2){
+//         stringminutes = "0" + stringminutes;
+//     }
+
+
+//     var seconds = now.getSeconds();
+
+//        var stringseconds =  seconds.toString();
+//     if (stringseconds.length<2){
+//         stringseconds = "0" + stringseconds;
+//     }
+
+
+
+//     // Output the result in an element with id="demo"
+//     //document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+//     //+ minutes + "m " + seconds + "s ";
+    
+//     document.getElementById("demo").innerHTML = stringhour +":"+stringminutes+":"+stringseconds+"s";
+
+//     // If the count down is over, write some text 
+//     // if (distance < 0) {
+//     //     clearInterval(x);
+//     //     document.getElementById("demo").innerHTML = "EXPIRED";
+//     // }
+// }, 1000);
+
+
+// jQuery.ajaxSetup({async:false});
+// // Set the date we're counting down to
+// var countDownDate = new Date("Jan 5, 2019 15:37:25").getTime();
+
+// // Update the count down every 1 second
+// var x = setInterval(function() {
+
+//     // Get todays date and time
+//     var now = new Date();
+    
+//     // Find the distance between now and the count down date
+//     var distance = countDownDate - now;
+    
+//     // Time calculations for days, hours, minutes and seconds
+//     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+//     var hour = now.getHours();
+//     var stringhour =  hour.toString();
+//     if (stringhour.length<2){
+//         stringhour = "0" + stringhour;
+//     }
+
+    
+
+//     var minutes = now.getMinutes();
+
+//      var stringminutes =  minutes.toString();
+//     if (stringminutes.length<2){
+//         stringminutes = "0" + stringminutes;
+//     }
+
+
+//     var seconds = now.getSeconds();
+
+//        var stringseconds =  seconds.toString();
+//     if (stringseconds.length<2){
+//         stringseconds = "0" + stringseconds;
+//     }
+
+
+
+//     // Output the result in an element with id="demo"
+//     //document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+//     //+ minutes + "m " + seconds + "s ";
+    
+//     document.getElementById("demo").innerHTML = stringhour +":"+stringminutes+":"+stringseconds+"s";
+
+//     // If the count down is over, write some text 
+//     // if (distance < 0) {
+//     //     clearInterval(x);
+//     //     document.getElementById("demo").innerHTML = "EXPIRED";
+//     // }
+// }, 1000);
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

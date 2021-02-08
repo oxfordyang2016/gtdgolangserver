@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/v1/jquery.js"></script>
+  </head>
+ 
+<style>
+.balancealgo {
+  display: grid;
+  /* grid-template-columns: 20px 20px 20px; */
+  /* grid-template-rows: 20px 20px 20px; */
+  grid-gap: 2rem;
+}
+
+
+
+
+
+
+
+
+/* OTHER STYLES */
+
+body {
+  /* background-color: #3b404e; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  background-color:red;
+  /* background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%); */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  /* color: yellow; */
+  border-radius: 10px;
+  /* border: 6px solid #171717; */
+}
+
+
+</style>
+<div class="balancealgo" id ='balgo'>
+</div>
+
+<script>
+  // 哈希处理的函数
+ String.prototype.hashCode = function(){
+    if (Array.prototype.reduce){
+        return this.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
+    } 
+    var hash = 0;
+    if (this.length === 0) return hash;
+    for (var i = 0; i < this.length; i++) {
+        var character  = this.charCodeAt(i);
+        hash  = ((hash<<5)-hash)+character;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+ 
+var allcombined_factors_hashs
+
+function loadbalanceui(){
+    // var grid_place = grid_place_algo(need_to_created_factors.length)
+  
+    var tagscovert = {
+      "importanttag": "重要的",
+      'feartag': "害怕的",
+      'principletag': "原则",
+      'atomtag': "原子",
+      'dfstag': "需要深度搜索",
+      'hardtag': "困难的",
+      'easytag': "容易的",
+      'urgenttag': "急迫的",
+      'challengetag': "挑战的",
+      'uncomfortabletag': "不舒服的",
+      'troublesometag': "麻烦事",
+      'keyproblemtag': "关键问题",
+      'tenminutestasktag': "10分钟",
+      'thirtyminutestasktag': "30分钟",
+      'threeminutestasktag': "3分钟",
+    }
+    
+    
+    var reviewalgo_covert = {
+          'attackactively':"主动进攻",
+          'makeuseofthings':"利用学习到的东西",
+          'depthfirstsearch':"深度优先搜索",
+          'markataskimmediately':"立即标记任务",
+          'alwaysprofit':"总是保持进步",
+          'brainuse':"动脑筋",
+          'useprinciple':"使用原则",
+          'patience':"有耐心",
+          'solveakeyproblem':"解决关键问题",
+          'learnnewthings':"学习到新内容",
+          'battlewithlowerbrain':"战胜低级情绪",
+          'difficultthings':"完成困难事情",
+          'acceptfactandseektruth':"接受事实，寻求真相",
+          'dealwithahardtask':"处理困难任务",
+          'threeminutes':"3分钟原则",
+          'serviceforgoal':"为目标服务",
+          'buildframeandprinciple':"建立框架原则",
+          'atomadifficulttask':"原子化拆分任务",
+          'noflinch':"不退缩",
+          'learntechuse':"学习技术",
+          'doanimportantthingearly':"提前完成一件重要的事",
+          'acceptpain':"接受痛苦",
+          'conquerthefear':"战胜恐惧"
+    }
+
+      // 这一段写入到请求回调当中
+      var balgo = document.getElementById('balgo')
+
+    $.get("/v1/goaljson", function(data, status){
+      var allgoals = data.goals
+      console.log(data.goals)
+      // 提取任务tag的数据
+      var allgoals_names = []
+      var allgoals_names_hash = []
+      // 遍历目标4
+      for(var i =0;i<allgoals.length;i++){
+       allgoals_names.push(allgoals[i].name)
+       allgoals_names_hash.push(allgoals[i].name.hashCode())
+      // console.log(allgoals[i].name.hashCode())  
+       }
+      console.log(allgoals_names_hash)
+      
+
+      var reviewalgo_names = []
+      var reviewalgo_names_hash = []
+      for(const single_reviewalgo in reviewalgo_covert){
+          reviewalgo_names.push(single_reviewalgo)
+          reviewalgo_names_hash.push(single_reviewalgo.hashCode())
+      }
+      console.log(reviewalgo_names_hash)
+
+      var tasktags_names = []
+          var tasktags_names_hash = []
+      for(const single_tag in tagscovert){
+          tasktags_names.push(single_tag)
+          tasktags_names_hash.push(single_tag.hashCode())
+      }
+      console.log(tasktags_names_hash)
+      
+      var all_grids_lenth =   allgoals_names_hash.length+reviewalgo_names_hash.length+tasktags_names_hash.length
+      var position = grid_place_algo(all_grids_lenth)
+      var rows = "20px ".repeat(position[0]);
+      var columns = "20px ".repeat(position[1]);
+      console.log(rows,columns)
+      // 这里可以加入控制算法
+      balgo.style.gridTemplateColumns = columns
+      balgo.style.gridTemplateRows = rows
+      balgo.style.gridGap = '0.2rem'
+      var combined_factors_hashs =  [...allgoals_names_hash,...reviewalgo_names_hash,...tasktags_names_hash]
+      var combined_factors_names =  [...allgoals_names,...reviewalgo_names,...tasktags_names]
+      allcombined_factors_hashs = combined_factors_hashs
+      console.log(combined_factors_hashs.length)
+      console.log(all_grids_lenth)
+      console.log(combined_factors_names)
+      console.log(combined_factors_hashs)
+      append2balance(balgo,combined_factors_hashs)
+    })
+
+
+
+
+// balgo.setAttribute("grid-gap","20rem")
+
+
+
+   
+  // for (var i = 0; i < need_to_created_factors.length; i++){
+  //     var item2 = document.createElement("div");
+  //     item2.setAttribute("class",`item item${i}`)
+  //     item2.setAttribute("id",`item${i}`)
+  //      balgo.appendChild(item2)
+  //   }
+
+  }  
+
+  function append2balance(node_be_appended,need_to_created_factors){
+    node_be_appended.innerHTML = "";
+    for (var i = 0; i < need_to_created_factors.length; i++){
+      var item2 = document.createElement("div");
+      item2.setAttribute("class",`item item${i}`)
+      item2.setAttribute("id",`${need_to_created_factors[i]}`)
+      // item2.innerHTML = "1"
+      node_be_appended.appendChild(item2)
+      // console.log(`这是${i}`)
+    } 
+  }
+   
+
+
+
+
+  // function rebalance(){
+  //   document.getElementById("item4").style.backgroundColor = "white";
+  
+  // }
+
+
+
+   function  grid_place_algo(numbers_of_cell){
+    var sqrt_value=Math.sqrt(numbers_of_cell);
+    b = Math.round(sqrt_value)
+    var final = b
+    if (sqrt_value-b>0){
+       final +=1
+    }
+   return [final,final]
+  }
+
+
+
+
+
+  function rebalance(){
+    // var grid_place = grid_place_algo(need_to_created_factors.length)
+  
+    var tagscovert = {
+      "importanttag": "重要的",
+      'feartag': "害怕的",
+      'principletag': "原则",
+      'atomtag': "原子",
+      'dfstag': "需要深度搜索",
+      'hardtag': "困难的",
+      'easytag': "容易的",
+      'urgenttag': "急迫的",
+      'challengetag': "挑战的",
+      'uncomfortabletag': "不舒服的",
+      'troublesometag': "麻烦事",
+      'keyproblemtag': "关键问题",
+      'tenminutestasktag': "10分钟",
+      'thirtyminutestasktag': "30分钟",
+      'threeminutestasktag': "3分钟",
+    }
+    
+    
+    var reviewalgo_covert = {
+          'attackactively':"主动进攻",
+          'makeuseofthings':"利用学习到的东西",
+          'depthfirstsearch':"深度优先搜索",
+          'markataskimmediately':"立即标记任务",
+          'alwaysprofit':"总是保持进步",
+          'brainuse':"动脑筋",
+          'useprinciple':"使用原则",
+          'patience':"有耐心",
+          'solveakeyproblem':"解决关键问题",
+          'learnnewthings':"学习到新内容",
+          'battlewithlowerbrain':"战胜低级情绪",
+          'difficultthings':"完成困难事情",
+          'acceptfactandseektruth':"接受事实，寻求真相",
+          'dealwithahardtask':"处理困难任务",
+          'threeminutes':"3分钟原则",
+          'serviceforgoal':"为目标服务",
+          'buildframeandprinciple':"建立框架原则",
+          'atomadifficulttask':"原子化拆分任务",
+          'noflinch':"不退缩",
+          'learntechuse':"学习技术",
+          'doanimportantthingearly':"提前完成一件重要的事",
+          'acceptpain':"接受痛苦",
+          'conquerthefear':"战胜恐惧"
+    }
+
+    // 这一段写入到请求回调当中
+    var balgo = document.getElementById('balgo')
+
+    $.get("/v1/rebalance", function(data, status){
+      var marked_goals = data.allmarked.goal
+      var marked_review = data.allmarked.review
+      var marked_tags = data.allmarked.tag
+      console.log(data.allmarked.goal)
+      console.log(marked_goals)
+
+      for (var i=0;i<marked_tags.length;i++){
+        console.log(marked_tags[i].hashCode())
+        if (allcombined_factors_hashs.includes(lowercase(marked_tags[i]).hashCode())){
+        document.getElementById(marked_tags[i].hashCode()).style.backgroundColor = "black";
+      }}
+
+
+      for (var i=0;i<marked_goals.length;i++){
+        console.log(marked_goals[i].hashCode())
+        
+        document.getElementById(marked_goals[i].hashCode()).style.backgroundColor = "blue";
+      }
+
+      for (var i=0;i<marked_review.length;i++){
+        if (allcombined_factors_hashs.includes(lowercase(marked_review[i]).hashCode())){
+          console.log(lowercase(marked_review[i]).hashCode())
+        document.getElementById(lowercase(marked_review[i]).hashCode()).style.backgroundColor = "green";
+        }
+       
+      }
+
+
+
+      // var allgoals = data.goals
+      // console.log(data.allmarked.goals)
+
+      // document.getElementById("item4").style.backgroundColor = "white";
+    })
+
+  }
+
+
+// 首字母小写
+  const lowercase = (str) => {
+    if(typeof str === 'string') {
+        return str.replace(/^\w/, c => c.toLowerCase());
+    } else {
+        return '';
+    }
+};
+
+
+
+</script>
+
+
+
+
+</html>
