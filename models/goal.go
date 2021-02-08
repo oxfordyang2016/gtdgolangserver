@@ -84,7 +84,7 @@ func Creategoal(g *gin.Context) {
 		db.Where("Email= ?", email).Find(&goalsforemail).Count(&goalcount)
 		if goalcount == 0 {
 
-			goalfromclient := Goalfordbs{Name: goal, Plantime: today,Finishtime:"unspecified" ,Email: email, Goalstatus: "unfinished", Goalcode: "aaa", Priority: int(priority)}
+			goalfromclient := Goalfordbs{Name: goal, Plantime: today, Finishtime: "unspecified", Email: email, Goalstatus: "unfinished", Goalcode: "aaa", Priority: int(priority)}
 			db.Create(&goalfromclient).Scan(&goalfromclient)
 			g.JSON(200, gin.H{
 				"status":  "posted",
@@ -106,7 +106,7 @@ func Creategoal(g *gin.Context) {
 				}
 			}
 			//这里原来引号出了问题。。。。多出了一个空格
-			goalfromclient := Goalfordbs{Name: goal, Plantime: today, Priority: int(priority),Finishtime:"unspecified",Goalstatus: "unfinished", Email: email, Goalcode: fmt.Sprintf("%s%s%s ", a, b, c)}
+			goalfromclient := Goalfordbs{Name: goal, Plantime: today, Priority: int(priority), Finishtime: "unspecified", Goalstatus: "unfinished", Email: email, Goalcode: fmt.Sprintf("%s%s%s ", a, b, c)}
 			db.Create(&goalfromclient).Scan(&goalfromclient)
 			g.JSON(200, gin.H{
 				"status":  "posted",
@@ -133,8 +133,7 @@ func Updategoal(c *gin.Context) {
 	priority := gjson.Get(reqBody, "priority").Int()
 	timerange := gjson.Get(reqBody, "timerange").Int()
 
-
-    //完成时间使用今天
+	//完成时间使用今天
 	loc, _ := time.LoadLocation("Asia/Shanghai")
 	today := time.Now().In(loc).Format("060102")
 	fmt.Println(timerange)
@@ -163,8 +162,6 @@ func Updategoal(c *gin.Context) {
 		db.Model(&goalindb).Update("Timerange", int(timerange))
 	}
 
-
-	
 	if goalstatus != "unspecified" {
 		if goalstatus == "f" {
 			goalstatus = "finished"
@@ -292,17 +289,16 @@ func Goalsystem(c *gin.Context) {
 
 	goaltype := c.Query("goaltype")
 
-
 	//var goals []Tasks
 	var goals []Goalfordbs
 	//db.Where("email =  ?", email).Where("project =  ?", "goal").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&goals)
 	//db.Where("email =  ?", email).Not("goalstatus", []string{"finished"}).Order("id").Find(&goals)
-	if goaltype =="unfinished"{
-		db.Where("email =  ?", email).Where("goalstatus=?","unfinished").Order("id").Find(&goals)
-	}else{
+	if goaltype == "unfinished" {
+		db.Where("email =  ?", email).Where("goalstatus=?", "unfinished").Order("id").Find(&goals)
+	} else {
 		db.Where("email =  ?", email).Order("id").Find(&goals)
 	}
-	
+
 	fmt.Println(goals)
 	c.JSON(200, gin.H{
 		"goals": goals,
@@ -468,12 +464,12 @@ func Get_goal_coffient(goal string, email string) float64 {
 }
 
 func Goalsjson(c *gin.Context) {
-/*
-【A】这里生成goal的逻辑
-1.获取所有没有完成的任务
-2.将任务当中的goal抽取出来，组成以goal为key，任务数组为value的字典
-3.loop 3中的每个key，然后提取任务的projetc生成三级goal
-4.最后补充前面没有的goal，
+	/*
+	   【A】这里生成goal的逻辑
+	   1.获取所有没有完成的任务
+	   2.将任务当中的goal抽取出来，组成以goal为key，任务数组为value的字典
+	   3.loop 3中的每个key，然后提取任务的projetc生成三级goal
+	   4.最后补充前面没有的goal，
 
 
 
@@ -484,11 +480,7 @@ func Goalsjson(c *gin.Context) {
 
 
 
-*/
-
-
-
-
+	*/
 
 	//the algorithm can be upgrade
 	//i use email as identifier
@@ -595,15 +587,11 @@ func Goalsjson(c *gin.Context) {
 	}
 
 	fmt.Println("========i am here 3========")
-	 
+
 	//这里提取所有的project！！！！
 	//获取所有目标字符串的数组
 
-
 	//alltasks_ingoal  目标里包含的所有任务
-
-
-
 
 	var goals []string
 	for k := range alltasks_ingoal {
@@ -611,10 +599,7 @@ func Goalsjson(c *gin.Context) {
 	}
 	fmt.Println(len(goals))
 
-
-
-
-    	//-------这里的代码非常的危险-------------
+	//-------这里的代码非常的危险-------------
 	//在末尾进行检测是否空的goals被检测到
 	//在这里查询新创建的目标来不及创建目标的那种
 	//查询所有对应的goal
@@ -625,15 +610,11 @@ func Goalsjson(c *gin.Context) {
 		Priority   int
 		Goalstatus string
 	}
-	
-	
-
 
 	//这里因该在补充goals
 	var goalsfinal []Result
 	db.Raw(`SELECT name,goalcode,priority,goalstatus  FROM goalfordbs  WHERE email ="` + email + `"` + " and goalstatus not in (" + `"giveup","g","finished","finish"` + `)`).Scan(&goalsfinal)
 	color.Red("red")
-
 
 	for i := 0; i < len(goalsfinal); i++ {
 		_, found := Find(goals, goalsfinal[i].Name)
@@ -646,12 +627,7 @@ func Goalsjson(c *gin.Context) {
 		}
 	}
 
-
-
 	//如果这里还有空的project也需要处理的！！！
-	
-
-
 
 	//这里可能包含具体的projects
 	allclassgoals := make(map[string][]Projects)
@@ -700,25 +676,18 @@ func Goalsjson(c *gin.Context) {
 			return allprojects[i].Name > allprojects[j].Name
 		})
 
-
-
 		color.Red("--------在这里再次检测-------是否allproject为nil")
 		fmt.Println(singlegoal)
 		fmt.Println(allprojects)
 		//这里已经实在目标层面了，就是将最终的project塞进去
-		if len(allprojects) == 0{
+		if len(allprojects) == 0 {
 			d := make([]Projects, 0)
 			allclassgoals[singlegoal] = d
-		}else{
+		} else {
 			allclassgoals[singlegoal] = allprojects
 		}
-		
 
 	}
-
-
-
-
 
 	var allgoals []Goals
 	for k, v := range allclassgoals {
@@ -746,7 +715,6 @@ func Goalsjson(c *gin.Context) {
 		allgoals = append(allgoals, Goals{k, goal_level, goal.Goalcode, v})
 
 	}
-
 
 	// var goalsfinal []Goalfordbs
 	// db.Where("Email= ?", email).Where("").Find(&goalsfinal)

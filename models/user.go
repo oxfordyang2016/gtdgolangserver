@@ -2,10 +2,13 @@ package models
 
 import (
 	"fmt"
-	"net/http"
 
 	"log"
+	"math/rand"
+	"net/http"
+	"net/smtp"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -17,6 +20,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	_ "github.com/lib/pq"
+	"github.com/robfig/cron/v3"
 	"github.com/tidwall/gjson"
 )
 
@@ -24,6 +28,7 @@ var Yangming int
 var db *gorm.DB
 var redisDBcon redis.Conn
 var testlogger *log.Logger
+var crontab *cron.Cron
 
 type (
 	//when username use lowcase,the db will not include the items
@@ -51,6 +56,7 @@ func init() {
 	testlogger = log.New(file, "测试日志: ", log.LstdFlags|log.Lshortfile)
 
 	var err error
+	crontab = cron.New()
 	//mysql://dt_admin:dt2016@localhost/dreamteam_db
 	db, err = gorm.Open("mysql", "root:123456@/dreamteam_db?charset=utf8&parseTime=True&loc=Local")
 	db.BlockGlobalUpdate(true)
@@ -90,6 +96,56 @@ func init() {
 
 }
 
+var Code = make(map[string]int)
+
+func SendEmail(email string) int {
+	//smtp.PlainAuth()
+	// 参数1：Usually identity should be the empty string, to act as username
+	// 参数2：username
+	//参数3：password
+	//参数4：host
+	auth := smtp.PlainAuth("", "thinking_for_life@163.com", "LXRODHFLFPNSJIRJ", "smtp.163.com")
+	to := []string{email}
+	//发送随机数为验证码
+	// Seed uses the provided seed value to initialize the default Source to a
+	// deterministic state. If Seed is not called, the generator behaves as
+	// if seeded by Seed(1). Seed values that have the same remainder when
+	// divided by 2^31-1 generate the same pseudo-random sequence.
+	// Seed, unlike the Rand.Seed method, is safe for concurrent use.
+	rand.Seed(time.Now().Unix())
+	// Intn returns, as an int, a non-negative pseudo-random number in [0,n)
+	num := rand.Intn(10000)
+	//发送内容使用base64 编码，单行不超过80字节，需要插入\r\n进行换行
+	//The msg headers should usually include
+	// fields such as "From", "To", "Subject", and "Cc".  Sending "Bcc"
+	// messages is accomplished by including an email address in the to
+	// parameter but not including it in the msg headers.
+	str := fmt.Sprintf("From:thinking_for_life@163.com\r\nTo:%s\r\nSubject:注册验证码verifycode\r\n\r\nThinkingforlife\r\n验证码是%d \r\n感恩信任\r\n祝您身体健康，平安喜乐，成就伟大事业！", email, num) //邮件格式
+	msg := []byte(str)
+	err := smtp.SendMail("smtp.163.com:25", auth, "thinking_for_life@163.com", to, msg)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// 如果存储的
+	return num
+}
+
+func EmailGenerateCode(c *gin.Context) {
+	buf := make([]byte, 1000000)
+	num, _ := c.Request.Body.Read(buf)
+	reqBody := string(buf[0:num])
+	//--------------using gjson to parse------------
+	//https://github.com/tidwall/gjson
+	Email := gjson.Get(reqBody, "email").String()
+	// 这里需要检查验证码
+	generatedNum := SendEmail(Email)
+	log.Println(generatedNum)
+	c.JSON(http.StatusOK, gin.H{
+		"info": " code had been sent",
+	})
+
+}
+
 func User(c *gin.Context) {
 	c.HTML(http.StatusOK, "user.html", nil)
 }
@@ -110,6 +166,8 @@ func Register(c *gin.Context) {
 	Email := gjson.Get(reqBody, "email").String()
 	Password := gjson.Get(reqBody, "password").String()
 	Username := gjson.Get(reqBody, "username").String()
+
+	//发送email到用户，要求用户进行验证然后
 
 	User1 := Accounts{Email: Email, Username: Username, Password: Password}
 	fmt.Println(Email, Password, Username)
