@@ -6,12 +6,14 @@ import (
 	"math/rand"
 	"net/http"
 	"net/smtp"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 
 	//"github.com/gin-contrib/sessions"
+
 	"strings"
 
 	"github.com/gomodule/redigo/redis"
@@ -88,7 +90,12 @@ func init() {
 
 var Code = make(map[string]int)
 
-func SendEmail(email string) int {
+type EmailVerify struct {
+	email string
+	code  int
+}
+
+func SendEmail(email string) (int, error) {
 	//smtp.PlainAuth()
 	// 参数1：Usually identity should be the empty string, to act as username
 	// 参数2：username
@@ -113,11 +120,22 @@ func SendEmail(email string) int {
 	str := fmt.Sprintf("From:thinking_for_life@163.com\r\nTo:%s\r\nSubject:注册验证码verifycode\r\n\r\nThinkingforlife\r\n验证码是%d \r\n感恩信任\r\n祝您身体健康，平安喜乐，成就伟大事业！", email, num) //邮件格式
 	msg := []byte(str)
 	err := smtp.SendMail("smtp.163.com:25", auth, "thinking_for_life@163.com", to, msg)
+
 	if err != nil {
 		log.Fatal(err)
 	}
-	// 如果存储的
-	return num
+	// 使用字符串进行存储
+
+	var veryfyInfo = fmt.Sprintf("%s/%s/%s", email, strconv.Itoa(num), "time")
+	set_status, err1 := redis.String(redisDBcon.Do("SET", email, veryfyInfo))
+	log.Println(set_status)
+	if err1 != nil {
+		log.Println(err1)
+		log.Println("设置信息出错")
+		return -1, err1
+	}
+
+	return num, nil
 }
 
 func EmailGenerateCode(c *gin.Context) {
@@ -128,12 +146,18 @@ func EmailGenerateCode(c *gin.Context) {
 	//https://github.com/tidwall/gjson
 	Email := gjson.Get(reqBody, "email").String()
 	// 这里需要检查验证码
-	generatedNum := SendEmail(Email)
+	generatedNum, err := SendEmail(Email)
+	if err != nil {
+
+		log.Println("发送邮件出错了哟")
+		c.JSON(http.StatusOK, gin.H{
+			"info": " email error",
+		})
+	}
 	log.Println(generatedNum)
 	c.JSON(http.StatusOK, gin.H{
 		"info": " code had been sent",
 	})
-
 }
 
 func User(c *gin.Context) {
@@ -154,13 +178,39 @@ func Register(c *gin.Context) {
 	//--------------using gjson to parse------------
 	//https://github.com/tidwall/gjson
 	Email := gjson.Get(reqBody, "email").String()
+	// 在这里检测email是否存在
+	var numofaccounts = 0
+	db.Table("accounts").Where("Email= ?", Email).Count(&numofaccounts)
+	if numofaccounts > 0 {
+		c.JSON(409, gin.H{
+			"info": "该邮件已经被注册!",
+		})
+		return
+	}
+
 	Password := gjson.Get(reqBody, "password").String()
-	Username := gjson.Get(reqBody, "username").String()
+	// Username := gjson.Get(reqBody, "username").String()
+	verifycode := gjson.Get(reqBody, "verifycode").String()
+	client := gjson.Get(reqBody, "client").String()
+	savedveryinfo, readerr := redis.String(redisDBcon.Do("GET", Email))
+	if readerr != nil {
+		log.Println(readerr)
+		log.Println("redis 读取数据发生错误")
+		// return -1, readerr
+	}
+	var info = strings.Split(savedveryinfo, "/")
+	if verifycode != info[1] {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"info": "验证码不正确!",
+		})
+		return
+	}
+	log.Println("读取reids的邮件验证保存信息", info)
 
 	//发送email到用户，要求用户进行验证然后
 
-	User1 := Accounts{Email: Email, Username: Username, Password: Password}
-	fmt.Println(Email, Password, Username)
+	User1 := Accounts{Email: Email, Username: Email, Password: Password}
+	fmt.Println(Email, Password, Email)
 	fmt.Println(User1)
 	// db, _ = gorm.Open("mysql", "dt_admin:dt2016@/dreamteam_db?charset=utf8&parseTime=True&loc=Local")
 	db.Save(&User1)
@@ -168,6 +218,12 @@ func Register(c *gin.Context) {
 	// 	"status": "register ok!",
 	// })
 	// return
+	if client == "clientv2" {
+		c.JSON(http.StatusOK, gin.H{
+			"info": "register ok!",
+		})
+		return
+	}
 	c.HTML(http.StatusOK, "user.html", nil)
 }
 
@@ -289,6 +345,7 @@ func Login(c *gin.Context) {
 	email := gjson.Get(reqBody, "email").String()
 	password := gjson.Get(reqBody, "password").String()
 	client := gjson.Get(reqBody, "client").String()
+
 	// email := c.PostForm("email")
 	// password := c.PostForm("password")
 	// client := c.PostForm("client")

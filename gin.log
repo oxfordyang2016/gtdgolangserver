@@ -5,30 +5,30 @@
  - using code:	gin.SetMode(gin.ReleaseMode)
 
 [GIN-debug] Loaded HTML Templates (25): 
-	- goals.html
-	- inbox0.html
+	- time.html
+	- mainpage.html
+	- pridetimeline.html
+	- rebalancealgo.html
+	- reviewalgoforiosback.html
+	- taskmanager.html
+	- testgolangtemplaterender.html
+	- reviewalgoforios.html
+	- reviewfromprojectreview.html
+	- addtasks.html
+	- place.html
+	- pride.html
+	- project.html
 	- review.html
 	- reviewalgo.html
-	- reviewalgoforiosback.html
-	- testgolangtemplaterender.html
 	- everyday.html
-	- pride.html
-	- rebalancealgo.html
-	- reviewfromprojectreview.html
-	- time.html
-	- reviewalgoforios.html
-	- reviewalgoforyangming.html
 	- goallist.html
-	- inbox.html
-	- mainpage.html
-	- place.html
-	- pridetimeline.html
-	- project.html
-	- taskmanager.html
+	- inbox0.html
+	- map.html
+	- reviewalgoforyangming.html
 	- user.html
 	- 
-	- addtasks.html
-	- map.html
+	- goals.html
+	- inbox.html
 	- taskmanagerbak.html
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
@@ -129,4 +129,5 @@
 [GIN-debug] GET    /v1/searchwithtag         --> github.com/gtdgolangserver/models.Searchwithtags (4 handlers)
 [GIN-debug] GET    /v1/mybalancejson         --> github.com/gtdgolangserver/models.Getmywealth (4 handlers)
 [GIN-debug] Listening and serving HTTP on :8081
-[GIN] 2021/02/08 - 16:46:53 | 200 |    499.9875ms |       127.0.0.1 | GET      "/v1/emailverify"
+[GIN] 2021/02/09 - 16:21:01 | 409 |      6.2094ms |       127.0.0.1 | POST     "/v1/register"
+[GIN] 2021/02/09 - 16:21:12 | 409 |      1.5518ms |       127.0.0.1 | POST     "/v1/register"
