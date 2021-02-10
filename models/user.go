@@ -218,7 +218,21 @@ func Register(c *gin.Context) {
 	// 	"status": "register ok!",
 	// })
 	// return
+	token, err := GenarateJwt(Email)
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"info": "服务器内部错误",
+		})
+		return
+	}
 	if client == "clientv2" {
+		cookie := &http.Cookie{
+			Name:  "Token",
+			Value: token,
+		}
+		http.SetCookie(c.Writer, cookie)
+		//最好在这里设置token信息
 		c.JSON(http.StatusOK, gin.H{
 			"info": "register ok!",
 		})
@@ -391,6 +405,22 @@ func Login(c *gin.Context) {
 		Value: client,
 	}
 	http.SetCookie(c.Writer, cookie3)
+
+	token, err := GenarateJwt(email)
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"info": "服务器内部错误",
+		})
+		return
+	}
+
+	cookie4 := &http.Cookie{
+		Name:  "token",
+		Value: token,
+	}
+	http.SetCookie(c.Writer, cookie4)
+
 	//c.String(http.StatusOK, "0")
 	if client == "web" {
 		//https://github.com/gin-gonic/gin to redirect

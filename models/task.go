@@ -452,6 +452,22 @@ func CreatetaskbyJSON(c *gin.Context) {
 	//https://github.com/tidwall/gjson
 	value := gjson.Get(reqBody, "reviewdata")
 	fmt.Println(value.String())
+	ClientToken, err := c.Request.Cookie("token")
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"info": "cookie里面缺少对应的token",
+		})
+		return
+	}
+	VerifiedEmail, verifyerr := VerifyJwt(ClientToken.Value)
+	if verifyerr != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"info": "token不合法",
+		})
+		return
+	}
+
+	// 在这里新增refresh的逻辑
 
 	emailcookie, err := c.Request.Cookie("email")
 	//fmt.Println(emailcookie.Value)
@@ -1473,6 +1489,32 @@ func Test(c *gin.Context) {
 		// return
 	}
 	log.Println(jwt)
+
+	//在这里刷新jwt进行验证
+
+	//是否进行睡眠测试
+	time.Sleep(40 * time.Second)
+
+	// Printed after sleep is over
+	fmt.Println("Sleep Over.....")
+
+	newtoken, refresherr := Refresh(jwt)
+
+	if refresherr != nil {
+		err, ok := refresherr.(*VerifyTimeError)
+		if ok {
+			log.Println("这里正在进行类型判断")
+			log.Println(err)
+			log.Println("这里正在进行类型判断")
+		}
+	}
+	log.Println(newtoken)
+
+	email1, verifyerr1 := VerifyJwt(newtoken)
+	if verifyerr1 != nil {
+		log.Println(verifyerr1)
+	}
+	log.Println(email1)
 
 	c.JSON(200, gin.H{
 		"status":  "conected........",

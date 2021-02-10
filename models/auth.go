@@ -36,7 +36,7 @@ type Claims struct {
 func GenarateJwt(email string) (string, error) {
 	// Declare the expiration time of the token
 	// here, we have kept it as 5 minutes
-	expirationTime := time.Now().Add(5 * time.Minute)
+	expirationTime := time.Now().Add(1 * time.Minute)
 	// Create the JWT claims, which includes the username and expiry time
 	claims := &Claims{
 		Email: email,
@@ -88,11 +88,11 @@ func Refresh(oldtoken string) (string, error) {
 	// 30 seconds of expiry. Otherwise, return a bad request status
 	//不超出时间就不写入新的token，这里就不再设置新的cookie
 	if time.Unix(claims.ExpiresAt, 0).Sub(time.Now()) > 30*time.Second {
-		return "time", &VerifyTimeError{info: "还在有效时间内"}
+		return "token valid", &VerifyTimeError{info: "token还在有效时间内"}
 	}
 
 	// Now, create a new token for the current use, with a renewed expiration time
-	expirationTime := time.Now().Add(5 * time.Minute)
+	expirationTime := time.Now().Add(1 * time.Minute)
 	claims.ExpiresAt = expirationTime.Unix()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
