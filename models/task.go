@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/url"
 	"reflect"
 	"regexp"
@@ -1456,10 +1457,23 @@ func Test(c *gin.Context) {
 	// fmt.Println(entryid)
 	// crontab.Start()
 	// fmt.Println(crontab)
+	//测试panic状态
+	// if 5 > 4 {
+	// 	panic("runtime error: first name cannot be nil")
+	// }
 
-	if 5 > 4 {
-		panic("runtime error: first name cannot be nil")
+	jwt, jwterr := GenarateJwt("756260386@qq.com")
+	email, verifyerr := VerifyJwt(jwt)
+	if verifyerr != nil {
+		log.Println(verifyerr)
 	}
+	log.Println(email)
+	if jwterr != nil {
+		log.Println(jwterr)
+		// return
+	}
+	log.Println(jwt)
+
 	c.JSON(200, gin.H{
 		"status":  "conected........",
 		"message": "welcome to new world",
