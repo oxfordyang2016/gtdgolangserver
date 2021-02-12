@@ -1,29 +1,29 @@
 [GIN-debug] Loaded HTML Templates (25): 
-	- inbox.html
-	- pride.html
-	- reviewalgoforios.html
 	- 
-	- everyday.html
 	- place.html
 	- project.html
 	- reviewalgo.html
-	- reviewalgoforiosback.html
-	- taskmanagerbak.html
-	- testgolangtemplaterender.html
-	- goallist.html
-	- map.html
+	- reviewalgoforyangming.html
 	- time.html
-	- mainpage.html
-	- pridetimeline.html
+	- testgolangtemplaterender.html
+	- user.html
+	- everyday.html
+	- inbox0.html
+	- pride.html
+	- review.html
 	- reviewfromprojectreview.html
 	- taskmanager.html
+	- reviewalgoforiosback.html
+	- goallist.html
+	- inbox.html
+	- mainpage.html
+	- pridetimeline.html
+	- rebalancealgo.html
+	- reviewalgoforios.html
 	- addtasks.html
 	- goals.html
-	- review.html
-	- reviewalgoforyangming.html
-	- user.html
-	- inbox0.html
-	- rebalancealgo.html
+	- map.html
+	- taskmanagerbak.html
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
 [GIN-debug] HEAD   /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
@@ -123,4 +123,3 @@
 [GIN-debug] GET    /v1/searchwithtag         --> github.com/gtdgolangserver/models.Searchwithtags (4 handlers)
 [GIN-debug] GET    /v1/mybalancejson         --> github.com/gtdgolangserver/models.Getmywealth (4 handlers)
 [GIN-debug] Listening and serving HTTP on :8081
-[GIN-debug] redirecting request 301: /v1/ --> /v1/

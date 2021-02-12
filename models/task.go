@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/url"
 	"reflect"
 	"regexp"
@@ -123,7 +124,7 @@ type (
 
 var longtitude = "24.24"
 var latitude = "47.47"
-var websocket_switch = true
+var websocket_switch = false
 var voice_websocekt = false
 var image_websocket = true
 
@@ -456,6 +457,41 @@ func CreatetaskbyJSON(c *gin.Context) {
 	//https://github.com/tidwall/gjson
 	value := gjson.Get(reqBody, "reviewdata")
 	fmt.Println(value.String())
+	ClientToken, err := c.Request.Cookie("token")
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"info": "cookie里面缺少对应的token",
+		})
+		return
+	}
+	VerifiedEmail, verifyerr := VerifyJwt(ClientToken.Value)
+	if verifyerr != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"info": "token不合法",
+		})
+		return
+	}
+	log.Println(VerifiedEmail)
+	// 在这里新增refresh的逻辑
+	newtoken, refresherr := Refresh(ClientToken.Value)
+	if refresherr != nil {
+		if refresherr != nil {
+			err, ok := refresherr.(*VerifyTimeError)
+			if ok {
+				log.Println("这里正在进行类型判断")
+				log.Println(err)
+				log.Println("这里正在进行类型判断")
+			} else {
+				c.JSON(http.StatusUnauthorized, gin.H{
+
+					"info": "token无效",
+				})
+				return
+			}
+		}
+		log.Println(newtoken)
+
+	}
 
 	emailcookie, err := c.Request.Cookie("email")
 	//fmt.Println(emailcookie.Value)
@@ -1461,10 +1497,49 @@ func Test(c *gin.Context) {
 	// fmt.Println(entryid)
 	// crontab.Start()
 	// fmt.Println(crontab)
+	//测试panic状态
+	// if 5 > 4 {
+	// 	panic("runtime error: first name cannot be nil")
+	// }
 
-	if 5 > 4 {
-		panic("runtime error: first name cannot be nil")
+	jwt, jwterr := GenarateJwt("756260386@qq.com")
+	email, verifyerr := VerifyJwt(jwt)
+	if verifyerr != nil {
+		log.Println(verifyerr)
 	}
+	log.Println(email)
+	if jwterr != nil {
+		log.Println(jwterr)
+		// return
+	}
+	log.Println(jwt)
+
+	//在这里刷新jwt进行验证
+
+	//是否进行睡眠测试
+	time.Sleep(40 * time.Second)
+
+	// Printed after sleep is over
+	fmt.Println("Sleep Over.....")
+
+	newtoken, refresherr := Refresh(jwt)
+
+	if refresherr != nil {
+		err, ok := refresherr.(*VerifyTimeError)
+		if ok {
+			log.Println("这里正在进行类型判断")
+			log.Println(err)
+			log.Println("这里正在进行类型判断")
+		}
+	}
+	log.Println(newtoken)
+
+	email1, verifyerr1 := VerifyJwt(newtoken)
+	if verifyerr1 != nil {
+		log.Println(verifyerr1)
+	}
+	log.Println(email1)
+
 	c.JSON(200, gin.H{
 		"status":  "conected........",
 		"message": "welcome to new world",
