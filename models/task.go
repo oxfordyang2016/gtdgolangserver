@@ -457,42 +457,6 @@ func CreatetaskbyJSON(c *gin.Context) {
 	//https://github.com/tidwall/gjson
 	value := gjson.Get(reqBody, "reviewdata")
 	fmt.Println(value.String())
-	ClientToken, err := c.Request.Cookie("token")
-	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"info": "cookie里面缺少对应的token",
-		})
-		return
-	}
-	VerifiedEmail, verifyerr := VerifyJwt(ClientToken.Value)
-	if verifyerr != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"info": "token不合法",
-		})
-		return
-	}
-	log.Println(VerifiedEmail)
-	// 在这里新增refresh的逻辑
-	newtoken, refresherr := Refresh(ClientToken.Value)
-	if refresherr != nil {
-		if refresherr != nil {
-			err, ok := refresherr.(*VerifyTimeError)
-			if ok {
-				log.Println("这里正在进行类型判断")
-				log.Println(err)
-				log.Println("这里正在进行类型判断")
-			} else {
-				c.JSON(http.StatusUnauthorized, gin.H{
-
-					"info": "token无效",
-				})
-				return
-			}
-		}
-		log.Println(newtoken)
-
-	}
-
 	emailcookie, err := c.Request.Cookie("email")
 	//fmt.Println(emailcookie.Value)
 	var email string
@@ -1490,8 +1454,7 @@ func Todaytaskweb(c *gin.Context) {
 	c.HTML(http.StatusOK, "today.html", nil)
 }
 
-// createTodo add a new todo
-func Test(c *gin.Context) {
+func Testjwt() {
 	// entryid, _ := crontab.AddFunc("* * * * *", func() { fmt.Println("Every hour on the half hour") })
 	// fmt.Println("启动一个调度器")
 	// fmt.Println(entryid)
@@ -1517,7 +1480,7 @@ func Test(c *gin.Context) {
 	//在这里刷新jwt进行验证
 
 	//是否进行睡眠测试
-	time.Sleep(40 * time.Second)
+	// time.Sleep(40 * time.Second)
 
 	// Printed after sleep is over
 	fmt.Println("Sleep Over.....")
@@ -1539,6 +1502,11 @@ func Test(c *gin.Context) {
 		log.Println(verifyerr1)
 	}
 	log.Println(email1)
+
+}
+
+// createTodo add a new todo
+func Test(c *gin.Context) {
 
 	c.JSON(200, gin.H{
 		"status":  "conected........",

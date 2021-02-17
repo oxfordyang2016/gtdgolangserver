@@ -22,7 +22,10 @@ import (
 	//"./math"
 
 	"io"
+	"log"
+	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -36,6 +39,68 @@ import (
 )
 
 var db *gorm.DB
+
+// 定义授权的中间件
+
+func Authofuser() gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+		//检查对应的请求path
+		path := c.Request.URL.Path
+		log.Println(path)
+		// 设置不需要检查的路由
+		notneedtocheck := []string{"test", "login", "register", "alarm"}
+
+		Flag := false
+		for i := 0; i <= len(notneedtocheck); i++ {
+			//如果正确的话就提前结束
+			if strings.Contains(path, notneedtocheck[i]) {
+				Flag = true
+				break
+			}
+		}
+
+		if Flag {
+			log.Println("请求在不需要验证的路径之内")
+		} else {
+
+			//  可以在这里读去出对应的提取信息，如果授权不成功应该提前返回
+			ClientToken, err := c.Request.Cookie("token")
+			if err != nil {
+				c.JSON(http.StatusUnauthorized, gin.H{
+					"info": "cookie里面缺少对应的token",
+				})
+			}
+			VerifiedEmail, verifyerr := VerifyJwt(ClientToken.Value)
+			if verifyerr != nil {
+				c.JSON(http.StatusUnauthorized, gin.H{
+					"info": "token不合法",
+				})
+			}
+			log.Println(VerifiedEmail)
+			// 在这里新增refresh的逻辑
+			newtoken, refresherr := Refresh(ClientToken.Value)
+			log.Println(newtoken)
+			if refresherr != nil {
+				if refresherr != nil {
+					err, ok := refresherr.(*VerifyTimeError)
+					if ok {
+						log.Println("这里正在进行类型判断")
+						log.Println(err)
+						log.Println("这里正在进行类型判断")
+					} else {
+						c.JSON(http.StatusUnauthorized, gin.H{
+
+							"info": "token无效",
+						})
+
+					}
+				}
+			}
+
+		}
+	}
+}
 
 //about init https://stackoverflow.com/questions/24790175/when-is-the-init-function-run
 
@@ -52,6 +117,7 @@ func main() {
 	// gin.DefaultWriter = io.MultiWriter(f)
 	router := gin.Default()
 	router.Use(cors.Default())
+	router.Use(Authofuser())
 	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f)
 	// Recovery middleware recovers from any panics and writes a 500 if there was one.
