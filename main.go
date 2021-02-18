@@ -40,7 +40,7 @@ import (
 
 var db *gorm.DB
 
-// 定义授权的中间件
+// 定义授权的中间,件
 
 func Authofuser() gin.HandlerFunc {
 
