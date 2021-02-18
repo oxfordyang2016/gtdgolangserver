@@ -1,29 +1,29 @@
 [GIN-debug] Loaded HTML Templates (25): 
-	- pridetimeline.html
+	- reviewalgo.html
 	- reviewalgoforiosback.html
 	- reviewalgoforyangming.html
 	- reviewfromprojectreview.html
-	- taskmanager.html
-	- map.html
-	- inbox0.html
-	- reviewalgo.html
 	- user.html
-	- everyday.html
-	- mainpage.html
-	- project.html
 	- rebalancealgo.html
-	- taskmanagerbak.html
-	- testgolangtemplaterender.html
-	- time.html
-	- inbox.html
-	- addtasks.html
 	- goallist.html
+	- inbox.html
+	- mainpage.html
+	- pride.html
+	- pridetimeline.html
+	- testgolangtemplaterender.html
+	- 
+	- inbox0.html
+	- map.html
+	- review.html
+	- taskmanagerbak.html
+	- addtasks.html
 	- goals.html
 	- place.html
-	- pride.html
-	- review.html
+	- project.html
 	- reviewalgoforios.html
-	- 
+	- taskmanager.html
+	- time.html
+	- everyday.html
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (5 handlers)
 [GIN-debug] HEAD   /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (5 handlers)
@@ -55,11 +55,13 @@
 [GIN-debug] HEAD   /v1/background.png        --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (5 handlers)
 [GIN-debug] GET    /v1/test                  --> github.com/gtdgolangserver/models.Test (5 handlers)
 [GIN-debug] GET    /v1/time                  --> github.com/gtdgolangserver/models.Clock (5 handlers)
+[GIN-debug] GET    /v1/welcome               --> github.com/gtdgolangserver/models.User (5 handlers)
 [GIN-debug] GET    /v1/                      --> github.com/gtdgolangserver/models.User (5 handlers)
 [GIN-debug] GET    /v1/panic                 --> main.main.func1 (5 handlers)
 [GIN-debug] GET    /v1/location              --> github.com/gtdgolangserver/models.Canvas (5 handlers)
 [GIN-debug] GET    /v1/emailverify           --> github.com/gtdgolangserver/models.EmailGenerateCode (5 handlers)
 [GIN-debug] POST   /v1/login                 --> github.com/gtdgolangserver/models.Login (5 handlers)
+[GIN-debug] GET    /v1/logout                --> github.com/gtdgolangserver/models.Logout (5 handlers)
 [GIN-debug] POST   /v1/register              --> github.com/gtdgolangserver/models.Register (5 handlers)
 [GIN-debug] GET    /v1/blogupdate            --> github.com/gtdgolangserver/models.Blogupdate (5 handlers)
 [GIN-debug] GET    /v1/inboxjson             --> github.com/gtdgolangserver/models.Inboxjson (5 handlers)
@@ -123,3 +125,8 @@
 [GIN-debug] GET    /v1/searchwithtag         --> github.com/gtdgolangserver/models.Searchwithtags (5 handlers)
 [GIN-debug] GET    /v1/mybalancejson         --> github.com/gtdgolangserver/models.Getmywealth (5 handlers)
 [GIN-debug] Listening and serving HTTP on :8081
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500

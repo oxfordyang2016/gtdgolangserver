@@ -238,7 +238,7 @@ func Register(c *gin.Context) {
 	}
 	if client == "clientv2" {
 		cookie := &http.Cookie{
-			Name:  "Token",
+			Name:  "token",
 			Value: token,
 		}
 		http.SetCookie(c.Writer, cookie)
@@ -305,8 +305,8 @@ func Login1(c *gin.Context) {
 	fmt.Println(userfromdb.Password)
 
 	if userfromdb.Password != password {
-		c.JSON(http.StatusOK, gin.H{
-			"status": "password or email error!",
+		c.JSON(http.StatusBadRequest, gin.H{
+			"info": "password or email error!",
 		})
 		return
 	}
@@ -346,13 +346,35 @@ func Login1(c *gin.Context) {
 		//c.HTML(http.StatusOK, "user.html", nil)
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"status": "logined",
+			"info": "logined",
 		})
 	}
 }
 
 func checkcookie() bool {
 	return true
+}
+
+func Logout(c *gin.Context) {
+	cookie1 := &http.Cookie{
+		Name:  "token",
+		Value: "",
+	}
+	http.SetCookie(c.Writer, cookie1)
+
+	cookie2 := &http.Cookie{
+		Name:  "email",
+		Value: "",
+	}
+	http.SetCookie(c.Writer, cookie2)
+	cookie3 := &http.Cookie{
+		Name:  "username",
+		Value: "",
+	}
+	http.SetCookie(c.Writer, cookie3)
+	c.JSON(http.StatusOK, gin.H{
+		"info": "logouted",
+	})
 }
 
 func Login(c *gin.Context) {
@@ -385,8 +407,8 @@ func Login(c *gin.Context) {
 	fmt.Println(userfromdb.Password)
 
 	if userfromdb.Password != password {
-		c.JSON(http.StatusOK, gin.H{
-			"status": "password or email error!",
+		c.JSON(http.StatusBadRequest, gin.H{
+			"info": "password or email error!",
 		})
 	}
 
@@ -437,14 +459,14 @@ func Login(c *gin.Context) {
 		// c.Redirect(http.StatusMovedPermanently, "/v1/inbox")
 		// c.Redirect(http.StatusMovedPermanently, "http://baidu.com")
 		c.JSON(http.StatusOK, gin.H{
-			"status": "logined",
+			"info": "logined",
 		})
 		// c.Abort()
 		//c.Redirect(http.StatusMovedPermanently, "/mainboard")
 		//c.HTML(http.StatusOK, "user.html", nil)
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"status": "logined",
+			"info": "logined",
 		})
 	}
 }

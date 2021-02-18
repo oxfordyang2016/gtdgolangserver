@@ -49,10 +49,10 @@ func Authofuser() gin.HandlerFunc {
 		path := c.Request.URL.Path
 		log.Println(path)
 		// 设置不需要检查的路由
-		notneedtocheck := []string{"test", "login", "register", "alarm"}
+		notneedtocheck := []string{".ico", ".css", ".js", "welcome", "logout", ".html", "login", "register", "alarm"}
 
 		Flag := false
-		for i := 0; i <= len(notneedtocheck); i++ {
+		for i := 0; i < len(notneedtocheck); i++ {
 			//如果正确的话就提前结束
 			if strings.Contains(path, notneedtocheck[i]) {
 				Flag = true
@@ -60,6 +60,9 @@ func Authofuser() gin.HandlerFunc {
 			}
 		}
 
+		if path == "/v1/" {
+			Flag = true
+		}
 		if Flag {
 			log.Println("请求在不需要验证的路径之内")
 		} else {
@@ -67,35 +70,49 @@ func Authofuser() gin.HandlerFunc {
 			//  可以在这里读去出对应的提取信息，如果授权不成功应该提前返回
 			ClientToken, err := c.Request.Cookie("token")
 			if err != nil {
-				c.JSON(http.StatusUnauthorized, gin.H{
-					"info": "cookie里面缺少对应的token",
+				// c.AbortWithStatusJSON(code, gin.H{"error": message})
+				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+					"info": "cookie里面缺少对应的token，请登录",
 				})
 			}
 			VerifiedEmail, verifyerr := VerifyJwt(ClientToken.Value)
 			if verifyerr != nil {
-				c.JSON(http.StatusUnauthorized, gin.H{
-					"info": "token不合法",
+				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+					"info": "token不合法，请登录",
 				})
+				return
 			}
 			log.Println(VerifiedEmail)
 			// 在这里新增refresh的逻辑
 			newtoken, refresherr := Refresh(ClientToken.Value)
 			log.Println(newtoken)
+			//这里错误分为两类一类是授权还在时间范围内，另外一种是其他
 			if refresherr != nil {
 				if refresherr != nil {
 					err, ok := refresherr.(*VerifyTimeError)
+
 					if ok {
+						// 这里表示授权中对应的时间段还没有过期,代码将继续运行
 						log.Println("这里正在进行类型判断")
 						log.Println(err)
 						log.Println("这里正在进行类型判断")
 					} else {
-						c.JSON(http.StatusUnauthorized, gin.H{
+						c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 
-							"info": "token无效",
+							"info": "token无效，请重新登录",
 						})
+						return
 
 					}
 				}
+			} else {
+				// 表示刷新token成功，需要将token写入到cookie但中去
+				cookie := &http.Cookie{
+					Name:  "token",
+					Value: newtoken,
+				}
+				http.SetCookie(c.Writer, cookie)
+
 			}
 
 		}
@@ -152,6 +169,7 @@ func main() {
 	v1.GET("/test", Test)
 	v1.GET("/time", Clock)
 	//user system
+	v1.GET("/welcome", User)
 	v1.GET("/", User)
 	v1.GET("/panic", func(c *gin.Context) {
 		// panic with a string -- the custom middleware could save this to a database or report it to the user
@@ -160,6 +178,7 @@ func main() {
 	v1.GET("/location", Canvas)
 	v1.GET("/emailverify", EmailGenerateCode)
 	v1.POST("/login", Login)
+	v1.GET("/logout", Logout)
 	v1.POST("/register", Register)
 
 	//operate system command
