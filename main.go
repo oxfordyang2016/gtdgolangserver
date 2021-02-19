@@ -41,7 +41,7 @@ import (
 var db *gorm.DB
 
 // 定义授权的中间,件
-
+//many clients login test
 func Authofuser() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
