@@ -1,29 +1,30 @@
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
 [GIN-debug] Loaded HTML Templates (25): 
+	- place.html
 	- reviewalgo.html
-	- reviewalgoforiosback.html
-	- reviewalgoforyangming.html
-	- reviewfromprojectreview.html
-	- user.html
-	- rebalancealgo.html
+	- testgolangtemplaterender.html
+	- addtasks.html
 	- goallist.html
 	- inbox.html
-	- mainpage.html
 	- pride.html
-	- pridetimeline.html
-	- testgolangtemplaterender.html
-	- 
-	- inbox0.html
-	- map.html
-	- review.html
-	- taskmanagerbak.html
-	- addtasks.html
-	- goals.html
-	- place.html
 	- project.html
-	- reviewalgoforios.html
+	- review.html
+	- reviewalgoforyangming.html
 	- taskmanager.html
-	- time.html
 	- everyday.html
+	- user.html
+	- time.html
+	- rebalancealgo.html
+	- reviewalgoforios.html
+	- reviewalgoforiosback.html
+	- taskmanagerbak.html
+	- map.html
+	- goals.html
+	- inbox0.html
+	- mainpage.html
+	- pridetimeline.html
+	- reviewfromprojectreview.html
+	- 
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (5 handlers)
 [GIN-debug] HEAD   /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (5 handlers)
@@ -125,7 +126,6 @@
 [GIN-debug] GET    /v1/searchwithtag         --> github.com/gtdgolangserver/models.Searchwithtags (5 handlers)
 [GIN-debug] GET    /v1/mybalancejson         --> github.com/gtdgolangserver/models.Getmywealth (5 handlers)
 [GIN-debug] Listening and serving HTTP on :8081
-[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500
 [GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500
 [GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500
 [GIN-debug] [WARNING] Headers were already written. Wanted to override status code 401 with 500

@@ -1,0 +1,89 @@
+basePath: /v1
+definitions:
+  main.JSONParams:
+    properties:
+      array:
+        description: 这是一个字符串数组
+        items:
+          type: string
+        type: array
+      int:
+        description: 这是一个数字
+        type: integer
+      str:
+        description: 这是一个字符串
+        type: string
+      struct:
+        description: 这是一个结构
+        properties:
+          field:
+            type: string
+        type: object
+    type: object
+host: 127.0.0.1:8081
+info:
+  contact:
+    email: me@razeen.me
+    name: Razeen
+    url: https://razeen.me
+  description: 服务器文档.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://razeen.me
+  title: gtdgolangserver api
+  version: "1.0"
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: 登入
+      parameters:
+      - description: '{'
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/main.JSONParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"login success"}'
+          schema:
+            type: string
+        "400":
+          description: '{"msg": "user or password error"}'
+          schema:
+            type: string
+      summary: 登陆
+      tags:
+      - 用户系统
+  /logout:
+    get:
+      description: 登出
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 登出用户系统
+      tags:
+      - 用户系统
+  /test:
+    get:
+      description: 检查
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: info":"conected........"}
+          schema:
+            type: string
+      summary: 检查应用后台是否可以通信息
+      tags:
+      - 测试
+swagger: "2.0"

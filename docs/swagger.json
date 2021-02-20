@@ -1,0 +1,133 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "服务器文档.",
+        "title": "gtdgolangserver api",
+        "termsOfService": "https://razeen.me",
+        "contact": {
+            "name": "Razeen",
+            "url": "https://razeen.me",
+            "email": "me@razeen.me"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8081",
+    "basePath": "/v1",
+    "paths": {
+        "/login": {
+            "post": {
+                "description": "登入",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户系统"
+                ],
+                "summary": "登陆",
+                "parameters": [
+                    {
+                        "description": "{",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.JSONParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"login success\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"msg\": \"user or password error\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "description": "登出",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户系统"
+                ],
+                "summary": "登出用户系统",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/test": {
+            "get": {
+                "description": "检查",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "测试"
+                ],
+                "summary": "检查应用后台是否可以通信息",
+                "responses": {
+                    "200": {
+                        "description": "info\":\"conected........\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.JSONParams": {
+            "type": "object",
+            "properties": {
+                "array": {
+                    "description": "这是一个字符串数组",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "int": {
+                    "description": "这是一个数字",
+                    "type": "integer"
+                },
+                "str": {
+                    "description": "这是一个字符串",
+                    "type": "string"
+                },
+                "struct": {
+                    "description": "这是一个结构",
+                    "type": "object",
+                    "properties": {
+                        "field": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
