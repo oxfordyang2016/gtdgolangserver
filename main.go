@@ -31,14 +31,34 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 
+	// 在product模式应该将该swagger禁止掉
+	_ "github.com/gtdgolangserver/docs"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
+
 	//"github.com/gin-contrib/sessions"
 	// _ "github.com/jinzhu/gorm/dialects/postgres"
 	// the  . https://www.golang-book.com/books/intro/11
 	//_ "github.com/jinzhu/gorm/dialects/sqlite"
+
 	. "github.com/gtdgolangserver/models"
 )
 
 var db *gorm.DB
+
+// JSONParams doc
+type JSONParams struct {
+	// 这是一个字符串
+	Str string `json:"str"`
+	// 这是一个数字
+	Int int `json:"int"`
+	// 这是一个字符串数组
+	Array []string `json:"array"`
+	// 这是一个结构
+	Struct struct {
+		Field string `json:"field"`
+	} `json:"struct"`
+}
 
 // 定义授权的中间,件
 //many clients login test
@@ -49,7 +69,9 @@ func Authofuser() gin.HandlerFunc {
 		path := c.Request.URL.Path
 		log.Println(path)
 		// 设置不需要检查的路由
-		notneedtocheck := []string{".ico", ".css", ".js", "welcome", "logout", ".html", "login", "register", "alarm"}
+		notneedtocheck := []string{".ico", "swagger", ".css", ".js",
+			"welcome", "logout", ".html", "login", "register", "alarm",
+			"emailverify", "test"}
 
 		Flag := false
 		for i := 0; i < len(notneedtocheck); i++ {
@@ -123,6 +145,21 @@ func Authofuser() gin.HandlerFunc {
 
 //about init https://stackoverflow.com/questions/24790175/when-is-the-init-function-run
 
+// @title gtdgolangserver api
+// @version 1.0
+// @description 服务器文档.
+// @termsOfService https://razeen.me
+
+// @contact.name Razeen
+// @contact.url https://razeen.me
+// @contact.email me@razeen.me
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host 127.0.0.1:8081
+// @BasePath /v1
+
 func main() {
 	//golang https://www.goinggo.net/2014/03/exportedunexported-identifiers-in-go.html
 	//golang import var
@@ -144,6 +181,8 @@ func main() {
 	// 	}
 	// 	c.AbortWithStatus(http.StatusInternalServerError)
 	// }))
+	// 这是一段服务器请求的文档代码
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	v1 := router.Group("/v1")
 
@@ -172,7 +211,7 @@ func main() {
 	v1.GET("/welcome", User)
 	v1.GET("/", User)
 	v1.GET("/location", Canvas)
-	v1.GET("/emailverify", EmailGenerateCode)
+	v1.POST("/emailverify", EmailGenerateCode)
 	v1.POST("/login", Login)
 	v1.GET("/logout", Logout)
 	v1.POST("/register", Register)

@@ -11,7 +11,7 @@ import (
 // "fmt"
 
 // Create the JWT key used to create the signature
-var jwtKey = []byte("my_secret_key")
+var jwtKey = []byte("be_hero_of_yourself")
 
 var users = map[string]string{
 	"user1": "password1",
@@ -27,7 +27,7 @@ type Credentials struct {
 // Create a struct that will be encoded to a JWT.
 // We add jwt.StandardClaims as an embedded type, to provide fields like expiry time
 type Claims struct {
-	Email string `json:"username"`
+	Email string `json:"email"`
 	jwt.StandardClaims
 }
 
@@ -36,7 +36,7 @@ type Claims struct {
 func GenarateJwt(email string) (string, error) {
 	// Declare the expiration time of the token
 	// here, we have kept it as 5 minutes
-	expirationTime := time.Now().Add(2 * time.Minute)
+	expirationTime := time.Now().Add(360 * time.Hour)
 	// Create the JWT claims, which includes the username and expiry time
 	claims := &Claims{
 		Email: email,
@@ -87,7 +87,7 @@ func Refresh(oldtoken string) (string, error) {
 	// In this case, a new token will only be issued if the old token is within
 	// 30 seconds of expiry. Otherwise, return a bad request status
 	//不超出时间就不写入新的token，这里就不再设置新的cookie
-	if time.Unix(claims.ExpiresAt, 0).Sub(time.Now()) > 30*time.Second {
+	if time.Unix(claims.ExpiresAt, 0).Sub(time.Now()) > 120*time.Hour {
 		return "token valid", &VerifyTimeError{info: "token还在有效时间内"}
 	}
 

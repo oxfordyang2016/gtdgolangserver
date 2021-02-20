@@ -111,7 +111,7 @@ func SendEmail(email string) (int, error) {
 	// 参数2：username
 	//参数3：password
 	//参数4：host
-	auth := smtp.PlainAuth("", "thinking_for_life@163.com", "LXRODHFLFPNSJIRJ", "smtp.163.com")
+	auth := smtp.PlainAuth("", "thinking_for_life@163.com", "ELACZHTZLMLVJYDF", "smtp.163.com")
 	to := []string{email}
 	//发送随机数为验证码
 	// Seed uses the provided seed value to initialize the default Source to a
@@ -132,7 +132,8 @@ func SendEmail(email string) (int, error) {
 	err := smtp.SendMail("smtp.163.com:25", auth, "thinking_for_life@163.com", to, msg)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println("发送邮件出错")
+		log.Println(err)
 	}
 	// 使用字符串进行存储
 
@@ -166,7 +167,7 @@ func EmailGenerateCode(c *gin.Context) {
 	}
 	log.Println(generatedNum)
 	c.JSON(http.StatusOK, gin.H{
-		"info": " code had been sent",
+		"info": "code had been sent",
 	})
 }
 
@@ -355,6 +356,13 @@ func checkcookie() bool {
 	return true
 }
 
+// Logout doc
+// @Summary 登出用户系统
+// @Tags 用户系统
+// @Description 登出
+// @Produce json
+// @Success 200 {string} string ""
+// @Router /logout  [get]
 func Logout(c *gin.Context) {
 	cookie1 := &http.Cookie{
 		Name:  "token",
@@ -377,6 +385,16 @@ func Logout(c *gin.Context) {
 	})
 }
 
+// Login doc
+// @Summary 登陆
+// @Tags 用户系统
+// @Description 登入
+// @Accept json
+// @Produce json
+// @Param param body main.JSONParams true {"email":"yang75@qq.com","password":"1992"}
+// @Success 200 {string} string "{"msg":"login success"}"
+// @Failure 400 {string} string "{"msg": "user or password error"}"
+// @Router /login [post]
 func Login(c *gin.Context) {
 	//cookie set
 	//store := sessions.NewCookieStore([]byte("secret"))
@@ -403,6 +421,7 @@ func Login(c *gin.Context) {
 	// if (userfromdb.DeviceToken != devicetoken){
 	// db.Model(&userfromdb).Update("Devicetoken", devicetoken)
 	// }
+
 	fmt.Println("================================")
 	fmt.Println(userfromdb.Password)
 
@@ -410,6 +429,7 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"info": "password or email error!",
 		})
+		return
 	}
 
 	fmt.Println(client)

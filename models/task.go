@@ -1505,13 +1505,16 @@ func Testjwt() {
 
 }
 
-// createTodo add a new todo
+// @Summary 检查应用后台是否可以通信息
+// @Description 检查
+// @Tags 测试
+// @Produce json
+// @Success 200 {string} json    {"info":"conected........"}
+// @Router /test [get]
 func Test(c *gin.Context) {
 
 	c.JSON(200, gin.H{
-		"status":  "conected........",
-		"message": "welcome to new world",
-		"nick":    "234",
+		"info": "conected........",
 	})
 }
 
