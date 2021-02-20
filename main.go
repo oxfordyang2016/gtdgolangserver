@@ -171,10 +171,6 @@ func main() {
 	//user system
 	v1.GET("/welcome", User)
 	v1.GET("/", User)
-	v1.GET("/panic", func(c *gin.Context) {
-		// panic with a string -- the custom middleware could save this to a database or report it to the user
-		panic("foo")
-	})
 	v1.GET("/location", Canvas)
 	v1.GET("/emailverify", EmailGenerateCode)
 	v1.POST("/login", Login)
