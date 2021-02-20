@@ -2,5 +2,4 @@ dump.rdb
 engine.log
 mysql
 .env
-docker-compose.yml
 gin.log
