@@ -291,7 +291,7 @@ func Goalsystem(c *gin.Context) {
 	}
 
 	goaltype := c.Query("goaltype")
-
+        
 
 	//var goals []Tasks
 	var goals []Goalfordbs
