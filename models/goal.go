@@ -43,7 +43,7 @@ type (
 		Plantime    string `json:"plantime"`
 		Finishtime  string `json:"finishtime"`
 		Chinesename string `json:"chinesename"`
-		Timerange   int    `json:"timerange"` //制定目标的时间范围
+		Timerange   int    `json:"timerange"` //制定目标的时间范围，计划几个月完成
 	}
 
 	Goalsincludetasks struct {

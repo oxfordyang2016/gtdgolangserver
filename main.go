@@ -171,7 +171,8 @@ func main() {
 	// gin.DefaultWriter = io.MultiWriter(f)
 	router := gin.Default()
 	router.Use(cors.Default())
-	router.Use(Authofuser())
+	// 这里可以不使用授权中间件
+	// router.Use(Authofuser())
 	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f)
 	// Recovery middleware recovers from any panics and writes a 500 if there was one.
