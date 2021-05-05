@@ -591,6 +591,7 @@ var sendback_tasks = []
       'tenminutestasktag': "10分钟",
       'thirtyminutestasktag': "30分钟",
       'threeminutestasktag': "3分钟",
+      'lifetag': "人生伟大时刻",
     }
 
     // Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
@@ -671,7 +672,8 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'keyproblemtag': 'no',
       'tenminutestasktag': 'no',
       'thirtyminutestasktag': 'no',
-      'threeminutestasktag': 'no'
+      'threeminutestasktag': 'no',
+      'lifetag': 'no'
     }
 
     // define a inital reviewalgo
@@ -698,7 +700,8 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'learntechuse': 'no',
       'doanimportantthingearly': 'no',
       'acceptpain': 'no',
-      'conquerthefear': 'no'
+      'conquerthefear': 'no',
+      'life': 'no'
     }
 
 
@@ -1903,7 +1906,8 @@ $.get("/v1/goaljson", function(data, status){
       'keyproblemtag': 'no',
       'tenminutestasktag': 'no',
       'thirtyminutestasktag': 'no',
-      'threeminutestasktag': 'no'
+      'threeminutestasktag': 'no',
+      'lifetag': 'no'
       }
 
       var tem_tags = tasktags_fixed;

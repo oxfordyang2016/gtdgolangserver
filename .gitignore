@@ -3,3 +3,4 @@ engine.log
 mysql
 .env
 gin.log
+log.txt
