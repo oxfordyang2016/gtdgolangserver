@@ -838,7 +838,8 @@ $(document).on("click",".left_add_task2tomorrow_button",function(){
                 // alert("您已经成功把任务添加到明天")
                 task_li_div.outerHTML = ""
                 // geteverydaytask()
-                show_tomorrow_tree()
+                // show_tomorrow_tree()
+                show_today_tree()
                 },
                 failure: function (errMsg) {
                   console.log("this is erro")
