@@ -562,6 +562,7 @@ var reviewalgoforalltasksintoday = {}
 
 // 定义一个sontree的全局变量
 var sontree = {}
+var posterity_tree ={}
 
 // 定义这个sendback_tasks用来存放geteveryday传回来的所有task，是一个array,形式是这样的[{},{},{}……]
 var sendback_tasks = []
@@ -899,7 +900,30 @@ function show_today_tree(){
     get_today_task_tree("/v1/todayjson","today_tree")
     get_overdue_task_tree("/v1/yesterdayjson","overdue")
     set_todayandtomorrow_style_defult()
+
 }
+
+function  generate_posterity(sontree){
+  for (const [ key, value ] of Object.entries(sontree)) {
+    // do something with `key` and `value`
+}               
+
+}
+
+function get_posterity_byid(taskid,sontree){
+  if (len(sontree[taskid]) == 0){
+    return
+  }else{
+    var sons = sontree[taskid]
+    for(var i=0;i<len(sons);i++){
+     posterity_tree[taskid].push(sons[i].ID)
+     get_posterity_byid(sons[i].ID,sontree)
+    }
+  }
+
+}
+
+
 
 function show_tomorrow_tree(){
     today_or_tomorrow = 2
