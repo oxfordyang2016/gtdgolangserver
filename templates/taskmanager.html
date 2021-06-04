@@ -563,6 +563,7 @@ var reviewalgoforalltasksintoday = {}
 // 定义一个sontree的全局变量
 var sontree = {}
 var posterity_tree ={}
+var posterity_container = []
 
 // 定义这个sendback_tasks用来存放geteveryday传回来的所有task，是一个array,形式是这样的[{},{},{}……]
 var sendback_tasks = []
@@ -910,13 +911,15 @@ function  generate_posterity(sontree){
 
 }
 
+// 这里需要穿入一个全局变量进来posterity_container.
 function get_posterity_byid(taskid,sontree){
-  if (len(sontree[taskid]) == 0){
-    return
+  console.log(sontree)
+  if (sontree[taskid].length == 0){
+    return 
   }else{
     var sons = sontree[taskid]
-    for(var i=0;i<len(sons);i++){
-     posterity_tree[taskid].push(sons[i].ID)
+    for(var i=0;i<sons.length;i++){
+     posterity_container.push(sons[i].ID)
      get_posterity_byid(sons[i].ID,sontree)
     }
   }

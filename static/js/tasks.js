@@ -780,9 +780,13 @@ $(document).on("click",".add_task2tomorrow_button",function(){
     // }
     console.log("==========这里是所有要添加到明天任务的ID=============")
     console.log(clicked_taskid)
+    alert(clicked_taskid)
     // console.log(giveup_taskids)
+    posterity_container  = []
+    get_posterity_byid(clicked_taskid[0])
+    alert(posterity_container)
     var info = {
-        'tomorrowtaskids':clicked_taskid,
+        'tomorrowtaskids':posterity_container,
     }
           // console.log(updatedinfo)
           $.ajax({
@@ -819,9 +823,16 @@ $(document).on("click",".left_add_task2tomorrow_button",function(){
         console.log("==========这里是所有要添加到明天任务的ID=============")
         console.log(clicked_taskid)
         // console.log(giveup_taskids)
+        alert(clicked_taskid[0])
+        // console.log(giveup_taskids)
+        posterity_container  = []
+        get_posterity_byid(parseInt(clicked_taskid[0]),sontree)
+        alert(posterity_container)
+        posterity_container.push(parseInt(clicked_taskid[0]))
         var info = {
-            'tomorrowtaskids':clicked_taskid,
+            'tomorrowtaskids':posterity_container,
         }
+        
               // console.log(updatedinfo)
               $.ajax({
                 type: "POST",
