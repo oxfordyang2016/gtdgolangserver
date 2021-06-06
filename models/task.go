@@ -931,14 +931,32 @@ func CreatetaskbyJSON(c *gin.Context) {
 		plantime = time.Now().In(loc).Format("060102")
 	}
 	// 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
-	Check_reviewdaylog(plantime, email)
-	var score = Compute_singleday(plantime, email)
-	fmt.Println("真成绩是")
-	fmt.Println(score)
-	//Print the HTTP response status.
-	s := fmt.Sprintf("%f", score)
-	ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为" + s
-	fmt.Println(ttsclienttext)
+
+	go func(plantime string, email string) {
+		Check_reviewdaylog(plantime, email)
+		var score = Compute_singleday(plantime, email)
+		fmt.Println("真成绩是")
+		fmt.Println(score)
+		//Print the HTTP response status.
+		s := fmt.Sprintf("%f", score)
+		ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为" + s
+		fmt.Println(ttsclienttext)
+		if websocket_switch {
+			if websocket_switch && voice_websocekt {
+				//这里分别向前段推送语音合成数据
+				go ttsclient(email, ttsclienttext)
+				//这里是向前段推送图像数据
+
+			}
+
+			if websocket_switch && image_websocket {
+
+				go visiualdata2websocket(email, ttsclienttext)
+			}
+
+		}
+	}(plantime, email)
+
 	// ttsclient(ttsclienttext)
 	/*
 
@@ -947,20 +965,7 @@ func CreatetaskbyJSON(c *gin.Context) {
 	*/
 	//这里分别向前段推送语音合成数据
 	//这里是向前段推送图像数据
-	if websocket_switch {
-		if websocket_switch && voice_websocekt {
-			//这里分别向前段推送语音合成数据
-			go ttsclient(email, ttsclienttext)
-			//这里是向前段推送图像数据
 
-		}
-
-		if websocket_switch && image_websocket {
-
-			go visiualdata2websocket(email, ttsclienttext)
-		}
-
-	}
 	color.Yellow("------------we dealing with push notification---------------")
 	color.Red(starttime)
 	color.Red(plantime)
@@ -990,8 +995,8 @@ func CreatetaskbyJSON(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"taskid":  taskid,
-		"score":   score,
+		"taskid": taskid,
+		// "score":   score,
 		"status":  "posted",
 		"message": "u have uploaded info,please come on!",
 	})
