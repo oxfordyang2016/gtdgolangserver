@@ -780,13 +780,13 @@ $(document).on("click",".add_task2tomorrow_button",function(){
     // }
     console.log("==========这里是所有要添加到明天任务的ID=============")
     console.log(clicked_taskid)
-    alert(clicked_taskid)
+    // alert(clicked_taskid)
     // console.log(giveup_taskids)
-    posterity_container  = []
-    get_posterity_byid(clicked_taskid[0])
-    alert(posterity_container)
+    // posterity_container  = []
+    // get_posterity_byid(clicked_taskid[0])
+    // alert(posterity_container)
     var info = {
-        'tomorrowtaskids':posterity_container,
+        'tomorrowtaskids':clicked_taskid,
     }
           // console.log(updatedinfo)
           $.ajax({
@@ -913,10 +913,10 @@ $(document).on("click",".left_add_task2tomorrow_button",function(){
                 //   alert("我正在把任务调度到660606")
                 //   alert(data)
                   
-                  console.log(data)
-                  // alert(data); 
-                  task_li_div.outerHTML = ""
-              show_today_tree()
+               console.log(data)
+               // alert(data); 
+               task_li_div.outerHTML = ""
+               show_today_tree()
             
                 //   get_all_unfinished_tasks_list()
                   
