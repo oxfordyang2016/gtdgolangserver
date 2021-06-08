@@ -1759,14 +1759,14 @@ alert(battlewithlowerbrain);
 //finance api
 var thisyear = 10000
 var left = 100090
-$.get("/finance/getrewardleft", function(data, status){
+$.get("/finance/balance", function(data, status){
     /*
     
     {"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
     */
     var k = JSON.parse(data)
-        thisyear = k.thisyear
-        left = k.left
+        // thisyear = k.thisyear
+        left = k.asset
         // alert(data)
         // alert(left)     
 });  

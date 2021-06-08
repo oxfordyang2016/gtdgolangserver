@@ -336,7 +336,7 @@ def rewardfun():
 
 
 
-@app.route('/finance/banlance',methods=["POST","GET","PUT"])
+@app.route('/finance/balance',methods=["POST","GET","PUT"])
 def staticticsforbanlancetable():
     try:
         # days = request.args.get('days')
