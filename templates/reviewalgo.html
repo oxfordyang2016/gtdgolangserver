@@ -414,17 +414,33 @@ alert(battlewithlowerbrain);
 //finance api
 var thisyear = 10000
 var left = 100090
-$.get("/finance/getrewardleft", function(data, status){
+//这里是请求的老一点的api，是通过计算每一个订单流程来的
+// $.get("/finance/getrewardleft", function(data, status){
+//     /*
+    
+//     {"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
+//     */
+//     var k = JSON.parse(data)
+//         thisyear = k.thisyear
+//         left = k.left
+//         // alert(data)
+//         // alert(left)     
+// });  
+
+
+$.get("/finance/balance", function(data, status){
     /*
     
     {"left":finance["left"],"available":40,"budget":90,"thisyear":finance["thisyear"],"code":200}
     */
     var k = JSON.parse(data)
-        thisyear = k.thisyear
-        left = k.left
+        // thisyear = k.thisyear
+        left = k.asset
         // alert(data)
         // alert(left)     
-});  
+}); 
+
+
 
 // alert(thisyear)
 
@@ -453,12 +469,12 @@ option = {
             text: totalscore[totalscore.length - 1].toFixed(2),
             x: 100,
             y: 200
-    }
+          }
         },
 
 
     tooltip : {
-        trigger: 'axis',
+        trigger: 'none',
         axisPointer: {
             type: 'cross',
             label: {

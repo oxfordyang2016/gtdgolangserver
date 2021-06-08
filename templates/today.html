@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+  <!-- 色块图的脚本 -->
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css" integrity="sha256-+1Yu+5ObnnRUhRwyuxT1eNj5iVx/zBNS75tYlzc1z7U=" crossorigin="anonymous" />
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg=" crossorigin="anonymous"></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"
+    crossorigin="anonymous"></script>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"
+    ></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css" integrity="sha256-+1Yu+5ObnnRUhRwyuxT1eNj5iVx/zBNS75tYlzc1z7U=" crossorigin="anonymous" />
+
+    <title>life in a day</title>
+ <link rel="icon" href="https://photosfor2018.oss-cn-hangzhou.aliyuncs.com/dreamforfuture.png">
+<style>
+
+body {
+/*
+  background: url("https://static.pexels.com/photos/6663/desk-white-black-header.jpg") no-repeat center center fixed;
+*/ 
+ background-size: cover; 
+}
+.pomodoro {
+position:relative;
+left: 50%;
+  transform: translate(-50%, -0%);
+  width: 500px;  
+  padding-top: 15px;
+  padding-bottom: 25px;  
+}
+p {
+  text-align: center;
+}
+.flip-clock-wrapper{
+  max-width: 460px;
+  margin: 3em auto 2em;
+  display: flex;
+  justify-content: center;
+}
+.col-md-4{
+  display: flex;
+  justify-content: center;
+}
+.col-md-2{
+  display: flex;
+  justify-content: center;
+  height: 34px;
+  align-items: center;
+}
+.counter{
+  display: flex;
+  justify-content: center;
+}
+.clock{
+  margin-top: 30px;
+}
+.container {
+  width: 500px;
+}
+.middle{
+    display:inline-block;
+}
+#btns{
+  display: flex;
+  justify-content: center;
+}
+#stop {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.btn {
+  background-color: #333333;
+  color: #CCCCCC;
+}
+#sessInc, #sessDec, #breakInc, #breakDec {  
+  font-weight: bold;
+}
+#stats {
+  background-color: #333333;
+  width: 220px;
+  height: 70px;  
+  border-radius: 10px;
+  color: #CCCCCC;
+  font-size: 45px;
+  text-align: center;
+}
+#statRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
+
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+button[name=preparing][light=on]{
+background-color:green;
+}
+
+button[name=start][switch=on]{
+background-color:red;
+}
+
+button[name=end][switch=on]{
+background-color:red;
+}
+
+th[timeblock=yes]{
+  background-color:red;
+}
+
+
+td[childcolor=yes1111]{
+  background-color:red;
+}
+td[colorforexecute=yc]{
+  background-color:yellow;
+}
+
+li[buttoncolor=bc]{
+  background-color:purple;
+}
+
+</style>
+</head>
+<body>
+  
+
+<div id="app">
+    <table class="table table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>review for times</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  >
+           <th scope="row">
+           <button v-for="(propertyName,propertyName1) in  reviewdata"   type="button" style:color="red">
+             <li v-bind:number = "propertyName" buttoncolor = "bc" v-if="propertyName > 0.5">{{propertyName1}}</li>
+             <li v-bind:number = "propertyName" buttoncolor = "wc" v-else>{{propertyName1}}</li>
+            </button>
+          </th>
+
+           <!-- <td>{{ sales[1][i].Sale }}</td>   -->
+           <!-- <td><button class="btn1" id="btn1" var summary='' url=''>start task</button>
+              <button class="btn2" id="btn1" var summary='{{bookmark["summary"]}}' url='{{bookmark["url"]}}'>open in thinkingforlife</button> -->
+              <!-- <button class="btn2" id="btn2" bookname='' pagenumber=''>end task</button> -->
+        </tr>
+       </tbody>
+    </table>
+
+
+
+
+
+    <h2>finance api</h2>
+    <table class="table table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>budget</th>
+          <th>available</th>
+          <th>reward0413</th>
+          <th>tic</th>
+          <th>thisyearcost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+           <th scope="row">{{ finance.budget }}</th>
+           <td>{{finance.available}}</td> 
+           <td>{{finance.left}}</td> 
+           <td>{{finance.thisyearincome}}</td> 
+           <td>{{finance.thisyear}}</td> 
+           <!-- <td>{{ sales[1][i].Sale }}</td>   -->
+           <!-- <td><button class="btn1" id="btn1" var summary='' url=''>start task</button>
+              <button class="btn2" id="btn1" var summary='{{bookmark["summary"]}}' url='{{bookmark["url"]}}'>open in thinkingforlife</button> -->
+              <!-- <button class="btn2" id="btn2" bookname='' pagenumber=''>end task</button> -->
+        </tr>
+       </tbody>
+    </table>
+
+    <h2> media api</h2>
+    <table class="table table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>changleenge</th>
+          <th>hardthings</th>
+          <th>keyproblem</th>
+          <th>fearthings</th>
+          <th>resttime</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+           <th scope="row">{{ finance.budget }}</th>
+           <td>{{finance.available}}</td> 
+           <td>{{finance.left}}</td> 
+           <td>{{finance.thisyearincome}}</td> 
+           <td>{{finance.thisyear}}</td> 
+           <!-- <td>{{ sales[1][i].Sale }}</td>   -->
+           <!-- <td><button class="btn1" id="btn1" var summary='' url=''>start task</button>
+              <button class="btn2" id="btn1" var summary='{{bookmark["summary"]}}' url='{{bookmark["url"]}}'>open in thinkingforlife</button> -->
+              <!-- <button class="btn2" id="btn2" bookname='' pagenumber=''>end task</button> -->
+        </tr>
+       </tbody>
+    </table>
+
+
+
+
+
+
+
+    <h2>today tasks</h2>
+    <button class="btn2">preparing</button> 
+        <table class="table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th>plantime</th>
+            <th>task</th>
+            <th>taskid</th>
+            <th>control</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="task in tasks">
+             <th scope="row" v-bind:timeblock="task.timeblock" >{{task.plantime}}</th>
+             <td>
+                <button name="start" class = "start"  v = "75"  status= "unselected" color= "red" v-on:click="start"  v-bind:switch="task.tasksexecute_start_status" v-bind:taskid="task.ID"    v-bind:task="task.task">Start</button>
+                <!-- <button class="btn2" id="btn1" var summary='{{bookmark["summary"]}}' url='{{bookmark["url"]}}'>open in thinkingforlife</button> -->
+                <button name="end" class = "end"  status= "unselected" v-on:click="end"  v-bind:switch="task.tasksexecute_end_status"   v-bind:taskid="task.ID" v-bind:task="task.task">End</button>
+                <button name="preparing" class = "prepare"  name="preparing"   status= "unselected" v-bind:light="task.preparing_status" v-bind:switch="task.tasksexecute_end_status" v-bind:taskid="task.ID"   v-bind:taskid="task.ID" v-bind:task="task.task">preparing</button> 
+                    </td>  
+                    <td>{{ task.ID }}</td> 
+             <td v-bind:timeblock="task.timeblock"  v-bind:childcolor="task.childcolor"  colorforexecute="red" >{{ task.task }}</td> 
+             <!-- <td>{{ sales[1][i].Sale }}</td>   -->
+             <!-- <td><button class="btn1" id="btn1" var summary='' url=''>start task</button>
+                <button class="btn2" id="btn1" var summary='{{bookmark["summary"]}}' url='{{bookmark["url"]}}'>open in thinkingforlife</button> -->
+                <!-- <button class="btn2" id="btn2" bookname='' pagenumber=''>end task</button> -->
+              
+          </tr>
+         </tbody>
+      </table>
+  <h2>deadline tasks</h2>
+      <table class="table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th>deadline</th>
+            <th>task</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="task in deadlinetasks">
+             <th scope="row">{{task.deadline}}</th>
+
+             <td>{{ task.task }}</td> 
+             <!-- <td>{{ sales[1][i].Sale }}</td>   -->
+             <!-- <td><button class="btn1" id="btn1" var summary='' url=''>start task</button>
+                <button class="btn2" id="btn1" var summary='{{bookmark["summary"]}}' url='{{bookmark["url"]}}'>open in thinkingforlife</button> -->
+                <!-- <button class="btn2" id="btn2" bookname='' pagenumber=''>end task</button> -->
+             
+          </tr>
+         </tbody>
+      </table>
+
+      </div>
+
+<div class="pomodoro">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row"><p>session length<p></div>
+      <div class="row counter">
+        <div class="col-md-4">
+          <button class="btn btn-default" id="sessDec">-</button>        
+        </div>
+        <div class="col-md-2">
+          <div id="session"></div>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-default" id="sessInc">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row"><p>break length<p></div>
+      <div class="row counter">
+        <div class="col-md-4">
+          <button class="btn btn-default" id="breakDec">-</button>
+        </div>
+        <div class="col-md-2">
+          <div id="break"></div>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-default" id="breakInc">+</button>        
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div id="clock" class="row">
+    <div class="timer"><div class="middle"></div></div>
+  </div>
+  <div class="row" id="statRow">
+    <div id="stats"></div>
+  </div>
+  <div class="container">
+    <div class="row" id="btns">
+      <button class="btn btn-default btn-lg" id="start">start</button>
+      <button class="btn btn-default btn-lg" id="stop">stop</button>
+      <button class="btn btn-default btn-lg" id="clear">clear</button>
+    </div>
+  </div>
+     
+</div>
+<h3>tomorrow plantime</h3>
+<div id="mountNodefortomorrow"></div>
+<div id="mountNode"></div>
+
+</body>
+
+<!-- <embed src="http://127.0.0.1:9999/thinkingforlife/getbookmark?code=fe2546fa1fcb93ae42e2f2e5980449f2" width="800px" height="2100px" /> -->
+<script>
+
+$(document).ready(function(){
+  var countS = 25;
+  $("#session").html(countS);
+  var countB = 5;
+  $("#break").html(countB);
+  var pos = "pomodoro";
+  var countLama;
+  var posLama;
+  var count;
+  $("#stats").html(pos);
+  var clock = $(".timer").FlipClock(0, {
+    countdown: true,
+    clockFace: 'MinuteCounter',
+    autoStart: false,
+    callbacks: {
+      interval: function(){
+        if (clock.getTime() == 0){
+          if (pos == "session"){
+$("body").css("background-color", "white");
+//alert("i am lazy")            
+clock.setTime(countB*60);
+            clock.start();
+            pos = "break";
+            $("#stats").html(pos);
+          } else if (pos == "break"){
+$("body").css("background-color", "yellow");
+//alert("i am lazy")        
+    clock.setTime(countS*60);
+            clock.start();
+            pos = "session";
+            $("#stats").html(pos);
+          }
+        }        
+      }
+    }
+  })  
+  //SESSION
+  $("#sessInc").on("click", function(){
+    if ($("#session").html() > 0){
+      countS = parseInt($("#session").html());
+      countS+=1;
+      $("#session").html(countS);
+      //clock.setTime(countS*60);
+    }
+  });
+  $("#sessDec").on("click", function(){
+    if ($("#session").html() > 1){
+      countS = parseInt($("#session").html());
+      countS-=1;
+      $("#session").html(countS);
+      //clock.setTime(countS*60);
+    }
+  });
+  //BREAK
+  $("#breakInc").on("click", function(){
+    if ($("#break").html() > 0){
+      countB = parseInt($("#break").html());
+      countB+=1;
+      $("#break").html(countB);
+    }    
+  });
+  $("#breakDec").on("click", function(){
+    if ($("#break").html() > 1){
+      countB = parseInt($("#break").html());
+      countB-=1;
+      $("#break").html(countB);
+    }
+  });  
+  $("#start").on("click", function(){
+    if (count != countS || clock.getTime()==0){
+      clock.setTime(countS*60);
+      pos="session";
+      $("#stats").html(pos);
+    } else {
+      pos = posLama;
+      $("#stats").html(pos);
+    }
+    count = countS;    
+    clock.start();    
+  });
+  $("#stop").on("click", function(){
+    clock.stop();
+    countLama = clock.getTime();
+    posLama = $("#stats").html();
+  });
+  $("#clear").on("click", function(){
+    clock.stop();
+    pos = "pomodoro";
+    $("#stats").html(pos);
+    clock.setTime(0);
+  });
+});
+
+
+
+
+// const btn = document.querySelector('#btn');
+// btn.addEventListener('click',() => {
+// 	const input = document.createElement('input');
+//     input.setAttribute('readonly', 'readonly');
+//     input.setAttribute('value', 'hello world');
+//     document.body.appendChild(input);
+// 	input.setSelectionRange(0, 9999);
+// 	if (document.execCommand('copy')) {
+// 		document.execCommand('copy');
+// 		console.log('复制成功');
+// 	}
+//     document.body.removeChild(input);
+var k = 0
+// local
+// var rooturl = "http://localhost:8081/v1/taskexecute"
+// var todayurl =  'http://localhost:8081/v1/todayjson'
+// var deadlineurl =  'http://localhost:8081/v1/deadlinesystemjson'
+// var websocketurl = 'ws://localhost:777'
+// var financeurl = "http://localhost:6001/finance/getrewardleft"
+// var reviewurl= 'https://localhost:8081/v1/reviewfortimes?days=1' 
+//server
+var rooturl = "https://www.blackboxo.top/v1/taskexecute"
+var financeurl = "https://www.blackboxo.top/finance/getrewardleft"
+var todayurl =  'https://www.blackboxo.top/v1/todayjson'
+var deadlineurl =  'https://www.blackboxo.top/v1/deadlinesystemjson'
+var websocketurl = 'wss://www.blackboxo.top/wss'
+var reviewurl= 'https://www.blackboxo.top/v1/reviewfortimes?days=1' 
+
+
+// })
+var i1 = new Vue({
+  el: "#app",
+data () {
+    return {
+        name:"yangming",
+        sales: [
+        [{'Year': 2018, 'Month': 01, 'Sale': "yangming is here"}, {'Year': 2018, 'Month': 02, 'Sale': "test task id"}],
+            [{'Year': 2017, 'Month': 01, 'Sale': 155}, {'Year': 2017, 'Month': 02, 'Sale': 12}]
+    ],
+      info: null,
+      tasks:null,
+      deadlinetasks:null,
+      finance:{"budget":10000,"available":68},
+      reviewdata:null,
+      chartfortomorrow:new G2.Chart({
+    container: 'mountNodefortomorrow',
+    forceFit: true,
+    // height: window.innerHeight,
+    height: 400,
+    padding: [20, 80, 120, 85]
+  }),
+      chart:new G2.Chart({
+    container: 'mountNode',
+    forceFit: true,
+    height: 400,
+    // height: window.innerHeight,
+    padding: [20, 80, 120, 85]
+  })
+    }
+  },
+methods:{
+    start: function (event) {
+      // `this` inside methods point to the Vue instance
+      ////alert('Hello ' + this.name + '!')
+    //   class="w3-button w3-black"
+      // `event` is the native DOM event
+      ////alert(event.target.tagName)
+      ////alert(event.target.getAttribute("v"))
+    //   event.target.setAttribute("background-color", "red");
+      //这里要向服务器发送时间
+    //   e.target.style.color= 'red'
+    const now =  Date.now().toString()
+    const taskid = event.target.getAttribute("taskid")
+    const task = event.target.getAttribute("task")
+    const thisswitch = event.target.getAttribute("switch")
+    if (thisswitch=="on"){
+        //alert("please not repeated")
+        return 
+    }
+   
+    
+    //检查任务中是否有tbody中是否有没结束的任务
+    //不允许重复点击
+
+    var query = ".start[status!="+now+"][switch!='off']"
+    var a = $(query).length
+    if (a>0){
+        //alert("----i ma here------")
+        //alert("please end other tasks")
+    }else{
+        
+       // //alert("ifthis was executed it was a bug")
+    event.target.setAttribute("status", now);
+    event.target.setAttribute("switch",  "on");
+    event.target.nextElementSibling.nextElementSibling.setAttribute("light","off")
+    event.target.nextElementSibling.setAttribute("switch","off")
+    event.target.nextElementSibling.setAttribute("status",now)
+    //将按钮变红
+    event.target.style.background= 'red'
+      //设置任务也变黄      
+   event.target.parentNode.nextElementSibling.setAttribute("colorforexecute","yc")
+    event.target.nextElementSibling.style.background= 'white'
+    const fakeData = [ { fake: 'data' } ];
+    // //alert(taskid)
+    const url = rooturl;
+     axios.post(url, {
+    topic: 'topic',
+    operationtype:"start",
+    timestamp:now,
+    task:task,
+    taskid:taskid,
+    logs: fakeData, // look ma, no JSON.stringify()!
+    });
+    }
+  
+    //   //alert(event.target.v)
+    },
+    end: function (event) {
+      // `this` inside methods point to the Vue instance
+    //   //alert('Hello ' + this.name + '!')
+    // previousSibling
+    
+    const taskid = event.target.getAttribute("taskid")
+    const task = event.target.getAttribute("task")
+    const thisswitch = event.target.getAttribute("switch")
+    if (thisswitch=="on"){
+        //alert("please not repeated")
+        return 
+    }
+
+    //如果两个switch都是end的时候请不要从end开始
+    const endswitch = event.target.getAttribute("switch")
+    const startswitch= event.target.previousElementSibling.getAttribute("switch")
+
+   if (endswitch=="off"&&startswitch=="off"){
+       //alert("firstly you need to start")
+       return;
+   }
+   event.target.previousElementSibling.style.background= 'white'
+    event.target.style.background= 'red'
+    const now =  Date.now().toString()
+    event.target.setAttribute("status", now);
+    event.target.setAttribute("switch",  "on");
+    event.target.previousElementSibling.setAttribute("switch","off")
+    event.target.previousElementSibling.setAttribute("status",now)
+
+   
+   
+    
+     
+
+    var query = ".end[status!="+now+"][switch!='off']"
+    var a = $(query).length
+    
+          //将按钮变红
+    //检查任务中是否有tbody中是否有没结束的任务
+      // `event` is the native DOM event
+    //   //alert(event.target.tagName)
+    const fakeData = [ { fake: 'data' } ];
+    const url = rooturl;
+     axios.post(url, {
+    topic: 'topic',
+    operationtype:"end",
+    timestamp:now,
+    taskid:taskid,
+    task:task,
+    logs: fakeData, // look ma, no JSON.stringify()!
+    });
+    
+    }
+
+
+
+
+  },
+mounted () {
+  reviewdatafromserver()
+  financeprofilefromserver()
+  axios.get(deadlineurl).then(response => {
+  this.info = response;
+  console.log(response.data.deadlinefortasks)
+  this.deadlinetasks = response.data.deadlinefortasks
+    //alert(this.deadlinetasks)
+    // for (var i=0;i<this.deadlinetasks.length;i++){
+    }),
+
+axios.get(todayurl).then(response => {
+this.info = response;
+
+// this.finance = {"budget":100000,"reward":10000,"available":1000,"thisyearcost":10}
+// connect('wss://www.blackboxo.top/wss') 
+// 获取色块图数据
+var plantime = response.data.positions
+var plantimefortomorrow = response.data.positionsfortomorrow
+// [[0, 0, 0], [1, 1, 0], [2, 2, 0], [3, 3, 0], [4, 4, 0],[7, 9, 1], [8, 10, 1], [9, 11, 1], [10, 12, 1], [11, 13, 1]];
+  var source = [];
+  var sourcefortomorrow = [];
+  if (plantime !== null){
+  for (var i = 0; i < plantime.length; i++) {
+    var item = plantime[i];
+    var obj = {};
+    obj.name = item[1];
+    obj.day = item[0];
+    obj.sales = item[2];
+    source.push(obj);
+  }
+  }
+if (plantimefortomorrow !== null){
+  for (var i = 0; i < plantimefortomorrow.length; i++) {
+    var item = plantimefortomorrow[i];
+    var obj = {};
+    obj.name = item[1];
+    obj.day = item[0];
+    obj.sales = item[2];
+    sourcefortomorrow.push(obj);
+  }
+}
+ 
+
+
+  // var chart = new G2.Chart({
+  //   container: 'mountNode',
+  //   forceFit: true,
+  //   height: window.innerHeight,
+  //   padding: [20, 80, 120, 85]
+  // });
+  this.chart.source(source, {
+    name: {
+      type: 'cat',
+      values:['0','1','2','3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23',
+ '24',
+ '25',
+ '26',
+ '27',
+ '28',
+ '29',
+ '30',
+ '31',
+ '32',
+ '33',
+ '34',
+ '35',
+ '36',
+ '37',
+ '38',
+ '39',
+ '40',
+ '41',
+ '42',
+ '43',
+ '44',
+ '45',
+ '46',
+ '47',
+ '48',
+ '49',
+ '50',
+ '51',
+ '52',
+ '53',
+ '54',
+ '55',
+ '56',
+ '57',
+ '58',
+ '59'],
+ //2030  2040
+      // values: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas', 'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+    },
+    day: {
+      type: 'cat',
+      values:['0',
+ '1',
+ '2',
+ '3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23']
+      //values: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    }
+  });
+  this.chart.axis('name', {
+    tickLine: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      }
+    }
+  });
+  this.chart.axis('day', {
+    title: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      },
+      showFirstLine: true
+    }
+  });
+  this.chart.polygon().position('name*day').color('sales', 'red').label('sales', {
+    offset: -2,
+    textStyle: {
+      fill: '#fff',
+      shadowBlur: 2,
+      shadowColor: 'rgba(0, 0, 0, .45)'
+    }
+  }).style({
+    lineWidth: 1,
+    stroke: '#fff'
+  });
+  this.chart.render();
+
+
+  this.chartfortomorrow.source(sourcefortomorrow, {
+    name: {
+      type: 'cat',
+      values:['0','1','2','3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23',
+ '24',
+ '25',
+ '26',
+ '27',
+ '28',
+ '29',
+ '30',
+ '31',
+ '32',
+ '33',
+ '34',
+ '35',
+ '36',
+ '37',
+ '38',
+ '39',
+ '40',
+ '41',
+ '42',
+ '43',
+ '44',
+ '45',
+ '46',
+ '47',
+ '48',
+ '49',
+ '50',
+ '51',
+ '52',
+ '53',
+ '54',
+ '55',
+ '56',
+ '57',
+ '58',
+ '59'],
+ //2030  2040
+      // values: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas', 'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+    },
+    day: {
+      type: 'cat',
+      values:['0',
+ '1',
+ '2',
+ '3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23']
+      //values: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    }
+  });
+  this.chartfortomorrow.axis('name', {
+    tickLine: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      }
+    }
+  });
+  this.chartfortomorrow.axis('day', {
+    title: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      },
+      showFirstLine: true
+    }
+  });
+  this.chartfortomorrow.polygon().position('name*day').color('sales', 'red-black').label('sales', {
+    offset: -2,
+    textStyle: {
+      fill: '#fff',
+      shadowBlur: 2,
+      shadowColor: 'rgba(0, 0, 0, .45)'
+    }
+  }).style({
+    lineWidth: 1,
+    stroke: '#fff'
+  });
+  this.chartfortomorrow.render();
+    this.tasks = response.data.task;
+//       for (vari = 0; i < 5; i++) {
+ 
+// },
+var notspecified_starttime_task = []
+var specified_starttime_task = []
+var d = new Date();
+var h = d.getHours()
+var m = d.getMinutes()
+// //alert(h)
+// //alert(m)
+var now = h*100+m
+
+//可以按任务id进行依次排序
+// var copyoftasks = 
+this.tasks.sort(function(a, b){return a.ID-b.ID});
+
+
+var id_andparentid_andstart_status = {}
+//来确定关系pid的父子关系
+console.log(this.tasks.length)
+var  allparentandchildid = {}
+var all_ids_color = {}
+for (var i=0;i<this.tasks.length;i++){
+    //  //alert(this.tasks[i])
+    //  if(i==1){
+    //     this.tasks[i].test = "on"
+    //  }
+    //子id是什么
+    allparentandchildid[this.tasks[i].ID.toString()]= []
+    all_ids_color[this.tasks[i].ID.toString()] = "no"
+
+   
+}
+
+
+
+
+
+var startingid = -999
+console.log("----why i am here")
+console.log(allparentandchildid)
+for (var i=0;i<this.tasks.length;i++){
+    //  //alert(this.tasks[i])
+    //  if(i==1){
+    //     this.tasks[i].test = "on"
+    //  }
+
+    if (this.tasks[i].tasksexecute_start_status == "on"){
+      console.log("----检查这里是否被检查执行状态-----")
+        this.tasks[i].childcolor = "yes1111"
+        all_ids_color[this.tasks[i].ID.toString()] = "yes1111"
+        startingid =  this.tasks[i].ID
+      }
+  if(this.tasks[i].parentid!= "unspecified"){
+    console.log("杨明---------")
+    console.log(this.tasks[i].tasksexecute_start_status)
+    console.log(this.tasks[i].parentid)
+    console.log(allparentandchildid[this.tasks[i].parentid])
+    
+    if (all_ids_color[this.tasks[i].parentid]=="yes1111"){
+      this.tasks[i].childcolor = "yes1111"
+      all_ids_color[this.tasks[i].ID.toString()] = "yes1111"
+    } 
+    // allparentandchildid[this.tasks[i].parentid].push(this.tasks[i].ID)
+      }
+    
+
+
+    id_andparentid_andstart_status[this.tasks[i].ID] = [this.tasks[i].parentid,this.tasks[i].tasksexecute_start_status]
+}
+
+console.log("------这里在测试颜色--------")
+console.log(all_ids_color)
+
+
+console.log("------我们在这里测试-----")
+console.log(this.tasks)
+console.log(id_andparentid_andstart_status)
+console.log("print the length")
+console.log(this.tasks.length)
+
+ for (var i=0;i<this.tasks.length;i++){
+  if (this.tasks[i].tasksexecute_start_status == "on"){
+    
+      console.log("再次测试----------")
+      // this.tasks[i].childcolor = "yes"
+    }
+    //  //alert(this.tasks[i])
+     if(i==1){
+        this.tasks[i].test = "on"
+    
+     }
+   
+
+
+
+    console.log(id_andparentid_andstart_status)
+    console.log(i)
+   if (this.tasks[i].starttime!="unspecified"&&this.tasks[i].endtime!="unspecified"){
+     if (parseInt(this.tasks[i].starttime)<now<parseInt(this.tasks[i].endtime)){
+      //  this.task[i].timeblock = "yes"
+     }
+   }
+
+
+     if(this.tasks[i].starttime=="unspecified"){
+        this.tasks[i].plantime ="today"
+        // notspecified_starttime_task.push(this.task[i])
+        // notspecified_starttime_task.push(this.task[i])
+     }else{
+        this.tasks[i].plantime = this.tasks[i].starttime.substr(0, 2)+":"+this.tasks[i].starttime.substr(2, 4) +"---"+this.tasks[i].endtime.substr(0, 2)+":"+this.tasks[i].endtime.substr(2, 4)
+        // specified_starttime_task.push(this.task[i]) 
+   
+     }
+    
+ };
+
+
+//修改原来的数组
+  this.tasks.forEach(function(part, i) {
+    
+    if (this[i].starttime!="unspecified"&&this[i].endtime!="unspecified"){
+      // //alert("------fuck u--------")
+      // //alert(this[i].starttime,this[i].endtime)
+     if (parseInt(this[i].starttime)<now&&now<parseInt(this[i].endtime)){
+      //  //alert("yangming ishere")
+      this[i].timeblock = "yes"
+     }
+  
+   }
+  // this[i].timeblock = "yes";
+}, this.tasks);
+
+
+
+
+//       //修改默认颜色
+      k=response.data.task})
+  
+  },  
+},
+
+)
+
+//这个似乎用来修饰原来的表格
+function datafromserver(){
+  axios.get(todayurl).then(response => {
+          this.info = response;
+
+      // connect('wss://www.blackboxo.top/wss') 
+     // 获取色块图数据
+var plantime = response.data.positions
+var plantimefortomorrow = response.data.positionsfortomorrow
+// [[0, 0, 0], [1, 1, 0], [2, 2, 0], [3, 3, 0], [4, 4, 0],[7, 9, 1], [8, 10, 1], [9, 11, 1], [10, 12, 1], [11, 13, 1]];
+  var source = [];
+  var sourcefortomorrow = [];
+  if (plantime !== null){
+  for (var i = 0; i < plantime.length; i++) {
+    var item = plantime[i];
+    var obj = {};
+    obj.name = item[1];
+    obj.day = item[0];
+    obj.sales = item[2];
+    source.push(obj);
+  }
+  }
+if (plantimefortomorrow !== null){
+  for (var i = 0; i < plantimefortomorrow.length; i++) {
+    var item = plantimefortomorrow[i];
+    var obj = {};
+    obj.name = item[1];
+    obj.day = item[0];
+    obj.sales = item[2];
+    sourcefortomorrow.push(obj);
+  }
+}
+ 
+  i1.chart.source(source, {
+    name: {
+      type: 'cat',
+      values:['0','1','2','3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23',
+ '24',
+ '25',
+ '26',
+ '27',
+ '28',
+ '29',
+ '30',
+ '31',
+ '32',
+ '33',
+ '34',
+ '35',
+ '36',
+ '37',
+ '38',
+ '39',
+ '40',
+ '41',
+ '42',
+ '43',
+ '44',
+ '45',
+ '46',
+ '47',
+ '48',
+ '49',
+ '50',
+ '51',
+ '52',
+ '53',
+ '54',
+ '55',
+ '56',
+ '57',
+ '58',
+ '59'],
+ //2030  2040
+      // values: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas', 'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+    },
+    day: {
+      type: 'cat',
+      values:['0',
+ '1',
+ '2',
+ '3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23']
+      //values: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    }
+  });
+  i1.chart.axis('name', {
+    tickLine: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      }
+    }
+  });
+  i1.chart.axis('day', {
+    title: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      },
+      showFirstLine: true
+    }
+  });
+  i1.chart.polygon().position('name*day').color('sales', 'red').label('sales', {
+    offset: -2,
+    textStyle: {
+      fill: '#fff',
+      shadowBlur: 2,
+      shadowColor: 'rgba(0, 0, 0, .45)'
+    }
+  }).style({
+    lineWidth: 1,
+    stroke: '#fff'
+  });
+  i1.chart.render();
+
+  i1.chartfortomorrow.source(sourcefortomorrow, {
+    name: {
+      type: 'cat',
+      values:['0','1','2','3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23',
+ '24',
+ '25',
+ '26',
+ '27',
+ '28',
+ '29',
+ '30',
+ '31',
+ '32',
+ '33',
+ '34',
+ '35',
+ '36',
+ '37',
+ '38',
+ '39',
+ '40',
+ '41',
+ '42',
+ '43',
+ '44',
+ '45',
+ '46',
+ '47',
+ '48',
+ '49',
+ '50',
+ '51',
+ '52',
+ '53',
+ '54',
+ '55',
+ '56',
+ '57',
+ '58',
+ '59'],
+ //2030  2040
+      // values: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas', 'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+    },
+    day: {
+      type: 'cat',
+      values:['0',
+ '1',
+ '2',
+ '3',
+ '4',
+ '5',
+ '6',
+ '7',
+ '8',
+ '9',
+ '10',
+ '11',
+ '12',
+ '13',
+ '14',
+ '15',
+ '16',
+ '17',
+ '18',
+ '19',
+ '20',
+ '21',
+ '22',
+ '23']
+      //values: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    }
+  });
+  i1.chartfortomorrow.axis('name', {
+    tickLine: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      }
+    }
+  });
+  i1.chartfortomorrow.axis('day', {
+    title: null,
+    grid: {
+      align: 'center',
+      lineStyle: {
+        lineWidth: 1,
+        lineDash: null,
+        stroke: '#f0f0f0'
+      },
+      showFirstLine: true
+    }
+  });
+  i1.chartfortomorrow.polygon().position('name*day').color('sales', 'red-black').label('sales', {
+    offset: -2,
+    textStyle: {
+      fill: '#fff',
+      shadowBlur: 2,
+      shadowColor: 'rgba(0, 0, 0, .45)'
+    }
+  }).style({
+    lineWidth: 1,
+    stroke: '#fff'
+  });
+  i1.chartfortomorrow.render();
+    this.tasks = response.data.task;
+//       for (vari = 0; i < 5; i++) {
+ 
+// },
+var notspecified_starttime_task = []
+var specified_starttime_task = []
+var d = new Date();
+var h = d.getHours()
+var m = d.getMinutes()
+// //alert(h)
+// //alert(m)
+var now = h*100+m
+
+//可以按任务id进行依次排序
+// var copyoftasks = 
+this.tasks.sort(function(a, b){return a.ID-b.ID});
+
+
+var id_andparentid_andstart_status = {}
+//来确定关系pid的父子关系
+console.log(this.tasks.length)
+var  allparentandchildid = {}
+var all_ids_color = {}
+for (var i=0;i<this.tasks.length;i++){
+    //  //alert(this.tasks[i])
+    //  if(i==1){
+    //     this.tasks[i].test = "on"
+    //  }
+    //子id是什么
+    allparentandchildid[this.tasks[i].ID.toString()]= []
+    all_ids_color[this.tasks[i].ID.toString()] = "no"
+
+   
+}
+
+
+
+
+
+var startingid = -999
+console.log("----why i am here")
+console.log(allparentandchildid)
+for (var i=0;i<this.tasks.length;i++){
+    //  //alert(this.tasks[i])
+    //  if(i==1){
+    //     this.tasks[i].test = "on"
+    //  }
+
+    if (this.tasks[i].tasksexecute_start_status == "on"){
+      console.log("----检查这里是否被检查执行状态-----")
+        this.tasks[i].childcolor = "yes1111"
+        all_ids_color[this.tasks[i].ID.toString()] = "yes1111"
+        startingid =  this.tasks[i].ID
+      }
+  if(this.tasks[i].parentid!= "unspecified"){
+    console.log("杨明---------")
+    console.log(this.tasks[i].tasksexecute_start_status)
+    console.log(this.tasks[i].parentid)
+    console.log(allparentandchildid[this.tasks[i].parentid])
+    
+    if (all_ids_color[this.tasks[i].parentid]=="yes1111"){
+      this.tasks[i].childcolor = "yes1111"
+      all_ids_color[this.tasks[i].ID.toString()] = "yes1111"
+    } 
+    // allparentandchildid[this.tasks[i].parentid].push(this.tasks[i].ID)
+      }
+    
+
+
+    id_andparentid_andstart_status[this.tasks[i].ID] = [this.tasks[i].parentid,this.tasks[i].tasksexecute_start_status]
+}
+
+console.log("------这里在测试颜色--------")
+console.log(all_ids_color)
+
+
+console.log("------我们在这里测试-----")
+console.log(this.tasks)
+console.log(id_andparentid_andstart_status)
+console.log("print the length")
+console.log(this.tasks.length)
+
+ for (var i=0;i<this.tasks.length;i++){
+  if (this.tasks[i].tasksexecute_start_status == "on"){
+    
+      console.log("再次测试----------")
+      // this.tasks[i].childcolor = "yes"
+    }
+    //  //alert(this.tasks[i])
+     if(i==1){
+        this.tasks[i].test = "on"
+    
+     }
+   
+
+
+
+    console.log(id_andparentid_andstart_status)
+    console.log(i)
+   if (this.tasks[i].starttime!="unspecified"&&this.tasks[i].endtime!="unspecified"){
+     if (parseInt(this.tasks[i].starttime)<now<parseInt(this.tasks[i].endtime)){
+      //  this.task[i].timeblock = "yes"
+     }
+   }
+
+
+     if(this.tasks[i].starttime=="unspecified"){
+        this.tasks[i].plantime ="today"
+        // notspecified_starttime_task.push(this.task[i])
+        // notspecified_starttime_task.push(this.task[i])
+     }else{
+        this.tasks[i].plantime = this.tasks[i].starttime.substr(0, 2)+":"+this.tasks[i].starttime.substr(2, 4) +"---"+this.tasks[i].endtime.substr(0, 2)+":"+this.tasks[i].endtime.substr(2, 4)
+        // specified_starttime_task.push(this.task[i]) 
+   
+     }
+    
+ };
+
+
+//修改原来的数组
+  this.tasks.forEach(function(part, i) {
+    
+    if (this[i].starttime!="unspecified"&&this[i].endtime!="unspecified"){
+      // //alert("------fuck u--------")
+      // //alert(this[i].starttime,this[i].endtime)
+     if (parseInt(this[i].starttime)<now&&now<parseInt(this[i].endtime)){
+      //  //alert("yangming ishere")
+      this[i].timeblock = "yes"
+     }
+  
+   }
+  // this[i].timeblock = "yes";
+}, this.tasks);
+
+i1.tasks = this.tasks
+
+
+//       //修改默认颜色
+      k=response.data.task})
+  
+  
+  }
+
+
+
+
+  function deadlinefromserver(){
+    axios.get(deadlineurl).then(response => {
+    this.info = response;
+    console.log(response.data.deadlinefortasks)
+    i1.deadlinetasks = response.data.deadlinefortasks
+  })
+  }
+
+  //  简单的财务金融状况
+  function financeprofilefromserver(){
+    console.log("-----we are  here------u now here-----")
+    axios.get(financeurl).then(response => {
+    this.info = response;
+    console.log(response.data)
+    i1.finance = response.data
+  })
+  }
+
+  
+
+
+    
+  //  简单的财务金融状况
+  // r2= requests.get(str(url)+'/v1/comparegoal',cookies=cookie)
+ 
+  function reviewdatafromserver(){
+    console.log("-----we are  here------u now here-----")
+    axios.get(reviewurl).then(response => {
+    this.info = response;
+    console.log(response.data)
+    var reviewdata = response.data.reviewdata[0]
+    delete reviewdata.ID;
+    delete reviewdata.CreatedAt;
+    delete reviewdata.UpdatedAt;
+    delete reviewdata.DeletedAt;
+    delete reviewdata.email;
+    delete reviewdata.date;
+    delete  reviewdata.thenumberoftasks_score;
+    delete  reviewdata.serviceforgoal_score;
+    i1.reviewdata = response.data.reviewdata[0]
+  })
+  }
+
+
+
+
+
+
+// var app4 = new Vue({
+//   el: '#app-4',
+//   data: {
+//     todos: [
+//       { text: 'learn javaScript' },
+//       { text: 'learn Vue' },
+//       { text: 'to do aproject' }
+//     ]
+//   }
+// })
+
+
+$(".btn1").on("click",function(){
+    var url=$(this).attr("url");
+    var summary=$(this).attr("summary");
+    //执行之后的代码
+  //  //alert(canshu)
+   var oInput = document.createElement('input');
+        oInput.value = summary+" "+url;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        //alert('复制成功');
+});
+ 
+// function copyUrl2()
+//     {
+//         var Url2=document.getElementById("biao1").innerText;
+//         var oInput = document.createElement('input');
+//         var x = document.getElementById("biao1").parentNode.parentNode.children[0].innerText;
+//         //alert(x)
+//         oInput.value = Url2;
+//         document.body.appendChild(oInput);
+//         oInput.select(); // 选择对象
+//         document.execCommand("Copy"); // 执行浏览器复制命令
+//         oInput.className = 'oInput';
+//         oInput.style.display='none';
+//         //alert('复制成功');
+//     }
+
+
+
+
+    function send(bookname,pagenumber) {
+        var person = {
+            name: $("#id-name").val(),
+            address:$("#id-address").val(),
+            phone:$("#id-phone").val()
+        }
+        var bookinfo = {
+            bookname:"241_introducing_pdfkit_on_ios.pdf",
+            pagenumber:50
+        }
+
+        var resulttoserver = `{"bookname":"${bookname}","pagenumber":${pagenumber}}`
+var thinkingforlife = `http://127.0.0.1:3030/pushtothinkingforlifeiostest?bookname=${bookname}&pagenumber=`+pagenumber
+        // $('#target').html('sending..');
+// console.log(thinkingforlife)
+        // //alert(JSON.stringify(bookinfo))
+        $.ajax({
+            url: thinkingforlife,
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                // $('#target').html(data.msg);
+                //alert("----杨明在这里----------")
+                //alert(data.msg)
+            },
+            data: JSON.stringify({"bookname":"yangming"})
+        });
+    }
+
+
+    $(".btn2").click(function(){
+    //     var bookname=$(this).attr("bookname");
+    //    var pagenumber=$(this).attr("pagenumber");
+    //   // //alert(bookname,pagenumber)
+    //    send(bookname,pagenumber)
+       i1.tasks = []
+        //alert("we can here")
+//   $.get("http://localhost:3030/pushtothinkingforlifeios?filename=yang&pagenumber=50", function(data, status){
+//     //alert("Data: " + data + "\nStatus: " + status);
+//   });
+});
+
+var heartCheck = {
+    timeout: 6000,
+    timeoutObj: null,
+    ws:null,
+    serverTimeoutObj: null,
+    reset: function(){
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        this.start()
+// 　　　　 this.start();
+    },
+    start: function(){
+        
+        var self = this;
+        this.timeoutObj = setTimeout(function(){
+        console.log("------我在这里测试心跳-----------")
+        
+        console.log("------我在这里测试心跳-----------")
+        self.ws.send("HeartBeat");
+        self.serverTimeoutObj = setTimeout(function(){
+        self.ws.close();
+            }, self.timeout)
+        }, this.timeout)
+    },
+}
+
+
+
+
+
+function connect(url) {
+  var ws = new WebSocket(url);
+  
+
+  ws.onopen = function() {
+    
+    heartCheck.ws = ws;
+    
+    heartCheck.start()
+    
+    console.log("发送数据到服务器进行测试")
+    ws.send("Message to send");
+    console.log("发送数据到服务器进行测试")
+    
+    
+    
+    
+  };
+
+  ws.onmessage = function(e) {
+    heartCheck.reset();
+    console.log('Message:', e.data);
+    console.log(e.data =="服务器发送图像数据到前端")
+    // //alert(e.data)
+    
+    if (e.data =="服务器发送图像数据到前端"){
+    //  var data = {"name":"goals","children":getgoaltrees()}
+    //  doooo(data)
+    // 服务器发送图像数据到前端
+    datafromserver()
+    deadlinefromserver()
+    financeprofilefromserver()
+    reviewdatafromserver()
+    // i1.tasks = []
+    // //alert(5)
+    // //alert("-----------shanghai----------------")
+    
+    }
+   
+    
+    
+    
+  };
+  
+  
+  ws.onclose = function(e) {
+    console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+    setTimeout(function() {
+connect(url)  
+
+    
+    
+    // connect('ws://localhost:777');
+    }, 1000);
+  };
+
+  ws.onerror = function(err) {
+    console.error('Socket encountered error: ', err.message, 'Closing socket');
+    ws.close();
+  };
+}
+
+
+   
+  connect(websocketurl);
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

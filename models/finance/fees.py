@@ -260,6 +260,24 @@ class Reviewofdays(Base):
 
 
 
+class BalanceSheet(Base):
+    __tablename__ = 'banlancesheet'
+    id = Column(Integer, primary_key=True)
+    # scores=Column(String(32))
+    email = Column(String(32))
+    date = Column(String(32))
+    asset=Column('asset', Numeric)
+    debt=Column('debet', Numeric) 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def __init__(self,email,date,asset,debt):
+        # self.direction= direction
+        self.date = date
+        self.asset = asset
+        self.debt = debt
+        self.email = email
+
+
 
 
 
@@ -281,6 +299,12 @@ class Accounting(Base):
         self.fee = fee
         self.email = email
         
+
+
+
+
+
+
 
 
 # 2 - generate database schema
@@ -306,6 +330,39 @@ def rewardfun():
     except:
         logger.exception("获取回馈数据异常")
         return json.dumps({'code':403,'info':"server eror"})
+
+
+
+
+
+
+@app.route('/finance/banlance',methods=["POST","GET","PUT"])
+def staticticsforbanlancetable():
+    try:
+        # days = request.args.get('days')
+        # email = request.headers['email']
+        email= "yang756260386@gmail.com"
+        #date = content['date']
+        session = Session()
+        #这里使用级别链接的方式重新设计
+        #all = session.query(Accounting).filter(and_(Accounting.email == email, Accounting.date == date)).all()
+        #使用级别链接的方式
+        all = session.query(BalanceSheet).filter(BalanceSheet.email == email).all()
+        #写消费统计部分
+        session.close()
+        allcost = sum([float(row.debt) for row in all ])
+        allincome = sum([float(row.asset) for row in all ])
+        result = {"debt":allcost,"asset":allincome,"code":200}
+        return json.dumps(result)
+    except:
+        logger.exception("获取统计数据异常")
+        return json.dumps({"code":403,"info":"server error"})
+
+
+
+
+
+
 
 @app.route('/finance/statistics',methods=["POST","GET","PUT"])
 def staticticsformoney():
@@ -469,7 +526,46 @@ def updatefees():
         logger.exception("更新费用异常")
         return json.dumps({"code":405,"info":"server error"})
 
+import time
 
+@app.route('/finance/updatebalancetable',methods=["POST","GET","PUT"])
+def updatebanlancetable():
+    try:
+        email = "yang756260386@gmail.com"
+        # print(request.method)
+        print("----i开始---------")
+        print(dict(request.headers))
+        print("----后来---------")
+        content = request.json
+        print(request)
+        print(content)
+        print("----i am here---------")
+        debt = content['debt']
+        asset = content['asset']
+        email = content['email']
+
+        
+        # print(record)
+        print("-----i am here---------")
+        #record = "我们吃了10块钱的晚饭"
+        session = Session()
+        recordfromdb = session.query(BalanceSheet).filter(BalanceSheet.email == email).first()
+        print(recordfromdb)
+        # time.sleep(10)
+        if recordfromdb ==  None:
+            one= BalanceSheet(email,'2021/06/08',asset,debt)
+            session.add(one)   
+            pass
+        else:
+            recordfromdb.debt = debt
+            recordfromdb.asset = asset
+        
+        session.commit()
+        session.close()
+        return json.dumps({"info":"记账成功","status":"ok","code":200})
+    except:
+        logger.exception("更新费用异常")
+        return json.dumps({"code":405,"info":"server error"})
 
 
 
@@ -495,7 +591,7 @@ def rowtodict(row):
 
 if __name__ == '__main__':
     logger.add("./logging/file_1.log", rotation="50 MB",backtrace=True, diagnose=True,colorize=True) 
-    app.run('0.0.0.0',threaded=True,debug = True,port = 6000)
+    app.run('0.0.0.0',threaded=True,port = 6000,debug=True)
 
 
 
