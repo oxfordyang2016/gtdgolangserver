@@ -56,27 +56,32 @@ type (
 		Starttime string `json:"starttime"`
 		Endtime   string `json:"endtime"`
 		//  添加实际执行时间戳（仅包含开始和结尾）
-		Starttime_exe             string  `json:"starttime_exe"`
-		Endtime_exe               string  `json:"endtime_exe"`
-		Finishtime                string  `json:"finishtime"`
-		Note                      string  `json:"note"`
-		Parentproject             string  `json:"parentproject"`
-		Ifdissect                 string  `json:"ifdissect"`
-		AccurateFinishtime        string  `json:"AccurateFinishtime"`
-		Longitude                 string  `json:"Longitude"`
-		Latitude                  string  `json:"Latitude"`
-		Reviewsign                string  `json:"reviewsign"`
-		Score                     uint    `json:"score"`
-		Deadline                  string  `json:"deadline"`
-		Devotedtime               int     `json:"devotedtime"`
-		Priority                  int     `json:"priority"`
-		Reviewdatas               string  `json:"reviewdatas" sql:"type:text;"`
-		Tasktags                  string  `json:"tasktags" sql:"type:text;"`
-		Tasktagsorigin            string  `json:"tasktagsorigin" sql:"type:text;"`
-		Goalcoefficient           float64 `json:"goalcoefficient"`
-		Executeabilityscore       float64 `json:"executeabilityscore"`
-		Mark_finished_time_switch int     `json:"mark_finished_time_switch"`
-		First_finish_timestamp    string  `json:"First_finish_timestamp"`
+		//时间相关建议增加表
+		Starttime_exe      string `json:"starttime_exe"`
+		Endtime_exe        string `json:"endtime_exe"`
+		Finishtime         string `json:"finishtime"`
+		Note               string `json:"note"`
+		Parentproject      string `json:"parentproject"`
+		Ifdissect          string `json:"ifdissect"`
+		AccurateFinishtime string `json:"AccurateFinishtime"`
+		Longitude          string `json:"Longitude"`
+		Latitude           string `json:"Latitude"`
+		Reviewsign         string `json:"reviewsign"`
+		Score              uint   `json:"score"`
+		Deadline           string `json:"deadline"`
+		Devotedtime        int    `json:"devotedtime"`
+		Priority           int    `json:"priority"`
+		Reviewdatas        string `json:"reviewdatas" sql:"type:text;"`
+		//建议加一张标签表
+		Tasktags        string  `json:"tasktags" sql:"type:text;"`
+		Tasktagsorigin  string  `json:"tasktagsorigin" sql:"type:text;"`
+		Goalcoefficient float64 `json:"goalcoefficient"`
+		// 废弃
+		Executeabilityscore float64 `json:"executeabilityscore"`
+		// 废弃
+		Mark_finished_time_switch int `json:"mark_finished_time_switch"`
+		//废弃
+		First_finish_timestamp string `json:"First_finish_timestamp"`
 		//标记任务的执行状态，如任务正在执行，是为on，莫认为off
 		Tasksexecute_start_status string `json:"tasksexecute_start_status" gorm:"default:'off'"`
 		Tasksexecute_end_status   string `json:"tasksexecute_end_status" gorm:"default:'off'"`
@@ -440,6 +445,26 @@ func Createtaskbyscheduler() {
 	fmt.Sprintf("%s", plantime)
 }
 
+// 重复任务进行复制部分
+func repeattask(taskid string) {
+	// 只允许本地的ip
+	// allowedip := []string{"127.0.0.1", "127.0.0.2", "127.0.0.3"}
+	// 抽取对应的数据
+	var task Tasks
+	db.Where("id= ?", taskid).Find(&task)
+	// 修改task对应的属性，生成今天的计划时间
+	loc, _ := time.LoadLocation("Asia/Shanghai")
+	plantime := time.Now().In(loc).Format("060102")
+	// 回写到具体的数据库
+	db.Model(&task).Update("plantime", plantime)
+	//考虑原来任务的状态
+	/*
+		1. 原任务是否要被标记
+		2. 如何生成当天的任务
+		3. 如何在生成
+	*/
+}
+
 // createTodo add a new todo
 func CreatetaskbyJSON(c *gin.Context) {
 	fmt.Println("+++++++++++++++++++ i am invoked in create task++++++++++++++++++++++")
@@ -578,8 +603,10 @@ func CreatetaskbyJSON(c *gin.Context) {
 			//using python design method to return none
 			return
 		}
-
+		//这里获取出来的是父亲任务
 		var task Tasks
+		color.Red("打印传上来的parentid")
+		color.Red(parentid_fromgtdcli)
 		db.Where("Email= ?", email).First(&task, parentid_fromgtdcli)
 		fmt.Println(task)
 		fmt.Println(task.Email)
@@ -904,14 +931,32 @@ func CreatetaskbyJSON(c *gin.Context) {
 		plantime = time.Now().In(loc).Format("060102")
 	}
 	// 先将查数据库中是否有评价数据的空，如果没有先创建，没有这一行会引起大bug
-	Check_reviewdaylog(plantime, email)
-	var score = Compute_singleday(plantime, email)
-	fmt.Println("真成绩是")
-	fmt.Println(score)
-	//Print the HTTP response status.
-	s := fmt.Sprintf("%f", score)
-	ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为" + s
-	fmt.Println(ttsclienttext)
+
+	go func(plantime string, email string) {
+		Check_reviewdaylog(plantime, email)
+		var score = Compute_singleday(plantime, email)
+		fmt.Println("真成绩是")
+		fmt.Println(score)
+		//Print the HTTP response status.
+		s := fmt.Sprintf("%f", score)
+		ttsclienttext := "AI女娲在陆家嘴为你播报，评价算法的分数为" + s
+		fmt.Println(ttsclienttext)
+		if websocket_switch {
+			if websocket_switch && voice_websocekt {
+				//这里分别向前段推送语音合成数据
+				go ttsclient(email, ttsclienttext)
+				//这里是向前段推送图像数据
+
+			}
+
+			if websocket_switch && image_websocket {
+
+				go visiualdata2websocket(email, ttsclienttext)
+			}
+
+		}
+	}(plantime, email)
+
 	// ttsclient(ttsclienttext)
 	/*
 
@@ -920,20 +965,7 @@ func CreatetaskbyJSON(c *gin.Context) {
 	*/
 	//这里分别向前段推送语音合成数据
 	//这里是向前段推送图像数据
-	if websocket_switch {
-		if websocket_switch && voice_websocekt {
-			//这里分别向前段推送语音合成数据
-			go ttsclient(email, ttsclienttext)
-			//这里是向前段推送图像数据
 
-		}
-
-		if websocket_switch && image_websocket {
-
-			go visiualdata2websocket(email, ttsclienttext)
-		}
-
-	}
 	color.Yellow("------------we dealing with push notification---------------")
 	color.Red(starttime)
 	color.Red(plantime)
@@ -963,8 +995,8 @@ func CreatetaskbyJSON(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"taskid":  taskid,
-		"score":   score,
+		"taskid": taskid,
+		// "score":   score,
 		"status":  "posted",
 		"message": "u have uploaded info,please come on!",
 	})

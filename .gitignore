@@ -1,2 +1,6 @@
 dump.rdb
 engine.log
+mysql
+.env
+gin.log
+log.txt

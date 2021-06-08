@@ -562,6 +562,8 @@ var reviewalgoforalltasksintoday = {}
 
 // 定义一个sontree的全局变量
 var sontree = {}
+var posterity_tree ={}
+var posterity_container = []
 
 // 定义这个sendback_tasks用来存放geteveryday传回来的所有task，是一个array,形式是这样的[{},{},{}……]
 var sendback_tasks = []
@@ -591,6 +593,7 @@ var sendback_tasks = []
       'tenminutestasktag': "10分钟",
       'thirtyminutestasktag': "30分钟",
       'threeminutestasktag': "3分钟",
+      'lifetag': "人生伟大时刻",
     }
 
     // Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
@@ -671,7 +674,8 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'keyproblemtag': 'no',
       'tenminutestasktag': 'no',
       'thirtyminutestasktag': 'no',
-      'threeminutestasktag': 'no'
+      'threeminutestasktag': 'no',
+      'lifetag': 'no'
     }
 
     // define a inital reviewalgo
@@ -698,7 +702,8 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'learntechuse': 'no',
       'doanimportantthingearly': 'no',
       'acceptpain': 'no',
-      'conquerthefear': 'no'
+      'conquerthefear': 'no',
+      'life': 'no'
     }
 
 
@@ -896,7 +901,32 @@ function show_today_tree(){
     get_today_task_tree("/v1/todayjson","today_tree")
     get_overdue_task_tree("/v1/yesterdayjson","overdue")
     set_todayandtomorrow_style_defult()
+
 }
+
+function  generate_posterity(sontree){
+  for (const [ key, value ] of Object.entries(sontree)) {
+    // do something with `key` and `value`
+}               
+
+}
+
+// 这里需要穿入一个全局变量进来posterity_container.
+function get_posterity_byid(taskid,sontree){
+  console.log(sontree)
+  if (sontree[taskid].length == 0){
+    return 
+  }else{
+    var sons = sontree[taskid]
+    for(var i=0;i<sons.length;i++){
+     posterity_container.push(sons[i].ID)
+     get_posterity_byid(sons[i].ID,sontree)
+    }
+  }
+
+}
+
+
 
 function show_tomorrow_tree(){
     today_or_tomorrow = 2
@@ -1903,7 +1933,8 @@ $.get("/v1/goaljson", function(data, status){
       'keyproblemtag': 'no',
       'tenminutestasktag': 'no',
       'thirtyminutestasktag': 'no',
-      'threeminutestasktag': 'no'
+      'threeminutestasktag': 'no',
+      'lifetag': 'no'
       }
 
       var tem_tags = tasktags_fixed;
@@ -2923,6 +2954,14 @@ $(document).on("mouseover","#task_reviewalgo_selector",function(){
       // return false;
     }
     );
+
+
+    setInterval(function(){ 
+      show_today_tree()
+      // alert("正在间隔刷新")
+
+     }, 100*60000);
+
 
 </script>
    
