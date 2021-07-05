@@ -594,6 +594,7 @@ var sendback_tasks = []
       'thirtyminutestasktag': "30分钟",
       'threeminutestasktag': "3分钟",
       'lifetag': "人生伟大时刻",
+      // 'recordtag': "创造新的纪录",
     }
 
     // Object.values(字典)，是指把一个字典的所有值提取出来，Object.keys(字典)，是指把一个字典里所有key提取出来
@@ -621,7 +622,10 @@ var sendback_tasks = []
     //   '30分钟': 'thirtyminutestasktag',
     //   '3分钟': 'threeminutestasktag'
     // }
+   
 
+
+    //这里是在评价算法那一栏添加对应的tag部分
     var reviewalgo_covert = {
           'attackactively':"主动进攻",
           'makeuseofthings':"利用学习到的东西",
@@ -645,7 +649,9 @@ var sendback_tasks = []
           'learntechuse':"学习技术",
           'doanimportantthingearly':"提前完成一件重要的事",
           'acceptpain':"接受痛苦",
-          'conquerthefear':"战胜恐惧"
+          'conquerthefear':"战胜恐惧",
+          'makearecord':"创造新的纪录",
+          'life':"生命重要时刻"
     }
 
 
@@ -675,7 +681,8 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'tenminutestasktag': 'no',
       'thirtyminutestasktag': 'no',
       'threeminutestasktag': 'no',
-      'lifetag': 'no'
+      'lifetag': 'no',
+      'recordtag':'no'
     }
 
     // define a inital reviewalgo
@@ -703,7 +710,8 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'doanimportantthingearly': 'no',
       'acceptpain': 'no',
       'conquerthefear': 'no',
-      'life': 'no'
+      'life': 'no',
+      'makearecord': 'no'
     }
 
 
