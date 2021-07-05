@@ -57,7 +57,8 @@ type Reviewdatadetail struct {
 	Solveakeyproblem            float64 `json:"solveakeyproblem"`
 	Depthfirstsearch            float64 `json:"depthfirstsearch"`
 	Noflinch                    float64 `json:"noflinch"`
-	Setarecord                  float64 `json:"setarecord"`
+	Makearecord                 float64 `json:"makearecord"`
+	Life                        float64 `json:"life"`
 	Conquerthefear              float64 `json:"conquerthefear"`
 	Executeability_score        float64 `json:"executeability_score"`
 }
@@ -109,7 +110,8 @@ type Reviewfortimescount struct {
 	Solveakeyproblem            int `json:"solveakeyproblem"`
 	Depthfirstsearch            int `json:"depthfirstsearch"`
 	Noflinch                    int `json:"noflinch"`
-	Setarecord                  int `json:"setarecord"`
+	Makearecord                 int `json:"makearecord"`
+	Life                        int `json:"life"`
 	Conquerthefear              int `json:"conquerthefear"`
 	Self_discipline_number      int `json:"self_discipline_number"`
 }
@@ -899,10 +901,15 @@ func Compute_singleday(date string, email string) float64 {
 	var noflinch_score float64 = 0
 	var conquerthefear_score float64 = 0
 	var conquerthefear_number = 0
-	var setarecord_score float64 = 0
-	var setarecord_number = 0
+	// var setarecord_score float64 = 0
+	// var setarecord_number = 0
 	var self_discipline_score float64 = 0
 	var self_discipline_number = 0
+	var life_score float64 = 0
+	var life_number = 0
+	var makearecord_score float64 = 0
+	var makearecord_number = 0
+
 	// var self_discipline_coffient = 0.5
 
 	db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Count(&countoffinishedtasks)
@@ -1036,6 +1043,19 @@ func Compute_singleday(date string, email string) float64 {
 			noflinch_number = noflinch_number + 1
 		}
 
+		//这里会不会算法给的过高的嫌疑
+		if life := gjson.Get(json, "life").String(); life == "yes" {
+			//fmt.Println(brainuse)
+			life_score = float64(life_score+1000) * (item.Goalcoefficient)
+			life_number = life_number + 1
+		}
+		//这里会不会有算法给的过高的嫌疑
+		if makearecord := gjson.Get(json, "makearecord").String(); makearecord == "yes" {
+			//fmt.Println(brainuse)
+			makearecord_score = float64(makearecord_score+500) * (item.Goalcoefficient)
+			makearecord_number = makearecord_number + 1
+		}
+
 		if acceptfact_from_client := gjson.Get(json, "acceptfactandseektruth").String(); acceptfact_from_client == "yes" {
 			//fmt.Println(brainuse)
 			acceptfactandseektruth_score = float64(acceptfactandseektruth_score+10) * (item.Goalcoefficient)
@@ -1102,10 +1122,10 @@ func Compute_singleday(date string, email string) float64 {
 			conquerthefear_number = conquerthefear_number + 1
 		}
 
-		if setarecord := gjson.Get(json, "setarecord").String(); setarecord == "yes" {
-			setarecord_score = float64(setarecord_score+50) * item.Goalcoefficient
-			setarecord_number = setarecord_number + 1
-		}
+		// if setarecord := gjson.Get(json, "setarecord").String(); setarecord == "yes" {
+		// 	setarecord_score = float64(setarecord_score+50) * item.Goalcoefficient
+		// 	setarecord_number = setarecord_number + 1
+		// }
 
 		if atomadifficulttask := gjson.Get(json, "atomadifficulttask").String(); atomadifficulttask == "yes" {
 			atomadifficulttask_score = float64(atomadifficulttask_score+5) * item.Goalcoefficient
@@ -1149,7 +1169,14 @@ func Compute_singleday(date string, email string) float64 {
 
 	}
 
-	total_score := acceptfactandseektruth_score + dfs_score + useprinciple_score + attackactively_score + solveakeyproblem_score + acceptpain_score + buildframeandprinciple_score + conquerthefear_score + setarecord_score + taskcount_score + doanimportantthingearly_score + atomadifficulttask_score + onlystartatask_score + markataskimmediately_score + challengetag_score + atomtag_score + brainuse_score + alwaysprofit_score + makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score + learnnewthings_score + difficultthings_score + threeminutes_score + getlesson_score + learntechuse_score + serviceforgoal_score
+	total_score := acceptfactandseektruth_score + dfs_score + useprinciple_score + attackactively_score +
+		solveakeyproblem_score + acceptpain_score + buildframeandprinciple_score +
+		conquerthefear_score + makearecord_score + taskcount_score + doanimportantthingearly_score +
+		atomadifficulttask_score + onlystartatask_score + markataskimmediately_score +
+		challengetag_score + atomtag_score + brainuse_score + alwaysprofit_score +
+		makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score +
+		learnnewthings_score + difficultthings_score + threeminutes_score + getlesson_score +
+		learntechuse_score + serviceforgoal_score + life_score
 
 	fmt.Println("--------之前的成绩----")
 	fmt.Println(total_score)
@@ -1258,12 +1285,34 @@ func Compute_singleday(date string, email string) float64 {
 		total_score = 0.0
 	}
 
-	review := &Reviewdatadetail{Self_discipline_score: self_discipline_score, Totalscore: total_score, Executeability_score: executeability_score, Noflinch: noflinch_score, Setarecord: setarecord_score, Conquerthefear: conquerthefear_score, Depthfirstsearch: dfs_score, Useprinciple: useprinciple_score, Attackactively: attackactively_score, Solveakeyproblem: solveakeyproblem_score, Acceptpain: acceptpain_score, Acceptfactandseektruth: acceptfactandseektruth_score, Buildframeandprinciple: buildframeandprinciple_score, Challengethings: challengetag_score, Markataskimmediately: markataskimmediately_score, Doanimportantthingearly: doanimportantthingearly_score, Alwaysprofit: alwaysprofit_score, Atomadifficulttask: atomadifficulttask_score, Onlystartatask: onlystartatask_score, Thenumberoftasks_score: taskcount_score, Difficultthings: difficultthings_score, Threeminutes: threeminutes_score, Getlesson: getlesson_score, Learntechuse: learntechuse_score, Patience: patience_score, Serviceforgoal_score: serviceforgoal_score, Usebrain: brainuse_score, Battlewithlowerbrain: battlewithlowerbrain_score, Learnnewthings: learnnewthings_score, Makeuseofthingsuhavelearned: makeuseofthethingsuhavelearned_score}
+	review := &Reviewdatadetail{Self_discipline_score: self_discipline_score, Totalscore: total_score,
+		Executeability_score: executeability_score, Noflinch: noflinch_score, Makearecord: makearecord_score,
+		Conquerthefear: conquerthefear_score, Depthfirstsearch: dfs_score, Useprinciple: useprinciple_score,
+		Attackactively: attackactively_score, Solveakeyproblem: solveakeyproblem_score, Life: life_score,
+		Acceptpain: acceptpain_score, Acceptfactandseektruth: acceptfactandseektruth_score,
+		Buildframeandprinciple: buildframeandprinciple_score, Challengethings: challengetag_score,
+		Markataskimmediately: markataskimmediately_score, Doanimportantthingearly: doanimportantthingearly_score,
+		Alwaysprofit: alwaysprofit_score, Atomadifficulttask: atomadifficulttask_score, Onlystartatask: onlystartatask_score,
+		Thenumberoftasks_score: taskcount_score, Difficultthings: difficultthings_score, Threeminutes: threeminutes_score,
+		Getlesson: getlesson_score, Learntechuse: learntechuse_score, Patience: patience_score, Serviceforgoal_score: serviceforgoal_score,
+		Usebrain: brainuse_score, Battlewithlowerbrain: battlewithlowerbrain_score, Learnnewthings: learnnewthings_score,
+		Makeuseofthingsuhavelearned: makeuseofthethingsuhavelearned_score}
 
 	color.Red("We have red")
 
 	fmt.Println(markataskimmediately_number)
-	reviewfortimecount_from_client := Reviewfortimescount{Self_discipline_number: self_discipline_number, Email: email, Noflinch: noflinch_number, Challengethings: challengetag_number, Conquerthefear: conquerthefear_number, Setarecord: setarecord_number, Depthfirstsearch: dfs_number, Date: date, Useprinciple: useprinciple_number, Attackactively: attackactively_number, Acceptpain: acceptpain_number, Solveakeyproblem: solveakeyproblem_number, Acceptfactandseektruth: acceptfactandseektruth_number, Atomadifficulttask: atomadifficulttask_number, Serviceforgoal_score: serviceforgoal_number, Doanimportantthingearly: doanimportantthingearly_number, Makeuseofthingsuhavelearned: makeuseofthethingsuhavelearned_number, Difficultthings: difficultthings_number, Learnnewthings: learnnewthings_number, Threeminutes: threeminutes_number, Alwaysprofit: alwaysprofit_number, Markataskimmediately: markataskimmediately_number, Usebrain: usebrainnumber, Battlewithlowerbrain: battlewithlowerbrainnumber, Buildframeandprinciple: buildframeandprinciplenumber, Patience: patiencenumber}
+	reviewfortimecount_from_client := Reviewfortimescount{Self_discipline_number: self_discipline_number, Email: email,
+		Noflinch: noflinch_number, Challengethings: challengetag_number, Life: life_number,
+		Conquerthefear: conquerthefear_number, Makearecord: makearecord_number,
+		Depthfirstsearch: dfs_number, Date: date, Useprinciple: useprinciple_number,
+		Attackactively: attackactively_number, Acceptpain: acceptpain_number,
+		Solveakeyproblem: solveakeyproblem_number, Acceptfactandseektruth: acceptfactandseektruth_number,
+		Atomadifficulttask: atomadifficulttask_number, Serviceforgoal_score: serviceforgoal_number,
+		Doanimportantthingearly: doanimportantthingearly_number, Makeuseofthingsuhavelearned: makeuseofthethingsuhavelearned_number,
+		Difficultthings: difficultthings_number, Learnnewthings: learnnewthings_number,
+		Threeminutes: threeminutes_number, Alwaysprofit: alwaysprofit_number,
+		Markataskimmediately: markataskimmediately_number, Usebrain: usebrainnumber,
+		Battlewithlowerbrain: battlewithlowerbrainnumber, Buildframeandprinciple: buildframeandprinciplenumber, Patience: patiencenumber}
 
 	//https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
 

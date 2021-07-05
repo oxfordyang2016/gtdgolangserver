@@ -1961,7 +1961,7 @@ $.get("/v1/goaljson", function(data, status){
       return tem_tags;
     }
 
-    // 更新评价的函数
+    // 更新评价的函数，用来将复选框列表里面的数据进行选择
     function updatereviewalgo(reviewarray) {
       const reviewalgo_fixed = {
       'attackactively': 'no',
@@ -1986,7 +1986,9 @@ $.get("/v1/goaljson", function(data, status){
       'learntechuse': 'no',
       'doanimportantthingearly': 'no',
       'acceptpain': 'no',
-      'conquerthefear': 'no'
+      'conquerthefear': 'no',
+      'life':'no',
+      'makearecord':'no'
     }
     var tmp_reviewalgo = reviewalgo_fixed;
     for(var i =0; i<reviewarray.length; i++){

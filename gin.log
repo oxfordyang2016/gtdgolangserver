@@ -1,31 +1,31 @@
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
 [GIN-debug] Loaded HTML Templates (26): 
-	- time.html
-	- user.html
+	- everyday.html
 	- goallist.html
 	- goals.html
-	- project.html
-	- review.html
-	- reviewalgo.html
+	- inbox0.html
+	- place.html
 	- pride.html
 	- pridetimeline.html
-	- reviewalgoforiosback.html
-	- everyday.html
-	- mainpage.html
-	- map.html
-	- newuser.html
-	- place.html
-	- taskmanager.html
-	- testgolangtemplaterender.html
-	- 
 	- addtasks.html
-	- inbox0.html
-	- rebalancealgo.html
+	- reviewalgoforiosback.html
+	- taskmanager.html
+	- user.html
+	- review.html
 	- reviewalgoforyangming.html
+	- testgolangtemplaterender.html
+	- newuser.html
 	- inbox.html
+	- mainpage.html
+	- project.html
+	- taskmanagerbak.html
+	- 
+	- rebalancealgo.html
+	- reviewalgo.html
 	- reviewalgoforios.html
 	- reviewfromprojectreview.html
-	- taskmanagerbak.html
+	- time.html
+	- map.html
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
 [GIN-debug] HEAD   /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
@@ -126,4 +126,3 @@
 [GIN-debug] GET    /v1/searchwithtag         --> github.com/gtdgolangserver/models.Searchwithtags (4 handlers)
 [GIN-debug] GET    /v1/mybalancejson         --> github.com/gtdgolangserver/models.Getmywealth (4 handlers)
 [GIN-debug] Listening and serving HTTP on :8081
-[GIN-debug] redirecting request 301: /v1/ --> /v1/
