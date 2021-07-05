@@ -264,6 +264,7 @@ func goalcompare(c *gin.Context) {
 
 }
 
+//按照任务tag进行搜索
 func Searchwithtags(c *gin.Context) {
 	//i use email as identifier
 	//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
@@ -287,6 +288,47 @@ func Searchwithtags(c *gin.Context) {
 	//var s string = "12312sf"
 	querystring := "select * from tasks where status not in ('finished','finish','giveup','g') and  email =" + `"` + email + `" ` + " and tasktags REGEXP " + "'" + `"` + keywords + `"` + ":[ ]{0,1}" + `"yes"` + "'"
 	querystring2 := "select * from tasks where status  in ('finished','finish') and  email =" + `"` + email + `" ` + " and tasktags REGEXP " + "'" + `"` + keywords + `"` + ":[ ]{0,1}" + `"yes"` + "'"
+	//qurystring = fmt.Sprintf("select * from tasks where tasktags REGEXP '%s %s %s",s,"123123")
+	// select * from tasks where tasktags REGEXP  '"hardtag":"yes"'\G;
+	//db.Where("email =  ?", email).Where("task LIKE ?", "%"+keywords+"%").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&search)
+	fmt.Println(querystring)
+	if status == "unfinished" {
+		db.Raw(querystring).Scan(&search)
+	}
+	if status == "f" {
+
+		db.Raw(querystring2).Scan(&search)
+	}
+	c.JSON(200, gin.H{
+		"search": search,
+	})
+
+}
+
+//按照任务的评价算法进行搜索
+func Searchwithreviewalgo(c *gin.Context) {
+	//i use email as identifier
+	//https://github.com/gin-gonic/gin/issues/165 use it to set cookie
+	emailcookie, err := c.Request.Cookie("email")
+	//fmt.Println(emailcookie.Value)
+	var email string
+	if err != nil {
+		email = c.Request.Header.Get("email")
+	} else {
+		fmt.Println(emailcookie.Value)
+		email = emailcookie.Value
+	}
+	//fmt.Println(cookie1.Value)
+	var keywords = c.Query("keywords")
+
+	var status = c.Query("status")
+
+	fmt.Println(status)
+	fmt.Println(keywords)
+	var search []Tasks
+	//var s string = "12312sf"
+	querystring := "select * from tasks where status not in ('finished','finish','giveup','g') and  email =" + `"` + email + `" ` + " and reviewdatas REGEXP " + "'" + `"` + keywords + `"` + ":[ ]{0,1}" + `"yes"` + "'"
+	querystring2 := "select * from tasks where status  in ('finished','finish') and  email =" + `"` + email + `" ` + " and reviewdatas REGEXP " + "'" + `"` + keywords + `"` + ":[ ]{0,1}" + `"yes"` + "'"
 	//qurystring = fmt.Sprintf("select * from tasks where tasktags REGEXP '%s %s %s",s,"123123")
 	// select * from tasks where tasktags REGEXP  '"hardtag":"yes"'\G;
 	//db.Where("email =  ?", email).Where("task LIKE ?", "%"+keywords+"%").Not("status", []string{"finished","f","finish","giveup","g"}).Order("id").Find(&search)

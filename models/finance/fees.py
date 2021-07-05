@@ -336,7 +336,7 @@ def rewardfun():
 
 
 
-@app.route('/finance/balance',methods=["POST","GET","PUT"])
+@app.route('/finance/banlance',methods=["POST","GET","PUT"])
 def staticticsforbanlancetable():
     try:
         # days = request.args.get('days')
@@ -552,6 +552,7 @@ def updatebanlancetable():
         recordfromdb = session.query(BalanceSheet).filter(BalanceSheet.email == email).first()
         print(recordfromdb)
         # time.sleep(10)
+        #TODO 这里要注意更新日期的保存工作
         if recordfromdb ==  None:
             one= BalanceSheet(email,'2021/06/08',asset,debt)
             session.add(one)   

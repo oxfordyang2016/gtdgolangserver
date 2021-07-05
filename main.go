@@ -296,6 +296,7 @@ func main() {
 	v1.GET("/reviewgraphforios", Reviewforios)
 	v1.GET("/search", Search)
 	v1.GET("/searchwithtag", Searchwithtags)
+	v1.GET("/searchwithreviewalgo", Searchwithreviewalgo)
 	//finance
 	v1.GET("/mybalancejson", Getmywealth)
 	//v1.POST("/createfee",CreatefeebyJSON)

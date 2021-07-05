@@ -1,31 +1,31 @@
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
 [GIN-debug] Loaded HTML Templates (26): 
+	- reviewalgoforyangming.html
+	- taskmanager.html
+	- testgolangtemplaterender.html
+	- addtasks.html
+	- map.html
+	- pridetimeline.html
+	- review.html
+	- reviewalgoforiosback.html
 	- everyday.html
-	- goallist.html
 	- goals.html
 	- inbox0.html
-	- place.html
-	- pride.html
-	- pridetimeline.html
-	- addtasks.html
-	- reviewalgoforiosback.html
-	- taskmanager.html
-	- user.html
-	- review.html
-	- reviewalgoforyangming.html
-	- testgolangtemplaterender.html
 	- newuser.html
-	- inbox.html
-	- mainpage.html
-	- project.html
 	- taskmanagerbak.html
 	- 
+	- inbox.html
+	- place.html
 	- rebalancealgo.html
-	- reviewalgo.html
 	- reviewalgoforios.html
 	- reviewfromprojectreview.html
 	- time.html
-	- map.html
+	- user.html
+	- goallist.html
+	- mainpage.html
+	- pride.html
+	- project.html
+	- reviewalgo.html
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
 [GIN-debug] HEAD   /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
@@ -124,5 +124,6 @@
 [GIN-debug] GET    /v1/reviewgraphforios     --> github.com/gtdgolangserver/models.Reviewforios (4 handlers)
 [GIN-debug] GET    /v1/search                --> github.com/gtdgolangserver/models.Search (4 handlers)
 [GIN-debug] GET    /v1/searchwithtag         --> github.com/gtdgolangserver/models.Searchwithtags (4 handlers)
+[GIN-debug] GET    /v1/searchwithreviewalgo  --> github.com/gtdgolangserver/models.Searchwithreviewalgo (4 handlers)
 [GIN-debug] GET    /v1/mybalancejson         --> github.com/gtdgolangserver/models.Getmywealth (4 handlers)
 [GIN-debug] Listening and serving HTTP on :8081
