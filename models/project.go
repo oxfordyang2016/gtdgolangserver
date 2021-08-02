@@ -102,8 +102,6 @@ func Getprojectofgoal(email string) map[string][]string {
 
 func Updateprojectofgoal(c *gin.Context) {
 
-	
-	
 	buf := make([]byte, 1024)
 	num, _ := c.Request.Body.Read(buf)
 	reqBody := string(buf[0:num])
@@ -115,15 +113,15 @@ func Updateprojectofgoal(c *gin.Context) {
 	fmt.Println(goalcode)
 	projectname := gjson.Get(reqBody, "projectname").String()
 	status := gjson.Get(reqBody, "projectstatus").String()
-	AllowedStatus := [8]string{"f", "finished", "finish","g" ,"giveup","unfinish" ,"unfinished","unspecified"}
-	if !itemExists(AllowedStatus, status){
+	AllowedStatus := [8]string{"f", "finished", "finish", "g", "giveup", "unfinish", "unfinished", "unspecified"}
+	if !itemExists(AllowedStatus, status) {
 		c.JSON(905, gin.H{
 			"result": "status not allowed",
 		})
 		return
 	}
 	color.Yellow("------这是客户端的project status---------")
-    fmt.Println(status)
+	fmt.Println(status)
 	projectstatus := "unspecified"
 	endtime := "unspecified"
 	if status == "unspecified" || status == "" {
@@ -141,7 +139,6 @@ func Updateprojectofgoal(c *gin.Context) {
 		endtime = time.Now().In(loc).Format("060102")
 	}
 
-   
 	var projectfromclient Projectofgoals
 	db.Where(&Projectofgoals{Goalcode: goalcode, Project: projectname, Email: email}).First(&projectfromclient)
 	//   if goalname != "unspecified"{
@@ -156,9 +153,22 @@ func Updateprojectofgoal(c *gin.Context) {
 		projectfromclient.Endtime = endtime
 	}
 	color.Yellow("------我在这里检查传入的projetc信息---------")
-    fmt.Println(projectstatus)
+	fmt.Println(projectstatus)
 	db.Save(&projectfromclient)
 	c.JSON(200, gin.H{
 		"result": "u have update project",
+	})
+}
+
+func Getallpojects(c *gin.Context) {
+	// buf := make([]byte, 1024)
+	// num, _ := c.Request.Body.Read(buf)
+	// reqBody := string(buf[0:num])
+	emailcookie, _ := c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email := emailcookie.Value
+	all := Getprojectofgoal(email)
+	c.JSON(200, gin.H{
+		"result": all,
 	})
 }

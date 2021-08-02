@@ -1,31 +1,31 @@
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
 [GIN-debug] Loaded HTML Templates (26): 
-	- reviewalgoforyangming.html
-	- taskmanager.html
-	- testgolangtemplaterender.html
 	- addtasks.html
-	- map.html
-	- pridetimeline.html
+	- goals.html
+	- inbox.html
+	- reviewalgo.html
+	- taskmanager.html
+	- taskmanagerbak.html
+	- user.html
+	- 
+	- newuser.html
+	- place.html
+	- project.html
 	- review.html
 	- reviewalgoforiosback.html
-	- everyday.html
-	- goals.html
-	- inbox0.html
-	- newuser.html
-	- taskmanagerbak.html
-	- 
-	- inbox.html
-	- place.html
-	- rebalancealgo.html
-	- reviewalgoforios.html
-	- reviewfromprojectreview.html
-	- time.html
-	- user.html
-	- goallist.html
 	- mainpage.html
+	- map.html
 	- pride.html
-	- project.html
-	- reviewalgo.html
+	- reviewalgoforios.html
+	- time.html
+	- everyday.html
+	- inbox0.html
+	- pridetimeline.html
+	- rebalancealgo.html
+	- reviewalgoforyangming.html
+	- reviewfromprojectreview.html
+	- testgolangtemplaterender.html
+	- goallist.html
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
 [GIN-debug] HEAD   /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
@@ -100,6 +100,7 @@
 [GIN-debug] GET    /v1/searchwithprinciplecode --> github.com/gtdgolangserver/models.Searchwithprinciplecode (4 handlers)
 [GIN-debug] POST   /v1/createproject         --> github.com/gtdgolangserver/models.Createprojectofgoal (4 handlers)
 [GIN-debug] POST   /v1/updateproject         --> github.com/gtdgolangserver/models.Updateprojectofgoal (4 handlers)
+[GIN-debug] GET    /v1/getallprojects        --> github.com/gtdgolangserver/models.Getallpojects (4 handlers)
 [GIN-debug] POST   /v1/creategoal            --> github.com/gtdgolangserver/models.Creategoal (4 handlers)
 [GIN-debug] POST   /v1/updategoal            --> github.com/gtdgolangserver/models.Updategoal (4 handlers)
 [GIN-debug] GET    /v1/comparegoal           --> github.com/gtdgolangserver/models.Goalcompare (4 handlers)

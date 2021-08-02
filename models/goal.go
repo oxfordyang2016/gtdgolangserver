@@ -470,16 +470,6 @@ func Goalsjson(c *gin.Context) {
 	   2.将任务当中的goal抽取出来，组成以goal为key，任务数组为value的字典
 	   3.loop 3中的每个key，然后提取任务的projetc生成三级goal
 	   4.最后补充前面没有的goal，
-
-
-
-
-
-
-
-
-
-
 	*/
 
 	//the algorithm can be upgrade

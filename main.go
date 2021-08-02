@@ -268,6 +268,7 @@ func main() {
 	//goalsystem
 	v1.POST("/createproject", Createprojectofgoal)
 	v1.POST("/updateproject", Updateprojectofgoal)
+	v1.GET("/getallprojects", Getallpojects)
 	v1.POST("/creategoal", Creategoal)
 	v1.POST("/updategoal", Updategoal)
 	v1.GET("/comparegoal", Goalcompare)
