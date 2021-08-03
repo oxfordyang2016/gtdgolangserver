@@ -651,7 +651,8 @@ var sendback_tasks = []
           'acceptpain':"接受痛苦",
           'conquerthefear':"战胜恐惧",
           'makearecord':"创造新的纪录",
-          'life':"生命重要时刻"
+          'life':"生命重要时刻",
+          "systematic":"感受到本系统的好处"
     }
 
 
@@ -711,7 +712,8 @@ var reviewalgo_covert_chkey = swap(reviewalgo_covert);
       'acceptpain': 'no',
       'conquerthefear': 'no',
       'life': 'no',
-      'makearecord': 'no'
+      'makearecord': 'no',
+      'systematic':'no'
     }
 
 
@@ -1988,7 +1990,9 @@ $.get("/v1/goaljson", function(data, status){
       'acceptpain': 'no',
       'conquerthefear': 'no',
       'life':'no',
-      'makearecord':'no'
+      'makearecord':'no',
+      'systematic':'no'
+
     }
     var tmp_reviewalgo = reviewalgo_fixed;
     for(var i =0; i<reviewarray.length; i++){

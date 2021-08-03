@@ -61,6 +61,7 @@ type Reviewdatadetail struct {
 	Life                        float64 `json:"life"`
 	Conquerthefear              float64 `json:"conquerthefear"`
 	Executeability_score        float64 `json:"executeability_score"`
+	Systematic                  float64 `json:"systematic"`
 }
 
 type Reviewofday struct {
@@ -114,6 +115,7 @@ type Reviewfortimescount struct {
 	Life                        int `json:"life"`
 	Conquerthefear              int `json:"conquerthefear"`
 	Self_discipline_number      int `json:"self_discipline_number"`
+	Systematic                  int `json:"systematic"`
 }
 
 func Reviewalgorithmjson(c *gin.Context) {
@@ -951,7 +953,8 @@ func Compute_singleday(date string, email string) float64 {
 	var life_number = 0
 	var makearecord_score float64 = 0
 	var makearecord_number = 0
-
+	var systematic_score float64 = 0
+	var systematic_number = 0
 	// var self_discipline_coffient = 0.5
 
 	db.Table("tasks").Where("Email= ?", email).Where("finishtime =  ?", date).Count(&countoffinishedtasks)
@@ -1098,6 +1101,12 @@ func Compute_singleday(date string, email string) float64 {
 			makearecord_number = makearecord_number + 1
 		}
 
+		if systematic := gjson.Get(json, "systematic").String(); systematic == "yes" {
+			//fmt.Println(brainuse)
+			systematic_score = float64(systematic_score+10) * (item.Goalcoefficient)
+			systematic_number = systematic_number + 1
+		}
+
 		if acceptfact_from_client := gjson.Get(json, "acceptfactandseektruth").String(); acceptfact_from_client == "yes" {
 			//fmt.Println(brainuse)
 			acceptfactandseektruth_score = float64(acceptfactandseektruth_score+10) * (item.Goalcoefficient)
@@ -1218,7 +1227,7 @@ func Compute_singleday(date string, email string) float64 {
 		challengetag_score + atomtag_score + brainuse_score + alwaysprofit_score +
 		makeuseofthethingsuhavelearned_score + battlewithlowerbrain_score + patience_score +
 		learnnewthings_score + difficultthings_score + threeminutes_score + getlesson_score +
-		learntechuse_score + serviceforgoal_score + life_score
+		learntechuse_score + serviceforgoal_score + life_score + systematic_score
 
 	fmt.Println("--------之前的成绩----")
 	fmt.Println(total_score)
@@ -1338,7 +1347,7 @@ func Compute_singleday(date string, email string) float64 {
 		Thenumberoftasks_score: taskcount_score, Difficultthings: difficultthings_score, Threeminutes: threeminutes_score,
 		Getlesson: getlesson_score, Learntechuse: learntechuse_score, Patience: patience_score, Serviceforgoal_score: serviceforgoal_score,
 		Usebrain: brainuse_score, Battlewithlowerbrain: battlewithlowerbrain_score, Learnnewthings: learnnewthings_score,
-		Makeuseofthingsuhavelearned: makeuseofthethingsuhavelearned_score}
+		Makeuseofthingsuhavelearned: makeuseofthethingsuhavelearned_score, Systematic: systematic_score}
 
 	color.Red("We have red")
 
@@ -1353,7 +1362,7 @@ func Compute_singleday(date string, email string) float64 {
 		Doanimportantthingearly: doanimportantthingearly_number, Makeuseofthingsuhavelearned: makeuseofthethingsuhavelearned_number,
 		Difficultthings: difficultthings_number, Learnnewthings: learnnewthings_number,
 		Threeminutes: threeminutes_number, Alwaysprofit: alwaysprofit_number,
-		Markataskimmediately: markataskimmediately_number, Usebrain: usebrainnumber,
+		Markataskimmediately: markataskimmediately_number, Usebrain: usebrainnumber, Systematic: systematic_number,
 		Battlewithlowerbrain: battlewithlowerbrainnumber, Buildframeandprinciple: buildframeandprinciplenumber, Patience: patiencenumber}
 
 	//https://stackoverflow.com/questions/8270816/converting-go-struct-to-json
