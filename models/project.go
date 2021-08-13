@@ -172,3 +172,17 @@ func Getallpojects(c *gin.Context) {
 		"result": all,
 	})
 }
+
+func GetallLinks(c *gin.Context) {
+	// buf := make([]byte, 1024)
+	// num, _ := c.Request.Body.Read(buf)
+	// reqBody := string(buf[0:num])
+	emailcookie, _ := c.Request.Cookie("email")
+	fmt.Println(emailcookie.Value)
+	email := emailcookie.Value
+	var tasks []Tasks
+	db.Where("Email= ?", email).Where("Project=?", "videos").Find(&tasks)
+	c.JSON(200, gin.H{
+		"task": tasks,
+	})
+}

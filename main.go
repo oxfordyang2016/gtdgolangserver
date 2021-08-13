@@ -21,10 +21,8 @@ import (
 
 	//"./math"
 
-	"io"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 
 	"github.com/gin-contrib/cors"
@@ -166,15 +164,15 @@ func main() {
 	//fmt.Println(Modeltest)
 
 	// f, err := os.Create("/tmp/dat2")
-
+	//这里是否进行log的使用
 	// f, _ := os.Create("engine.log")
 	// gin.DefaultWriter = io.MultiWriter(f)
 	router := gin.Default()
 	router.Use(cors.Default())
 	// 这里可以不使用授权中间件
 	// router.Use(Authofuser())
-	f, _ := os.Create("gin.log")
-	gin.DefaultWriter = io.MultiWriter(f)
+	// f, _ := os.Create("gin.log")
+	// gin.DefaultWriter = io.MultiWriter(f)
 	// Recovery middleware recovers from any panics and writes a 500 if there was one.
 	// router.Use(gin.CustomRecovery(func(c *gin.Context, recovered interface{}) {
 	// 	if err, ok := recovered.(string); ok {
@@ -262,13 +260,13 @@ func main() {
 	v1.POST("/connectpcodewithtasktag", Connectpcodewithtasktag)
 	// v1.POST("/Createprincipledetail",Createprincipledetail)
 	v1.GET("/getprinciple", Principlesystem)
+	v1.GET("/getstudymaterail", GetallLinks)
 	v1.GET("/getprincipledetails", Principlesdetailsystem)
 	v1.GET("/searchwithprinciplecode", Searchwithprinciplecode)
 
 	//goalsystem
 	v1.POST("/createproject", Createprojectofgoal)
 	v1.POST("/updateproject", Updateprojectofgoal)
-	v1.GET("/getallprojects", Getallpojects)
 	v1.POST("/creategoal", Creategoal)
 	v1.POST("/updategoal", Updategoal)
 	v1.GET("/comparegoal", Goalcompare)
@@ -297,7 +295,6 @@ func main() {
 	v1.GET("/reviewgraphforios", Reviewforios)
 	v1.GET("/search", Search)
 	v1.GET("/searchwithtag", Searchwithtags)
-	v1.GET("/searchwithreviewalgo", Searchwithreviewalgo)
 	//finance
 	v1.GET("/mybalancejson", Getmywealth)
 	//v1.POST("/createfee",CreatefeebyJSON)
