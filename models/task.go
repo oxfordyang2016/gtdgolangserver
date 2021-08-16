@@ -76,6 +76,7 @@ type (
 		Tasktags        string  `json:"tasktags" sql:"type:text;"`
 		Tasktagsorigin  string  `json:"tasktagsorigin" sql:"type:text;"`
 		Goalcoefficient float64 `json:"goalcoefficient"`
+		Url             string  `json:"url"`
 		// 废弃
 		Executeabilityscore float64 `json:"executeabilityscore"`
 		// 废弃
@@ -518,6 +519,7 @@ func CreatetaskbyJSON(c *gin.Context) {
 
 	inboxlist := gjson.Get(reqBody, "inboxlist")
 	deadline := gjson.Get(reqBody, "deadline").String()
+	url := gjson.Get(reqBody, "url").String()
 	devotedtime := gjson.Get(reqBody, "timedevotedto_a_task").Int()
 	fmt.Println(devotedtime)
 
@@ -852,7 +854,16 @@ func CreatetaskbyJSON(c *gin.Context) {
 				for _, inbox := range inboxlist.Array() {
 					// Mark_finished_time_switch int  `json:"mark_finished_time_switch"`
 
-					task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe, Starttime: starttime, Deadline: deadline, Endtime: endtime, Note: note, Tasktagsorigin: tasktagsorigin, Ifdissect: ifdissect, Parentid: parentid_fromgtdcli, Mark_finished_time_switch: mark_finished_time_firstly_switch, First_finish_timestamp: mark_finished_time_firstly_timestamp, Priority: task_priority, Devotedtime: int(devotedtime), Goalcoefficient: goalcoefficient, Goal: goal, Parentproject: parentproject, Task: inbox.String(), User: email, Finishtime: clientfinishtime, Status: status, Email: email, Place: place, Project: project, Plantime: plantime, Tasktags: tasktags, Reviewdatas: reviewalgodata}
+					task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe,
+						Starttime: starttime, Deadline: deadline, Endtime: endtime,
+						Note: note, Tasktagsorigin: tasktagsorigin, Ifdissect: ifdissect,
+						Parentid: parentid_fromgtdcli, Mark_finished_time_switch: mark_finished_time_firstly_switch,
+						First_finish_timestamp: mark_finished_time_firstly_timestamp,
+						Priority:               task_priority, Devotedtime: int(devotedtime),
+						Goalcoefficient: goalcoefficient, Goal: goal, Parentproject: parentproject,
+						Task: inbox.String(), User: email, Finishtime: clientfinishtime,
+						Status: status, Email: email, Place: place, Project: project, Plantime: plantime,
+						Tasktags: tasktags, Reviewdatas: reviewalgodata, Url: url}
 					db.Create(&task).Scan(&task)
 					fmt.Println("i am testing the id return")
 					fmt.Println(task.ID)
@@ -861,7 +872,16 @@ func CreatetaskbyJSON(c *gin.Context) {
 
 			} else {
 
-				task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe, Starttime: starttime, Deadline: deadline, Endtime: endtime, Note: note, Tasktagsorigin: tasktagsorigin, Ifdissect: ifdissect, Parentid: parentid_fromgtdcli, Mark_finished_time_switch: mark_finished_time_firstly_switch, First_finish_timestamp: mark_finished_time_firstly_timestamp, Priority: task_priority, Devotedtime: int(devotedtime), Goalcoefficient: goalcoefficient, Goal: goal, Parentproject: parentproject, Task: inbox, User: email, Finishtime: clientfinishtime, Status: status, Email: email, Place: place, Project: project, Plantime: plantime, Tasktags: tasktags, Reviewdatas: reviewalgodata}
+				task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe,
+					Starttime: starttime, Deadline: deadline, Endtime: endtime, Note: note,
+					Tasktagsorigin: tasktagsorigin, Ifdissect: ifdissect, Parentid: parentid_fromgtdcli,
+					Mark_finished_time_switch: mark_finished_time_firstly_switch,
+					First_finish_timestamp:    mark_finished_time_firstly_timestamp,
+					Priority:                  task_priority, Devotedtime: int(devotedtime),
+					Goalcoefficient: goalcoefficient, Goal: goal, Parentproject: parentproject,
+					Task: inbox, User: email, Finishtime: clientfinishtime, Status: status,
+					Email: email, Place: place, Project: project, Plantime: plantime,
+					Tasktags: tasktags, Reviewdatas: reviewalgodata, Url: url}
 				db.Create(&task).Scan(&task)
 				fmt.Println("i am testing the id return")
 				fmt.Println(task.ID)
@@ -877,7 +897,17 @@ func CreatetaskbyJSON(c *gin.Context) {
 			if len(inboxlist.Array()) > 1 {
 				for _, inbox := range inboxlist.Array() {
 					//task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox.String(),User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
-					task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe, Starttime: starttime, Deadline: deadline, Endtime: endtime, Note: note, Tasktagsorigin: tasktagsorigin, Parentid: parentid_fromgtdcli, Mark_finished_time_switch: mark_finished_time_firstly_switch, First_finish_timestamp: mark_finished_time_firstly_timestamp, Ifdissect: ifdissect, Priority: task_priority, Goalcoefficient: goalcoefficient, Goal: goal, Devotedtime: int(devotedtime), Parentproject: parentproject, Task: inbox.String(), User: email, Finishtime: finishtime.Format("060102"), Status: status, Email: email, Place: place, Project: project, Plantime: plantime, Tasktags: tasktags, Reviewdatas: reviewalgodata}
+					task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe,
+						Starttime: starttime, Deadline: deadline, Endtime: endtime, Note: note,
+						Tasktagsorigin: tasktagsorigin, Parentid: parentid_fromgtdcli,
+						Mark_finished_time_switch: mark_finished_time_firstly_switch,
+						First_finish_timestamp:    mark_finished_time_firstly_timestamp,
+						Ifdissect:                 ifdissect, Priority: task_priority,
+						Goalcoefficient: goalcoefficient, Goal: goal, Devotedtime: int(devotedtime),
+						Parentproject: parentproject, Task: inbox.String(), User: email,
+						Finishtime: finishtime.Format("060102"), Status: status,
+						Email: email, Place: place, Project: project, Plantime: plantime,
+						Tasktags: tasktags, Reviewdatas: reviewalgodata, Url: url}
 					db.Create(&task).Scan(&task)
 					fmt.Println("i am testing the id return")
 					fmt.Println(task.ID)
@@ -885,7 +915,16 @@ func CreatetaskbyJSON(c *gin.Context) {
 				}
 
 			} else {
-				task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe, Starttime: starttime, Endtime: endtime, Deadline: deadline, Note: note, Tasktagsorigin: tasktagsorigin, Parentid: parentid_fromgtdcli, Mark_finished_time_switch: mark_finished_time_firstly_switch, First_finish_timestamp: mark_finished_time_firstly_timestamp, Ifdissect: ifdissect, Priority: task_priority, Goalcoefficient: goalcoefficient, Devotedtime: int(devotedtime), Goal: goal, Parentproject: parentproject, Task: inbox, User: email, Finishtime: finishtime.Format("060102"), Status: status, Email: email, Place: place, Project: project, Plantime: plantime, Tasktags: tasktags, Reviewdatas: reviewalgodata}
+				task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe,
+					Starttime: starttime, Endtime: endtime, Deadline: deadline,
+					Note: note, Tasktagsorigin: tasktagsorigin, Parentid: parentid_fromgtdcli,
+					Mark_finished_time_switch: mark_finished_time_firstly_switch,
+					First_finish_timestamp:    mark_finished_time_firstly_timestamp,
+					Ifdissect:                 ifdissect, Priority: task_priority, Goalcoefficient: goalcoefficient,
+					Devotedtime: int(devotedtime), Goal: goal, Parentproject: parentproject,
+					Task: inbox, User: email, Finishtime: finishtime.Format("060102"),
+					Status: status, Email: email, Place: place, Project: project, Url: url,
+					Plantime: plantime, Tasktags: tasktags, Reviewdatas: reviewalgodata}
 				//task := Tasks{Note:note,Ifdissect:ifdissect,Goal:goal,Parentproject:parentproject,Task:inbox,User:email,Finishtime:clientfinishtime,Status:status,Email:email,Place:place, Project:project, Plantime:plantime,Tasktags:tasktags,Reviewdatas:reviewalgodata}
 				db.Create(&task).Scan(&task)
 				fmt.Println("i am testing the id return")
@@ -915,7 +954,15 @@ func CreatetaskbyJSON(c *gin.Context) {
 			}
 
 		} else {
-			task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe, Starttime: starttime, Endtime: endtime, Deadline: deadline, Task: inbox, User: email, Tasktagsorigin: tasktagsorigin, Parentid: parentid_fromgtdcli, Mark_finished_time_switch: mark_finished_time_firstly_switch, First_finish_timestamp: mark_finished_time_firstly_timestamp, Priority: task_priority, Finishtime: "unfinished", Goal: goal, Goalcoefficient: goalcoefficient, Devotedtime: int(devotedtime), Status: status, Email: email, Place: place, Project: project, Plantime: plantime, Tasktags: tasktags, Reviewdatas: reviewalgodata}
+			task := Tasks{Starttime_exe: starttime_exe, Endtime_exe: endtime_exe,
+				Starttime: starttime, Endtime: endtime, Deadline: deadline,
+				Task: inbox, User: email, Tasktagsorigin: tasktagsorigin, Parentid: parentid_fromgtdcli,
+				Mark_finished_time_switch: mark_finished_time_firstly_switch,
+				First_finish_timestamp:    mark_finished_time_firstly_timestamp,
+				Priority:                  task_priority, Finishtime: "unfinished", Goal: goal,
+				Goalcoefficient: goalcoefficient, Devotedtime: int(devotedtime),
+				Status: status, Email: email, Place: place, Project: project, Url: url,
+				Plantime: plantime, Tasktags: tasktags, Reviewdatas: reviewalgodata}
 			db.Create(&task).Scan(&task)
 			fmt.Println("i am testing the id return")
 			fmt.Println(task.ID)

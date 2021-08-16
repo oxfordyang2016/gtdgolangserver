@@ -1,31 +1,31 @@
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (4 handlers)
 [GIN-debug] Loaded HTML Templates (26): 
-	- reviewalgoforyangming.html
-	- time.html
-	- newuser.html
+	- rebalancealgo.html
+	- everyday.html
+	- goallist.html
+	- goals.html
+	- inbox0.html
+	- map.html
 	- pride.html
 	- project.html
 	- reviewalgo.html
 	- reviewalgoforios.html
-	- taskmanager.html
-	- testgolangtemplaterender.html
+	- reviewalgoforyangming.html
+	- reviewfromprojectreview.html
 	- user.html
+	- place.html
+	- reviewalgoforiosback.html
+	- newuser.html
+	- taskmanagerbak.html
+	- testgolangtemplaterender.html
+	- time.html
 	- 
-	- goals.html
+	- addtasks.html
 	- inbox.html
 	- mainpage.html
-	- reviewfromprojectreview.html
-	- reviewalgoforiosback.html
-	- addtasks.html
-	- goallist.html
-	- map.html
 	- pridetimeline.html
 	- review.html
-	- everyday.html
-	- inbox0.html
-	- place.html
-	- rebalancealgo.html
-	- taskmanagerbak.html
+	- taskmanager.html
 
 [GIN-debug] GET    /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
 [GIN-debug] HEAD   /v1/show.css              --> github.com/gin-gonic/gin.(*RouterGroup).StaticFile.func1 (4 handlers)
