@@ -159,7 +159,7 @@ var image_websocket = true
 //     }
 //     if plantime  =="tomorrow"{
 //       loc, _ := time.LoadLocation("Asia/Shanghai")
-//     //https://stackoverflow.com/questions/37697285/how-to-get-yesterday-date-in-golang
+//     //https://stackoverflow.com/questio697285/how-to-get-yesterday-date-in-golang
 //     plantime =  time.Now().In(loc).AddDate(0, 0, 1).Format("060102")
 //     }
 
