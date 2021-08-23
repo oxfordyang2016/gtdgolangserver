@@ -263,7 +263,7 @@ func main() {
 	v1.GET("/getstudymaterail", GetallLinks)
 	v1.GET("/getprincipledetails", Principlesdetailsystem)
 	v1.GET("/searchwithprinciplecode", Searchwithprinciplecode)
-
+	v1.GET("/searchwithreviewalgo", Searchwithreviewalgo)
 	//goalsystem
 	v1.POST("/createproject", Createprojectofgoal)
 	v1.POST("/updateproject", Updateprojectofgoal)
